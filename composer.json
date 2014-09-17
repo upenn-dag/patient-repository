@@ -31,8 +31,5 @@
         "mopa/bootstrap-bundle":                 "~3.0@dev",
         "twbs/bootstrap":                        "v3.2.0",
         "winzou/state-machine-bundle":           "~0.2"
-    },
-    "require-dev": {
-        "sensio/generator-bundle":               "~2.3"
     }
 }
