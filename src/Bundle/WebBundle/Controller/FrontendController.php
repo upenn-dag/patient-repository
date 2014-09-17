@@ -27,14 +27,4 @@ class FrontendController extends Controller
     {
         return $this->render('AccardWebBundle:Frontend:main.html.twig');
     }
-
-    public function testAction()
-    {
-        $runner = $this->get('accard.import.runner');
-        $importer = new StaticImporter();
-
-        $records = $runner->run($importer);
-
-        die(var_dump($records));
-    }
 }
