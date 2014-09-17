@@ -28,7 +28,7 @@
         "white-october/pagerfanta-bundle":       "1.0.*@dev",
         "knplabs/knp-menu":                      "2.0.*@dev",
         "knplabs/knp-menu-bundle":               "2.0.*@dev",
-        "mopa/bootstrap-bundle":                 "v3.0.0-beta4",
+        "mopa/bootstrap-bundle":                 "3.*@dev",
         "twbs/bootstrap":                        "v3.2.0",
         "winzou/state-machine-bundle":           "~0.2"
     },
