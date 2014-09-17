@@ -4,7 +4,7 @@
     "type": "library",
     "description": "Accard Patient Repository",
     "autoload": {
-        "psr-0": { "Accard\\": "src/" }
+        "psr-4": { "Accard\\": "src/" }
     },
     "require": {
         "php":                                   ">=5.3.3",
