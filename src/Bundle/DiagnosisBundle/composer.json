@@ -1,0 +1,35 @@
+{
+    "name": "accard/diagnosis-bundle",
+    "type": "symfony-bundle",
+    "description": "Accard diagnosis bundle",
+    "keywords": ["accard", "diagnosis"],
+    "homepage": "http://accard.med.upenn.edu",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Frank Bardon Jr.",
+            "homepage": "http://frankbardon.com"
+        },
+        {
+            "name": "Database and Applications Group",
+            "homepage": "http://dag.med.upenn.edu"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "accard/resource-bundle":   "dev-develop",
+        "accard/diagnosis":         "dev-develop"
+    },
+    "autoload": {
+        "psr-4": { "Accard\\Bundle\\DiagnosisBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Accard\\Bundle\\DiagnosisBundle\\spec\\": "spec/" }
+    },
+    "repositories": [
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Resource.git" },
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/ResourceBundle.git" },
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Diagnosis.git" }
+    ]
+}

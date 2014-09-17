@@ -1,0 +1,39 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+parameters:
+
+    accard.controller.settings.class: Accard\Bundle\SettingsBundle\Controller\SettingsController
+    accard.settings.form_factory.class: Accard\Bundle\SettingsBundle\Form\Factory\SettingsFormFactory
+    accard.settings.manager.class: Accard\Bundle\SettingsBundle\Manager\SettingsManager
+    accard.settings.schema_registry.class: Accard\Bundle\SettingsBundle\Schema\SchemaRegistry
+
+services:
+
+    accard.controller.settings:
+        class: %accard.controller.settings.class%
+        calls:
+            - ['setContainer', ['@service_container']]
+
+    accard.settings.form_factory:
+        class: %accard.settings.form_factory.class%
+        arguments: ['@accard.settings.schema_registry', '@form.factory']
+
+    accard.settings.cache:
+        alias: doctrine_cache.providers.accard_settings
+
+    accard.settings.manager:
+        class: %accard.settings.manager.class%
+        arguments:
+            - '@accard.settings.schema_registry'
+            - '@accard.manager.parameter'
+            - '@accard.repository.parameter'
+            - '@accard.settings.cache'
+            - '@validator'
+
+    accard.settings.schema_registry:
+        class: %accard.settings.schema_registry.class%

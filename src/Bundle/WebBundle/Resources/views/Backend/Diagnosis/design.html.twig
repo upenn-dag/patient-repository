@@ -1,0 +1,76 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Backend:layout.html.twig' %}
+
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import button, create, generic %}
+{% from 'AccardWebBundle:Common/Macros:actions.html.twig' import update %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import pagination, page_title, statistics %}
+{% from 'AccardWebBundle:Backend/Diagnosis:macros.html.twig' import list_fields %}
+
+
+{% block content %}
+    {{ page_title(
+        'accard.diagnosis.action.design'|trans,
+        [
+            generic(path('accard_frontend_diagnosis_index'), 'accard.diagnosis.action.manage'|trans, 'user'),
+            create(path('accard_frontend_diagnosis_create'), 'accard.diagnosis.action.create'|trans)
+        ]
+    ) }}
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <div class="pull-right">
+                            {{ create(path('accard_backend_diagnosis_field_create'), 'accard.form.field.create'|trans, 'xs') }}
+                        </div>
+                        {{ 'accard.diagnosis.field.title'|trans }}
+                    </h4>
+                </div>
+                {{ list_fields(fields) }}
+                {% if fields.haveToPaginate() %}
+                <div class="panel-body">
+                    {{ pagination(fields) }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-4">
+            {{ button(path('accard_backend_diagnosis_code_group_index'), 'accard.diagnosis_code_group.action.manage'|trans, 'block') }}
+            {{ button(path('accard_backend_diagnosis_phase_index'), 'accard.diagnosis.action.manage_phases'|trans, 'block') }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <form action="{{ path('accard_backend_diagnosis_settings_update') }}" method="POST" enctype="{{ form_enctype(settings_form) }}">
+                {{ form_widget(settings_form._token) }}
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-primary btn-xs">{{ 'accard.update'|trans }}</button>
+                            </div>
+                            {{- 'accard.settings'|trans -}}
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        {{ form_widget(settings_form.enabled) }}
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            {{ statistics([
+                'accard.diagnosis.message.count'|trans({'%total%': diagnoses_count}),
+                'accard.diagnosis.message.count_fields'|trans({'%total%': fields|length})
+            ]) }}
+        </div>
+    </div>
+{% endblock %}

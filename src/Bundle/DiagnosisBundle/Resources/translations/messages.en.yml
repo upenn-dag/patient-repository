@@ -1,0 +1,53 @@
+accard:
+    diagnosis:
+        title: Diagnosis
+        form:
+            code: Code
+            start_date: Start Date
+            end_date: End Date
+            end_date_ongoing: ongoing
+            patient: Patient
+        action:
+            show: %diagnosis%
+            index: Browse Diagnosis
+            create: Create Diagnosis
+            design: Design Diagnosis
+            manage: Manage Diagnoses
+        message:
+            count: %total% diagnoses registered.
+            count_fields: Collecting %total% diagnosis fields.
+        field:
+            title: Diagnosis Fields
+            create: Create Diagnosis Field
+            update: Update Diagnosis Field
+            none_found: No diagnosis fields found.
+    diagnosis_code:
+        title: Diagnosis Codes
+        form:
+            id: Id
+            code: Code
+            description: Description
+        action:
+            index: Diagnosis Codes
+            create: Create Code
+            update: Update Code
+            delete: Delete Code
+        message:
+            count: %total% diagnosis codes.
+            none_found: No diagnosis codes found.
+    diagnosis_code_group:
+        title: Diagnosis Code Group
+        form:
+            id: Id
+            name: Name
+            presentation: Presentation
+            codes: Codes
+        action:
+            index: Diagnosis Code Groups
+            create: Create Code Group
+            update: Update Code Group
+            delete: Delete Code Group
+            manage: Manage Code Groups
+        message:
+            count: %total% diagnosis code groups.
+            none_found: No diagnosis code groups found.

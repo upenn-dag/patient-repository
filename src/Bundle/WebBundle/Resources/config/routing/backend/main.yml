@@ -1,0 +1,39 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard_backend_dashboard:
+    path: /
+    defaults:
+        _controller: AccardWebBundle:Backend:dashboard
+
+accard_backend_settings:
+    resource: @AccardWebBundle/Resources/config/routing/backend/settings.yml
+    prefix: /settings
+
+accard_backend_option:
+    resource: @AccardWebBundle/Resources/config/routing/backend/option.yml
+    prefix: /option
+
+accard_backend_patient:
+    resource: @AccardWebBundle/Resources/config/routing/backend/patient.yml
+    prefix: /patient
+
+accard_backend_diagnosis:
+    resource: @AccardWebBundle/Resources/config/routing/backend/diagnosis.yml
+    prefix: /diagnosis
+
+accard_backend_activity:
+    resource: @AccardWebBundle/Resources/config/routing/backend/activity.yml
+    prefix: /activity
+
+accard_backend_behavior:
+    resource: @AccardWebBundle/Resources/config/routing/backend/behavior.yml
+    prefix: /behavior
+
+accard_backend_attribute:
+    resource: @AccardWebBundle/Resources/config/routing/backend/attribute.yml
+    prefix: /attribute

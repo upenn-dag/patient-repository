@@ -1,0 +1,17 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+parameters:
+
+    accard.import.importer.pds_diagnosis.class: Accard\Bundle\PDSBundle\Import\DiagnosisImporter
+    accard.import.importer.pds_test.class: Accard\Bundle\PDSBundle\Import\TestImporter
+    accard.import.importer.pds_drug.class: Accard\Bundle\PDSBundle\Import\DrugImporter
+
+services:
+
+    accard.connection.pds:
+        alias: doctrine.dbal.accard_connection

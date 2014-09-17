@@ -1,0 +1,20 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+parameters:
+
+    accard.builder.diagnosis.class: Accard\Component\Diagnosis\Builder\DiagnosisBuilder
+
+services:
+
+    accard.builder.diagnosis:
+        class: %accard.builder.diagnosis.class%
+        arguments:
+            - @accard.manager.diagnosis
+            - @accard.repository.diagnosis
+            - @accard.repository.diagnosis_field
+            - @accard.repository.diagnosis_field_value

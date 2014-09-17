@@ -1,0 +1,51 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{# @author Dylan Pierce <piercedy@upenn.edu #}
+
+{% macro list(occupation_behaviors) %}
+
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete, show %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
+
+{% if occupation_behaviors|length > 0 %}
+    <table class="behavior table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="patient">{{ 'accard.patient.form.full_name'|trans }}</th>
+                <th class="start-date">{{ accard_resource_sort('startDate', 'accard.behavior.form.start_date'|trans) }}</th>
+                <th class='end-date'>{{ accard_resource_sort('endDate', 'accard.behavior.form.end_date'|trans )}}</th>
+                <th class="industry">{{ accard_resource_sort('industry', 'accard.behavior.occupation.form.industry'|trans)}}</th>
+                <th class="hours">{{ accard_resource_sort('hours', 'accard.behavior.occupation.form.hours'|trans)}}</th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for occupation_behavior in occupation_behaviors %}
+            <tr id="{{ occupation_behavior.id }}">
+                <td class="patient-name">{{ occupation_behavior.patient.fullName }}</td>
+                <td class="start-of-behavior">{{ occupation_behavior.startDate|localizeddate('medium', 'none') }}</td>
+                <td class='end-date'>{{ occupation_behavior.endDate|localizeddate('medium', 'none') }}</td>
+                <td class="industry">{{ occupation_behavior.industry }}</td>
+                <td class="hours">{{ occupation_behavior.hours }}</td>
+                <td class="actions">
+                    <div class="pull-right">
+                        {{ show(path('accard_frontend_behavior_occupation_show', {'id': occupation_behavior.id}), null, 'xs') }}
+                        {{ edit(path('accard_frontend_behavior_occupation_update', {'id': occupation_behavior.id}), null, 'xs') }}
+                        {{ delete(path('accard_frontend_behavior_occupation_delete', {'id': occupation_behavior.id}), null, 'xs') }}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ info('accard.behavior.occupation.message.none_found'|trans) }}
+{% endif %}
+
+{% endmacro %}

@@ -1,0 +1,29 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% macro flow_path(route, scenario, step, params={}) %}
+{%- spaceless %}
+    {{ path(route, params|merge({ scenarioAlias: scenario, stepName: step })) }}
+{% endspaceless -%}
+{% endmacro %}
+
+{% from _self import flow_path %}
+{% set render_links = true %}
+
+<ul class="nav nav-tabs grid-tabs" role="tablist">
+{% for step in context.flow.steps %}
+    {% set trans_string = 'accard.flow.' ~ context.flow.scenarioAlias ~ '.' ~ step.name|trans %}
+    <li class="{% if step.active %}active{% endif %}{% if not render_links %} disabled{% endif %}">
+        <a href="{% if render_links %}{{ flow_path(context.flow.displayRoute, context.flow.scenarioAlias, step.name) }}{% else %}#{% endif %}">
+            {{- trans_string|trans -}}
+        </a>
+    </li>
+    {% if step.active %}
+        {% set render_links = false %}
+    {% endif %}
+{% endfor %}
+</ul>

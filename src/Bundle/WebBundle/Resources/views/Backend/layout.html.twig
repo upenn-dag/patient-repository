@@ -1,0 +1,203 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{%- set general = accard_settings('general') -%}
+{%- from 'AccardWebBundle:Common/Macros:misc.html.twig' import sidebar, menu -%}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+      {%- block title 'accard.interface.backend.title'|trans -%}
+    </title>
+
+    {% block stylesheets -%}
+    {% stylesheets output='assets/compiled/backend.css' filter='cssrewrite'
+        'bundles/accardweb/css/bootstrap.min.css'
+        'bundles/accardweb/css/font-awesome.css'
+        'bundles/accardweb/css/backend/backend.css'
+        'bundles/accardweb/css/backend/custom.css'
+    %}
+<link href="{{ asset_url }}" rel="stylesheet" type="text/css">
+    {% endstylesheets %}
+    {% endblock %}
+</head>
+
+<body>
+
+    {% block flashes -%}
+        {%- for type in ['success', 'error'] -%}
+            {%- for flash in app.session.flashbag.get(type) -%}
+                <div class="alert alert-{{ type == 'error' ? 'danger' : type == 'notice' ? 'warning' : type }}">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    {{ flash|trans }}
+                </div>
+            {%- endfor -%}
+        {%- endfor -%}
+    {%- endblock %}
+
+    <div id="wrapper">
+
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('accard_backend_dashboard') }}" title="{{ 'accard.interface.backend.title'|trans }}">
+                    {{- 'accard.interface.backend.title'|trans -}}
+                </a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <a href="{{ path('accard_frontend_homepage') }}" title="View your application front-end">
+                        <i class="fa fa-eye fa-fw"></i>
+                    </a>
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Tasks</strong>
+                                        <span class="pull-right text-muted">Coming Soon</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%">
+                                            <span class="sr-only">5% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Tasks</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> Alerts, Coming Soon!
+                                    <span class="pull-right text-muted small">1 month</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        {% if is_granted('ROLE_SUPERUSER') %}
+                        <li><a href="?_switch=user"><i class="fa fa-user fa-fw"></i> Switch to User</a></li>
+                        <li><a href="?_switch=admin"><i class="fa fa-user fa-fw"></i> Switch to Admin</a></li>
+                        <li><a href="?_switch=super"><i class="fa fa-user fa-fw"></i> Switch to Super</a></li>
+                        <li class="divider"></li>
+                        {% endif %}
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
+                        <li class="divider"></li>
+                        {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                        <li><a href="?_switch=_exit"><i class="fa fa-user fa-fw"></i> Exit Impersonation</a></li>
+                        {% endif %}
+                        <li><a href="{{ path('accard_logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default navbar-static-side" role="navigation">
+                <div class="sidebar-collapse">
+                    <ul class="nav" id="side-menu-search">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                    {{ sidebar('accard.backend.sidebar') }}
+                </div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper">
+            {% block main -%}
+                {% block content 'accard.message.no_content_found'|trans %}
+            {% endblock %}
+        </div>
+
+    </div>
+    <!-- /#wrapper -->
+
+    {% block javascripts -%}
+        {% javascripts output='assets/compiled/backend.js'
+            'bundles/accardweb/js/plugins/modernizr/modernizr.js'
+            'bundles/accardweb/js/jquery.js'
+            'bundles/accardweb/js/bootstrap.js'
+            'bundles/accardweb/js/accard.js'
+            'bundles/accardweb/js/forms.js'
+            'bundles/accardweb/js/tables.js'
+            'bundles/accardweb/js/tables-filter.js'
+            'bundles/accardweb/js/tables-highlight.js'
+            'bundles/accardweb/js/tables-sort.js'
+            'bundles/accardweb/js/menu.js'
+            'bundles/accardweb/js/alerts.js'
+            'bundles/accardweb/js/collections.js'
+            'bundles/accardweb/js/backend.js'
+        %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% endblock %}
+
+    {% block page_javascripts -%}
+        <!-- // Page javascripts -->
+    {%- endblock %}
+</body>
+</html>

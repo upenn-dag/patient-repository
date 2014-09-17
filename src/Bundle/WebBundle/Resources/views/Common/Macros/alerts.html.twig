@@ -1,0 +1,59 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% macro success(text, heading=true) %}
+<div class="alert alert-success">
+    {% if heading -%}
+        <h4 class="alert-heading">{{ 'accard.alert.success'|trans }}</h4>
+    {% endif %}
+    {{ text }}
+</div>
+{% endmacro %}
+
+{% macro info(text, heading=true) %}
+<div class="alert alert-info">
+    {% if heading -%}
+        <h4 class="alert-heading">{{ 'accard.alert.info'|trans }}</h4>
+    {% endif %}
+    {{ text }}
+</div>
+{% endmacro %}
+
+{% macro error(text, heading=true) %}
+<div class="alert alert-danger">
+    {% if heading -%}
+        <h4 class="alert-heading">{{ 'accard.alert.error'|trans }}</h4>
+    {% endif %}
+    {{ text }}
+</div>
+{% endmacro %}
+
+{% macro warning(text, heading=true) %}
+<div class="alert alert-warning">
+    {% if heading -%}
+        <h4 class="alert-heading">{{ 'accard.alert.warning'|trans }}</h4>
+    {% endif %}
+    {{ text }}
+</div>
+{% endmacro %}
+
+{% macro construction(area) %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import icon %}
+<div class="alert alert-warning alert-construction">
+    {{ icon('fa fa-5x fa-warning') }}
+    <h4 class="alert-heading">{{ 'accard.alert.construction'|trans }}</h4>
+    <p>{{ 'accard.alert.construction_area'|trans({ '%area%': area }) }}</p>
+    <div class="clearfix"></div>
+</div>
+{% endmacro %}
+
+{% macro disabled(area) %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import icon %}
+<div class="alert alert-warning">
+    {{ 'accard.alert.disabled_area'|trans({'%area%': area}) }}
+</div>
+{% endmacro %}

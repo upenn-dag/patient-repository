@@ -1,0 +1,132 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% macro abstractable(patient) %}
+{% spaceless %}
+    {% for phase in patient.phases %}
+        {% if 'ready_for_abstraction' == phase.phase.label %}
+            {{ 'success' }}
+        {% endif %}
+    {% endfor %}
+{% endspaceless %}
+{% endmacro %}
+
+{% macro list(patients) %}
+
+{% from _self import abstractable %}
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete, show %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
+
+{% if patients|length > 0 %}
+    <table class="patient table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="mrn">{{ accard_resource_sort('mrn', 'accard.patient.form.mrn'|trans) }}</th>
+                <th class="first-name">{{ accard_resource_sort('firstName', 'accard.patient.form.first_name'|trans) }}</th>
+                <th class="last-name">{{ accard_resource_sort('lastName', 'accard.patient.form.last_name'|trans) }}</th>
+                <th class="date-of-birth">{{ accard_resource_sort('dateOfBirth', 'accard.patient.form.date_of_birth'|trans) }}</th>
+                <th class="gender">{{ accard_resource_sort('gender', 'accard.patient.form.gender'|trans) }}</th>
+                <th class="deceased">{{ 'accard.patient.form.deceased'|trans }}</th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for patient in patients %}
+            <tr id="{{ patient.id }}" class="{{ abstractable(patient) }}">
+                <td class="mrn">{{ patient.mrn }}</td>
+                <td class="first-name">{{ patient.firstName }}</td>
+                <td class="last-name">{{ patient.lastName }}</td>
+                <td class="date-of-birth">{{ patient.dateOfBirth|localizeddate('medium', 'none') }}</td>
+                <td class="gender text-center">{{ patient.gender }}</td>
+                <td class="deceased text-center text-success">{%- if patient.deceased %}{{ icon('fa fa-check') }}{% endif -%}</td>
+                <td class="actions">
+                    <div class="pull-right">
+                        {{ show(path('accard_frontend_patient_show', {'id': patient.id}), null, 'xs') }}
+                        {{ edit(path('accard_frontend_patient_update', {'id': patient.id}), null, 'xs') }}
+                        {{ delete(path('accard_frontend_patient_delete', {'id': patient.id}), null, 'xs') }}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ info('accard.patient.none_found'|trans) }}
+{% endif %}
+
+{% endmacro %}
+
+{% macro list_descriptions(patient) %}
+{% spaceless %}
+{% set importers = patient.registeredImporters %}
+<ul class="list-unstyled">
+    {% for importer in importers %}
+    {% set translation = 'accard.import.importer.' ~ importer %}
+    <li>
+        {{ translation|trans }}
+        <ol>
+        {% for description in patient.getDescriptionsFor(importer) %}
+            <li>{{ description|raw }}</li>
+        {% endfor %}
+        </ol>
+    </li>
+    {% endfor %}
+</ul>
+{% endspaceless %}
+{% endmacro %}
+
+{% macro import_list(patients) %}
+
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
+
+{% if patients|length > 0 %}
+    <table class="patient table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="mrn">{{ accard_resource_sort('mrn', 'accard.patient.form.mrn'|trans) }}</th>
+                <th class="first-name">{{ accard_resource_sort('firstName', 'accard.patient.form.first_name'|trans) }}</th>
+                <th class="last-name">{{ accard_resource_sort('lastName', 'accard.patient.form.last_name'|trans) }}</th>
+                <th class="date-of-birth">{{ accard_resource_sort('dateOfBirth', 'accard.patient.form.date_of_birth'|trans) }}</th>
+                <th class="gender">{{ accard_resource_sort('gender', 'accard.patient.form.gender'|trans) }}</th>
+                <th class="deceased">{{ 'accard.patient.form.deceased'|trans }}</th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for patient in patients %}
+            <tr id="{{ patient.id }}"
+                data-toggle="popover"
+                data-trigger="hover"
+                data-html="true"
+                data-placement="bottom"
+                data-title="{{ 'accard.import.list_descriptions'|trans }}"
+                data-content="{{ _self.list_descriptions(patient)|e }}">
+                <td class="mrn">{{ patient.mrn }}</td>
+                <td class="first-name">{{ patient.firstName }}</td>
+                <td class="last-name">{{ patient.lastName }}</td>
+                <td class="date-of-birth">{{ patient.dateOfBirth|localizeddate('medium', 'none') }}</td>
+                <td class="gender text-center">{{ patient.gender }}</td>
+                <td class="deceased text-center text-success">{%- if patient.deceased %}{{ icon('fa fa-check') }}{% endif -%}</td>
+                <td class="actions">
+                    <div class="pull-right">
+                        <a href="{{ path('accard_frontend_import_accept', { subject: 'patient', id: patient.id }) }}" data-import="accept" data-record-id="{{ patient.id }}" class="btn btn-success btn-xs">Accept</a>
+                        <a href="{{ path('accard_frontend_import_decline', { subject: 'patient', id: patient.id }) }}" data-import="decline" data-record-id="{{ patient.id }}" class="btn btn-danger btn-xs">Decline</a>
+                    </div>
+                </td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ info('accard.patient.none_found'|trans) }}
+{% endif %}
+
+{% endmacro %}
+

@@ -1,0 +1,42 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+parameters:
+
+    accard.form.type.attribute.class: Accard\Bundle\AttributeBundle\Form\Type\AttributeType
+    accard.builder.attribute.class: Accard\Component\Attribute\Builder\AttributeBuilder
+
+services:
+
+    accard.form.type.attribute:
+        class: %accard.form.type.attribute.class%
+        arguments:
+            - %accard.model.attribute.class%
+            - %accard.validation_group.attribute%
+            - @accard.builder.attribute
+            - @accard.option.provider
+        tags:
+            - { name: form.type, alias: accard_attribute }
+
+    accard.form.type.family_cancer_attribute:
+        class: %accard.form.type.family_cancer_attribute.class%
+        arguments:
+            - %accard.model.family_cancer_attribute.class%
+            - %accard.validation_group.attribute%
+            - @accard.builder.attribute
+            - @accard.option.provider
+        calls:
+            - ['setTranslator', ['@translator']]
+            - ['setCodeProvider', ['@accard.provider.diagnosis_code']]
+        tags:
+            - { name: form.type, alias: accard_family_cancer_attribute }
+
+    accard.builder.attribute:
+        class: %accard.builder.attribute.class%
+        arguments:
+            - @accard.manager.attribute
+            - @accard.repository.attribute

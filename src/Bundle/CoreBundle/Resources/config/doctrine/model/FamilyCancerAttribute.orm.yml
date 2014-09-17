@@ -1,0 +1,24 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+Accard\Component\Core\Model\FamilyCancerAttribute:
+    type: mappedSuperclass
+    table: accard_family_cancer_attribute
+
+    fields:
+        familyMember:
+            type: string
+        side:
+            type: string
+
+    manyToOne:
+        code:
+            targetEntity: Accard\Component\Diagnosis\Model\CodeInterface
+            joinColumn:
+                name: codeId
+                referencedColumnName: id
+                nullable: false

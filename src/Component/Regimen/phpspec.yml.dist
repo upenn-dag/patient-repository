@@ -1,0 +1,6 @@
+suites:
+    Regimen:
+        namespace: Accard\Component\Regimen
+        spec_prefix: spec
+        spec_path: .
+        src_path: .

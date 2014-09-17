@@ -1,0 +1,64 @@
+/* Forms */
+label.optional {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Tables */
+
+/* Sidebar Menu Styles */
+
+#side-menu li.current > a {
+    color: black;
+}
+
+#side-menu li.ancestor {
+
+}
+
+/* Drag */
+.drag-over {
+    background-color: rgba(0, 15, 235, 0.1) !important;
+}
+
+.drag-reject {
+    background-color: rgba(235, 15, 0 0.1) !important;
+}
+
+/* Delete form */
+
+.delete-action-form {
+    display: inline;
+}
+
+/* Tabs */
+.grid-tabs {
+    margin: 10px auto;
+}
+
+/* Alerts */
+body > .alert {
+    position: fixed;
+    top: 51;
+    z-index: 1050;
+    width: 100%;
+    border-radius: 0;
+    text-align: center;
+}
+
+
+.alert-construction .alert-heading,
+.alert-construction p {
+    margin-left: 115px;
+}
+
+.alert-construction i {
+    float: left;
+    margin-left: 15px;
+}
+
+/* Layout */
+
+.row-split {
+    border-right: 1px solid #eee;
+}
+

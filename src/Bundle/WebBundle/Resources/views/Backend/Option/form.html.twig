@@ -1,0 +1,25 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{{ form_widget(form._token) }}
+
+<div class="row">
+    <div class="col-md-8 row-split">
+        {{ form_row(form.name) }}
+        {{ form_row(form.presentation) }}
+    </div>
+    <div class="col-md-4">
+        <div id="accard-option-values" class="collection-container" data-prototype="{{ form_row(form.values.vars.prototype.value, {'label': ''})|e }}">
+            {% for valueForm in form.values %}
+                {{ form_row(valueForm.value)  }}
+            {% endfor %}
+        </div>
+        <a href="#" class="btn btn-primary btn-block" data-collection-button="add" data-prototype="accard-option-values" data-collection="accard-option-values">
+            {{- "accard.form.option.add_value"|trans -}}
+        </a>
+    </div>
+</div>

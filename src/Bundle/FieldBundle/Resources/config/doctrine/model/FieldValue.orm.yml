@@ -1,0 +1,33 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+Accard\Component\Field\Model\FieldValue:
+    type: mappedSuperclass
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        stringValue:
+            type: string
+            nullable: true
+        dateValue:
+            type: datetime
+            nullable: true
+        numberValue:
+            type: integer
+            nullable: true
+
+    manyToOne:
+        optionValue:
+            targetEntity: Accard\Component\Option\Model\OptionValueInterface
+            joinColumn:
+                name: optionValueId
+                nullable: true

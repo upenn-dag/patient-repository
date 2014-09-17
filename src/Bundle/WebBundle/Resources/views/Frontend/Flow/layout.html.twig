@@ -1,0 +1,37 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Frontend:layout.html.twig' %}
+
+{% block content %}
+
+    {% block flow_navigation %}
+        {% include 'AccardWebBundle:Frontend/Flow:navigation.html.twig' %}
+    {% endblock %}
+
+    {% if form is defined %}
+    {% block flow_form_start %}
+        <form action="{{ path(context.flow.forwardRoute, { scenarioAlias: context.flow.scenarioAlias, stepName: context.currentStep.name}) }}" {{ form_enctype(form) }} method="post">
+            {% if form._token is defined %}{{ form_widget(form._token) }}{% endif %}
+    {% endblock %}
+    {% endif %}
+
+    {% block flow_content %}
+        Override flow content.
+    {% endblock %}
+
+    {% block flow_buttons %}
+        {% include 'AccardWebBundle:Frontend/Flow:buttons.html.twig' %}
+    {% endblock %}
+
+    {% if form is defined %}
+    {% block flow_form_end %}
+        </form>
+    {% endblock %}
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+{# @author Dylan Pierce <piercedy@upenn.edu #}
+
+{% extends 'AccardWebBundle:Frontend/Behavior:create.html.twig' %}
+
+{% block behavior_form_action path('accard_frontend_behavior_occupation_create') %}
+
+{% block behavior_form %}
+    {% include 'AccardWebBundle:Frontend/Behavior/Occupation:form.html.twig' %}
+{% endblock %}

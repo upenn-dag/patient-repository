@@ -1,0 +1,50 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{# @author Dylan Pierce <piercedy@upenn.edu #}
+
+{% macro list(family_cancer_attributes) %}
+
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete, show %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
+
+
+{% if family_cancer_attributes|length > 0 %}
+    <table class="behavior table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="patient">{{ 'accard.patient.form.full_name'|trans }}</th>
+                <th class="family-member">{{ accard_resource_sort('familyMember', 'accard.attribute.family_cancer.form.familyMember'|trans) }}</th>
+                <th class="side">{{ accard_resource_sort('side', 'accard.attribute.family_cancer.form.side'|trans )}}</th>
+                <th class="cancer-type">{{ accard_resource_sort('code', 'accard.attribute.family_cancer.form.code'|trans)}}</th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for family_cancer_attribute in family_cancer_attributes %}
+            <tr id="{{ family_cancer_attribute.id }}">
+                <td class="patient-name">{{ family_cancer_attribute.patient.fullName }}</td>
+                <td class="family-member">{{ family_cancer_attribute.familyMember }}</td> 
+                <td class="side">{{ family_cancer_attribute.side }}</td>
+                <td class="cancer-type">{{ family_cancer_attribute.code.description }}</td>
+                <td class="actions">
+                    <div class="pull-right">
+                        {{ show(path('accard_frontend_family_cancer_attribute_show', {'id': family_cancer_attribute.id}), null, 'xs') }}
+                        {{ edit(path('accard_frontend_family_cancer_attribute_update', {'id': family_cancer_attribute.id}), null, 'xs') }}
+                        {{ delete(path('accard_frontend_family_cancer_attribute_delete', {'id': family_cancer_attribute.id}), null, 'xs') }}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ info('accard.attribute.family_cancer.message.none_found'|trans) }}
+{% endif %}
+
+{% endmacro %}

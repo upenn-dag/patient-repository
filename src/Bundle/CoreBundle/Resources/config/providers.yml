@@ -1,0 +1,25 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+parameters:
+
+    accard.provider.patient_phase.class: Accard\Bundle\PhaseBundle\Provider\PhaseProvider
+    accard.provider.diagnosis_phase.class: Accard\Bundle\PhaseBundle\Provider\PhaseProvider
+
+services:
+
+    accard.provider.patient_phase:
+        class: %accard.provider.patient_phase.class%
+        arguments:
+            - @accard.repository.patient_phase
+            - @accard.repository.patient_phase_instance
+
+    accard.provider.diagnosis_phase:
+        class: %accard.provider.diagnosis_phase.class%
+        arguments:
+            - @accard.repository.diagnosis_phase
+            - @accard.repository.diagnosis_phase_instance

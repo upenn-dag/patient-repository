@@ -1,0 +1,142 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{%- set general = accard_settings('general') -%}
+{%- from 'AccardWebBundle:Common/Macros:misc.html.twig' import sidebar, menu -%}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+      {%- block title general.title|default('accard.interface.frontend.title'|trans) -%}
+    </title>
+
+    {% block stylesheets -%}
+    {% stylesheets output='assets/compiled/backend.css' filter='cssrewrite'
+        'bundles/accardweb/css/bootstrap.min.css'
+        'bundles/accardweb/css/font-awesome.css'
+        'bundles/accardweb/css/backend/backend.css'
+        'bundles/accardweb/css/backend/custom.css'
+    %}
+    
+    <link href="{{ asset_url }}" rel="stylesheet" type="text/css">
+        {% endstylesheets %}
+        {% endblock %}
+
+        <style type="text/css">
+      body {
+        padding-top: 60px;
+      }
+      .form-signin {
+        max-width: 370px;
+        padding: 15px 40px 30px 40px;
+        margin: 0 auto;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 9px;
+        background: rgba(0, 0, 0, 0.05);
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.15);
+                box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.15);
+
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin .checkbox {
+        font-weight: normal;
+      }
+      .form-signin .form-control {
+        position: relative;
+        font-size: 16px;
+        height: auto;
+        padding: 10px;
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+                box-sizing: border-box;
+      }
+      .form-signin .form-control:focus {
+        z-index: 2;
+      }
+      .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+      .form-signin-info {
+        max-width: 370px;
+        padding: 15px 40px 30px 40px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .form-signin-error {
+        color: red;
+      }
+    </style>
+
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <div class="container-fluid">
+            {%- for type in ['success', 'error', 'fos_user_success'] -%}
+                {%- for flash in app.session.flashbag.get(type) -%}
+                    <div class="alert alert-{{ type == 'fos_user_success' ? 'success' : type == 'error' ? 'danger' : type == 'notice' ? 'warning' : type }}">
+                        <a class="close" data-dismiss="alert" href="#">×</a>
+                        {{ flash|trans }}
+                    </div>
+                {%- endfor -%}
+            {%- endfor -%}
+            
+            <form action="{{ path("accard_login_check") }}" method="post" class="form-signin" role="form">
+
+                <h2 class="form-signin-heading">{{ 'accard.interface.frontend.titles.login'|trans }}</h2>
+
+                <!--<input type="hidden" name="_csrf_token" value="{ csrf_token }" />-->
+
+                <input type="text" class="form-control" name="_username" value="{{ username }}" placeholder="{{ 'accard.form.login.username'|trans }}" required autofocus>
+                <input type="password" class="form-control" name="_password" placeholder="{{ 'accard.form.login.password'|trans }}" required>
+
+                <label class="checkbox">
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> Remember me
+                </label>
+
+                <input type="submit" class="btn btn-lg btn-primary btn-block" name="_submit" value="{{ 'accard.form.login.login'|trans }}">
+
+            </form>
+
+            <div class="form-signin-info">
+                <p class="text-muted"><a href="#">text</a></p>
+            </div>
+        </div>
+
+    </div>
+    <!-- /#wrapper -->
+
+    {% block javascripts -%}
+        {% javascripts output='assets/compiled/login.js'
+            'bundles/accardweb/js/jquery.js'
+            'bundles/accardweb/js/bootstrap.js'
+            'bundles/accardweb/js/menu.js'
+            'bundles/accardweb/js/backend.js'
+        %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% endblock %}
+</body>
+</html>

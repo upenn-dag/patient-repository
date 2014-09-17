@@ -1,0 +1,88 @@
+accard:
+    behavior:
+        alcohol:
+            title: Alcohol
+            message:
+                none_found: No alcohol behaviors found
+            action:
+                create: Create Alcohol Behavior
+                index: Browse Alcohol Behaviors
+                update: Update Alcohol Behavior
+                delete: Delete Alcohol Behavior
+                design: Design Alcohol Behavior
+            form:
+                frequency: Frequency
+        smoking:
+            title: Smoking
+            message:
+                none_found: No smoking behaviors found
+            action:
+                create: Create Smoking Behavior
+                index: Browse Smoking Behaviors
+                update: Update Smoking Behavior
+                delete: Delete Smoking Behavior
+                design: Design Smoking Behavior
+            form:
+                type: Type of Smoking
+                frequency: Number of Packs
+        illicit_drug:
+            title: Illicit Drugs
+            message:
+                none_found: No illicit drug behaviors found 
+            action:
+                create: Create Illicit Drug Behavior
+                index: Browse Illicit Drug Behaviors
+                update: Update Illicit Drug Behavior
+                delete: Delete Illicit Drug Behavior
+                design: Design Illicit Drug Behavior
+            form:
+                type: Type of Illicit Drug
+                method: Method
+                frequency: Frequency
+        occupation:
+            message:
+                none_found: No occupation behaviors found
+            title: Occupation
+            action:
+                create: Create Occupation Behavior
+                index: Browse Occupation Behaviors
+                update: Update Occupation Behavior
+                delete: Delete Occupation Behavior
+                design: Design Occupation Behavior
+            form:
+                industry: Industry 
+                hours: Hours per week
+        education:
+            message:
+                none_found: No education behaviors found
+            title: Education
+            action:
+                create: Create Education Behavior
+                index: Browse Education Behaviors
+                update: Update Education Behavior
+                delete: Delete Education Behavior
+                design: Design Education Behavior
+            form:
+                level: Highest level attained
+                years: Number of years attended
+                completed: Completed degree?
+
+        title: Behavior
+        form:
+            start_date: Start Date
+            end_date: End Date
+            patient: Patient
+        action:
+            show: %behavior%
+            index: Browse Behavior
+            create: Create Behavior
+            design: Design Behavior
+            manage: Manage Behaviors
+        message:
+            count: %total% behaviors registered.
+            count_fields: Collecting %total% behavior fields.
+        field:
+            title: Behavior Fields
+            create: Create Behavior Field
+            update: Update Behavior Field
+            none_found: No Behavior Fields found

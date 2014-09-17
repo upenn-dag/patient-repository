@@ -1,0 +1,54 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard_frontend_family_cancer_attribute_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.family_cancer_attribute:indexAction
+        _accard:
+            template: AccardWebBundle:Frontend/Attribute/FamilyCancer:index.html.twig
+            sortable: true
+            paginate: 25
+
+accard_frontend_family_cancer_attribute_show:
+    pattern: /{id}
+    methods: [GET]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.family_cancer_attribute:showAction
+        _accard:
+            template: AccardWebBundle:Frontend/Attribute/FamilyCancer:show.html.twig
+
+accard_frontend_family_cancer_attribute_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.family_cancer_attribute:createAction
+        _accard:
+            template: AccardWebBundle:Frontend/Attribute/FamilyCancer:create.html.twig
+            redirect: accard_frontend_family_cancer_attribute_show
+
+accard_frontend_family_cancer_attribute_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT, POST]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.family_cancer_attribute:updateAction
+        _accard:
+            template: AccardWebBundle:Frontend/Attribute/FamilyCancer:update.html.twig
+            redirect: accard_frontend_family_cancer_attribute_show
+
+accard_frontend_family_cancer_attribute_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.family_cancer_attribute:deleteAction
+        _accard:
+            template: AccardWebBundle:Frontend/Attribute/FamilyCancer:delete.html.twig
+            redirect: accard_frontend_family_cancer_attribute_index

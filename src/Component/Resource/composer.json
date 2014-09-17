@@ -1,0 +1,35 @@
+
+{
+    "name": "accard/resource",
+    "type": "library",
+    "description": "Resource component",
+    "keywords": ["resource"],
+    "homepage": "http://accard.med.upenn.edu",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Frank Bardon Jr.",
+            "homepage": "http://frankbardon.com"
+        },
+        {
+            "name": "Database and Applications Group",
+            "homepage": "http://dag.med.upenn.edu"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "doctrine/collections": "~1.0"
+    },
+    "require-dev": {},
+    "autoload": {
+        "psr-4": { "Accard\\Component\\Resource\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Accard\\Component\\Resource\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.0-dev"
+        }
+    }
+}

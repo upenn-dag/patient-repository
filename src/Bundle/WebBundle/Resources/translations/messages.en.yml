@@ -1,0 +1,122 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard:
+    accept: Accept
+    close: Close
+    create: Create
+    decline: Decline
+    edit: Edit
+    update: Update
+    delete: Delete
+    design: Design
+    save_changes: Save Changes
+    cancel: Cancel
+    show: Show
+    statistics: Statistics
+    settings: Settings
+    confirmation:
+        message: Are you sure you want to delete this resource?
+    flow:
+        basic_patient:
+            create_patient: Create a Patient
+            create_diagnosis: First Presentation
+            create_pre_existing_conditions: Pre-existing Conditions
+            finalize_patient: Finalize Patient
+    alert:
+        info: Information
+        success: Success
+        warning: Warning!
+        error: Error!
+        construction: Under Construction!
+        construction_area: The %area% area is currently under construction. A future release has been planned to create this page for you.
+        disabled: Area Disabled!
+        disabled_area: The %area% area has been disabled. You may visit the repository designer to allow this to be accessed by application users.
+    menu:
+        backend:
+            dashboard: Dashboard
+            settings: Settings
+            general_settings: General
+            theme_settings: Theme
+            users: Users
+            design: Design
+            patient: Patient
+            diagnosis: Diagnosis
+            behavior: Behavior
+            attribute: Attribute
+            options: Options
+        frontend:
+            home: Home
+            repositories: Repositories
+            patients: Patients
+            import: Import
+            admin: Administration
+            diagnoses: Diagnoses
+            behaviors: Behaviors
+            attributes: Attributes
+    interface:
+        backend:
+            title: Accard Administration
+            search_text: Search Administration...
+            titles:
+                dashboard: Dashboard
+                settings: Settings
+                general_settings: General Settings
+                theme_settings: Theme Settings
+                manage_options: Manage Options
+                create_option: Creating Option
+                update_option: Updating Option, %option%
+        frontend:
+            titles:
+                login: Accard Login
+        nav:
+            import:
+                dashboard: Dashboard
+                importers: Importers
+                records: Records
+            patient:
+                base: Base Fields
+                custom: Custom
+    patient:
+        form:
+            select_patient: Select a patient
+            end_date_help: Leave blank for an ongoing diagnosis
+        action:
+            manage_phases: Manage Phases
+    diagnosis:
+        action:
+            manage_phases: Manage Phases
+    form:
+        choose: Choose one
+        field:
+            id: Id
+            name: Name
+            presentation: Presentation
+            type: Type
+            option: Option
+            create: Create Field
+            choose_option: Choose an option
+        option:
+            none_found: No options found.
+            id: Id
+            name: Name
+            presentation: Presentation
+            values: Values
+            create: Create Option
+            manage: Manage Options
+            add_value: Add Value
+        option_value:
+            none_found: No option values found.
+            id: Id
+            value: Value
+            option: Option
+            create: Create Option Value
+            manage: Manage Option Values
+        login:
+            username: Username
+            password: Password
+            login: Log-in

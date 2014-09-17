@@ -1,0 +1,41 @@
+{
+    "name": "accard/attribute",
+    "type": "library",
+    "description": "Accard attribute component",
+    "keywords": ["attribute"],
+    "homepage": "http://accard.med.upenn.edu",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Frank Bardon Jr.",
+            "homepage": "http://frankbardon.com"
+        },
+        {
+            "name": "Dylan Pierce",
+            "homepage": "http://dylanjohnpierce.com"
+        }
+        {
+            "name": "Database and Applications Group",
+            "homepage": "http://dag.med.upenn.edu"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "accard/resource": "dev-develop"
+    },
+    "require-dev": {},
+    "autoload": {
+        "psr-4": { "Accard\\Component\\Attribute\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Accard\\Component\\Attribute\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.0-dev"
+        }
+    },
+    "repositories": [
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Resource.git" }
+    ]
+}

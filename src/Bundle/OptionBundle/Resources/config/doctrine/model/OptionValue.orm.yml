@@ -1,0 +1,30 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+Accard\Component\Option\Model\OptionValue:
+    type: mappedSuperclass
+    table: accard_option_value
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        value:
+            type: string
+            nullable: false
+
+    manyToOne:
+        option:
+            targetEntity: Accard\Component\Option\Model\OptionInterface
+            inversedBy: values
+            joinColumn:
+                name: optionId
+                referencedColumnName: id
+                nullable: false

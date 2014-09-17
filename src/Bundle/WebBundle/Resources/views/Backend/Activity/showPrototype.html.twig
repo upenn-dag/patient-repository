@@ -1,0 +1,31 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Backend:layout.html.twig' %}
+
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import button, create, generic %}
+{% from 'AccardWebBundle:Common/Macros:actions.html.twig' import update %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import pagination, page_title, statistics %}
+{% from 'AccardWebBundle:Backend/Activity:macros.html.twig' import list_fields %}
+
+
+{% block content %}
+    {{ page_title(activity_prototype.presentation) }}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <div class="pull-right">
+                    {# create(path('accard_backend_activity_prototype_create'), 'accard.form.field.create'|trans, 'xs') #}
+                </div>
+                {{ 'accard.activity.prototype_field.title'|trans }}
+            </h4>
+        </div>
+        {{ list_fields(activity_prototype.fields) }}
+    </div>
+
+{% endblock %}

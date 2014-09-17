@@ -1,0 +1,7 @@
+parameters:
+#    accard_activity.example.class: Accard\Bundle\ActivityBundle\Example
+
+services:
+#    accard_activity.example:
+#        class: %accard_activity.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,54 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard_frontend_diagnosis_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.diagnosis:indexAction
+        _accard:
+            template: AccardWebBundle:Frontend/Diagnosis:index.html.twig
+            sortable: true
+            paginate: 25
+
+accard_frontend_diagnosis_show:
+    pattern: /{id}
+    methods: [GET]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.diagnosis:showAction
+        _accard:
+            template: AccardWebBundle:Frontend/Diagnosis:show.html.twig
+
+accard_frontend_diagnosis_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.diagnosis:createAction
+        _accard:
+            template: AccardWebBundle:Frontend/Diagnosis:create.html.twig
+            redirect: accard_frontend_diagnosis_show
+
+accard_frontend_diagnosis_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT, POST]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.diagnosis:updateAction
+        _accard:
+            template: AccardWebBundle:Frontend/Diagnosis:update.html.twig
+            redirect: accard_frontend_diagnosis_show
+
+accard_frontend_diagnosis_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.diagnosis:deleteAction
+        _accard:
+            template: AccardWebBundle:Frontend/Diagnosis:delete.html.twig
+            redirect: accard_frontend_diagnosis_index

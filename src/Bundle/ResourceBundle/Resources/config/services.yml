@@ -1,0 +1,75 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+parameters:
+    accard.controller.configuration_factory.class: Accard\Bundle\ResourceBundle\Controller\ConfigurationFactory
+    accard.controller.parameters_parser.class: Accard\Bundle\ResourceBundle\Controller\ParametersParser
+    accard.expression_language.class: Accard\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage
+    accard.form.type.object_to_identifier.class: Accard\Bundle\ResourceBundle\Form\Type\ObjectToIdentifierType
+    accard.event_subscriber.load_orm_metadata.class: Accard\Bundle\ResourceBundle\EventListener\LoadORMMetadataSubscriber
+    accard.event_subscriber.kernel_controller.class: Accard\Bundle\ResourceBundle\EventListener\KernelControllerSubscriber
+    accard.import.resource_factory.class: Accard\Bundle\ResourceBundle\Import\ResourceResolvingFactory
+    accard.import.registry.class: Accard\Bundle\ResourceBundle\Import\Registry
+    accard.import.record_resolver.class: Accard\Bundle\ResourceBundle\Import\RecordResolver
+    accard.import.runner.class: Accard\Bundle\ResourceBundle\Import\Runner
+    accard.import.event_subscriber.class: Accard\Bundle\ResourceBundle\EventListener\ImporterEventSubscriber
+
+services:
+    accard.controller.configuration_factory:
+        class: %accard.controller.configuration_factory.class%
+        arguments: ["@accard.controller.parameters_parser"]
+
+    accard.controller.parameters_parser:
+        class: %accard.controller.parameters_parser.class%
+        arguments: ["@accard.expresssion_language"]
+
+    accard.expresssion_language:
+        class: %accard.expression_language.class%
+        calls: [["setContainer", ["@service_container"]]]
+
+    accard.event_subscriber.load_orm_metadata:
+        class: %accard.event_subscriber.load_orm_metadata.class%
+        arguments: ["%accard.config.classes%", "%accard.config.inheritance%"]
+        tags: [{ name: doctrine.event_subscriber }]
+
+    accard.event_subscriber.kernel_controller:
+        class: %accard.event_subscriber.kernel_controller.class%
+        arguments: ["@security.context"]
+        tags: [{ name: kernel.event_subscriber }]
+
+    accard.form.type.object_to_identifier:
+        class: %accard.form.type.object_to_identifier.class%
+        abstract: true
+
+    accard.import.registry:
+        class: %accard.import.registry.class%
+        calls: [["setContainer", ["@service_container"]]]
+
+    accard.import.resource_factory:
+        class: %accard.import.resource_factory.class%
+        calls: [["setContainer", ["@service_container"]]]
+
+    accard.import.record_resolver:
+        class: %accard.import.record_resolver.class%
+        arguments:
+            - @accard.import.resource_factory
+
+    accard.import.runner:
+        class: %accard.import.runner.class%
+        arguments:
+            - @event_dispatcher
+            - @accard.import.resource_factory
+            - @accard.import.registry
+
+    accard.import.event.post_import:
+        class: %accard.import.event_subscriber.class%
+        tags: [{ name: kernel.event_subscriber }]
+
+#    accard.importer.static:
+#        class: Accard\Bundle\ResourceBundle\Import\StaticImporter
+#        tags:
+#            - { name: accard.importer, importer: static }

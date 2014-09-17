@@ -1,0 +1,87 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% macro show(url, message, size) %}
+<a href="{{ url }}" class="btn btn-default{% if size is defined %} btn-{{ size }}{% endif %}">
+   <i class="glyphicon glyphicon-book"></i><span> {{ message is empty ? 'accard.show'|trans : message }}</span>
+</a>
+{% endmacro %}
+
+{% macro generic(url, message, icon, size) %}
+<a href="{{ url }}" class="btn btn-default{% if size is defined %} btn-{{ size }}{% endif %}">
+    {% if icon is not empty %}<i class="glyphicon glyphicon-{{ icon }}"></i>{% endif %}<span> {{ message }}</span>
+</a>
+{% endmacro %}
+
+{% macro button(url, message, size) %}
+<a href="{{ url }}" class="btn btn-default{% if size is defined %} btn-{{ size }}{% endif %}">
+    <span> {{ message is empty ? 'accard.create'|trans : message }}</span>
+</a>
+{% endmacro %}
+
+{% macro create(url, message, size) %}
+<a href="{{ url }}" class="btn btn-primary{% if size is defined %} btn-{{ size }}{% endif %}">
+    <i class="glyphicon glyphicon-plus-sign"></i><span> {{ message is empty ? 'accard.create'|trans : message }}</span>
+</a>
+{% endmacro %}
+
+{% macro design(url, message, size) %}
+<a href="{{ url }}" class="btn btn-default{% if size is defined %} btn-{{ size }}{% endif %}">
+    <i class="fa fa-file"></i><span> {{ message is empty ? 'accard.design'|trans : message }}</span>
+</a>
+{% endmacro %}
+
+{% macro update(url, message, size) %}
+<a href="{{ url }}" class="btn btn-primary{% if size is defined %} btn-{{ size }}{% endif %}">
+    <i class="glyphicon glyphicon-pencil"></i><span> {{ message is empty ? 'accard.update'|trans : message }}</span>
+</a>
+{% endmacro %}
+
+{% macro edit(url, message, size) %}
+<a href="{{ url }}" class="btn btn-primary{% if size is defined %} btn-{{ size }}{% endif %}">
+    <i class="glyphicon glyphicon-pencil"></i><span> {{ message is empty ? 'accard.edit'|trans : message }}</span>
+</a>
+{% endmacro %}
+
+{% macro delete(url, message, size, disabled=false, modal=true) %}
+{% if disabled %}
+<span class="btn btn-danger disabled">
+    <i class="glyphicon glyphicon-trash"></i><span> {{ message is empty ? 'accard.delete'|trans : message }}</span>
+</span>
+{% else %}
+<form action="{{ url }}" method="post" class="delete-action-form">
+    <input type="hidden" name="_method" value="DELETE">
+    <button class="btn btn-danger{% if modal %} btn-confirm{% endif %}{% if size is defined %} btn-{{ size }}{% endif %}" type="submit">
+        <i class="glyphicon glyphicon-trash"></i> <span> {{ message is empty ? 'accard.delete'|trans : message }}</span>
+    </button>
+</form>
+{% endif %}
+{% endmacro %}
+
+{% macro manage(url, message, size) %}
+<a href="{{ url }}" class="btn btn-success{% if size is defined %} btn-{{ size }}{% endif %}">
+    <i class="glyphicon glyphicon-folder-open"></i><span> {{ message is empty ? 'accard.manage'|trans : message }}</span>
+</a>
+{% endmacro %}
+
+{% macro move(url, direction, first=false, last=false, message='') %}
+<form action="{{ url }}" method="post" class="delete-action-form">
+    <input type="hidden" name="_method" value="PUT">
+    <button title="{{ message is empty ? ('accard.move_'~direction)|trans : message }}" class="btn btn-default {% if ('up' == direction and first) or ('down' == direction and last) %}disabled{% endif %}" type="submit">
+        <i class="glyphicon glyphicon-arrow-{{ direction }}"></i>
+    </button>
+</form>
+{% endmacro %}
+
+{% macro patch(url, message, icon) %}
+<form action="{{ url }}" method="post" class="delete-action-form">
+    <input type="hidden" name="_method" value="PATCH">
+    <button class="btn btn-success" type="submit">
+        <i class="glyphicon glyphicon-{{ icon|default('transfer') }}"></i> <span> {{ message }}</span>
+    </button>
+</form>
+{% endmacro %}

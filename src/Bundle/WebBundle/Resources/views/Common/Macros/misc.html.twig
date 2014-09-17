@@ -1,0 +1,100 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% macro pagination(paginator, options) %}
+{% if paginator.haveToPaginate()|default(false) %}
+<div class="row">
+    <div class="col-xs-9">
+        {{ pagerfanta(paginator, 'twitter_bootstrap3_translated', options|default({})) }}
+    </div>
+
+    <div class="col-xs-3">
+        <div class="pull-right">
+            <div class="btn-group paginator">
+                {{ accard_resource_paginate(paginator, [10,20,30]) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro page_title(title, buttons) %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="page-header">
+            {% if buttons is defined -%}
+            <div class="pull-right">
+            {% if buttons is iterable %}
+                <div class="btn-group">
+                {% for button in buttons %}
+                    {{ button }}
+                {% endfor %}
+                </div>
+            {% else %}
+              {{ buttons }}
+            {% endif %}
+            </div>
+            {% endif %}
+            {{ title|trans }}
+        </h1>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro sidebar(menu, opts) %}
+    {{- knp_menu_render(menu, {
+        'template': 'AccardWebBundle:Backend:sidebar.html.twig',
+        'firstClass': null,
+        'lastClass': null,
+        'ancestorClass': 'ancestor',
+        'currentClass': 'current',
+    }|merge(opts|default({}))) -}}
+{% endmacro %}
+
+{% macro menu(menu, branch, opts) %}
+    {{- knp_menu_render(menu, {
+        'template': 'AccardWebBundle:Backend:menu.html.twig',
+        'firstClass': null,
+        'lastClass': null,
+        'ancestorClass': 'ancestor',
+        'currentClass': 'active',
+    }|merge(opts|default({}))) -}}
+{% endmacro %}
+
+{% macro label(text, type) %}
+{% spaceless %}
+    {% set type = type|default('primary') %}
+    <span class="label label-{{ type }}">{{ text }}</span>
+{% endspaceless %}
+{% endmacro %}
+
+{% macro icon(class) %}
+{% spaceless %}
+    <i class="{{ class }}"></i>
+{% endspaceless %}
+{% endmacro %}
+
+{% macro statistics(entries) %}
+{% set entries = entries|default([]) %}
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h4 class="panel-title">{{ 'accard.statistics'|trans }}</h4>
+    </div>
+    <ul class="list-group">
+    {% for entry in entries %}
+        <li class="list-group-item">{{ entry|raw }}</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endmacro %}
+
+{% macro modal() %}
+
+{% endmacro %}
+
+

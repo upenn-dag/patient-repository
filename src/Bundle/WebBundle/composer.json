@@ -1,0 +1,30 @@
+{
+    "name": "accard/web-bundle",
+    "type": "symfony-bundle",
+    "description": "Accard web bundle",
+    "keywords": ["web"],
+    "homepage": "http://accard.med.upenn.edu",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Frank Bardon Jr.",
+            "homepage": "http://frankbardon.com"
+        },
+        {
+            "name": "Database and Applications Group",
+            "homepage": "http://dag.med.upenn.edu"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+
+        "accard/core-bundle":  "dev-develop"
+    },
+    "autoload": {
+        "psr-4": { "Accard\\Bundle\\WebBundle\\": "" }
+    },
+    "repositories": [
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/CoreBundle.git" }
+    ]
+}

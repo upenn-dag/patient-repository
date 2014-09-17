@@ -1,0 +1,64 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard:
+    patient_phase:
+        form:
+            label: Label
+            presentation: Presentation
+            order: Order
+        title:
+            index: Patient Phases
+        action:
+            create: Create Patient Phase
+            update: Update Patient Phase
+    patient_phase_instance:
+        form:
+            start_date: Start Date
+            end_date: End Date
+            phase: Phase
+            target: Patient
+    diagnosis_phase:
+        form:
+            label: Label
+            presentation: Presentation
+            order: Order
+        title:
+            index: Diagnosis Phases
+        action:
+            create: Create Diagnosis Phase
+            update: Update Diagnosis Phase
+    diagnosis_phase_instance:
+        form:
+            start_date: Start Date
+            end_date: End Date
+            phase: Phase
+            target: Diagnosis
+    form:
+        settings:
+            general:
+                locale: Language
+                title: Page title
+                logotype: Logotype
+            theme:
+                theme: Theme
+            patient:
+                enabled: Enable patient repository
+                import_enabled: Enable patient repository import
+            diagnosis:
+                enabled: Enable diagnosis repository
+                import_enabled: Enable diagnosis repository import
+            behavior:
+                enabled: Enable behavior repository
+                enable_alcohol: Enable alcohol behavior
+                enable_smoking: Enable smoking behavior
+                enable_illicit_drugs: Enable illict drugs behavior
+                enable_occupation: Enable occupation behavior
+                enable_education: Enable education behavior
+            attribute:
+                enabled: Enable attribute repository
+                enable_family_cancer: Enable family cancer attribute

@@ -1,0 +1,6 @@
+suites:
+    Patient:
+        namespace: Accard\Component\Patient
+        spec_prefix: spec
+        spec_path: .
+        src_path: .

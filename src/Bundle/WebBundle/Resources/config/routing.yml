@@ -1,0 +1,28 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard_frontend:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/main.yml
+
+accard_backend:
+    resource: @AccardWebBundle/Resources/config/routing/backend/main.yml
+    prefix: /administration
+
+accard_partial:
+    resource: @AccardWebBundle/Resources/config/routing/partial/main.yml
+    prefix: /partial
+
+accard_login:
+    path: /login
+    defaults:
+        _controller: AccardWebBundle:Login:login
+
+accard_login_check:
+    path: /login_check
+
+accard_logout:
+    path: /logout

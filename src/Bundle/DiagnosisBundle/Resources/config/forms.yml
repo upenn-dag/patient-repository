@@ -1,0 +1,43 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+parameters:
+
+    accard.form.type.diagnosis.class: Accard\Bundle\DiagnosisBundle\Form\Type\DiagnosisType
+    accard.form.type.diagnosis_code.class: Accard\Bundle\DiagnosisBundle\Form\Type\CodeType
+    accard.form.type.diagnosis_code_group.class: Accard\Bundle\DiagnosisBundle\Form\Type\CodeGroupType
+
+services:
+
+    accard.form.type.diagnosis:
+        class: %accard.form.type.diagnosis.class%
+        arguments:
+            - %accard.model.diagnosis.class%
+            - %accard.validation_group.diagnosis%
+            - @accard.builder.diagnosis
+            - @accard.provider.diagnosis_code
+            - @accard.option.provider
+        tags:
+            - { name: form.type, alias: accard_diagnosis }
+
+    accard.form.type.diagnosis_code:
+        class: %accard.form.type.diagnosis_code.class%
+        arguments:
+            - %accard.model.diagnosis_code.class%
+            - %accard.model.diagnosis_code_group.class%
+            - %accard.validation_group.diagnosis_code%
+        tags:
+            - { name: form.type, alias: accard_diagnosis_code }
+
+    accard.form.type.diagnosis_code_group:
+        class: %accard.form.type.diagnosis_code_group.class%
+        arguments:
+            - %accard.model.diagnosis_code_group.class%
+            - %accard.model.diagnosis_code.class%
+            - %accard.validation_group.diagnosis_code_group%
+        tags:
+            - { name: form.type, alias: accard_diagnosis_code_group }

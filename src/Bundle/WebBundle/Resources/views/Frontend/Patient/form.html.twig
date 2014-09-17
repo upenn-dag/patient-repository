@@ -1,0 +1,64 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% set count = form.fields|length %}
+{% set row1fields = form.fields|slice(0, count/2) %}
+{% set row2fields = form.fields|slice(count/2, count) %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group{% if form.mrn.vars.errors|length %} has-error{% endif %}">
+            {{ form_widget(form.mrn, {
+                widget_addon_append: { text: 'accard.patient.form.mrn'|trans },
+                attr: {
+                    placeholder: 'accard.patient.form.mrn_extended'|trans 
+                }
+            }) }}
+            {% if form.mrn.vars.errors|length %}
+                {{ form_errors(form.mrn) }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% macro render_field(field) %}
+    {{ form_widget(field) }}
+{% endmacro %}
+
+{% from _self import render_field %}
+{% include 'AccardWebBundle:Frontend/Patient:formTabs.html.twig' %}
+
+<div class="tab-content">
+    <div class="tab-pane fade in active" id="patient-base">
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_row(form.firstName) }}
+                {{ form_row(form.lastName) }}
+                {{ form_row(form.gender) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_row(form.race) }}
+                {{ form_row(form.dateOfBirth) }}
+                {{ form_row(form.dateOfDeath) }}
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="patient-custom">
+        <div class="row">
+            <div class="col-md-6">
+            {% for field in row1fields %}
+                {{ render_field(field) }}
+            {% endfor %}
+            </div>
+            <div class="col-md-6">
+            {% for field in row2fields %}
+                {{ render_field(field) }}
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

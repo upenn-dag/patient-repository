@@ -1,0 +1,31 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard:
+    patient:
+        mrn:
+            regex: MRN must contain nine digits.
+        firstName:
+            not_blank: First name may not be left blank.
+            length:
+                min: "First name must container more than {{ limit }} characters."
+                max: "First name must not contain more than {{ limit }} characters."
+        lastName:
+            not_blank: Last name may not be left blank.
+            length:
+                min: "Last name must container more than {{ limit }} characters."
+                max: "Last name must not contain more than {{ limit }} characters."
+        dateOfBirth:
+            not_blank: Date of birth may not be left blank.
+            date: Date of birth must contain a valid date.
+        dateOfDeath:
+            date: Date of death must contain a valid date.
+            valid: Date of death must be empty or greater than date of birth.
+        gender:
+            not_blank: Gender may not be left blank.
+        race:
+            not_blank: Race may not be left blank.

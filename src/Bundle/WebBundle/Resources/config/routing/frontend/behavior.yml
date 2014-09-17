@@ -1,0 +1,26 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard_frontend_behavior_alcohol:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/behavior/alcohol.yml
+    prefix: /alcohol
+
+accard_frontend_behavior_smoking:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/behavior/smoking.yml
+    prefix: /smoking
+
+accard_frontend_behavior_illicit_drug:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/behavior/illicit_drug.yml
+    prefix: /illicit_drug
+
+accard_frontend_behavior_occupation:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/behavior/occupation.yml
+    prefix: /occupation
+
+accard_frontend_behavior_education:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/behavior/education.yml
+    prefix: /education

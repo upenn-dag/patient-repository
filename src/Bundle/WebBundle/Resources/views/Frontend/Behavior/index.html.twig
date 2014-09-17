@@ -1,0 +1,34 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Frontend:layout.html.twig' %}
+
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import create %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import pagination, page_title %}
+{% from 'AccardWebBundle:Frontend/Behavior:macros.html.twig' import behaviors_menu %}
+
+{% set designBtn = null %}
+{% if is_granted('ROLE_ADMIN') %}
+    {% set designBtn = design(path('accard_backend_behavior_design'), 'accard.behavior.action.design'|trans) %}
+{% endif %}
+
+{% block content %}
+
+
+   {{ page_title(
+        'accard.behavior.action.design'|trans,
+        [
+            create(path('accard_frontend_behavior_create'), 'accard.behavior.action.create'|trans),
+            designBtn
+        ]
+    )}}
+
+    {{ behaviors_menu() }}
+    
+    {{ list(behaviors) }}
+    {{ pagination(behaviors) }}    
+{% endblock %}

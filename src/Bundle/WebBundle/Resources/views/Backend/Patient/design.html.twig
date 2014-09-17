@@ -1,0 +1,78 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Backend:layout.html.twig' %}
+
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import button, create, generic %}
+{% from 'AccardWebBundle:Common/Macros:actions.html.twig' import update %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import pagination, page_title, statistics %}
+{% from 'AccardWebBundle:Backend/Patient:macros.html.twig' import list_fields %}
+
+
+{% block content %}
+    {{ page_title(
+        'accard.patient.action.design'|trans,
+        [
+            generic(path('accard_frontend_patient_index'), 'accard.patient.action.manage'|trans, 'user'),
+            create(path('accard_frontend_patient_create'), 'accard.patient.action.create'|trans)
+        ]
+    ) }}
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <div class="pull-right">
+                            {{ create(path('accard_backend_patient_field_create'), 'accard.form.field.create'|trans, 'xs') }}
+                        </div>
+                        {{ 'accard.patient.field.title'|trans }}
+                    </h4>
+                </div>
+                {{ list_fields(fields) }}
+                {% if fields.haveToPaginate() %}
+                <div class="panel-body">
+                    {{ pagination(fields) }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-4">
+            {{ button(path('accard_backend_option_update_redirect', { name: 'gender' }), 'accard.patient.field.update_gender'|trans, 'block') }}
+            {{ button(path('accard_backend_option_update_redirect', { name: 'race' }), 'accard.patient.field.update_race'|trans, 'block') }}
+            {{ button(path('accard_backend_patient_phase_index'), 'accard.patient.action.manage_phases'|trans, 'block') }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <form action="{{ path('accard_backend_patient_settings_update') }}" method="POST" enctype="{{ form_enctype(settings_form) }}">
+                {{ form_widget(settings_form._token) }}
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-primary btn-xs">{{ 'accard.update'|trans }}</button>
+                            </div>
+                            {{- 'accard.settings'|trans -}}
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        {{ form_widget(settings_form.enabled) }}
+                        {{ form_widget(settings_form.import_enabled) }}
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            {{ statistics([
+                'accard.patient.message.count'|trans({'%total%': patient_count}),
+                'accard.patient.field.count'|trans({'%total%': fields|length})
+            ]) }}
+        </div>
+    </div>
+{% endblock %}

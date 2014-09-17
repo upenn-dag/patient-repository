@@ -1,0 +1,21 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+imports:
+    - { resource: accard.yml }
+
+doctrine_cache:
+    providers:
+        accard_settings:
+            type: apc
+            namespace: accard_settings
+
+mopa_bootstrap:
+    form:
+        horizontal: false
+        render_optional_text: false
+    menu: ~

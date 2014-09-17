@@ -1,0 +1,51 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Backend:layout.html.twig' %}
+
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import button, create, generic %}
+{% from 'AccardWebBundle:Common/Macros:actions.html.twig' import update %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import pagination, page_title, statistics %}
+{% from 'AccardWebBundle:Backend/Diagnosis:macros.html.twig' import list_fields %}
+
+
+{% block content %}
+    {{ page_title('accard.attribute.action.design'|trans) }}
+
+    <div class="row">
+        <div class="col-md-8">
+            <form action="{{ path('accard_backend_attribute_settings_update') }}" method="POST" enctype="{{ form_enctype(settings_form) }}">
+                {{ form_widget(settings_form._token) }}
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-primary btn-xs">{{ 'accard.update'|trans }}</button>
+                            </div>
+                            {{- 'accard.settings'|trans -}}
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_widget(settings_form.enabled) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_widget(settings_form.enable_family_cancer) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            {{ statistics([
+                'accard.attribute.message.count'|trans({'%total%': attribute_count})
+            ]) }}
+        </div>
+    </div>
+{% endblock %}

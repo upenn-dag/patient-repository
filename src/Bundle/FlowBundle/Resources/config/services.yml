@@ -1,0 +1,45 @@
+parameters:
+
+    accard.flow.context.class: Accard\Bundle\FlowBundle\Flow\Context\FlowContext
+    accard.flow.builder.class: Accard\Bundle\FlowBundle\Flow\Builder\FlowBuilder
+    accard.flow.coordinator.class: Accard\Bundle\FlowBundle\Flow\Coordinator\FlowCoordinator
+    accard.flow.controller.class: Accard\Bundle\FlowBundle\Controller\FlowController
+    accard.flow.step_registry.class: Accard\Bundle\FlowBundle\Flow\Step\StepRegistry
+    accard.flow.storage.session.class: Accard\Bundle\FlowBundle\Storage\SessionStorage
+    accard.flow.storage.session.bag.class: Accard\Bundle\FlowBundle\Storage\SessionFlowsBag
+
+services:
+
+    accard.flow.context:
+        class: %accard.flow.context.class%
+        arguments:
+            - @accard.flow.storage.session
+
+    accard.flow.builder:
+        class: %accard.flow.builder.class%
+        arguments:
+            - @service_container
+
+    accard.flow.coordinator:
+        class: %accard.flow.coordinator.class%
+        arguments:
+            - @router
+            - @accard.flow.builder
+            - @accard.flow.context
+
+    accard.flow.controller:
+        class: %accard.flow.controller.class%
+        arguments:
+            - @accard.flow.coordinator
+            - @accard.flow.context
+
+    accard.flow.step_registry:
+        class: %accard.flow.step_registry.class%
+
+    accard.flow.storage.session:
+        class: %accard.flow.storage.session.class%
+        arguments:
+            - @session
+
+    accard.flow.storage.session.bag:
+        class: %accard.flow.storage.session.bag.class%

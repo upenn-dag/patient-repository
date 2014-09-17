@@ -1,0 +1,85 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Backend:layout.html.twig' %}
+
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import create, design %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
+{% from 'AccardWebBundle:Backend/Diagnosis:macros.html.twig' import list_groups, list_codes %}
+
+{% block content %}
+
+    {{ page_title('accard.diagnosis_code_group.action.index'|trans,
+        [
+            create(path('accard_backend_diagnosis_code_group_create'), 'accard.diagnosis_code_group.action.create'|trans),
+            create(path('accard_backend_diagnosis_code_create'), 'accard.diagnosis_code.action.create'|trans)
+        ])
+    }}
+
+    {{ list_groups(diagnosis_code_groups) }}
+    {{ list_codes(diagnosis_codes) }}
+{% endblock %}
+
+{% block page_javascripts %}
+    {% javascripts output='assets/compiled/import-codes.js' 'bundles/accardweb/js/import-codes.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+    !function ($) {
+        var code = $('.diagnosis-code-group').accardCode($('.diagnosis-code'));
+        var addUrl = '{{ path('accard_backend_diagnosis_code_group_add') }}';
+        var removeUrl = '{{ path('accard_backend_diagnosis_code_group_remove') }}';
+        //code.on('accard.code.pre_drop', function(event) { console.log('accard.code.pre_drop'); });
+
+        code
+            .on('accard.code.enter', function(event) {
+                event.container.el.addClass('drag-over');
+            })
+            .on('accard.code.pre_drop', function(event) {
+                var group = event.container.id;
+                var code = event.html.data('code-id');
+
+                $.post(addUrl, {
+                    group: group,
+                    code: code
+                });
+            })
+            .on('accard.code.leave accard.code.reject_drop accard.code.post_drop', function(event) {
+                event.container.el.removeClass('drag-over');
+            })
+            .on('accard.code.reject_drop', function(event) {
+                alert('Ignored adding this code, it already exists in this group.');
+            })
+            .on('accard.code.post_drop', function(event) {
+                event.html.removeClass('label-default').addClass('label-primary');
+            })
+            .on('accard.code.mouseenter', function(event) {
+                var container = event.container;
+                var group = container.id;
+                var code = $(event.code).data('code-id');
+
+                $(event.code).prepend('<a href="#">&times;</a><span class="inner"> | </span>');
+                $(event.code).on('click', 'a', function(event) {
+                    $.post(removeUrl, {
+                        group: group,
+                        code: code
+                    })
+                        .done(function(response) {
+                            container.removeCode(code);
+                            container.removeCodeHtml(code);
+                        })
+                    ;
+                });
+            })
+            .on('accard.code.mouseleave', function(event) {
+                $(event.code).find('a, span.inner').remove();
+            })
+        ;
+    }(jQuery);
+    </script>
+{% endblock %}

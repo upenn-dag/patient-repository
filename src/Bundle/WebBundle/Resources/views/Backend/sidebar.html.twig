@@ -1,0 +1,141 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'knp_menu_base.html.twig' %}
+
+{% macro attributes(attributes) %}
+ {% spaceless %}
+    {% for name, value in attributes %}
+        {% if value is not none and value is not sameas(false) %}
+            {{- ' %s="%s"'|format(name, value is sameas(true) ? name|e : value|e)|raw -}}
+        {% endif %}
+    {% endfor %}
+{% endspaceless %}
+{% endmacro %}
+
+{% macro level(level) %}
+{% spaceless %}
+    {% if level == 1 %}
+        second
+    {% elseif level == 2 %}
+        third
+    {% else %}
+        fourth
+    {% endif %}
+{% endspaceless %}
+{% endmacro %}
+
+{% block compressed_root %}
+{% spaceless %}
+    {{ block('root') }}
+{% endspaceless %}
+{% endblock %}
+
+{% block root %}
+    {% set listAttributes = item.childrenAttributes %}
+    {{ block('list') }}
+{% endblock %}
+
+{% block list %}
+{% if item.hasChildren and options.depth is not sameas(0) and item.displayChildren -%}
+    <ul{{ _self.attributes(listAttributes) }}>
+        {{ block('children') }}
+    </ul>
+{%- endif %}
+{% endblock %}
+
+{% block label %}
+    {%- if item.labelAttribute('icon') -%}
+        <i class="{{ item.labelAttribute('icon') }}"></i>{{ ' ' }}
+    {%- endif -%}
+    {%- if not item.labelAttribute('iconOnly') -%}
+        {%- if options.allow_safe_labels and item.getExtra('safe_label', false) -%}
+            {{ item.label|trans|raw }}
+        {%- else -%}
+            {{ item.label|trans }}
+        {%- endif -%}
+    {%- endif -%}
+{% endblock %}
+
+{% block span_element %}
+{% spaceless %}
+    <a href="#"{{ _self.attributes(item.linkAttributes) }}>{{ block('label') }}</a>
+{% endspaceless %}
+{% endblock %}
+
+{% block link_element %}
+{% spaceless %}
+    <a href="{{ item.uri }}"{{ _self.attributes(item.linkAttributes) }}>{{ block('label') }}</a>
+{% endspaceless %}
+{% endblock %}
+
+{% block item %}
+{% if item.displayed %}
+
+    {#- Classes -#}
+    {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] -%}
+    {%- if matcher.isCurrent(item) %}
+        {%- set classes = classes|merge([options.currentClass]) %}
+    {%- elseif matcher.isAncestor(item, options.matchingDepth) %}
+        {%- set classes = classes|merge([options.ancestorClass]) %}
+    {%- endif %}
+    {%- if item.actsLikeFirst %}{% set classes = classes|merge([options.firstClass]) %}{% endif %}
+    {%- if item.actsLikeLast %}{% set classes = classes|merge([options.lastClass]) %}{% endif %}
+
+    {#- Leaf (no children), Branch (has children) #}
+    {%- if item.hasChildren and options.depth is not sameas(0) %}
+        {%- if options.branch_class is not empty and item.displayChildren %}
+            {%- set classes = classes|merge([options.branch_class]) %}
+        {%- endif %}
+    {%- elseif options.leaf_class is not empty %}
+        {%- set classes = classes|merge([options.leaf_class]) %}
+    {%- endif %}
+
+    {%- set attributes = item.attributes %}
+    {%- if classes is not empty %}
+        {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
+    {%- endif %}
+
+    {#- Render #}
+    <li{{ _self.attributes(attributes) }}>
+        {% if item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink) %}
+            {{- block('link_element') }}
+        {%- else %}
+            {{- block('span_element') }}
+        {%- endif %}
+
+        {#- Render children #}
+        {%- set childrenClasses = item.childrenAttribute('class') is not empty ? [item.childrenAttribute('class')] : ['nav'] %}
+        {%- set childrenClasses = childrenClasses|merge(['nav-' ~ _self.level(item.level) ~ '-level']) %}
+        {%- set listAttributes = item.childrenAttributes|merge({'class': childrenClasses|join(' ') }) %}
+
+        {{ block('list') }}
+    </li>
+{% endif %}
+{% endblock %}
+
+{% block children %}
+    {%- set currentOptions = options -%}
+    {%- set currentItem = item -%}
+
+    {# Update depth #}
+    {%- if options.depth is not none -%}
+        {%- set options = options|merge({'depth': currentOptions.depth - 1}) -%}
+    {%- endif -%}
+
+    {# Update the matching depth #}
+    {%- if options.matchingDepth is not none and options.matchingDepth > 0 -%}
+        {%- set options = options|merge({'matchingDepth': currentOptions.matchingDepth - 1}) -%}
+    {%- endif -%}
+
+    {%- for item in currentItem.children -%}
+        {{ block('item') }}
+    {%- endfor -%}
+
+    {%- set item = currentItem -%}
+    {%- set options = currentOptions -%}
+{% endblock %}

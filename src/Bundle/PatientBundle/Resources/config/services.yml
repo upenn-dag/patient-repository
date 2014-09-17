@@ -1,0 +1,36 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+parameters:
+
+    accard.builder.patient.class: Accard\Component\Patient\Builder\PatientBuilder
+    accard.provider.patient.class: Accard\Bundle\PatientBundle\Provider\PatientProvider
+
+services:
+
+    accard.form.type.patient:
+        class: %accard.form.type.patient.class%
+        arguments:
+            - %accard.model.patient.class%
+            - %accard.validation_group.patient%
+            - @accard.builder.patient
+            - @accard.option.provider
+        tags:
+            - { name: form.type, alias: accard_patient }
+
+    accard.builder.patient:
+        class: %accard.builder.patient.class%
+        arguments:
+            - @accard.manager.patient
+            - @accard.repository.patient
+            - @accard.repository.patient_field
+            - @accard.repository.patient_field_value
+
+    accard.provider.patient:
+        class: %accard.provider.patient.class%
+        arguments:
+            - @accard.repository.patient

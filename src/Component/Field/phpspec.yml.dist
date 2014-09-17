@@ -1,0 +1,6 @@
+suites:
+    Field:
+        namespace: Accard\Component\Field
+        spec_prefix: spec
+        spec_path: .
+        src_path: .

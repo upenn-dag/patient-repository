@@ -1,0 +1,26 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Backend:layout.html.twig' %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
+
+{% block content %}
+
+    {{ page_title(message is defined ? message : 'accard.confirmation.message'|trans) }}
+
+    <form action="{{ app.request.requestUri }}" method="post" class="delete-action-form">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="confirmed" value="1">
+        <div class="form-actions">
+            <button class="btn btn-danger" type="submit">
+                <i class="glyphicon glyphicon-trash"></i> <span>{{ 'accard.delete'|trans }}</span>
+            </button>
+            <a href="{{ app.request.headers.get('referer') }}" class="btn btn-info"><i class="glyphicon glyphicon-remove"></i> {{ 'accard.cancel'|trans }}</a>
+        </div>
+    </form>
+
+{% endblock %}

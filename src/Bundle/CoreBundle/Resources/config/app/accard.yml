@@ -1,0 +1,56 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard_core:
+    driver: doctrine/orm
+
+accard_resource: ~
+accard_settings: ~
+accard_phase: ~
+
+accard_patient:
+    classes:
+        patient:
+            model: Accard\Component\Core\Model\Patient
+            controller: Accard\Bundle\CoreBundle\Controller\PatientController
+
+accard_diagnosis:
+    classes:
+        diagnosis:
+            model: Accard\Component\Core\Model\Diagnosis
+            controller: Accard\Bundle\CoreBundle\Controller\DiagnosisController
+        diagnosis_code_group:
+            controller: Accard\Bundle\CoreBundle\Controller\DiagnosisCodeGroupController
+
+accard_activity:
+    classes:
+        activity:
+            controller: Accard\Bundle\CoreBundle\Controller\ActivityController
+
+accard_behavior:
+    classes:
+        behavior:
+            model: Accard\Component\Core\Model\Behavior
+            controller: Accard\Bundle\CoreBundle\Controller\BehaviorController
+        alcohol_behavior:
+            controller: Accard\Bundle\CoreBundle\Controller\BehaviorController
+        smoking_behavior:
+            controller: Accard\Bundle\CoreBundle\Controller\BehaviorController
+        illicit_drug_behavior:
+            controller: Accard\Bundle\CoreBundle\Controller\BehaviorController
+        occupation_behavior:
+            controller: Accard\Bundle\CoreBundle\Controller\BehaviorController
+        education_behavior:
+            controller: Accard\Bundle\CoreBundle\Controller\BehaviorController
+
+accard_attribute:
+    classes:
+        attribute:
+            model: Accard\Component\Core\Model\Attribute
+            controller: Accard\Bundle\CoreBundle\Controller\AttributeController
+        family_cancer_attribute:
+            controller: Accard\Bundle\CoreBundle\Controller\AttributeController

@@ -1,0 +1,18 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+parameters:
+
+    accard.twig.extension.settings.class: Accard\Bundle\SettingsBundle\Twig\SettingsExtension
+
+services:
+
+    accard.twig.extension.settings:
+        class: %accard.twig.extension.settings.class%
+        arguments: ['@accard.templating.helper.settings']
+        tags:
+            - { name: twig.extension }

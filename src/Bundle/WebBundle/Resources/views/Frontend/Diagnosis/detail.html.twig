@@ -1,0 +1,43 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+<table class="table table-striped">
+	<tbody>
+		<tr>
+			<th>
+				Code
+			</th>
+			<td>
+				{{diagnosis.code.code}}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Description
+			</th>
+			<td>
+				{{diagnosis.code.description}}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Start date
+			</th>
+			<td>
+				{{diagnosis.startDate|date('m-d-Y')}}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				End date
+			</th>
+			<td>
+				{{diagnosis.endDate|date('m-d-Y')}}
+			</td>
+		</tr>
+	</tbody>
+</table>

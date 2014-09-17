@@ -1,0 +1,39 @@
+{
+    "name": "accard/core-bundle",
+    "type": "symfony-bundle",
+    "description": "Accard core bundle",
+    "keywords": ["core"],
+    "homepage": "http://accard.med.upenn.edu",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Frank Bardon Jr.",
+            "homepage": "http://frankbardon.com"
+        },
+        {
+            "name": "Database and Applications Group",
+            "homepage": "http://dag.med.upenn.edu"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "accard/core":              "dev-develop",
+        "accard/resource-bundle":   "dev-develop"
+    },
+    "suggest": {
+        "accard/web-bundle": "Provides the default web interface",
+        "accard/fixtures-bundle": "Provides the default Accard fixtures"
+    },
+    "autoload": {
+        "psr-4": { "Accard\\Bundle\\CoreBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Accard\\Bundle\\CoreBundle\\spec\\": "spec/" }
+    },
+    "repositories": [
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Core.git" },
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Resource.git" },
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/ResourceBundle.git" }
+    ]
+}

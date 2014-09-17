@@ -1,0 +1,54 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard_frontend_behavior_alcohol_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.alcohol_behavior:indexAction
+        _accard:
+            template: AccardWebBundle:Frontend/Behavior/Alcohol:index.html.twig
+            sortable: true
+            paginate: 25
+
+accard_frontend_behavior_alcohol_show:
+    pattern: /{id}
+    methods: [GET]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.alcohol_behavior:showAction
+        _accard:
+            template: AccardWebBundle:Frontend/Behavior/Alcohol:show.html.twig
+
+accard_frontend_behavior_alcohol_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.alcohol_behavior:createAction
+        _accard:
+            template: AccardWebBundle:Frontend/Behavior/Alcohol:create.html.twig
+            redirect: accard_frontend_behavior_alcohol_show
+
+accard_frontend_behavior_alcohol_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT, POST]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.alcohol_behavior:updateAction
+        _accard:
+            template: AccardWebBundle:Frontend/Behavior/Alcohol:update.html.twig
+            redirect: accard_frontend_behavior_alcohol_show
+
+accard_frontend_behavior_alcohol_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.alcohol_behavior:deleteAction
+        _accard:
+            template: AccardWebBundle:Frontend/Behavior/Alcohol:delete.html.twig
+            redirect: accard_frontend_behavior_alcohol_index

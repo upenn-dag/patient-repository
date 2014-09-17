@@ -1,0 +1,22 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard_backend_behavior_design:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.behavior:designAction
+        _accard:
+            template: AccardWebBundle:Backend/Behavior:design.html.twig
+
+accard_backend_behavior_settings_update:
+    pattern: /settings/update
+    methods: [PUT, POST]
+    defaults:
+        _controller: accard.controller.settings:updateAction
+        namespace: behavior
+        redirect: accard_backend_behavior_design

@@ -1,0 +1,10 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard_frontend_attribute_family_cancer:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/attribute/family_cancer.yml
+    prefix: /family_cancer

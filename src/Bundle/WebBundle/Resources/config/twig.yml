@@ -1,0 +1,23 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+parameters:
+
+    twig.extension.text.class: Twig_Extensions_Extension_Text
+    twig.extension.intl.class: Twig_Extensions_Extension_Intl
+
+services:
+
+    accard.twig.extension.text:
+        class: %twig.extension.text.class%
+        public: false
+        tags: [{ name: twig.extension }]
+
+    accard.twig.extension.intl:
+        class: %twig.extension.intl.class%
+        public: false
+        tags: [{name: twig.extension }]

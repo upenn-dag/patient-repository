@@ -1,0 +1,21 @@
+{# @author Dylan Pierce <piercedy@upenn.edu #}
+{% from 'AccardWebBundle:Common/Macros:form.html.twig' import select_patient %}
+
+<div class="row">
+{% if form.patient is defined %}
+    {{ select_patient(form.patient) }}
+{% endif %}
+</div>
+<hr>
+<div class="col-lg-3">
+    <h3>Create Attribute</h3>
+    <p>Create the attribute for the selected patient.</p>
+</div>
+<div class="col-lg-9">
+    <div class="well">
+
+            {% block sub_attribute_form_fields %}
+            {% endblock %}
+
+    </div>
+</div>

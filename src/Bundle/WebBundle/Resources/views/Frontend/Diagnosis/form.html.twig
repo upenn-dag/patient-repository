@@ -1,0 +1,25 @@
+{% from 'AccardWebBundle:Common/Macros:form.html.twig' import select_patient %}
+
+<div class="row">
+{% if form.patient is defined %}
+    {{ select_patient(form.patient) }}
+{% endif %}
+</div>
+<div class="row">
+    <div class="col-md-6">
+        {{ form_row(form.code) }}
+        {{ form_row(form.startDate) }}
+        {% if form.endDate is defined %}
+            {{ form_row(form.endDate, {
+                help_block: 'accard.patient.form.end_date_help'|trans
+            }) }}
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+        {% for field in form.fields %}
+            <div class="field-hider">
+                {{ form_widget(field) }}
+            </div>
+        {% endfor %}
+    </div>
+</div>

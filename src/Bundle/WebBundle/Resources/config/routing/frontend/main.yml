@@ -1,0 +1,35 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard_frontend_homepage:
+    path: /
+    defaults:
+        _controller: AccardWebBundle:Frontend:main
+
+accard_frontend_patient:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/patient.yml
+    prefix: /patient
+
+accard_frontend_diagnosis:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/diagnosis.yml
+    prefix: /diagnosis
+
+accard_frontend_behavior:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/behavior.yml
+    prefix: /behavior
+
+accard_frontend_attribute:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/attribute.yml
+    prefix: /attribute
+
+accard_frontend_import:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/import.yml
+    prefix: /import
+
+accard_frontend_flow:
+    resource: @AccardFlowBundle/Resources/config/routing.yml
+    prefix: /flow

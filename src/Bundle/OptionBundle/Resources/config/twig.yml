@@ -1,0 +1,18 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+parameters:
+
+    accard.twig.extension.option.class: Accard\Bundle\OptionBundle\Twig\OptionExtension
+
+services:
+
+    accard.twig.extension.option:
+        class: %accard.twig.extension.option.class%
+        arguments: ['@accard.templating.helper.option']
+        tags:
+            - { name: twig.extension }

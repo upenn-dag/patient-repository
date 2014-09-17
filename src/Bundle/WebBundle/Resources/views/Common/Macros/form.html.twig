@@ -1,0 +1,16 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% macro select_patient(patientForm) %}
+<div class="select-patient col-md-12 well">
+    <p class="lead">{{ 'accard.patient.form.select_patient'|trans }}
+    <div class="form-group">
+        {{ form_widget(patientForm) }}
+    </div>
+    {{ form_errors(patientForm) }}
+</div>
+{% endmacro %}

@@ -1,0 +1,164 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard_backend_diagnosis_design:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.diagnosis:designAction
+        _accard:
+            template: AccardWebBundle:Backend/Diagnosis:design.html.twig
+
+accard_backend_diagnosis_code_group_index:
+    pattern: /code/group
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.diagnosis:codeGroupAction
+        _accard:
+            template: AccardWebBundle:Backend/Diagnosis:groupIndex.html.twig
+
+accard_backend_diagnosis_code_group_add:
+    pattern: /code/group/add
+    methods: [POST]
+    defaults:
+        _controller: accard.controller.diagnosis_code_group:addCodeAction
+
+accard_backend_diagnosis_code_group_remove:
+    pattern: /code/group/remove
+    methods: [POST]
+    defaults:
+        _controller: accard.controller.diagnosis_code_group:removeCodeAction
+
+accard_backend_diagnosis_code_group_create:
+    pattern: /code/group/new
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.diagnosis_code_group:createAction
+        _accard:
+            template: AccardWebBundle:Backend/Diagnosis:groupCreate.html.twig
+            redirect: accard_backend_diagnosis_code_group_index
+
+accard_backend_diagnosis_code_group_update:
+    pattern: /code/group/{id}/edit
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: accard.controller.diagnosis_code_group:updateAction
+        _accard:
+            template: AccardWebBundle:Backend/Diagnosis:groupUpdate.html.twig
+            redirect: accard_backend_diagnosis_code_group_index
+
+accard_backend_diagnosis_code_group_delete:
+    pattern: /code/group/{id}
+    methods: [DELETE]
+    defaults:
+        _controller: accard.controller.diagnosis_code_group:deleteAction
+        _accard:
+            template: AccardWebBundle:Backend/Misc:delete.html.twig
+            redirect: accard_backend_diagnosis_code_group_index
+
+accard_backend_diagnosis_code_create:
+    pattern: /code/new
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.diagnosis_code:createAction
+        _accard:
+            template: AccardWebBundle:Backend/Diagnosis:codeCreate.html.twig
+            redirect: accard_backend_diagnosis_code_group_index
+
+accard_backend_diagnosis_code_update:
+    pattern: /code/{id}/edit
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: accard.controller.diagnosis_code:updateAction
+        _accard:
+            template: AccardWebBundle:Backend/Diagnosis:codeUpdate.html.twig
+            redirect: accard_backend_diagnosis_code_group_index
+
+accard_backend_diagnosis_code_delete:
+    pattern: /code/{id}
+    methods: [DELETE]
+    defaults:
+        _controller: accard.controller.diagnosis_code:deleteAction
+        _accard:
+            template: AccardWebBundle:Backend/Misc:delete.html.twig
+            redirect: accard_backend_diagnosis_code_group_index
+
+accard_backend_diagnosis_settings_update:
+    pattern: /settings/update
+    methods: [PUT, POST]
+    defaults:
+        _controller: accard.controller.settings:updateAction
+        namespace: diagnosis
+        redirect: accard_backend_diagnosis_design
+
+accard_backend_diagnosis_field_create:
+    pattern: /field/new
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.diagnosis_field:createAction
+        _accard:
+            template: AccardWebBundle:Backend/Diagnosis:fieldCreate.html.twig
+            redirect: accard_backend_diagnosis_design
+
+accard_backend_diagnosis_field_update:
+    pattern: /field/{id}/edit
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: accard.controller.diagnosis_field:updateAction
+        _accard:
+            template: AccardWebBundle:Backend/Diagnosis:fieldUpdate.html.twig
+            redirect: accard_backend_diagnosis_design
+
+accard_backend_diagnosis_field_delete:
+    pattern: /field/{id}
+    methods: [DELETE]
+    defaults:
+        _controller: accard.controller.diagnosis_field:deleteAction
+        _accard:
+            template: AccardWebBundle:Backend/Misc:delete.html.twig
+            redirect: accard_backend_diagnosis_design
+
+accard_backend_diagnosis_phase_index:
+    pattern: /phase
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.diagnosis_phase:indexAction
+        _accard:
+            template: AccardWebBundle:Backend/DiagnosisPhase:index.html.twig
+            sortable: true
+            paginate: 12
+            sorting:
+                order: asc
+
+accard_backend_diagnosis_phase_create:
+    pattern: /phase/new
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.diagnosis_phase:createAction
+        _accard:
+            template: AccardWebBundle:Backend/DiagnosisPhase:create.html.twig
+            redirect: accard_backend_diagnosis_phase_index
+
+accard_backend_diagnosis_phase_update:
+    pattern: /phase/{id}/edit
+    methods: [GET, PUT, POST]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.diagnosis_phase:updateAction
+        _accard:
+            template: AccardWebBundle:Backend/DiagnosisPhase:update.html.twig
+            redirect: accard_backend_diagnosis_phase_index
+
+accard_backend_diagnosis_phase_delete:
+    pattern: /phase/{id}
+    methods: [DELETE]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.diagnosis_phase:deleteAction
+        _accard:
+            template: AccardWebBundle:Backend/DiagnosisPhase:delete.html.twig
+            redirect: accard_backend_diagnosis_phase_index

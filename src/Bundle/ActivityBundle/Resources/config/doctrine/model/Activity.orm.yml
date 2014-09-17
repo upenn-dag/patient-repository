@@ -1,0 +1,21 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+Accard\Component\Activity\Model\Activity:
+    type: mappedSuperclass
+    table: accard_activity
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        activityDate:
+            type: date
+            nullable: false

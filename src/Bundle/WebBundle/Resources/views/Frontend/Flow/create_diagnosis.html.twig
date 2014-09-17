@@ -1,0 +1,38 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Frontend/Flow:layout.html.twig' %}
+
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
+
+{% block flow_content %}
+    {{ page_title('accard.diagnosis.action.create'|trans) }}
+    {{ form_errors(form) }}    
+    {% include 'AccardWebBundle:Frontend/Diagnosis:form.html.twig' %}
+{% endblock %}
+
+{% block page_javascripts %}
+
+<script>
+var formClass = Accard.get('form');
+var manager = new formClass('form');
+console.log(manager);
+manager
+	.behavior($('[data-field-name=diagnosed_at_UPHS]').first(), {
+		target: function() {
+			console.log($('[data-field-name=diagnosed_at_').parents('.field-hider'));
+			return $('[data-field-name=diagnosed_at_').parents('.field-hider');
+		},
+		condition: 'checked',
+		action: 'hide'
+	})
+	.bindAll()
+;
+
+</script>
+
+{% endblock %}

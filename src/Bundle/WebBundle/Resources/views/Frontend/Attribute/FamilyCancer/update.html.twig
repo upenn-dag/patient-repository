@@ -1,0 +1,29 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+{# @author Dylan Pierce <piercedy@upenn.edu> #}
+
+{% extends 'AccardWebBundle:Frontend:layout.html.twig' %}
+
+{% from 'AccardWebBundle:Common/Macros:actions.html.twig' import update %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
+
+{% block content %}
+    {{ page_title('accard.attributes.family_cancer.action.update'|trans) }}
+
+    {{ form_errors(form) }}
+    
+    <form action="{{ path('accard_frontend_family_cancer_attribute_update', { id: family_cancer_attribute.id }) }}" method="post" {{ form_enctype(form) }}>
+        <input type="hidden" name="_method" value="PUT">
+        {{ form_widget(form._token) }}
+        {% include 'AccardWebBundle:Frontend/Attribute/FamilyCancer:form.html.twig' %}
+        <div class="row">
+            <div class="col-md-12">
+                <span class="pull-right">{{ update() }}</span>
+            </div>
+        </div>
+    </form>
+{% endblock %}
