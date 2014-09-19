@@ -8,7 +8,7 @@
 {# @author Dylan Pierce <piercedy@upenn.edu #}
 
 
-{% macro behaviors_menu() %}
+{% macro behaviors_menu(view_type) %}
 
     {%- set settings = accard_settings('behavior') -%}
     {% from 'AccardWebBundle:Common/Macros:url.html.twig' import active_if_current %}
@@ -20,30 +20,32 @@
 
     <ul class="nav nav-tabs nav-justified grid-tabs" role="tablist">
     {% if settings.enable_alcohol %}
-        <li class="{{ active_if_current('accard_frontend_behavior_alcohol_index') }}">
+        <li class="{{ active_if_current("accard_frontend_behavior_alcohol_#{view_type}") }}">
             <a href="{{ path('accard_frontend_behavior_alcohol_index') }}">{{ 'accard.behavior.alcohol.title'|trans }}</a>
         </li>
     {% endif %}
     {% if settings.enable_smoking %}
-        <li class="{{ active_if_current('accard_frontend_behavior_smoking_index') }}">
+        <li class="{{ active_if_current("accard_frontend_behavior_smoking_#{view_type}") }}">
             <a href="{{ path('accard_frontend_behavior_smoking_index') }}">{{ 'accard.behavior.smoking.title'|trans }}</a>
         </li>
     {% endif %}
     {% if settings.enable_illicit_drugs %}
-        <li class="{{ active_if_current('accard_frontend_behavior_illicit_drug_index') }}">
+        <li class="{{ active_if_current("accard_frontend_behavior_illicit_drug_#{view_type}") }}">
             <a href="{{ path('accard_frontend_behavior_illicit_drug_index') }}">{{ 'accard.behavior.illicit_drug.title'|trans }}</a>
         </li>
     {% endif %}
     {% if settings.enable_occupation %}
-        <li class="{{ active_if_current('accard_frontend_behavior_occupation_index') }}">
+        <li class="{{ active_if_current("accard_frontend_behavior_occupation_#{view_type}") }}">
             <a href="{{ path('accard_frontend_behavior_occupation_index') }}">{{ 'accard.behavior.occupation.title'|trans }}</a>
         </li>
     {% endif %}
     {% if settings.enable_education %}
-        <li class="{{ active_if_current('accard_frontend_behavior_education_index') }}">
+        <li class="{{ active_if_current("accard_frontend_behavior_education_#{view_type}") }}">
             <a href="{{ path('accard_frontend_behavior_education_index') }}">{{ 'accard.behavior.education.title'|trans }}</a>
         </li>
     {% endif %}
     </ul>
 
 {% endmacro %}
+
+

@@ -9,9 +9,14 @@
 
 {% from 'AccardWebBundle:Common/Macros:actions.html.twig' import create %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import generic %}
 
 {% block content %}
-    {{ page_title('accard.patient.action.create'|trans) }}
+    {{ page_title('accard.patient.action.create'|trans,
+        [
+            generic(path('accard_frontend_patient_index'), 'accard.patient.action.manage'|trans, 'user')
+        ]
+    ) }}
 
     {{ form_errors(form) }}
     

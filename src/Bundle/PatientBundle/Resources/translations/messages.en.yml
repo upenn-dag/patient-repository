@@ -19,6 +19,7 @@ accard:
             manage: Manage Patients
             design: Design Patient
             update: Update Patient
+            index:  Browse Patients
         message:
             count: %total% patients registered.
             import_disabled: 'Patient import has been disabled, access denied.'

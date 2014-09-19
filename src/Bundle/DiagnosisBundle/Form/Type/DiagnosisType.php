@@ -90,7 +90,7 @@ class DiagnosisType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $codeClass = $this->codeProvider->getRepository()->getClassName();
-        $codeChoices = null;
+        $choices = null;
 
         if (is_string($options['code_group'])) {
             $choices = $this->codeProvider->getCodesForGroup($options['code_group']);
@@ -100,7 +100,7 @@ class DiagnosisType extends AbstractType
             ->add('code', 'entity', array(
                   'class' => $codeClass,
                   'property' => 'description',
-                  'choices' => $codeChoices,
+                  'choices' => $choices,
                   'label' => 'accard.diagnosis.form.code',
             ))
             ->add('startDate', 'date', array(
@@ -135,7 +135,7 @@ class DiagnosisType extends AbstractType
             ->setDefaults(array(
                 'data_class' => $this->dataClass,
                 'validation_groups' => $this->validationGroups,
-                'code_group' => 'main',
+                'code_group' => 'icd9',
                 'show_end_date' => true,
             ))
         ;

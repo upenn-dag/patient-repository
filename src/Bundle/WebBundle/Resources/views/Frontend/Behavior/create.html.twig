@@ -9,11 +9,17 @@
 {% extends 'AccardWebBundle:Frontend:layout.html.twig' %}
 
 {% from 'AccardWebBundle:Common/Macros:actions.html.twig' import create %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import generic %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
+{% from 'AccardWebBundle:Frontend/Behavior:macros.html.twig' import behaviors_menu %}
 
 {% block content %}
-    {{ page_title('accard.behavior.action.create'|trans)}}
-    
+    {{ page_title('accard.behavior.action.create'|trans,
+        [
+            generic(path('accard_frontend_behavior_alcohol_index'), 'accard.behavior.action.index'|trans , 'glyphicon glyphicon-arrow-left')
+        ]
+    )}}
+    {{ behaviors_menu('create') }}
     {{ form_errors(form)}}
 
     <form action={% block behavior_form_action %}{% endblock %} method="post" {{ form_enctype(form) }}>
