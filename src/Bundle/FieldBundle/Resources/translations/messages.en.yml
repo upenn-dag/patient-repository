@@ -1,0 +1,13 @@
+accard:
+    field:
+        entity_name: Field
+        form:
+            name: Name
+            presentation: Presentation
+        action:
+            add: Add Field
+            create: Create Field
+            update: Update Field
+            delete: Delete Field
+            manage: Manage Field
+            manage_all: Manage Fields

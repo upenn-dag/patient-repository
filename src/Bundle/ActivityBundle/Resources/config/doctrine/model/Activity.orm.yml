@@ -7,7 +7,6 @@
 
 Accard\Component\Activity\Model\Activity:
     type: mappedSuperclass
-    table: accard_activity
 
     id:
         id:

@@ -9,8 +9,8 @@
 
 <div class="row">
     <div class="col-md-8 row-split">
-        {{ form_row(form.name) }}
         {{ form_row(form.presentation) }}
+        {{ form_row(form.name) }}
     </div>
     <div class="col-md-4">
         <div id="accard-option-values" class="collection-container" data-prototype="{{ form_row(form.values.vars.prototype.value, {'label': ''})|e }}">

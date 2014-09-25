@@ -18,4 +18,3 @@ mopa_bootstrap:
     form:
         horizontal: false
         render_optional_text: false
-    menu: ~

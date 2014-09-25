@@ -1,0 +1,62 @@
+accard:
+    activity:
+        entity_name: Activity
+        form:
+            id: Id
+            activity_date: Activity Date
+            prototype: Prototype
+            prototype_label: Activity Type
+        action:
+            add: Add Activity
+            create: Create Activity
+            update: Update Activity
+            delete: Delete Activity
+            design: Design Activity
+            manage: Manage Activity
+            manage_all: Manage Activities
+        title:
+            index: Browse Activities
+            show: %activity% Activity
+            create: Create a New Activity
+            update: Update Activity
+            list: Activities
+    activity_prototype:
+        entity_name: Activity Prototype
+        form:
+            name: Name
+            presentation: Presentation
+            fields: Fields
+            subjects: Subjects
+        action:
+            add: Add Activity Prototype
+            create: Create Activity Prototype
+            update: Update Activity Prototype
+            delete: Delete Activity Prototype
+            design: Design Activity Prototype
+            manage: Manage Activity Prototype
+            manage_all: Manage Activity Prototypes
+        title:
+            index: Browse Activity Prototypes
+            show: %activity% Activity Prototype
+            create: Create a New Activity Prototype
+            update: Update Activity Prototype
+            list: Activity Prototypes
+    activity_field:
+        entity_name: Activity Field
+        form:
+            name: Name
+            presentation: Presentation
+        action:
+            add: Add Activity Field
+            create: Create Activity Field
+            update: Update Activity Field
+            delete: Delete Activity Field
+            design: Design Activity Field
+            manage: Manage Activity Field
+            manage_all: Manage Activity Fields
+        title:
+            index: Browse Activity Fields
+            show: %activity% Activity Field
+            create: Create a New Activity Field
+            update: Update Activity Field
+            list: Activity Fields

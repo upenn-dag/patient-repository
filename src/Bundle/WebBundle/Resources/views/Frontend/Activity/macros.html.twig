@@ -1,0 +1,64 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% macro list(activities) %}
+
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete, show %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
+
+{% if activities|length > 0 %}
+    <table class="activity table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="prototype">{{ accard_resource_sort('prototype', 'accard.activity.form.prototype'|trans) }}</th>
+                <th class="patient">{{ accard_resource_sort('patient', 'accard.activity.form.patient'|trans) }}</th>
+                <th class="activity-date">{{ accard_resource_sort('activityDate', 'accard.activity.form.activity_date'|trans) }}</th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for activity in activities %}
+            <tr id="{{ activity.id }}">
+                <td class="prototype">{{ activity.prototype.presentation }}</td>
+                <td class="patient">{{ activity.patient.fullName }}</td>
+                <td class="activity-date">{{ activity.activityDate|localizeddate('medium', 'none') }}</td>
+                <td class="actions">
+                    <div class="pull-right">
+                        {{ show(path('accard_frontend_activity_show', {'id': activity.id}), null, 'xs') }}
+                        {{ edit(path('accard_frontend_activity_update', {'id': activity.id}), null, 'xs') }}
+                        {{ delete(path('accard_frontend_activity_delete', {'id': activity.id}), null, 'xs') }}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ info('accard.activity.none_found'|trans) }}
+{% endif %}
+
+{% endmacro %}
+
+{% macro list_descriptions(activity) %}
+{% spaceless %}
+{% set importers = activity.registeredImporters %}
+<ul class="list-unstyled">
+    {% for importer in importers %}
+    {% set translation = 'accard.import.importer.' ~ importer %}
+    <li>
+        {{ translation|trans }}
+        <ol>
+        {% for description in activity.getDescriptionsFor(importer) %}
+            <li>{{ description|raw }}</li>
+        {% endfor %}
+        </ol>
+    </li>
+    {% endfor %}
+</ul>
+{% endspaceless %}
+{% endmacro %}

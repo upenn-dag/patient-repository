@@ -69,6 +69,12 @@ class PrototypeType extends AbstractType
             ->add('presentation', 'text', array(
                 'label' => 'accard.form.prototype.presentation'
             ))
+            ->add('fields', 'collection', array(
+                  'label' => 'accard.form.prototype.fields',
+                  'type' => 'accard_activity_prototype_field_choice',
+                  'allow_add' => true,
+                  'allow_delete' => true,
+            ))
         ;
     }
 

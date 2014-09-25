@@ -1,0 +1,17 @@
+accard:
+    prototype:
+        entity_name: Prototype
+        form:
+            name: Name
+            presentation: Presentation
+            fields: Fields
+            subjects: Subjects
+        action:
+            add: Add Prototype
+            add_field: Add Field
+            add_subject: Add Subject
+            create: Create Prototype
+            update: Update Prototype
+            delete: Delete Prototype
+            manage: Manage Prototype
+            manage_all: Manage Prototypes

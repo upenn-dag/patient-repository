@@ -29,6 +29,7 @@ accard_diagnosis:
 accard_activity:
     classes:
         activity:
+            model: Accard\Component\Core\Model\Activity
             controller: Accard\Bundle\CoreBundle\Controller\ActivityController
 
 accard_behavior:

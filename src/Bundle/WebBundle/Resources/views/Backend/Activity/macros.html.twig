@@ -9,27 +9,27 @@
 {% macro list_prototypes(prototypes) %}
 
 {% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
-{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import design, edit %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import design, edit, delete %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label %}
 
 {% if prototypes|length > 0 %}
-    <table class="table table-bordered">
+    <table id="activity-prototypes" class="table table-bordered">
         <tbody>
         {% for prototype in prototypes %}
-            <tr id="{{ prototype.id }}">
+            <tr id="activity-prototype-{{ prototype.id }}">
                 <td>{{ prototype.presentation }}</td>
                 <td>{{ prototype.name }}</td>
                 <td>
                     {%- for field in prototype.fields %}
-                        {{ label(field.presentation) }}</td>
+                        {{ label(field.presentation) }}
                     {% else %}
                         {{ label('No fields found.', 'danger') }}
                     {% endfor -%}
+                </td>
                 <td>
                     <div class="pull-right">
-                        {{ design(path('accard_backend_activity_prototype', {'id': prototype.id}), null, 'xs') }}
                         {{ edit(path('accard_backend_activity_prototype_update', {'id': prototype.id}), null, 'xs') }}
-                        {# delete(path('accard_backend_activity_prototype_delete', {'id': prototype.id}), null, 'xs') #}
+                        {{ delete(path('accard_backend_activity_prototype_delete', {'id': prototype.id}), null, 'xs') }}
                     </div>
                 </td>
             </tr>
@@ -50,17 +50,17 @@
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label %}
 
 {% if fields|length > 0 %}
-    <table class="table table-bordered">
+    <table id="activity-fields" class="table table-bordered">
         <tbody>
         {% for field in fields %}
-            <tr id="{{ field.id }}">
+            <tr id="activity-field-{{ field.id }}">
                 <td>{{ field.presentation }}</td>
                 <td>{{ field.name }}</td>
                 <td>{{ label(field.type) }}</td>
                 <td>
                     <div class="pull-right">
-                        {# edit(path('accard_backend_activity_field_update', {'id': field.id}), null, 'xs') #}
-                        {# delete(path('accard_backend_activity_field_delete', {'id': field.id}), null, 'xs') #}
+                        {{ edit(path('accard_backend_activity_field_update', {'id': field.id}), null, 'xs') }}
+                        {{ delete(path('accard_backend_activity_field_delete', {'id': field.id}), null, 'xs') }}
                     </div>
                 </td>
             </tr>

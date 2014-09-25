@@ -1,5 +1,6 @@
 accard:
     patient:
+        entity_name: Patient
         registered: Registered Patients
         unregistered: Unregistered Patients
         form:

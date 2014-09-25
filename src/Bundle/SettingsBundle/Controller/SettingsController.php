@@ -55,6 +55,16 @@ class SettingsController extends Controller
             }
             $request->getSession()->getBag('flashes')->add($messageType, $message);
 
+            $params = $request->get('_accard');
+            if (isset($params['redirect']) && isset($params['redirect']['route'])) {
+                return $this->redirect(
+                    $this->generateUrl(
+                        $params['redirect']['route'],
+                        isset($params['redirect']['parameters']) ? $params['redirect']['parameters'] : array()
+                    )
+                );
+            }
+
             if ($request->headers->has('referer')) {
                 return $this->redirect($request->headers->get('referer'));
             }

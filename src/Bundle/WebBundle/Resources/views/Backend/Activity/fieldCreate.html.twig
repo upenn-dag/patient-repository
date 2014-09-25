@@ -8,18 +8,16 @@
 {% extends 'AccardWebBundle:Backend:layout.html.twig' %}
 
 {% from 'AccardWebBundle:Common/Macros:actions.html.twig' import create %}
-{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
-
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import pagination, page_title, statistics %}
 
 {% block content %}
 
-    {{ page_title('accard.activity_prototype.field.create'|trans) }}
+    {{ page_title('accard.activity_field.field.create'|trans) }}
 
     {{ form_errors(form) }}
 
-    <form action="{{ path('accard_backend_activity_prototype_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form._token) }}
-        {% include 'AccardWebBundle:Backend/Activity:prototypeForm.html.twig' %}
+    <form action="{{ path('accard_backend_activity_field_create') }}" method="post" {{ form_enctype(form) }}>
+        {% include 'AccardWebBundle:Backend/Activity:fieldForm.html.twig' %}
         <div class="row">
             <div class="col-md-12">
                 <span class="pull-right">{{ create() }}</span>
@@ -41,9 +39,6 @@
             target: 'name',
             condition: 'changed',
             action: 'slug'
-        })
-        .collection("#accard-prototype-fields", {
-          adder: $("#accard-prototype-field-adder")
         })
         .bindAll();
 </script>

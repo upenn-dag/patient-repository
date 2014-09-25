@@ -52,6 +52,15 @@ class FrontendMenuSubscriber implements EventSubscriberInterface
             }
         }
 
+        $activitySettings = $settingsManager->load('activity');
+        if ($activitySettings['enabled']) {
+            $activity = $this->createSimpleItem($event, $repositories, 'activity', 'activity_index', 'activities');
+
+            if ('activity' === $baseRoute) {
+                $activity->setCurrent(true);
+            }
+        }
+
         $behaviorSettings = $settingsManager->load('behavior');
         if ($behaviorSettings['enabled']) {
             $behavior = $this->createSimpleItem($event, $repositories, 'behavior', 'behavior_alcohol_index', 'behaviors');

@@ -7,34 +7,122 @@
 
 {% extends 'AccardWebBundle:Backend:layout.html.twig' %}
 
-{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import button, create, generic %}
-{% from 'AccardWebBundle:Common/Macros:actions.html.twig' import update %}
-{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import pagination, page_title, statistics %}
-{% from 'AccardWebBundle:Backend/Activity:macros.html.twig' import list_prototypes %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import create %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
+{% from 'AccardWebBundle:Backend/Activity:macros.html.twig' import list_prototypes, list_fields %}
 
+{% macro action_buttons() %}
+    <div class="btn-group">
+        <a href="{{ path('accard_frontend_activity_index') }}" class="btn btn-primary">{{ 'accard.activity.action.manage_all'|trans }}</a>
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+            <span class="sr-only">{{ 'accard.toggle'|trans }}</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+            <li><a href="{{ path('accard_backend_activity_prototype_create') }}">{{ 'accard.activity_prototype.action.create'|trans }}</a></li>
+            <li><a href="{{ path('accard_backend_activity_field_create') }}">{{ 'accard.activity_field.action.create'|trans }}</a></li>
+        </ul>
+    </div>
+{% endmacro %}
 
 {% block content %}
-    {{ page_title(
-        'accard.activity.action.design'|trans, [
-            create(path('accard_backend_activity_prototype_create'), 'accard.activity_prototype.action.create'|trans)
-        ]
-    ) }}
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <div class="pull-right">
-                    {# create(path('accard_backend_activity_prototype_create'), 'accard.form.field.create'|trans, 'xs') #}
+    {{ page_title('accard.activity.action.design'|trans, _self.action_buttons()) }}
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="{{ _self.active_tab(['prototype', 'none'], 'active') }}">
+            <a href="#prototypes" role="tab" data-toggle="tab">
+                {{- 'accard.activity_prototype.title.list'|trans -}}
+            </a>
+        </li>
+        <li class="{{ _self.active_tab('field', 'active') }}">
+            <a href="#fields" role="tab" data-toggle="tab">
+                {{- 'accard.activity_field.title.list'|trans -}}
+            </a>
+        </li>
+        <li class="{{ _self.active_tab('settings', 'active') }}">
+            <a href="#settings" role="tab" data-toggle="tab">
+                {{- 'accard.settings'|trans -}}
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content grid-tabs">
+        <div id="prototypes" class="tab-pane fade{{ _self.active_tab(['prototype', 'none'], ' in active') }}">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        {{- 'accard.activity_prototype.title.list'|trans -}}
+                    </h4>
                 </div>
-                {{ 'accard.activity.prototype.title'|trans }}
-            </h4>
+                {{ list_prototypes(prototypes) }}
+            </div>
         </div>
-        {{ list_prototypes(prototypes) }}
-        {% if prototypes.haveToPaginate() %}
-        <div class="panel-body">
-            {{ pagination(prototypes) }}
+        <div id="fields" class="tab-pane fade{{ _self.active_tab('field', ' in active') }}">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        {{- 'accard.activity_field.title.list'|trans -}}
+                    </h4>
+                </div>
+                {{ list_fields(fields) }}
+            </div>
         </div>
-        {% endif %}
+        <div id="settings" class="tab-pane fade{{ _self.active_tab('settings', ' in active') }}">
+            <form action="{{ path('accard_backend_activity_settings_update') }}" method="POST" enctype="{{ form_enctype(settings_form) }}">
+                {{ form_widget(settings_form._token) }}
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-primary btn-xs">{{ 'accard.update'|trans }}</button>
+                            </div>
+                            {{- 'accard.settings'|trans -}}
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        {{ form_widget(settings_form.enabled) }}
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
 {% endblock %}
+
+{% block page_javascripts %}
+<script type="text/javascript" defer>
+
+    var Tabler = Accard.get('table');
+    var prototypes = new Tabler('#activity-prototypes');
+    var fields = new Tabler('#activity-fields');
+
+    prototypes
+        .plugin('autohighlighting', {
+            id: 'activity-prototype-{{ app.request.query.get('id', 0) }}',
+            className: 'warning'
+        })
+        .bindAll()
+    ;
+
+    fields
+        .plugin('autohighlighting', {
+            id: 'activity-field-{{ app.request.query.get('id', 0) }}',
+            className: 'warning'
+        })
+        .bindAll()
+    ;
+
+</script>
+{% endblock %}
+
+{# Figure out if the current tab has been set, if not default to prototypes #}
+{% macro active_tab(test, output) %}
+{% spaceless %}
+    {% set active_section = app.request.query.get('type', 'none') %}
+    {% if test is not iterable %}
+        {% set test = [test] %}
+    {% endif %}
+    {% if active_section in test %}{{ output }}{% endif %}
+{% endspaceless %}
+{% endmacro %}

@@ -53,7 +53,8 @@ abstract class FieldChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'class' => $this->className
+                'class' => $this->className,
+                'property' => 'presentation',
             ))
         ;
     }

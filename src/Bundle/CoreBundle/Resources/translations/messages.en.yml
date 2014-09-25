@@ -6,7 +6,25 @@
 # file that was distributed with this source code.
 
 accard:
+    patient:
+        form:
+            diagnoses: Diagnoses
+            activities: Activities
+            attributes: Attributes
+            behaviors: Behaviors
+            phases: Phases
+    activity:
+        form:
+            patient: Patient
+            diagnosis: Diagnosis
+    attribute:
+        form:
+            patient: Patient
+    behavior:
+        form:
+            patient: Patient
     patient_phase:
+        entity_name: Patient Phase
         form:
             label: Label
             presentation: Presentation
@@ -17,12 +35,14 @@ accard:
             create: Create Patient Phase
             update: Update Patient Phase
     patient_phase_instance:
+        entity_name: Patient Phase
         form:
             start_date: Start Date
             end_date: End Date
             phase: Phase
             target: Patient
     diagnosis_phase:
+        entity_name: Diagnosis Phase
         form:
             label: Label
             presentation: Presentation
@@ -33,6 +53,7 @@ accard:
             create: Create Diagnosis Phase
             update: Update Diagnosis Phase
     diagnosis_phase_instance:
+        entity_name: Diagnosis Phase
         form:
             start_date: Start Date
             end_date: End Date
@@ -52,6 +73,8 @@ accard:
             diagnosis:
                 enabled: Enable diagnosis repository
                 import_enabled: Enable diagnosis repository import
+            activity:
+                enabled: Enable activity repository
             behavior:
                 enabled: Enable behavior repository
                 enable_alcohol: Enable alcohol behavior

@@ -19,6 +19,9 @@ accard:
     show: Show
     statistics: Statistics
     settings: Settings
+    actions: Actions
+    action: Action
+    toggle: Toggle
     confirmation:
         message: Are you sure you want to delete this resource?
     flow:
@@ -48,6 +51,7 @@ accard:
             diagnosis: Diagnosis
             behavior: Behavior
             attribute: Attribute
+            activity: Activity
             options: Options
         frontend:
             home: Home
@@ -56,6 +60,7 @@ accard:
             import: Import
             admin: Administration
             diagnoses: Diagnoses
+            activities: Activities
             behaviors: Behaviors
             attributes: Attributes
     interface:
