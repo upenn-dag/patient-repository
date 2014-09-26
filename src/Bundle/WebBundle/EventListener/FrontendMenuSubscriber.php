@@ -63,7 +63,9 @@ class FrontendMenuSubscriber implements EventSubscriberInterface
 
         $behaviorSettings = $settingsManager->load('behavior');
         if ($behaviorSettings['enabled']) {
-            $behavior = $this->createSimpleItem($event, $repositories, 'behavior', 'behavior_alcohol_index', 'behaviors');
+            $behaviorMenus = $this->getBehaviorMenuOrder($behaviorSettings);
+
+            $behavior = $this->createSimpleItem($event, $repositories, 'behavior', $behaviorMenus[0], 'behaviors');
 
             if ('behavior' === $baseRoute) {
                 $behavior->setCurrent(true);
@@ -107,4 +109,22 @@ class FrontendMenuSubscriber implements EventSubscriberInterface
             MenuEvents::FRONTEND_SIDEBAR => array('createSidebarItems', 999),
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    private function getBehaviorMenuOrder($behaviorSettings)
+    {
+        $behaviorMenus = array
+        (
+            $behaviorSettings['alcohol_order'] => 'behavior_alcohol_index',
+            $behaviorSettings['smoking_order'] =>   'behavior_smoking_index',
+            $behaviorSettings['illicit_drug_order'] => 'behavior_illicit_drug_index',
+            $behaviorSettings['occupation_order'] => 'behavior_occupation_index',
+            $behaviorSettings['education_order'] => 'behavior_education_index'
+        );
+        ksort($behaviorMenus);
+
+        return $behaviorMenus;
+    }  
 }

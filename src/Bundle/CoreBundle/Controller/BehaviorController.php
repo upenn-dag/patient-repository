@@ -46,7 +46,7 @@ class BehaviorController extends ResourceController
             throw $this->createNotFoundException('Smoking behavior has been disabled. Please contact your administrator to turn it on.');
         }
 
-        if ($this->routeMatches($request, 'behavior_illicit_drug') && !$settings['enable_illicit_drugs']) {
+        if ($this->routeMatches($request, 'behavior_illicit_drug') && !$settings['enable_illicit_drug']) {
             throw $this->createNotFoundException('Illicit drug behavior has been disabled. Please contact your administrator to turn it on.');
         }
 
@@ -57,6 +57,7 @@ class BehaviorController extends ResourceController
         if ($this->routeMatches($request, 'behavior_education') && !$settings['enable_education']) {
             throw $this->createNotFoundException('Education behavior has been disabled. Please contact your administrator to turn it on.');
         }
+
     }
 
     /**

@@ -10,8 +10,6 @@
 {% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import button, create, generic %}
 {% from 'AccardWebBundle:Common/Macros:actions.html.twig' import update %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import pagination, page_title, statistics %}
-{% from 'AccardWebBundle:Backend/Diagnosis:macros.html.twig' import list_fields %}
-
 
 {% block content %}
     {{ page_title('accard.behavior.action.design'|trans) }}
@@ -34,12 +32,49 @@
                             <div class="col-md-6">
                                 {{ form_widget(settings_form.enabled) }}
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
-                                {{ form_widget(settings_form.enable_alcohol) }}
-                                {{ form_widget(settings_form.enable_smoking) }}
-                                {{ form_widget(settings_form.enable_illicit_drugs) }}
-                                {{ form_widget(settings_form.enable_occupation) }}
-                                {{ form_widget(settings_form.enable_education) }}
+                            <div id="behavior-order">
+
+                                    <legend>{{ 'accard.form.settings.behavior.order'|trans }}</legend>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <span class="badge"></span>
+                                            {{ form_label( settings_form.alcohol_order )}}
+                                            {{ form_widget( settings_form.alcohol_order ) }}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="badge"></span>
+                                            {{ form_label( settings_form.smoking_order )}}
+                                            {{ form_widget( settings_form.smoking_order ) }}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="badge"></span>
+                                            {{ form_label( settings_form.illicit_drug_order )}}
+                                            {{ form_widget( settings_form.illicit_drug_order ) }}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="badge"></span>
+                                            {{ form_label( settings_form.occupation_order )}}
+                                            {{ form_widget( settings_form.occupation_order) }}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="badge"></span>
+                                            {{ form_label( settings_form.education_order )}}
+                                            {{ form_widget( settings_form.education_order) }}
+                                        </li>
+                                    </ul>
+
+                            </div>
+                            </div>
+                            <div class="col-md-6">
+                                <legend>{{ 'accard.form.settings.behavior.enable_menus'|trans }}</legend>
+                                    {{ form_widget( settings_form.enable_alcohol ) }}
+                                    {{ form_widget( settings_form.enable_smoking ) }}
+                                    {{ form_widget( settings_form.enable_illicit_drug ) }}
+                                    {{ form_widget( settings_form.enable_occupation ) }}
+                                    {{ form_widget( settings_form.enable_education ) }}
                             </div>
                         </div>
                     </div>
@@ -53,3 +88,126 @@
         </div>
     </div>
 {% endblock %}
+
+
+{% block page_javascripts %}
+<script type="text/javascript" defer>
++function ($, Modernizr) {
+
+    // We need to be certain we have a jQuery object to work with.
+    if (!$ || !Modernizr || !Modernizr.draganddrop) {
+        console.log('Behavior sorting javascript prerequisites failed.');
+        return;
+    }
+
+    function sortGroups(groups) {
+        groups.sort(function(a, b) {
+            var an = $(a).data('sort-index')
+              , bn = $(b).data('sort-index');
+
+            if (an > bn) return 1;
+            if (an < bn) return -1;
+
+            return 0;
+        });
+    }
+
+
+    // INITIALIZATION
+    var container = $('#behavior-order');
+    var groups = container.find('.list-group-item').detach();
+
+    groups.each(function(index, group) {
+        var $this = $(this)
+          , $input = $this.find('input').first()
+          , currentIndex = $input.val();
+
+        // Temporary, remove me.
+        //$this.find('label').first().html(currentIndex + '...' + $this.find('label').first().html());
+
+        $this.data('sort-index', currentIndex);
+        $this.data('sort-input', $input);
+
+        $input.attr('type', 'hidden');
+    });
+
+    sortGroups(groups);
+
+    groups.each(function(index, group) {
+        var $group = $(group);
+
+        $group.data('sort-input').val(index);
+        $group.find('span').text(index + 1);
+        container.append($group);
+    })
+
+    // MAINTENANCE
+
+    var dragSrcEl = null;
+
+    function handleDragStart(e) {
+
+      dragSrcEl = $(this);
+      $this = $(this);
+
+      $input = $this;
+
+      e.dataTransfer.effectAllowed = 'move';
+
+     // e.dataTransfer.setData('text/html', this.innerHTML);
+      e.dataTransfer.setData('form_name', $this.find('input').attr('name'));
+      e.dataTransfer.setData('label', $this.find('label').text());
+    }
+
+    function handleDragOver(e) {
+      if (e.preventDefault) {
+        e.preventDefault(); // Necessary. Allows us to drop.
+      }
+
+      e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+
+      return false;
+    }
+
+    function handleDrop(e) {
+      // this/e.target is current target element.
+      var container = $('#behavior-order');
+      var groups = container.find('.form-group');
+
+      if (e.stopPropagation) {
+        e.stopPropagation(); // Stops some browsers from redirecting.
+      }
+
+      // Don't do anything if dropping the same column we're dragging.
+      if (dragSrcEl != $(this)) {
+
+        $this = $(this);
+        // Set the source input form name and label to the HTML of the label and form input we dropped on.
+        dragSrcEl.find('input').attr('name', $this.find('input').attr('name'));
+        dragSrcEl.find('label').text($this.find('label').text());
+
+       
+        $this.find('input').attr('name', e.dataTransfer.getData('form_name'));
+        $this.find('label').text(e.dataTransfer.getData('label'));
+      }
+
+      return false;
+    }
+
+    groups.each(function(index, group)
+    {
+        group.addEventListener('dragstart', handleDragStart, false);
+        group.addEventListener('dragover', handleDragOver, false);
+        group.addEventListener('drop', handleDrop, false);
+    });
+
+}(jQuery, Modernizr);
+</script>
+{% endblock %}
+
+
+
+
+
+
+
