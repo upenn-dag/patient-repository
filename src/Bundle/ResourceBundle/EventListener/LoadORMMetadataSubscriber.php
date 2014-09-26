@@ -71,6 +71,9 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
         $configuration = $eventArgs->getEntityManager()->getConfiguration();
+        $table = $this->normalizeTableName($metadata->table['name']);
+        $metadata->table['name'] = $table;
+
 
         $this->setSuperclassStatus($metadata);
         $this->setCustomRepositoryClasses($metadata);
@@ -83,6 +86,17 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         } else {
             $this->unsetAssociationMappings($metadata);
         }
+    }
+
+    /**
+     * Normalize table name for all databases.
+     *
+     * @param string $tableName
+     * @return string
+     */
+    private function normalizeTableName($tableName)
+    {
+        return substr($tableName, 0, 35);
     }
 
     /**
