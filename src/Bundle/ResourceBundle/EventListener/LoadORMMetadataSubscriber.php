@@ -73,7 +73,7 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         $configuration = $eventArgs->getEntityManager()->getConfiguration();
         $table = $this->normalizeTableName($metadata->table['name']);
         $metadata->table['name'] = $table;
-var_dump($table);
+
         $this->setSuperclassStatus($metadata);
         $this->setCustomRepositoryClasses($metadata);
 
