@@ -90,6 +90,11 @@ class LoadORMMetadataSubscriber implements EventSubscriber
     /**
      * Normalize table name for all databases.
      *
+     * Note: This has been implemented because Oracle does not allow more than
+     *       30 characters for a table name, and our dynamic tables tend to go
+     *       well beyond that. This allows us to have the same table names across
+     *       all environments.
+     *
      * @param string $tableName
      * @return string
      */

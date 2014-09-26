@@ -63,9 +63,8 @@ class FrontendMenuSubscriber implements EventSubscriberInterface
 
         $behaviorSettings = $settingsManager->load('behavior');
         if ($behaviorSettings['enabled']) {
-            $behaviorMenus = $this->getBehaviorMenuOrder($behaviorSettings);
-
-            $behavior = $this->createSimpleItem($event, $repositories, 'behavior', $behaviorMenus[0], 'behaviors');
+            $firstBehaviorRoute = $this->getFirstBehaviorRoute($behaviorSettings);
+            $behavior = $this->createSimpleItem($event, $repositories, 'behavior', $firstBehaviorRoute, 'behaviors');
 
             if ('behavior' === $baseRoute) {
                 $behavior->setCurrent(true);
@@ -111,12 +110,14 @@ class FrontendMenuSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Finds the first behavior as sorted by settings.
+     *
+     * @param array $behaviorSettings
+     * @return string
      */
-    private function getBehaviorMenuOrder($behaviorSettings)
+    private function getFirstBehaviorRoute($behaviorSettings)
     {
-        $behaviorMenus = array
-        (
+        $behaviorMenus = array(
             $behaviorSettings['alcohol_order'] => 'behavior_alcohol_index',
             $behaviorSettings['smoking_order'] =>   'behavior_smoking_index',
             $behaviorSettings['illicit_drug_order'] => 'behavior_illicit_drug_index',
@@ -125,6 +126,6 @@ class FrontendMenuSubscriber implements EventSubscriberInterface
         );
         ksort($behaviorMenus);
 
-        return $behaviorMenus;
-    }  
+        return array_shift($behaviorMenus);
+    }
 }
