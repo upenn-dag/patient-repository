@@ -31,18 +31,6 @@ class AccardResourceBundle extends Bundle
     const DRIVER_DOCTRINE_PHPCR_ODM   = 'doctrine/phpcr-odm';
 
     /**
-     * Return array with currently supported drivers.
-     *
-     * @return array
-     */
-    public static function getSupportedDrivers()
-    {
-        return array(
-            AccardResourceBundle::DRIVER_DOCTRINE_ORM
-        );
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function build(ContainerBuilder $container)

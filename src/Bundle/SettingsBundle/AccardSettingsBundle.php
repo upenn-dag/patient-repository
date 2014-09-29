@@ -25,18 +25,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 class AccardSettingsBundle extends Bundle
 {
     /**
-     * Return array with currently supported drivers.
-     *
-     * @return array
-     */
-    public static function getSupportedDrivers()
-    {
-        return array(
-            AccardResourceBundle::DRIVER_DOCTRINE_ORM
-        );
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function build(ContainerBuilder $container)
