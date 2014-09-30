@@ -58,17 +58,17 @@ class DrugImporter extends PatientImporter
      * @param ImportPatientProvider $provider
      * @param Connection $connection
      * @param array $drugs
-     * @param DateTime|null $defaultStartDate
+     * @param string|null $defaultStartDate
      */
     public function __construct(ImportPatientProvider $provider,
                                 Connection $connection,
                                 array $drugs,
-                                DateTime $defaultStartDate = null)
+                                $defaultStartDate = null)
     {
         $this->provider = $provider;
         $this->connection = $connection;
         $this->drugs = $drugs;
-        $this->defaultStartDate = $defaultStartDate ?: new DateTime('1 month ago');
+        $this->defaultStartDate = $defaultStartDate ? new DateTime($defaultStartDate) : new DateTime('1 month ago');
     }
 
     /**

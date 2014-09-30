@@ -63,12 +63,12 @@ class TestImporter extends PatientImporter
     public function __construct(ImportPatientProvider $provider,
                                 Connection $connection,
                                 array $tests,
-                                DateTime $defaultStartDate = null)
+                                $defaultStartDate = null)
     {
         $this->provider = $provider;
         $this->connection = $connection;
         $this->tests = $tests;
-        $this->defaultStartDate = $defaultStartDate ?: new DateTime('1 month ago');
+        $this->defaultStartDate = $defaultStartDate ? new DateTime($defaultStartDate) : new DateTime('1 month ago');
     }
 
     /**
