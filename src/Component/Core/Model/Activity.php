@@ -28,6 +28,7 @@ class Activity extends BaseActivity implements ActivityInterface
      */
     public function __construct()
     {
+        parent::__construct();
         $this->createdAt = new DateTime();
     }
 }

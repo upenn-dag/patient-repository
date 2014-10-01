@@ -18,3 +18,10 @@ Accard\Component\Activity\Model\Activity:
         activityDate:
             type: date
             nullable: false
+
+    oneToMany:
+        fields:
+            targetEntity: Accard\Component\Activity\Model\FieldValueInterface
+            mappedBy: subject
+            orphanRemoval: true
+            cascade: ["all"]
