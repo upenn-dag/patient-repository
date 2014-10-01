@@ -64,6 +64,51 @@ class ActivityController extends ResourceController
     }
 
     /**
+     * Index activities by prototype.
+     *
+     * @param Request $request
+     *
+     */
+    public function indexByPrototypeAction(Request $request)
+    {
+        $provider = $this->get('accard.provider.activity_prototype');
+        $prototypeName = $request->get('prototype', 'default');
+
+        try {
+            $prototype = $provider->getPrototypeByName($prototypeName);
+        } catch (\Exception $e) {
+            throw $this->createNotFoundException(sprintf('The prototype "%s" does not exist.', $prototypeName));
+        }
+
+        $parameters = $this->config->getParameters();
+        $parameters['criteria']['prototype'] = $prototype->getId();
+        $this->config->setParameters($parameters);
+
+        return $this->indexAction($request);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getForm($resource = null)
+    {
+        if ($resource && null === $resource->getPrototype()) {
+            $request = $this->config->getRequest();
+            $provider = $this->get('accard.provider.activity_prototype');
+            $prototypeName = $request->get('prototype', 'default');
+
+            try {
+                $prototype = $provider->getPrototypeByName($prototypeName);
+                $resource->setPrototype($prototype);
+            } catch (\Exception $e) {
+                throw $this->createNotFoundException(sprintf('The prototype "%s" does not exist.', $prototypeName));
+            }
+        }
+
+        return parent::getForm($resource);
+    }
+
+    /**
      * Get activity prototypes.
      *
      * @return array

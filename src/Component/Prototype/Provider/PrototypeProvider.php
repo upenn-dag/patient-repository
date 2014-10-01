@@ -11,6 +11,7 @@
 namespace Accard\Component\Prototype\Provider;
 
 use Accard\Component\Prototype\Repository\PrototypeRepositoryInterface;
+use Accard\Component\Prototype\Exception\PrototypeNotFoundException;
 
 /**
  * Prototype provider.

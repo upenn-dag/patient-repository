@@ -20,7 +20,7 @@
         </button>
         <ul class="dropdown-menu dropdown-menu-right" role="menu">
             <li><a href="{{ path('accard_backend_activity_prototype_create') }}">{{ 'accard.activity_prototype.action.create'|trans }}</a></li>
-            <li><a href="{{ path('accard_backend_activity_field_create') }}">{{ 'accard.activity_field.action.create'|trans }}</a></li>
+            <li><a href="{{ path('accard_backend_activity_field_create') }}">{{ 'accard.activity_prototype_field.action.create'|trans }}</a></li>
         </ul>
     </div>
 {% endmacro %}
@@ -37,7 +37,7 @@
         </li>
         <li class="{{ _self.active_tab('field', 'active') }}">
             <a href="#fields" role="tab" data-toggle="tab">
-                {{- 'accard.activity_field.title.list'|trans -}}
+                {{- 'accard.activity_prototype_field.title.list'|trans -}}
             </a>
         </li>
         <li class="{{ _self.active_tab('settings', 'active') }}">

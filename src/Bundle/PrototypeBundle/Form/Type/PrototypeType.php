@@ -64,13 +64,13 @@ class PrototypeType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'accard.form.prototype.name'
+                'label' => sprintf('accard.%s_prototype.form.name', $this->subjectName),
             ))
             ->add('presentation', 'text', array(
-                'label' => 'accard.form.prototype.presentation'
+                'label' => sprintf('accard.%s_prototype.form.presentation', $this->subjectName),
             ))
             ->add('fields', 'collection', array(
-                  'label' => 'accard.form.prototype.fields',
+                  'label' => sprintf('accard.%s_prototype.form.fields', $this->subjectName),
                   'type' => 'accard_activity_prototype_field_choice',
                   'allow_add' => true,
                   'allow_delete' => true,

@@ -24,14 +24,18 @@
         <tbody>
         {% for activity in activities %}
             <tr id="{{ activity.id }}">
-                <td class="prototype">{{ activity.prototype.presentation }}</td>
+                <td class="prototype">
+                    <a href="{{ path('accard_frontend_activity_index_by_prototype', {'prototype': activity.prototype.name}) }}">
+                        {{- activity.prototype.presentation -}}
+                    </a>
+                </td>
                 <td class="patient">{{ activity.patient.fullName }}</td>
                 <td class="activity-date">{{ activity.activityDate|localizeddate('medium', 'none') }}</td>
                 <td class="actions">
                     <div class="pull-right">
-                        {{ show(path('accard_frontend_activity_show', {'id': activity.id}), null, 'xs') }}
-                        {{ edit(path('accard_frontend_activity_update', {'id': activity.id}), null, 'xs') }}
-                        {{ delete(path('accard_frontend_activity_delete', {'id': activity.id}), null, 'xs') }}
+                        {{ show(path('accard_frontend_activity_show', {'prototype': activity.prototype.name, 'id': activity.id}), null, 'xs') }}
+                        {{ edit(path('accard_frontend_activity_update', {'prototype': activity.prototype.name, 'id': activity.id}), null, 'xs') }}
+                        {{ delete(path('accard_frontend_activity_delete', {'prototype': activity.prototype.name, 'id': activity.id}), null, 'xs') }}
                     </div>
                 </td>
             </tr>

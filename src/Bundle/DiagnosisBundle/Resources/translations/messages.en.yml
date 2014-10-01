@@ -1,5 +1,6 @@
 accard:
     diagnosis:
+        entity_name: Diagnosis
         title: Diagnosis
         form:
             code: Code
@@ -22,6 +23,7 @@ accard:
             update: Update Diagnosis Field
             none_found: No diagnosis fields found.
     diagnosis_code:
+        entity_name: Diagnosis Code
         title: Diagnosis Codes
         form:
             id: Id
@@ -36,6 +38,7 @@ accard:
             count: %total% diagnosis codes.
             none_found: No diagnosis codes found.
     diagnosis_code_group:
+        entity_name: Diagnosis Code Group
         title: Diagnosis Code Group
         form:
             id: Id

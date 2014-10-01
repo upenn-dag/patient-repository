@@ -57,6 +57,7 @@ class ActivityTypeExtension extends AbstractTypeExtension
         if ($options['use_patient']) {
             $builder
                 ->add('patient', 'entity', array(
+                    'label' => 'accard.patient.entity_name',
                     'class' => $this->patientClass,
                     'property' => 'fullName',
                 ))
@@ -65,8 +66,10 @@ class ActivityTypeExtension extends AbstractTypeExtension
 
         if ($options['use_diagnosis']) {
             $builder->add('diagnosis', 'entity', array(
+                'label' => 'accard.diagnosis.entity_name',
                 'class' => $this->diagnosisClass,
                 'property' => 'id',
+                'disabled' => true,
             ));
         }
     }

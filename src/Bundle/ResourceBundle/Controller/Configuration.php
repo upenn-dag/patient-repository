@@ -8,7 +8,6 @@
  * For the full copyright and license information, please view the
  * LICENSE file that was distributed with this source code.
  */
-
 namespace Accard\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Inflector\Inflector;
@@ -22,31 +21,43 @@ use Symfony\Component\HttpFoundation\Request;
 class Configuration
 {
     /**
+     * Bundle prefix.
+     *
      * @var string
      */
     protected $bundlePrefix;
 
     /**
+     * Resource name.
+     *
      * @var string
      */
     protected $resourceName;
 
     /**
+     * Template namespace.
+     *
      * @var string
      */
     protected $templateNamespace;
 
     /**
+     * Templating engine.
+     *
      * @var string
      */
     protected $templatingEngine;
 
     /**
+     * Parameters array.
+     *
      * @var array
      */
     protected $parameters;
 
     /**
+     * Parameters parser.
+     *
      * @var ParametersParser
      */
     protected $parser;
@@ -58,6 +69,10 @@ class Configuration
      */
     protected $request;
 
+
+    /**
+     * Constructor.
+     */
     public function __construct(
         ParametersParser $parser,
         $bundlePrefix,
@@ -72,18 +87,50 @@ class Configuration
         $this->parser = $parser;
     }
 
+    /**
+     * Get request.
+     *
+     * @return Request
+     */
     public function getRequest()
     {
         return $this->request;
     }
 
+    /**
+     * Set request.
+     *
+     * Additionally, this processes the _accard route namespace and switches any
+     * expression (as set in {@see ParametersParser}) with dynamic values.
+     *
+     * @param Request $request
+     */
     public function setRequest(Request $request)
     {
         $this->request = $request;
-
         $parameters = $request->attributes->get('_accard', array());
         $this->parser->parse($parameters, $request);
 
+        $this->setParameters($parameters);
+    }
+
+    /**
+     * Get parameters.
+     *
+     * @return array
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * Set parameters.
+     *
+     * @param array $parameters
+     */
+    public function setParameters(array $parameters)
+    {
         $this->parameters = $parameters;
     }
 

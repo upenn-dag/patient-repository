@@ -7,26 +7,20 @@
 
 {% extends 'AccardWebBundle:Frontend:layout.html.twig' %}
 
-{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import create, design %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import design %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import pagination, page_title %}
 {% from 'AccardWebBundle:Frontend/Activity:macros.html.twig' import list %}
 
-{%- set settings = accard_settings('activity') -%}
+{% set settings = accard_settings('activity') %}
 {% set designBtn = null %}
+
 {% if is_granted('ROLE_ADMIN') %}
     {% set designBtn = design(path('accard_backend_activity_design'), 'accard.activity.action.design'|trans) %}
 {% endif %}
 
 {% block content %}
-
     {% block activity_title %}
-    {{ page_title(
-        'accard.activity.title.index'|trans,
-        [
-            create(path('accard_frontend_activity_create'), 'accard.activity.action.create'|trans),
-            designBtn
-        ]
-    )}}
+        {{ page_title('accard.activity.title.index'|trans, designBtn) }}
     {% endblock %}
 
     {% block activity_tabs '' %}

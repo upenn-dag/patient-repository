@@ -15,38 +15,55 @@ accard_frontend_activity_index:
             sortable: true
             paginate: 25
 
-accard_frontend_activity_show:
-    pattern: /{id}
+accard_frontend_activity_index_by_prototype:
+    pattern: /{prototype}/
     methods: [GET]
-    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.activity:indexByPrototypeAction
+        _accard:
+            template: AccardWebBundle:Frontend/Activity:indexByPrototype.html.twig
+            sortable: true
+            criteria:
+                prototype: $prototype
+            paginate: 25
+
+accard_frontend_activity_show:
+    pattern: /{prototype}/{id}
+    methods: [GET]
+    requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
     defaults:
         _controller: accard.controller.activity:showAction
         _accard:
             template: AccardWebBundle:Frontend/Activity:show.html.twig
 
 accard_frontend_activity_create:
-    pattern: /new
+    pattern: /{prototype}/new
     methods: [GET, POST]
+    requirements: { prototype: "[a-zA-Z1-9\-_\/]+" }
     defaults:
         _controller: accard.controller.activity:createAction
         _accard:
             template: AccardWebBundle:Frontend/Activity:create.html.twig
-            redirect: accard_frontend_activity_show
+            redirect:
+                route: accard_frontend_activity_show
+                parameters: { prototype: resource.prototype.name, id: resource.id }
 
 accard_frontend_activity_update:
-    pattern: /{id}/edit
+    pattern: /{prototype}/{id}/edit
     methods: [GET, PUT, POST]
-    requirements: { id: \d+ }
+    requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
     defaults:
         _controller: accard.controller.activity:updateAction
         _accard:
             template: AccardWebBundle:Frontend/Activity:update.html.twig
-            redirect: accard_frontend_activity_show
+            redirect:
+                route: accard_frontend_activity_show
+                parameters: { prototype: resource.prototype.name, id: resource.id }
 
 accard_frontend_activity_delete:
-    pattern: /{id}
+    pattern: /{prototype}/{id}
     methods: [DELETE]
-    requirements: { id: \d+ }
+    requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
     defaults:
         _controller: accard.controller.activity:deleteAction
         _accard:

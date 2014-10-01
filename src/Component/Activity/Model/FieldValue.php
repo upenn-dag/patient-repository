@@ -24,7 +24,7 @@ class FieldValue extends BaseFieldValue implements FieldValueInterface
      *
      * @var ActivityInterface|null
      */
-    protected $activity;
+    //protected $activity;
 
 
     /**
@@ -32,7 +32,7 @@ class FieldValue extends BaseFieldValue implements FieldValueInterface
      */
     public function getActivity()
     {
-        return $this->activity;
+        return parent::getSubject();
     }
 
     /**
@@ -40,8 +40,6 @@ class FieldValue extends BaseFieldValue implements FieldValueInterface
      */
     public function setActivity(ActivityInterface $activity = null)
     {
-        $this->activity = $activity;
-
-        return $this;
+        return parent::setSubject($activity);
     }
 }

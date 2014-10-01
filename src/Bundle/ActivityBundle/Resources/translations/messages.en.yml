@@ -16,7 +16,7 @@ accard:
             manage_all: Manage Activities
         title:
             index: Browse Activities
-            show: %activity% Activity
+            show: Show Activity
             create: Create a New Activity
             update: Update Activity
             list: Activities
@@ -41,7 +41,7 @@ accard:
             create: Create a New Activity Prototype
             update: Update Activity Prototype
             list: Activity Prototypes
-    activity_field:
+    activity_prototype_field:
         entity_name: Activity Field
         form:
             name: Name

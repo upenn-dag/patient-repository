@@ -40,7 +40,7 @@ class ActivityType extends AbstractType
 
     /**
      * Activity builder.
-     * 
+     *
      * @var ActivityBuilderInterface
      */
     protected $activityBuilder;
@@ -75,11 +75,12 @@ class ActivityType extends AbstractType
                 'label' => 'accard.activity.form.activity_date',
             ))
             ->add('fields', 'collection', array(
+                'label' => 'accard.activity.form.fields',
                 'required'     => false,
                 'type'         => 'accard_activity_prototype_field_value',
                 'allow_add'    => true,
                 'allow_delete' => true,
-                'by_reference' => false
+                'by_reference' => false,
             ))
             ->addEventSubscriber(
                 new DefaultActivityFieldListener($builder->getFormFactory(), $this->activityBuilder)

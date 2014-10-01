@@ -59,7 +59,26 @@ class DefaultActivityFieldListener implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(FormEvents::PRE_SET_DATA => 'buildForm');
+        return array(
+            FormEvents::POST_SET_DATA => 'hidePrototype',
+            FormEvents::PRE_SET_DATA => 'createFields',
+        );
+    }
+
+    /**
+     * Remove prototype field if prototype is present.
+     * 
+     * @param FormEvent $event
+     */
+    public function hidePrototype(FormEvent $event)
+    {
+        if (!$this->testForPrototype($event)) {
+            return;
+        }
+
+        if ($event->getForm()->has('prototype')) {
+            $event->getForm()->remove('prototype');
+        }
     }
 
     /**
@@ -67,16 +86,13 @@ class DefaultActivityFieldListener implements EventSubscriberInterface
      *
      * @param FormEvent $event
      */
-    public function buildForm(FormEvent $event)
+    public function createFields(FormEvent $event)
     {
-        if (null === ($activity = $event->getData())) {
+        if (!$this->testForPrototype($event)) {
             return;
         }
 
-        if (null === $activity->getPrototype()) {
-        	return;
-        }
-
+        $activity = $event->getData();
         $this->builder->set($activity);
         $possibleFields = $activity->getPrototype()->getFields();
 
@@ -85,5 +101,15 @@ class DefaultActivityFieldListener implements EventSubscriberInterface
                 $this->builder->addField($field->getName(), null, $field->getPresentation());
             }
         }
+    }
+
+    /**
+     * Test if prototype exists within form data.
+     * 
+     * @return boolean
+     */
+    private function testForPrototype(FormEvent $event)
+    {
+        return !(null === ($activity = $event->getData()) || null === $activity->getPrototype());
     }
 }

@@ -95,6 +95,9 @@ accard:
     diagnosis:
         action:
             manage_phases: Manage Phases
+    activity:
+        title:
+            index_by_prototype: Browse %prototype% Activities
     form:
         choose: Choose one
         field:
