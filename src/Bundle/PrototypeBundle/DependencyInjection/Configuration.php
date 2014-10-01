@@ -85,7 +85,7 @@ class Configuration implements ConfigurationInterface
                                 ->children()
                                     ->scalarNode('model')->defaultValue('Accard\Component\Prototype\Model\Prototype')->end()
                                     ->scalarNode('controller')->defaultValue('Accard\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                    ->scalarNode('repository')->cannotBeEmpty()->end()
+                                    ->scalarNode('repository')->defaultValue('Accard\Bundle\PrototypeBundle\Doctrine\ORM\PrototypeRepository')->end()
                                     ->scalarNode('form')->defaultValue('Accard\Bundle\PrototypeBundle\Form\Type\PrototypeType')->end()
                                 ->end()
                             ->end()

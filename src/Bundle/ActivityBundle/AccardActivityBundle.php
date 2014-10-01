@@ -28,6 +28,15 @@ class AccardActivityBundle extends Bundle
      */
     public function build(ContainerBuilder $container)
     {
+        $interfaces = array(
+            'Accard\Component\Activity\Model\ActivityInterface' => 'accard.model.activity.class',
+            'Accard\Component\Activity\Model\FieldInterface' => 'accard.model.activity_field.class',
+            'Accard\Component\Activity\Model\FieldValueInterface' => 'accard.model.activity_field_value.class',
+            'Accard\Component\Activity\Model\PrototypeInterface' => 'accard.model.activity_prototype.class',
+        );
+
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('accard_activity', $interfaces));
+
         $mappings = array(
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Accard\Component\Activity\Model',
         );
@@ -36,7 +45,7 @@ class AccardActivityBundle extends Bundle
             DoctrineOrmMappingsPass::createYamlMappingDriver(
                 $mappings,
                 array('doctrine.orm.entity_manager'),
-                'accard_prototype.driver.doctrine/orm'
+                'accard_activity.driver.doctrine/orm'
             )
         );
     }

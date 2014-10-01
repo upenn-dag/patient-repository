@@ -13,24 +13,24 @@ namespace Accard\Component\Activity\Model;
 use Accard\Component\Field\Model\FieldValueInterface as BaseFieldValueInterface;
 
 /**
- * Activity prototype field value model interface.
+ * Activity activity field value model interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
 interface FieldValueInterface extends BaseFieldValueInterface
 {
     /**
-     * Get prototype.
+     * Get activity.
      *
-     * @return PrototypeInterface|null
+     * @return ActivityInterface|null
      */
-    public function getPrototype();
+    public function getActivity();
 
     /**
-     * Set prototype.
+     * Set activity.
      *
-     * @param PrototypeInterface|null $prototype
+     * @param ActivityInterface|null $activity
      * @return FieldValueInterface
      */
-    public function setPrototype(PrototypeInterface $prototype = null);
+    public function setActivity(ActivityInterface $activity = null);
 }

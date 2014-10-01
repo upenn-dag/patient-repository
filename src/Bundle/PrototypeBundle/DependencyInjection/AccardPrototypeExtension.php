@@ -15,6 +15,7 @@ use Accard\Bundle\ResourceBundle\AccardResourceBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Accard prototype bundle extension.
@@ -83,6 +84,7 @@ class AccardPrototypeExtension extends AbstractResourceExtension
         $prototypeAlias = $subject.'_prototype';
         $prototypeClasses = $config[$prototypeAlias];
 
+        // Form type.
         $prototypeFormType = new Definition($prototypeClasses['form']);
         $prototypeFormType
             ->setArguments(array($subject, $prototypeClasses['model'], '%accard.validation_group.'.$prototypeAlias.'%'))
@@ -90,5 +92,20 @@ class AccardPrototypeExtension extends AbstractResourceExtension
         ;
 
         $container->setDefinition('accard.form.type.'.$prototypeAlias, $prototypeFormType);
+
+        // Choice form type.
+        $choiceFormType = new Definition('Accard\Bundle\PrototypeBundle\Form\Type\PrototypeChoiceType');
+        $choiceFormType
+            ->setArguments(array($subject, new Reference('accard.provider.'.$prototypeAlias)))
+            ->addTag('form.type', array('alias' => 'accard_'.$prototypeAlias.'_choice'))
+        ;
+
+        $container->setDefinition('accard.form.type.'.$prototypeAlias.'_choice', $choiceFormType);
+
+        // Provider.
+        $prototypeProvider = new Definition('Accard\Component\Prototype\Provider\PrototypeProvider');
+        $prototypeProvider->addArgument(new Reference('accard.repository.'.$prototypeAlias));
+
+        $container->setDefinition('accard.provider.'.$prototypeAlias, $prototypeProvider);
     }
 }

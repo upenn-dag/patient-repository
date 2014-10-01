@@ -80,6 +80,8 @@ class OptionValueChoiceType extends AbstractType
      */
     public function getName()
     {
-        return sprintf('accard_%s_option_value', $this->option->getName());
+        $normalizedName = str_replace('-', '_', $this->option->getName());
+
+        return sprintf('accard_%s_option_value', $normalizedName);
     }
 }

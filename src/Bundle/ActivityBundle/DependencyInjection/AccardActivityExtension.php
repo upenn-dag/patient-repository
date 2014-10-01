@@ -57,7 +57,8 @@ class AccardActivityExtension extends AbstractResourceExtension implements Prepe
                 'activity' => array(
                     'subject'   => $config['classes']['activity']['model'],
                     'prototype' => array(
-                        'model' => 'Accard\Component\Activity\Model\Prototype'
+                        'model' => 'Accard\Component\Activity\Model\Prototype',
+                        'repository' => 'Accard\Bundle\PrototypeBundle\Doctrine\ORM\PrototypeRepository',
                     ),
                     'field' => array(
                         'model' => 'Accard\Component\Activity\Model\Field',
