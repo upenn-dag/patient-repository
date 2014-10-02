@@ -92,19 +92,18 @@ class LoadORMMetadataSubscriber implements EventSubscriber
             $fieldMapping = array(
                 'fieldName' => 'fields',
                 'targetEntity' => $class['field']['model'],
+                'cascade' => array("persist"),
                 'joinTable' => array(
                     'name' => sprintf('accard_%s_prototype_map', $subject),
                     'joinColumns' => array(array(
                         'name' => 'prototypeId',
                         'referencedColumnName' => 'id',
                         'nullable' => false,
-                        'onDelete' => 'CASCADE',
                     )),
                     'inverseJoinColumns' => array(array(
                         'name' => 'subjectId',
                         'referencedColumnName' => 'id',
                         'nullable' => false,
-                        'onDelete' => 'CASCADE',
                     ))
                 ),
             );

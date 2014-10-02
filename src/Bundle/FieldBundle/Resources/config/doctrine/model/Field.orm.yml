@@ -33,5 +33,6 @@ Accard\Component\Field\Model\Field:
     manyToOne:
         option:
             targetEntity: Accard\Component\Option\Model\OptionInterface
+            cascade: ["persist"]
             joinColumn:
                 name: optionId

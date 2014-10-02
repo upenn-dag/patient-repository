@@ -69,7 +69,6 @@ class LoadORMMetadataSubscriber implements EventSubscriber
                     'name'                 => $subject.'Id',
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
-                    'onDelete'             => 'CASCADE'
                 ))
             );
 
@@ -83,7 +82,6 @@ class LoadORMMetadataSubscriber implements EventSubscriber
                     'name'                 => 'fieldId',
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
-                    'onDelete'             => 'CASCADE'
                 ))
             );
 
