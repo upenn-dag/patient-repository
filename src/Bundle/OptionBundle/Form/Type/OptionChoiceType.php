@@ -48,6 +48,7 @@ class OptionChoiceType extends AbstractType
             ->setDefaults(array(
                 'empty_value' => 'accard.form.field.choose_option',
                 'class' => $this->className,
+                'property' => 'presentation',
             ))
         ;
     }
