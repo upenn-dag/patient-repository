@@ -1,0 +1,87 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Frontend/Flow:layout.html.twig' %}
+
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
+
+{% macro phase_form(phase) %}
+{% spaceless %}
+
+<div class="row">
+<div class="col-sm-4">
+    <strong>Select Phase</strong>
+    {{ form_widget(phase.phase) }}
+</div> 
+<div class="col-sm-4">
+    <strong>Date:</strong>
+    {{ form_widget(phase.startDate) }}
+</div>
+ <div class="col-sm-4">
+    <div class="detail-hider">
+     <strong>Disease type</strong>
+    {{ form_widget(phase.diseaseType)}}
+    </div>
+   </div>
+</div>
+<hr>
+{% endspaceless %}
+{% endmacro %}
+
+{% block flow_content %}
+
+    {{ page_title('accard.phase.action.create'|trans) }}
+    {{ form_errors(form) }}
+<div class="col-sm-8">
+    {{ form_row(form.patient) }}
+    {{ form_row(form.diagnosis) }}
+    
+
+    <button id="add-phase" class="btn btn-success"><i class = 'glyphicon glyphicon-plus'></i> Add Phase</button>
+    <div id="phases" data-prototype="{{ _self.phase_form(form.phases.vars.prototype)|e }}">
+        {% for phase in form.phases %}
+            {{ _self.phase_form(phase) }}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block page_javascripts %}
+
+<script type="text/javascript">
+
+    var Former = Accard.get('form');
+    var manager = new Former($('form'));
+
+    console.log(manager);
+
+    manager
+        .collection("#phases", {
+         adder: $("#add-phase"),
+          startup: function(collection) {}
+        })
+        .dynamic(/accard_flow_create_diagnosis_phases\[phases\]\[[0-9]{0,2}\]\[phase\]/g, {
+         target: function() {
+         return this.parent().parent().first().find(".detail-hider")
+        },
+        condition: ["equal", "2"],
+        action: "show"
+        })
+       .dynamic(/accard_flow_create_diagnosis_phases\[phases\]\[[0-9]{0,2}\]\[phase\]/g, {
+         target: function() {
+        return this.parent().parent().first().find("select").get(1)
+        },
+        condition: ["not_equal", "2"],
+        action: "clear"
+        })
+        .bindAll()
+    ;
+
+</script>
+
+{% endblock %}
