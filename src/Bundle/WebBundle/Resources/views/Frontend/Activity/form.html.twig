@@ -18,14 +18,24 @@
         {{ select_patient(form.patient) }}
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6 row-split">
-        {{ form_row(form.diagnosis) }}
-        {{ form_row(form.activityDate) }}
-    </div>
-    <div class="col-md-6">
-    {% for field in form.fields %}
-        {{ _self.prototype(field) }}
-    {% endfor %}
+
+<div class="col-md-12 well">
+    <p class="lead">{{ 'accard.diagnosis.form.select_diagnosis'|trans }}
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_widget(form.diagnosis) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_widget(form.activityDate) }}
+        </div>
     </div>
 </div>
+
+{% for field in form.fields %}
+<div class="row">
+    <div class="col-md-6">
+        {{ _self.prototype(field) }}
+    </div>
+</div>
+{% endfor %}
+
