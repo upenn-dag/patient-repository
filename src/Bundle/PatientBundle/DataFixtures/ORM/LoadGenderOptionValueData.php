@@ -1,7 +1,6 @@
 <?php
-// src/Accard/Bundle/OptionBundle/Doctrine/DataFixtures/ORM/LoadOptionValueData.php
 
-namespace Accard\Bundle\OptionBundle\DataFixtures\ORM;
+namespace Accard\Bundle\PatientBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
