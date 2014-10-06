@@ -10,6 +10,7 @@
  */
 namespace Accard\Bundle\CoreBundle\DataFixtures;
 
+use Accard\Component\Prototype\Exception\PrototypeNotFoundException;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -72,6 +73,55 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
     }
 
     /**
+     * Test for presence of prototype in storage.
+     * 
+     * @param string $subject
+     * @param string $name
+     * 
+     * @return boolean
+     */
+    public function hasPrototype($subject, $name)
+    {
+        $provider = $this->container->get(sprintf('accard.provider.%s_prototype', $subject));
+
+        return $provider->hasPrototypeByName($name);
+    }
+
+    /**
+     * Get prototype from storage.
+     * 
+     * @throws PrototypeNotFoundException If prototype does not exist.
+     * @param string $subject
+     * @param string $name
+     * 
+     * @return PrototypeBuilder
+     */
+    public function getPrototype($subject, $name)
+    {
+        $provider = $this->container->get(sprintf('accard.provider.%s_prototype', $subject));
+        $prototype = $provider->getPrototypeByName($name);
+
+        return new Builder\PrototypeBuilder($subject, $this, $prototype);
+    }
+
+    /**
+     * Get prototype from storage or create it.
+     * 
+     * @param string $subject
+     * @param string $name
+     * @param string|null $presentation
+     * @return PrototypeBuilder
+     */
+    public function getOrCreatePrototype($subject, $name, $presentation = null)
+    {
+        if ($this->hasPrototype($subject, $name)) {
+            return $this->getPrototype($subject, $name);
+        }
+
+        return $this->createPrototype($subject, $name, $presentation);
+    }
+
+    /**
      * Create field builder.
      * 
      * @param string $subject
@@ -88,6 +138,55 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
         $fieldBuilder->setType($type);
 
         return $fieldBuilder;
+    }
+
+    /**
+     * Test for presence of field in storage.
+     * 
+     * @param string $subject
+     * @param string $name
+     * 
+     * @return boolean
+     */
+    public function hasField($subject, $name)
+    {
+        $provider = $this->container->get(sprintf('accard.provider.%s_field', $subject));
+
+        return $provider->hasFieldByName($name);
+    }
+
+    /**
+     * Get field from storage.
+     * 
+     * @throws FieldNotFoundException If field does not exist.
+     * @param string $subject
+     * @param string $name
+     * 
+     * @return FieldBuilder
+     */
+    public function getField($subject, $name)
+    {
+        $provider = $this->container->get(sprintf('accard.provider.%s_field', $subject));
+        $field = $provider->getFieldByName($name);
+
+        return new Builder\FieldBuilder($subject, $this, $field);
+    }
+
+    /**
+     * Get field from storage or create it.
+     * 
+     * @param string $subject
+     * @param string $name
+     * @param string|null $presentation
+     * @return FieldBuilder
+     */
+    public function getOrCreateField($subject, $name, $presentation = null)
+    {
+        if ($this->hasField($subject, $name)) {
+            return $this->getField($subject, $name);
+        }
+
+        return $this->createField($subject, $name, $presentation);
     }
 
     /**
@@ -108,18 +207,67 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
     }
 
     /**
-     * Persist object
+     * Test for presence of option in storage.
      * 
-     * @param $object
+     * @param string $subject
+     * @param string $name
+     * 
+     * @return boolean
      */
-    public function save($object)
+    public function hasOption($name)
     {
-        // Make better exception...
-        if (!$this->objectManager) {
-            throw new \Exception('No object manager is set!');
-        }
+        $provider = $this->container->get(sprintf('accard.provider.option'));
 
-        $this->objectManager->flush();
+        return $provider->hasOptionByName($name);
+    }
+
+    /**
+     * Get option from storage.
+     * 
+     * @throws OptionNotFoundException If option does not exist.
+     * @param string $subject
+     * @param string $name
+     * 
+     * @return OptionBuilder
+     */
+    public function getOption($name)
+    {
+        $provider = $this->container->get(sprintf('accard.provider.option'));
+        $option = $provider->getOptionByName($name);
+
+        return new Builder\OptionBuilder($this, $option);
+    }
+
+    /**
+     * Test for presence of option value in storage.
+     * 
+     * @param string $subject
+     * @param string $name
+     * 
+     * @return boolean
+     */
+    public function hasOptionValue($name)
+    {
+        $provider = $this->container->get(sprintf('accard.provider.optionvalue'));
+
+        return $provider->hasOptionValueByName($name);
+    }
+
+    /**
+     * Get option value from storage.
+     * 
+     * @throws OptionNotFoundException If option does not exist.
+     * @param string $subject
+     * @param string $name
+     * 
+     * @return OptionBuilder
+     */
+    public function getOptionValue($name)
+    {
+        $provider = $this->container->get(sprintf('accard.provider.optionvalue'));
+        $option = $provider->getOptionValueByName($name);
+
+        return $option;
     }
 
     /**

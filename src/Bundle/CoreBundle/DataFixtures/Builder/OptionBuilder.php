@@ -147,6 +147,23 @@ class OptionBuilder
     }
 
     /**
+     * Get option from storage or create it.
+     * 
+     * @param string $subject
+     * @param string $name
+     * @param string|null $presentation
+     * @return OptionBuilder
+     */
+    public function getOrCreateOptionValue($name, $presentation)
+    {
+        if ($this->fixtureManager->hasOptionValue($name)) {
+            return $this->fixtureManager->getOptionValue($name);
+        }
+
+        return $this->createOption($name, $presentation);
+    }
+
+    /**
      * Add option value
      * 
      * @param OptionValue $value

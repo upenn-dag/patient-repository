@@ -203,6 +203,23 @@ class FieldBuilder
     }
 
     /**
+     * Get option from storage or create it.
+     * 
+     * @param string $subject
+     * @param string $name
+     * @param string|null $presentation
+     * @return OptionBuilder
+     */
+    public function getOrCreateOption($name, $presentation)
+    {
+        if ($this->fixtureManager->hasOption($name)) {
+            return $this->fixtureManager->getOption($name);
+        }
+
+        return $this->createOption($name, $presentation);
+    }
+
+    /**
      * End and persist.
      * 
      * @return PrototypeBuilder | FieldBuilder

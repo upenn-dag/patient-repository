@@ -63,12 +63,22 @@ class PrototypeBuilder
      */
     private $persisted = false;
 
-    public function __construct($subject, FixtureManagerInterface $fixtureManager)
+
+    /**
+     * Constructor.
+     * 
+     * @param string $subject
+     * @param FixtureManagerInterface $fixtureManager
+     * @param PrototypeInterface|null $prototype
+     */
+    public function __construct($subject,
+                                FixtureManagerInterface $fixtureManager,
+                                PrototypeInterface $prototype = null)
     {
         $this->subject = $subject;
         $this->fixtureManager = $fixtureManager;
         $prototypeClass = $this->getModelClass();
-        $this->prototype = new $prototypeClass();
+        $this->prototype = $prototype ?: new $prototypeClass();
         $this->context = $this;
     }
 
