@@ -56,6 +56,20 @@ class PrototypeProvider implements PrototypeProviderInterface
     /**
      * {@inheritdoc}
      */
+    public function hasPrototype($prototypeId)
+    {
+        try {
+            $this->getPrototype($prototypeId);
+
+            return true;
+        } catch (PrototypeNotFoundException $e) {
+            return false;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPrototype($prototypeId)
     {
         if (!$prototype = $this->repository->getPrototype($prototypeId)) {
@@ -68,10 +82,24 @@ class PrototypeProvider implements PrototypeProviderInterface
     /**
      * {@inheritdoc}
      */
+    public function hasPrototypeByName($prototypeName)
+    {
+        try {
+            $this->getPrototypeByName($prototypeName);
+
+            return true;
+        } catch (PrototypeNotFoundException $e) {
+            return false;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPrototypeByName($prototypeName)
     {
         if (!$prototype = $this->repository->getPrototypeByName($prototypeName)) {
-            throw new PrototypeNotFoundException($prototypeId);
+            throw new PrototypeNotFoundException($prototypeName);
         }
 
         return $prototype;

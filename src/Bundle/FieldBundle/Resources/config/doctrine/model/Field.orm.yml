@@ -19,6 +19,7 @@ Accard\Component\Field\Model\Field:
             type: string
             length: 120
             nullable: false
+            unique: true
         presentation:
             type: string
             length: 120

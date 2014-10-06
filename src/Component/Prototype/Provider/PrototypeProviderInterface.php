@@ -35,6 +35,14 @@ interface PrototypeProviderInterface
     public function getModelClass();
 
     /**
+     * Test for presence of prototype by id.
+     * 
+     * @param integer $prototypeId
+     * @return boolean
+     */
+    public function hasPrototype($prototypeId);
+
+    /**
      * Get prototype by id.
      *
      * @throws PrototypeNotFoundException If prototype can not be found.
@@ -42,6 +50,14 @@ interface PrototypeProviderInterface
      * @return PrototypeInterface
      */
     public function getPrototype($prototypeId);
+
+    /**
+     * Test for presence of prototype by name.
+     * 
+     * @param string $prototypeName
+     * @return boolean
+     */
+    public function hasPrototypeByName($prototypeName);
 
     /**
      * Get prototype by name.
