@@ -111,7 +111,7 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('model')->defaultValue('Accard\Component\Core\Model\DiagnosisPhase')->end()
                                 ->scalarNode('controller')->defaultValue('Accard\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->defaultValue('Accard\Bundle\PhseBundle\Doctrine\ORM\PhaseRepository')->end()
+                                ->scalarNode('repository')->defaultValue('Accard\Bundle\PhaseBundle\Doctrine\ORM\PhaseRepository')->end()
                                 ->scalarNode('form')->defaultValue('Accard\Bundle\CoreBundle\Form\Type\DiagnosisPhaseType')->end()
                             ->end()
                         ->end()
