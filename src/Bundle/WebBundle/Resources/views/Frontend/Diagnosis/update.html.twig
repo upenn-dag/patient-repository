@@ -26,3 +26,13 @@
         </div>
     </form>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ select_patient_js('#accard_diagnosis_patient') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ select_patient_css() }}
+{% endblock %}

@@ -23,34 +23,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class DiagnosisTypeExtension extends AbstractTypeExtension
 {
     /**
-     * Patient class FQCN.
-     *
-     * @var string
-     */
-    protected $patientClass;
-
-    /**
-     * Constructor.
-     *
-     * @param string $patientClass
-     */
-    public function __construct($patientClass)
-    {
-        $this->patientClass = $patientClass;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($options['use_patient']) {
-            $builder
-                ->add('patient', 'entity', array(
-                    'class' => $this->patientClass,
-                    'property' => 'fullName',
-                ))
-            ;
+            $builder->add('patient', 'accard_patient_choice');
         }
     }
 

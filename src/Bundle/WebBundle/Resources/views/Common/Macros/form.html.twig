@@ -14,3 +14,21 @@
     {{ form_errors(patientForm) }}
 </div>
 {% endmacro %}
+
+{% macro select_patient_js(field, options) %}
+{{ dump(options) }}
+{% if options is empty %}{% set options = { placeholder: '' } %}{% endif %}
+<script src="{{ asset('bundles/accardweb/js/plugins/select2/select2.min.js') }}" type="text/javascript"></script>
+<script type="text/javascript">
+    $('{{ field }}').select2({{ options|json_encode|raw }});
+</script>
+{% endmacro %}
+
+{% macro select_patient_css() %}
+{% stylesheets output='assets/compiled/select2.css' filter='cssrewrite'
+    'bundles/accardweb/css/plugins/select2/select2.css'
+    'bundles/accardweb/css/plugins/select2/select2-bootstrap.css'
+%}
+    <link href="{{ asset_url }}" rel="stylesheet" type="text/css">
+{% endstylesheets %}
+{% endmacro %}

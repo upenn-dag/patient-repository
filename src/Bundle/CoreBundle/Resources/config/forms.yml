@@ -71,11 +71,7 @@ services:
 
     accard.form.extension.accard_diagnosis:
         class: %accard.form.extension.accard_diagnosis.class%
-        arguments:
-            - %accard.model.patient.class%
-            - %accard.model.diagnosis_phase.class%
-        tags:
-            - { name: form.type_extension, alias: accard_diagnosis }
+        tags: [{ name: form.type_extension, alias: accard_diagnosis }]
 
     accard.form.extension.accard_activity:
         class: %accard.form.extension.accard_activity.class%
