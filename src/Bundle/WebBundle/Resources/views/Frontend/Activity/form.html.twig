@@ -20,13 +20,12 @@
 </div>
 
 <div class="col-md-12 well">
-    <p class="lead">{{ 'accard.diagnosis.form.select_diagnosis'|trans }}
     <div class="row">
-        <div class="col-md-6">
-            {{ form_widget(form.diagnosis) }}
+        <div class="col-md-6 row-split">
+            {{ form_row(form.diagnosis) }}
         </div>
         <div class="col-md-6">
-            {{ form_widget(form.activityDate) }}
+            {{ form_row(form.activityDate) }}
         </div>
     </div>
 </div>
