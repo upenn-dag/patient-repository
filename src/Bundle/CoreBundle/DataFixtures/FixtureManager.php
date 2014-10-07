@@ -55,11 +55,11 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
 
     /**
      * Create prototype builder.
-     * 
+     *
      * @param string $subject
      * @param string $name
      * @param string $presentation
-     * 
+     *
      * @return PrototypeBuilder $prototypeBuilder
      */
     public function createPrototype($subject, $name = null, $presentation = null)
@@ -74,10 +74,10 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
 
     /**
      * Test for presence of prototype in storage.
-     * 
+     *
      * @param string $subject
      * @param string $name
-     * 
+     *
      * @return boolean
      */
     public function hasPrototype($subject, $name)
@@ -89,11 +89,11 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
 
     /**
      * Get prototype from storage.
-     * 
+     *
      * @throws PrototypeNotFoundException If prototype does not exist.
      * @param string $subject
      * @param string $name
-     * 
+     *
      * @return PrototypeBuilder
      */
     public function getPrototype($subject, $name)
@@ -106,7 +106,7 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
 
     /**
      * Get prototype from storage or create it.
-     * 
+     *
      * @param string $subject
      * @param string $name
      * @param string|null $presentation
@@ -123,11 +123,11 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
 
     /**
      * Create field builder.
-     * 
+     *
      * @param string $subject
      * @param string $name
      * @param string $presentation
-     * 
+     *
      * @return FieldBuilder $fieldBuilder
      */
     public function createField($subject, $name, $presentation, $type)
@@ -142,26 +142,26 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
 
     /**
      * Test for presence of field in storage.
-     * 
+     *
      * @param string $subject
      * @param string $name
-     * 
+     *
      * @return boolean
      */
     public function hasField($subject, $name)
     {
-        $provider = $this->container->get(sprintf('accard.provider.%s_field', $subject));
+        $provider = $this->container->get(sprintf('accard.repository.%s_field', $subject));
 
-        return $provider->hasFieldByName($name);
+        return (boolean) $provider->findOneByName($name);
     }
 
     /**
      * Get field from storage.
-     * 
+     *
      * @throws FieldNotFoundException If field does not exist.
      * @param string $subject
      * @param string $name
-     * 
+     *
      * @return FieldBuilder
      */
     public function getField($subject, $name)
@@ -174,7 +174,7 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
 
     /**
      * Get field from storage or create it.
-     * 
+     *
      * @param string $subject
      * @param string $name
      * @param string|null $presentation
@@ -191,10 +191,10 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
 
     /**
      * Create option builder.
-     * 
+     *
      * @param string $name
      * @param string $presentation
-     * 
+     *
      * @return OptionBuilder $optionBuilder
      */
     public function createOption($name, $presentation)
@@ -208,10 +208,10 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
 
     /**
      * Test for presence of option in storage.
-     * 
+     *
      * @param string $subject
      * @param string $name
-     * 
+     *
      * @return boolean
      */
     public function hasOption($name)
@@ -223,11 +223,11 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
 
     /**
      * Get option from storage.
-     * 
+     *
      * @throws OptionNotFoundException If option does not exist.
      * @param string $subject
      * @param string $name
-     * 
+     *
      * @return OptionBuilder
      */
     public function getOption($name)
@@ -240,10 +240,10 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
 
     /**
      * Test for presence of option value in storage.
-     * 
+     *
      * @param string $subject
      * @param string $name
-     * 
+     *
      * @return boolean
      */
     public function hasOptionValue($name)
@@ -255,11 +255,11 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
 
     /**
      * Get option value from storage.
-     * 
+     *
      * @throws OptionNotFoundException If option does not exist.
      * @param string $subject
      * @param string $name
-     * 
+     *
      * @return OptionBuilder
      */
     public function getOptionValue($name)
