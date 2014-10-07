@@ -133,7 +133,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     /**
      * @return QueryBuilder
      */
-    protected function getQueryBuilder()
+    public function getQueryBuilder()
     {
         return $this->createQueryBuilder($this->getAlias());
     }
@@ -141,7 +141,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     /**
      * @return QueryBuilder
      */
-    protected function getCollectionQueryBuilder()
+    public function getCollectionQueryBuilder()
     {
         return $this->createQueryBuilder($this->getAlias());
     }

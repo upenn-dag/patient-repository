@@ -77,7 +77,7 @@ services:
         class: %accard.form.extension.accard_activity.class%
         arguments:
             - %accard.model.patient.class%
-            - %accard.model.diagnosis.class%
+            - @accard.repository.diagnosis
         tags:
             - { name: form.type_extension, alias: accard_activity }
 

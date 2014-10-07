@@ -6,10 +6,12 @@
 # file that was distributed with this source code.
 
 accard_frontend_diagnosis_index:
-    pattern: /
+    pattern: /index.{_format}
     methods: [GET]
+    requirements: { _format: html|json|xml }
     defaults:
         _controller: accard.controller.diagnosis:indexAction
+        _format: html
         _accard:
             template: AccardWebBundle:Frontend/Diagnosis:index.html.twig
             sortable: true

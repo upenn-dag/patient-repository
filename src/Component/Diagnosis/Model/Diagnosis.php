@@ -370,4 +370,23 @@ class Diagnosis implements DiagnosisInterface
 
         return null;
     }
+
+    public function getCanonical()
+    {
+        $canonical = null === $this->code ? 'Diagnosis' : $this->code->getDescription();
+
+        if (null !== $this->startDate) {
+            $canonical .= ' on '.$this->startDate->format('d/m/Y');
+        }
+
+        return $canonical;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getCanonical();
+    }
 }

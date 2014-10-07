@@ -9,6 +9,7 @@
  */
 namespace Accard\Bundle\DiagnosisBundle\Doctrine\ORM;
 
+use Accard\Component\Diagnosis\Repository\DiagnosisRepositoryInterface;
 use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
@@ -16,7 +17,7 @@ use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class DiagnosisRepository extends EntityRepository
+class DiagnosisRepository extends EntityRepository implements DiagnosisRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -35,5 +36,4 @@ class DiagnosisRepository extends EntityRepository
     {
         return $this->getQueryBuilder()->select('COUNT(diagnosis.id)')->getQuery()->getSingleScalarResult();
     }
-
 }

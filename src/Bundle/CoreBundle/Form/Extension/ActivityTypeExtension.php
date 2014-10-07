@@ -10,10 +10,13 @@
  */
 namespace Accard\Bundle\CoreBundle\Form\Extension;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Accard\Component\Diagnosis\Repository\DiagnosisRepositoryInterface;
+use Accard\Bundle\CoreBundle\Form\EventListener\PatientDiagnosesListener;
 
 /**
  * Activity form type extension.
@@ -36,17 +39,26 @@ class ActivityTypeExtension extends AbstractTypeExtension
      */
     protected $diagnosisClass;
 
+    /**
+     * Diagnosis repository.
+     *
+     * @var DiagnosisRepositoryInterface
+     */
+    protected $diagnosisRepository;
+
 
     /**
      * Constructor.
      *
      * @param string $patientClass
-     * @param string $diagnosisClass
+     * @param DiagnosisRepositoryInterface $diagnosisRepository
      */
-    public function __construct($patientClass, $diagnosisClass)
+    public function __construct($patientClass,
+                                DiagnosisRepositoryInterface $diagnosisRepository)
     {
         $this->patientClass = $patientClass;
-        $this->diagnosisClass = $diagnosisClass;
+        $this->diagnosisClass = $diagnosisRepository->getClassName();
+        $this->diagnosisRepository = $diagnosisRepository;
     }
 
     /**
@@ -55,22 +67,19 @@ class ActivityTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($options['use_patient']) {
-            $builder
-                ->add('patient', 'entity', array(
-                    'label' => 'accard.patient.entity_name',
-                    'class' => $this->patientClass,
-                    'property' => 'fullName',
-                ))
-            ;
+            $builder->add('patient', 'accard_patient_choice');
         }
 
         if ($options['use_diagnosis']) {
-            $builder->add('diagnosis', 'entity', array(
-                'label' => 'accard.diagnosis.entity_name',
-                'class' => $this->diagnosisClass,
-                'property' => 'id',
-                'disabled' => true,
-            ));
+            $builder
+                ->add('diagnosis', 'entity', array(
+                    'label' => 'accard.diagnosis.entity_name',
+                    'class' => $this->diagnosisClass,
+                    'property' => 'canonical',
+                    'query_builder' => $this->diagnosisRepository->getQueryBuilder(),
+                ))
+                ->addEventSubscriber(new PatientDiagnosesListener)
+            ;
         }
     }
 

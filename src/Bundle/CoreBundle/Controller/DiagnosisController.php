@@ -64,6 +64,28 @@ class DiagnosisController extends ResourceController
     }
 
     /**
+     * Index diagnoses by patient.
+     *
+     * @param Request $request
+     *
+     */
+    public function indexByPatientAction(Request $request)
+    {
+        $repository = $this->get('accard.repository.patient');
+        $patientId = $request->get('patient');
+
+        if (!$patientId || !$patient = $repository->find($request->get('patient'))) {
+            throw $this->createNotFoundException(sprintf('The patient with id="%s" does not exist.', $patientId));
+        }
+
+        $parameters = $this->config->getParameters();
+        $parameters['criteria']['patient'] = $patient->getId();
+        $this->config->setParameters($parameters);
+
+        return $this->indexAction($request);
+    }
+
+    /**
      * Code group action.
      *
      * @param Request $request
