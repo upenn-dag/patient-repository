@@ -40,16 +40,16 @@ class DefaultOptionsData extends AccardFixture
         ->persist();
 
         $fm->createoption('gender', 'Gender')
-            ->addOptionValue('male', '')
-            ->addOptionValue('female', '')
-            ->addOptionValue('unknown', '')
+            ->addOptionValue('Male')
+            ->addOptionValue('Female')
+            ->addOptionValue('Unknown')
         ->persist();
 
         $fm->createOption('race', 'Race')
-            ->addOptionValue('caucasian', '')
-            ->addOptionValue('asian', '')
-            ->addOptionValue('african-american', '')
-            ->addOptionValue('latin', '')
+            ->addOptionValue('Caucasian')
+            ->addOptionValue('Asian')
+            ->addOptionValue('African-American')
+            ->addOptionValue('Latin')
         ->persist();
 
         $fm->objectManager->flush();
