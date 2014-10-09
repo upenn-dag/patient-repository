@@ -33,3 +33,142 @@
         </div>
     </form>
 {% endblock %}
+
+{% block page_javascripts %}
+    {# Surgery activity prototype javascript #}
+    <script type="text/javascript">
+        var formClass = Accard.get('form');
+        var manager = new formClass('form');
+
+    {% if prototype == 'surgery' %}
+        var siteOtherValue = $('[data-field-name="surgery-site"]').first().find('option').last().val();
+        var inOrOutHouseValue = $('[data-field-name="surgery-in-or-out-house"]').first().find('option').last().val();
+
+        manager
+            .behavior($('[data-field-name="surgery-site"]'), {
+                target: '#surgery-site-other-hider',
+                condition: ['equal', siteOtherValue],
+                action: 'show'
+            })
+            .behavior($('[data-field-name="surgery-in-or-out-house"]'), {
+                target: '#surgery-in-or-out-other-hider',
+                condition: ['equal', inOrOutHouseValue],
+                action: 'show'
+            })
+        .bindAll();
+
+    {% elseif prototype == 'pathology' %}
+
+        var pathBodyValue = $('[data-field-name="path-body"]').first().find('option').last().val();
+        var pathHistologicValue = $('[data-field-name="path-histologic-type"]').first().find('option').last().val();
+        var chestWallValue = $('[data-field-name="path-chest-wall-margin"]').first().find('option').eq(1).val();
+        var attachedTissueValue = $('[data-field-name="path-other-attached-tissue-margin"]').first().find('option').eq(1).val();
+        var pathFindingsValue = $('[data-field-name="path-additional-pathological-findings"]').first().find('option').last().val();
+
+        manager
+            .behavior($('[data-field-name="path-body"]'), {
+                target: '#path-body-other-hider',
+                condition: ['equal', pathBodyValue],
+                action: 'show'
+            })
+            .behavior($('[data-field-name="path-histologic-type"]'), {
+                target: '#path-histologic-type-other-hider',
+                condition: ['equal', pathHistologicValue],
+                action: 'show'
+            })
+            .behavior($('[data-field-name="path-chest-wall-margin"]'), {
+                target: '#path-chest-wall-margin-site-hider',
+                condition: ['equal', chestWallValue],
+                action: 'show'
+            })
+            .behavior($('[data-field-name="path-other-attached-tissue-margin"]'), {
+                target: '#path-other-attached-tissue-margin-site-hider',
+                condition: ['equal', attachedTissueValue],
+                action: 'show'
+            })
+            .behavior($('[data-field-name="path-additional-pathological-findings"]'), {
+                target: '#path-additional-pathological-findings-other-hider',
+                condition: ['equal', pathFindingsValue],
+                action: 'show'
+            })
+        .bindAll();
+
+    {% elseif prototype == 'interventional-pulmonary' %}
+
+        var ipMalignantIndicationValue = $('[data-field-name="ip-malignant-indictation"]').first().find('option').last().val();
+        var ipProcedureBrochscopicValue = $('[data-field-name="ip-procedure"]').first().find('option').eq(1).val();
+        var ipAbliationTechniquePolarValue = $('[data-field-name="ip-abliation-technique-polar"]').first().find('option').eq(1).val();
+        var ipDilationPolarValue = $('[data-field-name="ip-dilation-polar"]').first().find('option').eq(1).val();
+
+        var ipProcedurePuleralValue = $('[data-field-name="ip-procedure"]').first().find('option').last().val();
+        var ipProcedureMaglignantEffusionValue = $('[data-field-name="ip-malignant-effusion-confirmed-polar"]').first().find('option').eq(1).val();
+
+        manager
+            .behavior($('[data-field-name="ip-malignant-indictation"]'), {
+                target: '#ip-malignant-indictation-other-hider',
+                condition: ['equal', ipMalignantIndicationValue],
+                action: 'show'
+            })
+            .behavior($('[data-field-name="ip-procedure"]'), {
+                target: '#ip-procedure-brochscopic-hider',
+                condition: ['equal', ipProcedureBrochscopicValue],
+                action: 'show'
+            })
+            .behavior($('[data-field-name="ip-abliation-technique-polar"]'), {
+                target: '#ip-abliation-technique-hider',
+                condition: ['equal', ipAbliationTechniquePolarValue],
+                action: 'show'
+            })
+            .behavior($('[data-field-name="ip-dilation-polar"]'), {
+                target: '#ip-dilation-hider',
+                condition: ['equal', ipDilationPolarValue],
+                action: 'show'
+            })
+
+
+            .behavior($('[data-field-name="ip-procedure"]'), {
+                target: '#ip-procedure-puleral-hider',
+                condition: ['equal', ipProcedurePuleralValue],
+                action: 'show'
+            })
+            .behavior($('[data-field-name="ip-malignant-effusion-confirmed-polar"]'), {
+                target: '#ip-malignant-effusion-confirmed-primary-tumor-hider',
+                condition: ['equal', ipProcedureMaglignantEffusionValue],
+                action: 'show'
+            })
+        .bindAll();
+
+    {% elseif prototype == 'interventional-radiology' %}
+
+        var irIndicationForProcedureValue = $('[data-field-name="ir-indication-for-procedure"]').first().find('option').last().val();
+        var irProcedureAblationValue = $('[data-field-name="ir-procedure"]').first().find('option').eq(1).val();
+        var irProcedureChemoValue = $('[data-field-name="ir-procedure"]').first().find('option').eq(2).val();
+        var irProcedureRadioValue = $('[data-field-name="ir-procedure"]').first().find('option').eq(3).val();
+        var irChemoRadioComplicationsValue = $('[data-field-name="ir-chemo-radio-complications"]').first().find('option').last().val();
+
+        manager
+            .behavior($('[data-field-name="ir-indication-for-procedure"]'), {
+                target: '#ir-indication-for-procedure-other-hider',
+                condition: ['equal', irIndicationForProcedureValue],
+                action: 'show'
+            })
+            .behavior($('[data-field-name="ir-procedure"]'), {
+                target: '#ir-procedure-ablation-hider',
+                condition: ['equal', irProcedureAblationValue],
+                action: 'show'
+            })
+            .behavior($('[data-field-name="ir-procedure"]'), {
+                target: '#ir-chemo-radio-complications-hider',
+                condition: ['regexp', new RegExp(irProcedureRadioValue+'|'+irProcedureChemoValue)],
+                action: 'show'
+            })
+            .behavior($('[data-field-name="ir-chemo-radio-complications"]'), {
+                target: '#ir-chemo-radio-complications-other-hider',
+                condition: ['equal', irChemoRadioComplicationsValue],
+                action: 'show'
+            })
+        .bindAll();
+
+    {% endif %}
+    </script>
+{% endblock %}
