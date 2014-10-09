@@ -11,7 +11,7 @@
 
 {% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import create %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import pagination, page_title %}
-{% from 'AccardWebBundle:Frontend/Attribute:macros.html.twig' import list %}
+{% from 'AccardWebBundle:Frontend/Attribute:macros.html.twig' import list, attributes_menu %}
 
 {% set designBtn = null %}
 
@@ -26,7 +26,7 @@
         ]
     )}}
 
-    {{attributes_menu()}}
+    {{ attributes_menu() }}
     
     {{ list(attributes) }}
     {{ pagination(attributes) }}    
