@@ -12,6 +12,7 @@ parameters:
     accard.fixture.manager.class: Accard\Bundle\CoreBundle\DataFixtures\FixtureManager
     accard.fixture.option_builder.class: Accard\Bundle\CoreBundle\DataFixtures\OptionBuilder
     accard.fixture.option_value_builder.class: Accard\Bundle\CoreBundle\DataFixtures\OptionValueBuilder
+    doctrine.oracle.session_listener.class: Accard\Bundle\ResourceBundle\EventListener\OracleSessionInit
 
 services:
 
@@ -32,4 +33,12 @@ services:
         class: %accard.fixture.option_value_builder.class%
         calls:
             - [setOptionValueClass, ["%accard.model.optionvalue.class"]]
+
+    doctrine.oracle.default_session_listener:
+        class: %doctrine.oracle.session_listener.class%
+        tags: [{ name: doctrine.event_listener, event: postConnect }]
+
+    doctrine.oracle.accard_session_listener:
+        class: %doctrine.oracle.session_listener.class%
+        tags: [{ name: doctrine.event_listener, event: postConnect, connection: accard }]
 
