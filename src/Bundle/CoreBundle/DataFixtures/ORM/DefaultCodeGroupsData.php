@@ -11,6 +11,7 @@
 namespace Accard\Bundle\DiagnosisBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Accard\Component\Diagnosis\Model\CodeGroup;
 
@@ -19,7 +20,7 @@ use Accard\Component\Diagnosis\Model\CodeGroup;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class DefaultCodeGroupsData extends AbstractFixture
+class DefaultCodeGroupsData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -38,9 +39,23 @@ class DefaultCodeGroupsData extends AbstractFixture
         $preExistingConditions->setName('pre-existing-conditions');
         $preExistingConditions->setPresentation('Pre-Existing Conditions');
 
+        $icd9 = new CodeGroup();
+        $icd9->setName('icd9');
+        $icd9->setPresentation('ICD-9');
+        $this->addReference('icd9', $icd9);
+
         $manager->persist($main);
         $manager->persist($preExistingConditions);
         $manager->persist($familyCancers);
+        $manager->persist($icd9);
         $manager->flush();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getOrder()
+    {
+        return 1; // the order in which fixtures will be loaded
     }
 }
