@@ -57,3 +57,14 @@
     {{ 'accard.alert.disabled_area'|trans({'%area%': area}) }}
 </div>
 {% endmacro %}
+
+{% macro no_javascript(text, heading=true) %}
+<noscript class="noscript">
+    <div class="alert alert-warning noscript">
+        {% if heading -%}
+            <h4 class="alert-heading">{{ 'accard.alert.warning'|trans }}</h4>
+        {% endif %}
+        {{ text|default('accard.alert.no_javascript'|trans) }}
+    </div>
+</noscript>
+{% endmacro %}

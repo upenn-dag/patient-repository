@@ -39,6 +39,7 @@ accard:
         construction_area: The %area% area is currently under construction. A future release has been planned to create this page for you.
         disabled: Area Disabled!
         disabled_area: The %area% area has been disabled. You may visit the repository designer to allow this to be accessed by application users.
+        no_javascript: Javascript has been disabled. Some features of this page may not work as intended.
     menu:
         backend:
             dashboard: Dashboard

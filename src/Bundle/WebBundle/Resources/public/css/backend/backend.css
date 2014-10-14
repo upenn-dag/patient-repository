@@ -13,6 +13,10 @@ body {
     }
 }
 
+html.js .noscript {
+    display: none;
+}
+
 /* Wrappers */
 
 /* ------------------------------- */
