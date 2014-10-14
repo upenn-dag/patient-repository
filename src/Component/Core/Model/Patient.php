@@ -265,7 +265,7 @@ class Patient extends BasePatient implements PatientInterface, ImportSubjectInte
     public function addPhase(PatientPhaseInstanceInterface $phase)
     {
         if (!$this->hasPhase($phase)) {
-            $phase->setPatient($this);
+            $phase->setTarget($this);
             $this->phases->add($phase);
         }
 
@@ -279,7 +279,7 @@ class Patient extends BasePatient implements PatientInterface, ImportSubjectInte
     {
         if ($this->hasPhase($phase)) {
             $this->phases->removeElement($phase);
-            $phase->setPatient(null);
+            $phase->setTarget(null);
         }
     }
 }

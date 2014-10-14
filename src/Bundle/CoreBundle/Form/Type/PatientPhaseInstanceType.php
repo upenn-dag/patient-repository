@@ -40,9 +40,11 @@ class PatientPhaseInstanceType extends AbstractType
      * Constructor.
      *
      * @param string $dataClass
+     * @param string $phaseDataClass
+     * @param string $targetDataClass
      * @param array $validationGroups
      */
-    public function __construct($dataClass, array $validationGroups)
+    public function __construct($dataClass, $phaseDataClass, $targetDataClass, array $validationGroups)
     {
         $this->dataClass = $dataClass;
         $this->phaseDataClass = $phaseDataClass;
@@ -61,12 +63,15 @@ class PatientPhaseInstanceType extends AbstractType
         		'property' => 'presentation',
         		'label' => 'accard.patient_phase_instance.form.phase',
         	))
-        	->add('target', 'entity', array(
+        ;
+
+        if ($options['use_target']) {
+        	$builder->add('target', 'entity', array(
         		'class' => $this->targetDataClass,
         		'property' => 'fullName',
         		'label' => 'accard.patient_phase_instance.form.target',
-        	))
-        ;
+        	));
+        }
     }
 
     /**

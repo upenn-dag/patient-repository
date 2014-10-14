@@ -47,10 +47,12 @@ class PatientSettingsSchema implements SchemaInterface
             ->setDefaults(array_merge(array(
                 'enabled' => true,
                 'import_enabled' => true,
+                'collect_phases' => true,
             ), $this->defaults))
             ->setAllowedValues(array(
                 'enabled' => array(true, false, '1', '0'),
                 'import_enabled' => array(true, false, '1', '0'),
+                'collect_phases' => array(true, false, '1', '0'),
             ))
         ;
     }
@@ -68,6 +70,10 @@ class PatientSettingsSchema implements SchemaInterface
             ))
             ->add('import_enabled', 'checkbox', array(
                 'label' => 'accard.form.settings.patient.import_enabled',
+                'required' => false,
+            ))
+            ->add('collect_phases', 'checkbox', array(
+                'label' => 'accard.form.settings.patient.collect_phases',
                 'required' => false,
             ))
         ;

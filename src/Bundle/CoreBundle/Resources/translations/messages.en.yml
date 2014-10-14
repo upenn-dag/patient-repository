@@ -70,6 +70,7 @@ accard:
             patient:
                 enabled: Enable patient repository
                 import_enabled: Enable patient repository import
+                collect_phases: Collect phases in patient forms
             diagnosis:
                 enabled: Enable diagnosis repository
                 import_enabled: Enable diagnosis repository import

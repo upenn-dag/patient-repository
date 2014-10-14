@@ -34,6 +34,27 @@
     {{ form_widget(field) }}
 {% endmacro %}
 
+{% macro phase_form(phase) %}
+{% spaceless %}
+
+    <div class="row">
+        <div class="col-md-4">
+            {{ form_widget(phase.phase) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_widget(phase.startDate) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_widget(phase.endDate, {
+                'widget_addon_append': { icon: 'calendar' }
+            }) }}
+        </div>
+    </div>
+    <hr>
+
+{% endspaceless %}
+{% endmacro %}
+
 {% from _self import render_field %}
 {% include 'AccardWebBundle:Frontend/Patient:formTabs.html.twig' %}
 
@@ -70,4 +91,15 @@
             </div>
         </div>
     </div>
+    {% if accard_setting('patient.collect_phases') %}
+    <div class="tab-pane fade" id="patient-phases">
+        <div class="row">
+            <div id="phases" data-prototype="{{ _self.phase_form(form.phases.vars.prototype)|e }}">
+            {% for phase in form.phases %}
+                {{ _self.phase_form(phase) }}
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
 </div>

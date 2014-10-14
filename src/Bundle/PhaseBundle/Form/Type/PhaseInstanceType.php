@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the
  * LICENSE file that was distributed with this source code.
  */
-namespace Accard\Bundle\CoreBundle\Form\Type;
+namespace Accard\Bundle\PhaseBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -33,6 +33,7 @@ class PhaseInstanceType extends AbstractType
                 ))
                 ->add('endDate', 'date', array(
                     'label' => 'accard.phase_instance.form.end_date',
+                    'required' => false,
                 ))
             ;
         }

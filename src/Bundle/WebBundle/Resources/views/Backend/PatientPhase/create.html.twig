@@ -28,3 +28,21 @@
         </div>
     </form>
 {% endblock %}
+
+{% block page_javascripts %}
+
+<script type="text/javascript">
+    var former = Accard.get("form");
+    var manager = new former($('form'));
+
+    manager
+        .behavior('presentation', {
+            target: 'label',
+            condition: 'changed',
+            action: 'slug',
+            event: 'keyup'
+        })
+        .bindAll();
+</script>
+
+{% endblock %}

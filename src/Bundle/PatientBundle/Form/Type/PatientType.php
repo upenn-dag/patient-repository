@@ -116,6 +116,17 @@ class PatientType extends AbstractType
                 new DefaultPatientFieldListener($builder->getFormFactory(), $this->patientBuilder)
             )
         ;
+
+        if ($options['use_phases']) {
+            $builder->add('phases', 'collection', array(
+                'required'     => false,
+                'type'         => 'accard_patient_phase_instance',
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'options'      => array('use_target' => false)
+            ));
+        }
     }
 
     /**
@@ -126,7 +137,8 @@ class PatientType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'data_class' => $this->dataClass,
-                'validation_groups' => $this->validationGroups
+                'validation_groups' => $this->validationGroups,
+                'use_phases' => true,
             ))
         ;
     }

@@ -12,6 +12,9 @@ accard:
             presentation: Presentation
             order: Order
         action:
+            add: Add Phase
+            remove: Remove Phase
+            end: End Phase
             create: Create Phase
             manage: Manage Phases
             design: Design Phase

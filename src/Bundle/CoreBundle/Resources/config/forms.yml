@@ -31,7 +31,7 @@ services:
         class: %accard.form.type.accard_patient_phase_instance.class%
         arguments:
             - %accard.model.patient_phase_instance.class%
-            - $accard.model.patient_phase.class%
+            - %accard.model.patient_phase.class%
             - %accard.model.patient.class%
             - %accard.validation_group.patient_phase_instance%
         tags:

@@ -11,6 +11,7 @@ accard:
     create: Create
     decline: Decline
     edit: Edit
+    end: End
     update: Update
     delete: Delete
     design: Design
