@@ -6,12 +6,15 @@
 {# file that was distributed with this source code. #}
 
 {% extends 'AccardWebBundle:Backend:layout.html.twig' %}
+
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import no_javascript %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
 {% from 'AccardWebBundle:Common/Macros:actions.html.twig' import update %}
 
 {% block content %}
     {{ page_title('accard.interface.backend.titles.update_patient_field'|trans) }}
 
+    {{ no_javascript() }}
     {{ form_errors(form) }}
 
     <form action="{{ path('accard_backend_patient_field_update', { id: patient_field.id }) }}" method="post" {{ form_enctype(form) }}>
@@ -22,5 +25,23 @@
             </div>
         </div>
     </form>
+
+{% endblock %}
+
+{% block page_javascripts %}
+
+<script type="text/javascript">
+    var former = Accard.get("form");
+    var manager = new former($('form'));
+
+    manager
+        .behavior('presentation', {
+            target: 'name',
+            condition: 'changed',
+            action: 'slug',
+            event: 'keyup'
+        })
+        .bindAll();
+</script>
 
 {% endblock %}

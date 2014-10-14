@@ -7,6 +7,7 @@
 
 {% extends 'AccardWebBundle:Backend:layout.html.twig' %}
 
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import no_javascript %}
 {% from 'AccardWebBundle:Common/Macros:actions.html.twig' import create %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
 
@@ -15,6 +16,7 @@
 
     {{ page_title('accard.activity_prototype.action.create'|trans) }}
 
+    {{ no_javascript() }}
     {{ form_errors(form) }}
 
     <form action="{{ path('accard_backend_activity_prototype_create') }}" method="post" {{ form_enctype(form) }}>
@@ -40,7 +42,8 @@
         .behavior('presentation', {
             target: 'name',
             condition: 'changed',
-            action: 'slug'
+            action: 'slug',
+            event: 'keyup'
         })
         .collection("#accard-prototype-fields", {
           adder: $("#accard-prototype-field-adder")

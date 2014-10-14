@@ -7,12 +7,14 @@
 
 {% extends 'AccardWebBundle:Backend:layout.html.twig' %}
 
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import no_javascript %}
 {% from 'AccardWebBundle:Common/Macros:actions.html.twig' import update %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
 
 {% block content %}
     {{ page_title('accard.interface.backend.titles.update_option'|trans({ '%option%': option })) }}
 
+    {{ no_javascript() }}
     {{ form_errors(form) }}
     
     <form action="{{ path('accard_backend_option_update', { id: option.id }) }}" method="post" {{ form_enctype(form) }}>
@@ -38,7 +40,8 @@
         .behavior('presentation', {
             target: 'name',
             condition: 'changed',
-            action: 'slug'
+            action: 'slug',
+            event: 'keyup'
         })
         .bindAll();
 </script>
