@@ -12,10 +12,10 @@ accard_backend:
     resource: @AccardWebBundle/Resources/config/routing/backend/main.yml
     prefix: /administration
 
-#accard_api:
-#    type: rest
-#    resource: @AccardWebBundle/Resources/config/routing/api/main.yml
-#    prefix: /api
+accard_api:
+    type: rest
+    resource: @AccardWebBundle/Resources/config/routing/api/main.yml
+    prefix: /api
 
 accard_partial:
     resource: @AccardWebBundle/Resources/config/routing/partial/main.yml

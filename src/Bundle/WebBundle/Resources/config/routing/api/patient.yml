@@ -5,3 +5,15 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
+accard_api_patient_diagnoses:
+    pattern: /{patient}/diagnoses
+    methods: [GET]
+    requirements: { patient: \d+ }
+    defaults:
+        _controller: accard.controller.diagnosis:indexAction
+        _accard:
+            template: AccardWebBundle:Frontend/Diagnosis:index.html.twig
+            sortable: true
+            paginate: false
+            criteria:
+                patient: $patient

@@ -47,11 +47,13 @@ fos_rest:
         default_engine: twig
     routing_loader:
         default_format: json
+    serializer:
+        serialize_null: true
 
 jms_serializer:
     metadata:
         auto_detection: false
         directories:
             core:
-                namespace_prefix: Accard\\
-                path: @AccardCoreBundle/Resources/config/serializer
+                namespace_prefix: Accard\Component
+                path: @AccardCoreBundle/Resources/serializer

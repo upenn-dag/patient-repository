@@ -6,5 +6,7 @@
 # file that was distributed with this source code.
 
 Accard\Component\Core\Model\Diagnosis:
-	exclusion_policy: ALL
-	
+    exclusion_policy: ALL
+    xml_root_name: diagnosis
+    read_only: true
+    access_type: public_method

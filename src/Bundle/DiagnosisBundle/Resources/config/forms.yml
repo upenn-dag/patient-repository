@@ -8,6 +8,7 @@
 parameters:
 
     accard.form.type.diagnosis.class: Accard\Bundle\DiagnosisBundle\Form\Type\DiagnosisType
+    accard.form.type.diagnosis_choice.class: Accard\Bundle\DiagnosisBundle\Form\Type\DiagnosisChoiceType
     accard.form.type.diagnosis_code.class: Accard\Bundle\DiagnosisBundle\Form\Type\CodeType
     accard.form.type.diagnosis_code_group.class: Accard\Bundle\DiagnosisBundle\Form\Type\CodeGroupType
 
@@ -23,6 +24,13 @@ services:
             - @accard.option.provider
         tags:
             - { name: form.type, alias: accard_diagnosis }
+
+    accard.form.type.diagnosis_choice:
+        class: %accard.form.type.diagnosis_choice.class%
+        arguments:
+            - %accard.model.diagnosis.class%
+            - @accard.repository.diagnosis
+        tags: [{ name: form.type, alias: accard_diagnosis_choice }]
 
     accard.form.type.diagnosis_code:
         class: %accard.form.type.diagnosis_code.class%

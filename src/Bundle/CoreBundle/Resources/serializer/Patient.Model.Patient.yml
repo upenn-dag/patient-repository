@@ -6,5 +6,5 @@
 # file that was distributed with this source code.
 
 Accard\Component\Core\Model\Patient:
-	exclusion_policy: ALL
-	
+    exclusion_policy: ALL
+    

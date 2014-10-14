@@ -72,13 +72,8 @@ class ActivityTypeExtension extends AbstractTypeExtension
 
         if ($options['use_diagnosis']) {
             $builder
-                ->add('diagnosis', 'entity', array(
-                    'label' => 'accard.diagnosis.entity_name',
-                    'class' => $this->diagnosisClass,
-                    'property' => 'canonical',
-                    'query_builder' => $this->diagnosisRepository->getQueryBuilder(),
-                ))
-                ->addEventSubscriber(new PatientDiagnosesListener)
+                ->add('diagnosis', 'accard_diagnosis_choice')
+                ->addEventSubscriber(new PatientDiagnosesListener($this->diagnosisRepository))
             ;
         }
     }

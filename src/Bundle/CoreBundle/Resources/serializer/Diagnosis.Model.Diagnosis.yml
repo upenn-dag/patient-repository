@@ -1,0 +1,64 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+Accard\Component\Diagnosis\Model\Diagnosis:
+    exclusion_policy: ALL
+    xml_root_name: diagnosis
+    read_only: true
+    accessor_order: custom
+    custom_accessor_order: [id, canonical, parent, primary, code, startDate, endDate, ongoing]
+    properties:
+        id:
+            expose: true
+            type: integer
+            serialized_name: id
+            since_version: 1.0
+            groups: [api, limited]
+        parent:
+            expose: true
+            type: id
+            serialized_name: parent
+            since_version: 1.0
+            groups: [api, limited]
+        primary:
+            expose: true
+            type: id
+            serialized_name: primary
+            since_version: 1.0
+            groups: [api, limited]
+        code:
+            expose: true
+            type: Accard\Component\Diagnosis\Model\Code
+            serialized_name: code
+            since_version: 1.0
+            max_depth: 1
+            groups: [api]
+        startDate:
+            expose: true
+            type: DateTime
+            serialized_name: start_date
+            since_version: 1.0
+            groups: [api, limited]
+        endDate:
+            expose: true
+            type: DateTime
+            serialized_name: end_date
+            since_version: 1.0
+            groups: [api, limited]
+    virtual_properties:
+        getCanonical:
+            expose: true
+            type: string
+            serialized_name: canonical
+            since_version: 1.0
+            groups: [api]
+        isOngoing:
+            expose: true
+            type: boolean
+            serialized_name: ongoing
+            since_version: 1.0
+            groups: [api]

@@ -5,20 +5,6 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
-# THIS ROUTE IS TEMPORARY UNTIL WE HAVE AN API...
-# IT IS USED BY THE TYPEAHEAD PATIENT CHOICE FORM TYPE
-# accard_patient_typeahead:
-#     pattern: typeahead.{_format}
-#     methods: [GET]
-#     requirements:
-#         _format: json|xml
-#     defaults: 
-#         _controller: accard.controller.patient:indexAction
-#         _format: json
-#         _accard:
-#             sortable: false
-#             paginate: false
-
 accard_frontend_patient_index:
     pattern: /
     methods: [GET]

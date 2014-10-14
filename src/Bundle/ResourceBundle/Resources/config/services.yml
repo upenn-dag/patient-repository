@@ -17,6 +17,7 @@ parameters:
     accard.import.record_resolver.class: Accard\Bundle\ResourceBundle\Import\RecordResolver
     accard.import.runner.class: Accard\Bundle\ResourceBundle\Import\Runner
     accard.import.event_subscriber.class: Accard\Bundle\ResourceBundle\EventListener\ImporterEventSubscriber
+    jms_serializer.identifier_handler.class: Accard\Bundle\ResourceBundle\Serializer\IdentifierHandler
 
 services:
     accard.controller.configuration_factory:
@@ -68,6 +69,10 @@ services:
     accard.import.event.post_import:
         class: %accard.import.event_subscriber.class%
         tags: [{ name: kernel.event_subscriber }]
+
+    jms_serializer.identifier_handler:
+        class: %jms_serializer.identifier_handler.class%
+        tags: [{ name: jms_serializer.subscribing_handler }]
 
 #    accard.importer.static:
 #        class: Accard\Bundle\ResourceBundle\Import\StaticImporter

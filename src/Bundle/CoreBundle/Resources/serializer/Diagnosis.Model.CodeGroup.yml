@@ -1,0 +1,37 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+Accard\Component\Diagnosis\Model\CodeGroup:
+    exclusion_policy: all
+    xml_root_name: code_group
+    read_only: true
+    properties:
+        id:
+            expose: true
+            type: integer
+            serialized_name: id
+            since_version: 1.0
+            groups: [api, limited]
+        name:
+            expose: true
+            type: string
+            serialized_name: name
+            since_version: 1.0
+            groups: [api, limited]
+        presentation:
+            expose: true
+            type: string
+            serialized_name: presentation
+            since_version: 1.0
+            groups: [api, limited]
+        codes:
+            expose: true
+            type: id
+            serialized_name: codes
+            since_version: 1.0
+            max_depth: 1
+            groups: [api]

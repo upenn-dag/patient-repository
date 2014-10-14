@@ -135,7 +135,7 @@ class DiagnosisType extends AbstractType
             ->setDefaults(array(
                 'data_class' => $this->dataClass,
                 'validation_groups' => $this->validationGroups,
-                'code_group' => 'icd9',
+                'code_group' => 'main',
                 'show_end_date' => true,
             ))
         ;

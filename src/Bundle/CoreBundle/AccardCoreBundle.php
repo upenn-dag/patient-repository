@@ -33,6 +33,7 @@ class AccardCoreBundle extends Bundle
             'Accard\Component\Core\Model\PatientPhaseInterface' => 'accard.model.patient_phase.class',
             'Accard\Component\Core\Model\PatientPhaseInstanceInterface' => 'accard.model.patient_phase_instance.class',
             'Accard\Component\Core\Model\DiagnosisPhaseInterface' => 'accard.model.diagnosis_phase.class',
+            'Accard\Component\Core\Model\DiagnosisPhaseInstanceInterface' => 'accard.model.diagnosis_phase_instance.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('accard_core', $interfaces));

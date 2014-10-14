@@ -43,7 +43,29 @@
 {% block page_javascripts %}
 <script type="text/javascript">
     $('#accard_activity_patient').on('change', function(event) {
-        var patientId = event.added.id;
+        var field = $('#accard_activity_diagnosis');
+        field.find('option').remove();
+
+        if (!event.added.id) {            
+            return;
+        }
+
+        var urlClass = window.Accard.get('url');
+        var url = new urlClass('{{ path('accard_api_patient_diagnoses', { patient: 99999 }) }}')
+            .popSegment()
+            .popSegment()
+            .appendSegment(event.added.id)
+            .appendSegment('diagnoses')
+            .toString();
+
+        field.prop('readonly', true);
+
+        $.getJSON(url, function(diagnoses) {
+            $(diagnoses).each(function(index, diagnosis) {
+                field.append($('<option value="'+diagnosis.id+'">'+diagnosis.canonical+'</option>'));
+            })
+            field.prop('readonly', false);
+        })
     });
 </script>
 {% endblock %}
