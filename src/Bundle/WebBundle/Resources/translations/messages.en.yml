@@ -87,6 +87,7 @@ accard:
             patient:
                 base: Base Fields
                 custom: Custom
+                phases: Phases
     patient:
         form:
             select_patient: Select a patient
