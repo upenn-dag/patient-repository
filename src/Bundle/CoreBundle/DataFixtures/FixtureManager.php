@@ -357,4 +357,15 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
     {
         return new DateTime();
     }
+
+    /**
+     * Create a fixture exception.
+     *
+     * @param string $message
+     * @return FixtureException
+     */
+    public function createFixtureException($message)
+    {
+        return new FixtureException($message);
+    }
 }
