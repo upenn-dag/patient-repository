@@ -18,7 +18,7 @@ services:
             - %accard.model.behavior.class%
             - %accard.validation_group.behavior%
             - @accard.builder.behavior
-            - @accard.option.provider
+            - @accard.provider.option
         tags:
             - { name: form.type, alias: accard_behavior }
 
@@ -28,7 +28,7 @@ services:
             - %accard.model.alcohol_behavior.class%
             - %accard.validation_group.behavior%
             - @accard.builder.behavior
-            - @accard.option.provider
+            - @accard.provider.option
         tags:
             - { name: form.type, alias: accard_alcohol_behavior }
 
@@ -38,7 +38,7 @@ services:
             - %accard.model.smoking_behavior.class%
             - %accard.validation_group.behavior%
             - @accard.builder.behavior
-            - @accard.option.provider
+            - @accard.provider.option
         tags:
             - { name: form.type, alias: accard_smoking_behavior }
 
@@ -48,7 +48,7 @@ services:
             - %accard.model.illicit_drug_behavior.class%
             - %accard.validation_group.behavior%
             - @accard.builder.behavior
-            - @accard.option.provider
+            - @accard.provider.option
         tags:
             - { name: form.type, alias: accard_illicit_drug_behavior }
 
@@ -58,7 +58,7 @@ services:
             - %accard.model.occupation_behavior.class%
             - %accard.validation_group.behavior%
             - @accard.builder.behavior
-            - @accard.option.provider
+            - @accard.provider.option
         tags:
             - { name: form.type, alias: accard_occupation_behavior }
 
@@ -68,7 +68,7 @@ services:
             - %accard.model.education_behavior.class%
             - %accard.validation_group.behavior%
             - @accard.builder.behavior
-            - @accard.option.provider
+            - @accard.provider.option
         tags:
             - { name: form.type, alias: accard_education_behavior }
 

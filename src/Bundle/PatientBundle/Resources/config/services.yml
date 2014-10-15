@@ -19,7 +19,7 @@ services:
             - %accard.model.patient.class%
             - %accard.validation_group.patient%
             - @accard.builder.patient
-            - @accard.option.provider
+            - @accard.provider.option
         tags: [{ name: form.type, alias: accard_patient }]
 
     accard.form.type.patient_choice:

@@ -21,11 +21,36 @@ use Accard\Component\Option\Exception\OptionNotFoundException;
 interface OptionProviderInterface
 {
     /**
+     * Test for presence of option.
+     *
+     * @param integer $optionId
+     * @return boolean
+     */
+    public function hasOption($optionId);
+
+    /**
      * Get option.
+     *
+     * @param integer $optionId
+     * @return OptionInterface|null
+     * @throws OptionNotFoundException When option can not be located.
+     */
+    public function getOption($optionId);
+
+    /**
+     * Test for presence of option by name.
+     *
+     * @param integer $optionId
+     * @return boolean
+     */
+    public function hasOptionByName($optionName);
+
+    /**
+     * Get option by name.
      *
      * @param string $optionName
      * @return OptionInterface|null
      * @throws OptionNotFoundException When option can not be located.
      */
-    public function getOption($optionName);
+    public function getOptionByName($optionName);
 }

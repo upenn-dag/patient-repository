@@ -25,42 +25,42 @@ class FieldBuilder
 {
     /**
      * Field
-     * 
+     *
      * @var Field
      */
     private $field;
 
     /**
      * Subject
-     * 
+     *
      * @var string
      */
     private $subject;
 
     /**
      * Fixture manager
-     * 
+     *
      * @var FixtureManager
      */
     private $fixtureManager;
 
     /**
      * Context
-     * 
+     *
      * @var PrototypeBuilder
      */
     private $context;
 
     /**
      * Option
-     * 
+     *
      * @var Option
      */
     private $option;
 
     /**
      * is persisted already
-     * 
+     *
      * @var boolean
      */
     private $persisted = false;
@@ -79,7 +79,7 @@ class FieldBuilder
 
     /**
      * Get field.
-     * 
+     *
      * @return Field
      */
     public function getField()
@@ -89,7 +89,7 @@ class FieldBuilder
 
     /**
      * Get model class
-     * 
+     *
      * @return string
      */
     public function getModelClass()
@@ -101,7 +101,7 @@ class FieldBuilder
 
     /**
      * Set name.
-     * 
+     *
      * @param string $name
      * @return FieldBuilder
      */
@@ -112,10 +112,10 @@ class FieldBuilder
 
         return $this;
     }
-    
+
     /**
      * Set presentation.
-     * 
+     *
      * @param string $presentation
      * @return FieldBuilder
      */
@@ -129,7 +129,7 @@ class FieldBuilder
 
     /**
      * Set type.
-     * 
+     *
      * @param string $type
      * @return FieldBuilder
      */
@@ -148,7 +148,7 @@ class FieldBuilder
 
     /**
      * Has option.
-     * 
+     *
      * @param string $name
      * @return null | Option
      */
@@ -159,7 +159,7 @@ class FieldBuilder
 
     /**
      * Get option.
-     * 
+     *
      * @return Option
      */
     public function getOption()
@@ -169,7 +169,7 @@ class FieldBuilder
 
     /**
      * Set option.
-     * 
+     *
      * @param OptionBuilder $optionBuilder
      * @return FieldBuilder
      */
@@ -183,7 +183,7 @@ class FieldBuilder
 
     /**
      * Create option.
-     * 
+     *
      * @param string $name
      * @param string $presentation
      * @return OptionBuilder
@@ -193,7 +193,7 @@ class FieldBuilder
         $this->assertNotPersisted();
 
         $subjectAppended = $this->context ? $this->subject.'_prototype' : $this->subject;
-        $optionBuilder = new OptionBuilder($this->fixtureManager, $this);
+        $optionBuilder = new OptionBuilder($this->fixtureManager, null, $this);
         $this->option = $optionBuilder;
 
         return $optionBuilder
@@ -204,7 +204,7 @@ class FieldBuilder
 
     /**
      * Get option from storage or create it.
-     * 
+     *
      * @param string $subject
      * @param string $name
      * @param string|null $presentation
@@ -221,7 +221,7 @@ class FieldBuilder
 
     /**
      * End and persist.
-     * 
+     *
      * @return PrototypeBuilder | FieldBuilder
      */
     public function end()
@@ -245,7 +245,7 @@ class FieldBuilder
 
     /**
      * Assert field's not already persisted
-     * 
+     *
      * @return boolean
      */
     private function assertNotPersisted()

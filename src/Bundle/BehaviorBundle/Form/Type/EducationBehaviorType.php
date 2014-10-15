@@ -27,7 +27,7 @@ class EducationBehaviorType extends BehaviorType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $levelOption = $this->optionProvider->getOption('level');
+        $levelOption = $this->optionProvider->getOptionByName('level');
 
         $builder
             ->add('level', new OptionValueChoiceType($levelOption), array(

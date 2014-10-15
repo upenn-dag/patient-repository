@@ -11,7 +11,6 @@
 namespace Accard\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Accard\Bundle\CoreBundle\DataFixtures\AccardFixture;
-use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * Default options (required on install).
@@ -21,36 +20,44 @@ use Doctrine\Common\Persistence\ObjectManager;
 class DefaultOptionsData extends AccardFixture
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function doLoad()
     {
         $fm = $this->fixtureManager;
 
-        $fm->createOption('industry', 'Industry')
-            ->addOptionValue('Accounting')
-            ->addOptionValue('Information Systems')
-            ->addOptionValue('Nursing')
-        ->persist();
+        if (!$fm->hasOption('industry')) {
+            $fm->createOption('industry', 'Industry')
+                ->addOptionValue('Accounting')
+                ->addOptionValue('Information Systems')
+                ->addOptionValue('Nursing')
+            ->persist();
+        }
 
-        $fm->createOption('education-level', 'Education level')
-            ->addOptionValue('High school')
-            ->addOptionValue('Undergraduate University')
-            ->addOptionValue('Graduate University')
-        ->persist();
+        if (!$fm->hasOption('education-level')) {
+            $fm->createOption('education-level', 'Education level')
+                ->addOptionValue('High school')
+                ->addOptionValue('Undergraduate University')
+                ->addOptionValue('Graduate University')
+            ->persist();
+        }
 
-        $fm->createoption('gender', 'Gender')
-            ->addOptionValue('Male')
-            ->addOptionValue('Female')
-            ->addOptionValue('Unknown')
-        ->persist();
+        if (!$fm->hasOption('gender')) {
+            $fm->createoption('gender', 'Gender')
+                ->addOptionValue('Male')
+                ->addOptionValue('Female')
+                ->addOptionValue('Unknown')
+            ->persist();
+        }
 
-        $fm->createOption('race', 'Race')
-            ->addOptionValue('Caucasian')
-            ->addOptionValue('Asian')
-            ->addOptionValue('African-American')
-            ->addOptionValue('Latin')
-        ->persist();
+        if (!$fm->hasOption('race')) {
+            $fm->createOption('race', 'Race')
+                ->addOptionValue('Caucasian')
+                ->addOptionValue('Asian')
+                ->addOptionValue('African-American')
+                ->addOptionValue('Latin')
+            ->persist();
+        }
 
         $fm->objectManager->flush();
     }

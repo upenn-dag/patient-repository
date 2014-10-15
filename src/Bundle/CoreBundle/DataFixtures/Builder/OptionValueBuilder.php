@@ -12,47 +12,57 @@ namespace Accard\Bundle\CoreBundle\DataFixtures\Builder;
 
 use Accard\Bundle\CoreBundle\DataFixtures\FixtureManagerInterface;
 use Accard\Component\Option\Model\OptionValue;
+use Accard\Component\Option\Model\OptionValueInterface;
 
 /**
  * Option Value Builder fixture.
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
+ * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
 class OptionValueBuilder
 {
     /**
      * OptionValue
-     * 
+     *
      * @var OptionValue
      */
     private $optionValue;
 
     /**
      * FixtureManager
-     * 
+     *
      * @var FixtureManager
      */
     private $fixtureManager;
 
     /**
      * Context
-     * 
+     *
      * @var OptionBuilder
      */
     private $context;
 
 
+    /**
+     * Constructor.
+     *
+     * @param FixtureManagerInterface $fixtureManager
+     * @param OptionBuilder $optionBuilder
+     * @param OptionValueInterface $optionValue
+     */
     public function __construct(FixtureManagerInterface $fixtureManager,
-                                OptionBuilder $optionBuilder)
+                                OptionBuilder $optionBuilder,
+                                OptionValueInterface $optionValue = null)
     {
         $this->fixtureManager = $fixtureManager;
         $this->context = $optionBuilder;
-        $this->optionValue = new OptionValue;
+        $this->optionValue = $optionValue ?: new OptionValue;
     }
 
     /**
      * Get option value.
-     * 
+     *
      * @return OptionValue
      */
     public function getOptionValue()
@@ -62,7 +72,7 @@ class OptionValueBuilder
 
     /**
      * Set option value.
-     * 
+     *
      * @param OptionValue $value
      */
     public function setValue($value)
@@ -74,7 +84,7 @@ class OptionValueBuilder
 
     /**
      * End.
-     * 
+     *
      * @return OptionBuilder | OptionValueBuilder
      */
     public function end()

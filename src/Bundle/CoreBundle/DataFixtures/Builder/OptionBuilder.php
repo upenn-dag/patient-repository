@@ -10,64 +10,83 @@
  */
 namespace Accard\Bundle\CoreBundle\DataFixtures\Builder;
 
+use ArrayAccess;
+use Iterator;
+use Countable;
+use BadMethodCallException;
+use InvalidArgumentException;
 use Accard\Bundle\CoreBundle\DataFixtures\FixtureManagerInterface;
 use Accard\Component\Core\Exception\RedundantPersistanceException;
 use Accard\Component\Option\Model\Option;
+use Accard\Component\Option\Model\OptionInterface;
+use Accard\Component\Option\Model\OptionValueInterface;
 
 /**
  * Option Builder fixture.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class OptionBuilder
+class OptionBuilder implements ArrayAccess, Iterator, Countable
 {
     /**
      * Option
-     * 
+     *
      * @var Option
      */
     private $option;
 
     /**
      * Fixture manager
-     * 
+     *
      * @var FixtureManager
      */
     private $fixtureManager;
 
     /**
      * Context
-     * 
+     *
      * @var FieldBuilder
      */
     private $context;
 
     /**
      * Option Values
-     * 
+     *
      * @var array
      */
     private $optionValues = array();
 
     /**
      * Is persisted
-     * 
+     *
      * @var boolean
      */
     private $persisted = false;
 
 
+    /**
+     * Constructor.
+     *
+     * @param FixtureManagerInterface $fixtureManager
+     * @param OptionInterface $option
+     * @param FieldBuilder $fieldBuilder
+     */
     public function __construct(FixtureManagerInterface $fixtureManager,
+                                OptionInterface $option = null,
                                 FieldBuilder $fieldBuilder = null)
     {
         $this->fixtureManager = $fixtureManager;
         $this->context = $fieldBuilder;
-        $this->option = new Option;
+        $this->option = $option ?: new Option;
+
+        foreach ($this->option->getValues() as $optionValue) {
+            $this->createBareOptionValue($optionValue);
+        }
     }
 
     /**
      * Set name.
-     * 
+     *
      * @param string $name
      * @return OptionBuilder
      */
@@ -82,7 +101,7 @@ class OptionBuilder
 
     /**
      * Set presentation.
-     * 
+     *
      * @param string $presentation
      * @return OptionBuilder
      */
@@ -97,7 +116,7 @@ class OptionBuilder
 
     /**
      * Get option
-     * 
+     *
      * @return Option
      */
     public function getOption()
@@ -105,34 +124,33 @@ class OptionBuilder
         return $this->option;
     }
 
-
     /**
-     * Has option value.
-     * 
-     * @param OptionValue $optionValue
+     * Test for presence of option value by name.
+     *
+     * @param string $optionName
      * @return boolean
      */
-    public function hasOptionValue($optionValue)
+    public function hasOptionValue($optionName)
     {
-        return isset($this->values[$optionValue]);
+        return isset($this->optionValues[$optionName]);
     }
 
     /**
-     * Get option value.
-     * 
-     * @param OptionValue $optionValue
+     * Get option value by name.
+     *
+     * @param string $optionName
      * @return OptionBuilder
      */
-    public function getOptionValue($optionValue)
+    public function getOptionValue($optionName)
     {
-        if ($this->hasOptionValue($optionValue)) {
-            return $this->optionValues[$optionValue];
+        if ($this->hasOptionValue($optionName)) {
+            return $this->optionValues[$optionName];
         }
     }
 
     /**
      * Create Option Value
-     * 
+     *
      * @param OptionValue $value
      * @return OptionBuilder
      */
@@ -147,8 +165,21 @@ class OptionBuilder
     }
 
     /**
+     * Create a bare option value.
+     *
+     * @param OptionValueInterface $optionValue
+     */
+    private function createBareOptionValue($optionValue)
+    {
+        $this->assertNotPersisted();
+
+        $builder = new OptionValueBuilder($this->fixtureManager, $this, $optionValue);
+        $this->optionValues[$optionValue->getValue()] = $builder;
+    }
+
+    /**
      * Get option from storage or create it.
-     * 
+     *
      * @param string $subject
      * @param string $name
      * @param string|null $presentation
@@ -165,7 +196,7 @@ class OptionBuilder
 
     /**
      * Add option value
-     * 
+     *
      * @param OptionValue $value
      * @return OptionBuilder
      */
@@ -180,7 +211,7 @@ class OptionBuilder
 
     /**
      * Remove OptionValue
-     * 
+     *
      * @param OptionValue $value
      * @return OptionBuilder
      */
@@ -197,7 +228,7 @@ class OptionBuilder
 
     /**
      * End and associate Option Values
-     * 
+     *
      * @return FieldBuilder | OptionBuilder
      */
     public function end()
@@ -213,7 +244,7 @@ class OptionBuilder
 
     /**
      * Persist
-     * 
+     *
      * @return OptionBuilder
      */
     public function persist()
@@ -224,6 +255,94 @@ class OptionBuilder
         $this->persisted = true;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetExists($offset)
+    {
+        return $this->hasOptionValue($offset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetGet($offset)
+    {
+        if (!$this->hasOptionValue($offset)) {
+            throw new InvalidArgumentException(sprintf(
+                'Option value "%s" is not included in the %s option.',
+                $offset,
+                $this->option->getName()
+            ));
+        }
+
+        return $this->optionValues[$offset];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetSet($offset, $value)
+    {
+        throw new BadMethodCallException('Setting option values directly is not supported.');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetUnset($offset)
+    {
+        throw new BadMethodCallException('Un-setting option values directly is not supported.');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function current()
+    {
+        return current($this->optionValues);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function key()
+    {
+        return key($this->optionValues);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function next()
+    {
+        return next($this->optionValues);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rewind()
+    {
+        return reset($this->optionValues);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function valid()
+    {
+        return null !== key($this->optionValues);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function count()
+    {
+        return count($this->optionValues);
     }
 
     /**

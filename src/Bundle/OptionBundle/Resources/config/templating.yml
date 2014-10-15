@@ -13,6 +13,6 @@ services:
 
     accard.templating.helper.option:
         class: %accard.templating.helper.option.class%
-        arguments: ['@accard.option.provider']
+        arguments: ['@accard.provider.option']
         tags:
             - { name: templating.helper, alias: accard_option }

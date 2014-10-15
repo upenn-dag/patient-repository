@@ -7,13 +7,13 @@
 
 parameters:
 
-    accard.option.provider.class: Accard\Bundle\OptionBundle\Provider\RepositoryOptionProvider
+    accard.provider.option.class: Accard\Bundle\OptionBundle\Provider\OptionProvider
     accard.form.type.option_choice.class: Accard\Bundle\OptionBundle\Form\Type\OptionChoiceType
 
 services:
 
-    accard.option.provider:
-        class: %accard.option.provider.class%
+    accard.provider.option:
+        class: %accard.provider.option.class%
         arguments:
             - @accard.repository.option
 

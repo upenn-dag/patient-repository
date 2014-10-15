@@ -58,7 +58,7 @@ class OptionExtension extends Twig_Extension
      */
     public function getOption($optionName)
     {
-        return $this->helper->getOption($optionName);
+        return $this->helper->getOptionByName($optionName);
     }
 
     /**

@@ -16,11 +16,11 @@ use Accard\Component\Option\Repository\OptionRepositoryInterface;
 use Accard\Component\Option\Exception\OptionNotFoundException;
 
 /**
- * Repository backed option provider.
+ * Option provider.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class RepositoryOptionProvider implements OptionProviderInterface
+class OptionProvider implements OptionProviderInterface
 {
     /**
      * Option repository.
@@ -43,7 +43,49 @@ class RepositoryOptionProvider implements OptionProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getOption($optionName)
+    public function hasOption($optionId)
+    {
+        try {
+            $this->getOption($optionId);
+
+            return true;
+        } catch (OptionNotFoundException $e) {}
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOption($optionId)
+    {
+        $option = $this->optionRepository->find($optionId);
+
+        if (!$option instanceof OptionInterface) {
+            throw new OptionNotFoundException($optionName);
+        }
+
+        return $option;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasOptionByName($optionName)
+    {
+        try {
+            $this->getOptionByName($optionName);
+
+            return true;
+        } catch (OptionNotFoundException $e) {}
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOptionByName($optionName)
     {
         $option = $this->optionRepository->findOneByName(array('name' => $optionName));
 

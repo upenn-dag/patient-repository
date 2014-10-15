@@ -10,6 +10,11 @@
  */
 namespace Accard\Bundle\CoreBundle\DataFixtures\Builder;
 
+use ArrayAccess;
+use Iterator;
+use Countable;
+use BadMethodCallException;
+use InvalidArgumentException;
 use Accard\Bundle\CoreBundle\DataFixtures\FixtureManagerInterface;
 use Accard\Component\Prototype\Model\PrototypeInterface;
 
@@ -19,11 +24,11 @@ use Accard\Component\Prototype\Model\PrototypeInterface;
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-class PrototypeBuilder
+class PrototypeBuilder implements ArrayAccess, Iterator, Countable
 {
     /**
      * Fixture manager.
-     * 
+     *
      * @var FixtureManagerInterface
      */
     private $fixtureManager;
@@ -37,28 +42,28 @@ class PrototypeBuilder
 
     /**
      * Prototype model.
-     * 
+     *
      * @var PrototypeInterface
      */
     private $prototype;
 
     /**
      * Context.
-     * 
+     *
      * @var this
      */
     private $context;
 
     /**
      * Fields array
-     * 
+     *
      * @var array
      */
     private $fields = array();
 
     /**
      * Is already persisted
-     * 
+     *
      * @var boolean
      */
     private $persisted = false;
@@ -66,7 +71,7 @@ class PrototypeBuilder
 
     /**
      * Constructor.
-     * 
+     *
      * @param string $subject
      * @param FixtureManagerInterface $fixtureManager
      * @param PrototypeInterface|null $prototype
@@ -84,7 +89,7 @@ class PrototypeBuilder
 
     /**
      * Set prototype name.
-     * 
+     *
      * @param string $name
      * @return PrototypeBuilder
      */
@@ -99,7 +104,7 @@ class PrototypeBuilder
 
     /**
      * Set prototype presentation.
-     * 
+     *
      * @param string $presentation
      * @return PrototypeBuilder
      */
@@ -114,7 +119,7 @@ class PrototypeBuilder
 
     /**
      * Has field.
-     * 
+     *
      * @param string $name
      */
     public function hasField($name)
@@ -124,7 +129,7 @@ class PrototypeBuilder
 
     /**
      * Get field.
-     * 
+     *
      * @param string $name
      * @return Field
      */
@@ -137,7 +142,7 @@ class PrototypeBuilder
 
     /**
      * Create field.
-     * 
+     *
      * @param string $name
      * @param string $presentation
      * @param string $type
@@ -158,7 +163,7 @@ class PrototypeBuilder
 
     /**
      * Add field.
-     * 
+     *
      * @param $name
      * @param $presentation
      * @param $type
@@ -175,7 +180,7 @@ class PrototypeBuilder
 
     /**
      * Remove field.
-     * 
+     *
      * @param string $name
      * @return PrototypeBuilder
      */
@@ -192,7 +197,7 @@ class PrototypeBuilder
 
     /**
      * Get prototype.
-     * 
+     *
      * @return Prototype
      */
     public function getPrototype()
@@ -202,7 +207,7 @@ class PrototypeBuilder
 
     /**
      * Get model class.
-     * 
+     *
      * @return string
      */
     public function getModelClass()
@@ -214,7 +219,7 @@ class PrototypeBuilder
 
     /**
      * Get field model class.
-     * 
+     *
      * @return string
      */
     public function getFieldModelClass()
@@ -225,7 +230,7 @@ class PrototypeBuilder
     }
 
     /**
-     * 
+     *
      * @return string
      */
     public function getFieldValueModelClass()
@@ -236,8 +241,8 @@ class PrototypeBuilder
     }
 
     /**
-     * End and persist
-     * 
+     * End.
+     *
      * @return PrototypeBuilder
      */
     public function end()
@@ -252,7 +257,7 @@ class PrototypeBuilder
     }
 
     /**
-     * Persist prototype
+     * Persist.
      */
     public function persist()
     {
@@ -262,8 +267,96 @@ class PrototypeBuilder
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function offsetExists($offset)
+    {
+        return $this->hasField($offset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetGet($offset)
+    {
+        if (!$this->hasField($offset)) {
+            throw new InvalidArgumentException(sprintf(
+                'Field "%s" is not included in the %s prototype.',
+                $offset,
+                $this->prototype->getName()
+            ));
+        }
+
+        return $this->fields[$offset];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetSet($offset, $value)
+    {
+        throw new BadMethodCallException('Setting field values directly is not supported.');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetUnset($offset)
+    {
+        throw new BadMethodCallException('Un-setting field values directly is not supported.');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function current()
+    {
+        return current($this->fields);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function key()
+    {
+        return key($this->fields);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function next()
+    {
+        return next($this->fields);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rewind()
+    {
+        return reset($this->fields);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function valid()
+    {
+        return null !== key($this->fields);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function count()
+    {
+        return count($this->fields);
+    }
+
+    /**
      * Assert not persisted
-     * 
+     *
      * @return boolean
      */
     private function assertNotPersisted()

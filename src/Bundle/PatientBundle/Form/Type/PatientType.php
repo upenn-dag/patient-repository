@@ -79,8 +79,8 @@ class PatientType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $genderOption = $this->optionProvider->getOption('gender');
-        $raceOption = $this->optionProvider->getOption('race');
+        $genderOption = $this->optionProvider->getOptionByName('gender');
+        $raceOption = $this->optionProvider->getOptionByName('race');
 
         $builder
             ->add('mrn', 'text', array(

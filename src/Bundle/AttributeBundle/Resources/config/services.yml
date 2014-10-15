@@ -18,7 +18,7 @@ services:
             - %accard.model.attribute.class%
             - %accard.validation_group.attribute%
             - @accard.builder.attribute
-            - @accard.option.provider
+            - @accard.provider.option
         tags:
             - { name: form.type, alias: accard_attribute }
 
@@ -28,7 +28,7 @@ services:
             - %accard.model.family_cancer_attribute.class%
             - %accard.validation_group.attribute%
             - @accard.builder.attribute
-            - @accard.option.provider
+            - @accard.provider.option
         calls:
             - ['setTranslator', ['@translator']]
             - ['setCodeProvider', ['@accard.provider.diagnosis_code']]

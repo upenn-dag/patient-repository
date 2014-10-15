@@ -10,7 +10,10 @@
  */
 namespace Accard\Bundle\CoreBundle\DataFixtures;
 
+use DateTime;
 use Accard\Component\Prototype\Exception\PrototypeNotFoundException;
+use Accard\Bundle\CoreBundle\Exception\FixtureException;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -276,5 +279,82 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
     public function resolveClassFromParameter($parameter)
     {
         return $this->container->getParameter($parameter);
+    }
+
+    /**
+     * Test for presence of an entity.
+     *
+     * @param string $entityAlias
+     * @param mixed $criteria
+     * @return boolean
+     */
+    public function hasEntity($entityAlias, $criteria)
+    {
+        return (boolean) $this->getEntity($entityAlias, $criteria);
+    }
+
+    /**
+     * Get entity.
+     *
+     * @param string $entityAlias
+     * @param mixed $criteria
+     * @return object|null
+     */
+    public function getEntity($entityAlias, $criteria)
+    {
+        try {
+            $repository = $this->container->get(sprintf('accard.repository.%s', $entityAlias));
+
+            if (is_array($criteria)) {
+                $result = $repository->findOneBy($criteria);
+            } elseif (is_numeric($criteria)) {
+                $result = $repository->find($criteria);
+            }
+
+            return (boolean) $result;
+
+        } catch (ServiceNotFoundException $e) {
+            throw new FixtureException(sprintf('Entity repository "%s" could not be located by the fixture manager.', $entityAlias));
+        }
+
+        return false;
+    }
+
+    /**
+     * Reusable simple entity builder creator.
+     *
+     * @param string $entityAlias
+     */
+    public function createEntity($entityAlias)
+    {
+        try {
+            $repository = $this->container->get(sprintf('accard.repository.%s', $entityAlias));
+            $entity = $repository->createNew();
+        } catch (ServiceNotFoundException $e) {
+            throw new FixtureException(sprintf('Entity repository "%s" could not be located by the fixture manager.', $entityAlias));
+        }
+
+        return new Builder\EntityBuilder($entityAlias, $entity, $this);
+    }
+
+    /**
+     * Convenient date utility.
+     *
+     * @param mixed $constructorArg
+     * @return DateTime
+     */
+    public function date($constructorArg = null)
+    {
+        return new DateTime($constructorArg);
+    }
+
+    /**
+     * Convenient date utility (today).
+     *
+     * @return DateTime
+     */
+    public function today()
+    {
+        return new DateTime();
     }
 }

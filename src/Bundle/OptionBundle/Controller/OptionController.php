@@ -34,7 +34,7 @@ class OptionController extends ResourceController
             throw new RouteNotFoundException('Option redirect route must be configured with _accard.redirect parameter.');
         }
 
-        $option = $this->getOptionProvider()->getOption($name);
+        $option = $this->getOptionProvider()->getOptionByName($name);
 
         return $this->redirect($this->generateUrl($route, array('id' => $option->getId())));
     }
@@ -46,6 +46,6 @@ class OptionController extends ResourceController
      */
     private function getOptionProvider()
     {
-        return $this->get('accard.option.provider');
+        return $this->get('accard.provider.option');
     }
 }

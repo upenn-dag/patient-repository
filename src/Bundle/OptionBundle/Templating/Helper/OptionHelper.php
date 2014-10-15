@@ -48,7 +48,7 @@ class OptionHelper extends Helper
      */
     public function getOption($optionName)
     {
-        return $this->optionProvider->getOption($optionName);
+        return $this->optionProvider->getOptionByName($optionName);
     }
 
     /**

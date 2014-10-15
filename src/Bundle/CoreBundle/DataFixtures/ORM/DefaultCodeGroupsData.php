@@ -10,52 +10,50 @@
  */
 namespace Accard\Bundle\DiagnosisBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
-use Accard\Component\Diagnosis\Model\CodeGroup;
+use Accard\Bundle\CoreBundle\DataFixtures\AccardFixture;
 
 /**
  * Default Accard code groups (required to start application).
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class DefaultCodeGroupsData extends AbstractFixture implements OrderedFixtureInterface
+class DefaultCodeGroupsData extends AccardFixture
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
-    public function load(ObjectManager $manager)
+    public function doLoad()
     {
-        $main = new CodeGroup();
-        $main->setName('main');
-        $main->setPresentation('Main');
+        $fm = $this->fixtureManager;
 
-        $familyCancers = new CodeGroup();
-        $familyCancers->setName('family-cancers');
-        $familyCancers->setPresentation('Family Cancers');
+        if (!$fm->hasEntity('diagnosis_code_group', array('name' => 'main'))) {
+            $fm->createEntity('diagnosis_code_group')
+                ->setName('main')
+                ->setPresentation('Main')
+            ->persist();
+        }
 
-        $preExistingConditions = new CodeGroup();
-        $preExistingConditions->setName('pre-existing-conditions');
-        $preExistingConditions->setPresentation('Pre-Existing Conditions');
+        if (!$fm->hasEntity('diagnosis_code_group', array('name' => 'family-cancers'))) {
+            $fm->createEntity('diagnosis_code_group')
+                ->setName('family-cancers')
+                ->setPresentation('Family Cancers')
+            ->persist();
+        }
 
-        $icd9 = new CodeGroup();
-        $icd9->setName('icd9');
-        $icd9->setPresentation('ICD-9');
-        $this->addReference('icd9', $icd9);
+        if (!$fm->hasEntity('diagnosis_code_group', array('name' => 'pre-existing-conditions'))) {
+            $fm->createEntity('diagnosis_code_group')
+                ->setName('pre-existing-conditions')
+                ->setPresentation('Pre-Existing Conditions')
+            ->persist();
+        }
 
-        $manager->persist($main);
-        $manager->persist($preExistingConditions);
-        $manager->persist($familyCancers);
-        $manager->persist($icd9);
-        $manager->flush();
-    }
+        if (!$fm->hasEntity('diagnosis_code_group', array('name' => 'icd9'))) {
+            $fm->createEntity('diagnosis_code_group')
+                ->setName('icd9')
+                ->setPresentation('ICD-9')
+            ->persist();
+        }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 1; // the order in which fixtures will be loaded
+        $fm->objectManager->flush();
     }
 }

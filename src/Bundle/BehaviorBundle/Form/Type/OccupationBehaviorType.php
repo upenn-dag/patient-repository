@@ -27,7 +27,7 @@ class OccupationBehaviorType extends BehaviorType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $industryOption = $this->optionProvider->getOption('industry');
+        $industryOption = $this->optionProvider->getOptionByName('industry');
 
         $builder
             ->add('industry', new OptionValueChoiceType($industryOption), array(
