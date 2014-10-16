@@ -41,10 +41,11 @@ class FrontendController extends Controller
     public function filterAction($type, $template)
     {
         $request = $this->get('request_stack')->getMasterRequest();
+        $criteria = $request->query->get('criteria', array());
         $form = $this
             ->get('form.factory')
-            ->createNamed('criteria', $type, $request->query->get('criteria', array()), array('csrf_protection' => false));
+            ->createNamed('criteria', $type, $criteria, array('csrf_protection' => false));
 
-        return $this->render($template, array('form' => $form->createView()));
+        return $this->render($template, array('form' => $form->createView(), 'filter_criteria' => $criteria));
     }
 }

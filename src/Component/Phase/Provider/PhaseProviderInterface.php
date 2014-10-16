@@ -44,10 +44,18 @@ interface PhaseProviderInterface
     public function getPhases();
 
     /**
-     * Get phase by label.
+     * Get phase by id.
      *
-     * @param string $label
+     * @param integer $id
      * @return PhaseInterface
      */
-    public function getPhase($label);
+    public function getPhase($id);
+
+    /**
+     * Get phase by name.
+     *
+     * @param string $name
+     * @return PhaseInterface
+     */
+    public function getPhaseByName($name);
 }

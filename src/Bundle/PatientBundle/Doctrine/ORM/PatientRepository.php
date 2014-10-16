@@ -47,11 +47,19 @@ class PatientRepository extends EntityRepository
      */
     public function createFilterPaginator(array $criteria = null, array $sorting = null)
     {
-        $queryBuilder = parent::getCollectionQueryBuilder()
-            ->select('patient');
+        $queryBuilder = parent::getCollectionQueryBuilder()->select('patient');
 
         if (!is_array($criteria)) {
             $criteria = array();
+        }
+
+        if (!empty($criteria['phase'])) {
+            $queryBuilder
+                ->join('patient.phases', 'phase_instance')
+                ->join('phase_instance.phase', 'phase')
+                ->andWhere('phase.id = :phaseId')
+                ->andWhere('phase_instance.endDate IS NULL')
+                ->setParameter('phaseId', (int) $criteria['phase']);
         }
 
         if (!empty($criteria['mrn'])) {

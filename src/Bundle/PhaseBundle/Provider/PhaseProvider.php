@@ -79,7 +79,19 @@ class PhaseProvider implements PhaseProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getPhase($label)
+    public function getPhase($id)
+    {
+        if (!$phase = $this->phaseRepository->find($id)) {
+            throw new PhaseNotFoundException($id);
+        }
+
+        return $phase;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPhaseByName($name)
     {
         if (!$phase = $this->phaseRepository->findOneByLabel($label)) {
             throw new PhaseNotFoundException($label);

@@ -13,6 +13,8 @@ namespace Accard\Bundle\CoreBundle\Form\Type\Filter;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -23,6 +25,19 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class PatientFilterType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
+        /* =
+         * I have absolutely NO IDEA why I need to do this. For some reason, the
+         * form is not cascading this value down to the child form so I have to
+         * brute force it in there.
+         */
+        $view->children['phase']->vars['value'] = $view->vars['value']['phase'];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -49,6 +64,10 @@ class PatientFilterType extends AbstractType
                 'attr'     => array(
                     'placeholder' => 'accard.patient.filter.last_name',
                 )
+            ))
+            ->add('phase', 'accard_patient_phase_choice', array(
+                'required' => false,
+                'label'    => 'accard.patient.filter.phase',
             ))
             ->add('deceased', 'checkbox', array(
                 'required'    => false,

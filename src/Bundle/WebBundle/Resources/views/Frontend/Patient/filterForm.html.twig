@@ -1,7 +1,5 @@
 {% form_theme form 'form_div_layout.html.twig' %}
 
-{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import icon %}
-
 {% macro has_data(form) %}
 {% spaceless %}
     {% set has = false %}
@@ -18,11 +16,19 @@
 {% endspaceless %}
 {% endmacro %}
 
+{% macro filter_link(phase, criteria) %}
+    {% set link_criteria = criteria|merge({ phase: phase.label }) %}
+    {{- path('accard_frontend_patient_index_by_phase', link_criteria) -}}
+{% endmacro %}
+
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import icon %}
+{% from _self import has_data, filter_link %}
+
 <div id="patient-filter">
     <a data-toggle="collapse"
        data-parent="#patient-filter"
        href="#patient-filter-collapse"
-       class="{% spaceless %}filter-bar {{ _self.has_data(form) }}{% endspaceless %}">
+       class="{% spaceless %}filter-bar {{ has_data(form) }}{% endspaceless %}">
         <span class="caret"></span>
     </a>
     <div id="patient-filter-collapse" class="collapse">
@@ -30,6 +36,7 @@
             {{ form_widget(form.mrn) }}
             {{ form_widget(form.firstName) }}
             {{ form_widget(form.lastName) }}
+            {{ form_widget(form.phase) }}
             {{ form_widget(form.deceased) }} {{ form_label(form.deceased) }}
             <button type="submit">{{ icon('glyphicon glyphicon-search') }} {{ 'accard.filter'|trans }}</button>
             <a href="{{ path('accard_frontend_patient_index') }}">{{ 'accard.reset'|trans }}</a>

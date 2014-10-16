@@ -47,6 +47,22 @@ class PatientController extends ResourceController
     }
 
     /**
+     * Render patient filter form.
+     *
+     * @return Response
+     */
+    public function filterAction()
+    {
+        $request = $this->get('request_stack')->getMasterRequest();
+        $criteria = $request->query->get('criteria', array());
+
+        return $this->render('AccardWebBundle:Frontend/Patient:filterForm.html.twig', array(
+            'form' => $this->getPatientFilterForm($criteria)->createView(),
+            'filter_criteria' => $criteria,
+        ));
+    }
+
+    /**
      * Import patient index.
      *
      * @param Request $request
@@ -92,6 +108,39 @@ class PatientController extends ResourceController
     private function getPatientSettings()
     {
         return $this->get('accard.settings.manager')->load('patient');
+    }
+
+    /**
+     * Get patient phases.
+     *
+     * @return ArrayCollection|PatientPhaseInterface[]
+     */
+    private function getPatientPhases()
+    {
+        return $this->get('accard.provider.patient_phase')->getPhases();
+    }
+
+    /**
+     * Get patient phase provider.
+     *
+     * @return PhaseProviderInterface
+     */
+    private function getPatientPhaseProvider()
+    {
+        return $this->get('accard.provider.patient_phase');
+    }
+
+    /**
+     * Get patient filter form.
+     *
+     * @param array $criteria
+     * @return FormInterface
+     */
+    private function getPatientFilterForm(array $criteria = array())
+    {
+        return $this
+            ->get('form.factory')
+            ->createNamed('criteria', 'accard_patient_filter', $criteria, array('csrf_protection' => false));
     }
 
     /**
