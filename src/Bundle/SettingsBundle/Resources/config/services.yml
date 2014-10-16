@@ -37,3 +37,4 @@ services:
 
     accard.settings.schema_registry:
         class: %accard.settings.schema_registry.class%
+        arguments: ['@service_container']

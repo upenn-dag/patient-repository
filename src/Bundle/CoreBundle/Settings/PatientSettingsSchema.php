@@ -13,13 +13,15 @@ namespace Accard\Bundle\CoreBundle\Settings;
 use Accard\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Accard\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Patient settings schema.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class PatientSettingsSchema implements SchemaInterface
+class PatientSettingsSchema implements SchemaInterface, ContainerAwareInterface
 {
     /**
      * Default data.
@@ -27,6 +29,14 @@ class PatientSettingsSchema implements SchemaInterface
      * @var array
      */
     protected $defaults;
+
+    /**
+     * Service container.
+     *
+     * @var ContainerInterface
+     */
+    private $container;
+
 
     /**
      * Constructor.
@@ -41,20 +51,44 @@ class PatientSettingsSchema implements SchemaInterface
     /**
      * {@inheritdoc}
      */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function buildSettings(SettingsBuilderInterface $builder)
     {
-        $builder
-            ->setDefaults(array_merge(array(
-                'enabled' => true,
-                'import_enabled' => true,
-                'collect_phases' => true,
-            ), $this->defaults))
-            ->setAllowedValues(array(
-                'enabled' => array(true, false, '1', '0'),
-                'import_enabled' => array(true, false, '1', '0'),
-                'collect_phases' => array(true, false, '1', '0'),
-            ))
-        ;
+        $defaults = array_merge(array(
+            'enabled' => true,
+            'import_enabled' => true,
+            'collect_phases' => true,
+        ), $this->defaults);
+
+        $allowedValues = array(
+            'enabled' => array(true, false, '1', '0'),
+            'import_enabled' => array(true, false, '1', '0'),
+            'collect_phases' => array(true, false, '1', '0'),
+        );
+
+        if ($this->getPDSDefault()) {
+            $defaults['pds_enabled'] = $this->getPDSDefault();
+            $allowedValues['pds_enabled'] = array(true, false, '1', '0');
+        }
+
+        $builder->setDefaults($defaults)->setAllowedValues($allowedValues);
+    }
+
+    /**
+     * Check if PDS is enabled.
+     *
+     * @return boolean
+     */
+    private function getPDSDefault()
+    {
+        return $this->container && $this->container->hasParameter('accard.pds.present');
     }
 
     /**
@@ -77,5 +111,12 @@ class PatientSettingsSchema implements SchemaInterface
                 'required' => false,
             ))
         ;
+
+        if ($this->getPDSDefault()) {
+            $builder->add('pds_enabled', 'checkbox', array(
+                'label' => 'accard.form.settings.patient.pds_enabled',
+                'required' => false,
+            ));
+        }
     }
 }

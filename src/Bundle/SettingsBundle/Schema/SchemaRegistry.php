@@ -13,6 +13,8 @@ namespace Accard\Bundle\SettingsBundle\Schema;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Accard\Bundle\SettingsBundle\Exception\SchemaAccessException;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Basic schema registry.
@@ -28,13 +30,21 @@ class SchemaRegistry implements SchemaRegistryInterface
      */
     protected $schemas;
 
+    /**
+     * Service container.
+     *
+     * @var ContainerInterface
+     */
+    private $container;
+
 
     /**
      * Constructor.
      */
-    public function __construct()
+    public function __construct(ContainerInterface $container = null)
     {
         $this->schemas = new ArrayCollection();
+        $this->container = $container;
     }
 
     /**
@@ -84,6 +94,10 @@ class SchemaRegistry implements SchemaRegistryInterface
     {
         if (!$this->hasSchema($namespace)) {
             throw new SchemaAccessException($namespace);
+        }
+
+        if ($this->container && $this->schemas[$namespace] instanceof ContainerAwareInterface) {
+            $this->schemas[$namespace]->setContainer($this->container);
         }
 
         return $this->schemas[$namespace];
