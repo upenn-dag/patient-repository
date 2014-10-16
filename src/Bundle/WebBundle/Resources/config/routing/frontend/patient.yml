@@ -13,6 +13,9 @@ accard_frontend_patient_index:
         _accard:
             template: AccardWebBundle:Frontend/Patient:index.html.twig
             sortable: true
+            filterable: true
+            method: createFilterPaginator
+            arguments: [$criteria, $sorting]
             paginate: 25
 
 accard_frontend_patient_import:

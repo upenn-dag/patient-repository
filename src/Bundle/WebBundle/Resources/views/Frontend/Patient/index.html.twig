@@ -44,6 +44,8 @@
     {% endblock %}
 
     {% block patient_content %}
+        {% render(controller('AccardWebBundle:Frontend:filter', {'type': 'accard_patient_filter', 'template': 'AccardWebBundle:Frontend/Patient:filterForm.html.twig'})) %}
+        
         {{ list(patients) }}
         {{ pagination(patients) }}
     {% endblock %}

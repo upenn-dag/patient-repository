@@ -12,11 +12,13 @@ accard:
     decline: Decline
     edit: Edit
     end: End
+    filter: Filter
     update: Update
     delete: Delete
     design: Design
     save_changes: Save Changes
     cancel: Cancel
+    reset: Reset
     show: Show
     statistics: Statistics
     settings: Settings

@@ -3,6 +3,7 @@ accard:
         entity_name: Patient
         registered: Registered Patients
         unregistered: Unregistered Patients
+        none_found: No patients found matching your search criteria.
         form:
             mrn: MRN
             mrn_extended: Medical Record Number
@@ -38,7 +39,7 @@ accard:
             count: Collecting %total% patient fields.
             update_gender: Update Gender Options
             update_race: Update Race Options
-    patient_type:
+    patient_field:
         form:
             id: Id
             name: Name

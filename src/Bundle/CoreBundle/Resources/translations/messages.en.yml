@@ -13,6 +13,11 @@ accard:
             attributes: Attributes
             behaviors: Behaviors
             phases: Phases
+        filter:
+            mrn: Patient MRN
+            first_name: First Name
+            last_name: Last Name
+            deceased: Deceased?
     activity:
         form:
             patient: Patient

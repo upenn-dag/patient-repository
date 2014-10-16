@@ -1,0 +1,19 @@
+{% extends 'AccardWebBundle::forms.html.twig' %}
+
+{% block form_row %}
+{% spaceless %}
+    <div class="form-group{% if errors|length > 0 %} has-error{% endif %}">
+        {{ form_label(form, null, {'label_attr': {'class': 'sr-only'}}) }}
+        {{ form_widget(form, criteria|default({})) }}
+        {% for error in errors %}
+            <span class="help-block">
+                {{
+                    error.messagePluralization is null
+                    ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                    : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                }}
+            </span>
+        {% endfor %}
+    </div>
+{% endspaceless %}
+{% endblock form_row %}

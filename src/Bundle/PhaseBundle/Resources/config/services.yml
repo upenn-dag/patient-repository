@@ -8,16 +8,19 @@
 parameters:
 
     accard.form.type.accard_phase.class: Accard\Bundle\PhaseBundle\Form\Type\PhaseType
+    accard.form.type.accard_phase_choice.class: Accard\Bundle\PhaseBundle\Form\Type\PhaseChoiceType
     accard.form.type.accard_phase_instance.class: Accard\Bundle\PhaseBundle\Form\Type\PhaseInstanceType
 
 services:
 
     accard.form.type.accard_phase:
         class: %accard.form.type.accard_phase.class%
-        tags:
-            - { name: form.type, alias: accard_phase }
+        tags: [{ name: form.type, alias: accard_phase }]
+
+    accard.form.type.accard_phase_choice:
+        class: %accard.form.type.accard_phase_choice.class%
+        tags: [{ name: form.type, alias: accard_phase_choice }]
 
     accard.form.type.accard_phase_instance:
         class: %accard.form.type.accard_phase_instance.class%
-        tags:
-            - { name: form.type, alias: accard_phase_instance }
+        tags: [{ name: form.type, alias: accard_phase_instance }]

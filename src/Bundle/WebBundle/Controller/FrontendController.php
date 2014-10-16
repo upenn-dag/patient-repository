@@ -11,11 +11,14 @@
 namespace Accard\Bundle\WebBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Accard\Bundle\ResourceBundle\Import\ResourceInterface;
-use Accard\Bundle\ResourceBundle\Import\StaticImporter;
-use Accard\Bundle\ResourceBundle\Event\ImportEvent;
 
+/**
+ * Base frontend controller.
+ *
+ * @author Frank Bardon Jr. <bardonf@upenn.edu>
+ */
 class FrontendController extends Controller
 {
     /**
@@ -23,8 +26,25 @@ class FrontendController extends Controller
      *
      * @var Response
      */
-    public function mainAction()
+    public function mainAction(Request $request)
     {
         return $this->render('AccardWebBundle:Frontend:main.html.twig');
+    }
+
+    /**
+     * Render filter form.
+     *
+     * @param string $type
+     * @param string $template
+     * @return Response
+     */
+    public function filterAction($type, $template)
+    {
+        $request = $this->get('request_stack')->getMasterRequest();
+        $form = $this
+            ->get('form.factory')
+            ->createNamed('criteria', $type, $request->query->get('criteria', array()), array('csrf_protection' => false));
+
+        return $this->render($template, array('form' => $form->createView()));
     }
 }
