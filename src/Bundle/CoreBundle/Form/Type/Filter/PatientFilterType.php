@@ -35,7 +35,9 @@ class PatientFilterType extends AbstractType
          * form is not cascading this value down to the child form so I have to
          * brute force it in there.
          */
-        $view->children['phase']->vars['value'] = $view->vars['value']['phase'];
+        if (isset($view->vars['value']['phase'])) {
+            $view->children['phase']->vars['value'] = $view->vars['value']['phase'];
+        }
     }
 
     /**

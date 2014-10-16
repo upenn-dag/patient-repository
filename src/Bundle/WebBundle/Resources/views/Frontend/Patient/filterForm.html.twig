@@ -16,11 +16,6 @@
 {% endspaceless %}
 {% endmacro %}
 
-{% macro filter_link(phase, criteria) %}
-    {% set link_criteria = criteria|merge({ phase: phase.label }) %}
-    {{- path('accard_frontend_patient_index_by_phase', link_criteria) -}}
-{% endmacro %}
-
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import icon %}
 {% from _self import has_data, filter_link %}
 
