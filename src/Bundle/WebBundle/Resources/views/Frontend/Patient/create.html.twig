@@ -11,6 +11,9 @@
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
 {% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import generic %}
 
+{% set settings = accard_settings('patient') %}
+{% set pds = settings.pds_enabled is defined and settings.pds_enabled %}
+
 {% block content %}
     {{ page_title('accard.patient.action.create'|trans,
         [
@@ -31,7 +34,8 @@
     </form>
 {% endblock %}
 
-{% block page_javascripts -%}
+{% block page_javascripts -%} {{dump(pds)}}
+    {% if pds %}<script type="text/javascript" src="{{ path('accard_pds_js') }}"></script>{% endif %}
     <script type="text/javascript">
         var formClass = Accard.get('form');
         var manager = new formClass('form');
@@ -54,6 +58,7 @@
         }
 
         manager
+            .plugin("pds", "#pds")
             .collection("#phases", {
                 adder: addPhase,
                 startup: function(collection) {

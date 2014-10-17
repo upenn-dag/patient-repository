@@ -7,6 +7,7 @@
 
 parameters:
 
+    accard_pds.controller.class: Accard\Bundle\PDSBundle\Controller\PDSController
     accard.import.importer.pds_diagnosis.class: Accard\Bundle\PDSBundle\Import\DiagnosisImporter
     accard.import.importer.pds_test.class: Accard\Bundle\PDSBundle\Import\TestImporter
     accard.import.importer.pds_drug.class: Accard\Bundle\PDSBundle\Import\DrugImporter
@@ -15,3 +16,7 @@ services:
 
     accard.connection.pds:
         alias: doctrine.dbal.accard_connection
+
+    accard_pds.controller:
+        class: "%accard_pds.controller.class%"
+        arguments: ["@doctrine.orm.accard_entity_manager"]

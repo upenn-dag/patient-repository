@@ -37,3 +37,7 @@ accard_frontend_import:
 accard_frontend_flow:
     resource: @AccardFlowBundle/Resources/config/routing.yml
     prefix: /flow
+
+accard_frontend_pds:
+    resource: @AccardPDSBundle/Resources/config/routing.yml
+    prefix: /pds

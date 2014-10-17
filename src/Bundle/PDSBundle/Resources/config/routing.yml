@@ -1,0 +1,18 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard_pds_patient:
+    pattern:  /patient/{mrn}
+    defaults: { _controller: AccardPDSBundle:PDS:patient }
+    methods: [GET]
+    requirements:
+        mrn: \d+
+
+accard_pds_js:
+    pattern: /accard-pds.js
+    defaults: { _controller: AccardPDSBundle:PDS:js }
+    methods: [GET]

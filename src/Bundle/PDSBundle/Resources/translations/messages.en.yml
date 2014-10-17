@@ -10,3 +10,5 @@ accard:
         pds_diagnosis: PDS Diagnosis Importer
         pds_test: PDS Test Importer
         pds_drug: PDS Drug Importer
+    message:
+        patient_not_found: Patient could not be located in Penn Data Store

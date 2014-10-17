@@ -15,7 +15,7 @@
 {% endif %}
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-{% if pds %}10{% else %}12{% endif %}">
         <div class="form-group{% if form.mrn.vars.errors|length %} has-error{% endif %}">
             {{ form_widget(form.mrn, {
                 widget_addon_append: { text: 'accard.patient.form.mrn'|trans },
@@ -28,6 +28,13 @@
             {% endif %}
         </div>
     </div>
+    {% if pds %}
+    <div class="col-md-2">
+        <button type="button" class="btn btn-primary" id="pds" data-pds-url="{{ path("accard_pds_patient", { mrn: "000000000" }) }}">
+            {{ icon('glyphicon glyphicon-search') }} Search PDS
+        </button>
+    </div>
+    {% endif %}
 </div>
 
 {% macro render_field(field) %}

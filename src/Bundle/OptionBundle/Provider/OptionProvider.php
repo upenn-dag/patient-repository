@@ -62,7 +62,7 @@ class OptionProvider implements OptionProviderInterface
         $option = $this->optionRepository->find($optionId);
 
         if (!$option instanceof OptionInterface) {
-            throw new OptionNotFoundException($optionName);
+            throw new OptionNotFoundException($optionId);
         }
 
         return $option;
