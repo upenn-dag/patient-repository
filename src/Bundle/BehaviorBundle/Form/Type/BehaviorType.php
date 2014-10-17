@@ -17,7 +17,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Accard\Bundle\OptionBundle\Form\Type\OptionValueChoiceType;
 use Accard\Component\Option\Provider\OptionProviderInterface;
 use Accard\Component\Behavior\Builder\BehaviorBuilderInterface;
-use Accard\Bundle\BehaviorBundle\Form\EventListener\DefaultBehaviorFieldListener;
 
 /**
  * Behavior form type.
@@ -87,9 +86,6 @@ class BehaviorType extends AbstractType
                 'label' => 'accard.behavior.form.end_date',
                 'required' => false,
             ))
-            ->addEventSubscriber(
-                new DefaultBehaviorFieldListener($builder->getFormFactory(), $this->builder)
-            )
         ;
     }
 
