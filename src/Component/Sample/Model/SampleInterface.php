@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Sample\Model;
 
-use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Collection as DoctrineCollection;
 
 /**
  * Basic sample interface.
@@ -27,19 +27,19 @@ interface SampleInterface
     public function getId();
 
     /**
-     * Get parent.
+     * Get source.
      *
-     * @return SampleInterface
+     * @var SourceInterface
      */
-    public function getParent();
+    public function getSource();
 
     /**
-     * Set parent.
+     * Set source.
      *
-     * @param SampleInterface|null $sample
+     * @param SourceInterface $source
      * @return SampleInterface
      */
-    public function setParent(SampleInterface $sample = null);
+    public function setSource(SourceInterface $source = null);
 
     /**
      * Get amount.
@@ -57,69 +57,40 @@ interface SampleInterface
     public function setAmount($amount);
 
     /**
-     * Get amount of parent used.
+     * Get derivatives.
      *
-     * @return SampleInterface
+     * @return DoctrineCollection|SourceInterface[]
      */
-    public function getAmountOfParentUsed();
+    public function getDerivatives();
 
     /**
-     * Set amount of parent used.
+     * Test for presence of derivative.
      *
-     * @param integer|null $amountOfParentUsed
-     * @return SampleInterface
+     * @param SourceInterface $derivation
+     * @return boolean
      */
-    public function setAmountOfParentUsed($amountOfParentUsed = null);
+    public function hasDerivative(SourceInterface $derivation);
 
     /**
-     * Get children.
-     *
-     * @return Collection|SampleInterface[]
-     */
-    public function getChildren();
-
-    /**
-     * Test for presence of a child sample.
-     *
-     * @param SampleInterface $sample
-     * @return SampleInterface
-     */
-    public function hasChild(SampleInterface $sample);
-
-    /**
-     * Add child sample.
-     *
-     * @param SampleInterface $sample
-     * @return SampleInterface
-     */
-    public function addChild(SampleInterface $sample);
-
-    /**
-     * Remove child sample.
-     *
-     * @param SampleInterface $sample
-     * @return SampleInterface
-     */
-    public function removeChild(SampleInterface $sample);
-
-    /**
-     * Get amount of sample remaining.
-     *
-     * @return integer
-     */
-    public function getAmountRemaining();
-
-    /**
-     * Test if sample is a derivative.
+     * Test for presence of any derivatives.
      *
      * @return boolean
      */
-    public function isDerivative();
+    public function hasDerivatives();
 
     /**
-     * Test if a sample is a souce.
+     * Add derivative.
      *
-     * @return boolean
+     * @param SourceInterface $derivation
+     * @return SampleInterface
      */
-    public function isSource();
+    public function addDerivative(SourceInterface $derivative);
+
+    /**
+     * Remove derivative.
+     *
+     * @param SourceInterface $derivation
+     * @return SampleInterface
+     */
+    public function removeDerivative(SourceInterface $derivative);
 }

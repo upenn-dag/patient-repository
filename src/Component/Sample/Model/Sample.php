@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Sample\Model;
 
-use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Collection as DoctrineCollection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class Sample implements SampleInterface
+abstract class Sample implements SampleInterface
 {
     /**
      * Sample id.
@@ -28,13 +28,6 @@ class Sample implements SampleInterface
     protected $id;
 
     /**
-     * Parent sample.
-     *
-     * @var SampleInterface
-     */
-    protected $parent;
-
-    /**
      * Amount.
      *
      * @var integer
@@ -42,18 +35,18 @@ class Sample implements SampleInterface
     protected $amount = 0;
 
     /**
-     * Amount of parent used.
+     * Source.
      *
-     * @var integer|null
+     * @var SourceInterface
      */
-    protected $amountOfParentUsed;
+    protected $source;
 
     /**
-     * Child samples.
+     * Derivatives.
      *
-     * @var Collection|SampleInterface[]
+     * @param DoctrineCollection|DerivativeInterface[]
      */
-    protected $children;
+    protected $derivatives;
 
 
     /**
@@ -61,7 +54,7 @@ class Sample implements SampleInterface
      */
     public function __construct()
     {
-        $this->children = new ArrayCollection;
+        $this->derivatives = new ArrayCollection();
     }
 
     /**
@@ -75,17 +68,17 @@ class Sample implements SampleInterface
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getSource()
     {
-        return $this->parent;
+        return $this->source;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setParent(SampleInterface $parent = null)
+    public function setSource(SourceInterface $source = null)
     {
-        $this->parent = $parent;
+        $this->source = $source;
 
         return $this;
     }
@@ -111,45 +104,34 @@ class Sample implements SampleInterface
     /**
      * {@inheritdoc}
      */
-    public function getAmountOfParentUsed()
+    public function getDerivatives()
     {
-        return $this->amountOfParentUsed;
+        return $this->derivatives;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setAmountOfParentUsed($amountOfParentUsed = null)
+    public function hasDerivative(SourceInterface $derivative)
     {
-        $this->amountOfParentUsed = $amountOfParentUsed;
-
-        return $this;
+        return $this->derivatives->contains($derivative);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getChildren()
+    public function hasDerivatives()
     {
-        return $this->children;
+        return 0 < count($this->derivatives);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasChild(SampleInterface $sample)
+    public function addDerivative(SourceInterface $derivative)
     {
-        return $this->children->contains($sample);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addChild(SampleInterface $sample)
-    {
-        if (!$this->hasChild($sample)) {
-            $sample->setParent($this);
-            $this->children->add($sample);
+        if (!$this->hasDerivative($derivative)) {
+            $this->derivatives->add($derivative);
         }
 
         return $this;
@@ -158,42 +140,12 @@ class Sample implements SampleInterface
     /**
      * {@inheritdoc}
      */
-    public function removeChild(SampleInterface $sample)
+    public function removeDerivative(SourceInterface $derivative)
     {
-        if ($this->hasChild($sample)) {
-            $this->children->removeElement($sample);
-            $sample->setParent(null);
+        if ($this->hasDerivative($derivative)) {
+            $this->derivatives->removeElement($derivative);
         }
 
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAmountRemaining()
-    {
-        $amount = $this->amount;
-        foreach ($this->children as $sample) {
-            $amount -= $sample->getAmount();
-        }
-
-        return $amount;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isDerivative()
-    {
-        return !$this->isSource();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isSource()
-    {
-        return null === $this->parent;
     }
 }

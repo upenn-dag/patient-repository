@@ -32,6 +32,15 @@ accard_activity:
             model: Accard\Component\Core\Model\Activity
             controller: Accard\Bundle\CoreBundle\Controller\ActivityController
 
+accard_sample:
+    classes:
+        sample:
+            model: Accard\Component\Core\Model\Sample
+        whole_blood_sample:
+            model: Accard\Component\Core\Model\WholeBloodSample
+        tissue_sample:
+            model: Accard\Component\Core\Model\TissueSample
+
 accard_behavior:
     classes:
         behavior:

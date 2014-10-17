@@ -1,0 +1,37 @@
+{
+    "name": "accard/sample-bundle",
+    "type": "symfony-bundle",
+    "description": "Accard sample bundle",
+    "keywords": ["sample"],
+    "homepage": "http://accard.med.upenn.edu",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Frank Bardon Jr.",
+            "homepage": "http://frankbardon.com"
+        },
+        {
+            "name": "Database and Applications Group",
+            "homepage": "http://dag.med.upenn.edu"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "accard/resource-bundle":   "dev-develop",
+        "accard/sample":            "dev-develop"
+    },
+    "suggest": {
+        "accard/web-bundle": "Provides the default web interface"
+    },
+    "autoload": {
+        "psr-4": { "Accard\\Bundle\\SampleBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Accard\\Bundle\\SampleBundle\\spec\\": "spec/" }
+    },
+    "repositories": [
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Resource.git" },
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/ResourceBundle.git" },
+    ]
+}

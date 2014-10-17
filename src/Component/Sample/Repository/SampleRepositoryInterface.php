@@ -8,16 +8,15 @@
  * For the full copyright and license information, please view the
  * LICENSE file that was distributed with this source code.
  */
-namespace Accard\Component\Core\Model;
+namespace Accard\Component\Sample\Repository;
 
-use Accard\Component\Sample\Model\Sample as BaseSample;
+use Accard\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * Accard sample model.
+ * Sample repository interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-abstract class Sample extends BaseSample implements SampleInterface
+interface SampleRepositoryInterface extends RepositoryInterface
 {
-    use \Accard\Component\Patient\Model\PatientCollectingTrait;
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * This file is part of the Accard package.
  *
@@ -12,32 +11,13 @@
 namespace Accard\Component\Core\Model;
 
 use Accard\Component\Sample\Model\SampleInterface as BaseSampleInterface;
-use Accard\Component\Resource\Model\BlameableInterface;
-use Accard\Component\Resource\Model\VersionableInterface;
-use Accard\Component\Resource\Model\TimestampableInterface;
+use Accard\Component\Patient\Model\PatientCollectingInterface;
 
 /**
  * Accard sample interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface SampleInterface extends BaseSampleInterface,
-                                  TimestampableInterface,
-                                  BlameableInterface,
-                                  VersionableInterface
+interface SampleInterface extends BaseSampleInterface, PatientCollectingInterface
 {
-    /**
-     * Get activity.
-     *
-     * @return CollectionInterface
-     */
-    public function getCollection();
-
-    /**
-     * Set activity.
-     *
-     * @param CollectionInterface $activity
-     * @return SampleInterface
-     */
-    public function setCollection(CollectionInterface $activity);
 }

@@ -10,14 +10,14 @@
  */
 namespace Accard\Component\Core\Model;
 
-use Accard\Component\Sample\Model\Sample as BaseSample;
+use Accard\Component\Sample\Model\Source as BaseSource;
 
 /**
- * Accard sample model.
+ * Accard source model.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-abstract class Sample extends BaseSample implements SampleInterface
+class Source extends BaseSource implements SourceInterface
 {
     use \Accard\Component\Patient\Model\PatientCollectingTrait;
 }

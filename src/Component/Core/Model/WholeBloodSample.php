@@ -10,14 +10,13 @@
  */
 namespace Accard\Component\Core\Model;
 
-use Accard\Component\Sample\Model\Sample as BaseSample;
+use Accard\Component\Sample\Model\WholeBloodSampleInterface;
 
 /**
- * Accard sample model.
+ * Accard whole blood sample model.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-abstract class Sample extends BaseSample implements SampleInterface
+class WholeBloodSample extends Sample implements WholeBloodSampleInterface
 {
-    use \Accard\Component\Patient\Model\PatientCollectingTrait;
 }
