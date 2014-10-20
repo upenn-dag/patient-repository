@@ -21,13 +21,7 @@
     <strong>Date:</strong>
     {{ form_widget(phase.startDate) }}
 </div>
- <div class="col-sm-4">
-    <div class="detail-hider">
-     <strong>Disease type</strong>
-    {{ form_widget(phase.diseaseType)}}
-    </div>
-   </div>
-</div>
+
 <hr>
 {% endspaceless %}
 {% endmacro %}
@@ -57,8 +51,6 @@
 
     var Former = Accard.get('form');
     var manager = new Former($('form'));
-
-    console.log(manager);
 
     manager
         .collection("#phases", {

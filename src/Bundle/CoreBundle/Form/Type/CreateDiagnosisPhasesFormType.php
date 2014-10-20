@@ -57,8 +57,7 @@ class CreateDiagnosisPhasesFormType extends AbstractType
                 'data_class' => 'Accard\Bundle\CoreBundle\Flow\Data\CreateDiagnosisPhasesData',
                 'patient_class' => null,
                 'diagnosis_class' => null,
-            ))
-        ;
+            ));
     }
 
     /**

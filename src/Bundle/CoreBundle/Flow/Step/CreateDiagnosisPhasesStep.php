@@ -73,7 +73,7 @@ class CreateDiagnosisPhasesStep extends ControllerStep
     public function complete(FlowContextInterface $context)
     {
         
-        return parent::complete($context);
+       return parent::complete($context);
     }
 
     /**
@@ -82,13 +82,13 @@ class CreateDiagnosisPhasesStep extends ControllerStep
      * @param CreateDiagnosisPhasesData|null $model
      * @return FormInterface
      */
-    public function createDiagnosisPhasesForm(CreateDiagnosisPhasesData $model = null)
+     public function createDiagnosisPhasesForm(CreateDiagnosisPhasesData $model = null)
     {
         if (!$model) {
             $model = new CreateDiagnosisPhasesData();
         }
 
-        return $this->createForm(new CreateDiagnosisPhasesFormType(), $model, array(
+        return $this->createForm(new CreateDiagnosisPhasesFormType(), new $model, array(
             'csrf_protection' => false,
             'patient_class' => $this->patientClass,
             'diagnosis_class' => $this->diagnosisClass,

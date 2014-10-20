@@ -8,7 +8,6 @@
 parameters:
     accard.flow.scenario.basic_patient.class: Accard\Bundle\CoreBundle\Flow\Scenario\BasicPatientScenario
     accard.flow.step.create_patient.class: Accard\Bundle\CoreBundle\Flow\Step\CreatePatientStep
-    accard.flow.scenario.create_diagnosis_phases.class: Accard\Bundle\CoreBundle\Flow\Scenario\CreateDiagnosisPhasesScenario
     accard.flow.step.create_diagnosis_phases.class: Accard\Bundle\CoreBundle\Flow\Step\CreateDiagnosisPhasesStep
     accard.flow.step.create_diagnosis.class: Accard\Bundle\CoreBundle\Flow\Step\CreateDiagnosisStep
     accard.flow.step.create_pre_existing_conditions.class : Accard\Bundle\CoreBundle\Flow\Step\CreatePreExistingConditionsStep
@@ -17,18 +16,12 @@ parameters:
     accard.form.extension.accard_behavior.class: Accard\Bundle\CoreBundle\Form\Extension\BehaviorTypeExtension
 
 services:
-    accard.flow.create_diagnosis_phases:
-        class: %accard.flow.scenario.create_diagnosis_phases.class%
-        argument:
-            - "@accard.manager.create_diagnosis_phases"
-        tags:
-            - { name: accard.flow.scenario, alias: create_diagnosis_phases }
     
     accard.flow.step.create_diagnosis_phases:
         class: %accard.flow.step.create_diagnosis_phases.class%
         arguments:
-            - @accard.repository.diagnosis_phase
-            - %accard.model.diagnosis_phase.class%
+            - %accard.model.patient.class%
+            - %accard.model.diagnosis.class%
         tags:
             - { name: accard.flow.step, alias: create_diagnosis_phases }
 
