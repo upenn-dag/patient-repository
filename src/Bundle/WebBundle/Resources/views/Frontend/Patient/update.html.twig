@@ -35,7 +35,7 @@
     <script type="text/javascript">
         var formClass = Accard.get('form');
         var manager = new formClass('form');
-        var addPhase = $('#add-phase');
+        var addPhase = $('#add-phase').hide();
 
         $('a[data-toggle="tab"]').on('shown.bs.tab', function(event) {
             if (event.target.href.indexOf('patient-phase') != -1) {

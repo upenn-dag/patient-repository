@@ -5,11 +5,15 @@
 {# For the full copyright and license information, please view the LICENSE #}
 {# file that was distributed with this source code. #}
 
+{% set add_phases = accard_setting('patient.collect_phases', false) %}
+
+{% if add_phases %}
 <div class="row pull-right">
-    <button id="add-phase" class="btn btn-success" style="display: none;"><i class = 'glyphicon glyphicon-plus'></i>
+    <button id="add-phase" class="btn btn-success"><i class = 'glyphicon glyphicon-plus'></i>
         {{ 'accard.phase.action.add'|trans }}
     </button>
 </div>
+{% endif %}
 
 <ul class="nav nav-tabs grid-tabs" role="tablist">
     <li class="active">
@@ -18,7 +22,7 @@
     <li>
         <a href="#patient-custom" role="tab" data-toggle="tab">{{ 'accard.interface.nav.patient.custom'|trans }}</a>
     </li>
-    {% if accard_setting('patient.collect_phases') %}
+    {% if add_phases %}
     <li>
         <a href="#patient-phases" role="tab" data-toggle="tab">{{ 'accard.interface.nav.patient.phases'|trans }}</a>
     </li>
