@@ -13,6 +13,8 @@ namespace Accard\Bundle\CoreBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Accard\Component\Phase\Model\PhaseTargetInterface;
+use Accard\Component\Core\Model\DiagnosisPhaseInterface;
 
 /**
  * Diagnosis phase instance type.
@@ -29,6 +31,20 @@ class DiagnosisPhaseInstanceType extends AbstractType
     protected $dataClass;
 
     /**
+     * Phase data class.
+     *
+     * @var DiagnosisPhaseInterface
+     */
+    protected $phaseDataClass;
+
+    /**
+     * Phase target data class.
+     *
+     * @var PhaseTargetInterface
+     */
+    protected $targetDataClass;
+
+    /**
      * Validation groups.
      *
      * @var array
@@ -40,9 +56,11 @@ class DiagnosisPhaseInstanceType extends AbstractType
      * Constructor.
      *
      * @param string $dataClass
+     * @param string $phaseDataClass
+     * @param string $targetDataClass
      * @param array $validationGroups
      */
-    public function __construct($dataClass, array $validationGroups)
+    public function __construct($dataClass, $phaseDataClass, $targetDataClass, array $validationGroups)
     {
         $this->dataClass = $dataClass;
         $this->phaseDataClass = $phaseDataClass;

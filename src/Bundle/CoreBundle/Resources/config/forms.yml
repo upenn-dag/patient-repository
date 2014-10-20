@@ -62,7 +62,7 @@ services:
         class: %accard.form.type.accard_diagnosis_phase_instance.class%
         arguments:
             - %accard.model.diagnosis_phase_instance.class%
-            - $accard.model.diagnosis_phase.class%
+            - %accard.model.diagnosis_phase.class%
             - %accard.model.diagnosis.class%
             - %accard.validation_group.diagnosis_phase_instance%
         tags: [{ name: form.type, alias: accard_diagnosis_phase_instance }]

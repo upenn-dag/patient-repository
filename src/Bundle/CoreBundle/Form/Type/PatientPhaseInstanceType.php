@@ -13,6 +13,8 @@ namespace Accard\Bundle\CoreBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Accard\Component\Phase\Model\PhaseTargetInterface;
+use Accard\Component\Core\Model\PatientPhaseInterface;
 
 /**
  * Patient phase instance type.
@@ -27,6 +29,20 @@ class PatientPhaseInstanceType extends AbstractType
      * @var string
      */
     protected $dataClass;
+
+    /**
+     * Phase data class.
+     *
+     * @var PatientPhaseInterface
+     */
+    protected $phaseDataClass;
+
+    /**
+     * Phase target data class.
+     *
+     * @var PhaseTargetInterface
+     */
+    protected $targetDataClass;
 
     /**
      * Validation groups.
