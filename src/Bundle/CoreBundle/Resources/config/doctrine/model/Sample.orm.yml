@@ -13,7 +13,7 @@ Accard\Component\Core\Model\Sample:
     manyToOne:
         patient:
             targetEntity: Accard\Component\Patient\Model\PatientInterface
-#            inversedBy: diagnoses
+#            inversedBy: samples
             joinColumn:
                 name: patientId
                 referencedColumnName: id

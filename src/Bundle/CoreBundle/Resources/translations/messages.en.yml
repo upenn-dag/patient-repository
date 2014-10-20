@@ -22,6 +22,14 @@ accard:
         form:
             patient: Patient
             diagnosis: Diagnosis
+    sample:
+        form:
+            patient: Patient
+            show_collections: Show collections
+            show_derivations: Show derivations
+    sample_source:
+        form:
+            patient: Patient
     attribute:
         form:
             patient: Patient
@@ -82,6 +90,8 @@ accard:
                 import_enabled: Enable diagnosis repository import
             activity:
                 enabled: Enable activity repository
+            sample:
+                enabled: Enable sample repository
             behavior:
                 enabled: Enable behavior repository
                 enable_menus: Enable behaviors

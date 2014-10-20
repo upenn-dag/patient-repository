@@ -7,7 +7,6 @@
 
 Accard\Component\Sample\Model\Sample:
     type: mappedSuperclass
-    table: accard_sample
 
     id:
         id:
@@ -32,3 +31,8 @@ Accard\Component\Sample\Model\Sample:
         derivatives:
             targetEntity: Accard\Component\Sample\Model\SourceInterface
             mappedBy: sample
+        fields:
+            targetEntity: Accard\Component\Sample\Model\FieldValueInterface
+            mappedBy: subject
+            orphanRemoval: true
+            cascade: ["all"]

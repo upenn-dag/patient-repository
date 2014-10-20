@@ -43,11 +43,11 @@ interface SourceInterface
     public function setSample(SampleInterface $sample = null);
 
     /**
-     * Test if source is a derivative.
+     * Test if source is a derivation.
      *
      * @return boolean
      */
-    public function isDerivative();
+    public function isDerivation();
 
     /**
      * Get sample source date.

@@ -12,6 +12,7 @@ parameters:
     accard.settings_schema.patient.class: Accard\Bundle\CoreBundle\Settings\PatientSettingsSchema
     accard.settings_schema.diagnosis.class: Accard\Bundle\CoreBundle\Settings\DiagnosisSettingsSchema
     accard.settings_schema.activity.class: Accard\Bundle\CoreBundle\Settings\ActivitySettingsSchema
+    accard.settings_schema.sample.class: Accard\Bundle\CoreBundle\Settings\SampleSettingsSchema
     accard.settings_schema.behavior.class: Accard\Bundle\CoreBundle\Settings\BehaviorSettingsSchema
     accard.settings_schema.attribute.class: Accard\Bundle\CoreBundle\Settings\AttributeSettingsSchema
 
@@ -41,6 +42,11 @@ services:
         class: %accard.settings_schema.activity.class%
         tags:
             - { name: accard.settings_schema, namespace: activity }
+
+    accard.settings_schema.sample:
+        class: %accard.settings_schema.sample.class%
+        tags:
+            - { name: accard.settings_schema, namespace: sample }
 
     accard.settings_schema.behavior:
         class: %accard.settings_schema.behavior.class%

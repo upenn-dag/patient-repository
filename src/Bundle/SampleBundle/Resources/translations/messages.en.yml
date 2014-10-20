@@ -1,0 +1,120 @@
+accard:
+    sample:
+        entity_name: Sample
+        collections: Collections
+        derivations: Derivations
+        samples: Samples
+        form:
+            id: Id
+            source: Collection
+            amount: Amount
+            derivatives: Derivatives
+            prototype: Prototype
+            prototype_label: Sample Type
+        action:
+            add: Add Sample
+            create: Create Sample
+            update: Update Sample
+            delete: Delete Sample
+            design: Design Sample
+            manage: Manage Sample
+            manage_all: Manage Samples
+        title:
+            index: Browse Samples
+            show: Show Sample
+            create: Create a New Sample
+            update: Update Sample
+            list: Samples
+    sample_source:
+        entity_name: Sample Source
+        form:
+            id: Id
+            sample: Parent sample
+            sourceDate: Date
+            amount: Amount
+            samples: Samples
+            derivation: Derivation
+            collection: Collection
+            type: Type
+        action:
+            collection:
+                add: Add Sample Collection
+                create: Create Sample Collection
+                update: Update Sample Collection
+                delete: Delete Sample Collection
+                design: Design Sample Collection
+                manage: Manage Sample Collection
+                manage_all: Manage Sample Collections
+            derivation:
+                add: Add Sample Derivation
+                create: Create Sample Derivation
+                update: Update Sample Derivation
+                delete: Delete Sample Derivation
+                design: Design Sample Derivation
+                manage: Manage Sample Derivation
+                manage_all: Manage Sample Derivations
+            add: Add Sample Source
+            create: Create Sample Source
+            update: Update Sample Source
+            delete: Delete Sample Source
+            design: Design Sample Source
+            manage: Manage Sample Source
+            manage_all: Manage Sample Sources
+        title:
+            collection:
+                index: Browse Sample Collections
+                show: Show Sample Collection
+                create: Create a New Sample Collection
+                update: Update Sample Collection
+                list: Sample Collections
+            derivation:
+                index: Browse Sample Derivations
+                show: Show Sample Derivations
+                create: Create a New Sample Derivation
+                update: Update Sample Derivation
+                list: Sample Derivations
+            index: Browse Sample Sources
+            show: Show Sample Source
+            create: Create a New Sample Source
+            update: Update Sample Source
+            list: Sample Sources
+    sample_prototype:
+        entity_name: Sample Prototype
+        form:
+            name: Name
+            presentation: Presentation
+            fields: Fields
+            subjects: Subjects
+        action:
+            add: Add Sample Prototype
+            create: Create Sample Prototype
+            update: Update Sample Prototype
+            delete: Delete Sample Prototype
+            design: Design Sample Prototype
+            manage: Manage Sample Prototype
+            manage_all: Manage Sample Prototypes
+        title:
+            index: Browse Sample Prototypes
+            show: %sample% Sample Prototype
+            create: Create a New Sample Prototype
+            update: Update Sample Prototype
+            list: Sample Prototypes
+    sample_prototype_field:
+        entity_name: Sample Field
+        form:
+            name: Name
+            presentation: Presentation
+        action:
+            add: Add Sample Field
+            create: Create Sample Field
+            update: Update Sample Field
+            delete: Delete Sample Field
+            design: Design Sample Field
+            manage: Manage Sample Field
+            manage_all: Manage Sample Fields
+        title:
+            index: Browse Sample Fields
+            show: %sample% Sample Field
+            create: Create a New Sample Field
+            update: Update Sample Field
+            list: Sample Fields

@@ -11,13 +11,15 @@
 namespace Accard\Component\Sample\Model;
 
 use Doctrine\Common\Collections\Collection as DoctrineCollection;
+use Accard\Component\Prototype\Model\PrototypeSubjectInterface;
+use Accard\Component\Field\Model\FieldSubjectInterface;
 
 /**
  * Basic sample interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface SampleInterface
+interface SampleInterface extends PrototypeSubjectInterface, FieldSubjectInterface
 {
     /**
      * Get sample id.

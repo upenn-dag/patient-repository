@@ -30,6 +30,9 @@ class AccardSampleBundle extends Bundle
     {
         $interfaces = array(
             'Accard\Component\Sample\Model\SampleInterface' => 'accard.model.sample.class',
+            'Accard\Component\Sample\Model\FieldInterface' => 'accard.model.sample_field.class',
+            'Accard\Component\Sample\Model\FieldValueInterface' => 'accard.model.sample_field_value.class',
+            'Accard\Component\Sample\Model\PrototypeInterface' => 'accard.model.sample_prototype.class',
             'Accard\Component\Sample\Model\SourceInterface' => 'accard.model.sample_source.class',
         );
 

@@ -10,11 +10,13 @@
  */
 namespace Accard\Component\Sample\Model;
 
+use Accard\Component\Field\Model\FieldInterface as BaseFieldInterface;
+
 /**
- * Whole blood sample interface.
+ * Sample prototype field model interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface WholeBloodSampleInterface extends SampleInterface
+interface FieldInterface extends BaseFieldInterface
 {
 }

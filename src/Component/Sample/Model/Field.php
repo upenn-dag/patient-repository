@@ -10,11 +10,13 @@
  */
 namespace Accard\Component\Sample\Model;
 
+use Accard\Component\Field\Model\Field as BaseField;
+
 /**
- * Tissue sample interface.
+ * Accard prototype field.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface TissueSampleInterface extends SampleInterface
+class Field extends BaseField implements FieldInterface
 {
 }

@@ -15,14 +15,14 @@ use Accard\Component\Resource\Builder\BuilderInterface;
 /**
  * Activity Builder.
  *
- * Used to ease the programmatic creation of activities.
+ * Used to ease the programmatic creation of samples.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
 interface ActivityBuilderInterface extends BuilderInterface
 {
     /**
-     * Create a new activity.
+     * Create a new sample.
      *
      * @return ActivityBuilderInterface
      */

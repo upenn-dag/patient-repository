@@ -17,7 +17,7 @@ use Accard\Component\Sample\Model\Sample as BaseSample;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-abstract class Sample extends BaseSample implements SampleInterface
+class Sample extends BaseSample implements SampleInterface
 {
     use \Accard\Component\Patient\Model\PatientCollectingTrait;
 }

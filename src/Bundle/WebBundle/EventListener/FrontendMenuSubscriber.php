@@ -61,6 +61,15 @@ class FrontendMenuSubscriber implements EventSubscriberInterface
             }
         }
 
+        $sampleSettings = $settingsManager->load('sample');
+        if ($sampleSettings['enabled']) {
+            $sample = $this->createSimpleItem($event, $repositories, 'sample', 'sample_index', 'samples');
+
+            if ('sample' === $baseRoute) {
+                $sample->setCurrent(true);
+            }
+        }
+
         $behaviorSettings = $settingsManager->load('behavior');
         if ($behaviorSettings['enabled']) {
             $firstBehaviorRoute = $this->getFirstBehaviorRoute($behaviorSettings);

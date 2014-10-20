@@ -36,10 +36,9 @@ accard_sample:
     classes:
         sample:
             model: Accard\Component\Core\Model\Sample
-        whole_blood_sample:
-            model: Accard\Component\Core\Model\WholeBloodSample
-        tissue_sample:
-            model: Accard\Component\Core\Model\TissueSample
+            controller: Accard\Bundle\CoreBundle\Controller\SampleController
+        sample_source:
+            model: Accard\Component\Core\Model\Source
 
 accard_behavior:
     classes:

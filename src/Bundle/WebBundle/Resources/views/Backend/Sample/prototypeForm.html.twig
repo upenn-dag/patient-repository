@@ -1,0 +1,32 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% macro prototype(field) %}
+<div class="form-group">
+    {{ form_label(field, 'accard.field.entity_name'|trans) }}
+    {{ form_widget(field) }}
+</div>
+{% endmacro %}
+
+<div class="row">
+    <div class="col-md-8 row-split">
+        {{ form_row(form.presentation) }}
+        {{ form_row(form.name) }}
+    </div>
+    <div class="col-md-4">
+        <div id="accard-prototype-fields" data-prototype="{{ _self.prototype(form.fields.vars.prototype)|e }}">
+            {% for field in form.fields %}
+                {{ _self.prototype(field) }}
+            {% endfor %}
+        </div>
+        <a href="#" id="accard-prototype-field-adder" class="btn btn-primary btn-block">
+            {{- "accard.prototype.action.add_field"|trans -}}
+        </a>
+    </div>
+</div>
+
+<hr>

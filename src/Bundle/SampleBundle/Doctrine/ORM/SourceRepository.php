@@ -10,6 +10,7 @@
  */
 namespace Accard\Bundle\SampleBundle\Doctrine\ORM;
 
+use PagerFanta\Pagerfanta;
 use Accard\Component\Sample\Repository\SourceRepositoryInterface;
 use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
@@ -20,6 +21,52 @@ use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class SourceRepository extends EntityRepository implements SourceRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function createCollectionQueryBuilder(array $criteria = array(), array $sorting = array())
+    {
+        $qb = $this
+            ->getCollectionQueryBuilder()
+            ->andWhere('source.sample IS NULL');
+
+        $this->applyCriteria($qb, $criteria);
+        $this->applySorting($qb, $sorting);
+
+        return $qb;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createCollectionPaginator(array $criteria = array(), array $sorting = array())
+    {
+        return $this->getPaginator($this->createCollectionQueryBuilder($criteria, $sorting));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createDerivationQueryBuilder(array $criteria = array(), array $sorting = array())
+    {
+        $qb = $this
+            ->getCollectionQueryBuilder()
+            ->andWhere('source.sample IS NOT NULL');
+
+        $this->applyCriteria($qb, $criteria);
+        $this->applySorting($qb, $sorting);
+
+        return $qb;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createDerivationPaginator(array $criteria = array(), array $sorting = array())
+    {
+        return $this->getPaginator($this->createDerivationQueryBuilder($criteria, $sorting));
+    }
+
     /**
      * {@inheritdoc}
      */

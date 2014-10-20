@@ -10,6 +10,7 @@
  */
 namespace Accard\Bundle\PatientBundle\Doctrine\ORM;
 
+use PagerFanta\PagerfantaInterface;
 use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**

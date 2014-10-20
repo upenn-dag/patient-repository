@@ -10,6 +10,8 @@
  */
 namespace Accard\Component\Sample\Repository;
 
+use PagerFanta\PagerfantaInterface;
+use Doctrine\ORM\QueryBuilder;
 use Accard\Component\Resource\Repository\RepositoryInterface;
 use Accard\Component\Sample\Model\SourceInterface;
 
@@ -21,20 +23,38 @@ use Accard\Component\Sample\Model\SourceInterface;
 interface SourceRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Get collection sources.
+     * Get collection sources query builder.
      *
      * @param array $criteria
      * @param array $sorting
-     * @return SourceInterface[]
+     * @return QueryBuilder
      */
-    public function getCollections(array $criteria = null, array $sorting = null);
+    public function createCollectionQueryBuilder(array $criteria = array(), array $sorting = array());
 
     /**
-     * Get derivative sources.
+     * Get collection sources paginator.
      *
      * @param array $criteria
      * @param array $sorting
-     * @return SourceInterface[]
+     * @return PagerfantaInterface
      */
-    public function getDerivatives(array $criteria = null, array $sorting = null);
+    public function createCollectionPaginator(array $criteria = array(), array $sorting = array());
+
+    /**
+     * Get derivative sources query builder.
+     *
+     * @param array $criteria
+     * @param array $sorting
+     * @return QueryBuilder
+     */
+    public function createDerivationQueryBuilder(array $criteria = array(), array $sorting = array());
+
+    /**
+     * Get derivation sources paginator.
+     *
+     * @param array $criteria
+     * @param array $sorting
+     * @return PagerfantaInterface
+     */
+    public function createDerivationPaginator(array $criteria = array(), array $sorting = array());
 }

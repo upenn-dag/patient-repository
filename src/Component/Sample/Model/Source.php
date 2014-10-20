@@ -94,7 +94,7 @@ class Source implements SourceInterface
     /**
      * {@inheritdoc}
      */
-    public function isDerivative()
+    public function isDerivation()
     {
         return null !== $this->sample;
     }

@@ -1,0 +1,24 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Frontend/Sample:index.html.twig' %}
+
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import create %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
+
+{% set prototype = app.request.get('prototype') %}
+{% set createBtn = prototype ? create(path('accard_frontend_sample_create', { prototype: prototype }), 'accard.sample.action.create'|trans) : null %}
+
+{% block sample_title %}
+    {{ page_title(
+        'accard.sample.title.index_by_prototype'|trans({'%prototype%': prototype|humanize}),
+        [
+            createBtn,
+            designBtn
+        ]
+    ) }}
+{% endblock %}

@@ -75,11 +75,6 @@ class Configuration implements ConfigurationInterface
      */
     private function addClassesSection(ArrayNodeDefinition $node)
     {
-        $defaultInheritance = array(
-            'whole_blood_sample',
-            'tissue_sample'
-        );
-
         $node
             ->children()
                 ->arrayNode('classes')
@@ -88,34 +83,10 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('sample')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->arrayNode('children')
-                                    ->prototype('scalar')->end()
-                                    ->defaultValue($defaultInheritance)
-                                ->end()
                                 ->scalarNode('model')->defaultValue('Accard\Component\Sample\Model\Sample')->end()
                                 ->scalarNode('controller')->defaultValue('Accard\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->defaultValue('Accard\Bundle\SampleBundle\Doctrine\ORM\SampleRepository')->end()
                                 ->scalarNode('form')->defaultValue('Accard\Bundle\SampleBundle\Form\Type\SampleType')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('whole_blood_sample')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('parent')->defaultValue('sample')->end()
-                                ->scalarNode('model')->isRequired()->end()
-                                ->scalarNode('controller')->defaultValue('Accard\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->defaultValue('Accard\Bundle\SampleBundle\Doctrine\ORM\SampleRepository')->end()
-                                ->scalarNode('form')->defaultValue('Accard\Bundle\SampleBundle\Form\Type\WholeBloodSampleType')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('tissue_sample')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('parent')->defaultValue('sample')->end()
-                                ->scalarNode('model')->isRequired()->end()
-                                ->scalarNode('controller')->defaultValue('Accard\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->defaultValue('Accard\Bundle\SampleBundle\Doctrine\ORM\SampleRepository')->end()
-                                ->scalarNode('form')->defaultValue('Accard\Bundle\SampleBundle\Form\Type\TissueSampleType')->end()
                             ->end()
                         ->end()
                         ->arrayNode('sample_source')

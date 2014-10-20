@@ -1,0 +1,38 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Common/Form:update.html.twig' %}
+
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import generic %}
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import no_javascript %}
+{% from 'AccardWebBundle:Common/Macros:form.html.twig' import select_patient_js, select_patient_css %}
+
+{% set source = form.vars.source_type %}
+
+{% block form_page_title %}
+    {{ page_title(('accard.sample_source.action.' ~ source ~ '.create')|trans,
+        [
+            generic(path('accard_frontend_sample_source_' ~ source ~ '_index'), ('accard.sample_source.action.' ~ source ~ '.manage_all')|trans, 'user')
+        ]
+    ) }}
+    {{ no_javascript() }}
+{% endblock %}
+
+{% block form_submit_action path('accard_frontend_sample_source_' ~ source ~ '_update', {'id': sample_source.id}) %}
+
+{% block form_body %}
+    {% include 'AccardWebBundle:Frontend/Sample:sourceForm.html.twig' %}
+{% endblock %}
+
+{% block form_javascripts %}
+    {{ select_patient_js('#accard_sample_patient') }}
+{% endblock %}
+
+{% block form_stylesheets %}
+    {{ select_patient_css() }}
+{% endblock %}

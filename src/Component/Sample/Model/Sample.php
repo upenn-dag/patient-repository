@@ -10,15 +10,17 @@
  */
 namespace Accard\Component\Sample\Model;
 
-use Doctrine\Common\Collections\Collection as DoctrineCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Accard\Component\Field\Model\FieldValueInterface as BaseFieldValueInterface;
+use Accard\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterface;
 
 /**
  * Accard sample model.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-abstract class Sample implements SampleInterface
+class Sample implements SampleInterface
 {
     /**
      * Sample id.
@@ -28,11 +30,11 @@ abstract class Sample implements SampleInterface
     protected $id;
 
     /**
-     * Amount.
+     * Prototype.
      *
-     * @var integer
+     * @var PrototypeInterface
      */
-    protected $amount = 0;
+    protected $prototype;
 
     /**
      * Source.
@@ -42,11 +44,25 @@ abstract class Sample implements SampleInterface
     protected $source;
 
     /**
+     * Amount.
+     *
+     * @var integer
+     */
+    protected $amount = 0;
+
+    /**
      * Derivatives.
      *
-     * @param DoctrineCollection|DerivativeInterface[]
+     * @param Collection|SourceInterface[]
      */
     protected $derivatives;
+
+    /**
+     * Fields.
+     *
+     * @var Collection|BaseFieldValueInterface[]
+     */
+    protected $fields;
 
 
     /**
@@ -55,6 +71,7 @@ abstract class Sample implements SampleInterface
     public function __construct()
     {
         $this->derivatives = new ArrayCollection();
+        $this->fields = new ArrayCollection();
     }
 
     /**
@@ -63,6 +80,24 @@ abstract class Sample implements SampleInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPrototype()
+    {
+        return $this->prototype;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPrototype(BasePrototypeInterface $prototype = null)
+    {
+        $this->prototype = $prototype;
+
+        return $this;
     }
 
     /**
@@ -147,5 +182,85 @@ abstract class Sample implements SampleInterface
         }
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFields()
+    {
+        return $this->fields;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setFields(Collection $fields)
+    {
+        foreach ($fields as $field) {
+            $this->addField($field);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addField(BaseFieldValueInterface $field)
+    {
+        if (!$this->hasField($field)) {
+            $field->setSample($this);
+            $this->fields->add($field);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeField(BaseFieldValueInterface $field)
+    {
+        if ($this->hasField($field)) {
+            $this->fields->removeElement($field);
+            $field->setSample(null);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasField(BaseFieldValueInterface $field)
+    {
+        return $this->fields->contains($field);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasFieldByName($fieldName)
+    {
+        foreach ($this->fields as $field) {
+            if ($field->getName() === $fieldName) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFieldByName($fieldName)
+    {
+        foreach ($this->fields as $field) {
+            if ($field->getName() === $fieldName) {
+                return $field;
+            }
+        }
     }
 }

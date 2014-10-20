@@ -1,0 +1,40 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% from 'AccardWebBundle:Common/Macros:form.html.twig' import select_patient %}
+
+{% macro prototype(field) %}
+<div class="form-group">
+    {{ form_widget(field) }}
+</div>
+{% endmacro %}
+
+<div class="row">
+    <div class="col-md-12">
+        {{ select_patient(form.patient) }}
+    </div>
+</div>
+
+<div class="col-md-12 well">
+    <div class="row">
+        <div class="col-md-6 row-split">
+            {{ form_row(form.amount) }}
+        </div>
+        <div class="col-md-6">
+            
+        </div>
+    </div>
+</div>
+
+{% for field in form.fields %}
+<div class="row">
+    <div class="col-md-6">
+        {{ _self.prototype(field) }}
+    </div>
+</div>
+{% endfor %}
+

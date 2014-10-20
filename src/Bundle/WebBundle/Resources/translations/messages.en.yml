@@ -56,6 +56,7 @@ accard:
             behavior: Behavior
             attribute: Attribute
             activity: Activity
+            sample: Sample
             options: Options
         frontend:
             home: Home
@@ -65,6 +66,7 @@ accard:
             admin: Administration
             diagnoses: Diagnoses
             activities: Activities
+            samples: Samples
             behaviors: Behaviors
             attributes: Attributes
     interface:

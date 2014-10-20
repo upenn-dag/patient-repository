@@ -71,7 +71,7 @@ class PrototypeType extends AbstractType
             ))
             ->add('fields', 'collection', array(
                   'label' => sprintf('accard.%s_prototype.form.fields', $this->subjectName),
-                  'type' => 'accard_activity_prototype_field_choice',
+                  'type' => sprintf('accard_%s_prototype_field_choice', $this->subjectName),
                   'allow_add' => true,
                   'allow_delete' => true,
             ))

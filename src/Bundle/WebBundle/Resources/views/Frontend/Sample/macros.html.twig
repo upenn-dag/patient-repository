@@ -1,0 +1,98 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% macro list(samples) %}
+
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete, show %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
+
+{% if samples|length > 0 %}
+    <table class="sample table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="prototype">{{ accard_resource_sort('prototype', 'accard.sample.form.prototype'|trans) }}</th>
+                <th class="patient">{{ accard_resource_sort('patient', 'accard.sample.form.patient'|trans) }}</th>
+                <th class="amount">{{ accard_resource_sort('sampleDate', 'accard.sample.form.amount'|trans) }}</th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sample in samples %}
+            <tr id="{{ sample.id }}">
+                <td class="prototype">
+                    <a href="{{ path('accard_frontend_sample_index_by_prototype', {'prototype': sample.prototype.name}) }}">
+                        {{- sample.prototype.presentation -}}
+                    </a>
+                </td>
+                <td class="patient">{{ sample.patient.fullName }}</td>
+                <td class="amount">{{ sample.amount }}</td>
+                <td class="actions">
+                    <div class="pull-right">
+                        {{ show(path('accard_frontend_sample_show', {'prototype': sample.prototype.name, 'id': sample.id}), null, 'xs') }}
+                        {{ edit(path('accard_frontend_sample_update', {'prototype': sample.prototype.name, 'id': sample.id}), null, 'xs') }}
+                        {{ delete(path('accard_frontend_sample_delete', {'prototype': sample.prototype.name, 'id': sample.id}), null, 'xs') }}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ info('accard.sample.none_found'|trans) }}
+{% endif %}
+
+{% endmacro %}
+
+{% macro list_sources(sources) %}
+
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete, show %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
+
+{% if sources|length > 0 %}
+    <table class="sample table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="patient">{{ accard_resource_sort('patient', 'accard.sample_source.form.patient'|trans) }}</th>
+                <th class="type">{{ accard_resource_sort('patient', 'accard.sample_source.form.type'|trans) }}</th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for source in sources %}
+            <tr id="{{ source.id }}">
+                <td class="patient">{{ source.patient.fullName }}</td>
+                <td class="type">
+                {%- if source.derivation %}
+                    {{- 'accard.sample_source.form.derivation'|trans -}}
+                {% else %}
+                    {{- 'accard.sample_source.form.collection'|trans -}}
+                {% endif -%}
+                </td>
+                <td class="actions">
+                    <div class="pull-right">
+                    {%- if source.derivation %}
+                        {{ show(path('accard_frontend_sample_source_derivation_show', {'id': source.id}), null, 'xs') }}
+                        {{ edit(path('accard_frontend_sample_source_derivation_update', {'id': source.id}), null, 'xs') }}
+                        {{ delete(path('accard_frontend_sample_source_derivation_delete', {'id': source.id}), null, 'xs') }}
+                    {% else %}
+                        {{ show(path('accard_frontend_sample_source_collection_show', {'id': source.id}), null, 'xs') }}
+                        {{ edit(path('accard_frontend_sample_source_collection_update', {'id': source.id}), null, 'xs') }}
+                        {{ delete(path('accard_frontend_sample_source_collection_delete', {'id': source.id}), null, 'xs') }}
+                    {% endif -%}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ info('accard.source.none_found'|trans) }}
+{% endif %}
+
+{% endmacro %}

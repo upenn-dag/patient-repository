@@ -22,6 +22,10 @@ accard_frontend_activity:
     resource: @AccardWebBundle/Resources/config/routing/frontend/activity.yml
     prefix: /activity
 
+accard_frontend_sample:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/sample.yml
+    prefix: /sample
+
 accard_frontend_behavior:
     resource: @AccardWebBundle/Resources/config/routing/frontend/behavior.yml
     prefix: /behavior

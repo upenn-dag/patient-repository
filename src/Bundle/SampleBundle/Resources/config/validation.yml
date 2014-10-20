@@ -1,0 +1,58 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+Accard\Component\Sample\Model\Sample:
+    properties:
+        mrn:
+            - Regex: { pattern: "/^[0-9]{9}$/", message: accard.patient.mrn.regex, groups: ['accard'] }
+        firstName:
+            - NotBlank: { message: accard.patient.firstName.not_blank, groups: ['accard'] }
+            - Length: { min: 3, max: 36, minMessage: accard.patient.firstName.length.min, maxMessage: accard.patient.firstName.length.max, groups: ['accard'] }
+        lastName:
+            - NotBlank: { message: accard.patient.lastName.not_blank, groups: ['accard'] }
+            - Length: { min: 3, max: 36, minMessage: accard.patient.lastName.length.min, maxMessage: accard.patient.lastName.length.max, groups: ['accard'] }
+        dateOfBirth:
+            - NotBlank: { message: accard.patient.dateOfBirth.not_blank, groups: ['accard'] }
+            - DateTime: { message: accard.patient.dateOfBirth.date, groups: ['accard'] }
+        dateOfDeath:
+            - DateTime: { message: accard.patient.dateOfDeath.date, groups: ['accard'] }
+        gender:
+            - NotBlank: { message: accard.patient.gender.not_blank, groups: ['accard'] }
+            - Valid: ~
+        race:
+            - NotBlank: { message: accard.patient.race.not_blank, groups: ['accard'] }
+            - Valid: ~
+        fields:
+            - Valid: ~
+
+    getters: ~
+
+Accard\Component\Sample\Model\Prototype:
+    properties:
+        name:
+            - NotEqualTo: { value: collection, message: accard.sample_prototype.name.not_collection, groups: ['accard'] }
+            - NotEqualTo: { value: derivation, message: accard.sample_prototype.name.not_derivation, groups: ['accard']}
+            - Regex: { pattern: "/^[a-z0-9-]+$/", message: accard.sample_prototype.name.regex, groups: ['accard']}
+            - Length: { min: 3, max: 60, minMessage: accard.sample_prototype.name.length.min, maxMessage: accard.sample_prototype.name.length.max, groups: ['accard']}
+        presentation:
+            - Length: { min: 3, max: 120, minMessage: accard.sample_prototype.presentation.length.min, maxMessage: accard.sample_prototype.presentation.length.max, groups: ['accard']}
+        subjects:
+            - Valid: ~
+        fields:
+            - Valid: ~
+
+Accard\Component\Sample\Model\Field:
+    properties: ~
+    getters: ~
+
+Accard\Component\Sample\Model\FieldValue:
+    properties: ~
+    getters: ~
+
+Accard\Component\Sample\Model\Source:
+    properties: ~
+    getters: ~
