@@ -34,7 +34,7 @@
     </form>
 {% endblock %}
 
-{% block page_javascripts -%} {{dump(pds)}}
+{% block page_javascripts -%}
     {% if pds %}<script type="text/javascript" src="{{ path('accard_pds_js') }}"></script>{% endif %}
     <script type="text/javascript">
         var formClass = Accard.get('form');
