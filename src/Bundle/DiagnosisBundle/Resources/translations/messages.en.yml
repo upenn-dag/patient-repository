@@ -6,6 +6,7 @@ accard:
             code: Code
             start_date: Start Date
             end_date: End Date
+            end_date_help: End date help
             end_date_ongoing: ongoing
             patient: Patient
         action:
@@ -54,3 +55,11 @@ accard:
         message:
             count: %total% diagnosis code groups.
             none_found: No diagnosis code groups found.
+    interface:
+        nav:
+          diagnosis:
+             base: Base fields
+             phases: Phases
+        frontend:
+             titles:
+                update_diagnosis: Update diagnosis
