@@ -47,9 +47,11 @@ class DiagnosisSettingsSchema implements SchemaInterface
         $builder
             ->setDefaults(array_merge(array(
                 'enabled' => true,
+                'collect_phases' => true,
             ), $this->defaults))
             ->setAllowedValues(array(
                 'enabled' => array(true, false, '1', '0'),
+                'collect_phases' => array(true, false, '1', '0'),
             ))
         ;
     }
@@ -62,6 +64,10 @@ class DiagnosisSettingsSchema implements SchemaInterface
         $builder
             ->add('enabled', 'checkbox', array(
                 'label' => 'accard.form.settings.diagnosis.enabled',
+                'required' => false,
+            ))
+            ->add('collect_phases', 'checkbox', array(
+                'label' => 'accard.form.settings.diagnosis.collect_phases',
                 'required' => false,
             ))
         ;

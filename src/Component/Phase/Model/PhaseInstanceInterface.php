@@ -44,10 +44,10 @@ interface PhaseInstanceInterface
     /**
      * Set target.
      *
-     * @param PhaseTargetInterface $target
+     * @param PhaseTargetInterface|null $target
      * @return PhaseInstanceInterface
      */
-    public function setTarget(PhaseTargetInterface $target);
+    public function setTarget(PhaseTargetInterface $target = null);
 
     /**
      * Get start date.

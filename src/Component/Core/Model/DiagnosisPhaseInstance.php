@@ -79,7 +79,7 @@ class DiagnosisPhaseInstance implements DiagnosisPhaseInstanceInterface
     /**
      * {@inheritdoc}
      */
-    public function setTarget(PhaseTargetInterface $target)
+    public function setTarget(PhaseTargetInterface $target = null)
     {
         $this->target = $target;
 

@@ -124,6 +124,17 @@ class DiagnosisType extends AbstractType
                 'required' => false,
             ));
         }
+
+        if ($options['use_phases']) {
+            $builder->add('phases', 'collection', array(
+                'required'     => false,
+                'type'         => 'accard_diagnosis_phase_instance',
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'options'      => array('use_target' => false)
+            ));
+        }
     }
 
     /**
@@ -137,6 +148,7 @@ class DiagnosisType extends AbstractType
                 'validation_groups' => $this->validationGroups,
                 'code_group' => 'main',
                 'show_end_date' => true,
+                'use_phases' => true,
             ))
         ;
     }
