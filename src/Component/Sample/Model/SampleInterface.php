@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Sample\Model;
 
-use Doctrine\Common\Collections\Collection as DoctrineCollection;
+use Doctrine\Common\Collections\Collection;
 use Accard\Component\Prototype\Model\PrototypeSubjectInterface;
 use Accard\Component\Field\Model\FieldSubjectInterface;
 
@@ -61,7 +61,7 @@ interface SampleInterface extends PrototypeSubjectInterface, FieldSubjectInterfa
     /**
      * Get derivatives.
      *
-     * @return DoctrineCollection|SourceInterface[]
+     * @return Collection|SourceInterface[]
      */
     public function getDerivatives();
 
