@@ -5,37 +5,6 @@
 {# For the full copyright and license information, please view the LICENSE #}
 {# file that was distributed with this source code. #}
 
-{% macro list_fields(fields) %}
-
-{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
-{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete %}
-{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label %}
-
-{% if fields|length > 0 %}
-    <table class="table table-bordered">
-        <tbody>
-        {% for fields in fields %}
-            <tr id="{{ fields.id }}">
-                <td>{{ fields.presentation }}</td>
-                <td>{{ fields.name }}</td>
-                <td>{{ label(fields.type) }}</td>
-                <td>
-                    <div class="pull-right">
-                        {{ edit(path('accard_backend_diagnosis_field_update', {'id': fields.id}), null, 'xs') }}
-                        {{ delete(path('accard_backend_diagnosis_field_delete', {'id': fields.id}), null, 'xs') }}
-                    </div>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    {{ info('accard.diagnosis.field.none_found'|trans) }}
-{% endif %}
-
-{% endmacro %}
-
-
 {% macro list_codes(codes) %}
 
 {% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}

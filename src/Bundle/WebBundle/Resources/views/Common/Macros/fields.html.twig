@@ -38,3 +38,40 @@
     {{ info('accard.field.message.none_found'|trans) }}
 {% endif %}
 {% endmacro %}
+
+
+{% macro list_prototypes(prototypes, update_path, delete_path) %}
+
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import design, edit, delete %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label %}
+
+{% if prototypes|length > 0 %}
+    <table id="prototypes" class="table table-bordered">
+        <tbody>
+        {% for prototype in prototypes %}
+            <tr id="prototype-{{ prototype.id }}">
+                <td>{{ prototype.presentation }}</td>
+                <td>{{ prototype.name }}</td>
+                <td>
+                    {%- for field in prototype.fields %}
+                        {{ label(field.presentation) }}
+                    {% else %}
+                        {{ label('No fields found.', 'danger') }}
+                    {% endfor -%}
+                </td>
+                <td>
+                    <div class="pull-right">
+                        {{ edit(path(update_path, {'id': prototype.id}), null, 'xs') }}
+                        {{ delete(path(delete_path, {'id': prototype.id}), null, 'xs') }}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ info('accard.prototype.message.none_found'|trans) }}
+{% endif %}
+
+{% endmacro %}
