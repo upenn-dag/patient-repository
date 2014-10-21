@@ -66,21 +66,21 @@ class FieldType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                'label' => 'accard.form.field.name'
+                'label' => 'accard.field.form.name'
             ))
             ->add('presentation', 'text', array(
-                'label' => 'accard.form.field.presentation'
+                'label' => 'accard.field.form.presentation'
             ))
             ->add('type', 'choice', array(
-                'label' => 'accard.form.field.type',
+                'label' => 'accard.field.form.type',
                 'choices' => FieldTypes::getChoices()
             ))
             ->add('option', 'accard_option_choice', array(
-                'label' => 'accard.form.field.option',
+                'label' => 'accard.field.form.option',
                 'required' => false
             ))
             ->add('allowMultiple', 'checkbox', array(
-                'label' => 'accard.form.field.allow_multiple',
+                'label' => 'accard.field.form.allow_multiple',
                 'required' => false,
             ))
         ;

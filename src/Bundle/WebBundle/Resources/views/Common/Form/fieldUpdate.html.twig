@@ -1,0 +1,29 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Common/Form:fieldCreate.html.twig' %}
+
+{% from 'AccardWebBundle:Common/Macros:actions.html.twig' import update %}
+
+{#
+    Form body header.
+#}
+
+{% block form_header '<input type="hidden" name="_method" value="PUT">' %}
+
+
+{#
+    Form body footer.
+#}
+
+{% block form_footer %}
+    <div class="row">
+        <div class="col-md-12">
+            <span class="pull-right">{{ update() }}</span>
+        </div>
+    </div>
+{% endblock %}

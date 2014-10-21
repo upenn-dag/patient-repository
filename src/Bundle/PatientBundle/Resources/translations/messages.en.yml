@@ -27,21 +27,28 @@ accard:
             import_disabled: 'Patient import has been disabled, access denied.'
             none_found: No patients found.
             not_found: Patient %patient% not found.
-        title:
-            index: Browse Patients
-            show: %patient%
-            create: Creating a New Patient
-            update: Updating Patient, %patient%
         field:
-            title: Patient Fields
-            create: Create a new Patient Field
             race: Race
             count: Collecting %total% patient fields.
             update_gender: Update Gender Options
             update_race: Update Race Options
     patient_field:
+        entity_name: Patient Field
         form:
             id: Id
             name: Name
             presentation: Presentation
             type: Type
+            option: Option
+            allow_multiple: Allow multiple options
+        action:
+            create: Create Patient Field
+            manage: Manage Patient Field
+            manage_all: Manage Patient Fields
+            design: Design Patient Field
+            update: Update Patient Field
+            index: Browse Patient Fields
+            delete: Delete Patient Field
+        message:
+            none_found: No patient fields found.
+            not_found: Patient field not found.

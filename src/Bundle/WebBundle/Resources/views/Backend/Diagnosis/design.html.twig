@@ -10,7 +10,7 @@
 {% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import button, create, generic %}
 {% from 'AccardWebBundle:Common/Macros:actions.html.twig' import update %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import pagination, page_title, statistics %}
-{% from 'AccardWebBundle:Backend/Diagnosis:macros.html.twig' import list_fields %}
+{% from 'AccardWebBundle:Common/Macros:fields.html.twig' import list_fields %}
 
 
 {% block content %}
@@ -33,12 +33,7 @@
                         {{ 'accard.diagnosis.field.title'|trans }}
                     </h4>
                 </div>
-                {{ list_fields(fields) }}
-                {% if fields.haveToPaginate() %}
-                <div class="panel-body">
-                    {{ pagination(fields) }}
-                </div>
-                {% endif %}
+                {{ list_fields(fields, 'accard_backend_diagnosis_field_update', 'accard_backend_diagnosis_field_delete') }}
             </div>
         </div>
         <div class="col-md-4">
