@@ -74,19 +74,19 @@ class PatientPhaseInstanceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        	->add('phase', 'entity', array(
-        		'class' => $this->phaseDataClass,
-        		'property' => 'presentation',
-        		'label' => 'accard.patient_phase_instance.form.phase',
-        	))
+            ->add('phase', 'entity', array(
+                'class' => $this->phaseDataClass,
+                'property' => 'presentation',
+                'label' => 'accard.patient_phase_instance.form.phase',
+            ))
         ;
 
         if ($options['use_target']) {
-        	$builder->add('target', 'entity', array(
-        		'class' => $this->targetDataClass,
-        		'property' => 'fullName',
-        		'label' => 'accard.patient_phase_instance.form.target',
-        	));
+            $builder->add('target', 'entity', array(
+                'class' => $this->targetDataClass,
+                'property' => 'fullName',
+                'label' => 'accard.patient_phase_instance.form.target',
+            ));
         }
     }
 

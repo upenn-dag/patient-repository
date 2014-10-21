@@ -64,7 +64,7 @@ class DomainManager
     public function create($resource)
     {
         /** @var ResourceEvent $event */
-        $event = $this->dispatchEvent('pre_create', new ResourceEvent($resource));
+        $event = $this->dispatchEvent('pre_create', new ResourceEvent($resource, array('objectManager' => $this->manager)));
 
         if ($event->isStopped()) {
             $this->flashHelper->setFlash(
@@ -80,7 +80,7 @@ class DomainManager
         $this->manager->flush();
         $this->flashHelper->setFlash('success', 'create');
 
-        $this->dispatchEvent('post_create', new ResourceEvent($resource));
+        $this->dispatchEvent('post_create', new ResourceEvent($resource, array('objectManager' => $this->manager)));
 
         return $resource;
     }
@@ -94,7 +94,7 @@ class DomainManager
     public function update($resource, $flash = 'update')
     {
         /** @var ResourceEvent $event */
-        $event = $this->dispatchEvent('pre_update', new ResourceEvent($resource));
+        $event = $this->dispatchEvent('pre_update', new ResourceEvent($resource, array('objectManager' => $this->manager)));
 
         if ($event->isStopped()) {
             $this->flashHelper->setFlash(
@@ -110,7 +110,7 @@ class DomainManager
         $this->manager->flush();
         $this->flashHelper->setFlash('success', $flash);
 
-        $this->dispatchEvent('post_update', new ResourceEvent($resource));
+        $this->dispatchEvent('post_update', new ResourceEvent($resource, array('objectManager' => $this->manager)));
 
         return $resource;
     }
@@ -138,7 +138,7 @@ class DomainManager
     public function delete($resource)
     {
         /** @var ResourceEvent $event */
-        $event = $this->dispatchEvent('pre_delete', new ResourceEvent($resource));
+        $event = $this->dispatchEvent('pre_delete', new ResourceEvent($resource, array('objectManager' => $this->manager)));
 
         if ($event->isStopped()) {
             $this->flashHelper->setFlash(
@@ -154,7 +154,7 @@ class DomainManager
         $this->manager->flush();
         $this->flashHelper->setFlash('success', 'delete');
 
-        $this->dispatchEvent('post_delete', new ResourceEvent($resource));
+        $this->dispatchEvent('post_delete', new ResourceEvent($resource, array('objectManager' => $this->manager)));
 
         return $resource;
     }

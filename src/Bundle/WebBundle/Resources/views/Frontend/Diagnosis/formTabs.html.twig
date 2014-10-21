@@ -1,0 +1,27 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% set add_phases = accard_setting('diagnosis.collect_phases', false) %}
+
+{% if add_phases %}
+<div class="row pull-right">
+    <button id="add-phase" class="btn btn-success"><i class = 'glyphicon glyphicon-plus'></i>
+        {{ 'accard.phase.action.add'|trans }}
+    </button>
+</div>
+{% endif %}
+
+<ul class="nav nav-tabs grid-tabs" role="tablist">
+    <li class="active">
+        <a href="#diagnosis-base" role="tab" data-toggle="tab">{{ 'accard.interface.nav.diagnosis.base'|trans }}</a>
+    </li>
+    {% if add_phases %}
+    <li>
+        <a href="#diagnosis-phases" role="tab" data-toggle="tab">{{ 'accard.interface.nav.diagnosis.phases'|trans }}</a>
+    </li>
+    {% endif %}
+</ul>

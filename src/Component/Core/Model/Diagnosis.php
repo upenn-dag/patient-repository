@@ -44,7 +44,7 @@ class Diagnosis extends BaseDiagnosis implements DiagnosisInterface
     /**
      * Phases.
      *
-     * @var Collection|DiagnosisPhaseInterface[]
+     * @var Collection|DiagnosisPhaseInstanceInterface[]
      */
     protected $phases;
 
@@ -101,7 +101,7 @@ class Diagnosis extends BaseDiagnosis implements DiagnosisInterface
     public function addActivity(ActivityInterface $activity)
     {
         if (!$this->hasActivity($activity)) {
-            $activity->setDiagnosis($this);
+            $activity->setTarget($this);
             $this->activities->add($activity);
         }
 
@@ -115,7 +115,7 @@ class Diagnosis extends BaseDiagnosis implements DiagnosisInterface
     {
         if ($this->hasActivity($activity)) {
             $this->activities->removeElement($activity);
-            $activity->setDiagnosis(null);
+            $activity->setTarget(null);
         }
     }
 
@@ -130,7 +130,7 @@ class Diagnosis extends BaseDiagnosis implements DiagnosisInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPhase(DiagnosisPhaseInterface $phase)
+    public function hasPhase(DiagnosisPhaseInstanceInterface $phase)
     {
         return $this->phases->contains($phase);
     }
@@ -138,10 +138,10 @@ class Diagnosis extends BaseDiagnosis implements DiagnosisInterface
     /**
      * {@inheritdoc}
      */
-    public function addPhase(DiagnosisPhaseInterface $phase)
+    public function addPhase(DiagnosisPhaseInstanceInterface $phase)
     {
         if (!$this->hasPhase($phase)) {
-            $phase->setDiagnosis($this);
+            $phase->setTarget($this);
             $this->phases->add($phase);
         }
 
@@ -151,11 +151,11 @@ class Diagnosis extends BaseDiagnosis implements DiagnosisInterface
     /**
      * {@inheritdoc}
      */
-    public function removePhase(DiagnosisPhaseInterface $phase)
+    public function removePhase(DiagnosisPhaseInstanceInterface $phase)
     {
         if ($this->hasPhase($phase)) {
             $this->phases->removeElement($phase);
-            $phase->setDiagnosis(null);
+            $phase->setTarget(null);
         }
     }
 }

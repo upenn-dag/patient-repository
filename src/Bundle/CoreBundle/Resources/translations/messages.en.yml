@@ -88,6 +88,7 @@ accard:
             diagnosis:
                 enabled: Enable diagnosis repository
                 import_enabled: Enable diagnosis repository import
+                collect_phases: Collect phases in diagnosis forms
             activity:
                 enabled: Enable activity repository
             sample:
