@@ -28,6 +28,9 @@ Accard\Component\Field\Model\Field:
             type: string
             length: 36
             nullable: false
+        allowMultiple:
+            type: boolean
+            nullable: false
         configuration:
             type: array
 

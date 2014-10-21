@@ -58,6 +58,13 @@ class Field implements FieldInterface
     protected $option;
 
     /**
+     * Allow multiple choices.
+     *
+     * @var boolean
+     */
+    protected $allowMultiple = false;
+
+    /**
      * Field configuration.
      *
      * @var array
@@ -141,6 +148,24 @@ class Field implements FieldInterface
     public function setOption(OptionInterface $option)
     {
         $this->option = $option;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAllowMultiple()
+    {
+        return $this->allowMultiple;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAllowMultiple($allowMultiple)
+    {
+        $this->allowMultiple = (boolean) $allowMultiple;
 
         return $this;
     }

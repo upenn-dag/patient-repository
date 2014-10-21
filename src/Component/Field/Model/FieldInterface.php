@@ -80,6 +80,21 @@ interface FieldInterface
     public function setOption(OptionInterface $option);
 
     /**
+     * Test if multiple options are allowed.
+     *
+     * @return boolean
+     */
+    public function getAllowMultiple();
+
+    /**
+     * Set if multiple options are allowed.
+     *
+     * @param boolean $allowMultiple
+     * @return FieldValueInterface
+     */
+    public function setAllowMultiple($allowMultiple);
+
+    /**
      * Get field configuration.
      *
      * @return array

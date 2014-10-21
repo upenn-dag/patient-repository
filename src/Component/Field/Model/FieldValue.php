@@ -12,6 +12,9 @@ namespace Accard\Component\Field\Model;
 
 use BadMethodCallException;
 use DateTime;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Accard\Component\Option\Model\OptionValueInterface;
 
 /**
  * Accard field to subject relationship.
@@ -69,6 +72,21 @@ class FieldValue implements FieldValueInterface
      */
     protected $optionValue;
 
+    /**
+     * Field choice values.
+     *
+     * @var Collection|OptionValueInterface[]
+     */
+    protected $optionValues;
+
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->optionValues = new ArrayCollection();
+    }
 
     /**
      * Get field id.
@@ -175,6 +193,68 @@ class FieldValue implements FieldValueInterface
     /**
      * {@inheritdoc}
      */
+    public function getValues()
+    {
+        $this->assertMultipleAllowed();
+
+        return $this->optionValues;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setValues(Collection $values)
+    {
+        $this->assertMultipleAllowed();
+
+        foreach ($values as $value) {
+            $this->addValue($value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasValue(OptionValueInterface $value)
+    {
+        $this->assertMultipleAllowed();
+
+        return $this->optionValues->contains($value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addValue(OptionValueInterface $value)
+    {
+        $this->assertMultipleAllowed();
+
+        if (!$this->hasValue($value)) {
+            $this->optionValues->add($value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeValue(OptionValueInterface $value)
+    {
+        $this->assertMultipleAllowed();
+
+        if ($this->hasValue($value)) {
+            $this->optionValues->removeElement($value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         $this->assertFieldIsSet();
@@ -205,6 +285,26 @@ class FieldValue implements FieldValueInterface
     /**
      * {@inheritdoc}
      */
+    public function getOption()
+    {
+        $this->assertFieldIsSet();
+
+        return $this->field->getOption();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAllowMultiple()
+    {
+        $this->assertFieldIsSet();
+
+        return $this->field->getAllowMultiple();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getConfiguration()
     {
         $this->assertFieldIsSet();
@@ -221,6 +321,18 @@ class FieldValue implements FieldValueInterface
     {
         if (null === $this->field) {
             throw new BadMethodCallException('The field is undefined, so you cannot access proxy methods.');
+        }
+    }
+
+    /**
+     * Test if multiple options are allowed.
+     *
+     * @throws BadMethodCallException When multiple options are not allowed.
+     */
+    protected function assertMultipleAllowed()
+    {
+        if (!$this->getAllowMultiple()) {
+            throw new BadMethodCallException('The field must allow multiple values to access.');
         }
     }
 

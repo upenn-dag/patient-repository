@@ -73,16 +73,22 @@ class BuildFieldValueFormListener implements EventSubscriberInterface
             $options = array_merge_recursive($options, $fieldValue->getConfiguration());
         }
 
+        $name = 'value';
         if (FieldTypes::CHOICE === $fieldValue->getType()) {
             $option = $fieldValue->getField()->getOption();
             $type = new OptionValueChoiceType($option);
+            if ($fieldValue->getAllowMultiple()) {
+                $name = 'values';
+                $options['multiple'] = true;
+                $options['expanded'] = true;
+            }
         } else {
             $type = $fieldValue->getType();
         }
 
         $form
             ->remove('field')
-            ->add($this->factory->createNamed('value', $type, null, $options))
+            ->add($this->factory->createNamed($name, $type, null, $options))
         ;
     }
 }

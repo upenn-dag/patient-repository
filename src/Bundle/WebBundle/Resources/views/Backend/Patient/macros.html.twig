@@ -9,7 +9,7 @@
 
 {% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
 {% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete %}
-{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
 
 {% if fields|length > 0 %}
     <table class="table table-bordered">
@@ -19,6 +19,11 @@
                 <td>{{ field.presentation }}</td>
                 <td>{{ field.name }}</td>
                 <td>{{ label(field.type) }}</td>
+                <td class="text-center text-success">
+                    {%- if field.allowMultiple %}
+                        {{ icon('fa fa-check') }}
+                    {% endif -%}
+                </td>
                 <td>
                     <div class="pull-right">
                         {{ edit(path('accard_backend_patient_field_update', {'id': field.id}), null, 'xs') }}

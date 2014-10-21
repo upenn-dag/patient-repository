@@ -31,3 +31,16 @@ Accard\Component\Field\Model\FieldValue:
             joinColumn:
                 name: optionValueId
                 nullable: true
+
+    manyToMany:
+        optionValues:
+            targetEntity: Accard\Component\Option\Model\OptionValueInterface
+            joinTable:
+                name: accard_%s_field_option_map
+                joinColumns:
+                    fieldId:
+                        name: fieldId
+                        referencedColumnName: id
+                    optionId:
+                        name: optionId
+                        referencedColumnName: id

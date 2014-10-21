@@ -10,6 +10,7 @@
  */
 namespace Accard\Component\Patient\Builder;
 
+use Accard\Component\Field\Model\FieldTypes;
 use Accard\Component\Resource\Builder\AbstractBuilder;
 use Accard\Component\Resource\Repository\RepositoryInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -100,7 +101,14 @@ class PatientBuilder extends AbstractBuilder implements PatientBuilderInterface
 
         $fieldValue = $this->fieldValueRepository->createNew();
         $fieldValue->setField($field);
-        $fieldValue->setValue($value);
+
+        if (null !== $value) {
+            if (FieldTypes::MULTICHOICE === $field->getType()) {
+                $fieldValue->setValues($value);
+            } else {
+                $fieldValue->setValue($value);
+            }
+        }
 
         $this->resource->addField($fieldValue);
 

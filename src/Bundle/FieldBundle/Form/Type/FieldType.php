@@ -79,6 +79,10 @@ class FieldType extends AbstractType
                 'label' => 'accard.form.field.option',
                 'required' => false
             ))
+            ->add('allowMultiple', 'checkbox', array(
+                'label' => 'accard.form.field.allow_multiple',
+                'required' => false,
+            ))
         ;
     }
 
