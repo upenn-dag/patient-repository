@@ -7,6 +7,13 @@
 
 {% extends 'AccardWebBundle:Common/Form:createBackend.html.twig' %}
 
+{% macro prototype(field) %}
+    <div class="form-group">
+        {{ form_label(field, 'accard.field.entity_name'|trans) }}
+        {{ form_widget(field) }}
+    </div>
+{% endmacro %}
+
 {% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import no_javascript %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
 {% from 'AccardWebBundle:Common/Macros:actions.html.twig' import create %}
@@ -16,7 +23,7 @@
     Page title translation.
 #}
 
-{% block form_page_title_translation 'accard.field.action.create'|trans %}
+{% block form_page_title_translation 'accard.prototype.action.create'|trans %}
 
 
 {#
@@ -30,31 +37,36 @@
 
 
 {#
-    Field form.
+    Prototype form.
 #}
 
 {% block form_body %}
+
+    {% from _self import prototype %}
+
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8 row-split">
             {{ form_row(form.presentation) }}
             {{ form_row(form.name) }}
         </div>
-        <div class="col-md-6">
-            {{ form_row(form.type) }}
-            <div id="option-hider">
-                {{ form_row(form.option) }}
-                <span class="pull-right">
-                    {{ form_widget(form.allowMultiple) }}
-                </span>
+        <div class="col-md-4">
+            <div id="accard-prototype-fields" data-prototype="{{ prototype(form.fields.vars.prototype)|e }}">
+                {% for field in form.fields %}
+                    {{ prototype(field) }}
+                {% endfor %}
             </div>
+            <a href="#" id="accard-prototype-field-adder" class="btn btn-primary btn-block">
+                {{- "accard.prototype.action.add_field"|trans -}}
+            </a>
         </div>
     </div>
+
     <hr>
 {% endblock %}
 
 
 {#
-    Field javascript.
+    Prototype javascript.
 #}
 
 {% block form_javascripts %}
@@ -68,20 +80,8 @@
                 action: 'slug',
                 event: 'keyup'
             })
-            .behavior('type', {
-                target: '#option-hider',
-                condition: ['equal', 'choice'],
-                action: 'show'
-            })
-            .behavior('type', {
-                target: 'option',
-                condition: ['not_equal', 'choice'],
-                action: 'clear'
-            })
-            .behavior('type', {
-                target: 'allowMultiple',
-                condition: ['not_equal', 'choice'],
-                action: 'clear'
+            .collection("#accard-prototype-fields", {
+              adder: $("#accard-prototype-field-adder")
             })
             .bindAll();
     </script>
