@@ -1,0 +1,22 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+# Dylan Pierce <piercedy@upenn.edu>
+
+Accard\Component\Core\Model\Regimen:
+    type: entity
+    table: accard_regimen
+    repositoryClass: Accard\Bundle\RegimenBundle\Doctrine\ORM\RegimenRepository
+
+    manyToOne:
+        diagnosis:
+            targetEntity: Accard\Component\Diagnosis\Model\DiagnosisInterface
+            inversedBy: diagnoses
+            joinColumn:
+                name: diagnosisId
+                referencedColumnName: id
+                nullable: false

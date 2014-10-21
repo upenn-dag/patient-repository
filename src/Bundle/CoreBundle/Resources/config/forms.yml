@@ -19,6 +19,7 @@ parameters:
     accard.form.extension.accard_activity.class: Accard\Bundle\CoreBundle\Form\Extension\ActivityTypeExtension
     accard.form.extension.accard_sample.class: Accard\Bundle\CoreBundle\Form\Extension\SampleTypeExtension
     accard.form.extension.accard_sample_source.class: Accard\Bundle\CoreBundle\Form\Extension\SampleSourceTypeExtension
+    accard.form.extension.accard_regimen.class: Accard\Bundle\CoreBundle\Form\Extension\RegimenTypeExtension
 
     accard.form.type.patient_diagnoses.class: Accard\Bundle\CoreBundle\Form\Type\PatientDiagnosesType
 
@@ -104,6 +105,11 @@ services:
         arguments:
             - %accard.model.patient.class%
         tags: [{ name: form.type_extension, alias: accard_sample_source }]
+
+    accard.form.extension.accard_regimen:
+        class: %accard.form.extension.accard_regimen.class%
+        arguments: ['@accard.repository.diagnosis']
+        tags: [{ name: form.type_extension, alias: accard_regimen }]
 
     accard.form.type.patient_diagnoses:
         class: %accard.form.type.patient_diagnoses.class%

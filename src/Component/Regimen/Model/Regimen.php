@@ -12,6 +12,8 @@ namespace Accard\Component\Regimen\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Accard\Component\Field\Model\FieldValueInterface as BaseFieldValueInterface;
+use Accard\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterface;
 
 /**
  * Accard regimen model.
@@ -28,18 +30,18 @@ class Regimen implements RegimenInterface
     protected $id;
 
     /**
-     * Parent regimen.
+     * Prototype.
      *
-     * @var RegimenInterface
+     * @var PrototypeInterface
      */
-    protected $parent;
+    protected $prototype;
 
     /**
-     * Child regimens.
+     * Fields.
      *
-     * @var Collection|RegimenInterface[]
+     * @var Collection|BaseFieldValueInterface[]
      */
-    protected $children;
+    protected $fields;
 
 
     /**
@@ -47,7 +49,7 @@ class Regimen implements RegimenInterface
      */
     public function __construct()
     {
-        $this->children = new ArrayCollection;
+        $this->fields = new ArrayCollection();
     }
 
     /**
@@ -61,17 +63,17 @@ class Regimen implements RegimenInterface
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getPrototype()
     {
-        return $this->parent;
+        return $this->prototype;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setParent(RegimenInterface $parent = null)
+    public function setPrototype(BasePrototypeInterface $prototype = null)
     {
-        $this->parent = $parent;
+        $this->prototype = $prototype;
 
         return $this;
     }
@@ -79,27 +81,18 @@ class Regimen implements RegimenInterface
     /**
      * {@inheritdoc}
      */
-    public function getChildren()
+    public function getFields()
     {
-        return $this->children;
+        return $this->fields;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasChild(RegimenInterface $regimen)
+    public function setFields(Collection $fields)
     {
-        return $this->children->contains($regimen);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addChild(RegimenInterface $regimen)
-    {
-        if (!$this->hasChild($regimen)) {
-            $regimen->setParent($this);
-            $this->children->add($regimen);
+        foreach ($fields as $field) {
+            $this->addField($field);
         }
 
         return $this;
@@ -108,11 +101,11 @@ class Regimen implements RegimenInterface
     /**
      * {@inheritdoc}
      */
-    public function removeChild(RegimenInterface $regimen)
+    public function addField(BaseFieldValueInterface $field)
     {
-        if ($this->hasChild($regimen)) {
-            $this->children->removeElement($regimen);
-            $regimen->setParent(null);
+        if (!$this->hasField($field)) {
+            $field->setRegimen($this);
+            $this->fields->add($field);
         }
 
         return $this;
@@ -121,16 +114,47 @@ class Regimen implements RegimenInterface
     /**
      * {@inheritdoc}
      */
-    public function isChild()
+    public function removeField(BaseFieldValueInterface $field)
     {
-        return !$this->isParent();
+        if ($this->hasField($field)) {
+            $this->fields->removeElement($field);
+            $field->setRegimen(null);
+        }
+
+        return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isParent()
+    public function hasField(BaseFieldValueInterface $field)
     {
-        return null === $this->parent;
+        return $this->fields->contains($field);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasFieldByName($fieldName)
+    {
+        foreach ($this->fields as $field) {
+            if ($field->getName() === $fieldName) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFieldByName($fieldName)
+    {
+        foreach ($this->fields as $field) {
+            if ($field->getName() === $fieldName) {
+                return $field;
+            }
+        }
     }
 }

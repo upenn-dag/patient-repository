@@ -1,0 +1,71 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard_frontend_regimen_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.regimen:indexAction
+        _accard:
+            template: AccardWebBundle:Frontend/Regimen:index.html.twig
+            sortable: true
+            paginate: 25
+
+accard_frontend_regimen_index_by_prototype:
+    pattern: /{prototype}/
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.regimen:indexByPrototypeAction
+        _accard:
+            template: AccardWebBundle:Frontend/Regimen:indexByPrototype.html.twig
+            sortable: true
+            criteria:
+                prototype: $prototype
+            paginate: 25
+
+accard_frontend_regimen_show:
+    pattern: /{prototype}/{id}
+    methods: [GET]
+    requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
+    defaults:
+        _controller: accard.controller.regimen:showAction
+        _accard:
+            template: AccardWebBundle:Frontend/Regimen:show.html.twig
+
+accard_frontend_regimen_create:
+    pattern: /{prototype}/new
+    methods: [GET, POST]
+    requirements: { prototype: "[a-zA-Z1-9\-_\/]+" }
+    defaults:
+        _controller: accard.controller.regimen:createAction
+        _accard:
+            template: AccardWebBundle:Frontend/Regimen:create.html.twig
+            redirect:
+                route: accard_frontend_regimen_show
+                parameters: { prototype: resource.prototype.name, id: resource.id }
+
+accard_frontend_regimen_update:
+    pattern: /{prototype}/{id}/edit
+    methods: [GET, PUT, POST]
+    requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
+    defaults:
+        _controller: accard.controller.regimen:updateAction
+        _accard:
+            template: AccardWebBundle:Frontend/Regimen:update.html.twig
+            redirect:
+                route: accard_frontend_regimen_show
+                parameters: { prototype: resource.prototype.name, id: resource.id }
+
+accard_frontend_regimen_delete:
+    pattern: /{prototype}/{id}
+    methods: [DELETE]
+    requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
+    defaults:
+        _controller: accard.controller.regimen:deleteAction
+        _accard:
+            template: AccardWebBundle:Frontend/Regimen:delete.html.twig
+            redirect: accard_frontend_regimen_index

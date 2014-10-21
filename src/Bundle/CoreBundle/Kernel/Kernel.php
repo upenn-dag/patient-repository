@@ -20,10 +20,10 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
  */
 abstract class Kernel extends BaseKernel
 {
-    const VERSION = '0.1.0-dev';
-    const VERSION_ID = '000100';
+    const VERSION = '0.2.0-dev';
+    const VERSION_ID = '000200';
     const MAJOR_VERSION = '0';
-    const MINOR_VERSION = '1';
+    const MINOR_VERSION = '2';
     const RELEASE_VERSION = '0';
     const EXTRA_VERSION = 'DEV';
 
@@ -46,6 +46,7 @@ abstract class Kernel extends BaseKernel
             new \Accard\Bundle\BehaviorBundle\AccardBehaviorBundle(),
             new \Accard\Bundle\AttributeBundle\AccardAttributeBundle(),
             new \Accard\Bundle\SampleBundle\AccardSampleBundle(),
+            new \Accard\Bundle\RegimenBundle\AccardRegimenBundle(),
             new \Accard\Bundle\FlowBundle\AccardFlowBundle(),
             new \Accard\Bundle\ActivityBundle\AccardActivityBundle(),
             new \Accard\Bundle\WebBundle\AccardWebBundle(),

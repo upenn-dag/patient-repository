@@ -34,6 +34,10 @@ accard_backend_sample:
     resource: @AccardWebBundle/Resources/config/routing/backend/sample.yml
     prefix: /sample
 
+accard_backend_regimen:
+    resource: @AccardWebBundle/Resources/config/routing/backend/regimen.yml
+    prefix: /regimen
+
 accard_backend_behavior:
     resource: @AccardWebBundle/Resources/config/routing/backend/behavior.yml
     prefix: /behavior

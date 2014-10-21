@@ -1,0 +1,69 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard:
+    regimen:
+        entity_name: Regimen
+        regimens: Regimens
+        form:
+            id: Id
+            prototype: Prototype
+            prototype_label: Regimen Type
+        action:
+            add: Add Regimen
+            create: Create Regimen
+            update: Update Regimen
+            delete: Delete Regimen
+            design: Design Regimen
+            manage: Manage Regimen
+            manage_all: Manage Regimens
+        title:
+            index: Browse Regimens
+            show: Show Regimen
+            create: Create a New Regimen
+            update: Update Regimen
+            list: Regimens
+    regimen_prototype:
+        entity_name: Regimen Prototype
+        form:
+            name: Name
+            presentation: Presentation
+            fields: Fields
+            subjects: Subjects
+        action:
+            add: Add Regimen Prototype
+            create: Create Regimen Prototype
+            update: Update Regimen Prototype
+            delete: Delete Regimen Prototype
+            design: Design Regimen Prototype
+            manage: Manage Regimen Prototype
+            manage_all: Manage Regimen Prototypes
+        title:
+            index: Browse Regimen Prototypes
+            show: %regimen% Regimen Prototype
+            create: Create a New Regimen Prototype
+            update: Update Regimen Prototype
+            list: Regimen Prototypes
+    regimen_prototype_field:
+        entity_name: Regimen Field
+        form:
+            name: Name
+            presentation: Presentation
+        action:
+            add: Add Regimen Field
+            create: Create Regimen Field
+            update: Update Regimen Field
+            delete: Delete Regimen Field
+            design: Design Regimen Field
+            manage: Manage Regimen Field
+            manage_all: Manage Regimen Fields
+        title:
+            index: Browse Regimen Fields
+            show: %regimen% Regimen Field
+            create: Create a New Regimen Field
+            update: Update Regimen Field
+            list: Regimen Fields

@@ -1,0 +1,91 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard_backend_regimen_design:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.regimen:designAction
+        _accard:
+            template: AccardWebBundle:Backend/Regimen:design.html.twig
+
+accard_backend_regimen_settings_update:
+    pattern: /settings/update
+    methods: [PUT, POST]
+    defaults:
+        namespace: regimen
+        _controller: accard.controller.settings:updateAction
+        _accard:
+            redirect:
+                route: accard_backend_regimen_design
+                parameters: { type: settings, action: update }
+
+accard_backend_regimen_prototype_create:
+    pattern: /prototype/new
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.regimen_prototype:createAction
+        _accard:
+            template: AccardWebBundle:Backend/Regimen:prototypeCreate.html.twig
+            redirect:
+                route: accard_backend_regimen_design
+                parameters: { type: prototype, action: create, id: resource.id }
+
+accard_backend_regimen_prototype_update:
+    pattern: /prototype/{id}/edit
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: accard.controller.regimen_prototype:updateAction
+        _accard:
+            template: AccardWebBundle:Backend/Regimen:prototypeUpdate.html.twig
+            redirect:
+                route: accard_backend_regimen_design
+                parameters: { type: prototype, action: update, id: resource.id }
+
+accard_backend_regimen_prototype_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.regimen_prototype:deleteAction
+        _accard:
+            redirect:
+                route: accard_backend_regimen_design
+                parameters: { type: prototype, action: delete }
+
+accard_backend_regimen_field_create:
+    pattern: /field/new
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.regimen_prototype_field:createAction
+        _accard:
+            template: AccardWebBundle:Backend/Regimen:fieldCreate.html.twig
+            redirect:
+                route: accard_backend_regimen_design
+                parameters: { type: field, action: create, id: resource.id }
+
+accard_backend_regimen_field_update:
+    pattern: /field/{id}/edit
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: accard.controller.regimen_prototype_field:updateAction
+        _accard:
+            template: AccardWebBundle:Backend/Regimen:fieldUpdate.html.twig
+            redirect:
+                route: accard_backend_regimen_design
+                parameters: { type: field, action: update, id: resource.id }
+
+accard_backend_regimen_field_delete:
+    pattern: /field/{id}
+    methods: [DELETE]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.regimen_prototype_field:deleteAction
+        _accard:
+            redirect:
+                route: accard_backend_regimen_design
+                parameters: { type: field, action: delete }

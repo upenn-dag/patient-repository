@@ -1,0 +1,38 @@
+{
+    "name": "accard/regimen-bundle",
+    "type": "symfony-bundle",
+    "description": "Accard regimen bundle",
+    "keywords": ["regimen"],
+    "homepage": "http://accard.med.upenn.edu",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Frank Bardon Jr.",
+            "homepage": "http://frankbardon.com"
+        },
+        {
+            "name": "Database and Applications Group",
+            "homepage": "http://dag.med.upenn.edu"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "accard/resource-bundle":   "dev-develop",
+        "accard/regimen":            "dev-develop"
+    },
+    "suggest": {
+        "accard/web-bundle": "Provides the default web interface"
+    },
+    "autoload": {
+        "psr-4": { "Accard\\Bundle\\RegimenBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Accard\\Bundle\\RegimenBundle\\spec\\": "spec/" }
+    },
+    "repositories": [
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Resource.git" },
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/ResourceBundle.git" },
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/ActivityBundle.git" }
+    ]
+}

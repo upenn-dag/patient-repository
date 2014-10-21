@@ -40,6 +40,12 @@ accard_sample:
         sample_source:
             model: Accard\Component\Core\Model\Source
 
+accard_regimen:
+    classes:
+        regimen:
+            model: Accard\Component\Core\Model\Regimen
+            controller: Accard\Bundle\CoreBundle\Controller\RegimenController
+
 accard_behavior:
     classes:
         behavior:

@@ -1,3 +1,10 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
 accard:
     prototype:
         entity_name: Prototype
@@ -15,3 +22,6 @@ accard:
             delete: Delete Prototype
             manage: Manage Prototype
             manage_all: Manage Prototypes
+        message:
+            none_found: No prototypes can be found.
+            not_found: Prototype can not be found.

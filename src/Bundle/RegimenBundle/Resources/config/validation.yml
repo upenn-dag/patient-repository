@@ -5,18 +5,16 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
-Accard\Component\Sample\Model\Sample:
+Accard\Component\Regimen\Model\Regimen:
     properties:
         fields:
             - Valid: ~
 
     getters: ~
 
-Accard\Component\Sample\Model\Prototype:
+Accard\Component\Regimen\Model\Prototype:
     properties:
         name:
-            - NotEqualTo: { value: collection, message: accard.sample_prototype.name.not_collection, groups: ['accard'] }
-            - NotEqualTo: { value: derivation, message: accard.sample_prototype.name.not_derivation, groups: ['accard']}
             - Regex: { pattern: "/^[a-z0-9-]+$/", message: accard.sample_prototype.name.regex, groups: ['accard']}
             - Length: { min: 3, max: 60, minMessage: accard.sample_prototype.name.length.min, maxMessage: accard.sample_prototype.name.length.max, groups: ['accard']}
         presentation:
@@ -26,14 +24,14 @@ Accard\Component\Sample\Model\Prototype:
         fields:
             - Valid: ~
 
-Accard\Component\Sample\Model\Field:
+Accard\Component\Regimen\Model\Field:
     properties: ~
     getters: ~
 
-Accard\Component\Sample\Model\FieldValue:
+Accard\Component\Regimen\Model\FieldValue:
     properties: ~
     getters: ~
 
-Accard\Component\Sample\Model\Source:
+Accard\Component\Regimen\Model\Source:
     properties: ~
     getters: ~

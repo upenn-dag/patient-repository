@@ -13,31 +13,31 @@
 
 {% macro action_buttons() %}
     <div class="btn-group">
-        <a href="{{ path('accard_frontend_sample_index') }}" class="btn btn-primary">{{ 'accard.sample.action.manage_all'|trans }}</a>
+        <a href="{{ path('accard_frontend_regimen_index') }}" class="btn btn-primary">{{ 'accard.regimen.action.manage_all'|trans }}</a>
         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>
             <span class="sr-only">{{ 'accard.toggle'|trans }}</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-right" role="menu">
-            <li><a href="{{ path('accard_backend_sample_prototype_create') }}">{{ 'accard.sample_prototype.action.create'|trans }}</a></li>
-            <li><a href="{{ path('accard_backend_sample_field_create') }}">{{ 'accard.sample_prototype_field.action.create'|trans }}</a></li>
+            <li><a href="{{ path('accard_backend_regimen_prototype_create') }}">{{ 'accard.regimen_prototype.action.create'|trans }}</a></li>
+            <li><a href="{{ path('accard_backend_regimen_field_create') }}">{{ 'accard.regimen_prototype_field.action.create'|trans }}</a></li>
         </ul>
     </div>
 {% endmacro %}
 
 {% block content %}
 
-    {{ page_title('accard.sample.action.design'|trans, _self.action_buttons()) }}
+    {{ page_title('accard.regimen.action.design'|trans, _self.action_buttons()) }}
 
     <ul class="nav nav-tabs" role="tablist">
         <li class="{{ _self.active_tab(['prototype', 'none'], 'active') }}">
             <a href="#prototypes" role="tab" data-toggle="tab">
-                {{- 'accard.sample_prototype.title.list'|trans -}}
+                {{- 'accard.regimen_prototype.title.list'|trans -}}
             </a>
         </li>
         <li class="{{ _self.active_tab('field', 'active') }}">
             <a href="#fields" role="tab" data-toggle="tab">
-                {{- 'accard.sample_prototype_field.title.list'|trans -}}
+                {{- 'accard.regimen_prototype_field.title.list'|trans -}}
             </a>
         </li>
         <li class="{{ _self.active_tab('settings', 'active') }}">
@@ -52,24 +52,24 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        {{- 'accard.sample_prototype.title.list'|trans -}}
+                        {{- 'accard.regimen_prototype.title.list'|trans -}}
                     </h4>
                 </div>
-                {{ list_prototypes(prototypes, 'accard_backend_sample_prototype_update', 'accard_backend_sample_prototype_delete') }}
+                {{ list_prototypes(prototypes, 'accard_backend_regimen_prototype_update', 'accard_backend_regimen_prototype_delete') }}
             </div>
         </div>
         <div id="fields" class="tab-pane fade{{ _self.active_tab('field', ' in active') }}">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        {{- 'accard.sample_prototype_field.title.list'|trans -}}
+                        {{- 'accard.regimen_prototype_field.title.list'|trans -}}
                     </h4>
                 </div>
-                {{ list_fields(fields, 'accard_backend_sample_field_update', 'accard_backend_sample_field_delete') }}
+                {{ list_fields(fields, 'accard_backend_regimen_field_update', 'accard_backend_regimen_field_delete') }}
             </div>
         </div>
         <div id="settings" class="tab-pane fade{{ _self.active_tab('settings', ' in active') }}">
-            <form action="{{ path('accard_backend_sample_settings_update') }}" method="POST" enctype="{{ form_enctype(settings_form) }}">
+            <form action="{{ path('accard_backend_regimen_settings_update') }}" method="POST" enctype="{{ form_enctype(settings_form) }}">
                 {{ form_widget(settings_form._token) }}
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -82,8 +82,6 @@
                     </div>
                     <div class="panel-body">
                         {{ form_widget(settings_form.enabled) }}
-                        {{ form_widget(settings_form.show_collections) }}
-                        {{ form_widget(settings_form.show_derivations) }}
                     </div>
                 </div>
             </form>

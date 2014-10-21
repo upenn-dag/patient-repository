@@ -94,12 +94,12 @@
 <script type="text/javascript" defer>
 
     var Tabler = Accard.get('table');
-    var prototypes = new Tabler('#activity-prototypes');
-    var fields = new Tabler('#activity-fields');
+    var prototypes = new Tabler('#prototypes');
+    var fields = new Tabler('#fields');
 
     prototypes
         .plugin('autohighlighting', {
-            id: 'activity-prototype-{{ app.request.query.get('id', 0) }}',
+            id: 'prototype-{{ app.request.query.get('id', 0) }}',
             className: 'warning'
         })
         .bindAll()
@@ -107,7 +107,7 @@
 
     fields
         .plugin('autohighlighting', {
-            id: 'activity-field-{{ app.request.query.get('id', 0) }}',
+            id: 'field-{{ app.request.query.get('id', 0) }}',
             className: 'warning'
         })
         .bindAll()

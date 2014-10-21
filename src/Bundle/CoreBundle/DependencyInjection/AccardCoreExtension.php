@@ -35,7 +35,9 @@ class AccardCoreExtension extends AbstractResourceExtension implements PrependEx
         'accard_phase',
         'accard_import',
         'accard_behavior',
-        'accard_attribute'
+        'accard_attribute',
+        'accard_sample',
+        'accard_regimen',
     );
 
     /**

@@ -30,6 +30,9 @@ accard:
     sample_source:
         form:
             patient: Patient
+    regimen:
+        form:
+            diagnosis: Diagnosis
     attribute:
         form:
             patient: Patient
@@ -93,6 +96,8 @@ accard:
                 enabled: Enable activity repository
             sample:
                 enabled: Enable sample repository
+            regimen:
+                enabled: Enable regimen repository
             behavior:
                 enabled: Enable behavior repository
                 enable_menus: Enable behaviors

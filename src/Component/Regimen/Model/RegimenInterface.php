@@ -11,13 +11,15 @@
 namespace Accard\Component\Regimen\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Accard\Component\Prototype\Model\PrototypeSubjectInterface;
+use Accard\Component\Field\Model\FieldSubjectInterface;
 
 /**
  * Basic regimen interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface RegimenInterface
+interface RegimenInterface extends PrototypeSubjectInterface, FieldSubjectInterface
 {
     /**
      * Get regimen id.
@@ -25,64 +27,4 @@ interface RegimenInterface
      * @return integer
      */
     public function getId();
-
-    /**
-     * Get parent.
-     *
-     * @return RegimenInterface
-     */
-    public function getParent();
-
-    /**
-     * Set parent.
-     *
-     * @param RegimenInterface|null $regimen
-     * @return RegimenInterface
-     */
-    public function setParent(RegimenInterface $regimen = null);
-
-    /**
-     * Get children.
-     *
-     * @return Collection|RegimenInterface[]
-     */
-    public function getChildren();
-
-    /**
-     * Test for presence of a child regimen.
-     *
-     * @param RegimenInterface $regimen
-     * @return RegimenInterface
-     */
-    public function hasChild(RegimenInterface $regimen);
-
-    /**
-     * Add child regimen.
-     *
-     * @param RegimenInterface $regimen
-     * @return RegimenInterface
-     */
-    public function addChild(RegimenInterface $regimen);
-
-    /**
-     * Remove child regimen.
-     *
-     * @param RegimenInterface $regimen
-     * @return RegimenInterface
-     */
-    public function removeChild(RegimenInterface $regimen);
-
-    /**
-     * Test if regimen is a child.
-     *
-     * @return boolean
-     */
-    public function isChild();
-
-    /**
-     * Test if a regimen is a parent.
-     *
-     * @return boolean
-     */
-    public function isParent();
 }
