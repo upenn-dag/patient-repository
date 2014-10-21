@@ -18,10 +18,15 @@ accard:
         message:
             count: %total% diagnoses registered.
             count_fields: Collecting %total% diagnosis fields.
-        field:
-            title: Diagnosis Fields
+    diagnosis_field:
+        title: Diagnosis Fields
+        action:
+            show: Show Diagnosis Field
+            index: Browse Diagnosis Fields
             create: Create Diagnosis Field
+            design: Design Diagnosis Field
             update: Update Diagnosis Field
+        message:
             none_found: No diagnosis fields found.
     diagnosis_code:
         entity_name: Diagnosis Code

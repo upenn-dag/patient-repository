@@ -1,0 +1,121 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Backend:layout.html.twig' %}
+
+{% from 'AccardWebBundle:Common/Macros:actions.html.twig' import create %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
+
+
+{#
+    Page heading display.
+#}
+
+{% block form_page_title page_title('accard.create'|trans) %}
+
+
+{#
+    Form errors display.
+#}
+
+{% block form_errors form_errors(form) %}
+
+
+{#
+    Form submit action.
+#}
+
+{% block form_submit_action '' %}
+
+
+{#
+    Form submit method.
+#}
+
+{% block form_method 'post' %}
+
+
+{#
+    Form body header.
+#}
+
+{% block form_header '' %}
+
+
+{#
+    Form token.
+#}
+
+{% block form_token %}
+{% spaceless %}
+    {% if form._token is defined %}
+        {{ form_widget(form._token) }}
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+
+{#
+    Form body, empty by default.
+#}
+
+{% block form_body '' %}
+
+
+{#
+    Form body footer.
+#}
+
+{% block form_footer %}
+    <div class="row">
+        <div class="col-md-12">
+            <span class="pull-right">{{ create() }}</span>
+        </div>
+    </div>
+{% endblock %}
+
+
+{#
+    Extra form javascripts.
+#}
+
+{% block form_javascripts '' %}
+
+
+{#
+    Extra form stylesheets.
+#}
+
+{% block form_stylesheets '' %}
+
+
+{#
+    Using the extended form blocks above, the following bits use block inheritance
+    to create a form page.
+#}
+
+{% block content %}
+    {{ block('form_page_title') }}
+    {{ block('form_errors') }}
+
+    <form action="{{ block('form_submit_action') }}" method="{{ block('form_method') }}" {{ form_enctype(form) }}>
+        {{ block('form_token') }}
+        {{ block('form_header') }}
+        {{ block('form_body') }}
+        {{ block('form_footer') }}
+    </form>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ block('form_javascripts') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ block('form_stylesheets') }}
+{% endblock %}

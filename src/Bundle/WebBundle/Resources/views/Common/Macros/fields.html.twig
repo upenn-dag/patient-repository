@@ -5,7 +5,7 @@
 {# For the full copyright and license information, please view the LICENSE #}
 {# file that was distributed with this source code. #}
 
-{% macro list_fields(fields) %}
+{% macro list_fields(fields, update_path, delete_path) %}
 
 {% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
 {% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete %}
@@ -26,8 +26,8 @@
                 </td>
                 <td>
                     <div class="pull-right">
-                        {{ edit(path('accard_backend_patient_field_update', {'id': field.id}), null, 'xs') }}
-                        {{ delete(path('accard_backend_patient_field_delete', {'id': field.id}), null, 'xs') }}
+                        {{ edit(path(update_path, {'id': field.id}), null, 'xs') }}
+                        {{ delete(path(delete_path, {'id': field.id}), null, 'xs') }}
                     </div>
                 </td>
             </tr>
@@ -35,7 +35,6 @@
         </tbody>
     </table>
 {% else %}
-    {{ info('accard.patient.message.none_found'|trans) }}
+    {{ info('accard.field.message.none_found'|trans) }}
 {% endif %}
-
 {% endmacro %}

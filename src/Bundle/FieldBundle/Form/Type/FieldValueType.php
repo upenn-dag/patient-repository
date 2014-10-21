@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Field value form type.
- * 
+ *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
 class FieldValueType extends AbstractType

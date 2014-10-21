@@ -10,6 +10,10 @@
  */
 namespace Accard\Component\Field\Model;
 
+use Doctrine\Common\Collections\Collection;
+use Accard\Component\Option\Model\OptionInterface;
+use Accard\Component\Option\Model\OptionValueInterface;
+
 /**
  * Field value interface.
  *
@@ -65,6 +69,45 @@ interface FieldValueInterface
     public function setValue($value);
 
     /**
+     * Get values.
+     *
+     * @return Collection|OptionValueInterface[]
+     */
+    public function getValues();
+
+    /**
+     * Set values.
+     *
+     * @param Collection|OptionValueInterface[]
+     * @return FieldValueInterface
+     */
+    public function setValues(Collection $values);
+
+    /**
+     * Test for presence of value.
+     *
+     * @param OptionValueInterface $value
+     * @return FieldValueInterface
+     */
+    public function hasValue(OptionValueInterface $value);
+
+    /**
+     * Add value.
+     *
+     * @param OptionValueInterface $value
+     * @return FieldValueInterface
+     */
+    public function addValue(OptionValueInterface $value);
+
+    /**
+     * Remove value.
+     *
+     * @param OptionValueInterface $value
+     * @return FieldValueInterface
+     */
+    public function removeValue(OptionValueInterface $value);
+
+    /**
      * Proxy access to name on field.
      *
      * @return string
@@ -84,6 +127,20 @@ interface FieldValueInterface
      * @return string
      */
     public function getType();
+
+    /**
+     * Proxy access to option on field.
+     *
+     * @return OptionInterface|null
+     */
+    public function getOption();
+
+    /**
+     * Proxy access to multiplicity on field.
+     *
+     * @return boolean
+     */
+    public function getAllowMultiple();
 
     /**
      * Get field configuration.

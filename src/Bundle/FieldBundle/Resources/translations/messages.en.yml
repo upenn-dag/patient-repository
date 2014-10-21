@@ -4,6 +4,9 @@ accard:
         form:
             name: Name
             presentation: Presentation
+            type: Type
+            option: Option
+            allow_multiple: Allow multiple options
         action:
             add: Add Field
             create: Create Field

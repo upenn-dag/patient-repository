@@ -61,7 +61,7 @@ class BuildFieldFormChoicesListener implements EventSubscriberInterface
 
         $type = $field->getType();
 
-        if (null === $type || FieldTypes::CHOICE === $type) {
+        if (FieldTypes::CHOICE === $type) {
             $event->getForm()->add('option', 'accard_option_choice', array(
                 'required' => false,
             ));
