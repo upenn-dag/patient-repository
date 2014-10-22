@@ -72,7 +72,7 @@ class ActivityTypeExtension extends AbstractTypeExtension
 
         if ($options['use_diagnosis']) {
             $builder
-                ->add('diagnosis', 'accard_diagnosis_choice')
+                ->add('diagnosis', 'accard_diagnosis_choice', array('required' => false))
                 ->addEventSubscriber(new PatientDiagnosesListener($this->diagnosisRepository))
             ;
         }

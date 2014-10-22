@@ -108,7 +108,9 @@ services:
 
     accard.form.extension.accard_regimen:
         class: %accard.form.extension.accard_regimen.class%
-        arguments: ['@accard.repository.diagnosis']
+        arguments:
+            - @accard.repository.patient
+            - @accard.repository.diagnosis
         tags: [{ name: form.type_extension, alias: accard_regimen }]
 
     accard.form.type.patient_diagnoses:

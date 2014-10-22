@@ -23,10 +23,14 @@ class PatientNotFoundException extends RuntimeException
      * Exception constructor.
      *
      * @param string $field
-     * @param string $value
+     * @param string|null $value
      */
-    public function __construct($field, $value)
+    public function __construct($field, $value = null)
     {
-        $this->message = sprintf('Patient could not be found using %s with value %s', $field, strval($value));
+        if (null === $value) {
+            $this->message = sprintf('Patient count not be found in this %s.', $field);
+        } else {
+            $this->message = sprintf('Patient could not be found using %s with value %s', $field, strval($value));
+        }
     }
 }

@@ -70,6 +70,15 @@ class RegimenType extends AbstractType
         $builder
             ->add('prototype', 'accard_regimen_prototype_choice', array(
                 'label' => 'accard.regimen.form.prototype',
+                'required' => true,
+            ))
+            ->add('startDate', 'date', array(
+                'label' => 'accard.regimen.form.start_date',
+                'required' => true,
+            ))
+            ->add('endDate', 'date', array(
+                'label' => 'accard.regimen.form.end_date',
+                'required' => false,
             ))
             ->add('fields', 'collection', array(
                 'label' => 'accard.regimen.form.fields',

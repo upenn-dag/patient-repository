@@ -21,7 +21,24 @@ use DateTime;
 class Activity extends BaseActivity implements ActivityInterface
 {
     // Traits
-    use ActivityTrait;
+    use \Accard\Component\Resource\Model\BlameableTrait;
+    use \Accard\Component\Resource\Model\TimestampableTrait;
+    use \Accard\Component\Resource\Model\VersionableTrait;
+
+    /**
+     * Patient.
+     *
+     * @var PatientInterface
+     */
+    protected $patient;
+
+    /**
+     * Diagnosis.
+     *
+     * @var DiagnosisInterface
+     */
+    protected $diagnosis;
+
 
     /**
      * Constructor.
@@ -30,5 +47,41 @@ class Activity extends BaseActivity implements ActivityInterface
     {
         parent::__construct();
         $this->createdAt = new DateTime();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPatient()
+    {
+        return $this->patient;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPatient(PatientInterface $patient = null)
+    {
+        $this->patient = $patient;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDiagnosis()
+    {
+        return $this->diagnosis;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDiagnosis(DiagnosisInterface $diagnosis = null)
+    {
+        $this->diagnosis = $diagnosis;
+
+        return $this;
     }
 }

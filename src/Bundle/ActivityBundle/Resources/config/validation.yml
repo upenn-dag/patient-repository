@@ -1,0 +1,35 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+Accard\Component\Activity\Model\Activity:
+    properties:
+        fields:
+            - Valid: ~
+
+    getters: ~
+
+Accard\Component\Activity\Model\Prototype:
+    properties:
+        name:
+            - NotEqualTo: { value: derivation, message: accard.activity_prototype.name.not_derivation, groups: ['accard']}
+            - NotEqualTo: { value: collection, message: accard.activity_prototype.name.not_collection, groups: ['accard']}
+            - Regex: { pattern: "/^[a-z0-9-]+$/", message: accard.activity_prototype.name.regex, groups: ['accard']}
+            - Length: { min: 3, max: 60, minMessage: accard.activity_prototype.name.length.min, maxMessage: accard.activity_prototype.name.length.max, groups: ['accard']}
+        presentation:
+            - Length: { min: 3, max: 120, minMessage: accard.activity_prototype.presentation.length.min, maxMessage: accard.activity_prototype.presentation.length.max, groups: ['accard']}
+        subjects:
+            - Valid: ~
+        fields:
+            - Valid: ~
+
+Accard\Component\Activity\Model\Field:
+    properties: ~
+    getters: ~
+
+Accard\Component\Activity\Model\FieldValue:
+    properties: ~
+    getters: ~

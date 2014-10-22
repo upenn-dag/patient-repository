@@ -55,6 +55,12 @@ class BackendMenuSubscriber implements EventSubscriberInterface
             $activity->setCurrent(true);
         }
 
+        $regimen = $this->createSimpleItem($event, $design, 'regimen', 'regimen_design', 'regimen');
+
+        if (false !== strpos($uri, '/regimen/')) {
+            $regimen->setCurrent(true);
+        }
+
         $sample = $this->createSimpleItem($event, $design, 'sample', 'sample_design', 'sample');
 
         if (false !== strpos($uri, '/sample/')) {

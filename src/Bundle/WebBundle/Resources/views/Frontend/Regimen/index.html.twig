@@ -9,26 +9,26 @@
 
 {% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import design %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import pagination, page_title %}
-{% from 'AccardWebBundle:Frontend/Activity:macros.html.twig' import list %}
+{% from 'AccardWebBundle:Frontend/Regimen:macros.html.twig' import list %}
 
-{% set settings = accard_settings('activity') %}
+{% set settings = accard_settings('regimen') %}
 {% set designBtn = null %}
 
 {% if is_granted('ROLE_ADMIN') %}
-    {% set designBtn = design(path('accard_backend_activity_design'), 'accard.activity.action.design'|trans) %}
+    {% set designBtn = design(path('accard_backend_regimen_design'), 'accard.regimen.action.design'|trans) %}
 {% endif %}
 
 {% block content %}
-    {% block activity_title %}
-        {{ page_title('accard.activity.title.index'|trans, designBtn) }}
+    {% block regimen_title %}
+        {{ page_title('accard.regimen.title.index'|trans, designBtn) }}
     {% endblock %}
 
-    {% block activity_tabs %}
+    {% block regimen_tabs %}
         {% include 'AccardWebBundle:Frontend/Activity:tabs.html.twig' %}
     {% endblock %}
 
-    {% block activity_content %}
-        {{ list(activities) }}
-        {{ pagination(activities) }}
+    {% block regimen_content %}
+        {{ list(regimens) }}
+        {{ pagination(regimens) }}
     {% endblock %}
 {% endblock %}

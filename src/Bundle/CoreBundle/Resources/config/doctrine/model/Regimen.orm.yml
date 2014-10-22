@@ -13,10 +13,17 @@ Accard\Component\Core\Model\Regimen:
     repositoryClass: Accard\Bundle\RegimenBundle\Doctrine\ORM\RegimenRepository
 
     manyToOne:
+        patient:
+            targetEntity: Accard\Component\Patient\Model\PatientInterface
+            #inversedBy: activities
+            joinColumn:
+                name: patientId
+                referencedColumnName: id
+                nullable: false
         diagnosis:
             targetEntity: Accard\Component\Diagnosis\Model\DiagnosisInterface
             inversedBy: diagnoses
             joinColumn:
                 name: diagnosisId
                 referencedColumnName: id
-                nullable: false
+                nullable: true

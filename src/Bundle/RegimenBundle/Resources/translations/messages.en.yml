@@ -12,6 +12,8 @@ accard:
         form:
             id: Id
             prototype: Prototype
+            start_date: Start Date
+            end_date: End Date
             prototype_label: Regimen Type
         action:
             add: Add Regimen

@@ -10,6 +10,7 @@
  */
 namespace Accard\Component\Regimen\Model;
 
+use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Accard\Component\Field\Model\FieldValueInterface as BaseFieldValueInterface;
@@ -35,6 +36,20 @@ class Regimen implements RegimenInterface
      * @var PrototypeInterface
      */
     protected $prototype;
+
+    /**
+     * Start date.
+     *
+     * @param DateTime
+     */
+    protected $startDate;
+
+    /**
+     * End date.
+     *
+     * @param DateTime|null
+     */
+    protected $endDate;
 
     /**
      * Fields.
@@ -74,6 +89,42 @@ class Regimen implements RegimenInterface
     public function setPrototype(BasePrototypeInterface $prototype = null)
     {
         $this->prototype = $prototype;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStartDate(DateTime $startDate)
+    {
+        $this->startDate = $startDate;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEndDate(DateTime $endDate = null)
+    {
+        $this->endDate = $endDate;
 
         return $this;
     }

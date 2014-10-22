@@ -84,26 +84,32 @@ class PatientType extends AbstractType
 
         $builder
             ->add('mrn', 'text', array(
-                'label' => 'accard.patient.form.mrn'
+                'label' => 'accard.patient.form.mrn',
+                'required' => false,
             ))
             ->add('firstName', 'text', array(
                 'label' => 'accard.patient.form.first_name'
+                'required' => true,
             ))
             ->add('lastName', 'text', array(
                 'label' => 'accard.patient.form.last_name'
+                'required' => true,
             ))
             ->add('dateOfBirth', 'birthday', array(
                 'label' => 'accard.patient.form.date_of_birth'
+                'required' => true,
             ))
             ->add('dateOfDeath', 'date', array(
                 'label' => 'accard.patient.form.date_of_death',
                 'required' => false,
             ))
             ->add('gender', new OptionValueChoiceType($genderOption), array(
-                'label' => 'accard.patient.form.gender'
+                'label' => 'accard.patient.form.gender',
+                'required' => false,
             ))
             ->add('race', new OptionValueChoiceType($raceOption), array(
-                'label' => 'accard.patient.form.race'
+                'label' => 'accard.patient.form.race',
+                'required' => false,
             ))
             ->add('fields', 'collection', array(
                 'required'     => false,

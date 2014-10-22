@@ -1,6 +1,8 @@
 accard:
     activity:
         entity_name: Activity
+        activities: Activities
+        regimens: Regimens
         form:
             id: Id
             activity_date: Activity Date

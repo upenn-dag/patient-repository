@@ -10,6 +10,7 @@
  */
 namespace Accard\Component\Regimen\Model;
 
+use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Accard\Component\Prototype\Model\PrototypeSubjectInterface;
 use Accard\Component\Field\Model\FieldSubjectInterface;
@@ -27,4 +28,34 @@ interface RegimenInterface extends PrototypeSubjectInterface, FieldSubjectInterf
      * @return integer
      */
     public function getId();
+
+    /**
+     * Get start date.
+     *
+     * @return DateTime
+     */
+    public function getStartDate();
+
+    /**
+     * Set start date.
+     *
+     * @param DateTime $startDate
+     * @return RegimenInterface
+     */
+    public function setStartDate(DateTime $startDate);
+
+    /**
+     * Get end date.
+     *
+     * @return DateTime|null
+     */
+    public function getEndDate();
+
+    /**
+     * Set end date.
+     *
+     * @param DateTime $endDate
+     * @return RegimenInterface
+     */
+    public function setEndDate(DateTime $endDate = null);
 }

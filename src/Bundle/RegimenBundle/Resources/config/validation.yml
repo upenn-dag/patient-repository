@@ -7,6 +7,11 @@
 
 Accard\Component\Regimen\Model\Regimen:
     properties:
+        startDate:
+            - NotBlank: { message: accard.regimen.start_date.not_blank, groups: ['accard']}
+            - DateTime: { message: accard.regimen.start_date.datetime, groups: ['accard']}
+        endDate:
+            - DateTime: { message: accard.regimen.end_date.date_time, groups: ['accard']}
         fields:
             - Valid: ~
 
@@ -15,10 +20,10 @@ Accard\Component\Regimen\Model\Regimen:
 Accard\Component\Regimen\Model\Prototype:
     properties:
         name:
-            - Regex: { pattern: "/^[a-z0-9-]+$/", message: accard.sample_prototype.name.regex, groups: ['accard']}
-            - Length: { min: 3, max: 60, minMessage: accard.sample_prototype.name.length.min, maxMessage: accard.sample_prototype.name.length.max, groups: ['accard']}
+            - Regex: { pattern: "/^[a-z0-9-]+$/", message: accard.regimen_prototype.name.regex, groups: ['accard']}
+            - Length: { min: 3, max: 60, minMessage: accard.regimen_prototype.name.length.min, maxMessage: accard.regimen_prototype.name.length.max, groups: ['accard']}
         presentation:
-            - Length: { min: 3, max: 120, minMessage: accard.sample_prototype.presentation.length.min, maxMessage: accard.sample_prototype.presentation.length.max, groups: ['accard']}
+            - Length: { min: 3, max: 120, minMessage: accard.regimen_prototype.presentation.length.min, maxMessage: accard.regimen_prototype.presentation.length.max, groups: ['accard']}
         subjects:
             - Valid: ~
         fields:

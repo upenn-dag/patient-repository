@@ -1,0 +1,28 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+Accard\Component\Core\Model\Activity:
+    properties:
+        patient:
+            - Valid: ~
+            - NotBlank: { message: accard.activity.patient.not_blank, groups: ['accard']}
+            - Type: { type: Accard\Component\Patient\Model\PatientInterface, message: accard.activity.patient.type, groups: ['accard']}
+        diagnosis:
+            - Valid: ~
+            - Type: { type: Accard\Component\Diagnosis\Model\DiagnosisInterface, message: accard.activity.diagnosis.type, groups: ['accard']}
+            - Expression: { expression: "value === null or this.getDiagnosis().getPatient() === this.getPatient()" , message: accard.activity.diagnosis.must_match_patient, groups: ['accard']}
+
+Accard\Component\Core\Model\Regimen:
+    properties:
+        patient:
+            - Valid: ~
+            - NotBlank: { message: accard.regimen.patient.not_blank, groups: ['accard']}
+            - Type: { type: Accard\Component\Patient\Model\PatientInterface, message: accard.regimen.patient.type, groups: ['accard']}
+        diagnosis:
+            - Valid: ~
+            - Type: { type: Accard\Component\Diagnosis\Model\DiagnosisInterface, message: accard.regimen.diagnosis.type, groups: ['accard']}
+            - Expression: { expression: "value === null or this.getDiagnosis().getPatient() === this.getPatient()" , message: accard.regimen.diagnosis.must_match_patient, groups: ['accard']}

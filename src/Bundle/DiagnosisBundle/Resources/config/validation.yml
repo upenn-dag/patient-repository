@@ -1,0 +1,26 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+Accard\Component\Diagnosis\Model\Diagnosis:
+    properties: ~
+    getters: ~
+
+Accard\Component\Diagnosis\Model\Field:
+    properties: ~
+    getters: ~
+
+Accard\Component\Diagnosis\Model\FieldValue:
+    properties: ~
+    getters: ~
+
+Accard\Component\Diagnosis\Model\Code:
+    properties: ~
+    getters: ~
+
+Accard\Component\Diagnosis\Model\CodeGroup:
+    properties: ~
+    getters: ~

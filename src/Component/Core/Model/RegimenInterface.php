@@ -27,6 +27,21 @@ interface RegimenInterface extends BaseRegimenInterface,
                                    VersionableInterface
 {
     /**
+     * Get patient.
+     *
+     * @return PatientInterface
+     */
+    public function getPatient();
+
+    /**
+     * Set patient.
+     *
+     * @param PatientInterface $patient
+     * @return RegimenInterface
+     */
+    public function setPatient(PatientInterface $patient = null);
+
+    /**
      * Get diagnosis.
      *
      * @return DiagnosisInterface

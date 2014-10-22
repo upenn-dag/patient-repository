@@ -46,9 +46,11 @@ class ActivitySettingsSchema implements SchemaInterface
         $builder
             ->setDefaults(array_merge(array(
                 'enabled' => true,
+                'show_regimens' => true,
             ), $this->defaults))
             ->setAllowedValues(array(
                 'enabled' => array(true, false, '1', '0'),
+                'show_regimens' => array(true, false, '1', '0'),
             ))
         ;
     }
@@ -61,6 +63,10 @@ class ActivitySettingsSchema implements SchemaInterface
         $builder
             ->add('enabled', 'checkbox', array(
                 'label' => 'accard.form.settings.activity.enabled',
+                'required' => false,
+            ))
+            ->add('show_regimens', 'checkbox', array(
+                'label' => 'accard.form.settings.activity.show_regimens',
                 'required' => false,
             ))
         ;

@@ -32,6 +32,7 @@ accard:
             patient: Patient
     regimen:
         form:
+            patient: Patient
             diagnosis: Diagnosis
     attribute:
         form:
@@ -94,6 +95,7 @@ accard:
                 collect_phases: Collect phases in diagnosis forms
             activity:
                 enabled: Enable activity repository
+                show_regimens: Show regimens in activity section
             sample:
                 enabled: Enable sample repository
             regimen:

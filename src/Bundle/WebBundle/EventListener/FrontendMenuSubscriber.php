@@ -56,7 +56,7 @@ class FrontendMenuSubscriber implements EventSubscriberInterface
         if ($activitySettings['enabled']) {
             $activity = $this->createSimpleItem($event, $repositories, 'activity', 'activity_index', 'activities');
 
-            if ('activity' === $baseRoute) {
+            if ('activity' === $baseRoute || 'regimen' === $baseRoute) {
                 $activity->setCurrent(true);
             }
         }

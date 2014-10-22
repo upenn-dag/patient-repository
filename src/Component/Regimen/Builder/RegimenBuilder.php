@@ -8,23 +8,23 @@
  * For the full copyright and license information, please view the
  * LICENSE file that was distributed with this source code.
  */
-namespace Accard\Component\Regiment\Builder;
+namespace Accard\Component\Regimen\Builder;
 
 use Accard\Component\Resource\Builder\AbstractBuilder;
 use Accard\Component\Resource\Repository\RepositoryInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Regiment builder.
+ * Regimen builder.
  *
  * Used to ease the programatic creation of regimens.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class RegimentBuilder extends AbstractBuilder implements RegimentBuilderInterface
+class RegimenBuilder extends AbstractBuilder implements RegimenBuilderInterface
 {
     /**
-     * Regiment repository.
+     * Regimen repository.
      *
      * @var RepositoryInterface
      */

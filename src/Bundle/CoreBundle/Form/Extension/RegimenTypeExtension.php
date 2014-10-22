@@ -15,7 +15,9 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Accard\Component\Patient\Repository\PatientRepositoryInterface;
 use Accard\Component\Diagnosis\Repository\DiagnosisRepositoryInterface;
+use Accard\Bundle\CoreBundle\Form\EventListener\PatientDiagnosesListener;
 
 /**
  * Regimen form type extension.
@@ -24,6 +26,20 @@ use Accard\Component\Diagnosis\Repository\DiagnosisRepositoryInterface;
  */
 class RegimenTypeExtension extends AbstractTypeExtension
 {
+    /**
+     * Patient class FQCN.
+     *
+     * @var string
+     */
+    protected $patientClass;
+
+    /**
+     * Patient repository.
+     *
+     * @var PatientRepositoryInterface
+     */
+    protected $patientRepository;
+
     /**
      * Diagnosis class FQCN.
      *
@@ -44,8 +60,10 @@ class RegimenTypeExtension extends AbstractTypeExtension
      *
      * @param DiagnosisRepositoryInterface $diagnosisRepository
      */
-    public function __construct(DiagnosisRepositoryInterface $diagnosisRepository)
+    public function __construct(PatientRepositoryInterface $patientRepository, DiagnosisRepositoryInterface $diagnosisRepository)
     {
+        $this->patientClass = $patientRepository->getClassName();
+        $this->patientRepository = $patientRepository;
         $this->diagnosisClass = $diagnosisRepository->getClassName();
         $this->diagnosisRepository = $diagnosisRepository;
     }
@@ -55,10 +73,14 @@ class RegimenTypeExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        if ($options['use_patient']) {
+            $builder->add('patient', 'accard_patient_choice');
+        }
+
         if ($options['use_diagnosis']) {
             $builder
-                ->add('diagnosis', 'accard_diagnosis_choice')
-                //->addEventSubscriber(new PatientDiagnosesListener($this->diagnosisRepository))
+                ->add('diagnosis', 'accard_diagnosis_choice', array('required' => false))
+                ->addEventSubscriber(new PatientDiagnosesListener($this->diagnosisRepository))
             ;
         }
     }
@@ -70,6 +92,7 @@ class RegimenTypeExtension extends AbstractTypeExtension
     {
         $resolver
             ->setDefaults(array(
+                'use_patient' => true,
                 'use_diagnosis' => true,
             ))
         ;

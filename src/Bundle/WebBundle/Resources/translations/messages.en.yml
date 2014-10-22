@@ -56,6 +56,7 @@ accard:
             behavior: Behavior
             attribute: Attribute
             activity: Activity
+            regimen: Regimen
             sample: Sample
             options: Options
         frontend:
@@ -105,6 +106,9 @@ accard:
         form:
             select_diagnosis: Select diagnosis
     activity:
+        title:
+            index_by_prototype: Browse %prototype% Activities
+    regimen:
         title:
             index_by_prototype: Browse %prototype% Activities
     form:

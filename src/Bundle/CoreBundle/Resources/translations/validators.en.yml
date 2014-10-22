@@ -1,0 +1,22 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard:
+    activity:
+        patient:
+            not_blank: Patient may not be left blank.
+            type: Value must be a valid patient object.
+        diagnosis:
+            type: Value must be a valid diagnosis object.
+            must_match_patient: Diagnosis must belong to the selected patient.
+    regimen:
+        patient:
+            not_blank: Patient may not be left blank.
+            type: Value must be a valid patient object.
+        diagnosis:
+            type: Value must be a valid diagnosis object.
+            must_match_patient: Diagnosis must belong to the selected patient.

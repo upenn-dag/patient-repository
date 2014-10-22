@@ -12,13 +12,14 @@ namespace Accard\Bundle\PatientBundle\Doctrine\ORM;
 
 use PagerFanta\PagerfantaInterface;
 use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Accard\Component\Patient\Repository\PatientRepositoryInterface;
 
 /**
  * Basic patient repository.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class PatientRepository extends EntityRepository
+class PatientRepository extends EntityRepository implements PatientRepositoryInterface
 {
     /**
      * {@inheritdoc}

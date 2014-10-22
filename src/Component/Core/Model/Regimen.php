@@ -10,6 +10,7 @@
  */
 namespace Accard\Component\Core\Model;
 
+use Accard\Bundle\PatientBundle\Exception\PatientNotFoundException;
 use Accard\Component\Regimen\Model\Regimen as BaseRegimen;
 use DateTime;
 
@@ -26,6 +27,13 @@ class Regimen extends BaseRegimen implements RegimenInterface
     use \Accard\Component\Resource\Model\VersionableTrait;
 
     /**
+     * Patient.
+     *
+     * @var PatientInterface
+     */
+    protected $patient;
+
+    /**
      * Diagnosis.
      *
      * @var DiagnosisInterface
@@ -39,6 +47,26 @@ class Regimen extends BaseRegimen implements RegimenInterface
     public function __construct()
     {
         $this->createdAt = new DateTime();
+
+        parent::__construct();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPatient()
+    {
+        return $this->patient;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPatient(PatientInterface $patient = null)
+    {
+        $this->patient = $patient;
+
+        return $this;
     }
 
     /**

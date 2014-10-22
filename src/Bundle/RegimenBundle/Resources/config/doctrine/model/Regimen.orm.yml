@@ -14,6 +14,14 @@ Accard\Component\Regimen\Model\Regimen:
             generator:
                 strategy: AUTO
 
+    fields:
+        startDate:
+            type: datetime
+            nullable: false
+        endDate:
+            type: datetime
+            nullable: true
+
     oneToMany:
         fields:
             targetEntity: Accard\Component\Regimen\Model\FieldValueInterface
