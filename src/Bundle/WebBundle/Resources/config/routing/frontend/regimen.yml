@@ -45,7 +45,7 @@ accard_frontend_regimen_create:
         _accard:
             template: AccardWebBundle:Frontend/Regimen:create.html.twig
             redirect:
-                route: accard_frontend_regimen_show
+                route: accard_frontend_regimen_index_by_prototype
                 parameters: { prototype: resource.prototype.name, id: resource.id }
 
 accard_frontend_regimen_update:
@@ -57,7 +57,7 @@ accard_frontend_regimen_update:
         _accard:
             template: AccardWebBundle:Frontend/Regimen:update.html.twig
             redirect:
-                route: accard_frontend_regimen_show
+                route: accard_frontend_regimen_index_by_prototype
                 parameters: { prototype: resource.prototype.name, id: resource.id }
 
 accard_frontend_regimen_delete:
@@ -68,4 +68,7 @@ accard_frontend_regimen_delete:
         _controller: accard.controller.regimen:deleteAction
         _accard:
             template: AccardWebBundle:Frontend/Regimen:delete.html.twig
-            redirect: accard_frontend_regimen_index
+            redirect:
+                route: accard_frontend_regimen_index_by_prototype
+                parameters: { prototype: resource.prototype.name }
+

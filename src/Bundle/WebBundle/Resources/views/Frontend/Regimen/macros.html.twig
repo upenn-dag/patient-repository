@@ -12,7 +12,7 @@
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
 
 {% if regimens|length > 0 %}
-    <table class="regimen table table-bordered table-striped table-hover">
+    <table id="regimens" class="regimen table table-bordered table-striped table-hover">
         <thead>
             <tr>
                 <th class="prototype">{{ accard_resource_sort('prototype', 'accard.regimen.form.prototype'|trans) }}</th>
@@ -24,7 +24,7 @@
         </thead>
         <tbody>
         {% for regimen in regimens %}
-            <tr id="{{ regimen.id }}">
+            <tr id="regimen-{{ regimen.id }}">
                 <td class="prototype">
                     <a href="{{ path('accard_frontend_regimen_index_by_prototype', {'prototype': regimen.prototype.name}) }}">
                         {{- regimen.prototype.presentation -}}

@@ -82,9 +82,9 @@ accard_frontend_sample_source_collection_create:
     defaults:
         _controller: accard.controller.sample_source:createAction
         _accard:
-            template: AccardWebBundle:Frontend/Sample:sourceCreate.html.twig
-            redirect: accard_frontend_sample_source_collection_show
             form: accard_sample_source_collection
+            template: AccardWebBundle:Frontend/Sample:sourceCreate.html.twig
+            redirect: accard_frontend_sample_source_collection_index
 
 accard_frontend_sample_source_derivation_create:
     pattern: /derivation/new
@@ -93,7 +93,7 @@ accard_frontend_sample_source_derivation_create:
         _controller: accard.controller.sample_source:createAction
         _accard:
             template: AccardWebBundle:Frontend/Sample:sourceCreate.html.twig
-            redirect: accard_frontend_sample_source_derivation_show
+            redirect: accard_frontend_sample_source_derivation_index
             form: accard_sample_source_derivation
 
 accard_frontend_sample_create:
@@ -105,7 +105,7 @@ accard_frontend_sample_create:
         _accard:
             template: AccardWebBundle:Frontend/Sample:create.html.twig
             redirect:
-                route: accard_frontend_sample_show
+                route: accard_frontend_sample_index_by_prototype
                 parameters: { prototype: resource.prototype.name, id: resource.id }
 
 accard_frontend_sample_source_collection_update:
@@ -116,7 +116,7 @@ accard_frontend_sample_source_collection_update:
         _controller: accard.controller.sample_source:updateAction
         _accard:
             template: AccardWebBundle:Frontend/Sample:sourceUpdate.html.twig
-            redirect: accard_frontend_sample_source_collection_show
+            redirect: accard_frontend_sample_source_collection_index
             form: accard_sample_source_collection
 
 accard_frontend_sample_source_derivation_update:
@@ -127,7 +127,7 @@ accard_frontend_sample_source_derivation_update:
         _controller: accard.controller.sample_source:updateActiion
         _accard:
             template: AccardWebBundle:Frontend/Sample:sourceUpdate.html.twig
-            redirect: accard_frontend_sample_source_derivation_show
+            redirect: accard_frontend_sample_source_derivation_index
             form: accard_sample_source_derivation
 
 accard_frontend_sample_update:
@@ -139,7 +139,7 @@ accard_frontend_sample_update:
         _accard:
             template: AccardWebBundle:Frontend/Sample:update.html.twig
             redirect:
-                route: accard_frontend_sample_show
+                route: accard_frontend_sample_index
                 parameters: { prototype: resource.prototype.name, id: resource.id }
 
 accard_frontend_sample_source_collection_delete:
@@ -150,7 +150,9 @@ accard_frontend_sample_source_collection_delete:
         _controller: accard.controller.sample_source:deleteAction
         _accard:
             template: AccardWebBundle:Frontend/Sample:delete.html.twig
-            redirect: accard_frontend_sample_source_collection_index
+            redirect:
+                route: accard_frontend_sample_source_collection_index
+                parameters: { id: resource.id }
 
 accard_frontend_sample_source_derivation_delete:
     pattern: /derivation/{id}
@@ -160,7 +162,9 @@ accard_frontend_sample_source_derivation_delete:
         _controller: accard.controller.sample_source:deleteAction
         _accard:
             template: AccardWebBundle:Frontend/Sample:delete.html.twig
-            redirect: accard_frontend_sample_source_derivation_index
+            redirect:
+                route: accard_frontend_sample_source_derivation_index
+                parameters: { id: resource.id }
 
 accard_frontend_sample_delete:
     pattern: /{prototype}/{id}
@@ -170,4 +174,6 @@ accard_frontend_sample_delete:
         _controller: accard.controller.sample:deleteAction
         _accard:
             template: AccardWebBundle:Frontend/Sample:delete.html.twig
-            redirect: accard_frontend_sample_index
+            redirect:
+                route: accard_frontend_sample_index
+                parameters: { name: resource.prototype.name, id: resource.id }

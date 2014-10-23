@@ -150,13 +150,15 @@ class DomainManager
             return null;
         }
 
+        $fixedResource = clone $resource;
         $this->manager->remove($resource);
         $this->manager->flush();
         $this->flashHelper->setFlash('success', 'delete');
 
         $this->dispatchEvent('post_delete', new ResourceEvent($resource, array('objectManager' => $this->manager)));
 
-        return $resource;
+
+        return $fixedResource;
     }
 
     /**

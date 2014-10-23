@@ -110,7 +110,7 @@ accard:
             index_by_prototype: Browse %prototype% Activities
     regimen:
         title:
-            index_by_prototype: Browse %prototype% Activities
+            index_by_prototype: Browse %prototype% Regimens
     form:
         choose: Choose one
         field:

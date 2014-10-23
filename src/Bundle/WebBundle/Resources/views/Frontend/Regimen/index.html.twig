@@ -32,3 +32,18 @@
         {{ pagination(regimens) }}
     {% endblock %}
 {% endblock %}
+
+{% block page_javascripts %}
+<script type="text/javascript" defer>
+    var Tabler = Accard.get('table');
+    var regimens = new Tabler('#regimens');
+
+    regimens
+        .plugin('autohighlighting', {
+            id: 'regimen-{{ app.request.query.get('id', 0) }}',
+            className: 'info'
+        })
+        .bindAll()
+    ;
+</script>
+{% endblock %}

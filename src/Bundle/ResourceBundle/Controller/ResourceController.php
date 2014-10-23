@@ -251,9 +251,9 @@ class ResourceController extends FOSRestController implements InitializableContr
     public function deleteAction(Request $request)
     {
         $resource = $this->findOr404($request);
-        $this->domainManager->delete($resource);
+        $clonedResource = $this->domainManager->delete($resource);
 
-        return $this->redirectHandler->redirectToIndex();
+        return $this->redirectHandler->redirectTo($clonedResource);
     }
 
     public function updateStateAction(Request $request, $transition, $graph = null)
