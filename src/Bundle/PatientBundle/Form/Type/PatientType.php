@@ -88,15 +88,15 @@ class PatientType extends AbstractType
                 'required' => false,
             ))
             ->add('firstName', 'text', array(
-                'label' => 'accard.patient.form.first_name'
+                'label' => 'accard.patient.form.first_name',
                 'required' => true,
             ))
             ->add('lastName', 'text', array(
-                'label' => 'accard.patient.form.last_name'
+                'label' => 'accard.patient.form.last_name',
                 'required' => true,
             ))
             ->add('dateOfBirth', 'birthday', array(
-                'label' => 'accard.patient.form.date_of_birth'
+                'label' => 'accard.patient.form.date_of_birth',
                 'required' => true,
             ))
             ->add('dateOfDeath', 'date', array(
