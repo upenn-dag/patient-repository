@@ -32,3 +32,18 @@
         {{ pagination(activities) }}
     {% endblock %}
 {% endblock %}
+
+{% block page_javascripts %}
+<script type="text/javascript" defer>
+    var Tabler = Accard.get('table');
+    var activities = new Tabler('#activities');
+
+    activities
+        .plugin('autohighlighting', {
+            id: 'activity-{{ app.request.query.get('id', 0) }}',
+            className: 'info'
+        })
+        .bindAll()
+    ;
+</script>
+{% endblock %}

@@ -12,7 +12,7 @@
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
 
 {% if activities|length > 0 %}
-    <table class="activity table table-bordered table-striped table-hover">
+    <table id="activities" class="activity table table-bordered table-striped table-hover">
         <thead>
             <tr>
                 <th class="prototype">{{ accard_resource_sort('prototype', 'accard.activity.form.prototype'|trans) }}</th>
@@ -24,7 +24,7 @@
         </thead>
         <tbody>
         {% for activity in activities %}
-            <tr id="{{ activity.id }}">
+            <tr id="activity-{{ activity.id }}">
                 <td class="prototype">
                     <a href="{{ path('accard_frontend_activity_index_by_prototype', {'prototype': activity.prototype.name}) }}">
                         {{- activity.prototype.presentation -}}
