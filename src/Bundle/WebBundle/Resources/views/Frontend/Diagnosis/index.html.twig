@@ -23,7 +23,7 @@
 {% block content %}
 
    {{ page_title(
-        'accard.diagnosis.title.index'|trans,
+        'accard.diagnosis.action.index'|trans,
         [
             create(path('accard_frontend_diagnosis_create'), 'accard.diagnosis.action.create'|trans),
             designBtn
@@ -31,9 +31,24 @@
     )}}
 
     {% if not settings.enabled %}
-        {{ disabled('accard.diagnosis.title'|trans) }}
+        {{ disabled('accard.diagnosis.entity_name'|trans) }}
     {% endif %}
 
      {{ list(diagnoses) }}
      {{ pagination(diagnoses) }}    
+{% endblock %}
+
+{% block page_javascripts %}
+<script type="text/javascript" defer>
+    var Tabler = Accard.get('table');
+    var diagnoses = new Tabler('#diagnoses');
+
+    diagnoses
+        .plugin('autohighlighting', {
+            id: 'diagnosis-{{ app.request.query.get('id', 0) }}',
+            className: 'info'
+        })
+        .bindAll()
+    ;
+</script>
 {% endblock %}

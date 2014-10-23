@@ -14,7 +14,7 @@
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
 
 {% if diagnoses|length > 0 %}
-    <table class="diagnosis table table-bordered table-striped table-hover">
+    <table id="diagnoses" class="diagnosis table table-bordered table-striped table-hover">
         <thead>
             <tr>
                 <th class="code">{{ accard_resource_sort('code', 'accard.diagnosis.form.code'|trans) }}</th>
@@ -26,7 +26,7 @@
         </thead>
         <tbody>
         {% for diagnosis in diagnoses %}
-            <tr id="{{ diagnosis.id }}">
+            <tr id="diagnosis-{{ diagnosis.id }}">
                 <td class="code">{{ diagnosis.code.description }}</td>
                 <td class="patient-name">{{ diagnosis.patient.fullName }}</td>
                 <td class="start-of-diagnosis">{{ diagnosis.startDate|localizeddate('medium', 'none') }}</td>
