@@ -48,3 +48,19 @@
         {{ pagination(patients) }}
     {% endblock %}
 {% endblock %}
+
+{% block page_javascripts %}
+<script type="text/javascript" defer>
+    var Tabler = Accard.get('table');
+    var patients = new Tabler('#patients');
+
+    patients
+        .plugin('autohighlighting', {
+            id: 'patient-{{ app.request.query.get('id', 0) }}',
+            className: 'info'
+        })
+        .bindAll()
+    ;
+</script>
+{% endblock %}
+
