@@ -6,6 +6,20 @@
 # file that was distributed with this source code.
 
 accard:
+    patient:
+        diagnoses:
+            type: Diagnoses must all be valid diagnoses.
+        activities:
+            type: Activities must all be valid activities.
+        behaviors:
+            type: Behaviors must all be valid behaviors.
+        attribtues:
+            type: Attributes must all be valid attribtues.
+        phases:
+            type: Phases must all be valid patient phases.
+    diagnosis:
+        phases:
+            type: Phases must all be valid diagnosis phases.
     activity:
         patient:
             not_blank: Patient may not be left blank.

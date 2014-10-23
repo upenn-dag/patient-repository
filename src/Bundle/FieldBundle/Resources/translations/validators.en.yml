@@ -1,0 +1,21 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard:
+    field:
+        name:
+            unique: The field name is already in use.
+            slug: "The field name may only contain letters, numbers and hyphens."
+            not_blank: Name may not be left blank.
+            length:
+                min: "Name must contain more than {{ limit }} characters."
+                max: "Name must not contain more than {{ limit }} characters."
+        presentation:
+            not_blank: Presentation may not be left blank.
+            length:
+                min: "Presentation must contain more than {{ limit }} characters."
+                max: "Presentation must not contain more than {{ limit }} characters."

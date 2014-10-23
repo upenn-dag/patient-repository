@@ -45,6 +45,16 @@ class FieldTypes
     }
 
     /**
+     * Get field type keys.
+     *
+     * @return array
+     */
+    public static function getKeys()
+    {
+        return array_keys(static::getChoices());
+    }
+
+    /**
      * Disabled constructor.
      */
     private function __construct()
