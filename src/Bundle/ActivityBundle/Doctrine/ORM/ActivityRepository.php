@@ -10,6 +10,7 @@
  */
 namespace Accard\Bundle\ActivityBundle\Doctrine\ORM;
 
+use Accard\Component\Activity\Repository\ActivityRepositoryInterface;
 use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
@@ -17,7 +18,7 @@ use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class ActivityRepository extends EntityRepository
+class ActivityRepository extends EntityRepository implements ActivityRepositoryInterface
 {
     /**
      * {@inheritdoc}

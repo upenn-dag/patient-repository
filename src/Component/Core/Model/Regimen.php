@@ -10,6 +10,8 @@
  */
 namespace Accard\Component\Core\Model;
 
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Accard\Bundle\PatientBundle\Exception\PatientNotFoundException;
 use Accard\Component\Regimen\Model\Regimen as BaseRegimen;
 use DateTime;
@@ -40,6 +42,13 @@ class Regimen extends BaseRegimen implements RegimenInterface
      */
     protected $diagnosis;
 
+    /**
+     * Activities.
+     *
+     * @var Collection|ActivityInterface[]
+     */
+    protected $activities;
+
 
     /**
      * Constructor.
@@ -47,6 +56,7 @@ class Regimen extends BaseRegimen implements RegimenInterface
     public function __construct()
     {
         $this->createdAt = new DateTime();
+        $this->activities = new ArrayCollection();
 
         parent::__construct();
     }
@@ -85,5 +95,45 @@ class Regimen extends BaseRegimen implements RegimenInterface
         $this->diagnosis = $diagnosis;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getActivities()
+    {
+        return $this->activities;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasActivity(ActivityInterface $activity)
+    {
+        return $this->activities->contains($activity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addActivity(ActivityInterface $activity)
+    {
+        if (!$this->hasActivity($activity)) {
+            $activity->setRegimen($this);
+            $this->activities->add($activity);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeActivity(ActivityInterface $activity)
+    {
+        if ($this->hasActivity($activity)) {
+            $this->activities->removeElement($activity);
+            $activity->setRegimen(null);
+        }
     }
 }

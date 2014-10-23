@@ -22,6 +22,7 @@ accard:
         form:
             patient: Patient
             diagnosis: Diagnosis
+            regimen: Regimen
     sample:
         form:
             patient: Patient
@@ -34,6 +35,7 @@ accard:
         form:
             patient: Patient
             diagnosis: Diagnosis
+            activities: Activities
     attribute:
         form:
             patient: Patient

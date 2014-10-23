@@ -40,15 +40,15 @@ class PrototypeProvider implements PrototypeProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAll()
+    public function getPrototypes()
     {
-        return $this->repository->getAll();
+        return $this->repository->getPrototypes();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getModelClass()
+    public function getPrototypeModelClass()
     {
         return $this->repository->getClassName();
     }

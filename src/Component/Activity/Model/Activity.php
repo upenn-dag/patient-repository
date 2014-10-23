@@ -184,4 +184,20 @@ class Activity implements ActivityInterface
             }
         }
     }
+
+    public function getCanonical()
+    {
+        $canonical = 'Activity';
+
+        if ($this->activityDate) {
+            $canonical .= ' on '.$this->activityDate->format('d/m/Y');
+        }
+
+        return $canonical;
+    }
+
+    public function __toString()
+    {
+        return $this->getCanonical();
+    }
 }

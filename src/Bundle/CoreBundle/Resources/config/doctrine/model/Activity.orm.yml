@@ -27,3 +27,10 @@ Accard\Component\Core\Model\Activity:
                 name: diagnosisId
                 referencedColumnName: id
                 nullable: true
+        regimen:
+            targetEntity: Accard\Component\Regimen\Model\RegimenInterface
+            inversedBy: activities
+            joinColumn:
+                name: regimenId
+                referencedColumnName: id
+                nullable: true

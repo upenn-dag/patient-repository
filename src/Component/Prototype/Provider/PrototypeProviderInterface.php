@@ -25,18 +25,18 @@ interface PrototypeProviderInterface
      *
      * @return PrototypeInterface[]
      */
-    public function getAll();
+    public function getPrototypes();
 
     /**
      * Get model class.
      *
      * @return string
      */
-    public function getModelClass();
+    public function getPrototypeModelClass();
 
     /**
      * Test for presence of prototype by id.
-     * 
+     *
      * @param integer $prototypeId
      * @return boolean
      */
@@ -53,7 +53,7 @@ interface PrototypeProviderInterface
 
     /**
      * Test for presence of prototype by name.
-     * 
+     *
      * @param string $prototypeName
      * @return boolean
      */

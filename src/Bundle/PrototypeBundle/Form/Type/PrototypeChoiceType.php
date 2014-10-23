@@ -31,7 +31,7 @@ class PrototypeChoiceType extends AbstractType
 
     /**
      * Prototype provider.
-     * 
+     *
      * @var PrototypeProviderInterface
      */
     protected $provider;
@@ -56,8 +56,8 @@ class PrototypeChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults(array(
-                'class' => $this->provider->getModelClass(),
-                'choices' => $this->provider->getAll(),
+                'class' => $this->provider->getPrototypeModelClass(),
+                'choices' => $this->provider->getPrototypes(),
                 'property' => 'presentation',
             ))
         ;

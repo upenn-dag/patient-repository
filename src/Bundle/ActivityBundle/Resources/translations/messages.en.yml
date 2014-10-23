@@ -8,6 +8,7 @@ accard:
             activity_date: Activity Date
             prototype: Prototype
             prototype_label: Activity Type
+            select_activity: Select an activity
         action:
             add: Add Activity
             create: Create Activity

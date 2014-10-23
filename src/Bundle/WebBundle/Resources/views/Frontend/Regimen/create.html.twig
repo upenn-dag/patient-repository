@@ -15,7 +15,6 @@
 
 {% set prototype = form.vars.value.prototype is defined ? form.vars.value.prototype.name : 'default' %}
 
-
 {% block content %}
 
     {{ page_title('accard.regimen.action.create'|trans,
@@ -45,33 +44,44 @@
 {% endblock %}
 
 {% block page_javascripts %}
-<script type="text/javascript">
-    $('#accard_regimen_patient').on('change', function(event) {
-        var field = $('#accard_regimen_diagnosis');
-        field.find('option').remove();
+    <script type="text/javascript">
+        var formClass = Accard.get('form');
+        var manager = new formClass('form');
+        var addActivity = $('#add-activity');
 
-        if (!event.added.id) {            
-            return;
-        }
-
-        var urlClass = window.Accard.get('url');
-        var url = new urlClass('{{ path('accard_api_patient_diagnoses', { patient: 99999 }) }}')
-            .popSegment()
-            .popSegment()
-            .appendSegment(event.added.id)
-            .appendSegment('diagnoses')
-            .toString();
-
-        field.prop('readonly', true);
-
-        $.getJSON(url, function(diagnoses) {
-            $(diagnoses).each(function(index, diagnosis) {
-                field.append($('<option value="'+diagnosis.id+'">'+diagnosis.canonical+'</option>'));
+        manager
+            .collection("#activities", {
+                adder: addActivity
             })
-            field.prop('readonly', false);
-        })
-    });
-</script>
+           .bindAll()
+        ;
+
+        $('#accard_regimen_patient').on('change', function(event) {
+            var field = $('#accard_regimen_diagnosis');
+            field.find('option').remove();
+
+            if (!event.added.id) {            
+                return;
+            }
+
+            var urlClass = window.Accard.get('url');
+            var url = new urlClass('{{ path('accard_api_patient_diagnoses', { patient: 99999 }) }}')
+                .popSegment()
+                .popSegment()
+                .appendSegment(event.added.id)
+                .appendSegment('diagnoses')
+                .toString();
+
+            field.prop('readonly', true);
+
+            $.getJSON(url, function(diagnoses) {
+                $(diagnoses).each(function(index, diagnosis) {
+                    field.append($('<option value="'+diagnosis.id+'">'+diagnosis.canonical+'</option>'));
+                })
+                field.prop('readonly', false);
+            })
+        });
+    </script>
 {% endblock %}
 
 {% block stylesheets %}

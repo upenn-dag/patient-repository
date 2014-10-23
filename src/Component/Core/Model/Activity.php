@@ -39,14 +39,22 @@ class Activity extends BaseActivity implements ActivityInterface
      */
     protected $diagnosis;
 
+    /**
+     * Regimen.
+     *
+     * @var RegimenInterface
+     */
+    protected $regimen;
+
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        parent::__construct();
         $this->createdAt = new DateTime();
+
+        parent::__construct();
     }
 
     /**
@@ -83,5 +91,39 @@ class Activity extends BaseActivity implements ActivityInterface
         $this->diagnosis = $diagnosis;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasDiagnosis()
+    {
+        return $this->diagnosis instanceof DiagnosisInterface;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRegimen()
+    {
+        return $this->regimen;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRegimen(RegimenInterface $regimen = null)
+    {
+        $this->regimen = $regimen;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasRegimen()
+    {
+        return $this->regimen instanceof RegimenInterface;
     }
 }

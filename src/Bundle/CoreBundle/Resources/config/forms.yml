@@ -111,6 +111,7 @@ services:
         arguments:
             - @accard.repository.patient
             - @accard.repository.diagnosis
+            - @accard.repository.activity
         tags: [{ name: form.type_extension, alias: accard_regimen }]
 
     accard.form.type.patient_diagnoses:

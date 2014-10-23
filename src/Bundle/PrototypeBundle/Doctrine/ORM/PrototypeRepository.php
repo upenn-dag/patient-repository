@@ -23,7 +23,7 @@ class PrototypeRepository extends EntityRepository implements PrototypeRepositor
     /**
      * {@inheritdoc}
      */
-    public function getAll()
+    public function getPrototypes()
     {
         return $this->findAll();
     }

@@ -18,6 +18,7 @@ parameters:
     accard.import.runner.class: Accard\Bundle\ResourceBundle\Import\Runner
     accard.import.event_subscriber.class: Accard\Bundle\ResourceBundle\EventListener\ImporterEventSubscriber
     jms_serializer.identifier_handler.class: Accard\Bundle\ResourceBundle\Serializer\IdentifierHandler
+    jms_serializer.property_handler.class: Accard\Bundle\ResourceBundle\Serializer\PropertyHandler
 
 services:
     accard.controller.configuration_factory:
@@ -72,6 +73,10 @@ services:
 
     jms_serializer.identifier_handler:
         class: %jms_serializer.identifier_handler.class%
+        tags: [{ name: jms_serializer.subscribing_handler }]
+
+    jms_serializer.property_handler:
+        class: %jms_serializer.property_handler.class%
         tags: [{ name: jms_serializer.subscribing_handler }]
 
 #    accard.importer.static:

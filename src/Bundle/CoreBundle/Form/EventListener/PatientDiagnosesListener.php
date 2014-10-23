@@ -62,7 +62,6 @@ class PatientDiagnosesListener implements EventSubscriberInterface
      */
     public function buildForm(FormEvent $event)
     {
-        //$activity = 'form.pre_set_data' === $event->getName() ? $event->getData() : $event->getForm()->getData();
         $activity = $event->getData();
         $qb = $event->getForm()->get('diagnosis')->getConfig()->getOption('query_builder');
         $qb = $qb($this->diagnosisRepository);

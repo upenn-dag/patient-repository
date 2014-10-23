@@ -18,6 +18,7 @@
                 <th class="prototype">{{ accard_resource_sort('prototype', 'accard.activity.form.prototype'|trans) }}</th>
                 <th class="patient">{{ accard_resource_sort('patient', 'accard.activity.form.patient'|trans) }}</th>
                 <th class="activity-date">{{ accard_resource_sort('activityDate', 'accard.activity.form.activity_date'|trans) }}</th>
+                <th class="regimen">{{ accard_resource_sort('regimen', 'accard.activity.form.regimen'|trans) }}
                 <th class="actions"></th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@
                 </td>
                 <td class="patient">{{ activity.patient.fullName }}</td>
                 <td class="activity-date">{{ activity.activityDate|localizeddate('medium', 'none') }}</td>
+                <td class="regimen">{% if activity.regimen %}{{ activity.regimen.prototype.presentation }}{% endif %}</td>
                 <td class="actions">
                     <div class="pull-right">
                         {{ show(path('accard_frontend_activity_show', {'prototype': activity.prototype.name, 'id': activity.id}), null, 'xs') }}

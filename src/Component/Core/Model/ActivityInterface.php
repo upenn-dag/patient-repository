@@ -55,4 +55,33 @@ interface ActivityInterface extends BaseActivityInterface,
      * @return ActivityInterface
      */
     public function setDiagnosis(DiagnosisInterface $diagnosis = null);
+
+    /**
+     * Test for presence of a diagnosis.
+     *
+     * @return boolean
+     */
+    public function hasDiagnosis();
+
+    /**
+     * Get regimen.
+     *
+     * @return RegimenInterface
+     */
+    public function getRegimen();
+
+    /**
+     * Set regimen.
+     *
+     * @param RegimenInterface|null $regimen
+     * @return ActivityInterface
+     */
+    public function setRegimen(RegimenInterface $regimen = null);
+
+    /**
+     * Test for presence of a regimen.
+     *
+     * @return boolean
+     */
+    public function hasRegimen();
 }

@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the
  * LICENSE file that was distributed with this source code.
  */
-namespace Accard\Bundle\DiagnosisBundle\Form\Type;
+namespace Accard\Bundle\ActivityBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
@@ -16,16 +16,16 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Accard\Component\Diagnosis\Repository\DiagnosisRepositoryInterface;
+use Accard\Component\Activity\Repository\ActivityRepositoryInterface;
 use Accard\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer;
 use Accard\Bundle\ResourceBundle\Form\DataTransformer\IdentifierToObjectTransformer;
 
 /**
- * Diagnosis choice form type.
+ * Activity choice form type.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class DiagnosisChoiceType extends AbstractType
+class ActivityChoiceType extends AbstractType
 {
     /**
      * Data class.
@@ -35,23 +35,22 @@ class DiagnosisChoiceType extends AbstractType
     protected $dataClass;
 
     /**
-     * Diagnosis repository.
+     * Activity repository.
      *
-     * @var DiagnosisRepositoryInterface
+     * @var ActivityRepositoryInterface
      */
-    protected $diagnosisRepository;
+    protected $activityRepository;
 
 
     /**
      * Constructor.
      *
-     * @param string $dataClass
+     * @param ActivityRepositoryInterface $activityRepository
      */
-    public function __construct($dataClass,
-                                DiagnosisRepositoryInterface $diagnosisRepository)
+    public function __construct(ActivityRepositoryInterface $activityRepository)
     {
-        $this->dataClass = $dataClass;
-        $this->diagnosisRepository = $diagnosisRepository;
+        $this->dataClass = $activityRepository->getClassName();
+        $this->activityRepository = $activityRepository;
     }
 
     /**
@@ -63,12 +62,12 @@ class DiagnosisChoiceType extends AbstractType
             ->setDefaults(array(
                 'class' => $this->dataClass,
                 'property' => 'canonical',
-                'label' => 'accard.diagnosis.entity_name',
+                'label' => 'accard.activity.entity_name',
                 'query_builder' => function (EntityRepository $er) {
                     static $qb;
                     return $qb = $er->getQueryBuilder();
                 },
-                'empty_value' => 'accard.diagnosis.form.select_diagnosis'
+                'empty_value' => 'accard.activity.form.select_activity'
             ))
         ;
     }
@@ -86,6 +85,6 @@ class DiagnosisChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'accard_diagnosis_choice';
+        return 'accard_activity_choice';
     }
 }

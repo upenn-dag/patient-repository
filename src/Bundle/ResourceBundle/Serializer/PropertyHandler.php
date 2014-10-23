@@ -17,19 +17,23 @@ use JMS\Serializer\VisitorInterface;
 use Doctrine\Common\Collections\Collection;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
 use JMS\Serializer\Exception\UnsupportedFormatException;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 /**
- * JMS Serializer identifier handler.
- *
- * Used to convert objects to identifiers, and collections of objects to an
- * array of identifiers. Also supports deserialization of the same relationship.
- *
- * Note: This always assumes the identifier is an integer.
+ * JMS Serializer property handler.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class IdentifierHandler implements SubscribingHandlerInterface
+class PropertyHandler implements SubscribingHandlerInterface
 {
+    /**
+     * Property accessor.
+     *
+     * @var PropertyAccessor
+     */
+    protected static $propertyAccessor;
+
     /**
      * {@inheritdoc}
      */
@@ -42,18 +46,30 @@ class IdentifierHandler implements SubscribingHandlerInterface
             $methods[] = array(
                 'direction' => GraphNavigator::DIRECTION_SERIALIZATION,
                 'format' => $format,
-                'type' => 'id',
-                'method' => 'serializeIdentifier'
+                'type' => 'property',
+                'method' => 'serializeProperty'
             );
             $methods[] = array(
                 'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
                 'format' => $format,
-                'type' => 'id',
-                'method' => 'deserializeIdentifier'
+                'type' => 'property',
+                'method' => 'deserializeProperty'
             );
         }
 
         return $methods;
+    }
+
+    protected $propertyPath;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        if (null === static::$propertyAccessor) {
+            static::$propertyAccessor = PropertyAccess::createPropertyAccessor();
+        }
     }
 
     /**
@@ -67,7 +83,7 @@ class IdentifierHandler implements SubscribingHandlerInterface
      * @param Context $context
      * @return
      */
-    public function serializeIdentifier(VisitorInterface $visitor, $data, array $type, Context $context)
+    public function serializeProperty(VisitorInterface $visitor, $data, array $type, Context $context)
     {
         if (!is_object($data)) {
             return;
@@ -76,13 +92,13 @@ class IdentifierHandler implements SubscribingHandlerInterface
         if ($this->isIterable($data)) {
             $identifiers = array();
             foreach ($data as $datum) {
-                $identifiers[] = $this->getIdentifier($datum);
+                $identifiers[] = $this->getProperty($datum, $type);
             }
 
             return $visitor->visitArray($identifiers, $type, $context);
         }
 
-        return $visitor->visitInteger($this->getIdentifier($data), $type, $context);
+        return $visitor->visitString($this->getProperty($data, $type), $type, $context);
     }
 
     /**
@@ -99,30 +115,15 @@ class IdentifierHandler implements SubscribingHandlerInterface
     /**
      * Get identifier through any means possible.
      *
-     * @throws UnsupportedFormatException If Identifier can not be found.
      * @param mixed $data
+     * @param array $type
      * @return integer
      */
-    private function getIdentifier($data)
+    private function getProperty($data, array $type)
     {
-        $refl = new ReflectionObject($data);
-        if ($refl->hasMethod('getId')) {
-            $refl = $refl->getMethod('getId');
+        $path = isset($type['params'][0]) ? $type['params'][0] : 'id';
 
-            return $refl->invoke($data);
-        }
-
-        if ($refl->hasProperty('id')) {
-            $refl = $refl->getProperty('id');
-            $refl->setAccessible(true);
-
-            return $refl->getValue($data);
-        }
-
-        throw new UnsupportedFormatException(sprintf(
-            'Object for serialization of class "%s" has no identifier to be found. Tried getId() and id property through refleciton.',
-            get_class($data)
-        ));
+        return static::$propertyAccessor->getValue($data, $path);
     }
 
     /**
@@ -136,7 +137,7 @@ class IdentifierHandler implements SubscribingHandlerInterface
      * @param Context $context
      * @return
      */
-    public function deserializeIdentifier(VisitorInterface $visitor, $data, array $type, Context $context)
+    public function deserializeProperty(VisitorInterface $visitor, $data, array $type, Context $context)
     {
         die('deserializing identifier');
     }

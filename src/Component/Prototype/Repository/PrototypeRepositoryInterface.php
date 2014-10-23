@@ -25,7 +25,7 @@ interface PrototypeRepositoryInterface
      *
      * @return PrototypeInterface[]
      */
-    public function getAll();
+    public function getPrototypes();
 
     /**
      * Get prototype by id.

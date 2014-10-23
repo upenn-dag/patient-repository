@@ -17,7 +17,9 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Accard\Component\Patient\Repository\PatientRepositoryInterface;
 use Accard\Component\Diagnosis\Repository\DiagnosisRepositoryInterface;
+use Accard\Component\Activity\Repository\ActivityRepositoryInterface;
 use Accard\Bundle\CoreBundle\Form\EventListener\PatientDiagnosesListener;
+use Accard\Bundle\CoreBundle\Form\EventListener\DiagnosisActivitiesListener;
 
 /**
  * Regimen form type extension.
@@ -54,18 +56,38 @@ class RegimenTypeExtension extends AbstractTypeExtension
      */
     protected $diagnosisRepository;
 
+    /**
+     * Activity class FQCN.
+     *
+     * @var string
+     */
+    protected $activityClass;
+
+    /**
+     * Activity repository.
+     *
+     * @var ActivityRepositoryInterface
+     */
+    protected $activityRepository;
+
 
     /**
      * Constructor.
      *
+     * @param PatientRepositoryInterface $patientRepository
      * @param DiagnosisRepositoryInterface $diagnosisRepository
+     * @param ActivityRepositoryInterface $activityRepository
      */
-    public function __construct(PatientRepositoryInterface $patientRepository, DiagnosisRepositoryInterface $diagnosisRepository)
+    public function __construct(PatientRepositoryInterface $patientRepository,
+                                DiagnosisRepositoryInterface $diagnosisRepository,
+                                ActivityRepositoryInterface $activityRepository)
     {
         $this->patientClass = $patientRepository->getClassName();
         $this->patientRepository = $patientRepository;
         $this->diagnosisClass = $diagnosisRepository->getClassName();
         $this->diagnosisRepository = $diagnosisRepository;
+        $this->activityClass = $activityRepository->getClassName();
+        $this->activityRepository = $activityRepository;
     }
 
     /**
@@ -83,6 +105,18 @@ class RegimenTypeExtension extends AbstractTypeExtension
                 ->addEventSubscriber(new PatientDiagnosesListener($this->diagnosisRepository))
             ;
         }
+
+        if ($options['use_activities']) {
+            $builder
+                ->add('activities', 'collection', array(
+                      'type' => 'accard_activity_choice',
+                      'allow_add' => true,
+                      'allow_delete' => true,
+                      'by_reference' => false,
+                ))
+                ->addEventSubscriber(new DiagnosisActivitiesListener($this->activityRepository))
+            ;
+        }
     }
 
     /**
@@ -94,6 +128,7 @@ class RegimenTypeExtension extends AbstractTypeExtension
             ->setDefaults(array(
                 'use_patient' => true,
                 'use_diagnosis' => true,
+                'use_activities' => true,
             ))
         ;
     }

@@ -7,10 +7,15 @@
 
 Accard\Component\Activity\Model\Activity:
     properties:
+        prototype:
+            - Valid: ~
+            - NotBlank: { message: accard.activity.prototype.not_blank, groups: ['accard']}
+            - Type: { type: Accard\Component\Activity\Model\PrototypeInterface, message: accard.activity.prototype.type, groups: ['accard']}
+        activityDate:
+            - NotBlank: { message: accard.activity.activity_date.not_blank, groups: ['accard']}
+            - DateTime: { message: accard.activity.activity_date.datetime, groups: ['accard']}
         fields:
             - Valid: ~
-
-    getters: ~
 
 Accard\Component\Activity\Model\Prototype:
     properties:

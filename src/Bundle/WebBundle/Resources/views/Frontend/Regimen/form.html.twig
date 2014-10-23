@@ -13,29 +13,50 @@
 </div>
 {% endmacro %}
 
+{% if form.patient is defined %}
 <div class="row">
     <div class="col-md-12">
         {{ select_patient(form.patient) }}
     </div>
 </div>
+{% endif %}
 
-<div class="col-md-12 well">
-    <div class="row">
-        <div class="col-md-6 row-split">
-            {{ form_row(form.diagnosis) }}
+<div class="row well">
+    <div class="col-md-6 row-split">
+        {{ form_row(form.diagnosis) }}
+        {{ form_row(form.startDate) }}
+        {{ form_row(form.endDate) }}
+    </div>
+    <div class="col-md-6">
+        <div id="activities" data-prototype="{{ _self.activity_form(form.activities.vars.prototype)|e }}">
+        {% for activity in form.activities %}
+            {{ _self.activity_form(activity) }}
+        {% endfor %}
         </div>
-        <div class="col-md-6">
-            {{ form_row(form.startDate) }}
-            {{ form_row(form.endDate) }}
-        </div>
+        <button id="add-activity" class="btn btn-success pull-right"><i class="glyphicon glyphicon-plus"></i>
+            {{- 'accard.activity.action.add'|trans -}}
+        </button>
     </div>
 </div>
 
-{% for field in form.fields %}
+{% if form.fields is not empty %}
 <div class="row">
+    {% for field in form.fields %}
     <div class="col-md-6">
         {{ _self.prototype(field) }}
     </div>
+    {% endfor %}
 </div>
-{% endfor %}
+{% endif %}
+
+<hr>
+
+{% macro activity_form(field) %}
+    <div class="form-group">
+        {{ form_label(field, 'accard.activity.entity_name'|trans) }}
+        {{ form_widget(field) }}
+    </div>
+{% endmacro %}
+
+
 

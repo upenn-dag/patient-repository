@@ -12,7 +12,18 @@ accard_api_patient_diagnoses:
     defaults:
         _controller: accard.controller.diagnosis:indexAction
         _accard:
-            template: AccardWebBundle:Frontend/Diagnosis:index.html.twig
+            sortable: true
+            paginate: false
+            criteria:
+                patient: $patient
+
+accard_api_patient_activities:
+    pattern: /{patient}/activities
+    methods: [GET]
+    requirements: { patient: \d+ }
+    defaults:
+        _controller: accard.controller.activity:indexAction
+        _accard:
             sortable: true
             paginate: false
             criteria:

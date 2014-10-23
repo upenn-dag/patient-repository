@@ -30,12 +30,17 @@
     </form>
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    {{ select_patient_js('#accard_regimen_patient') }}
-{% endblock %}
+{% block page_javascripts %}
+    <script type="text/javascript">
+        var formClass = Accard.get('form');
+        var manager = new formClass('form');
+        var addActivity = $('#add-activity');
 
-{% block stylesheets %}
-    {{ parent() }}
-    {{ select_patient_css() }}
+        manager
+            .collection("#activities", {
+                adder: addActivity
+            })
+           .bindAll()
+        ;
+    </script>
 {% endblock %}

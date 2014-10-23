@@ -55,4 +55,35 @@ interface RegimenInterface extends BaseRegimenInterface,
      * @return RegimenInterface
      */
     public function setDiagnosis(DiagnosisInterface $diagnosis = null);
+
+    /**
+     * Get activities.
+     *
+     * @return Collection|ActivityInterface[]
+     */
+    public function getActivities();
+
+    /**
+     * Test for presence of a activity.
+     *
+     * @param ActivityInterface $activity
+     * @return boolean
+     */
+    public function hasActivity(ActivityInterface $activity);
+
+    /**
+     * Add activity.
+     *
+     * @param ActivityInterface $activity
+     * @return PatientInterface
+     */
+    public function addActivity(ActivityInterface $activity);
+
+    /**
+     * Remove activity.
+     *
+     * @param ActivityInterface $activity
+     * @return PatientInterface
+     */
+    public function removeActivity(ActivityInterface $activity);
 }

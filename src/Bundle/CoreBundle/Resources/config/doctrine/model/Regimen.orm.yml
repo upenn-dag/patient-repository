@@ -15,15 +15,21 @@ Accard\Component\Core\Model\Regimen:
     manyToOne:
         patient:
             targetEntity: Accard\Component\Patient\Model\PatientInterface
-            #inversedBy: activities
+            #inversedBy: regimens
             joinColumn:
                 name: patientId
                 referencedColumnName: id
                 nullable: false
         diagnosis:
             targetEntity: Accard\Component\Diagnosis\Model\DiagnosisInterface
-            inversedBy: diagnoses
+            #inversedBy: diagnoses
             joinColumn:
                 name: diagnosisId
                 referencedColumnName: id
                 nullable: true
+
+    oneToMany:
+        activities:
+            targetEntity: Accard\Component\Activity\Model\ActivityInterface
+            mappedBy: regimen
+            cascade: ["persist"]
