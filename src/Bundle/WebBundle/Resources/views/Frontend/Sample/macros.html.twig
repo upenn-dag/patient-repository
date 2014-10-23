@@ -12,7 +12,7 @@
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
 
 {% if samples|length > 0 %}
-    <table class="sample table table-bordered table-striped table-hover">
+    <table id="samples" class="sample table table-bordered table-striped table-hover">
         <thead>
             <tr>
                 <th class="prototype">{{ accard_resource_sort('prototype', 'accard.sample.form.prototype'|trans) }}</th>
@@ -23,7 +23,7 @@
         </thead>
         <tbody>
         {% for sample in samples %}
-            <tr id="{{ sample.id }}">
+            <tr id="sample-{{ sample.id }}">
                 <td class="prototype">
                     <a href="{{ path('accard_frontend_sample_index_by_prototype', {'prototype': sample.prototype.name}) }}">
                         {{- sample.prototype.presentation -}}
@@ -55,7 +55,7 @@
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
 
 {% if sources|length > 0 %}
-    <table class="sample table table-bordered table-striped table-hover">
+    <table id="sample-sources" class="sample table table-bordered table-striped table-hover">
         <thead>
             <tr>
                 <th class="patient">{{ accard_resource_sort('patient', 'accard.sample_source.form.patient'|trans) }}</th>
@@ -65,7 +65,7 @@
         </thead>
         <tbody>
         {% for source in sources %}
-            <tr id="{{ source.id }}">
+            <tr id="sample-source-{{ source.id }}">
                 <td class="patient">{{ source.patient.fullName }}</td>
                 <td class="type">
                 {%- if source.derivation %}

@@ -111,6 +111,9 @@ accard:
     regimen:
         title:
             index_by_prototype: Browse %prototype% Regimens
+    sample:
+        title:
+            index_by_prototype: Browse %prototype% Samples
     form:
         choose: Choose one
         field:

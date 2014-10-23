@@ -19,7 +19,6 @@
 {% endif %}
 
 {% block content %}
-
     {% block sample_title %}
         {{ page_title('accard.sample.title.index'|trans, designBtn) }}
     {% endblock %}
@@ -32,4 +31,19 @@
         {{ list(samples) }}
         {{ pagination(samples) }}
     {% endblock %}
+{% endblock %}
+
+{% block page_javascripts %}
+<script type="text/javascript" defer>
+    var Tabler = Accard.get('table');
+    var samples = new Tabler('#samples');
+
+    samples
+        .plugin('autohighlighting', {
+            id: 'sample-{{ app.request.query.get('id', 0) }}',
+            className: 'info'
+        })
+        .bindAll()
+    ;
+</script>
 {% endblock %}

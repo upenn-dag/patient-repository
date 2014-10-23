@@ -38,3 +38,18 @@
         {{ pagination(sample_sources) }}
     {% endblock %}
 {% endblock %}
+
+{% block page_javascripts %}
+<script type="text/javascript" defer>
+    var Tabler = Accard.get('table');
+    var sampleSources = new Tabler('#sample-sources');
+
+    sampleSources
+        .plugin('autohighlighting', {
+            id: 'sample-source-{{ app.request.query.get('id', 0) }}',
+            className: 'info'
+        })
+        .bindAll()
+    ;
+</script>
+{% endblock %}

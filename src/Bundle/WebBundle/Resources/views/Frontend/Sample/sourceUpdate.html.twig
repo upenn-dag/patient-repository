@@ -15,7 +15,7 @@
 {% set source = form.vars.source_type %}
 
 {% block form_page_title %}
-    {{ page_title(('accard.sample_source.action.' ~ source ~ '.create')|trans,
+    {{ page_title(('accard.sample_source.action.' ~ source ~ '.update')|trans,
         [
             generic(path('accard_frontend_sample_source_' ~ source ~ '_index'), ('accard.sample_source.action.' ~ source ~ '.manage_all')|trans, 'user')
         ]

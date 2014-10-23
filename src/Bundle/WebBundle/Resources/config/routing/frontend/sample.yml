@@ -139,7 +139,7 @@ accard_frontend_sample_update:
         _accard:
             template: AccardWebBundle:Frontend/Sample:update.html.twig
             redirect:
-                route: accard_frontend_sample_index
+                route: accard_frontend_sample_index_by_prototype
                 parameters: { prototype: resource.prototype.name, id: resource.id }
 
 accard_frontend_sample_source_collection_delete:
@@ -176,4 +176,4 @@ accard_frontend_sample_delete:
             template: AccardWebBundle:Frontend/Sample:delete.html.twig
             redirect:
                 route: accard_frontend_sample_index
-                parameters: { name: resource.prototype.name, id: resource.id }
+                parameters: { prototype: resource.prototype.name, id: resource.id }

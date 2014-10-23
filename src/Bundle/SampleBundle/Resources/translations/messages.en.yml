@@ -37,7 +37,7 @@ accard:
         form:
             id: Id
             sample: Parent sample
-            sourceDate: Date
+            source_date: Date
             amount: Amount
             samples: Samples
             derivation: Derivation
