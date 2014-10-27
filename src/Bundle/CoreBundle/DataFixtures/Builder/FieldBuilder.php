@@ -147,6 +147,34 @@ class FieldBuilder
     }
 
     /**
+     * Allow multiple choice.
+     *
+     * @return FieldBuilder
+     */
+    public function enableMultipleChoice()
+    {
+        $this->assertNotPersisted();
+
+        $this->field->setAllowMultiple(true);
+
+        return $this;
+    }
+
+    /**
+     * Disable multiple choice.
+     *
+     * @return FieldBuilder
+     */
+    public function disableMultipleChoice()
+    {
+        $this->assertNotPersisted();
+
+        $this->field->setAllowMultiple(false);
+
+        return $this;
+    }
+
+    /**
      * Has option.
      *
      * @param string $name
