@@ -17,6 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Accard\Bundle\OptionBundle\Form\Type\OptionValueChoiceType;
 use Accard\Component\Option\Provider\OptionProviderInterface;
 use Accard\Component\Behavior\Builder\BehaviorBuilderInterface;
+use Accard\Bundle\BehaviorBundle\Form\EventListener\DefaultBehaviorFieldListener;
 
 /**
  * Behavior form type.
@@ -45,14 +46,7 @@ class BehaviorType extends AbstractType
      *
      * @var BehaviorBuilderInterface
      */
-    protected $builder;
-
-    /**
-     * Option provider..
-     *
-     * @var OptionProviderInterface
-     */
-    protected $optionProvider;
+    protected $behaviorBuilder;
 
 
     /**
@@ -64,13 +58,11 @@ class BehaviorType extends AbstractType
      */
     public function __construct($dataClass,
                                 array $validationGroups,
-                                BehaviorBuilderInterface $builder,
-                                OptionProviderInterface $optionProvider)
+                                BehaviorBuilderInterface $behaviorBuilder)
     {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
-        $this->builder = $builder;
-        $this->optionProvider = $optionProvider;
+        $this->behaviorBuilder = $behaviorBuilder;
     }
 
     /**
@@ -79,6 +71,9 @@ class BehaviorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('prototype', 'accard_behavior_prototype_choice', array(
+                'label' => 'accard.behavior.form.prototype',
+            ))
             ->add('startDate', 'date', array(
                 'label' => 'accard.behavior.form.start_date',
             ))
@@ -86,6 +81,17 @@ class BehaviorType extends AbstractType
                 'label' => 'accard.behavior.form.end_date',
                 'required' => false,
             ))
+            ->add('fields', 'collection', array(
+                'label' => 'accard.behavior.form.fields',
+                'required'     => false,
+                'type'         => 'accard_behavior_prototype_field_value',
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+            ))
+            ->addEventSubscriber(
+                new DefaultBehaviorFieldListener($builder->getFormFactory(), $this->behaviorBuilder)
+            )
         ;
     }
 

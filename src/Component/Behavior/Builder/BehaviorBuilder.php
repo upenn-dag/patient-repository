@@ -20,28 +20,56 @@ use Doctrine\Common\Persistence\ObjectManager;
  * Used to ease the programatic creation of behaviors.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
- * @author Dylan Pierce <piercedy@upenn.edu>
  */
 class BehaviorBuilder extends AbstractBuilder implements BehaviorBuilderInterface
 {
     /**
      * Behavior repository.
-     * 
+     *
      * @var RepositoryInterface
      */
-    private $repository;
+    protected $behaviorRepository;
+
+    /**
+     * Field repository.
+     *
+     * @var RepositoryInterface
+     */
+    protected $fieldRepository;
+
+    /**
+     * Field value repository.
+     *
+     * @var RepositoryInterface
+     */
+    protected $fieldValueRepository;
+
 
     /**
      * Constructor.
-     * 
+     *
      * @param ObjectManager $manager
      * @param RepositoryInterface $behaviorRepository
      */
     public function __construct(ObjectManager $manager,
-                                RepositoryInterface $behaviorRepository)
+                                RepositoryInterface $behaviorRepository,
+                                RepositoryInterface $fieldRepository,
+                                RepositoryInterface $fieldValueRepository)
     {
         $this->manager = $manager;
-        $this->repository = $behaviorRepository;
+        $this->behaviorRepository = $behaviorRepository;
+        $this->fieldRepository = $fieldRepository;
+        $this->fieldValueRepository = $fieldValueRepository;
+    }
+
+    public function getFieldRepository()
+    {
+        return $this->fieldRepository;
+    }
+
+    public function getFieldValueRepository()
+    {
+        return $this->fieldValueRepository;
     }
 
     /**
@@ -49,9 +77,33 @@ class BehaviorBuilder extends AbstractBuilder implements BehaviorBuilderInterfac
      */
     public function create()
     {
-        $this->resource = $this->repository->createNew();
+        $this->resource = $this->behaviorRepository->createNew();
 
         return $this;
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addField($name, $value, $presentation = null)
+    {
+        $field = $this->fieldRepository->findOneBy(array('name' => $name));
+
+        if (null === $field) {
+            $field = $this->fieldRepository->createNew();
+            $field->setName($name);
+            $field->setPresentation($presentation ?: $name);
+
+            $this->manager->persist($field);
+            $this->manager->flush($field);
+        }
+
+        $fieldValue = $this->fieldValueRepository->createNew();
+        $fieldValue->setField($field);
+        $fieldValue->setValue($value);
+
+        $this->resource->addField($fieldValue);
+
+        return $this;
+    }
 }

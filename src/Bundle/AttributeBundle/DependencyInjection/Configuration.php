@@ -59,10 +59,6 @@ class Configuration implements ConfigurationInterface
                             ->prototype('scalar')->end()
                             ->defaultValue(array('accard'))
                         ->end()
-                        ->arrayNode('family_cancer_attribute')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array('accard'))
-                        ->end()
                     ->end()
                 ->end()
             ->end()
@@ -76,10 +72,6 @@ class Configuration implements ConfigurationInterface
      */
     private function addClassesSection(ArrayNodeDefinition $node)
     {
-        $defaultInheritance = array(
-            'family_cancer_attribute',
-        );
-
         $node
             ->children()
                 ->arrayNode('classes')
@@ -88,24 +80,10 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('attribute')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->arrayNode('children')
-                                    ->prototype('scalar')->end()
-                                    ->defaultValue($defaultInheritance)
-                                ->end()
                                 ->scalarNode('model')->defaultValue('Accard\Component\Attribute\Model\Attribute')->end()
                                 ->scalarNode('controller')->defaultValue('Accard\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->defaultValue('Accard\Bundle\AttributeBundle\Doctrine\ORM\AttributeRepository')->end()
                                 ->scalarNode('form')->defaultValue('Accard\Bundle\AttributeBundle\Form\Type\AttributeType')->end()
-                            ->end()
-                        ->end()
-                        ->arrayNode('family_cancer_attribute')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('parent')->defaultValue('attribute')->end()
-                                ->scalarNode('model')->defaultValue('Accard\Component\Core\Model\FamilyCancerAttribute')->end()
-                                ->scalarNode('controller')->defaultValue('Accard\Bundle\ResourceBundle\Controller\ResourceController')->end()
-                                ->scalarNode('repository')->defaultValue('Accard\Bundle\AttributeBundle\Doctrine\ORM\AttributeRepository')->end()
-                                ->scalarNode('form')->defaultValue('Accard\Bundle\AttributeBundle\Form\Type\FamilyCancerAttributeType')->end()
                             ->end()
                         ->end()
                     ->end()

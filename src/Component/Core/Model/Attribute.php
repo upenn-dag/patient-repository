@@ -18,7 +18,7 @@ use DateTime;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-abstract class Attribute extends BaseAttribute implements AttributeInterface
+class Attribute extends BaseAttribute implements AttributeInterface
 {
     // Traits
     use \Accard\Component\Resource\Model\BlameableTrait;
@@ -38,6 +38,7 @@ abstract class Attribute extends BaseAttribute implements AttributeInterface
      */
     public function __construct()
     {
+        parent::__construct();
         $this->createdAt = new DateTime();
     }
 

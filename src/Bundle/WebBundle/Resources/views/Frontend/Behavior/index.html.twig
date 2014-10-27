@@ -7,28 +7,41 @@
 
 {% extends 'AccardWebBundle:Frontend:layout.html.twig' %}
 
-{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import create %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import design %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import pagination, page_title %}
-{% from 'AccardWebBundle:Frontend/Behavior:macros.html.twig' import behaviors_menu %}
+{% from 'AccardWebBundle:Frontend/Behavior:macros.html.twig' import list %}
 
+{% set settings = accard_settings('behavior') %}
 {% set designBtn = null %}
+
 {% if is_granted('ROLE_ADMIN') %}
     {% set designBtn = design(path('accard_backend_behavior_design'), 'accard.behavior.action.design'|trans) %}
 {% endif %}
 
 {% block content %}
+    {% block behavior_title %}
+        {{ page_title('accard.behavior.title.index'|trans, designBtn) }}
+    {% endblock %}
 
+    {% block behavior_tabs '' %}
 
-   {{ page_title(
-        'accard.behavior.action.design'|trans,
-        [
-            create(path('accard_frontend_behavior_create'), 'accard.behavior.action.create'|trans),
-            designBtn
-        ]
-    )}}
+    {% block behavior_content %}
+        {{ list(behaviors) }}
+        {{ pagination(behaviors) }}
+    {% endblock %}
+{% endblock %}
 
-    {{ behaviors_menu('index') }}
-    
-    {{ list(behaviors) }}
-    {{ pagination(behaviors) }}    
+{% block page_javascripts %}
+<script type="text/javascript" defer>
+    var Tabler = Accard.get('table');
+    var behaviors = new Tabler('#behaviors');
+
+    behaviors
+        .plugin('autohighlighting', {
+            id: 'behavior-{{ app.request.query.get('id', 0) }}',
+            className: 'info'
+        })
+        .bindAll()
+    ;
+</script>
 {% endblock %}

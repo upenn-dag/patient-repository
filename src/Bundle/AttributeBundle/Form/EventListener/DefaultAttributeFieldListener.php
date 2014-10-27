@@ -17,8 +17,13 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Accard\Component\Attribute\Builder\AttributeBuilderInterface;
 
 /**
+ * Attribute builder listener.
  *
- * @author Dylan Pierce <piercedy@upenn.edu>
+ * Responsible for adding default null objects to represent the values for each
+ * attribute field form element. This will ensure that the fields are present to
+ * be filled on create forms where they haven't yet been included.
+ *
+ * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
 class DefaultAttributeFieldListener implements EventSubscriberInterface
 {
@@ -54,7 +59,26 @@ class DefaultAttributeFieldListener implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return array(FormEvents::PRE_SET_DATA => 'buildForm');
+        return array(
+            FormEvents::POST_SET_DATA => 'hidePrototype',
+            FormEvents::PRE_SET_DATA => 'createFields',
+        );
+    }
+
+    /**
+     * Remove prototype field if prototype is present.
+     * 
+     * @param FormEvent $event
+     */
+    public function hidePrototype(FormEvent $event)
+    {
+        if (!$this->testForPrototype($event)) {
+            return;
+        }
+
+        if ($event->getForm()->has('prototype')) {
+            $event->getForm()->remove('prototype');
+        }
     }
 
     /**
@@ -62,11 +86,30 @@ class DefaultAttributeFieldListener implements EventSubscriberInterface
      *
      * @param FormEvent $event
      */
-    public function buildForm(FormEvent $event)
+    public function createFields(FormEvent $event)
     {
-        if (null === ($attribute = $event->getData())) {
+        if (!$this->testForPrototype($event)) {
             return;
         }
 
+        $attribute = $event->getData();
+        $this->builder->set($attribute);
+        $possibleFields = $attribute->getPrototype()->getFields();
+
+        foreach ($possibleFields as $field) {
+            if (!$attribute->hasFieldByName($field->getName())) {
+                $this->builder->addField($field->getName(), null, $field->getPresentation());
+            }
+        }
+    }
+
+    /**
+     * Test if prototype exists within form data.
+     * 
+     * @return boolean
+     */
+    private function testForPrototype(FormEvent $event)
+    {
+        return !(null === ($attribute = $event->getData()) || null === $attribute->getPrototype());
     }
 }

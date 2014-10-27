@@ -22,7 +22,7 @@ use Accard\Bundle\AttributeBundle\Form\EventListener\DefaultAttributeFieldListen
 /**
  * Attribute form type.
  *
- * @author Dylan Pierce <piercedy@upenn.edu>
+ * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
 class AttributeType extends AbstractType
 {
@@ -45,7 +45,7 @@ class AttributeType extends AbstractType
      *
      * @var AttributeBuilderInterface
      */
-    protected $builder;
+    protected $attributeBuilder;
 
 
 
@@ -58,11 +58,11 @@ class AttributeType extends AbstractType
      */
     public function __construct($dataClass,
                                 array $validationGroups,
-                                AttributeBuilderInterface $builder)
+                                AttributeBuilderInterface $attributeBuilder)
     {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
-        $this->builder = $builder;
+        $this->attributeBuilder = $attributeBuilder;
     }
 
     /**
@@ -71,8 +71,19 @@ class AttributeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('prototype', 'accard_attribute_prototype_choice', array(
+                'label' => 'accard.attribute.form.prototype',
+            ))
+            ->add('fields', 'collection', array(
+                'label' => 'accard.attribute.form.fields',
+                'required'     => false,
+                'type'         => 'accard_attribute_prototype_field_value',
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+            ))
             ->addEventSubscriber(
-                new DefaultAttributeFieldListener($builder->getFormFactory(), $this->builder)
+                new DefaultAttributeFieldListener($builder->getFormFactory(), $this->attributeBuilder)
             )
         ;
     }

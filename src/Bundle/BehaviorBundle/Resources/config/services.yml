@@ -18,62 +18,13 @@ services:
             - %accard.model.behavior.class%
             - %accard.validation_group.behavior%
             - @accard.builder.behavior
-            - @accard.provider.option
         tags:
             - { name: form.type, alias: accard_behavior }
-
-    accard.form.type.alcohol_behavior:
-        class: %accard.form.type.alcohol_behavior.class%
-        arguments:
-            - %accard.model.alcohol_behavior.class%
-            - %accard.validation_group.behavior%
-            - @accard.builder.behavior
-            - @accard.provider.option
-        tags:
-            - { name: form.type, alias: accard_alcohol_behavior }
-
-    accard.form.type.smoking_behavior:
-        class: %accard.form.type.smoking_behavior.class%
-        arguments:
-            - %accard.model.smoking_behavior.class%
-            - %accard.validation_group.behavior%
-            - @accard.builder.behavior
-            - @accard.provider.option
-        tags:
-            - { name: form.type, alias: accard_smoking_behavior }
-
-    accard.form.type.illicit_drug_behavior:
-        class: %accard.form.type.illicit_drug_behavior.class%
-        arguments:
-            - %accard.model.illicit_drug_behavior.class%
-            - %accard.validation_group.behavior%
-            - @accard.builder.behavior
-            - @accard.provider.option
-        tags:
-            - { name: form.type, alias: accard_illicit_drug_behavior }
-
-    accard.form.type.occupation_behavior:
-        class: %accard.form.type.occupation_behavior.class%
-        arguments:
-            - %accard.model.occupation_behavior.class%
-            - %accard.validation_group.behavior%
-            - @accard.builder.behavior
-            - @accard.provider.option
-        tags:
-            - { name: form.type, alias: accard_occupation_behavior }
-
-    accard.form.type.education_behavior:
-        class: %accard.form.type.education_behavior.class%
-        arguments:
-            - %accard.model.education_behavior.class%
-            - %accard.validation_group.behavior%
-            - @accard.builder.behavior
-            - @accard.provider.option
-        tags:
-            - { name: form.type, alias: accard_education_behavior }
 
     accard.builder.behavior:
         class: %accard.builder.behavior.class%
         arguments:
             - @accard.manager.behavior
             - @accard.repository.behavior
+            - @accard.repository.behavior_field
+            - @accard.repository.behavior_field_value

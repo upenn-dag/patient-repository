@@ -5,6 +5,70 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
-accard_frontend_attribute_family_cancer:
-    resource: @AccardWebBundle/Resources/config/routing/frontend/attribute/family_cancer.yml
-    prefix: /family_cancer
+accard_frontend_attribute_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.attribute:indexAction
+        _accard:
+            template: AccardWebBundle:Frontend/Attribute:index.html.twig
+            sortable: true
+            paginate: 25
+
+accard_frontend_attribute_index_by_prototype:
+    pattern: /{prototype}/
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.attribute:indexByPrototypeAction
+        _accard:
+            template: AccardWebBundle:Frontend/Attribute:indexByPrototype.html.twig
+            sortable: true
+            criteria:
+                prototype: $prototype
+            paginate: 25
+
+accard_frontend_attribute_show:
+    pattern: /{prototype}/{id}
+    methods: [GET]
+    requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
+    defaults:
+        _controller: accard.controller.attribute:showAction
+        _accard:
+            template: AccardWebBundle:Frontend/Attribute:show.html.twig
+
+accard_frontend_attribute_create:
+    pattern: /{prototype}/new
+    methods: [GET, POST]
+    requirements: { prototype: "[a-zA-Z1-9\-_\/]+" }
+    defaults:
+        _controller: accard.controller.attribute:createAction
+        _accard:
+            template: AccardWebBundle:Frontend/Attribute:create.html.twig
+            redirect:
+                route: accard_frontend_attribute_index_by_prototype
+                parameters: { prototype: resource.prototype.name, id: resource.id }
+
+accard_frontend_attribute_update:
+    pattern: /{prototype}/{id}/edit
+    methods: [GET, PUT, POST]
+    requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
+    defaults:
+        _controller: accard.controller.attribute:updateAction
+        _accard:
+            template: AccardWebBundle:Frontend/Attribute:update.html.twig
+            redirect:
+                route: accard_frontend_attribute_index_by_prototype
+                parameters: { prototype: resource.prototype.name, id: resource.id }
+
+accard_frontend_attribute_delete:
+    pattern: /{prototype}/{id}
+    methods: [DELETE]
+    requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
+    defaults:
+        _controller: accard.controller.attribute:deleteAction
+        _accard:
+            template: AccardWebBundle:Frontend/Attribute:delete.html.twig
+            redirect:
+                route: accard_frontend_attribute_index_by_prototype
+                parameters: { prototype: resource.prototype.name }
+

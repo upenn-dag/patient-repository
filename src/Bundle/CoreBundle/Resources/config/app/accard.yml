@@ -51,26 +51,9 @@ accard_behavior:
         behavior:
             model: Accard\Component\Core\Model\Behavior
             controller: Accard\Bundle\CoreBundle\Controller\BehaviorController
-        alcohol_behavior:
-            model: Accard\Component\Core\Model\AlcoholBehavior
-            controller: Accard\Bundle\CoreBundle\Controller\BehaviorController
-        smoking_behavior:
-            model: Accard\Component\Core\Model\SmokingBehavior
-            controller: Accard\Bundle\CoreBundle\Controller\BehaviorController
-        illicit_drug_behavior:
-            model: Accard\Component\Core\Model\IllicitDrugBehavior
-            controller: Accard\Bundle\CoreBundle\Controller\BehaviorController
-        occupation_behavior:
-            model: Accard\Component\Core\Model\OccupationBehavior
-            controller: Accard\Bundle\CoreBundle\Controller\BehaviorController
-        education_behavior:
-            model: Accard\Component\Core\Model\EducationBehavior
-            controller: Accard\Bundle\CoreBundle\Controller\BehaviorController
 
 accard_attribute:
     classes:
         attribute:
             model: Accard\Component\Core\Model\Attribute
-            controller: Accard\Bundle\CoreBundle\Controller\AttributeController
-        family_cancer_attribute:
             controller: Accard\Bundle\CoreBundle\Controller\AttributeController

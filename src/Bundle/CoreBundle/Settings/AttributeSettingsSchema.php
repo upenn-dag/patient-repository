@@ -46,11 +46,9 @@ class AttributeSettingsSchema implements SchemaInterface
         $builder
             ->setDefaults(array_merge(array(
                 'enabled' => true,
-                'enable_family_cancer' => true,
             ), $this->defaults))
             ->setAllowedValues(array(
                 'enabled' => array(true, false, '1', '0'),
-                'enable_family_cancer' => array(true, false, '1', '0'),
             ))
         ;
     }
@@ -63,10 +61,6 @@ class AttributeSettingsSchema implements SchemaInterface
         $builder
             ->add('enabled', 'checkbox', array(
                 'label' => 'accard.form.settings.attribute.enabled',
-                'required' => false,
-            ))
-            ->add('enable_family_cancer', 'checkbox', array(
-                'label' => 'accard.form.settings.attribute.enable_family_cancer',
                 'required' => false,
             ))
         ;

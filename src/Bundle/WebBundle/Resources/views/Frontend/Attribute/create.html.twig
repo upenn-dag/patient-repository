@@ -4,28 +4,46 @@
 
 {# For the full copyright and license information, please view the LICENSE #}
 {# file that was distributed with this source code. #}
-{# @author Dylan Pierce <piercedy@upenn.edu #}
 
 {% extends 'AccardWebBundle:Frontend:layout.html.twig' %}
 
 {% from 'AccardWebBundle:Common/Macros:actions.html.twig' import create %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import generic %}
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import no_javascript %}
+{% from 'AccardWebBundle:Common/Macros:form.html.twig' import select_patient_js, select_patient_css %}
+
+{% set prototype = form.vars.value.prototype is defined ? form.vars.value.prototype.name : 'default' %}
 
 {% block content %}
-    {{ page_title('accard.attribute.action.create'|trans)}}
-    
-    {{ form_errors(form)}}
 
-    <form action={% block attribute_form_action %}{% endblock %} method="post" {{ form_enctype(form) }}>
+    {{ page_title('accard.attribute.action.create'|trans,
+        [
+            generic(path('accard_frontend_attribute_index'), 'accard.attribute.action.manage'|trans, 'user')
+        ]
+    ) }}
+
+    {{ no_javascript() }}
+
+    {{ form_errors(form) }}
+
+    <form action="{{ path('accard_frontend_attribute_create', { prototype: prototype }) }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form._token) }}
-
-        {% block attribute_form %}{% endblock %}
-
+        {% include 'AccardWebBundle:Frontend/Attribute:form.html.twig' %}
         <div class="row">
             <div class="col-md-12">
                 <span class="pull-right">{{ create() }}</span>
             </div>
         </div>
-    </form> 
+    </form>
+{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {{ select_patient_js('#accard_attribute_patient') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ select_patient_css() }}
 {% endblock %}

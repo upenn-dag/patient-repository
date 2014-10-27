@@ -16,12 +16,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 
 /**
- * Accard Behavior bundle extension.
+ * Accard behavior bundle extension.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
- * @author Dylan Pierce <piercedy@upenn.edu>
  */
-class AccardBehaviorExtension extends AbstractResourceExtension
+class AccardBehaviorExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -31,5 +30,49 @@ class AccardBehaviorExtension extends AbstractResourceExtension
         $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
+        if (!$container->hasExtension('accard_prototype') || !$container->hasExtension('accard_field')) {
+            return;
+        }
+
+        // Prepend behavior prototype.
+        $container->prependExtensionConfig('accard_prototype', array(
+            'classes' => array(
+                'behavior' => array(
+                    'subject'   => $config['classes']['behavior']['model'],
+                    'prototype' => array(
+                        'model' => 'Accard\Component\Behavior\Model\Prototype',
+                        'repository' => 'Accard\Bundle\PrototypeBundle\Doctrine\ORM\PrototypeRepository',
+                    ),
+                    'field' => array(
+                        'model' => 'Accard\Component\Behavior\Model\Field',
+                    ),
+                    'field_value' => array(
+                        'model' => 'Accard\Component\Behavior\Model\FieldValue',
+                    ),
+                )
+            ))
+        );
+
+        // Prepend behavior prototype field.
+        $container->prependExtensionConfig('accard_field', array(
+            'classes' => array(
+                'behavior_prototype' => array(
+                    'subject'   => $config['classes']['behavior']['model'],
+                    'field' => array(
+                        'model' => 'Accard\Component\Behavior\Model\Field'
+                    ),
+                    'field_value' => array(
+                        'model' => 'Accard\Component\Behavior\Model\FieldValue'
+                    ),
+                )
+            ))
+        );
+    }
 }

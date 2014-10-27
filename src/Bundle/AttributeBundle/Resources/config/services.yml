@@ -18,25 +18,13 @@ services:
             - %accard.model.attribute.class%
             - %accard.validation_group.attribute%
             - @accard.builder.attribute
-            - @accard.provider.option
         tags:
             - { name: form.type, alias: accard_attribute }
-
-    accard.form.type.family_cancer_attribute:
-        class: %accard.form.type.family_cancer_attribute.class%
-        arguments:
-            - %accard.model.family_cancer_attribute.class%
-            - %accard.validation_group.attribute%
-            - @accard.builder.attribute
-            - @accard.provider.option
-        calls:
-            - ['setTranslator', ['@translator']]
-            - ['setCodeProvider', ['@accard.provider.diagnosis_code']]
-        tags:
-            - { name: form.type, alias: accard_family_cancer_attribute }
 
     accard.builder.attribute:
         class: %accard.builder.attribute.class%
         arguments:
             - @accard.manager.attribute
             - @accard.repository.attribute
+            - @accard.repository.attribute_field
+            - @accard.repository.attribute_field_value

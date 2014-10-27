@@ -5,37 +5,43 @@
 {# For the full copyright and license information, please view the LICENSE #}
 {# file that was distributed with this source code. #}
 
-{# @author Dylan Pierce <piercedy@upenn.edu #}
+{% macro list(behaviors) %}
 
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete, show %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
 
-{% macro behaviors_menu(view_type) %}
-
-    {%- set settings = accard_settings('behavior') -%}
-    {%- set order = {
-        alcohol: settings.alcohol_order,
-        smoking: settings.smoking_order,
-        illicit_drug: settings.illicit_drug_order,
-        occupation: settings.occupation_order,
-        education: settings.education_order
-    } -%}
-
-    {% if not settings.enabled %}
-        {% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import disabled %}
-        {{ disabled('accard.behavior.title'|trans) }}
-    {% else %}
-        {% from 'AccardWebBundle:Common/Macros:url.html.twig' import active_if_current %}
-
-        <ul class="nav nav-tabs nav-justified grid-tabs" role="tablist">
-        {%- for name, position in order|sort %}
-            {% if attribute(settings, 'enable_' ~ name) %}
-                <li class="{{ active_if_current("accard_frontend_behavior_#{name}_#{view_type}") }}">
-                    <a href="{{ path("accard_frontend_behavior_#{name}_index") }}">{{ "accard.behavior.#{name}.title"|trans }}</a>
-                </li>
-            {% endif %}
-        {% endfor -%}
-        </ul>
-    {% endif %}
+{% if behaviors|length > 0 %}
+    <table id="behaviors" class="behavior table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="prototype">{{ accard_resource_sort('prototype', 'accard.behavior.form.prototype'|trans) }}</th>
+                <th class="patient">{{ accard_resource_sort('patient', 'accard.behavior.form.patient'|trans) }}</th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for behavior in behaviors %}
+            <tr id="behavior-{{ behavior.id }}">
+                <td class="prototype">
+                    <a href="{{ path('accard_frontend_behavior_index_by_prototype', {'prototype': behavior.prototype.name}) }}">
+                        {{- behavior.prototype.presentation -}}
+                    </a>
+                </td>
+                <td class="patient">{{ behavior.patient.fullName }}</td>
+                <td class="actions">
+                    <div class="pull-right">
+                        {{ show(path('accard_frontend_behavior_show', {'prototype': behavior.prototype.name, 'id': behavior.id}), null, 'xs') }}
+                        {{ edit(path('accard_frontend_behavior_update', {'prototype': behavior.prototype.name, 'id': behavior.id}), null, 'xs') }}
+                        {{ delete(path('accard_frontend_behavior_delete', {'prototype': behavior.prototype.name, 'id': behavior.id}), null, 'xs') }}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ info('accard.behavior.none_found'|trans) }}
+{% endif %}
 
 {% endmacro %}
-
-

@@ -102,8 +102,8 @@ class LoadORMMetadataSubscriber implements EventSubscriber
     {
         if (30 < strlen($tableName)) {
             $tableName = str_replace(
-                array('prototype', 'instance', 'field_value', 'field', 'attribute', 'behavior'),
-                array('proto', 'inst', 'fldval', 'fld', 'attr', 'bhvr'),
+                array('prototype', 'instance', 'field_value', 'field', 'attribute', 'behavior', 'option'),
+                array('proto', 'inst', 'fldval', 'fld', 'attr', 'bhvr', 'opt'),
                 $tableName
             );
         }

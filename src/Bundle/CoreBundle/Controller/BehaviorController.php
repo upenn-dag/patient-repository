@@ -19,7 +19,6 @@ use Pagerfanta\Pagerfanta;
  * Behavior controller.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
- * @author Dylan Pierce <piercedy@upenn.edu>
  */
 class BehaviorController extends ResourceController
 {
@@ -35,48 +34,14 @@ class BehaviorController extends ResourceController
         }
 
         if (!$settings['enabled']) {
-            throw $this->createNotFoundException('Behaviors have been disabled. Please contact your administrator to turn them back on.');
+            throw $this->createNotFoundException('Activities have been disabled. Please contact your administrator to turn them back on.');
         }
-
-        if ($this->routeMatches($request, 'behavior_alcohol') && !$settings['enable_alcohol']) {
-            throw $this->createNotFoundException('Alcohol behavior has been disabled. Please contact your administrator to turn it on.');
-        }
-
-        if ($this->routeMatches($request, 'behavior_smoking') && !$settings['enable_smoking']) {
-            throw $this->createNotFoundException('Smoking behavior has been disabled. Please contact your administrator to turn it on.');
-        }
-
-        if ($this->routeMatches($request, 'behavior_illicit_drug') && !$settings['enable_illicit_drug']) {
-            throw $this->createNotFoundException('Illicit drug behavior has been disabled. Please contact your administrator to turn it on.');
-        }
-
-        if ($this->routeMatches($request, 'behavior_occupation') && !$settings['enable_occupation']) {
-            throw $this->createNotFoundException('Occupation behavior has been disabled. Please contact your administrator to turn it on.');
-        }
-
-        if ($this->routeMatches($request, 'behavior_education') && !$settings['enable_education']) {
-            throw $this->createNotFoundException('Education behavior has been disabled. Please contact your administrator to turn it on.');
-        }
-
-    }
-
-    /**
-     * Test if current route matches a given string.
-     *
-     * @param Request $request
-     * @param string $searchString
-     * @return boolean
-     */
-    private function routeMatches(Request $request, $searchString)
-    {
-        return false !== strpos($request->get('_route'), $searchString);
     }
 
     /**
      * Design behavior action.
      *
      * @param Request $request
-     * @todo create logical actions
      */
     public function designAction(Request $request)
     {
@@ -84,15 +49,83 @@ class BehaviorController extends ResourceController
         $settingsForm = $this->get('accard.settings.form_factory')->create('behavior');
         $settingsForm->setData($manager->load('behavior'));
 
-        $view = $this->view()
+        $view = $this
+            ->view()
             ->setTemplate($this->config->getTemplate('design.html'))
             ->setData(array(
+                'prototypes' => $this->getPrototypes(),
+                'fields' => $this->getFields(),
                 'settings_form' => $settingsForm->createView(),
                 'behavior_count' => $this->getBehaviorCount(),
             ))
         ;
 
         return $this->handleView($view);
+    }
+
+    /**
+     * Index behaviors by prototype.
+     *
+     * @param Request $request
+     *
+     */
+    public function indexByPrototypeAction(Request $request)
+    {
+        $provider = $this->get('accard.provider.behavior_prototype');
+        $prototypeName = $request->get('prototype', 'default');
+
+        try {
+            $prototype = $provider->getPrototypeByName($prototypeName);
+        } catch (\Exception $e) {
+            throw $this->createNotFoundException(sprintf('The prototype "%s" does not exist.', $prototypeName));
+        }
+
+        $parameters = $this->config->getParameters();
+        $parameters['criteria']['prototype'] = $prototype->getId();
+        $this->config->setParameters($parameters);
+
+        return $this->indexAction($request);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getForm($resource = null)
+    {
+        if ($resource && null === $resource->getPrototype()) {
+            $request = $this->config->getRequest();
+            $provider = $this->get('accard.provider.behavior_prototype');
+            $prototypeName = $request->get('prototype', 'default');
+
+            try {
+                $prototype = $provider->getPrototypeByName($prototypeName);
+                $resource->setPrototype($prototype);
+            } catch (\Exception $e) {
+                throw $this->createNotFoundException(sprintf('The prototype "%s" does not exist.', $prototypeName));
+            }
+        }
+
+        return parent::getForm($resource);
+    }
+
+    /**
+     * Get behavior prototypes.
+     *
+     * @return array
+     */
+    private function getPrototypes()
+    {
+        return $this->get('accard.repository.behavior_prototype')->createPaginator();
+    }
+
+    /**
+     * Get behavior fields.
+     *
+     * @return array
+     */
+    private function getFields()
+    {
+        return $this->Get('accard.repository.behavior_prototype_field')->createPaginator();
     }
 
     /**

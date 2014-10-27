@@ -14,3 +14,10 @@ Accard\Component\Attribute\Model\Attribute:
             type: integer
             generator:
                 strategy: AUTO
+
+    oneToMany:
+        fields:
+            targetEntity: Accard\Component\Attribute\Model\FieldValueInterface
+            mappedBy: subject
+            orphanRemoval: true
+            cascade: ["all"]

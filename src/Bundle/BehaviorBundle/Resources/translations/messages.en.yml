@@ -1,88 +1,69 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
 accard:
     behavior:
-        alcohol:
-            title: Alcohol
-            message:
-                none_found: No alcohol behaviors found
-            action:
-                create: Create Alcohol Behavior
-                index: Browse Alcohol Behaviors
-                update: Update Alcohol Behavior
-                delete: Delete Alcohol Behavior
-                design: Design Alcohol Behavior
-            form:
-                frequency: Frequency
-        smoking:
-            title: Smoking
-            message:
-                none_found: No smoking behaviors found
-            action:
-                create: Create Smoking Behavior
-                index: Browse Smoking Behaviors
-                update: Update Smoking Behavior
-                delete: Delete Smoking Behavior
-                design: Design Smoking Behavior
-            form:
-                type: Type of Smoking
-                frequency: Number of Packs
-        illicit_drug:
-            title: Illicit Drugs
-            message:
-                none_found: No illicit drug behaviors found 
-            action:
-                create: Create Illicit Drug Behavior
-                index: Browse Illicit Drug Behaviors
-                update: Update Illicit Drug Behavior
-                delete: Delete Illicit Drug Behavior
-                design: Design Illicit Drug Behavior
-            form:
-                type: Type of Illicit Drug
-                method: Method
-                frequency: Frequency
-        occupation:
-            message:
-                none_found: No occupation behaviors found
-            title: Occupation
-            action:
-                create: Create Occupation Behavior
-                index: Browse Occupation Behaviors
-                update: Update Occupation Behavior
-                delete: Delete Occupation Behavior
-                design: Design Occupation Behavior
-            form:
-                industry: Industry 
-                hours: Hours per week
-        education:
-            message:
-                none_found: No education behaviors found
-            title: Education
-            action:
-                create: Create Education Behavior
-                index: Browse Education Behaviors
-                update: Update Education Behavior
-                delete: Delete Education Behavior
-                design: Design Education Behavior
-            form:
-                level: Highest level attained
-                years: Number of years attended
-                completed: Completed degree?
-
-        title: Behavior
+        entity_name: Behavior
+        behaviors: Behaviors
         form:
-            start_date: Start Date
-            end_date: End Date
-            patient: Patient
+            id: Id
+            prototype: Prototype
+            prototype_label: Behavior Type
         action:
-            show: %behavior%
-            index: Browse Behavior
+            add: Add Behavior
             create: Create Behavior
+            update: Update Behavior
+            delete: Delete Behavior
             design: Design Behavior
-            manage: Manage Behaviors
-        message:
-            count: %total% behaviors registered.
-            count_fields: Collecting %total% behavior fields.
-        field:
-            title: Behavior Fields
+            manage: Manage Behavior
+            manage_all: Manage Behaviors
+        title:
+            index: Browse Behaviors
+            show: Show Behavior
+            create: Create a New Behavior
+            update: Update Behavior
+            list: Behaviors
+    behavior_prototype:
+        entity_name: Behavior Prototype
+        form:
+            name: Name
+            presentation: Presentation
+            fields: Fields
+            subjects: Subjects
+        action:
+            add: Add Behavior Prototype
+            create: Create Behavior Prototype
+            update: Update Behavior Prototype
+            delete: Delete Behavior Prototype
+            design: Design Behavior Prototype
+            manage: Manage Behavior Prototype
+            manage_all: Manage Behavior Prototypes
+        title:
+            index: Browse Behavior Prototypes
+            show: %behavior% Behavior Prototype
+            create: Create a New Behavior Prototype
+            update: Update Behavior Prototype
+            list: Behavior Prototypes
+    behavior_prototype_field:
+        entity_name: Behavior Field
+        form:
+            name: Name
+            presentation: Presentation
+        action:
+            add: Add Behavior Field
             create: Create Behavior Field
             update: Update Behavior Field
-            none_found: No Behavior Fields found
+            delete: Delete Behavior Field
+            design: Design Behavior Field
+            manage: Manage Behavior Field
+            manage_all: Manage Behavior Fields
+        title:
+            index: Browse Behavior Fields
+            show: %behavior% Behavior Field
+            create: Create a New Behavior Field
+            update: Update Behavior Field
+            list: Behavior Fields

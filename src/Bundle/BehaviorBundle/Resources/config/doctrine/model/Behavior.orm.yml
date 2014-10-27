@@ -23,4 +23,9 @@ Accard\Component\Behavior\Model\Behavior:
             type: datetime
             nullable: true
 
-
+    oneToMany:
+        fields:
+            targetEntity: Accard\Component\Behavior\Model\FieldValueInterface
+            mappedBy: subject
+            orphanRemoval: true
+            cascade: ["all"]

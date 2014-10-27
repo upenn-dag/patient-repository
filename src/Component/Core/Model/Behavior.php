@@ -17,7 +17,7 @@ use DateTime;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-abstract class Behavior extends BaseBehavior implements BehaviorInterface
+class Behavior extends BaseBehavior implements BehaviorInterface
 {
     // Traits
     use \Accard\Component\Resource\Model\BlameableTrait;
@@ -37,6 +37,7 @@ abstract class Behavior extends BaseBehavior implements BehaviorInterface
      */
     public function __construct()
     {
+        parent::__construct();
         $this->createdAt = new DateTime();
     }
 

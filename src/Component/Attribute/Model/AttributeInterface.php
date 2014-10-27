@@ -10,12 +10,16 @@
  */
 namespace Accard\Component\Attribute\Model;
 
+use Doctrine\Common\Collections\Collection;
+use Accard\Component\Prototype\Model\PrototypeSubjectInterface;
+use Accard\Component\Field\Model\FieldSubjectInterface;
+
 /**
  * Basic attribute interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface AttributeInterface
+interface AttributeInterface extends PrototypeSubjectInterface, FieldSubjectInterface
 {
     /**
      * Get attribute id.

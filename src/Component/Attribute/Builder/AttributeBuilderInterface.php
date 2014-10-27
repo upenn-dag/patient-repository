@@ -13,18 +13,28 @@ namespace Accard\Component\Attribute\Builder;
 use Accard\Component\Resource\Builder\BuilderInterface;
 
 /**
- * Attribute builder interface.
+ * Attribute Builder.
  *
- * Used to ease the programatic creation of attributess.
+ * Used to ease the programmatic creation of attributes.
  *
- * @author Dylan Pierce <piercedy@upenn.edu>
+ * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
 interface AttributeBuilderInterface extends BuilderInterface
 {
     /**
-     * Create a new attributes.
+     * Create a new attribute.
      *
      * @return AttributeBuilderInterface
      */
     public function create();
+
+    /**
+     * Add field with name and value.
+     *
+     * @param string $name
+     * @param mixed $value
+     * @param string|null $presentation
+     * @return AttributeBuilderInterface
+     */
+    public function addField($name, $value, $presentation = null);
 }

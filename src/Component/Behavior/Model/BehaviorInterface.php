@@ -11,13 +11,16 @@
 namespace Accard\Component\Behavior\Model;
 
 use DateTime;
+use Doctrine\Common\Collections\Collection;
+use Accard\Component\Prototype\Model\PrototypeSubjectInterface;
+use Accard\Component\Field\Model\FieldSubjectInterface;
 
 /**
  * Basic behavior interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface BehaviorInterface
+interface BehaviorInterface extends PrototypeSubjectInterface, FieldSubjectInterface
 {
     /**
      * Get behavior id.

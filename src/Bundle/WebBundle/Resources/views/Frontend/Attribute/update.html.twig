@@ -9,18 +9,19 @@
 
 {% from 'AccardWebBundle:Common/Macros:actions.html.twig' import update %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
+{% from 'AccardWebBundle:Common/Macros:form.html.twig' import select_patient_js, select_patient_css %}
+
+{% set prototype = form.vars.value.prototype is defined ? form.vars.value.prototype.name : 'default' %}
 
 {% block content %}
-    {# attribute.label doesn't technically exist in the db #}
-    {{ page_title('accard.interface.frontend.titles.update_attribute'|trans({ '%attribute%': attribute.label })) }}
+    {{ page_title('accard.attribute.title.update'|trans) }}
 
     {{ form_errors(form) }}
     
-    <form action="{{ path('accard_frontend_attribute_update', { id: attribute.id }) }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('accard_frontend_attribute_update', { prototype: prototype, id: attribute.id }) }}" method="post" {{ form_enctype(form) }}>
         <input type="hidden" name="_method" value="PUT">
         {{ form_widget(form._token) }}
         {% include 'AccardWebBundle:Frontend/Attribute:form.html.twig' %}
-        {{ form_rest(form) }}
         <div class="row">
             <div class="col-md-12">
                 <span class="pull-right">{{ update() }}</span>

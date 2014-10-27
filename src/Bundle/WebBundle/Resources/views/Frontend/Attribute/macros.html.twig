@@ -5,20 +5,43 @@
 {# For the full copyright and license information, please view the LICENSE #}
 {# file that was distributed with this source code. #}
 
-{# @author Dylan Pierce <piercedy@upenn.edu #}
+{% macro list(attributes) %}
 
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete, show %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
 
-{% macro attributes_menu() %}
-
-    {%- set settings = accard_settings('attribute') -%}
-    {% from 'AccardWebBundle:Common/Macros:url.html.twig' import active_if_current %}
-
-    <ul class="nav nav-tabs nav-justified grid-tabs" role="tablist">
-    {% if settings.enable_family_cancer %}
-        <li class="{{ active_if_current('accard_frontend_family_cancer_attribute_index') }}">
-            <a href="{{ path('accard_frontend_family_cancer_attribute_index') }}">{{ 'accard.attribute.family_cancer.title'|trans }}</a>
-        </li>
-    {% endif %}
-    </ul>
+{% if attributes|length > 0 %}
+    <table id="attributes" class="attribute table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="prototype">{{ accard_resource_sort('prototype', 'accard.attribute.form.prototype'|trans) }}</th>
+                <th class="patient">{{ accard_resource_sort('patient', 'accard.attribute.form.patient'|trans) }}</th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for attribute in attributes %}
+            <tr id="attribute-{{ attribute.id }}">
+                <td class="prototype">
+                    <a href="{{ path('accard_frontend_attribute_index_by_prototype', {'prototype': attribute.prototype.name}) }}">
+                        {{- attribute.prototype.presentation -}}
+                    </a>
+                </td>
+                <td class="patient">{{ attribute.patient.fullName }}</td>
+                <td class="actions">
+                    <div class="pull-right">
+                        {{ show(path('accard_frontend_attribute_show', {'prototype': attribute.prototype.name, 'id': attribute.id}), null, 'xs') }}
+                        {{ edit(path('accard_frontend_attribute_update', {'prototype': attribute.prototype.name, 'id': attribute.id}), null, 'xs') }}
+                        {{ delete(path('accard_frontend_attribute_delete', {'prototype': attribute.prototype.name, 'id': attribute.id}), null, 'xs') }}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ info('accard.attribute.none_found'|trans) }}
+{% endif %}
 
 {% endmacro %}

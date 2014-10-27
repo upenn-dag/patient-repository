@@ -63,6 +63,15 @@ class LoadORMMetadataSubscriber implements EventSubscriber
 
             // We must rename the join table to make sure they are unique.
             $mapTable = sprintf($metadata->associationMappings['optionValues']['joinTable']['name'], $subject);
+
+            if (30 < strlen($mapTable)) {
+                $mapTable = str_replace(
+                    array('prototype', 'instance', 'field_value', 'field', 'attribute', 'behavior', 'option'),
+                    array('proto', 'inst', 'fldval', 'fld', 'attr', 'bhvr', 'opt'),
+                    $mapTable
+                );
+            }
+            $mapTable = substr($mapTable, 0, 30);
             $metadata->associationMappings['optionValues']['joinTable']['name'] = $mapTable;
 
             $subjectMapping = array(

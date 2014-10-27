@@ -17,6 +17,75 @@ accard_backend_attribute_settings_update:
     pattern: /settings/update
     methods: [PUT, POST]
     defaults:
-        _controller: accard.controller.settings:updateAction
         namespace: attribute
-        redirect: accard_backend_attribute_design
+        _controller: accard.controller.settings:updateAction
+        _accard:
+            redirect:
+                route: accard_backend_attribute_design
+                parameters: { type: settings, action: update }
+
+accard_backend_attribute_prototype_create:
+    pattern: /prototype/new
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.attribute_prototype:createAction
+        _accard:
+            template: AccardWebBundle:Backend/Attribute:prototypeCreate.html.twig
+            redirect:
+                route: accard_backend_attribute_design
+                parameters: { type: prototype, action: create, id: resource.id }
+
+accard_backend_attribute_prototype_update:
+    pattern: /prototype/{id}/edit
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: accard.controller.attribute_prototype:updateAction
+        _accard:
+            template: AccardWebBundle:Backend/Attribute:prototypeUpdate.html.twig
+            redirect:
+                route: accard_backend_attribute_design
+                parameters: { type: prototype, action: update, id: resource.id }
+
+accard_backend_attribute_prototype_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.attribute_prototype:deleteAction
+        _accard:
+            redirect:
+                route: accard_backend_attribute_design
+                parameters: { type: prototype, action: delete }
+
+accard_backend_attribute_field_create:
+    pattern: /field/new
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.attribute_prototype_field:createAction
+        _accard:
+            template: AccardWebBundle:Backend/Attribute:fieldCreate.html.twig
+            redirect:
+                route: accard_backend_attribute_design
+                parameters: { type: field, action: create, id: resource.id }
+
+accard_backend_attribute_field_update:
+    pattern: /field/{id}/edit
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: accard.controller.attribute_prototype_field:updateAction
+        _accard:
+            template: AccardWebBundle:Backend/Attribute:fieldUpdate.html.twig
+            redirect:
+                route: accard_backend_attribute_design
+                parameters: { type: field, action: update, id: resource.id }
+
+accard_backend_attribute_field_delete:
+    pattern: /field/{id}
+    methods: [DELETE]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.attribute_prototype_field:deleteAction
+        _accard:
+            redirect:
+                route: accard_backend_attribute_design
+                parameters: { type: field, action: delete }

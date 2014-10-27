@@ -1,32 +1,69 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
 accard:
     attribute:
+        entity_name: Attribute
+        attributes: Attributes
+        form:
+            id: Id
+            prototype: Prototype
+            prototype_label: Attribute Type
         action:
+            add: Add Attribute
             create: Create Attribute
-            index: Browse Attributes
             update: Update Attribute
-            design: Design Attribute
             delete: Delete Attribute
-        family_cancer:
-            title: Family Cancers
-            action:
-                index: Browse Family Cancer History
-                create: Create New Family Cancer
-                update: Update Family Cancer
-                delete: Delete Family Cancer
-                design: Design Family Cancer
-            form:
-                familyMember: Family member
-                side: Side of Family
-                fathers_side: Father's side
-                mothers_side: Mother's side
-                code: Type of cancer
-                family:
-                    mother: Mother
-                    father: Father
-                    sister: Sister
-                    brother: Brother
-                    grandfather: Grandfather
-                    grandmother: Grandmother
-                    uncle: Uncle 
-                    aunt: Aunt
-                    cousin: Cousin
+            design: Design Attribute
+            manage: Manage Attribute
+            manage_all: Manage Attributes
+        title:
+            index: Browse Attributes
+            show: Show Attribute
+            create: Create a New Attribute
+            update: Update Attribute
+            list: Attributes
+    attribute_prototype:
+        entity_name: Attribute Prototype
+        form:
+            name: Name
+            presentation: Presentation
+            fields: Fields
+            subjects: Subjects
+        action:
+            add: Add Attribute Prototype
+            create: Create Attribute Prototype
+            update: Update Attribute Prototype
+            delete: Delete Attribute Prototype
+            design: Design Attribute Prototype
+            manage: Manage Attribute Prototype
+            manage_all: Manage Attribute Prototypes
+        title:
+            index: Browse Attribute Prototypes
+            show: %attribute% Attribute Prototype
+            create: Create a New Attribute Prototype
+            update: Update Attribute Prototype
+            list: Attribute Prototypes
+    attribute_prototype_field:
+        entity_name: Attribute Field
+        form:
+            name: Name
+            presentation: Presentation
+        action:
+            add: Add Attribute Field
+            create: Create Attribute Field
+            update: Update Attribute Field
+            delete: Delete Attribute Field
+            design: Design Attribute Field
+            manage: Manage Attribute Field
+            manage_all: Manage Attribute Fields
+        title:
+            index: Browse Attribute Fields
+            show: %attribute% Attribute Field
+            create: Create a New Attribute Field
+            update: Update Attribute Field
+            list: Attribute Fields

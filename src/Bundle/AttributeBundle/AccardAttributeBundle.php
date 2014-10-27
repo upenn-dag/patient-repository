@@ -30,7 +30,9 @@ class AccardAttributeBundle extends Bundle
     {
         $interfaces = array(
             'Accard\Component\Attribute\Model\AttributeInterface' => 'accard.model.attribute.class',
-            'Accard\Component\Attribute\Model\FamilyCancerAttributeInterface' => 'accard.model.family_cancer_attribute.class',
+            'Accard\Component\Attribute\Model\FieldInterface' => 'accard.model.attribute_field.class',
+            'Accard\Component\Attribute\Model\FieldValueInterface' => 'accard.model.attribute_field_value.class',
+            'Accard\Component\Attribute\Model\PrototypeInterface' => 'accard.model.attribute_prototype.class',
         );
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('accard_attribute', $interfaces));
