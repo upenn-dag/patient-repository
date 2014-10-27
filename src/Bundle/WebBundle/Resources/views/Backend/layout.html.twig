@@ -22,6 +22,7 @@
     {% block stylesheets -%}
     {% stylesheets output='assets/compiled/backend.css' filter='cssrewrite'
         'bundles/accardweb/css/bootstrap.min.css'
+        'bundles/accardweb/css/plugins/datepicker/bootstrap-datepicker-3.css'
         'bundles/accardweb/css/font-awesome.css'
         'bundles/accardweb/css/backend/backend.css'
         'bundles/accardweb/css/backend/custom.css'
@@ -179,9 +180,9 @@
     {% block javascripts -%}
         {% javascripts output='assets/compiled/backend.js'
             'bundles/accardweb/js/plugins/modernizr/modernizr.js'
-            'bundles/accardweb/js/plugins/datepicker/bootstrap-datepicker.js'
             'bundles/accardweb/js/jquery.js'
             'bundles/accardweb/js/bootstrap.js'
+            'bundles/accardweb/js/plugins/datepicker/bootstrap-datepicker.js'
             'bundles/accardweb/js/accard.js'
             'bundles/accardweb/js/forms.js'
             'bundles/accardweb/js/tables.js'
