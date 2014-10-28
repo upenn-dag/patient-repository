@@ -41,10 +41,18 @@ class DiagnosisProvider implements DiagnosisProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getDiagnosis($id)
+    public function getDiagnoses()
     {
-        if (!$diagnosis = $this->repository->find($id)) {
-            throw new DiagnosisNotFoundException($id);
+        return $this->repository->findAll();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDiagnosis($diagnosisId)
+    {
+        if (!$diagnosis = $this->repository->find($diagnosisId)) {
+            throw new DiagnosisNotFoundException($diagnosisId);
         }
 
         return $diagnosis;
