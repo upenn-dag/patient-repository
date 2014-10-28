@@ -11,44 +11,53 @@
 namespace Accard\Bundle\PatientBundle\Provider;
 
 use Accard\Component\Patient\Model\PatientInterface;
-use Accard\Bundle\PatientBundle\Doctrine\ORM\PatientRepository;
-use Accard\Bundle\PatientBundle\Exception\PatientNotFoundException;
+use Accard\Component\Patient\Provider\PatientProviderInterface;
+use Accard\Component\Patient\Repository\PatientRepositoryInterface;
+use Accard\Component\Patient\PatientNotFoundException;
 
 /**
  * Patient provider.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class PatientProvider
+class PatientProvider implements PatientProviderInterface
 {
     /**
      * Patient repository.
      *
-     * @var PatientRepository
+     * @var PatientRepositoryInterface
      */
     private $repository;
 
     /**
      * Constructor.
      *
-     * @param PatientRepository $repositry
+     * @param PatientRepositoryInterface $repositry
      */
-    public function __construct(PatientRepository $repository)
+    public function __construct(PatientRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
 
     /**
-     * Get patient by MRN.
-     *
-     * @throws PatientNotFoundException If patient is not found.
-     * @param string $mrn
-     * @return PatientInterface
+     * {@inheritdoc}
      */
-    public function getPatientByMRN($mrn)
+    public function getPatient($patientId)
     {
-        if (!$patient = $this->repository->findOneByMrn($mrn)) {
-            throw new PatientNotFoundException('MRN', $mrn);
+        if (!$patient = $this->repository->find($patientId)) {
+            throw new PatientNotFoundException($patientId);
+        }
+
+        return $patient;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPatientByMRN($patientMrn)
+    {
+        if (!$patient = $this->repository->findOneByMrn($patientMrn)) {
+            throw new PatientNotFoundException('MRN', $patientMrn);
         }
 
         return $patient;

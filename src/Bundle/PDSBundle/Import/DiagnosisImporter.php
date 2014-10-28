@@ -13,7 +13,7 @@ namespace Accard\Bundle\PDSBundle\Import;
 use DateTime;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Accard\Bundle\PatientBundle\Import\PatientImporter;
-use Accard\Bundle\PatientBundle\Exception\PatientNotFoundException;
+use Accard\Component\Patient\Exception\PatientNotFoundException;
 use Accard\Bundle\CoreBundle\Provider\ImportPatientProvider;
 use Doctrine\DBAL\Connection;
 

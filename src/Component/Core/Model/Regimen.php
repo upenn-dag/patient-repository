@@ -12,7 +12,6 @@ namespace Accard\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Accard\Bundle\PatientBundle\Exception\PatientNotFoundException;
 use Accard\Component\Regimen\Model\Regimen as BaseRegimen;
 use DateTime;
 

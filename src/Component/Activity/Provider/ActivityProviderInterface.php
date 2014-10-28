@@ -10,6 +10,7 @@
  */
 namespace Accard\Component\Activity\Provider;
 
+use Accard\Component\Resource\Provider\ProviderInterface;
 use Accard\Component\Activity\Model\ActivityInterface;
 use Accard\Component\Activity\Model\PrototypeInterface;
 use Accard\Component\Activity\Exception\ActivityNotFoundException;
@@ -20,7 +21,7 @@ use Accard\Component\Prototype\Provider\PrototypeProviderInterface;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface ActivityProviderInterface extends PrototypeProviderInterface
+interface ActivityProviderInterface extends PrototypeProviderInterface, ProviderInterface
 {
     /**
      * Get model FQCN.
