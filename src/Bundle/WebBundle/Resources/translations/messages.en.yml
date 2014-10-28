@@ -114,6 +114,12 @@ accard:
     sample:
         title:
             index_by_prototype: Browse %prototype% Samples
+    attribute:
+        title:
+            index_by_prototype: Browse %prototype% Attributes
+    behavior:
+        title:
+            index_by_prototype: Browse %prototype% Behaviors
     form:
         choose: Choose one
         field:
