@@ -12,13 +12,14 @@ namespace Accard\Component\Prototype\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Accard\Component\Field\Model\FieldInterface;
+use Accard\Component\Resource\Model\ResourceInterface;
 
 /**
  * Prototype interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface PrototypeInterface
+interface PrototypeInterface extends ResourceInterface
 {
     /**
      * Get prototype id.

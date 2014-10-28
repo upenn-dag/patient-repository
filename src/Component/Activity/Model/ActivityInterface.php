@@ -13,13 +13,16 @@ namespace Accard\Component\Activity\Model;
 use DateTime;
 use Accard\Component\Prototype\Model\PrototypeSubjectInterface;
 use Accard\Component\Field\Model\FieldSubjectInterface;
+use Accard\Component\Resource\Model\ResourceInterface;
 
 /**
  * Basic activity interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface ActivityInterface extends PrototypeSubjectInterface, FieldSubjectInterface
+interface ActivityInterface extends PrototypeSubjectInterface,
+                                    FieldSubjectInterface,
+                                    ResourceInterface
 {
     /**
      * Get activity id.

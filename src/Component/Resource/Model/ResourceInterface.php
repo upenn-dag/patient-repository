@@ -8,15 +8,13 @@
  * For the full copyright and license information, please view the
  * LICENSE file that was distributed with this source code.
  */
-namespace Accard\Component\Resource\Model;
-
-use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
+namespace Accard\Component\Resource\Model\ResourceInterface;
 
 /**
- * User interface.
+ * Accard resource interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface UserInterface extends BaseUserInterface, ResourceInterface
+interface ResourceInterface
 {
 }

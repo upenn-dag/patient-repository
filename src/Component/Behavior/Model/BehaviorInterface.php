@@ -14,13 +14,16 @@ use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Accard\Component\Prototype\Model\PrototypeSubjectInterface;
 use Accard\Component\Field\Model\FieldSubjectInterface;
+use Accard\Component\Resource\Model\ResourceInterface;
 
 /**
  * Basic behavior interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface BehaviorInterface extends PrototypeSubjectInterface, FieldSubjectInterface
+interface BehaviorInterface extends PrototypeSubjectInterface,
+                                    FieldSubjectInterface,
+                                    ResourceInterface
 {
     /**
      * Get behavior id.

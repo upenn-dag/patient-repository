@@ -11,13 +11,14 @@
 namespace Accard\Component\Field\Model;
 
 use Accard\Component\Option\Model\OptionInterface;
+use Accard\Component\Resource\Model\ResourceInterface;
 
 /**
  * Field interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface FieldInterface
+interface FieldInterface extends ResourceInterface
 {
     /**
      * Get name.

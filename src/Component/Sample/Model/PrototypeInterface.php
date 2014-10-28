@@ -11,12 +11,13 @@
 namespace Accard\Component\Sample\Model;
 
 use Accard\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterface;
+use Accard\Component\Resource\Model\ResourceInterface;
 
 /**
  * Sample prototype interface
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface PrototypeInterface extends BasePrototypeInterface
+interface PrototypeInterface extends BasePrototypeInterface, ResourceInterface
 {
 }

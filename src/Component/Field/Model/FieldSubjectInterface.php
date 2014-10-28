@@ -11,6 +11,7 @@
 namespace Accard\Component\Field\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Accard\Component\Resource\Model\ResourceInterface;
 
 /**
  * Field subject interface.
@@ -19,7 +20,7 @@ use Doctrine\Common\Collections\Collection;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface FieldSubjectInterface
+interface FieldSubjectInterface extends ResourceInterface
 {
     /**
      * Get all subject fields.

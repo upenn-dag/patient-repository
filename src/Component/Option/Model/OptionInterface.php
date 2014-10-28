@@ -11,13 +11,14 @@
 namespace Accard\Component\Option\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Accard\Component\Resource\Model\ResourceInterface;
 
 /**
  * Option interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface OptionInterface
+interface OptionInterface extends ResourceInterface
 {
     /**
      * Get internal name.

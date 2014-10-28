@@ -11,13 +11,14 @@
 namespace Accard\Component\Phase\Model;
 
 use DateTime;
+use Accard\Component\Resource\Model\ResourceInterface;
 
 /**
  * Basic phase interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface PhaseInterface
+interface PhaseInterface extends ResourceInterface
 {
     /**
      * Get phase id.

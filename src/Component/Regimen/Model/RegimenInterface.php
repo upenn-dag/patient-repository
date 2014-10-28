@@ -14,13 +14,16 @@ use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Accard\Component\Prototype\Model\PrototypeSubjectInterface;
 use Accard\Component\Field\Model\FieldSubjectInterface;
+use Accard\Component\Resource\Model\ResourceInterface;
 
 /**
  * Basic regimen interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface RegimenInterface extends PrototypeSubjectInterface, FieldSubjectInterface
+interface RegimenInterface extends PrototypeSubjectInterface,
+                                   FieldSubjectInterface,
+                                   ResourceInterface
 {
     /**
      * Get regimen id.

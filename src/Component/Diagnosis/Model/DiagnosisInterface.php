@@ -13,13 +13,14 @@ namespace Accard\Component\Diagnosis\Model;
 use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Accard\Component\Field\Model\FieldSubjectInterface;
+use Accard\Component\Resource\Model\ResourceInterface;
 
 /**
  * Basic diagnosis interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface DiagnosisInterface extends FieldSubjectInterface
+interface DiagnosisInterface extends FieldSubjectInterface, ResourceInterface
 {
     /**
      * Get diagnosis id.

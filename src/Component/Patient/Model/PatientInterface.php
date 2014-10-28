@@ -14,13 +14,14 @@ use DateTime;
 use DateInterval;
 use Accard\Component\Field\Model\FieldSubjectInterface;
 use Accard\Component\Option\Model\OptionValueInterface;
+use Accard\Component\Resource\Model\ResourceInterface;
 
 /**
  * Basic patient interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface PatientInterface extends FieldSubjectInterface
+interface PatientInterface extends FieldSubjectInterface, ResourceInterface
 {
     /**
      * Get id.

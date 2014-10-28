@@ -11,13 +11,14 @@
 namespace Accard\Component\Diagnosis\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Accard\Component\Resource\Model\ResourceInterface;
 
 /**
  * Code interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface CodeInterface
+interface CodeInterface extends ResourceInterface
 {
     /**
      * Get internal code id.
