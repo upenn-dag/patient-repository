@@ -83,7 +83,7 @@ class Configuration implements ConfigurationInterface
                             ->arrayNode('field')
                                 ->addDefaultsIfNotSet()
                                 ->children()
-                                    ->scalarNode('model')->defaultValue('Accard\Component\Field\Model\Field')->end()
+                                    ->scalarNode('model')->defaultValue('Accard\Component\Field\Model\Fiel')->end()
                                     ->scalarNode('controller')->defaultValue('Accard\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                     ->scalarNode('repository')->cannotBeEmpty()->end()
                                     ->scalarNode('form')->defaultValue('Accard\Bundle\FieldBundle\Form\Type\FieldType')->end()

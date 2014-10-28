@@ -15,6 +15,7 @@ use Accard\Bundle\ResourceBundle\AccardResourceBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Accard field bundle extension.
@@ -89,6 +90,16 @@ class AccardFieldExtension extends AbstractResourceExtension
         $fieldClasses = $config[$fieldAlias];
         $fieldValueClasses = $config[$fieldValueAlias];
 
+        // Field repository.
+        $repositoryClasses = array(
+            AccardResourceBundle::DRIVER_DOCTRINE_ORM => 'Accard\Bundle\FieldBundle\Doctrine\ORM\FieldRepository',
+        );
+        $repositoryClass = sprintf('accard.repository.%s.class', $fieldAlias);
+        if (!$container->hasParameter($repositoryClass)) {
+            $container->setParameter($repositoryClass, $repositoryClasses[$driver]);
+        }
+
+        // Field form.
         $fieldFormType = new Definition($fieldClasses['form']);
         $fieldFormType
             ->setArguments(array($subject, $fieldClasses['model'], '%accard.validation_group.'.$fieldAlias.'%'))
@@ -97,6 +108,7 @@ class AccardFieldExtension extends AbstractResourceExtension
 
         $container->setDefinition('accard.form.type.'.$fieldAlias, $fieldFormType);
 
+        // Field form choice.
         $choiceTypeClasses = array(
             AccardResourceBundle::DRIVER_DOCTRINE_ORM => 'Accard\Bundle\FieldBundle\Form\Type\FieldEntityChoiceType'
         );
@@ -109,6 +121,7 @@ class AccardFieldExtension extends AbstractResourceExtension
 
         $container->setDefinition('accard.form.type.'.$fieldAlias.'_choice', $fieldChoiceFormType);
 
+        // Field value form.
         $fieldValueFormType = new Definition($fieldValueClasses['form']);
         $fieldValueFormType
             ->setArguments(array($subject, $fieldValueClasses['model'], '%accard.validation_group.'.$fieldValueAlias.'%'))
@@ -116,5 +129,11 @@ class AccardFieldExtension extends AbstractResourceExtension
         ;
 
         $container->setDefinition('accard.form.type.'.$fieldValueAlias, $fieldValueFormType);
+
+        // Field provider.
+        $fieldProvider = new Definition('Accard\Component\Field\Provider\FieldProvider');
+        $fieldProvider->addArgument(new Reference('accard.repository.'.$fieldAlias));
+
+        $container->setDefinition('accard.provider.'.$fieldAlias, $fieldProvider);
     }
 }

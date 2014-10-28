@@ -33,10 +33,6 @@ abstract class Kernel extends BaseKernel
     public function registerBundles()
     {
         $bundles = array(
-            new \Accard\Bundle\ResourceBundle\AccardResourceBundle(),
-            new \Accard\Bundle\CoreBundle\AccardCoreBundle(),
-            new \Accard\Bundle\SettingsBundle\AccardSettingsBundle(),
-
             new \Accard\Bundle\OptionBundle\AccardOptionBundle(),
             new \Accard\Bundle\FieldBundle\AccardFieldBundle(),
             new \Accard\Bundle\PrototypeBundle\AccardPrototypeBundle(),
@@ -50,6 +46,10 @@ abstract class Kernel extends BaseKernel
             new \Accard\Bundle\FlowBundle\AccardFlowBundle(),
             new \Accard\Bundle\ActivityBundle\AccardActivityBundle(),
             new \Accard\Bundle\WebBundle\AccardWebBundle(),
+
+            new \Accard\Bundle\SettingsBundle\AccardSettingsBundle(),
+            new \Accard\Bundle\ResourceBundle\AccardResourceBundle(),
+            new \Accard\Bundle\CoreBundle\AccardCoreBundle(),
 
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
