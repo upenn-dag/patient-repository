@@ -42,6 +42,14 @@ class PatientProvider implements PatientProviderInterface
     /**
      * {@inheritdoc}
      */
+    public function getPatients()
+    {
+        return $this->repository->findAll();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPatient($patientId)
     {
         if (!$patient = $this->repository->find($patientId)) {

@@ -10,6 +10,7 @@
  */
 namespace Accard\Component\Patient\Provider;
 
+use Doctrine\Common\Collections\Collection;
 use Accard\Component\Resource\Provider\ProviderInterface;
 use Accard\Component\Patient\Model\PatientInterface;
 
@@ -20,6 +21,13 @@ use Accard\Component\Patient\Model\PatientInterface;
  */
 interface PatientProviderInterface extends ProviderInterface
 {
+    /**
+     * Get all patients.
+     *
+     * @return Collection|PatientInterface[]
+     */
+    public function getPatients();
+
     /**
      * Get patient by id.
      *
