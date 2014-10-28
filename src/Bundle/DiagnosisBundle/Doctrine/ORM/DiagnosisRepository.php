@@ -9,6 +9,7 @@
  */
 namespace Accard\Bundle\DiagnosisBundle\Doctrine\ORM;
 
+use Accard\Component\Diagnosis\Model\CodeInterface;
 use Accard\Component\Diagnosis\Repository\DiagnosisRepositoryInterface;
 use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 

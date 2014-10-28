@@ -36,4 +36,12 @@ interface DiagnosisProviderInterface extends ProviderInterface
      * @return DiagnosisInterface
      */
     public function getDiagnosis($diagnosisId);
+
+    /**
+     * Get diagnoses by code.
+     *
+     * @param CodeInterface $code
+     * @return DiagnosisInterface
+     */
+    public function getDiagnosesByCode(CodeInterface $code);
 }

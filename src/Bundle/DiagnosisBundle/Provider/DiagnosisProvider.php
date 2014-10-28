@@ -57,4 +57,12 @@ class DiagnosisProvider implements DiagnosisProviderInterface
 
         return $diagnosis;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDiagnosesByCode(CodeInterface $code)
+    {
+        return $this->repository->findBy(array('code' => $code));
+    }
 }

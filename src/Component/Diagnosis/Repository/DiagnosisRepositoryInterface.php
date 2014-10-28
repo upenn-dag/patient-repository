@@ -10,6 +10,8 @@
  */
 namespace Accard\Component\Diagnosis\Repository;
 
+use Accard\Component\Diagnosis\Model\DiagnosisInterface;
+use Accard\Component\Diagnosis\Model\CodeInterface;
 use Accard\Component\Resource\Repository\RepositoryInterface;
 
 /**
