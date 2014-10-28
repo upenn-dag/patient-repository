@@ -10,10 +10,7 @@
  */
 namespace Accard\Component\Sample\Model;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Accard\Component\Field\Model\FieldValueInterface as BaseFieldValueInterface;
-use Accard\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterface;
 
 /**
  * Accard sample model.
@@ -23,6 +20,7 @@ use Accard\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterfac
 class Sample implements SampleInterface
 {
     use \Accard\Component\Prototype\Model\PrototypeSubjectTrait;
+    use \Accard\Component\Field\Model\FieldSubjectTrait;
 
     /**
      * Sample id.
@@ -51,13 +49,6 @@ class Sample implements SampleInterface
      * @param Collection|SourceInterface[]
      */
     protected $derivatives;
-
-    /**
-     * Fields.
-     *
-     * @var Collection|BaseFieldValueInterface[]
-     */
-    protected $fields;
 
 
     /**
@@ -159,85 +150,5 @@ class Sample implements SampleInterface
         }
 
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFields()
-    {
-        return $this->fields;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFields(Collection $fields)
-    {
-        foreach ($fields as $field) {
-            $this->addField($field);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addField(BaseFieldValueInterface $field)
-    {
-        if (!$this->hasField($field)) {
-            $field->setSample($this);
-            $this->fields->add($field);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeField(BaseFieldValueInterface $field)
-    {
-        if ($this->hasField($field)) {
-            $this->fields->removeElement($field);
-            $field->setSample(null);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasField(BaseFieldValueInterface $field)
-    {
-        return $this->fields->contains($field);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasFieldByName($fieldName)
-    {
-        foreach ($this->fields as $field) {
-            if ($field->getName() === $fieldName) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFieldByName($fieldName)
-    {
-        foreach ($this->fields as $field) {
-            if ($field->getName() === $fieldName) {
-                return $field;
-            }
-        }
     }
 }

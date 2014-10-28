@@ -11,10 +11,7 @@
 namespace Accard\Component\Regimen\Model;
 
 use DateTime;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Accard\Component\Field\Model\FieldValueInterface as BaseFieldValueInterface;
-use Accard\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterface;
 
 /**
  * Accard regimen model.
@@ -24,6 +21,7 @@ use Accard\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterfac
 class Regimen implements RegimenInterface
 {
     use \Accard\Component\Prototype\Model\PrototypeSubjectTrait;
+    use \Accard\Component\Field\Model\FieldSubjectTrait;
 
     /**
      * Regimen id.
@@ -45,13 +43,6 @@ class Regimen implements RegimenInterface
      * @param DateTime|null
      */
     protected $endDate;
-
-    /**
-     * Fields.
-     *
-     * @var Collection|BaseFieldValueInterface[]
-     */
-    protected $fields;
 
 
     /**
@@ -104,85 +95,5 @@ class Regimen implements RegimenInterface
         $this->endDate = $endDate;
 
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFields()
-    {
-        return $this->fields;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFields(Collection $fields)
-    {
-        foreach ($fields as $field) {
-            $this->addField($field);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addField(BaseFieldValueInterface $field)
-    {
-        if (!$this->hasField($field)) {
-            $field->setRegimen($this);
-            $this->fields->add($field);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeField(BaseFieldValueInterface $field)
-    {
-        if ($this->hasField($field)) {
-            $this->fields->removeElement($field);
-            $field->setRegimen(null);
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasField(BaseFieldValueInterface $field)
-    {
-        return $this->fields->contains($field);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasFieldByName($fieldName)
-    {
-        foreach ($this->fields as $field) {
-            if ($field->getName() === $fieldName) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFieldByName($fieldName)
-    {
-        foreach ($this->fields as $field) {
-            if ($field->getName() === $fieldName) {
-                return $field;
-            }
-        }
     }
 }
