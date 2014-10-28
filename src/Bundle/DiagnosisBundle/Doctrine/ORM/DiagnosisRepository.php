@@ -37,4 +37,28 @@ class DiagnosisRepository extends EntityRepository implements DiagnosisRepositor
     {
         return $this->getQueryBuilder()->select('COUNT(diagnosis.id)')->getQuery()->getSingleScalarResult();
     }
+
+    /**
+     * Get ongoing diagnoses query builder.
+     *
+     * @param array $criteria
+     * @param array $sorting
+     * @return QueryBuilder
+     */
+    public function getOngoingDiagnosesQueryBuilder(array $criteria = array(), array $sorting = array())
+    {
+        $qb = $this->getQueryBuilder()->where('diagnosis.endDate IS NULL');
+        $qb->applyCriteria($criteria);
+        $qb->applySorting($sorting);
+
+        return $qb;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOngoingDiagnoses(array $criteria = array(), array $sorting = array())
+    {
+        return $this->getOngoingDiagnosesQueryBuilder($criteria, $sorting)->getQuery()->getResult();
+    }
 }
