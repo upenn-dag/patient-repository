@@ -17,14 +17,11 @@ services:
         class: %accard.provider.diagnosis.class%
         arguments:
             - @accard.repository.diagnosis
-            - @accard.provider.diagnosis_code
-            - @accard.provider.diagnosis_code_group
 
     accard.provider.diagnosis_code:
         class: %accard.provider.diagnosis_code.class%
         arguments:
             - @accard.repository.diagnosis_code
-            - @accard.provider.diagnosis_code_group
 
     accard.provider.diagnosis_code_group:
         class: %accard.provider.diagnosis_code_group.class%

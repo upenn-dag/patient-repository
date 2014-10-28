@@ -18,7 +18,7 @@ use Accard\Bundle\OptionBundle\Form\Type\OptionValueChoiceType;
 use Accard\Component\Option\Provider\OptionProviderInterface;
 use Accard\Component\Diagnosis\Builder\DiagnosisBuilderInterface;
 use Accard\Bundle\DiagnosisBundle\Form\EventListener\DefaultDiagnosisFieldListener;
-use Accard\Bundle\DiagnosisBundle\Provider\CodeProvider;
+use Accard\Bundle\DiagnosisBundle\Provider\CodeGroupProvider;
 
 /**
  * Diagnosis form type.
@@ -50,11 +50,11 @@ class DiagnosisType extends AbstractType
     protected $builder;
 
     /**
-     * Diagnosis code provider.
+     * Diagnosis code group provider.
      *
-     * @var CodeProvider
+     * @var CodeGroupProvider
      */
-    protected $codeProvider;
+    protected $codeGroupProvider;
 
     /**
      * Option provider..
@@ -74,13 +74,13 @@ class DiagnosisType extends AbstractType
     public function __construct($dataClass,
                                 array $validationGroups,
                                 DiagnosisBuilderInterface $builder,
-                                CodeProvider $codeProvider,
+                                CodeGroupProvider $codeGroupProvider,
                                 OptionProviderInterface $optionProvider)
     {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
         $this->builder = $builder;
-        $this->codeProvider = $codeProvider;
+        $this->codeGroupProvider = $codeGroupProvider;
         $this->optionProvider = $optionProvider;
     }
 
@@ -89,11 +89,12 @@ class DiagnosisType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $codeClass = $this->codeProvider->getRepository()->getClassName();
+        $codeClass = $this->codeGroupProvider->getModelClass();
         $choices = null;
 
         if (is_string($options['code_group'])) {
-            $choices = $this->codeProvider->getCodesForGroup($options['code_group']);
+            $group = $this->codeGroupProvider->getGroupByName($options['code_group']);
+            $choices = $group->getCodes();
         }
 
         $builder

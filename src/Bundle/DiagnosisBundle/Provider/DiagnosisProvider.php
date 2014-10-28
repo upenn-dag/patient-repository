@@ -10,84 +10,41 @@
  */
 namespace Accard\Bundle\DiagnosisBundle\Provider;
 
-use Accard\Bundle\DiagnosisBundle\Doctrine\ORM\DiagnosisRepository;
-use Accard\Bundle\DiagnosisBundle\Exception\DiagnosisNotFoundException;
-use Accard\Component\Diagnosis\Model\DiagnosisInterface;
+use Accard\Component\Diagnosis\Provider\DiagnosisProviderInterface;
+use Accard\Component\Diagnosis\Repository\DiagnosisRepositoryInterface;
+use Accard\Component\Diagnosis\Exception\DiagnosisNotFoundException;
 
 /**
  * Diagnosis provider.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class DiagnosisProvider
+class DiagnosisProvider implements DiagnosisProviderInterface
 {
     /**
      * Diagnosis repository.
      *
-     * @var DiagnosisRepository
+     * @var DiagnosisRepositoryInterface
      */
     private $repository;
 
     /**
      * Constructor.
      *
-     * @param DiagnosisRepository $repository
+     * @param DiagnosisRepositoryInterface $repository
      */
-    public function __construct(DiagnosisRepository $repository,
-                                CodeProvider $codeProvider,
-                                CodeGroupProvider $codeGroupProvider)
+    public function __construct(DiagnosisRepositoryInterface $repository)
     {
         $this->repository = $repository;
-        $this->codeProvider = $codeProvider;
-        $this->codeGroupProvider = $codeGroupProvider;
     }
 
     /**
-     * Get code provider.
-     *
-     * @return CodeProvider
+     * {@inheritdoc}
      */
-    public function getCodeProvider()
+    public function getDiagnosis($id)
     {
-        return $this->codeProvider;
-    }
-
-    /**
-     * Get code group provider.
-     *
-     * @return CodeGroupProvider
-     */
-    public function getCodeGroupProvider()
-    {
-        return $this->codeGroupProvider;
-    }
-
-    /**
-     * Get repository.
-     *
-     * @return DiagnosisRepository
-     */
-    public function getRepository()
-    {
-        return $this->repository;
-    }
-
-    /**
-     * Get diangnosis by id.
-     *
-     * @throws DiagnosisNotFoundException If diagnosis is not found and strict search is enabled
-     * @param integer $id
-     * @param boolean $strict
-     * @return DiagnosisInterface|null
-     */
-    public function getDiagnosis($id, $strict = true)
-    {
-        $diagnosis = $this->repository->find($id);
-
-        if ($strict && !$diagnosis) {
+        if (!$diagnosis = $this->repository->find($id)) {
             throw new DiagnosisNotFoundException($id);
-        } elseif (!$strict && !$diagnosis) {
-            return;
         }
 
         return $diagnosis;

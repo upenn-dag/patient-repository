@@ -10,16 +10,16 @@
  */
 namespace Accard\Bundle\DiagnosisBundle\Provider;
 
-use Accard\Bundle\DiagnosisBundle\Doctrine\ORM\CodeRepository;
-use Accard\Bundle\DiagnosisBundle\Exception\CodeNotFoundException;
-use Accard\Component\Diagnosis\Model\CodeInterface;
+use Accard\Component\Diagnosis\Provider\CodeProviderInterface;
+use Accard\Component\Diagnosis\Repository\CodeRepositoryInterface;
+use Accard\Component\Diagnosis\Exception\CodeNotFoundException;
 
 /**
  * Diagnosis code provider.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class CodeProvider
+class CodeProvider implements CodeProviderInterface
 {
     /**
      * Code repository.
@@ -29,72 +29,52 @@ class CodeProvider
     private $repository;
 
     /**
-     * Code group provider.
-     *
-     * @var CodeGroupProvider
-     */
-    private $codeGroupProvider;
-
-    /**
      * Constructor.
      *
      * @param CodeRepository $repository
      */
-    public function __construct(CodeRepository $repository,
-                                CodeGroupProvider $codeGroupProvider)
+    public function __construct(CodeRepositoryInterface $repository)
     {
         $this->repository = $repository;
-        $this->codeGroupProvider = $codeGroupProvider;
     }
 
     /**
-     * Get code group provider.
-     *
-     * @return CodeGroupProvider
+     * {@inheritdoc}
      */
-    public function getCodeGroupProvider()
+    public function getModelClass()
     {
-        return $this->codeGroupProvider;
+        return $this->repository->getClassName();
     }
 
     /**
-     * Get repository.
-     *
-     * @return CodeRepository
+     * {@inheritdoc}
      */
-    public function getRepository()
+    public function getAllCodes()
     {
-        return $this->repository;
+        return $this->repository->findAll();
     }
 
     /**
-     * Get code.
-     *
-     * @throws CodeNotFoundException If code can not be located.
-     * @param string $codeString
-     * @return CodeInterface
+     * {@inheritdoc}
      */
-    public function getCode($codeString)
+    public function getCode($codeId)
     {
-        $code = $this->repository->findOneByCode($codeString);
-
-        if (!$code) {
-            throw new CodeNotFoundException($codeString);
+        if (!$code = $this->repository->find($codeId)) {
+            throw new CodeNotFoundException($codeId);
         }
 
         return $code;
     }
 
     /**
-     * Get codes for a group.
-     *
-     * @param string $groupString
-     * @return array
+     * {@inheritdoc}
      */
-    public function getCodesForGroup($groupString)
+    public function getCodeByCode($codeString)
     {
-        $group = $this->codeGroupProvider->getGroup($groupString);
+        if (!$code = $this->repository->findOneByCode($codeId)) {
+            throw new CodeNotFoundException('code', $codeId);
+        }
 
-        return $group->getCodes();
+        return $code;
     }
 }

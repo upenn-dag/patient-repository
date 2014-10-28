@@ -20,7 +20,7 @@ services:
             - %accard.model.diagnosis.class%
             - %accard.validation_group.diagnosis%
             - @accard.builder.diagnosis
-            - @accard.provider.diagnosis_code
+            - @accard.provider.diagnosis_code_group
             - @accard.provider.option
         tags:
             - { name: form.type, alias: accard_diagnosis }

@@ -10,8 +10,10 @@
  */
 namespace Accard\Bundle\DiagnosisBundle\Provider;
 
-use Accard\Bundle\DiagnosisBundle\Doctrine\ORM\CodeGroupRepository;
-use Accard\Bundle\DiagnosisBundle\Exception\CodeGroupNotFoundException;
+use Doctrine\Common\Collections\Collection;
+use Accard\Component\Diagnosis\Provider\CodeGroupProviderInterface;
+use Accard\Component\Diagnosis\Repository\CodeGroupRepositoryInterface;
+use Accard\Component\Diagnosis\Exception\CodeGroupNotFoundException;
 use Accard\Component\Diagnosis\Model\CodeGroupInterface;
 
 /**
@@ -19,7 +21,7 @@ use Accard\Component\Diagnosis\Model\CodeGroupInterface;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class CodeGroupProvider
+class CodeGroupProvider implements CodeGroupProviderInterface
 {
     /**
      * Code group repository.
@@ -33,47 +35,48 @@ class CodeGroupProvider
      *
      * @param CodeGroupRepository $repository
      */
-    public function __construct(CodeGroupRepository $repository)
+    public function __construct(CodeGroupRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
 
     /**
-     * Get repository.
-     *
-     * @return CodeGroupRepository
+     * {@inheritdoc}
      */
-    public function getRepository()
+    public function getModelClass()
     {
-        return $this->repository;
+        return $this->repository->getClassName();
     }
 
     /**
-     * Get code group.
-     *
-     * @throws CodeGroupNotFoundException If code can not be located.
-     * @param string $name
-     * @return CodeGroupInterface
+     * {@inheritdoc}
      */
-    public function getGroup($name)
+    public function getAllGroups()
     {
-        $group = $this->repository->findOneByName($name);
+        return $this->repository->findAll();
+    }
 
-        if (!$group) {
-            throw new CodeGroupNotFoundException($name);
+    /**
+     * {@inheritdoc}
+     */
+    public function getGroup($groupId)
+    {
+        if (!$group = $this->repository->find($groupId)) {
+            throw new CodeGroupNotFoundException($groupId);
         }
 
         return $group;
     }
 
     /**
-     * Get all code groups.
-     *
-     * @throws CodeGroupNotFoundException If code can not be located.
-     * @return CodeGroupInterface
+     * {@inheritdoc}
      */
-    public function getGroups()
+    public function getGroupByName($groupName)
     {
-        return  $this->repository->findAll();
+        if (!$group = $this->repository->findOneByName($groupName)) {
+            throw new CodeGroupNotFoundException('name', $groupName);
+        }
+
+        return $group;
     }
 }

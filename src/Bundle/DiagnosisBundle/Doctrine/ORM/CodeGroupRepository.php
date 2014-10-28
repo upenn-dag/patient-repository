@@ -9,6 +9,7 @@
  */
 namespace Accard\Bundle\DiagnosisBundle\Doctrine\ORM;
 
+use Accard\Component\Diagnosis\Repository\CodeGroupRepositoryInterface;
 use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
@@ -16,7 +17,7 @@ use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class CodeGroupRepository extends EntityRepository
+class CodeGroupRepository extends EntityRepository implements CodeGroupRepositoryInterface
 {
     /**
      * {@inheritdoc}
