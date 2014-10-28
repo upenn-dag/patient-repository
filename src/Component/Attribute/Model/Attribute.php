@@ -22,19 +22,14 @@ use Accard\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterfac
  */
 class Attribute implements AttributeInterface
 {
+    use \Accard\Component\Prototype\Model\PrototypeSubjectTrait;
+
     /**
      * Attribute id.
      *
      * @var integer
      */
     protected $id;
-
-    /**
-     * Prototype.
-     *
-     * @var PrototypeInterface
-     */
-    protected $prototype;
 
     /**
      * Fields.
@@ -58,24 +53,6 @@ class Attribute implements AttributeInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPrototype()
-    {
-        return $this->prototype;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPrototype(BasePrototypeInterface $prototype = null)
-    {
-        $this->prototype = $prototype;
-
-        return $this;
     }
 
     /**

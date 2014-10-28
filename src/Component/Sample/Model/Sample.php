@@ -22,19 +22,14 @@ use Accard\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterfac
  */
 class Sample implements SampleInterface
 {
+    use \Accard\Component\Prototype\Model\PrototypeSubjectTrait;
+
     /**
      * Sample id.
      *
      * @var integer
      */
     protected $id;
-
-    /**
-     * Prototype.
-     *
-     * @var PrototypeInterface
-     */
-    protected $prototype;
 
     /**
      * Source.
@@ -80,24 +75,6 @@ class Sample implements SampleInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPrototype()
-    {
-        return $this->prototype;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPrototype(BasePrototypeInterface $prototype = null)
-    {
-        $this->prototype = $prototype;
-
-        return $this;
     }
 
     /**

@@ -24,19 +24,14 @@ use Accard\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterfac
  */
 class Activity implements ActivityInterface
 {
+    use \Accard\Component\Prototype\Model\PrototypeSubjectTrait;
+
     /**
      * Activity id.
      *
      * @var integer
      */
     protected $id;
-
-    /**
-     * Prototype.
-     *
-     * @var PrototypeInterface
-     */
-    protected $prototype;
 
     /**
      * Activity date.
@@ -67,24 +62,6 @@ class Activity implements ActivityInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPrototype()
-    {
-        return $this->prototype;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPrototype(BasePrototypeInterface $prototype = null)
-    {
-        $this->prototype = $prototype;
-
-        return $this;
     }
 
     /**
