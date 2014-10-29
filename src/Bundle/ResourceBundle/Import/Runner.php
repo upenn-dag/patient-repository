@@ -29,6 +29,8 @@ class Runner
     protected $registry;
     protected $option;
     protected $import;
+    protected $patient;
+    protected $diagnosis;
 
     public function __construct(EventDispatcherInterface $dispatcher,
                                 ResourceResolvingFactory $factory,
@@ -40,6 +42,8 @@ class Runner
 
         $this->option = $this->factory->resolveResource('option', ResourceInterface::NONE);
         $this->import = $this->factory->resolveResource('import', ResourceInterface::NONE);
+        $this->patient = $this->factory->resolveResource('patient', ResourceInterface::NONE);
+        $this->diagnosis = $this->factory->resolveResource('diagnosis', ResourceInterface::NONE);
     }
 
     /**
@@ -66,11 +70,13 @@ class Runner
 
         $evd = $this->dispatcher;
         $subjectName = $importer->getSubject();
+
         $subject = $this->factory->resolveResource($subjectName, ResourceInterface::SUBJECT);
-        $target = $this->factory->resolveResource('import_'.$subjectName, ResourceInterface::TARGET);
+        $target = $this->factory->resolveResource('import_' . $subjectName, ResourceInterface::TARGET);
         $event = new ImportEvent($subject, $target);
         $resolver = new OptionsResolver();
         $this->configureDefaultResolver($resolver, $subject, $target);
+
 
         $evd->dispatch(Events::INITIALIZE, $event);
         $event->setImporter($importer);
@@ -103,16 +109,20 @@ class Runner
             'target_resource' => $target,
             'option_resource' => $this->option,
             'import_resource' => $this->import,
+            'patient_resource' => $this->patient,
+            'diagnosis_resource' => $this->diagnosis,
         ));
 
         $resolver->setRequired(array('identifier', 'previous_record', 'import_description'));
 
         $resolver->setAllowedTypes(array(
-            'identifier' => 'string',
+            'identifier' => array('array', 'string'),
             'subject_resource' => array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'),
             'target_resource' => array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'),
             'option_resource' => array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'),
             'import_resource' => array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'),
+            'patient_resource' => array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'),
+            'diagnosis_resource' => array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'),
             'import_description' => 'string',
         ));
     }

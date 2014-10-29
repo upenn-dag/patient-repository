@@ -1,0 +1,23 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+Accard\Bundle\CPDBundle\Entity\GeneticResults:
+    type: entity
+    table: "CPD_VW_RESULTS"
+
+
+    fields:
+        PK_GR_ID: string
+        FK_GTS_ID: string
+        TEST_DATE: datetime
+        VARIANT_DETECTED: string
+        VARIANT_CATEGORIZATION: string
+        CDNA_CHANGE: string
+        PROTEIN_CHANGE: string
+        MUTATION_TYPE_CDNA: string
+        MUTATION_TYPE_PROTEIN: string
+        VARIANT_ALIAS: string

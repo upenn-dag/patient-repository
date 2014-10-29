@@ -31,9 +31,11 @@ class PersistImporterRecordsListener
         $om = $event->getTarget()->getManager();
         $records = $event->getRecords();
 
+
         $om->transactional(function($om) use ($records) {
-            foreach ($records as $record) {
-                $om->persist($record);
+            foreach ($records as $record => $value ) {
+                //die(var_dump($record));
+                $om->persist($value);
             }
         });
 

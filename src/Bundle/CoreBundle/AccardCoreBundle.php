@@ -30,6 +30,7 @@ class AccardCoreBundle extends Bundle
     {
         $interfaces = array(
             'Accard\Component\Core\Model\ImportPatientInterface' => 'accard.model.import_patient.class',
+            'Accard\Component\Core\Model\ImportActivityInterface' => 'accard.model.import_activity.class',
             'Accard\Component\Core\Model\PatientPhaseInterface' => 'accard.model.patient_phase.class',
             'Accard\Component\Core\Model\PatientPhaseInstanceInterface' => 'accard.model.patient_phase_instance.class',
             'Accard\Component\Core\Model\DiagnosisPhaseInterface' => 'accard.model.diagnosis_phase.class',
