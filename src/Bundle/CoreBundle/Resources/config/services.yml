@@ -9,6 +9,7 @@ parameters:
 
     accard.form.extension.accard_attribute.class: Accard\Bundle\CoreBundle\Form\Extension\AttributeTypeExtension
     accard.provider.import_patient.class: Accard\Bundle\CoreBundle\Provider\ImportPatientProvider
+    accard.provider.import_activity.class: Accard\Bundle\CoreBundle\Provider\ImportActivityProvider
     accard.fixture.manager.class: Accard\Bundle\CoreBundle\DataFixtures\FixtureManager
     accard.fixture.option_builder.class: Accard\Bundle\CoreBundle\DataFixtures\OptionBuilder
     accard.fixture.option_value_builder.class: Accard\Bundle\CoreBundle\DataFixtures\OptionValueBuilder
@@ -20,6 +21,11 @@ services:
         class: %accard.provider.import_patient.class%
         arguments:
             - @accard.repository.import_patient
+
+    accard.provider.import_activity:
+        class: %accard.provider.import_activity.class%
+        argument:
+            - @accard.repository.import_activity
 
     accard.fixture.manager:
         class: %accard.fixture.manager.class%
@@ -41,4 +47,3 @@ services:
     doctrine.oracle.accard_session_listener:
         class: %doctrine.oracle.session_listener.class%
         tags: [{ name: doctrine.event_listener, event: postConnect, connection: accard }]
-

@@ -1,0 +1,28 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+parameters:
+
+    accard_cpd.controller.class: Accard\Bundle\CPDBundle\Controller\CPDController
+    accard.import.importer.cpd_genetic_results.class: Accard\Bundle\CPDBundle\Import\GeneticResultsImporter
+
+services:
+
+    accard.connection.cpd:
+        alias: doctrine.dbal.accard_connection
+
+    accard_cpd.controller:
+        class: "%accard_cpd.controller.class%"
+        arguments: ["@doctrine.orm.accard_entity_manager"]
+
+    accard.import.importer.cpd_genetic_results:
+        class: %accard.import.importer.cpd_genetic_results.class%
+        arguments:
+            - @accard.provider.import_patient
+            - @accard.connection.pds
+            - ['205', '205.0', '205.00', '205.01', '205.02']
+        tags: [{ name: accard.importer, importer: cpd_genetic_results }]
