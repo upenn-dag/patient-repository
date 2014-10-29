@@ -54,6 +54,27 @@ class DefaultCodeGroupsData extends AccardFixture
             ->persist();
         }
 
+        if (!$fm->hasEntity('diagnosis_code', array('code' => '205'))) {
+            $fm->createEntity('diagnosis_code')
+                ->setCode('205')
+                ->setDescription('Test code 1')
+            ->persist();
+        }
+
+        if (!$fm->hasEntity('diagnosis_code', array('code' => '205.00'))) {
+            $fm->createEntity('diagnosis_code')
+                ->setCode('205.0')
+                ->setDescription('Test code 2')
+            ->persist();
+        }
+
+        if (!$fm->hasEntity('diagnosis_code', array('code' => '205.01'))) {
+            $fm->createEntity('diagnosis_code')
+                ->setCode('205.1')
+                ->setDescription('Test code 3')
+            ->persist();
+        }
+
         $fm->objectManager->flush();
     }
 }
