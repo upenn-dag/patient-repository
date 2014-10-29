@@ -45,3 +45,7 @@ accard_frontend_flow:
 accard_frontend_pds:
     resource: @AccardPDSBundle/Resources/config/routing.yml
     prefix: /pds
+
+accard_frontend_cpd:
+    resource: @AccardCPDBundle/Resources/config/routing.yml
+    prefix: /cpd

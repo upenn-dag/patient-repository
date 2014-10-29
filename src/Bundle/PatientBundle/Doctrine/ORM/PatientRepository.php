@@ -11,6 +11,7 @@
 namespace Accard\Bundle\PatientBundle\Doctrine\ORM;
 
 use PagerFanta\PagerfantaInterface;
+use Accard\Component\Patient\Model\PatientInterface;
 use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
@@ -36,6 +37,17 @@ class PatientRepository extends EntityRepository
     public function getCount()
     {
         return $this->getQueryBuilder()->select('COUNT(patient.id)')->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * Get patient by MRN.
+     * 
+     * @param string $mrn
+     * @return PatientInterface
+     */
+    public function getByMRN($mrn)
+    {
+        return $this->findOneBy(array('mrn' => $mrn));
     }
 
     /**

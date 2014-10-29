@@ -59,7 +59,7 @@ class ImportRunnerCommand extends ContainerAwareCommand
             $dispatcher->addListener(Events::FINISH, array($persister, 'persistImport'));
             $dispatcher->addListener(Events::FINISH, array($persister, 'persistRecords'));
         } else {
-            $output->writeln('<comment>Performing dry run.</comment>');
+            $output->writeln('<comment>Performing dry run.</comment>'); 
         }
 
         $records = $runner->run($importer);
