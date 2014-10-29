@@ -35,4 +35,20 @@ abstract class ContainerAwareExtension implements ContainerAwareInterface, Exten
     {
         $this->container = $container;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFunctions()
+    {
+        return array();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValues()
+    {
+        return array();
+    }
 }

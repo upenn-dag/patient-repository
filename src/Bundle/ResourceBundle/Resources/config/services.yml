@@ -19,8 +19,13 @@ parameters:
     accard.import.event_subscriber.class: Accard\Bundle\ResourceBundle\EventListener\ImporterEventSubscriber
     jms_serializer.identifier_handler.class: Accard\Bundle\ResourceBundle\Serializer\IdentifierHandler
     jms_serializer.property_handler.class: Accard\Bundle\ResourceBundle\Serializer\PropertyHandler
+    accard.expression_language.extension.resource.class: Accard\Bundle\ResourceBundle\ExpressionLanguage\ResourceExtension
 
 services:
+    accard.expression_language.extension.resource:
+        class: %accard.expression_language.extension.resource.class%
+        tags: [{ name: accard.expression_language_extension }]
+
     accard.controller.configuration_factory:
         class: %accard.controller.configuration_factory.class%
         arguments: ["@accard.controller.parameters_parser"]
