@@ -10,10 +10,12 @@
  */
 namespace Accard\Bundle\PatientBundle\Provider;
 
+use Doctrine\ORM\NonUniqueResultException;
 use Accard\Component\Patient\Model\PatientInterface;
 use Accard\Component\Patient\Provider\PatientProviderInterface;
 use Accard\Component\Patient\Repository\PatientRepositoryInterface;
-use Accard\Component\Patient\PatientNotFoundException;
+use Accard\Component\Patient\Exception\PatientNotFoundException;
+use Accard\Component\Patient\Exception\MultiplePatientsFoundException;
 
 /**
  * Patient provider.
@@ -66,6 +68,22 @@ class PatientProvider implements PatientProviderInterface
     {
         if (!$patient = $this->repository->findOneByMrn($patientMrn)) {
             throw new PatientNotFoundException('MRN', $patientMrn);
+        }
+
+        return $patient;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPatientByName($patientName)
+    {
+        try {
+            if (!$patient = $this->repository->getByName($patientName)) {
+                throw new PatientNotFoundException('name', $patientName);
+            }
+        } catch (NonUniqueResultException $exception) {
+            throw new MultiplePatientsFoundException();
         }
 
         return $patient;

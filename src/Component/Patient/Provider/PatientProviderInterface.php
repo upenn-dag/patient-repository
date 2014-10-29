@@ -45,4 +45,13 @@ interface PatientProviderInterface extends ProviderInterface
      * @return PatientInterface
      */
     public function getPatientByMRN($patientMrn);
+
+    /**
+     * Get patient by name.
+     *
+     * @throws PatientNotFoundException If patient is not found.
+     * @param string $patientName
+     * @return PatientInterface
+     */
+    public function getPatientByName($patientName);
 }

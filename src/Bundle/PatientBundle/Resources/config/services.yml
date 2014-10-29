@@ -10,8 +10,15 @@ parameters:
     accard.builder.patient.class: Accard\Component\Patient\Builder\PatientBuilder
     accard.provider.patient.class: Accard\Bundle\PatientBundle\Provider\PatientProvider
     accard.form.type.patient_choice.class: Accard\Bundle\PatientBundle\Form\Type\PatientChoiceType
+    accard.expression_language.extension.patient.class: Accard\Bundle\PatientBundle\ExpressionLanguage\PatientExtension
 
 services:
+
+    accard.expression_language.extension.patient:
+        class: %accard.expression_language.extension.patient.class%
+        arguments:
+            - @accard.provider.patient
+        tags: [{ name: accard.expression_language_extension }]
 
     accard.form.type.patient:
         class: %accard.form.type.patient.class%

@@ -10,6 +10,7 @@
  */
 namespace Accard\Bundle\PatientBundle\Doctrine\ORM;
 
+use Accard\Component\Patient\Utils;
 use PagerFanta\PagerfantaInterface;
 use Accard\Component\Patient\Model\PatientInterface;
 use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -22,6 +23,21 @@ use Accard\Component\Patient\Repository\PatientRepositoryInterface;
  */
 class PatientRepository extends EntityRepository implements PatientRepositoryInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getByName($patientName)
+    {
+        $name = Utils::parseName($patientName);
+        $criteria = array('firstName' => $name['forename']);
+
+        if (!empty($name['surname'])) {
+            $criteria['lastName'] = $name['surname'];
+        }
+
+        return $this->findOneBy($criteria);
+    }
+
     /**
      * {@inheritdoc}
      */

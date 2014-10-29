@@ -19,4 +19,15 @@ use Accard\Component\Resource\Repository\RepositoryInterface;
  */
 interface PatientRepositoryInterface extends RepositoryInterface
 {
+    /**
+     * Get patient by name.
+     *
+     * Parses patient name, and uses the values found to perform a search on the
+     * first and last name (last name is optional).
+     *
+     * @uses Accard\Component\Patient\Utils::parseName()
+     * @param string $patientName
+     * @return PatientInterface
+     */
+    public function getByName($patientName);
 }

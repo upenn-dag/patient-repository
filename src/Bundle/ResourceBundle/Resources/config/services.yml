@@ -27,9 +27,9 @@ services:
 
     accard.controller.parameters_parser:
         class: %accard.controller.parameters_parser.class%
-        arguments: ["@accard.expresssion_language"]
+        arguments: ["@accard.expression_language"]
 
-    accard.expresssion_language:
+    accard.expression_language:
         class: %accard.expression_language.class%
         calls: [["setContainer", ["@service_container"]]]
 
