@@ -22,7 +22,7 @@ class CodeGroupRepository extends EntityRepository implements CodeGroupRepositor
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'diagnosis_code_group';
     }

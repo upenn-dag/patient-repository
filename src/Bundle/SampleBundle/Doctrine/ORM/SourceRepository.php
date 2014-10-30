@@ -70,7 +70,7 @@ class SourceRepository extends EntityRepository implements SourceRepositoryInter
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'source';
     }

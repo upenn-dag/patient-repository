@@ -23,7 +23,7 @@ class PhaseRepository extends EntityRepository implements PhaseRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'phase';
     }

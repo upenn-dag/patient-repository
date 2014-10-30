@@ -41,24 +41,14 @@ class PatientRepository extends EntityRepository implements PatientRepositoryInt
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'patient';
     }
 
     /**
-     * Get patient count.
-     *
-     * @return integer
-     */
-    public function getCount()
-    {
-        return $this->getQueryBuilder()->select('COUNT(patient.id)')->getQuery()->getSingleScalarResult();
-    }
-
-    /**
      * Get patient by MRN.
-     * 
+     *
      * @param string $mrn
      * @return PatientInterface
      */
@@ -77,48 +67,32 @@ class PatientRepository extends EntityRepository implements PatientRepositoryInt
      */
     public function createFilterPaginator(array $criteria = null, array $sorting = null)
     {
-        $queryBuilder = parent::getCollectionQueryBuilder()->select('patient');
+        $queryBuilder = $this->getQueryBuilder();
 
         if (!is_array($criteria)) {
             $criteria = array();
-        }
-
-        if (!empty($criteria['phase'])) {
-            $queryBuilder
-                ->join('patient.phases', 'phase_instance')
-                ->join('phase_instance.phase', 'phase')
-                ->andWhere('phase.id = :phaseId')
-                ->andWhere('phase_instance.endDate IS NULL')
-                ->setParameter('phaseId', (int) $criteria['phase']);
-        }
-
-        if (!empty($criteria['mrn'])) {
-            $queryBuilder
-                ->andWhere('patient.mrn '.$this->getQueryEquality($criteria['mrn']).' :mrn')
-                ->setParameter('mrn', $criteria['mrn']);
-        }
-
-        if (!empty($criteria['firstName'])) {
-            $queryBuilder
-                ->andWhere('patient.firstName '.$this->getQueryEquality($criteria['firstName']).' :firstName')
-                ->setParameter('firstName', $criteria['firstName']);
-        }
-
-        if (!empty($criteria['lastName'])) {
-            $queryBuilder
-                ->andWhere('patient.lastName '.$this->getQueryEquality($criteria['lastName']).' :lastName')
-                ->setParameter('lastName', $criteria['lastName']);
-        }
-
-        if (!empty($criteria['deceased'])) {
-            $queryBuilder
-                ->andWhere('patient.dateOfDeath IS NOT NULL');
         }
 
         if (!is_array($sorting)) {
             $sorting = array();
         }
 
+        if (!empty($criteria['phase'])) {
+            $queryBuilder
+                ->join('patient.phases', 'phase_instance')
+                ->join('phase_instance.phase', 'phase')
+                ->filterByColumn('phase.id', (int) $criteria['phase'])
+                ->filterByColumn('phase_instance.endDate', null)
+            ;
+        }
+
+        if (!empty($criteria['deceased'])) {
+            $queryBuilder->filterByStatement('patient.dateOfDeath IS NOT NULL');
+        }
+
+
+        unset($criteria['phase'], $criteria['deceased']);
+        $this->applyCriteria($queryBuilder, $criteria);
         $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);

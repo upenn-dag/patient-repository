@@ -23,7 +23,7 @@ class FieldRepository extends EntityRepository implements FieldRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'field';
     }

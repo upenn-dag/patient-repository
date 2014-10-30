@@ -22,7 +22,7 @@ class PatientPhaseInstanceRepository extends AbstractPhaseInstanceRepository
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'patient_phase_instance';
     }

@@ -38,7 +38,7 @@ class ImportActivityRepository extends EntityRepository
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'import_activity';
     }

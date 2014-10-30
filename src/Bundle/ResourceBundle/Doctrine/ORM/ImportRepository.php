@@ -23,7 +23,7 @@ class ImportRepository extends EntityRepository implements ImportRepositoryInter
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'import';
     }

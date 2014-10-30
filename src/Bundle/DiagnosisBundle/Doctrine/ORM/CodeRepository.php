@@ -22,7 +22,7 @@ class CodeRepository extends EntityRepository implements CodeRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'diagnosis_code';
     }

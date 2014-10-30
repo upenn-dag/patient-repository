@@ -23,7 +23,7 @@ class ActivityRepository extends EntityRepository implements ActivityRepositoryI
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'activity';
     }

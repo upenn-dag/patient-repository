@@ -23,7 +23,7 @@ class SampleRepository extends EntityRepository implements SampleRepositoryInter
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'sample';
     }

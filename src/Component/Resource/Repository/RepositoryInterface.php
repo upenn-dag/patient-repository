@@ -10,6 +10,7 @@
  */
 namespace Accard\Component\Resource\Repository;
 
+use Pagerfanta\PagerfantaInterface;
 use Doctrine\Common\Persistence\ObjectRepository;
 
 /**
@@ -27,12 +28,16 @@ interface RepositoryInterface extends ObjectRepository
     public function createNew();
 
     /**
-     * Get paginated collection
+     * Get entity count.
      *
-     * @param array $criteria
-     * @param array $orderBy
-     *
-     * @return mixed
+     * @return integer
      */
-    public function createPaginator(array $criteria = null, array $orderBy = null);
+    public function getCount();
+
+    /**
+     * Get entity alias for use in DQL.
+     *
+     * @return string
+     */
+    public function getAlias();
 }

@@ -23,7 +23,7 @@ class DiagnosisRepository extends EntityRepository implements DiagnosisRepositor
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'diagnosis';
     }

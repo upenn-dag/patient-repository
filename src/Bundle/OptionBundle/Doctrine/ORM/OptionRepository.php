@@ -23,7 +23,7 @@ class OptionRepository extends EntityRepository implements OptionRepositoryInter
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'option';
     }

@@ -22,7 +22,7 @@ class DiagnosisPhaseInstanceRepository extends AbstractPhaseInstanceRepository
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'diagnosis_phase_instance';
     }

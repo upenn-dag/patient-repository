@@ -47,7 +47,7 @@ class PrototypeRepository extends EntityRepository implements PrototypeRepositor
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'prototype';
     }

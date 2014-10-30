@@ -23,7 +23,7 @@ abstract class AbstractPhaseInstanceRepository extends EntityRepository implemen
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'phase_instance';
     }

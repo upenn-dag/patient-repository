@@ -8,13 +8,12 @@
  * For the full copyright and license information, please view the
  * LICENSE file that was distributed with this source code.
  */
-
 namespace Accard\Bundle\ResourceBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityRepository as BaseEntityRepository;
-use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
+use Pagerfanta\PagerfantaInterface;
 use Accard\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -35,9 +34,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     }
 
     /**
-     * @param mixed $id
-     *
-     * @return null|object
+     * {@inheritdoc}
      */
     public function find($id)
     {
@@ -50,7 +47,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function findAll()
     {
@@ -62,9 +59,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     }
 
     /**
-     * @param array $criteria
-     *
-     * @return null|object
+     * {@inheritdoc}
      */
     public function findOneBy(array $criteria)
     {
@@ -72,19 +67,12 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
 
         $this->applyCriteria($queryBuilder, $criteria);
 
-        return $queryBuilder
-            ->getQuery()
-            ->getOneOrNullResult()
+        return $queryBuilder->getQuery()->getOneOrNullResult()
         ;
     }
 
     /**
-     * @param array   $criteria
-     * @param array   $orderBy
-     * @param integer $limit
-     * @param integer $offset
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
@@ -101,14 +89,76 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
             $queryBuilder->setFirstResult($offset);
         }
 
-        return $queryBuilder
-            ->getQuery()
-            ->getResult()
-        ;
+        return $queryBuilder->getQuery()->getResult();
     }
 
     /**
      * {@inheritdoc}
+     */
+    public function getAlias()
+    {
+        return 'o';
+    }
+
+    /**
+     * Get query builder class.
+     *
+     * Returns the FQCN of the query builder class used by this repository. This
+     * will allow us to override the query builder in extending repositories.
+     *
+     * @return string
+     */
+    protected function getQueryBuilderClass()
+    {
+        return '\Accard\Bundle\ResourceBundle\Doctrine\ORM\QueryBuilder';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createQueryBuilder($alias, $indexBy = null)
+    {
+        $queryBuilderClass = $this->getQueryBuilderClass();
+
+        return new $queryBuilderClass($this->getEntityManager(), $this);
+    }
+
+    /**
+     * Get query builder.
+     *
+     * @return QueryBuilder
+     */
+    public function getQueryBuilder()
+    {
+        return $this->createQueryBuilder($this->getAlias());
+    }
+
+    /**
+     * Get collection query builder.
+     *
+     * @return QueryBuilder
+     */
+    public function getCollectionQueryBuilder()
+    {
+        return $this->createQueryBuilder($this->getAlias());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCount()
+    {
+        $countString = sprintf('COUNT(%s.id)', $this->getAlias());
+
+        return $this->getQueryBuilder()->select($countString)->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * Create paginator for given criteria.
+     *
+     * @param array|null $criteria
+     * @param array|null $sorting
+     * @return PagerfantaInterface
      */
     public function createPaginator(array $criteria = null, array $orderBy = null)
     {
@@ -121,9 +171,10 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
+     * Get paginator for a query builder.
      *
-     * @return Pagerfanta
+     * @param QueryBuilder $queryBuilder
+     * @return PagerfantaInterface
      */
     public function getPaginator(QueryBuilder $queryBuilder)
     {
@@ -131,49 +182,27 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     }
 
     /**
-     * @return QueryBuilder
-     */
-    public function getQueryBuilder()
-    {
-        return $this->createQueryBuilder($this->getAlias());
-    }
-
-    /**
-     * @return QueryBuilder
-     */
-    public function getCollectionQueryBuilder()
-    {
-        return $this->createQueryBuilder($this->getAlias());
-    }
-
-    /**
-     * @param QueryBuilder $queryBuilder
+     * Merge criteria array into query builder.
      *
-     * @param array $criteria
+     * @param QueryBuilder $queryBuilder
+     * @param array|null $criteria
+     * @param boolean $strict
      */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
+    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null, $strict = false)
     {
         if (null === $criteria) {
             return;
         }
 
         foreach ($criteria as $property => $value) {
-            if (null === $value) {
-                $queryBuilder
-                    ->andWhere($queryBuilder->expr()->isNull($this->getPropertyName($property)));
-            } elseif (is_array($value)) {
-                $queryBuilder->andWhere($queryBuilder->expr()->in($this->getPropertyName($property), $value));
-            } elseif ('' !== $value) {
-                $queryBuilder
-                    ->andWhere($queryBuilder->expr()->eq($this->getPropertyName($property), ':' . $property))
-                    ->setParameter($property, $value);
-            }
+            $queryBuilder->filterByColumn($property, $value, $strict);
         }
     }
 
     /**
-     * @param QueryBuilder $queryBuilder
+     * Merge sorting array into query builder.
      *
+     * @param QueryBuilder $queryBuilder
      * @param array $sorting
      */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = null)
@@ -190,8 +219,9 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     }
 
     /**
-     * @param string $name
+     * Get fully qualified property name.
      *
+     * @param string $name
      * @return string
      */
     protected function getPropertyName($name)
@@ -201,22 +231,5 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
         }
 
         return $name;
-    }
-
-    protected function getAlias()
-    {
-        return 'o';
-    }
-
-    /**
-     * Get entity count.
-     *
-     * @return integer
-     */
-    public function getCount()
-    {
-        $countString = sprintf('COUNT(%s.id)', $this->getAlias());
-
-        return $this->getQueryBuilder()->select($countString)->getQuery()->getSingleScalarResult();
     }
 }

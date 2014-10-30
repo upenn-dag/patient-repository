@@ -23,7 +23,7 @@ class OptionValueRepository extends EntityRepository implements OptionValueRepos
     /**
      * {@inheritdoc}
      */
-    protected function getAlias()
+    public function getAlias()
     {
         return 'option_value';
     }
