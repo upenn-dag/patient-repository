@@ -24,6 +24,63 @@ class ImportActivity extends BaseActivity implements ImportActivityInterface
 {
     // Traits
     use \Accard\Component\Resource\Model\ImportTargetTrait;
-    use ActivityTrait;
 
+    /**
+     * Patient.
+     *
+     * @var PatientInterface
+     */
+    protected $patient;
+
+    /**
+     * Diagnosis.
+     *
+     * @var DiagnosisInterface
+     */
+    protected $diagnosis;
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPatient()
+    {
+        return $this->patient;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPatient(PatientInterface $patient = null)
+    {
+        $this->patient = $patient;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDiagnosis()
+    {
+        return $this->diagnosis;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDiagnosis(DiagnosisInterface $diagnosis = null)
+    {
+        $this->diagnosis = $diagnosis;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasDiagnosis()
+    {
+        return $this->diagnosis instanceof DiagnosisInterface;
+    }
 }

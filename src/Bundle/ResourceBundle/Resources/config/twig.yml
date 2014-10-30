@@ -17,6 +17,7 @@ services:
         class: %accard.twig.extension.resource.class%
         arguments:
             - @router
+            - %accard.import.signals%
             - %accard.twig.extension.resource.pagination_template%
             - %accard.twig.extension.resource.sorting_template%
         tags:

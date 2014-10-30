@@ -249,7 +249,7 @@ class Configuration
 
     public function getPaginationMaxPerPage()
     {
-        return (int) $this->get('paginate', 10);
+        return (int) $this->request->query->get('limit', $this->get('paginate', 10));
     }
 
     public function isFilterable()

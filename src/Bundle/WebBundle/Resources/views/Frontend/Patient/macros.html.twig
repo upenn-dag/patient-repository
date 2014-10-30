@@ -73,6 +73,7 @@
 
 {% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
+{% from 'AccardWebBundle:Common/Macros:import.html.twig' import import_btn %}
 
 {% if patients|length > 0 %}
     <table id="patients" class="patient table table-bordered table-striped table-hover">
@@ -104,7 +105,7 @@
                 <td class="deceased text-center text-success">{%- if patient.deceased %}{{ icon('fa fa-check') }}{% endif -%}</td>
                 <td class="actions">
                     <div class="pull-right">
-                        <a href="{{ path('accard_frontend_import_accept', { subject: 'patient', id: patient.id }) }}" data-import="accept" data-record-id="{{ patient.id }}" class="btn btn-success btn-xs">Accept</a>
+                        {{ import_btn('accept', patient.id) }}
                         <a href="{{ path('accard_frontend_import_decline', { subject: 'patient', id: patient.id }) }}" data-import="decline" data-record-id="{{ patient.id }}" class="btn btn-danger btn-xs">Decline</a>
                     </div>
                 </td>

@@ -28,6 +28,7 @@ class StaticImporter extends PatientImporter
         return array(
             $resolver->resolve(array(
                 'mrn' => '000000001',
+                'identifier' => 'patient-000000001',
                 'first_name' => 'Frank',
                 'last_name' => 'Bardon',
                 'date_of_birth' => '08/06/1984',
@@ -36,6 +37,7 @@ class StaticImporter extends PatientImporter
             )),
             $resolver->resolve(array(
                 'mrn' => '000000002',
+                'identifier' => 'patient-000000002',
                 'first_name' => 'Morraine',
                 'last_name' => 'Sedai',
                 'date_of_birth' => '04/06/1963',

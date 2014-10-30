@@ -22,4 +22,18 @@ class Events
     const CONVERT = 'accard.import.convert';
     const POST_IMPORT = 'accard.import.post_import';
     const FINISH = 'accard.import.finish';
+
+    /**
+     * Import accept event.
+     *
+     * @var string
+     */
+    const ACCEPT = 'accard.import.accept';
+
+    /**
+     * Import decline event.
+     *
+     * @var string
+     */
+    const DECLINE = 'accard.import.decline';
 }

@@ -49,15 +49,22 @@ class ResourceExtension extends \Twig_Extension
     private $router;
 
     /**
+     * @var array
+     */
+    private $importSignals;
+
+    /**
      * Constructor.
      *
      * @param RouterInterface $router
+     * @param array $importSignals
      * @param string $paginateTemplate
      * @param string $sortingTemplate
      */
-    public function __construct(RouterInterface $router, $paginateTemplate, $sortingTemplate)
+    public function __construct(RouterInterface $router, array $importSignals, $paginateTemplate, $sortingTemplate)
     {
         $this->router = $router;
+        $this->importSignals = $importSignals;
         $this->paginateTemplate = $paginateTemplate;
         $this->sortingTemplate = $sortingTemplate;
     }
@@ -77,8 +84,24 @@ class ResourceExtension extends \Twig_Extension
                 'accard_resource_paginate',
                 array($this, 'renderPaginateSelect'),
                 array('needs_environment' => true, 'is_safe' => array('html'))
-            ),
+            )
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getGlobals()
+    {
+        return array('accard_import_signals' => $this->importSignals);
+    }
+
+    /**
+     * @return array
+     */
+    public function getImportSignals()
+    {
+        return $this->importSignals;
     }
 
     /**
@@ -156,10 +179,9 @@ class ResourceExtension extends \Twig_Extension
      */
     public function renderPaginateSelect(\Twig_Environment $twig, Pagerfanta $paginator, array $limitOptions, array $options = array())
     {
-        if (array_key_exists('paginate', $this->accardRouteParams) &&
-            is_string($this->accardRouteParams['paginate'])) {
+        if (array_key_exists('paginate', $this->accardRouteParams) && is_integer($this->accardRouteParams['paginate'])) {
             $options = $this->getOptions($options, $this->paginateTemplate);
-            $paginateName = substr($this->accardRouteParams['paginate'], 1);
+            $paginateName = 'limit';
 
             $limits = array();
             foreach ($limitOptions as $limit) {

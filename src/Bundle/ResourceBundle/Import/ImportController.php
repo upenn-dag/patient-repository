@@ -15,6 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Accard\Component\Resource\Model\ImportTargetInterface;
+use Accard\Bundle\ResourceBundle\Event\ImportAcceptEvent;
+use Accard\Bundle\ResourceBundle\Event\ImportDeclineEvent;
+use Accard\Bundle\ResourceBundle\Import\Events;
 
 /**
  * Import controller.
@@ -40,11 +43,26 @@ class ImportController extends ResourceController
             return $this->createNotFoundException('Import record not found.');
         }
 
+        $signals = $this->getImportSignals();
+        $signal = $request->get('signal', false);
+
+        // Todo: Make this throw a custom exception, and add a catcher somewhere.
+        if ($signal && !in_array($signal, array_keys($signals))) {
+            throw $this->createNotFoundException('Unknown signal supplied to import accept.');
+        }
+
         $target = $record->getImportTarget();
         $target->setStatus(ImportTargetInterface::ACCEPTED);
-        $manager->persist($record);
-        $manager->persist($target);
-        $manager->flush();
+
+        $dispatcher = $this->getEventDispatcher();
+        $event = new ImportAcceptEvent($record, $target, $request->get('signal', false));
+
+        $manager->transactional(function($om) use ($dispatcher, $event, $record, $target) {
+            $dispatcher->dispatch(Events::ACCEPT, $event);
+            $om->persist($record);
+            $om->persist($target);
+            $om->flush();
+        });
 
         if ($request->isXMLHttpRequest()) {
             return new JsonResponse(array(
@@ -83,6 +101,16 @@ class ImportController extends ResourceController
         }
 
         return $this->redirectHandler->redirectToReferer();
+    }
+
+    private function getEventDispatcher()
+    {
+        return $this->get('event_dispatcher');
+    }
+
+    private function getImportSignals()
+    {
+        return $this->container->getParameter('accard.import.signals');
     }
 
     private function getRecordResolver()

@@ -1,13 +1,18 @@
-<a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-    {{ paginator.maxPerPage }}&nbsp;
-    <i class="icon-angle-down"></i>
-</a>
+{# This file is part of the Accard package. #}
 
-<ul class="dropdown-menu pull-left" role="menu">
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% set current = paginator.maxPerPage %}
+
+<ul class="pagination pull-right">
     {% for limit, url in limits %}
-    <li>
+    <li{% if current == limit %} class="active"{% endif %}>
         <a href="{{ url }}">{{ limit }}</a>
     </li>
     {% endfor %}
 </ul>
-/ {{ paginator.nbResults }}
+
+{# paginator.nbResults #}

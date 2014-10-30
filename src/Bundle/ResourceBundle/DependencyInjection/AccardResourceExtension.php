@@ -35,4 +35,14 @@ class AccardResourceExtension extends AbstractResourceExtension
     {
         $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function process(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('accard.import.signals', $config['import']['signals']);
+
+        return $config;
+    }
 }

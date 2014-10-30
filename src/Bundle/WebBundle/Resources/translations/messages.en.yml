@@ -13,6 +13,7 @@ accard:
     edit: Edit
     end: End
     filter: Filter
+    go: Go
     update: Update
     delete: Delete
     design: Design
@@ -21,10 +22,13 @@ accard:
     reset: Reset
     show: Show
     statistics: Statistics
+    stop: Stop
     settings: Settings
     actions: Actions
     action: Action
     toggle: Toggle
+    ready: Ready
+    set: Set
     confirmation:
         message: Are you sure you want to delete this resource?
     flow:

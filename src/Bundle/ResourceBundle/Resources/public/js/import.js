@@ -17,11 +17,11 @@
 
 
     function highlightRow(id, type) {
-        $('tr#'+id).addClass(type);
+        $('tr#patient-'+id).addClass(type);
     }
 
     function removeButtons(id, message) {
-        $('tr#'+id).find('td').last().html(message ? message : '');
+        $('tr#patient-'+id).find('td').last().html(message ? message : '');
     }
 
     function setModalAttributes(content, id, acceptHref, declineHref) {
