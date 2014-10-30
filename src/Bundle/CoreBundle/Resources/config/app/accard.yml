@@ -8,6 +8,9 @@
 accard_core:
     driver: doctrine/orm
 
+accard_user:
+    remote_user: %accard_remote_user%
+
 accard_resource: ~
 accard_settings: ~
 accard_phase: ~

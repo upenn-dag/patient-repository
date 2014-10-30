@@ -1,0 +1,42 @@
+{
+    "name": "accard/user-bundle",
+    "type": "symfony-bundle",
+    "description": "Accard user bundle",
+    "keywords": ["accard", "user"],
+    "homepage": "http://accard.med.upenn.edu",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Frank Bardon Jr.",
+            "homepage": "http://frankbardon.com"
+        },
+        {
+            "name": "Database and Applications Group",
+            "homepage": "http://dag.med.upenn.edu"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Accard\\Bundle\\UserBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Accard\\Bundle\\UserBundle\\spec\\": "spec/" }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "ext-ldap": "*",
+        "guzzlehttp/guzzle": "~4.0",
+        "prototype/penn-directory-client": "*",
+        "prototype/penngroups-client": "*",
+        "symfony/http-kernel": ">=2.1",
+        "symfony/security-bundle": ">=2.1",
+        "symfony/yaml": ">=2.1",
+        "accard/resource-bundle": "dev-develop"
+    },
+    "repositories": [
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Resource.git" },
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/ResourceBundle.git" },
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/penn-directory-client.git" },
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/penngroups-client.git" }
+  ]
+}
