@@ -1,0 +1,27 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+parameters:
+
+    accard_hmtb.controller.class: Accard\Bundle\HMTBBundle\Controller\HMTBController
+    accard.import.importer.hmtb_specimens_collection.class: Accard\Bundle\HMTBBundle\Import\SpecimensCollectionImporter
+
+services:
+
+    accard.connection.hmtb:
+        alias: doctrine.dbal.accard_connection
+
+    accard_hmtb.controller:
+        class: "%accard_hmtb.controller.class%"
+        arguments: ["@doctrine.orm.accard_entity_manager"]
+
+    accard.import.importer.hmtb_specimens_collection:
+        class: %accard.import.importer.hmtb_specimens_collection.class%
+        arguments:
+            - @accard.provider.import_patient
+            - @accard.connection.pds
+            - ['205', '205.0', '205.00', '205.01', '205.02']
+        tags: [{ name: accard.importer, importer: hmtb_specimens_collection }]
