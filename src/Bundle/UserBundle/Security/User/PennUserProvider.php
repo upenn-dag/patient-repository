@@ -71,7 +71,7 @@ class PennUserProvider implements UserProviderInterface
             throw new BadCredentialsException("'{$username}' is not a valid username");
         }
 
-        $attributes['id'] = $this->groupsClient->translatePennKeyToID($username);
+        $attributes['id'] = $this->groupsClient->pennKeyToID($username);
 
         if (null === $attributes['id']) {
             throw new BadCredentialsException("No PennID corresponds to the given username '{$username}'");

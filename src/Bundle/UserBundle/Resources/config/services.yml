@@ -17,11 +17,11 @@ services:
     # PennGroups lookup service
     penngroups_ldap_client:
         class: DAG\Penn\Groups\LDAP\Client
-        arguments: ["%penngroups_ldap_host%", "%penngroups_kerberos_principal%", "%penngroups_password%", "@penn_directory_cache"]
+        arguments: ["%penngroups_ldap_host%", "%penngroups_ldap_bind_dn%", "%penngroups_ldap_password%", "@penn_directory_cache"]
 
     penngroups_webservice_client:
         class: DAG\Penn\Groups\WS\Client
-        arguments: ["%penngroups_ws_url%", "%penngroups_kerberos_principal%", "%penngroups_password%"]
+        arguments: ["%penngroups_ws_url%", "%penngroups_ws_username%", "%penngroups_ws_password%"]
 
     penngroups_client:
         class: DAG\Penn\Groups\Client
