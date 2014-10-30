@@ -17,7 +17,7 @@ use Accard\Bundle\CoreBundle\DataFixtures\AccardFixture;
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-class DefaultCodeGroupsData extends AccardFixture
+class DefaultGeneticResultsData extends AccardFixture
 {
     /**
      * {@inheritdoc}
