@@ -45,13 +45,13 @@ class ImporterEventSubscriber implements EventSubscriberInterface
         $import = $event->getImport();
         $history = $event->getHistory();
         $importer = $event->getImporter();
-        $criteria = null;
+        $criteria = array();
 
         if (empty($history)) {
             $criteria = $importer->getDefaultCriteria();
         }
 
-        if (null === $criteria) {
+        if (empty($criteria)) {
             $criteria = $importer->getCriteria($history);
         }
 
@@ -93,7 +93,6 @@ class ImporterEventSubscriber implements EventSubscriberInterface
             $activities[$record['identifier']] = $entity;
             unset($records[$key]);
         }
-        die(var_dump($activities));
         $event->setRecords($records);
     }
 }

@@ -77,13 +77,12 @@ class Runner
         $resolver = new OptionsResolver();
         $this->configureDefaultResolver($resolver, $subject, $target);
 
-
         $evd->dispatch(Events::INITIALIZE, $event);
         $event->setImporter($importer);
         $event->setHistory($this->import->getRepository()->getAllFor($importer->getName()));
         $evd->dispatch(Events::PRE_IMPORT, $event);
         $importer->configureResolver($resolver);
-        $event->setRecords($importer->run($resolver, $event->getImport()->getCriteria()));
+        $event->setRecords($importer->run($resolver, $event->getImport()->getCriteria($event->getHistory())));
         $evd->dispatch(Events::CONVERT, $event);
         $evd->dispatch(Events::POST_IMPORT, $event);
         $event->setImporter(null);

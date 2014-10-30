@@ -10,6 +10,7 @@
  */
 namespace Accard\Bundle\HMTBBundle\Import;
 
+use PDO;
 use DateTime;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -46,12 +47,6 @@ class SpecimensCollectionImporter extends ActivityImporter
      */
     private $codes;
 
-    /**
-     * Default start date.
-     *
-     * @var DateTime
-     */
-    private $defaultStartDate;
 
     /**
      * Constructor.
@@ -70,6 +65,11 @@ class SpecimensCollectionImporter extends ActivityImporter
         $this->codes = $codes;
     }
 
+    /**
+     * Get diagnosis codes.
+     * 
+     * @return array
+     */
     public function getCodes()
     {
         return $this->codes;
@@ -81,8 +81,16 @@ class SpecimensCollectionImporter extends ActivityImporter
     public function run(OptionsResolverInterface $resolver, array $criteria)
     {
         $records = array();
+
+        if ($criteria['first_id'] === $criteria['last_id']) {
+            return $records;
+        }
+
         $stmt = $this->connection->prepare($this->getSQL());
-        $stmt->execute();
+        $stmt->execute(array(
+            'first_id' => $criteria['first_id'],
+            'last_id' => $criteria['last_id'],
+        ));
         $results = $stmt->fetchAll();
         $stmt->closeCursor();
 
@@ -114,8 +122,6 @@ class SpecimensCollectionImporter extends ActivityImporter
     public function configureResolver(OptionsResolverInterface $resolver)
     {
         parent::configureResolver($resolver);
-
-       ;
 
         $resolver->setRequired(array(
             'hmtb_id',
@@ -157,7 +163,22 @@ class SpecimensCollectionImporter extends ActivityImporter
      */
     public function getCriteria(array $history)
     {
-        return array();
+        if (empty($history)) {
+            return;
+        }
+
+        $criteria = $history[0]->getCriteria();
+
+        $stmt = $this->connection->prepare($this->getMaxCollectionId());
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $newLastId = $result['MAX'];
+        $stmt->closeCursor();
+
+        return array(
+            'first_id' => $criteria['last_id'],
+            'last_id' => $newLastId,
+        );
     }
 
     /**
@@ -165,7 +186,16 @@ class SpecimensCollectionImporter extends ActivityImporter
      */
     public function getDefaultCriteria()
     {
-        return array();
+        $stmt = $this->connection->prepare($this->getMaxCollectionId());
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $newLastId = $result['MAX'];
+        $stmt->closeCursor();
+
+        return array(
+            'first_id' => 0,
+            'last_id' => $newLastId,
+        );
     }
 
     /**
@@ -183,8 +213,6 @@ class SpecimensCollectionImporter extends ActivityImporter
      */
     private function getSQL()
     {
-        $codes = "'".implode("', '", $this->codes)."'";
-
         return "SELECT
                 COLLECTION_ID AS HMTB_ID,
                 MEDRECNUM AS PATIENT,
@@ -204,6 +232,17 @@ class SpecimensCollectionImporter extends ActivityImporter
                 CT_TIMEINRELATIONTOTREATMENT AS CT_TREATMENT_RELATION_TIME,
                 WHENMODIFIED AS WHEN_MODIFIED
             FROM HMTB_INVENTORY
+            WHERE COLLECTION_ID > :first_id AND COLLECTION_ID <= :last_id
             ORDER BY MEDRECNUM";
+    }
+
+    /**
+     * Find the biggest collection id SQL.
+     * 
+     * @return string
+     */
+    private function getMaxCollectionId()
+    {
+        return "SELECT MAX(COLLECTION_ID) AS MAX FROM HMTB_INVENTORY";
     }
 }
