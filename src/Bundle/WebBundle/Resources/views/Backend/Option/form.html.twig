@@ -5,6 +5,19 @@
 {# For the full copyright and license information, please view the LICENSE #}
 {# file that was distributed with this source code. #}
 
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import icon %}
+
+{% macro option_value_form(option_value) %}
+<div class="row lockable">
+    <div class="col-sm-10">
+        {{ form_widget(option_value.value) }}
+    </div>
+    <div class="lock col-sm-2">
+        {{ form_widget(option_value.locked, { label_render: false }) }}
+    </div>
+</div>
+{% endmacro %}
+
 {{ form_widget(form._token) }}
 
 <div class="row">
@@ -13,12 +26,12 @@
         {{ form_row(form.name) }}
     </div>
     <div class="col-md-4">
-        <div id="accard-option-values" class="collection-container" data-prototype="{{ form_row(form.values.vars.prototype.value, {'label': ''})|e }}">
+        <div id="option-values" data-prototype="{{ _self.option_value_form(form.values.vars.prototype)|e }}">
             {% for valueForm in form.values %}
-                {{ form_row(valueForm.value)  }}
+                {{ _self.option_value_form(valueForm) }}
             {% endfor %}
         </div>
-        <a href="#" class="btn btn-primary btn-block" data-collection-button="add" data-prototype="accard-option-values" data-collection="accard-option-values">
+        <a href="#" id="add-option-value" class="btn btn-primary btn-block">
             {{- "accard.form.option.add_value"|trans -}}
         </a>
     </div>

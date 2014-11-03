@@ -11,6 +11,7 @@
 namespace Accard\Component\Option\Model;
 
 use BadMethodCallException;
+use Accard\Component\Resource\Model\LockableTrait;
 
 /**
  * Option value model.
@@ -19,6 +20,8 @@ use BadMethodCallException;
  */
 class OptionValue implements OptionValueInterface
 {
+    use LockableTrait;
+
     /**
      * Option value id.
      *
@@ -114,6 +117,6 @@ class OptionValue implements OptionValueInterface
      */
     public function __toString()
     {
-        return $this->value;
+        return (string) $this->getValue();
     }
 }

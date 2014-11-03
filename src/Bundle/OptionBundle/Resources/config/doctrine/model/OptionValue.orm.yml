@@ -19,6 +19,8 @@ Accard\Component\Option\Model\OptionValue:
         value:
             type: string
             nullable: false
+        locked:
+            type: boolean
 
     manyToOne:
         option:

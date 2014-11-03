@@ -11,13 +11,14 @@
 namespace Accard\Component\Option\Model;
 
 use Accard\Component\Resource\Model\ResourceInterface;
+use Accard\Component\Resource\Model\LockableInterface;
 
 /**
  * Option value interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface OptionValueInterface extends ResourceInterface
+interface OptionValueInterface extends ResourceInterface, LockableInterface
 {
     /**
      * Get option.

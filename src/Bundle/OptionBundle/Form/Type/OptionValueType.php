@@ -54,7 +54,12 @@ class OptionValueType extends AbstractType
     {
         $builder
             ->add('value', 'text', array(
-                'label' => 'accard.form.option_value.value'
+                'required' => true,
+                'label' => 'accard.form.option_value.value',
+            ))
+            ->add('locked', 'checkbox', array(
+                'required' => false,
+                'label' => 'accard.form.option_value.locked',
             ))
         ;
     }
