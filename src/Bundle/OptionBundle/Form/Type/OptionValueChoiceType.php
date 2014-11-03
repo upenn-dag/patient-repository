@@ -57,6 +57,9 @@ class OptionValueChoiceType extends AbstractType
         }
 
         $class = get_class($choices->first());
+        $choices = $choices->filter(function($choice) {
+            return !$choice->isLocked();
+        });
 
         $resolver
             ->setDefaults(array(

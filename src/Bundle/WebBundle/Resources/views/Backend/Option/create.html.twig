@@ -34,6 +34,7 @@
 <script type="text/javascript">
     var former = Accard.get("form");
     var manager = new former($('form'));
+    var addOptionValue = $('#add-option-value');
 
     manager
         .behavior('presentation', {
@@ -42,7 +43,41 @@
             action: 'slug',
             event: 'keyup'
         })
+        .collection("#option-values", {
+            adder: addOptionValue,
+            startup: function(collection) {
+                var field = $(this).find('input[type="checkbox"]').first();
+                var nameField = $(this).find('input[type="text"]').first();
+                var lockArea = $(this).find('.lock').first();
+                var checked = field.prop('checked');
+
+                icon = $('<a href="#" style="float: left; padding-top: 6px"><i class="fa fa-'+(checked ? 'lock' : 'unlock')+'"></i></a>');
+
+                field.addClass('sr-only');
+                nameField.prop('readonly', checked);
+                lockArea.prepend(icon);
+            }
+        })
         .bindAll();
+
+    $('#option-values').on('click', '.lock > a', function(event) {
+        var parent = $(this).parents('.lockable').first();
+        var field = parent.find('input[type="checkbox"]').first();
+        var nameField = parent.find('input[type="text"]').first();
+        var icon = $(this).find('i').first();
+
+        // If locked, unlock.
+        if (field.prop('checked')) {
+            field.prop('checked', false);
+            nameField.prop('readonly', false);
+            icon.removeClass('fa-lock').addClass('fa-unlock');
+        } else {
+            field.prop('checked', true);
+            nameField.prop('readonly', true);
+            icon.removeClass('fa-unlock').addClass('fa-lock');
+        }
+    });
+
 </script>
 
 {% endblock %}

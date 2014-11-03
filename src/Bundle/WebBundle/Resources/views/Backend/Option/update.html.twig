@@ -52,7 +52,7 @@
                 var lockArea = $(this).find('.lock').first();
                 var checked = field.prop('checked');
 
-                icon = $('<a href="#"><i class="fa fa-'+(checked ? 'lock' : 'unlock')+'"></i></a>');
+                icon = $('<a href="#" style="float: left; padding-top: 6px"><i class="fa fa-'+(checked ? 'lock' : 'unlock')+'"></i></a>');
 
                 field.addClass('sr-only');
                 nameField.prop('readonly', checked);
