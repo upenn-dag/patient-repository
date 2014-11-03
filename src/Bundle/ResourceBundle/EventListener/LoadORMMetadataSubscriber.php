@@ -91,7 +91,7 @@ class LoadORMMetadataSubscriber implements EventSubscriber
      * Normalize table name for all databases.
      *
      * Note: This has been implemented because Oracle does not allow more than
-     *       30 characters for a table name, and our dynamic tables tend to go
+     *       28 characters for a table name, and our dynamic tables tend to go
      *       well beyond that. This allows us to have the same table names across
      *       all environments.
      *
@@ -100,7 +100,7 @@ class LoadORMMetadataSubscriber implements EventSubscriber
      */
     private function normalizeTableName($tableName)
     {
-        if (30 < strlen($tableName)) {
+        if (28 < strlen($tableName)) {
             $tableName = str_replace(
                 array('prototype', 'instance', 'field_value', 'field', 'attribute', 'behavior', 'option'),
                 array('proto', 'inst', 'fldval', 'fld', 'attr', 'bhvr', 'opt'),
@@ -108,7 +108,7 @@ class LoadORMMetadataSubscriber implements EventSubscriber
             );
         }
 
-        return substr($tableName, 0, 30);
+        return substr($tableName, 0, 28);
     }
 
     /**
