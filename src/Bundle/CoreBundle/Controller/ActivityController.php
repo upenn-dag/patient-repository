@@ -115,7 +115,7 @@ class ActivityController extends ResourceController
      */
     private function getPrototypes()
     {
-        return $this->get('accard.repository.activity_prototype')->createPaginator();
+        return $this->get('accard.provider.activity_prototype')->getPrototypes();
     }
 
     /**
@@ -125,7 +125,7 @@ class ActivityController extends ResourceController
      */
     private function getFields()
     {
-        return $this->Get('accard.repository.activity_prototype_field')->createPaginator();
+        return $this->get('accard.provider.activity_prototype_field')->getFields();
     }
 
     /**
