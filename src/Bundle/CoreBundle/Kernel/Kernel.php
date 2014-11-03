@@ -36,7 +36,6 @@ abstract class Kernel extends BaseKernel
             new \Accard\Bundle\SettingsBundle\AccardSettingsBundle(),
             new \Accard\Bundle\ResourceBundle\AccardResourceBundle(),
             new \Accard\Bundle\CoreBundle\AccardCoreBundle(),
-            new \Accard\Bundle\UserBundle\AccardUserBundle(),
 
             new \Accard\Bundle\OptionBundle\AccardOptionBundle(),
             new \Accard\Bundle\FieldBundle\AccardFieldBundle(),
