@@ -29,7 +29,7 @@ class ImporterEventSubscriber implements EventSubscriberInterface
     {
         return array(
             Events::PRE_IMPORT => array('initializeImport', 255),
-            //Events::CONVERT => array('convertRecords', -255),
+            Events::CONVERT => array('convertRecords', -255),
         );
     }
 
@@ -90,9 +90,10 @@ class ImporterEventSubscriber implements EventSubscriberInterface
             }
 
             $entity->addDescription($importer, $record['import_description']);
-            $activities[$record['identifier']] = $entity;
+            $records[$record['identifier']] = $entity;
             unset($records[$key]);
         }
+
         $event->setRecords($records);
     }
 }

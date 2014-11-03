@@ -311,7 +311,7 @@ class FixtureManager implements FixtureManagerInterface, ContainerAwareInterface
                 $result = $repository->find($criteria);
             }
 
-            return (boolean) $result;
+            return $result;
 
         } catch (ServiceNotFoundException $e) {
             throw new FixtureException(sprintf('Entity repository "%s" could not be located by the fixture manager.', $entityAlias));

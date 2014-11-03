@@ -82,7 +82,7 @@ class Runner
         $event->setHistory($this->import->getRepository()->getAllFor($importer->getName()));
         $evd->dispatch(Events::PRE_IMPORT, $event);
         $importer->configureResolver($resolver);
-        $event->setRecords($importer->run($resolver, $event->getImport()->getCriteria($event->getHistory())));
+        $event->setRecords($importer->run($resolver, $event->getImport()->getCriteria()));
         $evd->dispatch(Events::CONVERT, $event);
         $evd->dispatch(Events::POST_IMPORT, $event);
         $event->setImporter(null);
