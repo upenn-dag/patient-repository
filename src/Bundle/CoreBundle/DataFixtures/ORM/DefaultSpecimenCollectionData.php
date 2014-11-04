@@ -26,8 +26,8 @@ class DefaultSpecimenCollectionData extends AccardFixture
     {
         $fm = $this->fixtureManager;
 
-        if (!$fm->hasPrototype('activity', 'specimen_collection')) {
-            $specimentCollection = $fm->createPrototype('activity', 'specimen-collection', 'Specimen Collection');
+        if (!$fm->hasPrototype('sample', 'specimen_collection')) {
+            $specimentCollection = $fm->createPrototype('sample', 'specimen-collection', 'Specimen Collection');
             
             $specimentCollection
                 ->addField('specimen-collection-sample-type', 'Sample Type', 'text')

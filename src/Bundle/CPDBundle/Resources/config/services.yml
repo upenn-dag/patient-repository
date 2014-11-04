@@ -24,5 +24,7 @@ services:
         arguments:
             - @accard.provider.import_patient
             - @accard.connection.pds
+            - @doctrine.dbal.default_connection
+            - @accard.provider.activity_prototype
             - ['205', '205.0', '205.00', '205.01', '205.02']
         tags: [{ name: accard.importer, importer: cpd_genetic_results }]

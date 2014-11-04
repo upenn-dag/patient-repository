@@ -30,7 +30,9 @@ class DefaultGeneticResultsData extends AccardFixture
             $geneticResults = $fm->createPrototype('activity', 'genetic-results', 'Genetic Results');
             
             $geneticResults
+                    ->addField('genetic-results-cpd-id', 'CPD ID', 'text')
                     ->addField('genetic-results-gene', 'Gene', 'text')
+                    ->addField('genetic-results-gene-id', 'Gene ID', 'text')
                     ->addField('genetic-results-variant-detected', 'Variant Detected', 'text')
                     ->addField('genetic-results-variant-categorization', 'Variant Categorization', 'text')
                     ->addField('genetic-results-cdna-change', 'CDNA Change', 'text')
@@ -38,6 +40,13 @@ class DefaultGeneticResultsData extends AccardFixture
                     ->addField('genetic-results-mutation-type-protein', 'Mutation Type Protein', 'text')
                     ->addField('genetic-results-variant-alias', 'Variant Alias', 'text')
                     ->addField('genetic-results-genetic-test-version-id', 'Genetic Test Version', 'text')
+                    ->addField('genetic-results-transcript-id', 'Transcript ID' ,'text')
+                    ->addField('genetic-results-position', 'Position' ,'text')
+                    ->addField('genetic-results-fdp','FDP' ,'text')
+                    ->addField('genetic-results-frd', 'FRD' ,'text')
+                    ->addField('genetic-results-fad',  'FAD' ,'text')
+                    ->addField('genetic-results-faf', 'FAF', 'text')
+                    ->addField('genetic-results-genotype', 'Genotype', 'text')
                     ->end()
             ->persist();
         }

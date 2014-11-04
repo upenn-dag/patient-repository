@@ -35,3 +35,4 @@ Accard\Component\Sample\Model\Source:
         samples:
             targetEntity: Accard\Component\Sample\Model\SampleInterface
             mappedBy: source
+            cascade: ["persist", "remove"]

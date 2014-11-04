@@ -14,9 +14,10 @@ use PDO;
 use DateTime;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Accard\Bundle\ActivityBundle\Import\ActivityImporter;
+use Accard\Bundle\SampleBundle\Import\SampleImporter;
 use Accard\Bundle\ResourceBundle\Import\ImporterInterface;
 use Accard\Bundle\CoreBundle\Provider\ImportPatientProvider;
+use Accard\Component\Sample\Provider\SampleProvider;
 use Doctrine\DBAL\Connection;
 
 /**
@@ -24,7 +25,7 @@ use Doctrine\DBAL\Connection;
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-class SpecimensCollectionImporter extends ActivityImporter
+class SpecimensCollectionImporter extends SampleImporter
 {
     /**
      * Patient provider.
@@ -47,12 +48,12 @@ class SpecimensCollectionImporter extends ActivityImporter
      */
     private $codes;
 
-
     /**
      * Constructor.
      *
      * @param ImportPatientProvider $provider
      * @param Connection $connection
+     * @param Sample Provider
      * @param array $code
      * @param string|null $defaultStartDate
      */
@@ -82,7 +83,7 @@ class SpecimensCollectionImporter extends ActivityImporter
     {
         $records = array();
 
-        if ($criteria['first_id'] === $criteria['last_id']) {
+        if ($criteria['first_id'] == $criteria['last_id']) {
             return $records;
         }
 
@@ -91,6 +92,7 @@ class SpecimensCollectionImporter extends ActivityImporter
             'first_id' => $criteria['first_id'],
             'last_id' => $criteria['last_id'],
         ));
+
         $results = $stmt->fetchAll();
         $stmt->closeCursor();
 

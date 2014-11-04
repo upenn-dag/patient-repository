@@ -5,9 +5,9 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
-Accard\Component\Core\Model\ImportActivity:
+Accard\Component\Core\Model\ImportSample:
     type: mappedSuperclass
-    table: accard_import_activity
+    table: accard_import_sample
 
     fields:
         descriptions:
@@ -20,15 +20,7 @@ Accard\Component\Core\Model\ImportActivity:
     manyToOne:
         patient:
             targetEntity: Accard\Component\Patient\Model\PatientInterface
-            #inversedBy: activities
             joinColumn:
                 name: patientId
                 referencedColumnName: id
                 nullable: false
-        diagnosis:
-            targetEntity: Accard\Component\Diagnosis\Model\DiagnosisInterface
-            #inversedBy: diagnoses
-            joinColumn:
-                name: diagnosisId
-                referencedColumnName: id
-                nullable: true

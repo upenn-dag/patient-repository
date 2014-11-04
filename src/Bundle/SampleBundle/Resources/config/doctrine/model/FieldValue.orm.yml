@@ -8,3 +8,4 @@
 Accard\Component\Sample\Model\FieldValue:
     type: mappedSuperclass
     table: accard_sample_prototype_field_value
+
