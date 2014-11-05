@@ -24,4 +24,4 @@ Accard\Component\Activity\Model\Activity:
             targetEntity: Accard\Component\Activity\Model\FieldValueInterface
             mappedBy: subject
             orphanRemoval: true
-            cascade: ["all"]
+            cascade: ["persist", "remove"]
