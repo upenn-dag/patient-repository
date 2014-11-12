@@ -32,6 +32,21 @@ class FrontendController extends Controller
         // $return = $domain->evaluate('count(slice(patient("000000000").getDiagnoses(), 1))');
         // die(var_dump($return));
 
+        $factoryBuilder = $this->get('accard.widget.factory_builder');
+        $factoryBuilder->addExtension(new \Accard\Component\Widget\Extension\Core\CoreExtension());
+        $factory = $factoryBuilder->getFactory();
+
+        // $builder = $factory->createBuilder('widget', array());
+        // $builder->add('text1', 'text', array('text' => 'Block one. This goes here!'));
+        // $builder->add('text2', 'text', array('text' => '<p>Block two</p>.', 'raw' => true));
+        // $builder->add('translated', 'text', array('text' => 'accard.activity.entity_name', 'translate' => true));
+        // $builder->add('myHeading', 'heading', array('heading' => 'Create Patient'));
+        // $widget = $builder->getWidget();
+        //
+        // return $this->render('AccardWebBundle:Frontend:widgetTest.html.twig', array(
+        //     'widget' => $widget->createView(),
+        // ));
+
         return $this->render('AccardWebBundle:Frontend:main.html.twig');
     }
 

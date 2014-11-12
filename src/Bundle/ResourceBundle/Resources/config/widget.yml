@@ -1,0 +1,47 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+parameters:
+
+    accard.widget.extensions: []
+    accard.widget.factory_builder.class: Accard\Component\Widget\WidgetFactoryBuilder
+    accard.widget.resolved_type_factory.class: Accard\Component\Widget\ResolvedWidgetTypeFactory
+    accard.widget.registry.class: Accard\Component\Widget\WidgetRegistry
+    accard.widget.twig_renderer_engine.class: Accard\Bridge\Twig\Widget\TwigRendererEngine
+    accard.widget.twig_renderer.class: Accard\Bridge\Twig\Widget\TwigRenderer
+    accard.twig.extension.widget.class: Accard\Bridge\Twig\Extension\WidgetExtension
+
+services:
+
+    accard.widget.factory_builder:
+        class: %accard.widget.factory_builder.class%
+        arguments: ['@accard.widget.resolved_type_factory']
+
+    accard.widget.resolved_type_factory:
+        class: %accard.widget.resolved_type_factory.class%
+
+    accard.widget.registry:
+        class: %accard.widget.registry.class%
+        arguments:
+            - %accard.widget.extensions%
+            - @accard.widget.resolved_type_factory
+
+    accard.widget.twig_renderer_engine:
+        class: %accard.widget.twig_renderer_engine.class%
+        arguments:
+            - ['AccardWebBundle::widgets.html.twig']
+
+    accard.widget.twig_renderer:
+        class: %accard.widget.twig_renderer.class%
+        arguments:
+            - @accard.widget.twig_renderer_engine
+
+    accard.twig.extension.widget:
+        class: %accard.twig.extension.widget.class%
+        arguments: ['@accard.widget.twig_renderer']
+        tags:
+            - { name: twig.extension }

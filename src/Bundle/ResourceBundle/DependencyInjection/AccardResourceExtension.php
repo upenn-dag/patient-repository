@@ -26,7 +26,7 @@ class AccardResourceExtension extends AbstractResourceExtension
     /**
      * {@inheritdoc}
      */
-    protected $configFiles = array('services', 'twig');
+    protected $configFiles = array('services', 'twig', 'widget');
 
     /**
      * {@inheritdoc}
