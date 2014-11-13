@@ -12,7 +12,7 @@ doctrine_cache:
     providers:
         accard_settings:
             type: apc
-            namespace: accard_settings
+            namespace: accard_%accard_app_name%_settings
 
 mopa_bootstrap:
     form:
