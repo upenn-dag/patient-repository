@@ -32,10 +32,9 @@ class FrontendController extends Controller
         // $return = $domain->evaluate('count(slice(patient("000000000").getDiagnoses(), 1))');
         // die(var_dump($return));
 
-        $factoryBuilder = $this->get('accard.widget.factory_builder');
-        $factoryBuilder->addExtension(new \Accard\Component\Widget\Extension\Core\CoreExtension());
-        $factory = $factoryBuilder->getFactory();
-
+        // $factoryBuilder = $this->get('accard.widget.factory_builder');
+        // $factoryBuilder->addExtension(new \Accard\Component\Widget\Extension\Core\CoreExtension());
+        // $factory = $factoryBuilder->getFactory();
         // $builder = $factory->createBuilder('widget', array());
         // $builder->add('text1', 'text', array('text' => 'Block one. This goes here!'));
         // $builder->add('text2', 'text', array('text' => '<p>Block two</p>.', 'raw' => true));

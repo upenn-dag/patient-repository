@@ -10,13 +10,36 @@
  */
 namespace Accard\Component\Resource\Model;
 
-use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
+use Serializable;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * User interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface UserInterface extends BaseUserInterface, ResourceInterface
+interface UserInterface extends AdvancedUserInterface, ResourceInterface, Serializable
 {
+    /**
+     * Get user id.
+     *
+     * @return integer
+     */
+    public function getId();
+
+    /**
+     * Set username.
+     *
+     * @param string $username
+     * @return UserInterface
+     */
+    public function setUsername($username);
+
+    /**
+     * Set user is enabled.
+     *
+     * @param boolean $enabled
+     * @return UserInterface
+     */
+    public function setEnabled($enabled);
 }
