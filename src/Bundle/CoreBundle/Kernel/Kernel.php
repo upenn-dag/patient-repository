@@ -40,6 +40,7 @@ abstract class Kernel extends BaseKernel
             new \Accard\Bundle\OptionBundle\AccardOptionBundle(),
             new \Accard\Bundle\FieldBundle\AccardFieldBundle(),
             new \Accard\Bundle\PrototypeBundle\AccardPrototypeBundle(),
+            new \Accard\Bundle\DrugBundle\AccardDrugBundle(),
             new \Accard\Bundle\PatientBundle\AccardPatientBundle(),
             new \Accard\Bundle\DiagnosisBundle\AccardDiagnosisBundle(),
             new \Accard\Bundle\PhaseBundle\AccardPhaseBundle(),
