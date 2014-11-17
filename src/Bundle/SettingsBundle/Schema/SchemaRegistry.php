@@ -10,8 +10,6 @@
  */
 namespace Accard\Bundle\SettingsBundle\Schema;
 
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
 use Accard\Bundle\SettingsBundle\Exception\SchemaAccessException;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -26,9 +24,16 @@ class SchemaRegistry implements SchemaRegistryInterface
     /**
      * Schema collection.
      *
-     * @var Collection|SchemaInterface[]
+     * @var SchemaInterface[]
      */
-    protected $schemas;
+    private $schemas;
+
+    /**
+     * Schema extension collection.
+     *
+     * @var SchemaExtensionInterface[]
+     */
+    private $extensions;
 
     /**
      * Service container.
@@ -43,7 +48,8 @@ class SchemaRegistry implements SchemaRegistryInterface
      */
     public function __construct(ContainerInterface $container = null)
     {
-        $this->schemas = new ArrayCollection();
+        $this->schemas = array();
+        $this->extensions = array();
         $this->container = $container;
     }
 
@@ -65,6 +71,7 @@ class SchemaRegistry implements SchemaRegistryInterface
         }
 
         $this->schemas[$namespace] = $schema;
+        $this->extensions[$namespace] = array();
     }
 
     /**
@@ -76,7 +83,7 @@ class SchemaRegistry implements SchemaRegistryInterface
             throw new SchemaAccessException($namespace);
         }
 
-        $this->schemas->remove($namespace);
+        unset($this->schemas[$namespace], $this->extensions[$namespace]);
     }
 
     /**
@@ -84,7 +91,7 @@ class SchemaRegistry implements SchemaRegistryInterface
      */
     public function hasSchema($namespace)
     {
-        return $this->schemas->containsKey($namespace);
+        return isset($this->schemas[$namespace]);
     }
 
     /**
@@ -101,5 +108,52 @@ class SchemaRegistry implements SchemaRegistryInterface
         }
 
         return $this->schemas[$namespace];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function registerExtension($namespace, SchemaExtensionInterface $extension)
+    {
+        if (!$this->hasSchema($namespace)) {
+            throw new SchemaAccessException($namespace);
+        }
+
+        $this->extensions[$namespace][] = $extension;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unregisterExtension($namespace, SchemaExtensionInterface $extension)
+    {
+        if (!$this->hasSchema($namespace)) {
+            throw new SchemaAccessException($namespace);
+        }
+
+        if (false === ($key = array_search($extension, $this->extensions[$namespace]))) {
+            throw new SchemaAccessException($namespace);
+        }
+
+        unset($this->extensions[$namespace][$key]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtensions($namespace)
+    {
+        if (!$this->hasSchema($namespace)) {
+            throw new SchemaAccessException($namespace);
+        }
+
+        $extensions = $this->extensions[$namespace];
+        foreach ($extensions as $extension) {
+            if ($this->container && $extension instanceof ContainerAwareInterface) {
+                $extension->setContainer($this->container);
+            }
+        }
+
+        return $extensions;
     }
 }

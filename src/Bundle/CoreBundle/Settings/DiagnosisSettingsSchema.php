@@ -10,7 +10,7 @@
  */
 namespace Accard\Bundle\CoreBundle\Settings;
 
-use Accard\Bundle\SettingsBundle\Schema\SchemaInterface;
+use Accard\Bundle\SettingsBundle\Schema\Schema;
 use Accard\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-class DiagnosisSettingsSchema implements SchemaInterface
+class DiagnosisSettingsSchema extends Schema
 {
     /**
      * Default data.

@@ -12,6 +12,7 @@ namespace Accard\Bundle\SettingsBundle\Form\Factory;
 
 use Accard\Bundle\SettingsBundle\Schema\SchemaRegistryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * Settings form factory.
@@ -41,7 +42,8 @@ class SettingsFormFactory implements SettingsFormFactoryInterface
      * @param SchemaRegistryInterface $schemaRegistry
      * @param FormFactoryInterface $formFactory
      */
-    public function __construct(SchemaRegistryInterface $schemaRegistry, FormFactoryInterface $formFactory)
+    public function __construct(SchemaRegistryInterface $schemaRegistry,
+                                FormFactoryInterface $formFactory)
     {
         $this->schemaRegistry = $schemaRegistry;
         $this->formFactory = $formFactory;
@@ -53,9 +55,14 @@ class SettingsFormFactory implements SettingsFormFactoryInterface
     public function create($namespace)
     {
         $schema = $this->schemaRegistry->getSchema($namespace);
+        $extensions = $this->schemaRegistry->getExtensions($namespace);
         $builder = $this->formFactory->createBuilder('form', null, array('data_class' => null));
 
         $schema->buildForm($builder);
+
+        foreach ($extensions as $extension) {
+            $extension->buildForm($builder);
+        }
 
         return $builder->getForm();
     }

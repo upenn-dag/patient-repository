@@ -10,7 +10,7 @@
  */
 namespace Accard\Bundle\CoreBundle\Settings;
 
-use Accard\Bundle\SettingsBundle\Schema\SchemaInterface;
+use Accard\Bundle\SettingsBundle\Schema\Schema;
 use Accard\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Locale;
@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints\Length;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class GeneralSettingsSchema implements SchemaInterface
+class GeneralSettingsSchema extends Schema
 {
     /**
      * Default data.

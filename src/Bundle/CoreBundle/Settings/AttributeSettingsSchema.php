@@ -10,7 +10,7 @@
  */
 namespace Accard\Bundle\CoreBundle\Settings;
 
-use Accard\Bundle\SettingsBundle\Schema\SchemaInterface;
+use Accard\Bundle\SettingsBundle\Schema\Schema;
 use Accard\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-class AttributeSettingsSchema implements SchemaInterface
+class AttributeSettingsSchema extends Schema
 {
     /**
      * Default data.

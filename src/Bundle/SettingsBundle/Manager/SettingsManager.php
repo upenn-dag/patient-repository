@@ -108,9 +108,13 @@ class SettingsManager implements SettingsManagerInterface
         }
 
         $schema = $this->schemaRegistry->getSchema($namespace);
+        $extensions = $this->schemaRegistry->getExtensions($namespace);
 
         $settingsBuilder = new SettingsBuilder();
         $schema->buildSettings($settingsBuilder);
+        foreach ($extensions as $extension) {
+            $extension->buildSettings($settingsBuilder);
+        }
 
         foreach ($settingsBuilder->getTransformers() as $parameter => $transformer) {
             if (array_key_exists($parameter, $parameters)) {
@@ -131,9 +135,13 @@ class SettingsManager implements SettingsManagerInterface
     public function save($namespace, Settings $settings)
     {
         $schema = $this->schemaRegistry->getSchema($namespace);
+        $extensions = $this->schemaRegistry->getExtensions($namespace);
 
         $settingsBuilder = new SettingsBuilder();
         $schema->buildSettings($settingsBuilder);
+        foreach ($extensions as $extension) {
+            $extension->buildSettings($settingsBuilder);
+        }
 
         $parameters = $settingsBuilder->resolve($settings->getParameters());
 

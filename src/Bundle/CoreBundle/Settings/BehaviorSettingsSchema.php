@@ -10,7 +10,7 @@
  */
 namespace Accard\Bundle\CoreBundle\Settings;
 
-use Accard\Bundle\SettingsBundle\Schema\SchemaInterface;
+use Accard\Bundle\SettingsBundle\Schema\Schema;
 use Accard\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -22,7 +22,7 @@ use Accard\Bundle\SettingsBundle\Form\ArrayToStringTransformer;
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-class BehaviorSettingsSchema implements SchemaInterface
+class BehaviorSettingsSchema extends Schema
 {
     /**
      * Default data.

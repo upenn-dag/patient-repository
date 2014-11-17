@@ -8,20 +8,16 @@
  * For the full copyright and license information, please view the
  * LICENSE file that was distributed with this source code.
  */
-namespace Accard\Bundle\CoreBundle\Settings;
+namespace Accard\Bundle\SettingsBundle\Schema;
 
-use Accard\Bundle\SettingsBundle\Schema\Schema;
-use Accard\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\Locale;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Theme settings schema.
+ * Abstract schema.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class ThemeSettingsSchema extends Schema
+abstract class Schema implements SchemaInterface
 {
     /**
      * Default data.
@@ -29,6 +25,7 @@ class ThemeSettingsSchema extends Schema
      * @var array
      */
     protected $defaults;
+
 
     /**
      * Constructor.
@@ -45,14 +42,7 @@ class ThemeSettingsSchema extends Schema
      */
     public function buildSettings(SettingsBuilderInterface $builder)
     {
-        $builder
-            ->setDefaults(array_merge(array(
-                'theme' => 'default',
-            ), $this->defaults))
-            ->setAllowedTypes(array(
-                'theme' => array('string'),
-            ))
-        ;
+        // Do nothing by default.
     }
 
     /**
@@ -60,13 +50,6 @@ class ThemeSettingsSchema extends Schema
      */
     public function buildForm(FormBuilderInterface $builder)
     {
-        $builder
-            ->add('theme', 'text', array(
-                'label' => 'accard.form.settings.theme.theme',
-                'constraints' => array(
-                    new NotBlank()
-                )
-            ))
-        ;
+        // Do nothing by default.
     }
 }

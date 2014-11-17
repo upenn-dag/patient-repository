@@ -10,8 +10,6 @@
  */
 namespace Accard\Bundle\SettingsBundle\Schema;
 
-use Doctrine\Common\Collections\Collection;
-
 /**
  * Schema registry interface.
  *
@@ -22,7 +20,7 @@ interface SchemaRegistryInterface
     /**
      * Get schemas.
      *
-     * @return Collection|SchemaInterface[]
+     * @return SchemaInterface[]
      */
     public function getSchemas();
 
@@ -31,7 +29,6 @@ interface SchemaRegistryInterface
      *
      * @param string $namespace
      * @param SchemaInterface $schema
-     * @return SchemaRegistryInterface
      */
     public function registerSchema($namespace, SchemaInterface $schema);
 
@@ -39,7 +36,6 @@ interface SchemaRegistryInterface
      * Unregister a schema within a namespace.
      *
      * @param string $namespace
-     * @return SchemaRegistryInterface
      */
     public function unregisterSchema($namespace);
 
@@ -58,4 +54,28 @@ interface SchemaRegistryInterface
      * @return SchemaRegistryInterface
      */
     public function getSchema($namespace);
+
+    /**
+     * Register a schema extension within a namespace.
+     *
+     * @param string $namespace
+     * @param SchemaExtensionInterface $extension
+     */
+    public function registerExtension($namespace, SchemaExtensionInterface $extension);
+
+    /**
+     * Unregister a schema extension within a namespace.
+     *
+     * @param string $namespace
+     * @param SchemaExtensionInterface $extension
+     */
+    public function unregisterExtension($namespace, SchemaExtensionInterface $extension);
+
+    /**
+     * Get extensions for a namespace.
+     *
+     * @param string $namespace
+     * @return SchemaExtensionInterface[]
+     */
+    public function getExtensions($namespace);
 }

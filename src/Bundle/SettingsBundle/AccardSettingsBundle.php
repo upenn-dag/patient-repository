@@ -12,6 +12,7 @@ namespace Accard\Bundle\SettingsBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Accard\Bundle\SettingsBundle\DependencyInjection\Compiler\RegisterSchemasPass;
+use Accard\Bundle\SettingsBundle\DependencyInjection\Compiler\RegisterSchemaExtensionsPass;
 use Accard\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Accard\Bundle\ResourceBundle\AccardResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -35,6 +36,7 @@ class AccardSettingsBundle extends Bundle
 
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('accard_settings', $interfaces));
         $container->addCompilerPass(new RegisterSchemasPass());
+        $container->addCompilerPass(new RegisterSchemaExtensionsPass());
 
         $mappings = array(
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Accard\Bundle\SettingsBundle\Model',

@@ -10,52 +10,17 @@
  */
 namespace Accard\Bundle\CoreBundle\Settings;
 
-use Accard\Bundle\SettingsBundle\Schema\SchemaInterface;
+use Accard\Bundle\SettingsBundle\Schema\ContainerAwareSchema;
 use Accard\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Patient settings schema.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class PatientSettingsSchema implements SchemaInterface, ContainerAwareInterface
+class PatientSettingsSchema extends ContainerAwareSchema
 {
-    /**
-     * Default data.
-     *
-     * @var array
-     */
-    protected $defaults;
-
-    /**
-     * Service container.
-     *
-     * @var ContainerInterface
-     */
-    private $container;
-
-
-    /**
-     * Constructor.
-     *
-     * @param array $defaults
-     */
-    public function __construct(array $defaults = array())
-    {
-        $this->defaults = $defaults;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -79,16 +44,6 @@ class PatientSettingsSchema implements SchemaInterface, ContainerAwareInterface
         }
 
         $builder->setDefaults($defaults)->setAllowedValues($allowedValues);
-    }
-
-    /**
-     * Check if PDS is enabled.
-     *
-     * @return boolean
-     */
-    private function getPDSDefault()
-    {
-        return $this->container && $this->container->hasParameter('accard.pds.present');
     }
 
     /**
@@ -118,5 +73,15 @@ class PatientSettingsSchema implements SchemaInterface, ContainerAwareInterface
                 'required' => false,
             ));
         }
+    }
+
+    /**
+     * Check if PDS is enabled.
+     *
+     * @return boolean
+     */
+    private function getPDSDefault()
+    {
+        return $this->container && $this->container->hasParameter('accard.pds.present');
     }
 }
