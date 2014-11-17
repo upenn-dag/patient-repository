@@ -19,10 +19,6 @@ parameters:
 
 services:
 
-    temp_extension:
-        class: Accard\Bundle\CoreBundle\Settings\TempSettingsExtension
-        tags: [{ name: accard.settings_extension, namespace: general }]
-
     accard.settings_schema.general:
         class: %accard.settings_schema.general.class%
         tags: [{ name: accard.settings_schema, namespace: general }]
