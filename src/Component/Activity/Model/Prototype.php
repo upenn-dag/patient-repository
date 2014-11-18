@@ -19,4 +19,29 @@ use Accard\Component\Prototype\Model\Prototype as BasePrototype;
  */
 class Prototype extends BasePrototype implements PrototypeInterface
 {
+    /**
+     * Allow drug?
+     *
+     * @var boolean
+     */
+    protected $allowDrug = false;
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAllowDrug()
+    {
+        return $this->allowDrug;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAllowDrug($allowDrug)
+    {
+        $this->allowDrug = $allowDrug;
+
+        return $this;
+    }
 }

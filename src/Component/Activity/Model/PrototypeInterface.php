@@ -19,4 +19,18 @@ use Accard\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterfac
  */
 interface PrototypeInterface extends BasePrototypeInterface
 {
+    /**
+     * Get allow drug.
+     *
+     * @return boolean
+     */
+    public function getAllowDrug();
+
+    /**
+     * Set allow drug.
+     *
+     * @param boolean $allowDrug
+     * @return PrototypeInterface
+     */
+    public function setAllowDrug($allowDrug);
 }

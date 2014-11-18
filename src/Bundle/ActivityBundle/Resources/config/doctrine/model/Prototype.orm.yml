@@ -8,3 +8,8 @@
 Accard\Component\Activity\Model\Prototype:
     type: mappedSuperclass
     table: accard_activity_prototype
+
+    fields:
+        allowDrug:
+            type: boolean
+            nullable: false

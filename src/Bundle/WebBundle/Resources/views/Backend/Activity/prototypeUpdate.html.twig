@@ -14,3 +14,13 @@
 
 {% block form_page_title_translation 'accard.activity_prototype.action.update'|trans %}
 {% block form_submit_action path('accard_backend_activity_prototype_update', { id: activity_prototype.id }) %}
+
+{% block form_body %}
+    {{ parent() }}
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_widget(form.allowDrug) }}
+        </div>
+    </div>
+    <hr>
+{% endblock %}

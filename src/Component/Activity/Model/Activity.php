@@ -12,6 +12,7 @@ namespace Accard\Component\Activity\Model;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Accard\Component\Drug\Model\DrugInterface;
 
 /**
  * Accard activity model.
@@ -36,6 +37,13 @@ class Activity implements ActivityInterface
      * @var DateTime
      */
     protected $activityDate;
+
+    /**
+     * Drug.
+     *
+     * @var DrugInterface|null
+     */
+    protected $drug;
 
 
     /**
@@ -72,9 +80,35 @@ class Activity implements ActivityInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getDrug()
+    {
+        return $this->drug;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDrug(DrugInterface $drug = null)
+    {
+        $this->drug = $drug;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isDruggable()
+    {
+        return $this->prototype->allowDrug();
+    }
+
     public function getCanonical()
     {
-        $canonical = 'Activity';
+        $canonical = sprintf('Activity #%d', $this->id);
 
         if ($this->activityDate) {
             $canonical .= ' on '.$this->activityDate->format('d/m/Y');

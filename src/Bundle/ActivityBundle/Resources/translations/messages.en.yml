@@ -30,6 +30,7 @@ accard:
             presentation: Presentation
             fields: Fields
             subjects: Subjects
+            allow_drug: Allow drug to be collected?
         action:
             add: Add Activity Prototype
             create: Create Activity Prototype

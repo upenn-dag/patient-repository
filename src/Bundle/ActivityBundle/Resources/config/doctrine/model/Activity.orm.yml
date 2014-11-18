@@ -19,6 +19,13 @@ Accard\Component\Activity\Model\Activity:
             type: date
             nullable: false
 
+    manyToOne:
+        drug:
+            targetEntity: Accard\Component\Drug\Model\DrugInterface
+            joinColumn:
+                name: drugId
+                nullable: true
+
     oneToMany:
         fields:
             targetEntity: Accard\Component\Activity\Model\FieldValueInterface

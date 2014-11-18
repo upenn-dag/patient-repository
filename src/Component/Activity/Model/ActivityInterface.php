@@ -14,6 +14,7 @@ use DateTime;
 use Accard\Component\Prototype\Model\PrototypeSubjectInterface;
 use Accard\Component\Field\Model\FieldSubjectInterface;
 use Accard\Component\Resource\Model\ResourceInterface;
+use Accard\Component\Drug\Model\DrugInterface;
 
 /**
  * Basic activity interface.
@@ -45,4 +46,26 @@ interface ActivityInterface extends PrototypeSubjectInterface,
      * @return ActivityInterface
      */
     public function setActivityDate(DateTime $activityDate);
+
+    /**
+     * Get drug.
+     *
+     * @return DrugInterface
+     */
+    public function getDrug();
+
+    /**
+     * Set drug (optional).
+     *
+     * @param DrugInterface|null $drug
+     * @return ActivityInterface
+     */
+    public function setDrug(DrugInterface $drug = null);
+
+    /**
+     * Test if activity allows drug to be set (proxy).
+     *
+     * @return boolean
+     */
+    public function isDruggable();
 }
