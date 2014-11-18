@@ -10,6 +10,7 @@
  */
 namespace Accard\Bundle\DiagnosisBundle\Form\Type;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -56,13 +57,6 @@ class DiagnosisType extends AbstractType
      */
     protected $codeGroupProvider;
 
-    /**
-     * Option provider..
-     *
-     * @var OptionProviderInterface
-     */
-    protected $optionProvider;
-
 
     /**
      * Constructor.
@@ -74,14 +68,12 @@ class DiagnosisType extends AbstractType
     public function __construct($dataClass,
                                 array $validationGroups,
                                 DiagnosisBuilderInterface $builder,
-                                CodeGroupProvider $codeGroupProvider,
-                                OptionProviderInterface $optionProvider)
+                                CodeGroupProvider $codeGroupProvider)
     {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
         $this->builder = $builder;
         $this->codeGroupProvider = $codeGroupProvider;
-        $this->optionProvider = $optionProvider;
     }
 
     /**
@@ -89,13 +81,14 @@ class DiagnosisType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $codeClass = $this->codeGroupProvider->getModelClass();
-        $choices = null;
+        $group = $this->codeGroupProvider->getGroupByName($options['code_group']);
+        $choices = $group->getCodes();
 
-        if (is_string($options['code_group'])) {
-            $group = $this->codeGroupProvider->getGroupByName($options['code_group']);
-            $choices = $group->getCodes();
+        if (empty($choices)) {
+            throw new \RuntimeException('The code group provided to diagnosis form MUST contain codes.');
         }
+
+        $codeClass = get_class($choices->first());
 
         $builder
             ->add('code', 'entity', array(
