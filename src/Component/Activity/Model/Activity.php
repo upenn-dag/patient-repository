@@ -103,6 +103,10 @@ class Activity implements ActivityInterface
      */
     public function isDruggable()
     {
+        if (null === $this->prototype) {
+            return false;
+        }
+
         return $this->prototype->allowDrug();
     }
 
