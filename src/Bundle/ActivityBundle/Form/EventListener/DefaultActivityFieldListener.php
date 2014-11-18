@@ -61,8 +61,7 @@ class DefaultActivityFieldListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::POST_SET_DATA => 'hidePrototype',
-            FormEvents::PRE_SET_DATA => 'createFields',
-            FormEvents::PRE_SET_DATA => 'addDrugField',
+            FormEvents::PRE_SET_DATA => array('createFields', 'addDrugField'),
         );
     }
 
