@@ -61,8 +61,27 @@ class DefaultRegimenFieldListener implements EventSubscriberInterface
     {
         return array(
             FormEvents::POST_SET_DATA => 'hidePrototype',
-            FormEvents::PRE_SET_DATA => 'createFields',
+            FormEvents::PRE_SET_DATA => array(
+                array('createFields'),
+                array('addDrugField'),
+            )
         );
+    }
+
+    /**
+     * Create drug field IF it is allowed by the prototype.
+     *
+     * @param FormEvent $event
+     */
+    public function addDrugField(FormEvent $event)
+    {
+        if (!$this->testForPrototype($event)) {
+            return;
+        }
+
+        if ($event->getData()->isDruggable()) {
+            $event->getForm()->add('drug', 'accard_drug_choice');
+        }
     }
 
     /**

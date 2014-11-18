@@ -22,6 +22,13 @@ Accard\Component\Regimen\Model\Regimen:
             type: datetime
             nullable: true
 
+    manyToOne:
+        drug:
+            targetEntity: Accard\Component\Drug\Model\DrugInterface
+            joinColumn:
+                name: drugId
+                nullable: true
+
     oneToMany:
         fields:
             targetEntity: Accard\Component\Regimen\Model\FieldValueInterface

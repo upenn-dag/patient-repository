@@ -12,6 +12,7 @@ namespace Accard\Component\Regimen\Model;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Accard\Component\Drug\Model\DrugInterface;
 
 /**
  * Accard regimen model.
@@ -43,6 +44,13 @@ class Regimen implements RegimenInterface
      * @param DateTime|null
      */
     protected $endDate;
+
+    /**
+     * Drug.
+     *
+     * @var DrugInterface|null
+     */
+    protected $drug;
 
 
     /**
@@ -95,5 +103,35 @@ class Regimen implements RegimenInterface
         $this->endDate = $endDate;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDrug()
+    {
+        return $this->drug;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDrug(DrugInterface $drug = null)
+    {
+        $this->drug = $drug;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isDruggable()
+    {
+        if (null === $this->prototype) {
+            return false;
+        }
+
+        return $this->prototype->getAllowDrug();
     }
 }

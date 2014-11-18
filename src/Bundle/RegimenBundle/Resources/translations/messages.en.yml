@@ -12,6 +12,7 @@ accard:
         form:
             id: Id
             prototype: Prototype
+            drug: Drug
             start_date: Start Date
             end_date: End Date
             prototype_label: Regimen Type
@@ -36,6 +37,7 @@ accard:
             presentation: Presentation
             fields: Fields
             subjects: Subjects
+            allow_drug: Allow drug to be collected?
         action:
             add: Add Regimen Prototype
             create: Create Regimen Prototype

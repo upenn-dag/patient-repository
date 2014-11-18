@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Accard\Component\Prototype\Model\PrototypeSubjectInterface;
 use Accard\Component\Field\Model\FieldSubjectInterface;
 use Accard\Component\Resource\Model\ResourceInterface;
+use Accard\Component\Drug\Model\DrugInterface;
 
 /**
  * Basic regimen interface.
@@ -61,4 +62,26 @@ interface RegimenInterface extends PrototypeSubjectInterface,
      * @return RegimenInterface
      */
     public function setEndDate(DateTime $endDate = null);
+
+    /**
+     * Get drug.
+     *
+     * @return DrugInterface
+     */
+    public function getDrug();
+
+    /**
+     * Set drug (optional).
+     *
+     * @param DrugInterface|null $drug
+     * @return ActivityInterface
+     */
+    public function setDrug(DrugInterface $drug = null);
+
+    /**
+     * Test if activity allows drug to be set (proxy).
+     *
+     * @return boolean
+     */
+    public function isDruggable();
 }

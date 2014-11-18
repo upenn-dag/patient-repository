@@ -48,6 +48,7 @@ class AccardRegimenExtension extends AbstractResourceExtension implements Prepen
                     'prototype' => array(
                         'model' => 'Accard\Component\Regimen\Model\Prototype',
                         'repository' => 'Accard\Bundle\PrototypeBundle\Doctrine\ORM\PrototypeRepository',
+                        'form' => 'Accard\Bundle\RegimenBundle\Form\Type\RegimenPrototypeType',
                     ),
                     'field' => array(
                         'model' => 'Accard\Component\Regimen\Model\Field',

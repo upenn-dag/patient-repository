@@ -8,3 +8,8 @@
 Accard\Component\Regimen\Model\Prototype:
     type: mappedSuperclass
     table: accard_regimen_prototype
+
+    fields:
+        allowDrug:
+            type: boolean
+            nullable: false

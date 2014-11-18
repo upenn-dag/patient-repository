@@ -6,6 +6,7 @@ accard:
         form:
             id: Id
             activity_date: Activity Date
+            drug: Drug
             prototype: Prototype
             prototype_label: Activity Type
             select_activity: Select an activity
