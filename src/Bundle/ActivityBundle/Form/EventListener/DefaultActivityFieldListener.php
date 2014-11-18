@@ -62,12 +62,29 @@ class DefaultActivityFieldListener implements EventSubscriberInterface
         return array(
             FormEvents::POST_SET_DATA => 'hidePrototype',
             FormEvents::PRE_SET_DATA => 'createFields',
+            FormEvents::PRE_SET_DATA => 'addDrugField',
         );
     }
 
     /**
+     * Create drug field IF it is allowed by the prototype.
+     *
+     * @param FormEvent $event
+     */
+    public function addDrugField(FormEvent $event)
+    {
+        if (!$this->testForPrototype($event)) {
+            return;
+        }
+
+        if ($event->getData()->isDruggable()) {
+            $event->getForm()->add('drug', 'accard_drug_choice');
+        }
+    }
+
+    /**
      * Remove prototype field if prototype is present.
-     * 
+     *
      * @param FormEvent $event
      */
     public function hidePrototype(FormEvent $event)
@@ -105,7 +122,7 @@ class DefaultActivityFieldListener implements EventSubscriberInterface
 
     /**
      * Test if prototype exists within form data.
-     * 
+     *
      * @return boolean
      */
     private function testForPrototype(FormEvent $event)

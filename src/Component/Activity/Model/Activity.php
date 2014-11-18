@@ -107,7 +107,7 @@ class Activity implements ActivityInterface
             return false;
         }
 
-        return $this->prototype->allowDrug();
+        return $this->prototype->getAllowDrug();
     }
 
     public function getCanonical()
