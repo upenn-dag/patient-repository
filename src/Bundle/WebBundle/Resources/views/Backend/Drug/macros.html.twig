@@ -1,0 +1,93 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% macro list_drugs(drugs) %}
+
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label %}
+
+{% if drugs|length > 0 %}
+    <table class="drug table table-bordered table-condensed table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="presentation">{{ 'accard.drug.form.presentation'|trans }}</th>
+                <th class="name">{{ 'accard.drug.form.name'|trans }}</th>
+                <th class="generic">{{ 'accard.drug.form.generic'|trans }}</th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for drug in drugs %}
+            <tr id="{{ drug.id }}">
+                <td class="presentation">{{ drug.presentation }}</td>
+                <td class="name">
+                    <span data-drug-id="{{ drug.id }}" class="label label-default">{{ drug.name }}</span>
+                </td>
+                <td class="generic">
+                    {{ drug.isGeneric() ? "generic" : "brand" }}
+                </td>
+                <td class="actions">
+                    <div class="pull-right">
+                        {{ edit(path('accard_backend_drug_update', {'id': drug.id}), null, 'xs') }}
+                        {{ delete(path('accard_backend_drug_delete', {'id': drug.id}), null, 'xs') }}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ info('accard.drug.none_found'|trans) }}
+{% endif %}
+
+{% endmacro %}
+
+
+{% macro list_groups(groups) %}
+
+{% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label %}
+
+{% if groups|length > 0 %}
+    <table class="drug-group table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="presentation">{{ 'accard.drug_group.form.presentation'|trans }}</th>
+                <th class="name">{{ 'accard.drug_group.form.name'|trans }}</th>
+                <th class="drugs">{{ 'accard.drug_group.form.drugs'|trans }}</th>
+                <th class="actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for group in groups %}
+            <tr id="{{ group.id }}">
+                <td class="presentation">{{ group.presentation }}</td>
+                <td class="name">{{ group.name }}</td>
+                <td data-drug-container="{{ group.id }}" class="drugs">
+                {% for drug in group.drugs %}
+                    <span data-drug-id="{{ drug.id }}" class="label label-primary">{{ drug.presentation }}</span>
+                {% else %}
+                    <span data-drug-none class="label label-danger">{{ 'accard.drug.message.none_found'|trans }}</span>
+                {% endfor %}
+                </td>
+                <td class="actions">
+                    <div class="pull-right">
+                        {{ edit(path('accard_backend_drug_group_update', {'id': group.id}), null, 'xs') }}
+                        {{ delete(path('accard_backend_drug_group_delete', {'id': group.id}), null, 'xs') }}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ info('accard.drug_group.none_found'|trans) }}
+{% endif %}
+
+{% endmacro %}

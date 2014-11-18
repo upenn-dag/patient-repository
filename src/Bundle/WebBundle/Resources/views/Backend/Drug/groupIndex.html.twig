@@ -1,0 +1,25 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source drug. #}
+
+{% extends 'AccardWebBundle:Backend:layout.html.twig' %}
+
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import create, design %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
+{% from 'AccardWebBundle:Backend/Drug:macros.html.twig' import list_groups, list_drugs %}
+
+{% block content %}
+
+    {{ page_title('accard.drug_group.action.index'|trans,
+        [
+            create(path('accard_backend_drug_group_create'), 'accard.drug_group.action.create'|trans),
+            create(path('accard_backend_drug_create'), 'accard.drug.action.create'|trans)
+        ])
+    }}
+
+    {{ list_groups(drug_groups) }}
+    {{ list_drugs(drugs) }}
+{% endblock %}

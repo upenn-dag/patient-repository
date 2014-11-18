@@ -9,7 +9,7 @@
  */
 namespace Accard\Bundle\DrugBundle\Doctrine\ORM;
 
-use Accard\Component\Drug\Repository\DrugRepositoryInterface;
+use Accard\Component\Drug\Repository\DrugGroupRepositoryInterface;
 use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**

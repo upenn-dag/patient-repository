@@ -18,6 +18,10 @@ accard_backend_option:
     resource: @AccardWebBundle/Resources/config/routing/backend/option.yml
     prefix: /option
 
+accard_backend_drug:
+    resource: @AccardWebBundle/Resources/config/routing/backend/drug.yml
+    prefix: /drug
+
 accard_backend_patient:
     resource: @AccardWebBundle/Resources/config/routing/backend/patient.yml
     prefix: /patient

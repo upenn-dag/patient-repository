@@ -63,6 +63,7 @@ accard:
             regimen: Regimen
             sample: Sample
             options: Options
+            drugs: Drugs
         frontend:
             home: Home
             repositories: Repositories

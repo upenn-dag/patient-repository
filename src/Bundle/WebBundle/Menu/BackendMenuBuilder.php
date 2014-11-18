@@ -51,6 +51,7 @@ class BackendMenuBuilder extends AbstractMenuBuilder
         $this->attachTopLink($menu, 'dashboard', 'accard_backend_dashboard', 'fa fa-dashboard fa-fw');
         $this->attachTopItem($menu, 'design', 'fa fa-file fa-fw');
         $this->attachTopItem($menu, 'users', 'fa fa-user fa-fw');
+        $this->attachTopLink($menu, 'drugs', 'accard_backend_drug_group_index', 'fa fa-file fa-fw');
         $this->attachTopLink($menu, 'options', 'accard_backend_option_index', 'fa fa-list fa-fw');
         $this->attachTopItem($menu, 'settings', 'fa fa-wrench fa-fw');
 

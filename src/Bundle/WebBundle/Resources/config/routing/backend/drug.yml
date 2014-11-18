@@ -1,0 +1,80 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard_backend_drug_group_index:
+    pattern: /group
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.drug_group:drugGroupAction
+        _accard:
+            template: AccardWebBundle:Backend/Drug:groupIndex.html.twig
+
+accard_backend_drug_group_add:
+    pattern: /group/add
+    methods: [POST]
+    defaults:
+        _controller: accard.controller.drug_group:addDrugAction
+
+accard_backend_drug_group_remove:
+    pattern: /group/remove
+    methods: [POST]
+    defaults:
+        _controller: accard.controller.drug_group:removeDrugAction
+
+accard_backend_drug_group_create:
+    pattern: /group/new
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.drug_group:createAction
+        _accard:
+            template: AccardWebBundle:Backend/Drug:groupCreate.html.twig
+            redirect: accard_backend_drug_group_index
+
+accard_backend_drug_group_update:
+    pattern: /group/{id}/edit
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: accard.controller.drug_group:updateAction
+        _accard:
+            template: AccardWebBundle:Backend/Drug:groupUpdate.html.twig
+            redirect: accard_backend_drug_group_index
+
+accard_backend_drug_group_delete:
+    pattern: /group/{id}
+    methods: [DELETE]
+    defaults:
+        _controller: accard.controller.drug_group:deleteAction
+        _accard:
+            template: AccardWebBundle:Backend/Misc:delete.html.twig
+            redirect: accard_backend_drug_group_index
+
+accard_backend_drug_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.drug:createAction
+        _accard:
+            template: AccardWebBundle:Backend/Drug:drugCreate.html.twig
+            redirect: accard_backend_drug_group_index
+
+accard_backend_drug_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT, POST]
+    defaults:
+        _controller: accard.controller.drug:updateAction
+        _accard:
+            template: AccardWebBundle:Backend/Drug:drugUpdate.html.twig
+            redirect: accard_backend_drug_group_index
+
+accard_backend_drug_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: accard.controller.drug:deleteAction
+        _accard:
+            template: AccardWebBundle:Backend/Misc:delete.html.twig
+            redirect: accard_backend_drug_group_index

@@ -22,42 +22,42 @@ class Drug implements DrugInterface
 {
     /**
      * Drug id.
-     * 
+     *
      * @var integer
      */
     protected $id;
 
     /**
      * Drug name.
-     * 
+     *
      * @var string
      */
     protected $name;
 
     /**
      * Presentation.
-     * 
+     *
      * @var string
      */
     protected $presentation;
 
     /**
      * Generic drug (parent).
-     * 
+     *
      * @var DrugInterface|null
      */
     protected $generic;
 
     /**
      * Brand drugs (children).
-     * 
+     *
      * @var Collection|DrugInterface[]
      */
     protected $brands;
 
     /**
      * Drug groups.
-     * 
+     *
      * @var Collection|DrugGroupInterface[]
      */
     protected $groups;
@@ -161,7 +161,7 @@ class Drug implements DrugInterface
      */
     public function isGeneric()
     {
-        return $this->generic instanceof DrugInterface;
+        return null === $this->generic;
     }
 
     /**

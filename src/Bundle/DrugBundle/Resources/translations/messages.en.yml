@@ -1,0 +1,35 @@
+accard:
+    drug:
+        entity_name: Drug
+        title: Drugs
+        form:
+            id: Id
+            name: Name
+            presentation: Presentation
+            generic: Generic
+            brands: Brands
+        action:
+            index: Drugs
+            create: Create Drug
+            update: Update Drug
+            delete: Delete Drug
+        message:
+            count: %total% drugs.
+            none_found: No drugs found.
+    drug_group:
+        entity_name: Drug Group
+        title: Drug Group
+        form:
+            id: Id
+            name: Name
+            presentation: Presentation
+            drugs: Drugs
+        action:
+            index: Drug Groups
+            create: Create Group
+            update: Update Group
+            delete: Delete Group
+            manage: Manage Groups
+        message:
+            count: %total% drug groups.
+            none_found: No drug groups found.

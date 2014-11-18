@@ -57,3 +57,10 @@ accard_attribute:
         attribute:
             model: Accard\Component\Core\Model\Attribute
             controller: Accard\Bundle\CoreBundle\Controller\AttributeController
+
+accard_drug:
+    classes:
+        drug:
+            controller: Accard\Bundle\CoreBundle\Controller\DrugController
+        drug_group:
+            controller: Accard\Bundle\CoreBundle\Controller\DrugGroupController

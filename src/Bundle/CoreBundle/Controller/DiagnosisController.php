@@ -123,6 +123,11 @@ class DiagnosisController extends ResourceController
         return $this->get('accard.repository.diagnosis_code_group')->findAll();
     }
 
+    /**
+     * Get all codes.
+     *
+     * @return array
+     */
     private function getCodes()
     {
         return $this->get('accard.repository.diagnosis_code')->findAll();
