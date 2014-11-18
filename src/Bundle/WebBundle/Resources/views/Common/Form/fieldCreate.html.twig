@@ -36,7 +36,11 @@
 {% block form_body %}
     <div class="row">
         <div class="col-md-6">
-            {{ form_row(form.presentation) }}
+            {% if form.vars.value.id is null %}
+                {{ form_row(form.presentation, { widget_addon_append: { icon: 'remove'}}) }}
+            {% else %}
+                {{ form_row(form.presentation) }}
+            {% endif %}
             {{ form_row(form.name) }}
         </div>
         <div class="col-md-6">
@@ -62,12 +66,14 @@
         var former = Accard.get("form");
         var manager = new former($('form'));
         manager
+            {% if form.vars.value.id is null -%}
             .behavior('presentation', {
                 target: 'name',
                 condition: 'changed',
                 action: 'slug',
                 event: 'keyup'
             })
+            {% endif -%}
             .behavior('type', {
                 target: '#option-hider',
                 condition: ['equal', 'choice'],
@@ -84,5 +90,24 @@
                 action: 'clear'
             })
             .bindAll();
+
+        {% if form.vars.value.id is null -%}
+        // Enable or disable automatic slugging...
+        !(function($) {
+            var presentationField = $('[id$="field_presentation"]:first');
+            var nameField = $('[id$="field_name"]:first');
+            var presentationButton = presentationField.next();
+
+            if (presentationButton.is('span')) {
+                presentationButton.on('click', function() {
+                    presentationField.off('keyup');
+                    presentationButton.remove();
+                    presentationField.parent().removeClass('input-group');
+                    nameField.prop('readonly', false);
+                })
+            }
+        })(jQuery);
+        {% endif %}
+
     </script>
 {% endblock %}
