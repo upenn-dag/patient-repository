@@ -48,6 +48,13 @@ class Diagnosis extends BaseDiagnosis implements DiagnosisInterface
      */
     protected $phases;
 
+    /**
+     * Regimens.
+     * 
+     * @var Collection|RegimenInterface[]
+     */
+    protected $regimens;
+
 
     /**
      * Constructor.
@@ -57,6 +64,7 @@ class Diagnosis extends BaseDiagnosis implements DiagnosisInterface
         $this->createdAt = new DateTime();
         $this->activities = new ArrayCollection();
         $this->phases = new ArrayCollection();
+        $this->regimens = new ArrayCollection();
 
         parent::__construct();
     }
@@ -157,5 +165,47 @@ class Diagnosis extends BaseDiagnosis implements DiagnosisInterface
             $this->phases->removeElement($phase);
             $phase->setTarget(null);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRegimens()
+    {
+        return $this->regimens;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasRegimen(RegimenInterface $regimen)
+    {
+        return $this->regimens->contains($regimen);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addRegimen(RegimenInterface $regimen)
+    {
+        if (!$this->hasRegimen($regimen)) {
+            $regimen->setDiagnosis($this);
+            $this->regimens->add($regimen);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeRegimen(RegimenInterface $regimen)
+    {
+        if ($this->hasRegimen($regimen)) {
+            $this->regimens->removeElement($regimen);
+            $regimen->setDiagnosis(null);
+        }
+
+        return $this;
     }
 }

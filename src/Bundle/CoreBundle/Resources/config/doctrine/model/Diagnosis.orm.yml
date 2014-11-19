@@ -30,3 +30,8 @@ Accard\Component\Core\Model\Diagnosis:
             mappedBy: target
             orphanRemoval: true
             cascade: ["persist", "remove"]
+        regimens:
+            targetEntity: Accard\Component\Regimen\Model\RegimenInterface
+            mappedBy: diagnosis
+            orphanRemoval: true
+            cascade: ["persist"]

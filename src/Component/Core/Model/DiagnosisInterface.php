@@ -73,4 +73,34 @@ interface DiagnosisInterface extends BaseDiagnosisInterface,
      * @return DiagnosisInterface
      */
     public function removeActivity(ActivityInterface $activity);
+
+    /**
+     * Get regimens.
+     * 
+     * @return Collection|RegimenInterface[]
+     */
+    public function getRegimens();
+
+    /**
+     * Test for presence of a regimen.
+     * 
+     * @return boolean
+     */
+    public function hasRegimen(RegimenInterface $regimen);
+
+    /**
+     * Add regimen.
+     * 
+     * @param RegimenInterface $regimen
+     * @return DiagnosisInterface
+     */
+    public function addRegimen(RegimenInterface $regimen);
+
+    /**
+     *  Remove regimen.
+     * 
+     * @param RegimenInterface $regimen
+     * @return DiagnosisInterface
+     */
+    public function removeRegimen(RegimenInterface $regimen);
 }

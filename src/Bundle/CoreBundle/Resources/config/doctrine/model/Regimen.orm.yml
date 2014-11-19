@@ -22,7 +22,7 @@ Accard\Component\Core\Model\Regimen:
                 nullable: false
         diagnosis:
             targetEntity: Accard\Component\Diagnosis\Model\DiagnosisInterface
-            #inversedBy: diagnoses
+            inversedBy: regimens
             joinColumn:
                 name: diagnosisId
                 referencedColumnName: id
