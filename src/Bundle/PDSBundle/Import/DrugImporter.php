@@ -173,11 +173,11 @@ class DrugImporter extends PatientImporter
                 INNER JOIN PDS_ODS_ORDER_MED M ON M.FK_ORDER_ID = O.PK_ORDER_ID
                 INNER JOIN PDS_ODS_R_MEDICATION M1 ON M1.PK_MEDICATION_ID = M.FK_MEDICATION_ID
                 INNER JOIN PDS_ODS_R_LOCATION L ON L.PK_LOCATION_ID = E.FK_LOCATION_ID
-            AND O.ORDER_DATE > TO_DATE(:mds, 'mm/dd/yyyy')
-            AND O.ORDER_DATE < TO_DATE(:mde, 'mm/dd/yyyy')
-            AND MP.HUP_MRN IS NOT NULL
-            AND M1.PK_MEDICATION_ID IN ({$drugs})
-            AND L.PK_LOCATION_ID IN (273036, 274036, 275034, 275036, 58712, 66359, 68359)
+            WHERE O.ORDER_DATE > TO_DATE(:mds, 'mm/dd/yyyy')
+                AND O.ORDER_DATE < TO_DATE(:mde, 'mm/dd/yyyy')
+                AND MP.HUP_MRN IS NOT NULL
+                AND M1.PK_MEDICATION_ID IN ({$drugs})
+                AND L.PK_LOCATION_ID IN (273036, 274036, 275034, 275036, 58712, 66359, 68359)
         )
         GROUP BY MRN, MEDICATION, MEDICATION_DATE, FIRST_NAME, LAST_NAME, GENDER, RACE, DATE_OF_BIRTH, DATE_OF_DEATH
         ORDER BY MRN, MEDICATION_DATE";
