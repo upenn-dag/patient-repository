@@ -12,7 +12,7 @@ Accard\Component\Activity\Model\Prototype:
     fields:
         allowDrug:
             type: boolean
-            nullable: false
+            nullable: true
 
     manyToOne:
         drugGroup:
