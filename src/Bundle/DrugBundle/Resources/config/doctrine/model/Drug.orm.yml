@@ -39,10 +39,4 @@ Accard\Component\Drug\Model\Drug:
     manyToMany:
         groups:
             targetEntity: Accard\Component\Drug\Model\DrugGroupInterface
-            inversedBy: drugs
-            joinTable:
-                name: accard_drugs_groups
-                joinColumns:
-                    drugId: ~
-                inverseJoinColumns:
-                    groupId: ~
+            mappedBy: drugs

@@ -87,14 +87,14 @@ class DrugType extends AbstractType
                 'delete_empty' => true,
                 'by_reference' => false,
             ));
-        } elseif ($options['select_groups']) {
-            $builder->add('groups', 'entity', array(
-                'class' => $this->dataGroupClass,
-                'property' => 'presentation',
-                'expanded' => true,
-                'multiple' => true,
-            ));
-        }
+        }// elseif ($options['select_groups']) {
+            // $builder->add('groups', 'entity', array(
+            //     'class' => $this->dataGroupClass,
+            //     'property' => 'presentation',
+            //     'expanded' => true,
+            //     'multiple' => true,
+            // ));
+        //}
     }
 
     /**
@@ -107,7 +107,7 @@ class DrugType extends AbstractType
                 'data_class' => $this->dataClass,
                 'validation_groups' => $this->validationGroups,
                 'create_groups' => false,
-                'select_groups' => false,
+                //'select_groups' => false,
             ))
         ;
     }

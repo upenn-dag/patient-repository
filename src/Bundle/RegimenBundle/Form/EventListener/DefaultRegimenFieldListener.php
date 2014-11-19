@@ -79,8 +79,19 @@ class DefaultRegimenFieldListener implements EventSubscriberInterface
             return;
         }
 
-        if ($event->getData()->isDruggable()) {
-            $event->getForm()->add('drug', 'accard_drug_choice');
+        $prototype = $event->getData()->getPrototype();
+        if ($prototype->getAllowDrug()) {
+            if ($group = $prototype->getDrugGroup()) {
+                $event->getForm()->add('drug', 'accard_drug_choice', array(
+                    'label' => $group->getPresentation(),
+                    'group' => $group,
+                    'required' => false,
+                ));
+            } else {
+                $event->getForm()->add('drug', 'accard_drug_choice', array(
+                    'required' => false,
+                ));
+            }
         }
     }
 

@@ -13,9 +13,32 @@
 {% block form_body %}
     {{ parent() }}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4">
             {{ form_widget(form.allowDrug) }}
+        </div>
+        <div class="col-md-3">
+            <div id="drug-group-hider">
+                {{ form_widget(form.drugGroup) }}
+            </div>
         </div>
     </div>
     <hr>
+{% endblock %}
+
+{% block form_javascripts_extended %}
+
+    manager
+        .behavior('allowDrug', {
+            target: '#drug-group-hider',
+            condition: 'checked',
+            action: 'show'
+        })
+        .behavior('allowDrug', {
+            target: 'drugGroup',
+            condition: 'not_checked',
+            action: 'clear'
+        })
+        .bindAll()
+    ;
+
 {% endblock %}

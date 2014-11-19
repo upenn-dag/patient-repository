@@ -36,6 +36,6 @@ class DrugController extends ResourceController
             ;
         }
 
-        return $this->createForm($this->config->getFormType(), $resource, array('select_groups' => true));
+        return $this->createForm($this->config->getFormType(), $resource);
     }
 }

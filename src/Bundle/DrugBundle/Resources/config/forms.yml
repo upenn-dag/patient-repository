@@ -33,9 +33,7 @@ services:
     accard.form.type.drug_group_choice:
         class: %accard.form.type.drug_group_choice.class%
         arguments:
-            - %accard.model.drug.class%
-            - %accard.model.drug.class%
-            - %accard.validation_group.drug%
+            - %accard.model.drug_group.class%
         tags: [{ name: form.type, alias: accard_drug_group_choice }]
 
     accard.form.type.drug_choice:

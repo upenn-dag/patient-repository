@@ -13,6 +13,8 @@
         {{ form_row(form.generic) }}
     </div>
     <div class="col-md-6">
-        {{ form_row(form.groups) }}
+        {% if form.groups is defined %}
+            {{ form_row(form.groups) }}
+        {% endif %}
     </div>
 </div>

@@ -34,6 +34,10 @@ class ActivityPrototypeType extends PrototypeType
                 'label' => 'accard.activity_prototype.form.allow_drug',
                 'required' => false,
             ))
+            ->add('drugGroup', 'accard_drug_group_choice', array(
+                'label' => 'accard.regimen_prototype.form.drug_group',
+                'required' => false,
+            ))
         ;
     }
 }

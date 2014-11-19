@@ -13,3 +13,10 @@ Accard\Component\Regimen\Model\Prototype:
         allowDrug:
             type: boolean
             nullable: false
+
+    manyToOne:
+        drugGroup:
+            targetEntity: Accard\Component\Drug\Model\DrugGroupInterface
+            joinColumn:
+                name: drugGroupId
+                nullable: true

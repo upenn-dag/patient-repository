@@ -11,26 +11,13 @@
 namespace Accard\Component\Regimen\Model;
 
 use Accard\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterface;
+use Accard\Component\Drug\Model\DrugablePrototypeInterface;
 
 /**
  * Regimen prototype interface
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface PrototypeInterface extends BasePrototypeInterface
+interface PrototypeInterface extends BasePrototypeInterface, DrugablePrototypeInterface
 {
-    /**
-     * Get allow drug.
-     *
-     * @return boolean
-     */
-    public function getAllowDrug();
-
-    /**
-     * Set allow drug.
-     *
-     * @param boolean $allowDrug
-     * @return PrototypeInterface
-     */
-    public function setAllowDrug($allowDrug);
 }
