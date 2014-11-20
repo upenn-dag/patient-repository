@@ -37,6 +37,12 @@ accard:
             create_diagnosis: First Presentation
             create_pre_existing_conditions: Pre-existing Conditions
             finalize_patient: Finalize Patient
+        create_regimen:
+            dump: TEST DUMP
+            select_diagnosis: Select diagnosis
+            select_patient: Select patient
+            select_patient_diagnosis: "Select patient & diagnosis"
+            select_regimen: Select regimen
     alert:
         info: Information
         success: Success

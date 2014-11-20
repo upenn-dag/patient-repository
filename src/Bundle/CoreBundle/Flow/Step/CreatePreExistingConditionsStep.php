@@ -58,8 +58,8 @@ class CreatePreExistingConditionsStep extends ControllerStep
      * @param DiagnosisRepository $diagnosisRepository
      * @param string $diagnosisModelClass
      */
-    public function __construct(DiagnosisRepository $diagnosisRepository, 
-                                $diagnosisModelClass, 
+    public function __construct(DiagnosisRepository $diagnosisRepository,
+                                $diagnosisModelClass,
                                 $patientModelClass,
                                 $diagnosisFormType)
     {
@@ -96,7 +96,7 @@ class CreatePreExistingConditionsStep extends ControllerStep
 
         if ($form->isValid()) {
             $data = $context->getRequest()->request->all();
-            $context->setStepData($data['accard_patient_diagnoses']);
+            $context->setStepData($this, $data['accard_patient_diagnoses']);
 
             return parent::complete($context);
         }

@@ -76,7 +76,7 @@ class CreateDiagnosisStep extends ControllerStep
 
         if ($form->isValid()) {
             $data = $context->getRequest()->request->all();
-            $context->setStepData($data['accard_diagnosis']);
+            $context->setStepData($this, $data['accard_diagnosis']);
 
             return parent::complete($context);
         }

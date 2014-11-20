@@ -84,9 +84,10 @@ class FlowCoordinator implements FlowCoordinatorInterface
 
         $this->context->initialize($flow, $step);
         $this->context->close();
+        $this->context->setInitialParameters($params->all());
 
         // Issue redirect to get to first step.
-        return $this->redirect($flow, $step, $params);
+        return $this->redirect($flow, $step, null);
     }
 
     /**
@@ -104,10 +105,21 @@ class FlowCoordinator implements FlowCoordinatorInterface
         if ($step->skip($this->context)) {
             $nextStep = $this->context->getNextStep();
 
+            if (null === $nextStep) {
+                throw new \Exception('Last step cannot be skipped, for now.');
+            }
+
             return $this->redirect($flow, $nextStep, $params);
         }
 
         $step->setActive(true);
+
+        // Loop through all steps and test to see if they have been,
+        // or will be skipped.
+        foreach ($flow->getSteps() as $loopStep) {
+            $loopStep->setSkipped($loopStep->skip($this->context));
+        }
+
         $result = $step->display($this->context);
 
         return $this->processStepResult($flow, $result);

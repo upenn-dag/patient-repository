@@ -10,8 +10,6 @@
  */
 namespace Accard\Bundle\FlowBundle\Flow\Scenario;
 
-use Accard\Bundle\FlowBundle\Flow\Builder\FlowBuilderInterface;
-
 /**
  * Flow scenario.
  *

@@ -36,6 +36,11 @@ class SessionStorage extends Storage
         $this->session = $session;
     }
 
+    public function all()
+    {
+        return $this->getBag()->all();
+    }
+
     /**
      * {@inheritdoc}
      */

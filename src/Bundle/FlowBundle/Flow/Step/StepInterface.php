@@ -56,4 +56,11 @@ interface StepInterface
      * @return boolean
      */
     public function isActive();
+
+    /**
+     * Test if step has been skipped.
+     *
+     * @return boolean
+     */
+    public function isSkipped();
 }

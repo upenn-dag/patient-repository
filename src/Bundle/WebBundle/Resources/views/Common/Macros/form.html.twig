@@ -31,3 +31,13 @@
     <link href="{{ asset_url }}" rel="stylesheet" type="text/css">
 {% endstylesheets %}
 {% endmacro %}
+
+{% macro select_diagnosis(diagnosisForm) %}
+<div class="select-diagnosis col-md-12 well">
+    <p class="lead">{{ 'accard.diagnosis.form.select_diagnosis'|trans }}
+    <div class="form-group">
+        {{ form_widget(diagnosisForm) }}
+    </div>
+    {{ form_errors(diagnosisForm) }}
+</div>
+{% endmacro %}

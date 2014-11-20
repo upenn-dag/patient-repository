@@ -37,6 +37,13 @@ abstract class ControllerStep extends Controller implements StepInterface
      */
     protected $active = false;
 
+    /**
+     * Step is skipped.
+     *
+     * @var boolean
+     */
+    protected $skipped = false;
+
 
     /**
      * Set step name.
@@ -88,5 +95,21 @@ abstract class ControllerStep extends Controller implements StepInterface
     public function setActive($active)
     {
         $this->active = (boolean) $active;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isSkipped()
+    {
+        return $this->skipped;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSkipped($skipped)
+    {
+        $this->skipped = (boolean) $skipped;
     }
 }

@@ -16,6 +16,7 @@ use Accard\Bundle\FlowBundle\Exception\ContextNotInitializedException;
 use Accard\Bundle\FlowBundle\Exception\StepAccessException;
 use Accard\Bundle\FlowBundle\Storage\StorageInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
  * Flow context.
@@ -277,10 +278,15 @@ class FlowContext implements FlowContextInterface
     /**
      * {@inheritdoc}
      */
-    public function setStepData(array $stepData)
+    public function setStepData($step = null, array $stepData)
     {
-        $stepName = $this->currentStep->getName();
-        $this->storage->set($stepName, $stepData);
+        $step = $step ?: $this->currentStep;
+
+        if (is_string($step)) {
+            $step = $this->flow->getStep($step);
+        }
+
+        $this->storage->set($step->getName(), $stepData);
     }
 
     /**
@@ -303,6 +309,22 @@ class FlowContext implements FlowContextInterface
         }
 
         $this->setStepHistory($history);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setInitialParameters(array $params = null)
+    {
+        $this->storage->set('initial_params', $params);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getInitialParameters()
+    {
+        return $this->storage->get('initial_params', array());
     }
 
     /**
