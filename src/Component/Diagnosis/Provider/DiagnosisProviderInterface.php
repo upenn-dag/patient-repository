@@ -13,6 +13,7 @@ namespace Accard\Component\Diagnosis\Provider;
 use Doctrine\Common\Collections\Collection;
 use Accard\Component\Resource\Provider\ProviderInterface;
 use Accard\Component\Diagnosis\Model\DiagnosisInterface;
+use Accard\Component\Diagnosis\Model\CodeInterface;
 
 /**
  * Diagnosis provider interface.

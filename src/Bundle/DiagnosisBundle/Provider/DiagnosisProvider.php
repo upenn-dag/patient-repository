@@ -13,6 +13,7 @@ namespace Accard\Bundle\DiagnosisBundle\Provider;
 use Accard\Component\Diagnosis\Provider\DiagnosisProviderInterface;
 use Accard\Component\Diagnosis\Repository\DiagnosisRepositoryInterface;
 use Accard\Component\Diagnosis\Exception\DiagnosisNotFoundException;
+use Accard\Component\Diagnosis\Model\CodeInterface;
 
 /**
  * Diagnosis provider.
