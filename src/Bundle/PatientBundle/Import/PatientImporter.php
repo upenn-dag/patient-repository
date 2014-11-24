@@ -35,14 +35,14 @@ abstract class PatientImporter implements ImporterInterface
                 $genderValues = $resource->findOneByName('gender')->getValues();
             }
 
-            $value = trim(strtolower($value));
+            $value = substr(trim(strtolower($value)), 0, 1);
 
             if (empty($value)) {
-                $value = 'unknown';
+                $value = 'u';
             }
 
             foreach ($genderValues as $genderValue) {
-                if (strtolower($genderValue->getValue()) === strtolower($value)) {
+                if (substr(strtolower($genderValue->getValue()), 0, 1) === $value) {
                     return $genderValue;
                 }
             }
