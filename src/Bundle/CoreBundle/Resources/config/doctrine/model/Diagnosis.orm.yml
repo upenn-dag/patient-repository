@@ -20,11 +20,11 @@ Accard\Component\Core\Model\Diagnosis:
                 nullable: false
 
     oneToMany:
-#        activities:
-#            targetEntity: Accard\Component\Activity\Model\ActivityInterface
-#            mappedBy: patient
-#            orphanRemoval: true
-#            cascade: ["persist", "remove"]
+        activities:
+            targetEntity: Accard\Component\Activity\Model\ActivityInterface
+            mappedBy: patient
+            orphanRemoval: true
+            cascade: ["persist", "remove"]
         phases:
             targetEntity: Accard\Component\Core\Model\DiagnosisPhaseInstanceInterface
             mappedBy: target
