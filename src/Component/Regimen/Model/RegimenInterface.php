@@ -16,6 +16,7 @@ use Accard\Component\Prototype\Model\PrototypeSubjectInterface;
 use Accard\Component\Field\Model\FieldSubjectInterface;
 use Accard\Component\Resource\Model\ResourceInterface;
 use Accard\Component\Drug\Model\DrugInterface;
+use Accard\Component\Activity\Model\ActivityInterface;
 
 /**
  * Basic regimen interface.
@@ -84,4 +85,35 @@ interface RegimenInterface extends PrototypeSubjectInterface,
      * @return boolean
      */
     public function isDruggable();
+
+    /**
+     * Get activities.
+     *
+     * @return Collection|ActivityInterface[]
+     */
+    public function getActivities();
+
+    /**
+     * Test for presence of a activity.
+     *
+     * @param ActivityInterface $activity
+     * @return boolean
+     */
+    public function hasActivity(ActivityInterface $activity);
+
+    /**
+     * Add activity.
+     *
+     * @param ActivityInterface $activity
+     * @return PatientInterface
+     */
+    public function addActivity(ActivityInterface $activity);
+
+    /**
+     * Remove activity.
+     *
+     * @param ActivityInterface $activity
+     * @return PatientInterface
+     */
+    public function removeActivity(ActivityInterface $activity);
 }

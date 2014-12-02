@@ -13,6 +13,7 @@ namespace Accard\Component\Regimen\Model;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Accard\Component\Drug\Model\DrugInterface;
+use Accard\Component\Activity\Model\ActivityInterface;
 
 /**
  * Accard regimen model.
@@ -52,6 +53,13 @@ class Regimen implements RegimenInterface
      */
     protected $drug;
 
+    /**
+     * Activities.
+     *
+     * @var Collection|ActivityInterface[]
+     */
+    protected $activities;
+
 
     /**
      * Constructor.
@@ -59,6 +67,7 @@ class Regimen implements RegimenInterface
     public function __construct()
     {
         $this->fields = new ArrayCollection();
+        $this->activities = new ArrayCollection();
     }
 
     /**
@@ -133,5 +142,45 @@ class Regimen implements RegimenInterface
         }
 
         return $this->prototype->getAllowDrug();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getActivities()
+    {
+        return $this->activities;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasActivity(ActivityInterface $activity)
+    {
+        return $this->activities->contains($activity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addActivity(ActivityInterface $activity)
+    {
+        if (!$this->hasActivity($activity)) {
+            $activity->setRegimen($this);
+            $this->activities->add($activity);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeActivity(ActivityInterface $activity)
+    {
+        if ($this->hasActivity($activity)) {
+            $this->activities->removeElement($activity);
+            $activity->setRegimen(null);
+        }
     }
 }
