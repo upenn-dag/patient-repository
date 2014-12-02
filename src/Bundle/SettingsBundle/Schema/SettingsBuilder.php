@@ -36,8 +36,6 @@ class SettingsBuilder extends OptionsResolver implements SettingsBuilderInterfac
     public function __construct()
     {
         $this->transformers = new ArrayCollection();
-
-        parent::__construct();
     }
 
     /**
