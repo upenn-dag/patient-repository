@@ -8,6 +8,9 @@
 accard:
     accept: Accept
     close: Close
+    confirm: Are you sure?
+    confirm_delete: Are you sure you wish to delete?
+    confirm_accept: Are you sure you wish to accept?
     create: Create
     decline: Decline
     edit: Edit

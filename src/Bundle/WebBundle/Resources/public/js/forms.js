@@ -67,7 +67,6 @@
     },
 
     behavior: function(source, conditions) {
-      console.log(source);
       return this._attachItem(source, conditions, FormBehaviorEvent)
     },
 
@@ -209,7 +208,7 @@
     this.index = this.source.find(this.indexer).length
 
     if (typeof o.adder == "undefined") {
-      this.adder = this.source.find(".add-collection")
+      this.adder = this.source.find("[data-accard='add']")
     } else if (typeof o.adder == "string") {
       this.adder = Form.resolve(o.adder)
     } else {
@@ -230,28 +229,46 @@
         event.preventDefault()
         var fixed = $(self.proto.replace(/__name__/g, self.index))
 
-        self.index = self.index + 1
-        self.source.append(fixed)
-        self._attachBehaviors(fixed)
-        self.startup.call(fixed, self)
+        self.index = self.index + 1;
+        self.source.append(fixed);
+        fixed.addClass('accard-collection-item');
+        self._attachBehaviors(fixed);
+        self.startup.call(fixed, self);
 
-        self.form.bindAll()
-      })
-
-      this.source.on("click", ".delete-collection", function(event) {
-        event.preventDefault()
-        alert("Delete behavior not included")
+        self.form.bindAll();
       })
 
       // Work out already existing collection items and run behavior
       // attachment and collection startup function.
       var proto = $(this.proto.replace(/__name__/g, this.index)).get(0)
-        , currents = this.source.children(proto.localName)
+        , localName = proto.localName
+        , currents = this.source.children(localName)
 
       currents.each(function(index, current) {
-        self.index = self.index + 1
-        self._attachBehaviors($(current))
-        self.startup.call($(current), self)
+        var $current = $(current);
+        self.index = self.index + 1;
+        self._attachBehaviors($current);
+        self.startup.call($current, self);
+        $current.addClass('accard-collection-item');
+      })
+
+      // We need to add in some delete behavior based on the indexes above.
+      this.source.on("click", "[data-accard='delete']", function(event) {
+        event.preventDefault();
+        var $this = $(this);
+        var toDelete = $this.parents('.accard-collection-item').first();
+        var confirm = $this.is('[data-accard-confirm]');
+
+        if (confirm) {
+          var confirmText = $this.data('accard-confirm');
+          var isConfirmed = window.confirm(confirmText);
+
+          if (!isConfirmed) {
+            return;
+          }
+        }
+
+        toDelete.remove();
       })
     },
     _attachBehaviors: function(source) {

@@ -12,6 +12,8 @@
 
 {% macro prototype(field) %}
     <div class="form-group">
+        <a href="#" data-accard="delete" data-accard-confirm="{{ 'accard.confirm_delete'|trans }}" class="pull-right">{{ 'accard.delete'|trans|lower }}</a>
+        {{ form_label(field, 'accard.activity.entity_name'|trans) }}
         {{ form_widget(field) }}
     </div>
 {% endmacro %}
