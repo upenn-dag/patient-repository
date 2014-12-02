@@ -23,7 +23,9 @@
 
 <div class="row well">
     <div class="col-md-6 row-split">
-        {{ form_row(form.diagnosis) }}
+        {% if form.diagnosis is defined %}
+            {{ form_row(form.diagnosis) }}
+        {% endif %}
         {{ form_row(form.startDate) }}
         {{ form_row(form.endDate) }}
         {% if form.drug is defined %}
@@ -31,6 +33,7 @@
         {% endif %}
     </div>
     <div class="col-md-6">
+    {% if form.activities is defined %}
         <div id="activities" data-prototype="{{ _self.activity_form(form.activities.vars.prototype)|e }}">
         {% for activity in form.activities %}
             {{ _self.activity_form(activity) }}
@@ -39,6 +42,7 @@
         <button id="add-activity" class="btn btn-success pull-right"><i class="glyphicon glyphicon-plus"></i>
             {{- 'accard.activity.action.add'|trans -}}
         </button>
+    {% endif %}
     </div>
 </div>
 
@@ -50,6 +54,8 @@
     </div>
     {% endfor %}
 </div>
+{% else %}
+{{ dump(form.fields) }}
 {% endif %}
 
 <hr>

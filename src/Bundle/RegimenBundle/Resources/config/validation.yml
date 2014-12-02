@@ -8,10 +8,10 @@
 Accard\Component\Regimen\Model\Regimen:
     properties:
         startDate:
-            - NotBlank: { message: accard.regimen.start_date.not_blank, groups: ['accard']}
-            - DateTime: { message: accard.regimen.start_date.datetime, groups: ['accard']}
+            - NotBlank: { message: accard.regimen.start_date.not_blank, groups: ['accard', 'minimal']}
+            - DateTime: { message: accard.regimen.start_date.datetime, groups: ['accard', 'minimal']}
         endDate:
-            - DateTime: { message: accard.regimen.end_date.date_time, groups: ['accard']}
+            - DateTime: { message: accard.regimen.end_date.date_time, groups: ['accard', 'minimal']}
         fields:
             - Valid: ~
 
@@ -34,9 +34,5 @@ Accard\Component\Regimen\Model\Field:
     getters: ~
 
 Accard\Component\Regimen\Model\FieldValue:
-    properties: ~
-    getters: ~
-
-Accard\Component\Regimen\Model\Source:
     properties: ~
     getters: ~

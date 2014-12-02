@@ -46,6 +46,7 @@ accard:
             design: Design Regimen Prototype
             manage: Manage Regimen Prototype
             manage_all: Manage Regimen Prototypes
+            add_activity_prototype: Add Activity Prototype
         title:
             index: Browse Regimen Prototypes
             show: %regimen% Regimen Prototype

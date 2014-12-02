@@ -43,6 +43,7 @@ accard:
             select_patient: Select patient
             select_patient_diagnosis: "Select patient & diagnosis"
             select_regimen: Select regimen
+            create_regimen: Create regimen
     alert:
         info: Information
         success: Success

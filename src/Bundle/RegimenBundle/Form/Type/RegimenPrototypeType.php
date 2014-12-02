@@ -38,6 +38,12 @@ class RegimenPrototypeType extends PrototypeType
                 'label' => 'accard.regimen_prototype.form.drug_group',
                 'required' => false,
             ))
+            ->add('activityPrototypes', 'collection', array(
+                'type' => 'accard_activity_prototype_choice',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+            ))
         ;
     }
 }

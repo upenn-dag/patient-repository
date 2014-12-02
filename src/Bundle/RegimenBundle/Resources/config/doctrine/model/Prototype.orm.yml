@@ -20,3 +20,14 @@ Accard\Component\Regimen\Model\Prototype:
             joinColumn:
                 name: drugGroupId
                 nullable: true
+
+    manyToMany:
+        activityPrototypes:
+            targetEntity: Accard\Component\Activity\Model\PrototypeInterface
+            joinTable:
+                name: accard_regimen_activity_map
+                joinColumns:
+                    activityPrototypeId: ~
+                inverseJoinColumns:
+                    regimenPrototypeId: ~
+
