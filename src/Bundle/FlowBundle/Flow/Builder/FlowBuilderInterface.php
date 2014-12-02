@@ -52,8 +52,10 @@ interface FlowBuilderInterface
      *
      * @throws DuplicateStepException When step is already registered.
      * @param StepInterface|string $step
+     * @param array $options
+     * @return StepInterface
      */
-    public function add($step);
+    public function add($step, array $options = array());
 
     /**
      * Remove flow step.

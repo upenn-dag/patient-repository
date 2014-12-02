@@ -50,6 +50,11 @@ class SelectRegimenStep extends ControllerStep
             $data = $context->getRequest()->request->all();
             $context->setStepData($this, $data['form']);
 
+            // Add prototype to initial parameters.
+            $initialParams = $context->getInitialParameters();
+            $initialParams = array_merge($initialParams, array('regimen' => $data['form']['regimen']));
+            $context->setInitialParameters($initialParams);
+
             return parent::complete($context);
         }
 
@@ -64,11 +69,11 @@ class SelectRegimenStep extends ControllerStep
         // This step will be skipped if a regimen prototype was specified, and
         // that prototype can be found.
         $initialParams = $context->getInitialParameters();
-        if (isset($initialParams['prototype'])) {
+        if (isset($initialParams['regimen'])) {
             try {
                 $regimenProvider = $this->get('accard.provider.regimen_prototype');
-                $regimenPrototype = $regimenProvider->getPrototypeByName($initialParams['prototype']);
-                $context->setStepData($this, array('regimen_prototype', $regimenPrototype->getId()));
+                $regimenPrototype = $regimenProvider->getPrototypeByName($initialParams['regimen']);
+                $context->setStepData($this, array('regimen' => $regimenPrototype->getId()));
 
                 return true;
             } catch (PrototypeNotFoundException $e) {}

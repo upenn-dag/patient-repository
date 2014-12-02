@@ -141,11 +141,11 @@ class FlowBuilder implements FlowBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function add($alias, StepInterface $step = null)
+    public function add($alias, array $options = array())
     {
         $this->assertHasFlow();
 
-        if (null === $step) {
+        if (is_string($alias)) {
             $step = $this->load($alias);
         }
 
@@ -153,7 +153,7 @@ class FlowBuilder implements FlowBuilderInterface
             $step->setContainer($this->container);
         }
 
-        $this->flow->addStep($alias, $step);
+        $this->flow->addStep($alias, $step, $options);
 
         return $this;
     }

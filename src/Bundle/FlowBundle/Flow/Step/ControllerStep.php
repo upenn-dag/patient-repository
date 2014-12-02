@@ -44,6 +44,12 @@ abstract class ControllerStep extends Controller implements StepInterface
      */
     protected $skipped = false;
 
+    /**
+     * Step options.
+     *
+     * @var array
+     */
+    protected $options = array();
 
     /**
      * Set step name.
@@ -79,6 +85,50 @@ abstract class ControllerStep extends Controller implements StepInterface
     public function skip(FlowContextInterface $context)
     {
         return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = $options;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOption($key, $value)
+    {
+        $this->options[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasOption($key)
+    {
+        return isset($this->options[$key]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOption($key, $default = null)
+    {
+        return $this->hasOption($key) ? $this->options[$key] : $default;
     }
 
     /**

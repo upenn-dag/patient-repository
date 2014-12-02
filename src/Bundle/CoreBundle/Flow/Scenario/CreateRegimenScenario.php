@@ -50,6 +50,8 @@ class CreateRegimenScenario extends FlowScenario
         $builder
             ->add('select_patient_diagnosis')
             ->add('select_regimen')
+            ->add('create_regimen')
+            ->add('create_regimen_activities')
             ->add('dump')
             ->setSaveCallback(array($this, 'saveCreateRegimen'))
         ;

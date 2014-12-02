@@ -51,6 +51,47 @@ interface StepInterface
     public function skip(FlowContextInterface $context);
 
     /**
+     * Set options.
+     *
+     * @param array $options
+     * @return StepInterface
+     */
+    public function setOptions(array $options);
+
+    /**
+     * Get options.
+     *
+     * @return array
+     */
+    public function getOptions();
+
+    /**
+     * Set option by key.
+     *
+     * @param string $key
+     * @param mixed $value
+     * @return StepInterface
+     */
+    public function setOption($key, $value);
+
+    /**
+     * Test for presence of option.
+     *
+     * @param string $key
+     * @return boolean
+     */
+    public function hasOption($key);
+
+    /**
+     * Get option by key, or default.
+     *
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
+     */
+    public function getOption($key, $default = null);
+
+    /**
      * Test if step is active.
      *
      * @return boolean

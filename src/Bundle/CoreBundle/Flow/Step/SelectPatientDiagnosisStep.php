@@ -118,7 +118,9 @@ class SelectPatientDiagnosisStep extends ControllerStep
      */
     private function renderStep(FlowContextInterface $context, FormInterface $form)
     {
-        return $this->render('AccardWebBundle:Frontend\Flow:select_patient_diagnosis.html.twig', array(
+        $view = $this->getOption('view') ?: 'AccardWebBundle:Frontend\Flow:select_patient_diagnosis.html.twig';
+
+        return $this->render($view, array(
             'context' => $context,
             'form' => $form->createView(),
         ));

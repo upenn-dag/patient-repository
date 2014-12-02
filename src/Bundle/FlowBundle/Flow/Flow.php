@@ -276,7 +276,7 @@ class Flow implements FlowInterface
     /**
      * {@inheritdoc}
      */
-    public function addStep($alias, StepInterface $step)
+    public function addStep($alias, StepInterface $step, array $options = array())
     {
         if ($this->hasStep($alias)) {
             throw new DuplicateStepAliasException($alias);
@@ -286,6 +286,7 @@ class Flow implements FlowInterface
             $step->setName($alias);
         }
 
+        $step->setOptions($options);
         $this->steps[$alias] = $this->orderedSteps[] = $step;
     }
 

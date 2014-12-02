@@ -12,6 +12,8 @@ parameters:
     accard.flow.scenario.basic_patient.class: Accard\Bundle\CoreBundle\Flow\Scenario\BasicPatientScenario
     accard.flow.step.select_patient_diagnosis.class: Accard\Bundle\CoreBundle\Flow\Step\SelectPatientDiagnosisStep
     accard.flow.step.select_regimen.class: Accard\Bundle\CoreBundle\Flow\Step\SelectRegimenStep
+    accard.flow.step.create_regimen.class: Accard\Bundle\CoreBundle\Flow\Step\CreateRegimenStep
+    accard.flow.step.create_regimen_activities.class: Accard\Bundle\CoreBundle\Flow\Step\CreateRegimenActivitiesStep
 
     accard.flow.scenario.create_regimen.class: Accard\Bundle\CoreBundle\Flow\Scenario\CreateRegimenScenario
     accard.flow.step.create_patient.class: Accard\Bundle\CoreBundle\Flow\Step\CreatePatientStep
@@ -40,6 +42,16 @@ services:
     accard.flow.step.select_regimen:
         class: %accard.flow.step.select_regimen.class%
         tags: [{ name: accard.flow.step, alias: select_regimen }]
+
+    accard.flow.step.create_regimen:
+        class: %accard.flow.step.create_regimen.class%
+        arguments:
+            - %accard.model.regimen.class%
+        tags: [{ name: accard.flow.step, alias: create_regimen }]
+
+    accard.flow.step.create_regimen_activities:
+        class: %accard.flow.step.create_regimen_activities.class%
+        tags: [{ name: accard.flow.step, alias: create_regimen_activities }]
 
     accard.flow.scenario.create_regimen:
         class: %accard.flow.scenario.create_regimen.class%
