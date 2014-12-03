@@ -78,17 +78,37 @@ class Runner
         $this->configureDefaultResolver($resolver, $subject, $target);
 
         $evd->dispatch(Events::INITIALIZE, $event);
+        $event = $this->cloneEvent($event);
         $event->setImporter($importer);
         $event->setHistory($this->import->getRepository()->getAllFor($importer->getName()));
         $evd->dispatch(Events::PRE_IMPORT, $event);
+        $event = $this->cloneEvent($event);
         $importer->configureResolver($resolver);
         $event->setRecords($importer->run($resolver, $event->getImport()->getCriteria()));
         $evd->dispatch(Events::CONVERT, $event);
+        $event = $this->cloneEvent($event);
         $evd->dispatch(Events::POST_IMPORT, $event);
+        $event = $this->cloneEvent($event);
         $event->setImporter(null);
         $evd->dispatch(Events::FINISH, $event);
 
         return $event->getRecords();
+    }
+
+    /**
+     * Clone to event, and pass old data into it.
+     * 
+     * @param ImportEvent $oldEvent
+     * @return ImportEvent
+     */
+    private function cloneEvent($oldEvent)
+    {
+        $event = new ImportEvent($oldEvent->getSubject(), $oldEvent->getTarget(), $oldEvent->getImport());
+        $event->setImporter($oldEvent->getImporter());
+        $oldEvent->getHistory() && $event->setHistory($oldEvent->getHistory());
+        $event->setRecords($oldEvent->getRecords());
+
+        return $event;
     }
 
     /**

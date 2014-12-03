@@ -76,7 +76,8 @@ class ImportEvent extends Event
      * @param ImporterInterface $importer
      */
     public function __construct(ResourceInterface $subject,
-                                ResourceInterface $target)
+                                ResourceInterface $target,
+                                $import = null)
     {
         if (!$subject->isSubject()) {
             die(var_dump($subject));
@@ -89,8 +90,7 @@ class ImportEvent extends Event
 
         $this->subject = $subject;
         $this->target = $target;
-
-        $this->import = new Import();
+        $this->import = $import ?: new Import();
     }
 
     /**

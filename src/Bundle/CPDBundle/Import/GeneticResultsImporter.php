@@ -122,6 +122,7 @@ class GeneticResultsImporter extends ActivityImporter
 
             $record['identifier'] = $result['pk_id'];
             $result['import_description'] = sprintf('%s genetic results on the %s.', $result['cpd_id'], $result['patient']);
+
             $record = $resolver->resolve($result);
 
             if($record['patient'] && $record['genetic_test_version_id'] == '2' && !in_array($record['pk_id'], $localRecords)) {
@@ -327,7 +328,7 @@ class GeneticResultsImporter extends ActivityImporter
                 FRD,
                 FAD,
                 FAF
-            FROM CPD_VW_RESULTS
+            FROM CPD.RESULTS_VW
             WHERE TEST_DATE IS NOT NULL
             ORDER BY PATIENT_MRN";
     }

@@ -63,9 +63,9 @@ abstract class ActivityImporter implements ImporterInterface
         $resolver->setOptional(array('diagnosis'));
 
         $resolver->setAllowedTypes(array(
-            'patient' => array('Accard\Component\Patient\Model\PatientInterface', 'null'),
+            'patient' => array('string'),
             'diagnosis' => array('Accard\Component\Diagnosis\Model\DiagnosisInterface', 'null'),
-            'activity_date' => array('DateTime'),
+            'activity_date' => array('string', 'null'),
         ));
 
         $resolver->setNormalizers(array(
