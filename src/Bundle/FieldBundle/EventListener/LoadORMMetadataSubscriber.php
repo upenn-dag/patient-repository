@@ -90,7 +90,6 @@ class LoadORMMetadataSubscriber implements EventSubscriber
             $fieldMapping = array(
                 'fieldName'     => 'field',
                 'targetEntity'  => $class['field']['model'],
-                //'inversedBy'    => 'fields',
                 'joinColumns'   => array(array(
                     'name'                 => 'fieldId',
                     'referencedColumnName' => 'id',

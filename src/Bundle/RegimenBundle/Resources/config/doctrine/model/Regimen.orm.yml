@@ -33,5 +33,5 @@ Accard\Component\Regimen\Model\Regimen:
         fields:
             targetEntity: Accard\Component\Regimen\Model\FieldValueInterface
             mappedBy: subject
+            cascade: ["persist", "remove"]
             orphanRemoval: true
-            cascade: ["all"]

@@ -56,5 +56,5 @@ Accard\Component\Diagnosis\Model\Diagnosis:
         fields:
             targetEntity: Accard\Component\Diagnosis\Model\FieldValueInterface
             mappedBy: subject
+            cascade: ["persist", "remove"]
             orphanRemoval: true
-            cascade: ["all"]

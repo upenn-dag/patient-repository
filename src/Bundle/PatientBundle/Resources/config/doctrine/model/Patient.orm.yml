@@ -52,6 +52,6 @@ Accard\Component\Patient\Model\Patient:
         fields:
             targetEntity: Accard\Component\Patient\Model\FieldValueInterface
             mappedBy: subject
+            cascade: ["persist", "remove"]
             orphanRemoval: true
-            cascade: ["all"]
 

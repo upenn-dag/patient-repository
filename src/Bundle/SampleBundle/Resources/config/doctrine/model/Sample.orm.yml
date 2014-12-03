@@ -34,5 +34,5 @@ Accard\Component\Sample\Model\Sample:
         fields:
             targetEntity: Accard\Component\Sample\Model\FieldValueInterface
             mappedBy: subject
-            orphanRemoval: true
             cascade: ["persist", "remove"]
+            orphanRemoval: true

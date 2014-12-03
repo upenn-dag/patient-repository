@@ -38,9 +38,10 @@ Accard\Component\Field\Model\FieldValue:
             joinTable:
                 name: accard_%s_field_option_map
                 joinColumns:
+                    optionValueId:
+                        name: optionValueId
+                        referencedColumnName: id
                     fieldId:
                         name: fieldId
-                        referencedColumnName: id
-                    optionId:
-                        name: optionId
+                        onDelete: CASCADE
                         referencedColumnName: id

@@ -19,5 +19,5 @@ Accard\Component\Attribute\Model\Attribute:
         fields:
             targetEntity: Accard\Component\Attribute\Model\FieldValueInterface
             mappedBy: subject
+            cascade: ["persist", "remove"]
             orphanRemoval: true
-            cascade: ["all"]
