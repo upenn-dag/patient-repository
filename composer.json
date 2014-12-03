@@ -12,8 +12,6 @@
         "symfony/assetic-bundle":                "~2.3",
         "symfony/swiftmailer-bundle":            "~2.3",
         "symfony/monolog-bundle":                "~2.4",
-        "symfony/expression-language":           "~2.4",
-        "symfony/intl":                          "~2.3",
         "sensio/distribution-bundle":            "~3.0",
         "sensio/framework-extra-bundle":         "~3.0",
         "doctrine/orm":                          "~2.2,>=2.2.3",
