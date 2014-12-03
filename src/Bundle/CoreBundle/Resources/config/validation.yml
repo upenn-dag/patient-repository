@@ -26,20 +26,20 @@ Accard\Component\Core\Model\Patient:
         phases:
             - Valid: ~
             - All:
-                - Type: { type: Accard\Component\Core\Model\PatientPhaseInterface, message: accard.patient.phases.type, groups: ['accard'] }
+                - Type: { type: Accard\Component\Core\Model\PatientPhaseInstanceInterface, message: accard.patient.phases.type, groups: ['accard'] }
 
 Accard\Component\Core\Model\Diagnosis:
     properties:
         startDate:
             - Expression: { expression: "this.getPatient().getDateOfBirth() < value" , message: accard.diagnosis.start_date.before_birth, groups: ['accard']}
-        endDate:
-            - Expression: { expression: "this.getPatient().getDateOfDeath() > value" , message: accard.diagnosis.end_date.after_death, groups: ['accard']}
+        #endDate:
+        #    - Expression: { expression: "this.getPatient().getDateOfDeath() > value" , message: accard.diagnosis.end_date.after_death, groups: ['accard']}
         patient:
             - Type: { type: Accard\Component\Patient\Model\PatientInterface, message: accard.diagnosis.patient.type, groups: ['accard'] }
         phases:
             - Valid: ~
             - All:
-                - Type: { type: Accard\Component\Core\Model\DiagnosisPhaseInterface, message: accard.diagnosis.phases.type, groups: ['accard'] }
+                - Type: { type: Accard\Component\Core\Model\DiagnosisPhaseInstanceInterface, message: accard.diagnosis.phases.type, groups: ['accard'] }
 
 Accard\Component\Core\Model\Activity:
     properties:
