@@ -15,7 +15,7 @@ Accard\Component\Core\Model\Regimen:
     manyToOne:
         patient:
             targetEntity: Accard\Component\Patient\Model\PatientInterface
-            #inversedBy: regimens
+            inversedBy: regimens
             joinColumn:
                 name: patientId
                 referencedColumnName: id

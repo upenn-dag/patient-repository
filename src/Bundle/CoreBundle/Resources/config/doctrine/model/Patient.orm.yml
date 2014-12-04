@@ -39,8 +39,18 @@ Accard\Component\Core\Model\Patient:
             mappedBy: patient
             orphanRemoval: true
             cascade: ["persist", "remove"]
+        attributes:
+            targetEntity: Accard\Component\Attribute\Model\AttributeInterface
+            mappedBy: patient
+            orphanRemoval: true
+            cascade: ["persist", "remove"]
         phases:
             targetEntity: Accard\Component\Core\Model\PatientPhaseInstanceInterface
             mappedBy: target
             orphanRemoval: true
             cascade: ["persist", "remove"]
+        regimens:
+            targetEntity: Accard\Component\Regimen\Model\RegimenInterface
+            mappedBy: patient
+            orphanRemoval: true
+            casecade: ["persist", "remove"]

@@ -115,6 +115,7 @@ accard:
             end_date_help: Leave blank for an ongoing diagnosis
         action:
             manage_phases: Manage Phases
+            show: %patientFirstName% %patientLastName%
     diagnosis:
         action:
             manage_phases: Manage Phases
