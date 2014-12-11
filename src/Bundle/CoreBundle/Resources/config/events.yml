@@ -8,9 +8,14 @@
 parameters:
 
     accard.phase_persistence_listener.class: Accard\Bundle\CoreBundle\EventListener\PhasePersistenceSubscriber 
+    accard.top_level_resource_subscriber.class: Accard\Bundle\CoreBundle\EventListener\TopLevelResourceSubscriber
 
 services:
 
     accard.phase_persistence_listener:
         class: %accard.phase_persistence_listener.class%
+        tags: [{ name: kernel.event_subscriber }]
+
+    accard.top_level_resource_subscriber:
+        class: %accard.top_level_resource_subscriber.class%
         tags: [{ name: kernel.event_subscriber }]

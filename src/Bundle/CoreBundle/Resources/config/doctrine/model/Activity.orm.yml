@@ -22,7 +22,7 @@ Accard\Component\Core\Model\Activity:
                 nullable: false
         diagnosis:
             targetEntity: Accard\Component\Diagnosis\Model\DiagnosisInterface
-            inversedBy: diagnoses
+            inversedBy: activities
             joinColumn:
                 name: diagnosisId
                 referencedColumnName: id

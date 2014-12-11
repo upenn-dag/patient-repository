@@ -37,7 +37,7 @@
 <body>
 
     {% block flashes -%}
-        {%- for type in ['success', 'error'] -%}
+        {%- for type in ['success', 'warning', 'error'] -%}
             {%- for flash in app.session.flashbag.get(type) -%}
                 <div class="alert alert-{{ type == 'error' ? 'danger' : type == 'notice' ? 'warning' : type }}">
                     <a class="close" data-dismiss="alert" href="#">×</a>

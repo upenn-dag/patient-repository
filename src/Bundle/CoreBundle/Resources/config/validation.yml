@@ -30,8 +30,8 @@ Accard\Component\Core\Model\Patient:
 
 Accard\Component\Core\Model\Diagnosis:
     properties:
-        startDate:
-            - Expression: { expression: "this.getPatient().getDateOfBirth() < value" , message: accard.diagnosis.start_date.before_birth, groups: ['accard']}
+        #startDate:
+        #    - Expression: { expression: "this.getPatient().getDateOfBirth() < value" , message: accard.diagnosis.start_date.before_birth, groups: ['accard']}
         #endDate:
         #    - Expression: { expression: "this.getPatient().getDateOfDeath() > value" , message: accard.diagnosis.end_date.after_death, groups: ['accard']}
         patient:
