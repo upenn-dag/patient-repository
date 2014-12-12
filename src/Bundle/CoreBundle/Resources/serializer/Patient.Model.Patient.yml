@@ -5,6 +5,58 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
-Accard\Component\Core\Model\Patient:
+Accard\Component\Patient\Model\Patient:
     exclusion_policy: ALL
-    
+    xml_root_name: patient
+    read_only: true
+    access_type: public_method
+    properties:
+        id:
+            expose: true
+            type: integer
+            serialized_name: id
+            since_version: 1.0
+            groups: [search, api, limited]
+        mrn:
+            expose: true
+            type: string
+            serialized_name: mrn
+            since_version: 1.0
+            groups: [search, api, limited]
+        firstName:
+            expose: true
+            type: string
+            serialized_name: first_name
+            since_version: 1.0
+            groups: [search, api, limited]
+        lastName:
+            expose: true
+            type: string
+            serialized_name: last_name
+            since_version: 1.0
+            groups: [search, api, limited]
+        dateOfBirth:
+            expose: true
+            type: DateTime
+            serialized_name: date_of_birth
+            since_version: 1.0
+            groups: [search, api, limited]
+        dateOfDeath:
+            expose: true
+            type: DateTime
+            serialized_name: date_of_death
+            since_version: 1.0
+            groups: [search, api, limited]
+        gender:
+            expose: true
+            type: property<"value">
+            serialized_name: gender
+            since_version: 1.0
+            groups: [search, api, limited]
+        race:
+            expose: true
+            type: property<"value">
+            serialized_name: race
+            since_version: 1.0
+            groups: [search, api, limited]
+

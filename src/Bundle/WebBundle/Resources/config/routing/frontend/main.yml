@@ -46,6 +46,10 @@ accard_frontend_flow:
     resource: @AccardFlowBundle/Resources/config/routing.yml
     prefix: /flow
 
+accard_frontend_search:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/search.yml
+    prefix: /search
+
 accard_frontend_pds:
     resource: @AccardPDSBundle/Resources/config/routing.yml
     prefix: /pds

@@ -50,7 +50,7 @@ class Diagnosis extends BaseDiagnosis implements DiagnosisInterface
 
     /**
      * Regimens.
-     * 
+     *
      * @var Collection|RegimenInterface[]
      */
     protected $regimens;
@@ -85,6 +85,18 @@ class Diagnosis extends BaseDiagnosis implements DiagnosisInterface
         $this->patient = $patient;
 
         return $this;
+    }
+
+    /**
+     * Temporary get patient full name.
+     *
+     * @return string
+     */
+    public function getPatientFullName()
+    {
+        if ($this->patient) {
+            return $this->patient->getFullName();
+        }
     }
 
     /**

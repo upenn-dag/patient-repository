@@ -18,3 +18,29 @@ $(function() {
         $('input[type=date]').attr('type', 'text').datepicker({ format: 'yyyy-mm-dd' });
     }
 });
+
+// Intercept the search button and direct to proper search page.
+$(function() {
+    searchUrl = Accard.get('current_url').clone();
+    if (searchUrl.isDev()) {
+        searchUrl.segments = ['app_dev.php', 'search'];
+    } else {
+        searchUrl.segments = ['search'];
+    }
+
+    var search = function(event) {
+        var val = $('#accard-search-field').val();
+        if (val) {
+            searchUrl.addParam('q', val);
+        }
+
+        searchUrl.replace();
+    }
+
+    $('#accard-search').on('click', search);
+    $('#accard-search-field').on('keypress', function(event) {
+        if (event.which == 13) {
+            search.call(event);
+        }
+    });
+});

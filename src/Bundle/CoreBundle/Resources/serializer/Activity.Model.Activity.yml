@@ -9,6 +9,7 @@ Accard\Component\Activity\Model\Activity:
     exclusion_policy: ALL
     xml_root_name: activity
     read_only: true
+    access_type: public_method
     accessor_order: custom
     custom_accessor_order: [id, prototype, activityDate]
     properties:
