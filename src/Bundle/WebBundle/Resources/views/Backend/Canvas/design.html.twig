@@ -1,0 +1,61 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Backend:layout.html.twig' %}
+
+{% block content %}
+
+{% verbatim %}
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<div ng-controller="CanvasController">
+    <h2>Canvas</h2>
+    <div class='contentWrapper ng-cloak'>
+        <div class='content'>
+            <div class="row">
+                <div ng-repeat="row in rows" class="row">
+                    <div ng-repeat="column in row.columns" class="col-md-6">
+                        <div class="well well-lg" data-drop="true" ng-model='column.widget' jqyoui-droppable="{index: {{$index}}}">
+                            <div class="btn btn-info btn-draggable"  ng-show="column.widget.name" data-drag="{{design}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="column.widget" jqyoui-draggable="{index: {{$index}}, placeholder:true, animate:true}">{{column.widget.name}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar-inner">
+        <div class="container form-inline" style="text-align: center;">
+            <div class="btn btn-droppable" ng-repeat="item in widgets" data-drop="true" ng-model='widgets' jqyoui-droppable="{index: {{$index}} }">
+                <div class="btn btn-info btn-draggable" data-drag="{{design}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="widgets" jqyoui-draggable="{index: {{$index}}, animate:true}" ng-hide="!item.name">{{item.name}}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- If edit mode is on -->
+    <div class="canvas-buttons">
+        <button class="btn btn-success" type="button" data-canvas-action="save" ng-show="design" ng-click="saveDesign()">save</button>
+        <button class="btn btn-primary" type="button" data-canvas-action="design" ng-hide="design" ng-click="enableDesign()" ng-model="canvas.design">design</button>
+    </div>
+
+    <div id="canvas-recycle-bin" class="inactive-recycle-bin"></div>
+
+
+</div>
+
+<div ng-view></div>
+
+
+{% endverbatim %}
+{% endblock %}
+

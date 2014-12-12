@@ -9,6 +9,8 @@ parameters:
 
     accard.widget.extensions: []
     accard.widget.factory_builder.class: Accard\Component\Widget\WidgetFactoryBuilder
+    accard.widget.extension.core.class: Accard\Component\Widget\Extension\Core\CoreExtension
+    accard.widget.factory.class: Accard\Component\Widget\WidgetFactory
     accard.widget.resolved_type_factory.class: Accard\Component\Widget\ResolvedWidgetTypeFactory
     accard.widget.registry.class: Accard\Component\Widget\WidgetRegistry
     accard.widget.twig_renderer_engine.class: Accard\Bridge\Twig\Widget\TwigRendererEngine
@@ -20,6 +22,16 @@ services:
     accard.widget.factory_builder:
         class: %accard.widget.factory_builder.class%
         arguments: ['@accard.widget.resolved_type_factory']
+        calls:
+            - ['addExtension', ['@accard.widget.extension.core']]
+
+    accard.widget.extension.core:
+        class: %accard.widget.extension.core.class%
+        public: false
+
+    accard.widget.factory:
+        class: %accard.widget.factory.class%
+        factory: ['@accard.widget.factory_builder', 'getFactory']
 
     accard.widget.resolved_type_factory:
         class: %accard.widget.resolved_type_factory.class%
