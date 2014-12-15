@@ -8,6 +8,7 @@
 {% extends 'AccardWebBundle:Backend:layout.html.twig' %}
 
 {% block content %}
+
 {% verbatim %}
 <!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -35,7 +36,8 @@
     </div>
     <div class="navbar-inner">
         <div class="container form-inline" style="text-align: center;">
-            <div class="btn btn-droppable" ng-repeat="item in widgets | orderBy : 'name'" data-drop="true" ng-model='widgets' jqyoui-droppable="{index: {{$index}} }">
+
+            <div class="btn btn-droppable" ng-repeat="item in widgets" data-drop="true" ng-model='widgets' jqyoui-droppable="{index: {{$index}} }">
                 <div class="btn btn-info btn-draggable" data-drag="{{design}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="widgets" jqyoui-draggable="{index: {{$index}}, animate:true}" ng-hide="!item.name">{{item.name}}</div>
             </div>
         </div>
@@ -78,22 +80,5 @@
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
-    <!-- In production use:
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-    -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-dragdrop/src/angular-dragdrop.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="app.js"></script>
-    <script src="canvas/canvas.js"></script>
-    <script src="palette/palette.js"></script>
-    <script src="services/services.js"></script>
-    <script src="components/version/version.js"></script>
-    <script src="components/version/version-directive.js"></script>
-    <script src="components/version/interpolate-filter.js"></script>
+
 {% endblock %}

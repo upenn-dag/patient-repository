@@ -14,6 +14,7 @@ use ArrayAccess;
 use ArrayIterator;
 use IteratorAggregate;
 use Countable;
+use JsonSerializable;
 use Accard\Component\Widget\Exception\BadMethodCallException;
 
 /**
@@ -21,7 +22,7 @@ use Accard\Component\Widget\Exception\BadMethodCallException;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class WidgetView implements ArrayAccess, IteratorAggregate, Countable
+class WidgetView implements ArrayAccess, IteratorAggregate, Countable, JsonSerializable
 {
     /**
      * Variables.
@@ -150,5 +151,14 @@ class WidgetView implements ArrayAccess, IteratorAggregate, Countable
     public function count()
     {
         return count($this->children);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        // May need logic to only include scalar variables.
+        return $this->vars;
     }
 }

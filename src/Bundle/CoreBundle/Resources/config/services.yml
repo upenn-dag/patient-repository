@@ -14,6 +14,7 @@ parameters:
     accard.fixture.manager.class: Accard\Bundle\CoreBundle\DataFixtures\FixtureManager
     accard.fixture.option_builder.class: Accard\Bundle\CoreBundle\DataFixtures\OptionBuilder
     accard.fixture.option_value_builder.class: Accard\Bundle\CoreBundle\DataFixtures\OptionValueBuilder
+    accard.json.transformer.listener: Accard\Bundle\CoreBundle\EventListener\JsonRequestTransformerListener
     doctrine.oracle.session_listener.class: Accard\Bundle\ResourceBundle\EventListener\OracleSessionInit
 
 services:
@@ -53,3 +54,8 @@ services:
     doctrine.oracle.accard_session_listener:
         class: %doctrine.oracle.session_listener.class%
         tags: [{ name: doctrine.event_listener, event: postConnect, connection: accard }]
+
+    kernel.event_listener.json_request_transformer:
+        class: %accard.json.transformer.listener%
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }
