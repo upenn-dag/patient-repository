@@ -41,6 +41,7 @@ Accard\Component\Field\Model\FieldValue:
                     optionValueId:
                         name: optionValueId
                         referencedColumnName: id
+                inverseJoinColumns:
                     fieldValueId:
                         name: fieldValueId
                         referencedColumnName: id
