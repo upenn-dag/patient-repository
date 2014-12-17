@@ -82,7 +82,7 @@ class LoadORMMetadataSubscriber implements EventSubscriber
                 'targetEntity'  => $class['subject'],
                 'inversedBy'    => 'fields',
                 'joinColumns'   => array(array(
-                    'name'                 => $subject.'Id',
+                    'name'                 => str_replace('_prototype', '', $subject).'Id',
                     'referencedColumnName' => 'id',
                     'nullable'             => false,
                 ))
