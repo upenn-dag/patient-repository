@@ -1,0 +1,18 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+<div class="search-results-container">
+    <p class="lead">{{ num_results }} results found for &quot;{{ results.text }}&quot;</p>
+    <div class="search-results">
+    {% for result in results %}
+        {{ accard_search_result(result) }}
+        <hr>
+    {% else %}
+        <p>No results found</p>
+    {% endfor %}
+    </div>
+</div>

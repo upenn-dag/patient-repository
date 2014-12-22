@@ -1,0 +1,12 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Frontend/Search:base_result.html.twig' %}
+
+{% block search_link path('accard_frontend_patient_show', { id: result.id }) %}
+{% block search_text "Patient: " ~ result.data.fullName %}
+{% block search_description 'Patient found, click to go to the patient detail page.' %}

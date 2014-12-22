@@ -22,7 +22,7 @@ Accard\Component\Core\Model\Diagnosis:
     oneToMany:
         activities:
             targetEntity: Accard\Component\Activity\Model\ActivityInterface
-            mappedBy: patient
+            mappedBy: diagnosis
             orphanRemoval: true
             cascade: ["persist", "remove"]
         phases:

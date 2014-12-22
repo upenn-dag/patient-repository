@@ -53,7 +53,7 @@ class QueryBuilder extends DoctrineQueryBuilder
     public function setRepository(EntityRepository $repository)
     {
         $this->repository = $repository;
-        $this->useRepositoryEntity();
+        //$this->useRepositoryEntity();
     }
 
     /**

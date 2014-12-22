@@ -5,15 +5,15 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
-Accard\Component\Core\Model\Diagnosis:
+Accard\Component\Core\Model\Patient:
     exclusion_policy: ALL
-    xml_root_name: diagnosis
+    xml_root_name: patient
     read_only: true
     access_type: public_method
-    virtual_properties:
-        getPatientFullName:
+    properties:
+        diagnoses:
             expose: true
-            type: string
-            serialized_name: patient_name
+            type: ArrayCollection<Accard\Component\Core\Model\Diagnosis>
+            serialized_name: diagnoses
             since_version: 1.0
-            groups: [search]
+            groups: [api, limited]

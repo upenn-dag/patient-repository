@@ -37,7 +37,7 @@
 <body>
 
     {% block flashes -%}
-        {%- for type in ['success', 'error'] -%}
+        {%- for type in ['success', 'warning', 'error'] -%}
             {%- for flash in app.session.flashbag.get(type) -%}
                 <div class="alert alert-{{ type == 'error' ? 'danger' : type == 'notice' ? 'warning' : type }}">
                     <a class="close" data-dismiss="alert" href="#">×</a>
@@ -151,9 +151,9 @@
                     <ul class="nav" id="side-menu-search">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <input id="accard-search-field" type="text" class="form-control" placeholder="Search..."{% if last_search is defined %} value="{{ last_search }}"{% endif %}>
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
+                                    <button id="accard-search" class="btn btn-default" type="button">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
