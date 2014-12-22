@@ -37,12 +37,14 @@
     var addOptionValue = $('#add-option-value');
 
     manager
+        {% if form.vars.value.id is null -%}
         .behavior('presentation', {
             target: 'name',
             condition: 'changed',
             action: 'slug',
             event: 'keyup'
         })
+        {% endif -%}
         .collection("#option-values", {
             adder: addOptionValue,
             startup: function(collection) {
@@ -60,7 +62,28 @@
         })
         .bindAll();
 
+        {% if form.vars.value.id is null -%}
+
+        // Enable or disable automatic slugging...
+        !(function($) {
+            var presentation = $('[id$="presentation"]:first');
+            var name         = $('[id$="name"]:first');
+            var button       = presentation.next();
+
+            if (button.is('span')) {
+                button.on('click', function() {
+                    presentation.off('keyup');
+                    button.remove();
+                    presentation.parent().removeClass('input-group');
+                    name.prop('readonly', false);
+                })
+            }
+        })(jQuery);
+
+        {% endif %}
+
     $('#option-values').on('click', '.lock > a', function(event) {
+
         var parent = $(this).parents('.lockable').first();
         var field = parent.find('input[type="checkbox"]').first();
         var nameField = parent.find('input[type="text"]').first();

@@ -47,7 +47,11 @@
 
     <div class="row">
         <div class="col-md-8 row-split">
-            {{ form_row(form.presentation) }}
+            {% if form.vars.value.id is null %}
+                {{ form_row(form.presentation, { widget_addon_append: { icon: 'remove'}}) }}
+            {% else %}
+                {{ form_row(form.presentation) }}
+            {% endif %}
             {{ form_row(form.name) }}
         </div>
         <div class="col-md-4">
@@ -75,16 +79,38 @@
         var former = Accard.get("form");
         var manager = new former($('form'));
         manager
+            {% if form.vars.value.id is null -%}
             .behavior('presentation', {
                 target: 'name',
                 condition: 'changed',
                 action: 'slug',
                 event: 'keyup'
             })
+            {% endif -%}
             .collection("#accard-prototype-fields", {
               adder: $("#accard-prototype-field-adder")
             })
             .bindAll();
+
+            {% if form.vars.value.id is null -%}
+
+            // Enable or disable automatic slugging...
+            !(function($) {
+                var presentation = $('[id$="prototype_presentation"]:first');
+                var name = $('[id$="prototype_name"]:first');
+                var presentationButton = presentation.next();
+
+                if (presentationButton.is('span')) {
+                    presentationButton.on('click', function() {
+                        presentation.off('keyup');
+                        presentationButton.remove();
+                        presentation.parent().removeClass('input-group');
+                        name.prop('readonly', false);
+                    })
+                }
+            })(jQuery);
+
+            {% endif %}
     
     {% block form_javascripts_extended '' %}
 
