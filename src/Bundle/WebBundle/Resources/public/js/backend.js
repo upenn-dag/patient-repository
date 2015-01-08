@@ -20,16 +20,13 @@ $(function() {
 });
 
 // Intercept the search button and direct to proper search page.
-$(function() {
-    searchUrl = Accard.get('current_url').clone();
-    if (searchUrl.isDev()) {
-        searchUrl.segments = ['app_dev.php', 'search'];
-    } else {
-        searchUrl.segments = ['search'];
-    }
-
+$(function($, Accard) {
     var search = function(event) {
-        var val = $('#accard-search-field').val();
+        var field = $('#accard-search-field');
+        var val = field.val();
+        var Urler = Accard.get('url');
+        var searchUrl = new Urler(field.data('search-url'));
+
         if (val) {
             searchUrl.addParam('q', val);
         }
@@ -43,4 +40,4 @@ $(function() {
             search.call(event);
         }
     });
-});
+})(jQuery, Accard);
