@@ -6,59 +6,59 @@
 # file that was distributed with this source code.
 
 Accard\Component\Core\Model\Patient:
-    properties:
-        diagnoses:
-            - Valid: ~
-            - All:
-                - Type: { type: Accard\Component\Diagnosis\Model\DiagnosisInterface, message: accard.patient.diagnoses.type, groups: ['accard'] }
-        activities:
-            - Valid: ~
-            - All:
-                - Type: { type: Accard\Component\Activity\Model\ActivityInterface, message: accard.patient.activities.type, groups: ['accard'] }
-        behaviors:
-            - Valid: ~
-            - All:
-                - Type: { type: Accard\Component\Behavior\Model\BehaviorInterface, message: accard.patient.behaviors.type, groups: ['accard'] }
-        attributes:
-            - Valid: ~
-            - All:
-                - Type: { type: Accard\Component\Attribute\Model\AttributeInterface, message: accard.patient.attributes.type, groups: ['accard'] }
-        phases:
-            - Valid: ~
-            - All:
-                - Type: { type: Accard\Component\Core\Model\PatientPhaseInstanceInterface, message: accard.patient.phases.type, groups: ['accard'] }
+    properties: []
+#        diagnoses:
+#            - Valid: ~
+#            - All:
+#                - Type: { type: Accard\Component\Diagnosis\Model\DiagnosisInterface, message: accard.patient.diagnoses.type, groups: ['accard'] }
+#        activities:
+#            - Valid: ~
+#            - All:
+#                - Type: { type: Accard\Component\Activity\Model\ActivityInterface, message: accard.patient.activities.type, groups: ['accard'] }
+#        behaviors:
+#            - Valid: ~
+#            - All:
+#                - Type: { type: Accard\Component\Behavior\Model\BehaviorInterface, message: accard.patient.behaviors.type, groups: ['accard'] }
+#        attributes:
+#            - Valid: ~
+#            - All:
+#                - Type: { type: Accard\Component\Attribute\Model\AttributeInterface, message: accard.patient.attributes.type, groups: ['accard'] }
+#        phases:
+#            - Valid: ~
+#            - All:
+#                - Type: { type: Accard\Component\Core\Model\PatientPhaseInstanceInterface, message: accard.patient.phases.type, groups: ['accard'] }#
 
-Accard\Component\Core\Model\Diagnosis:
-    properties:
-        #startDate:
-        #    - Expression: { expression: "this.getPatient().getDateOfBirth() < value" , message: accard.diagnosis.start_date.before_birth, groups: ['accard']}
-        #endDate:
-        #    - Expression: { expression: "this.getPatient().getDateOfDeath() > value" , message: accard.diagnosis.end_date.after_death, groups: ['accard']}
-        patient:
-            - Type: { type: Accard\Component\Patient\Model\PatientInterface, message: accard.diagnosis.patient.type, groups: ['accard'] }
-        phases:
-            - Valid: ~
-            - All:
-                - Type: { type: Accard\Component\Core\Model\DiagnosisPhaseInstanceInterface, message: accard.diagnosis.phases.type, groups: ['accard'] }
+#Accard\Component\Core\Model\Diagnosis:
+#    properties:
+#        #startDate:
+#        #    - Expression: { expression: "this.getPatient().getDateOfBirth() < value" , message: accard.diagnosis.start_date.before_birth, groups: ['accard']}
+#        #endDate:
+#        #    - Expression: { expression: "this.getPatient().getDateOfDeath() > value" , message: accard.diagnosis.end_date.after_death, groups: ['accard']}
+#        patient:
+#            - Type: { type: Accard\Component\Patient\Model\PatientInterface, message: accard.diagnosis.patient.type, groups: ['accard'] }
+#        phases:
+#            - Valid: ~
+#            - All:
+#                - Type: { type: Accard\Component\Core\Model\DiagnosisPhaseInstanceInterface, message: accard.diagnosis.phases.type, groups: ['accard'] }#
 
-Accard\Component\Core\Model\Activity:
-    properties:
-        patient:
-            - Valid: ~
-            - NotBlank: { message: accard.activity.patient.not_blank, groups: ['accard']}
-            - Type: { type: Accard\Component\Patient\Model\PatientInterface, message: accard.activity.patient.type, groups: ['accard']}
-        diagnosis:
-            - Valid: ~
-            - Type: { type: Accard\Component\Diagnosis\Model\DiagnosisInterface, message: accard.activity.diagnosis.type, groups: ['accard']}
-            - Expression: { expression: "value === null or this.getDiagnosis().getPatient() === this.getPatient()" , message: accard.activity.diagnosis.must_match_patient, groups: ['accard']}
+#Accard\Component\Core\Model\Activity:
+#    properties:
+#        patient:
+#            - Valid: ~
+#            - NotBlank: { message: accard.activity.patient.not_blank, groups: ['accard']}
+#            - Type: { type: Accard\Component\Patient\Model\PatientInterface, message: accard.activity.patient.type, groups: ['accard']}
+#        diagnosis:
+#            - Valid: ~
+#            - Type: { type: Accard\Component\Diagnosis\Model\DiagnosisInterface, message: accard.activity.diagnosis.type, groups: ['accard']}
+#            - Expression: { expression: "value === null or this.getDiagnosis().getPatient() === this.getPatient()" , message: accard.activity.diagnosis.must_match_patient, groups: ['accard']}#
 
-Accard\Component\Core\Model\Regimen:
-    properties:
-        patient:
-            - Valid: ~
-            - NotBlank: { message: accard.regimen.patient.not_blank, groups: ['accard']}
-            - Type: { type: Accard\Component\Patient\Model\PatientInterface, message: accard.regimen.patient.type, groups: ['accard']}
-        diagnosis:
-            - Valid: ~
-            - Type: { type: Accard\Component\Diagnosis\Model\DiagnosisInterface, message: accard.regimen.diagnosis.type, groups: ['accard']}
-            - Expression: { expression: "value === null or this.getDiagnosis().getPatient() === this.getPatient()" , message: accard.regimen.diagnosis.must_match_patient, groups: ['accard']}
+#Accard\Component\Core\Model\Regimen:
+#    properties:
+#        patient:
+#            - Valid: ~
+#            - NotBlank: { message: accard.regimen.patient.not_blank, groups: ['accard']}
+#            - Type: { type: Accard\Component\Patient\Model\PatientInterface, message: accard.regimen.patient.type, groups: ['accard']}
+#        diagnosis:
+#            - Valid: ~
+#            - Type: { type: Accard\Component\Diagnosis\Model\DiagnosisInterface, message: accard.regimen.diagnosis.type, groups: ['accard']}
+#            - Expression: { expression: "value === null or this.getDiagnosis().getPatient() === this.getPatient()" , message: accard.regimen.diagnosis.must_match_patient, groups: ['accard']}
