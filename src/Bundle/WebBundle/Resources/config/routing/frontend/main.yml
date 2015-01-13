@@ -57,3 +57,11 @@ accard_frontend_pds:
 accard_frontend_cpd:
     resource: @AccardCPDBundle/Resources/config/routing.yml
     prefix: /cpd
+
+accard_frontend_option_quickadd:
+    path: /option/add/{option}
+    defaults:
+        _controller: AccardWebBundle:Frontend:quickAddOption
+        _requirements: { option: \d+ }
+
+

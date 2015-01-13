@@ -13,6 +13,8 @@ namespace Accard\Bundle\WebBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Accard\Component\Option\Model\OptionInterface;
 
 /**
  * Base frontend controller.
@@ -65,5 +67,65 @@ class FrontendController extends Controller
             ->createNamed('criteria', $type, $criteria, array('csrf_protection' => false));
 
         return $this->render($template, array('form' => $form->createView(), 'filter_criteria' => $criteria));
+    }
+
+    /**
+     * Present option 'quick add' form.
+     *
+     * @param Request $request
+     * @param integer $option
+     */
+    public function quickAddOptionAction(Request $request, $option)
+    {
+        $optionProvider = $this->get('accard.provider.option');
+
+        if (!$optionProvider->hasOption($option)) {
+            throw $this->createNotFoundException();
+        }
+
+        $option = $optionProvider->getOption($option);
+        $form = $this->createQuickAddForm($option);
+
+        if ($request->isMethod('POST')) {
+            $response = new JsonResponse(array());
+            $form->handleRequest($request);
+            $optionValue = $form->getData()['newValue'];
+
+            if ($form->isValid()) {
+                $em = $this->get('accard.manager.option');
+                $option->addValue($optionValue);
+                $em->persist($option);
+                $em->persist($optionValue);
+                $em->flush();
+            } else {
+                $response->setStatusCode(400);
+            }
+
+            return $response;
+        }
+
+        return $this->render('AccardWebBundle:Frontend\Option:create.html.twig', array(
+            'form' => $form->createView(),
+            'option' => $option,
+        ));
+    }
+
+    /**
+     * Create a form for the quick add.
+     *
+     * @param OptionInteface $option
+     */
+    private function createQuickAddForm(OptionInterface $option)
+    {
+        $builder = $this->createFormBuilder(array(), array(
+            'action' => $this->generateUrl('accard_frontend_option_quickadd', array('option' => $option->getId())),
+            'method' => 'POST',
+        ));
+
+        $builder->add('newValue', 'accard_option_value', array(
+            'required' => true,
+        ));
+
+        return $builder->getForm();
     }
 }

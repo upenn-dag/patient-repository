@@ -1,0 +1,16 @@
+<div class="create-option">
+    <h1>{{ option.presentation }}</h1>
+    <ul>
+        {% for value in option.values %}
+        <li>{{ value }}</li>
+        {% endfor %}
+    </ul>
+
+    <form action="{{ path('accard_frontend_option_quickadd', { option: option.id }) }}" method="post">
+        {{ form_widget(form._token) }}
+        {{ form_row(form.newValue.value) }}
+        {{ form_row(form.newValue.locked) }}
+
+        <input type="submit">
+    </form>
+</div>
