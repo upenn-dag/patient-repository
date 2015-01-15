@@ -44,7 +44,6 @@ class FieldType extends AbstractType
      */
     protected $validationGroups;
 
-
     /**
      * Constructor.
      *
@@ -81,6 +80,10 @@ class FieldType extends AbstractType
             ))
             ->add('allowMultiple', 'checkbox', array(
                 'label' => 'accard.field.form.allow_multiple',
+                'required' => false,
+            ))
+            ->add('addable', 'checkbox', array(
+                'label' => 'accard.field.form.addable',
                 'required' => false,
             ))
         ;

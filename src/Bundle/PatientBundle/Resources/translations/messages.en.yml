@@ -41,6 +41,7 @@ accard:
             type: Type
             option: Option
             allow_multiple: Allow multiple options
+            addable: Addable
         action:
             create: Create Patient Field
             manage: Manage Patient Field

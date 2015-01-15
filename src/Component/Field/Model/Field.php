@@ -65,12 +65,18 @@ class Field implements FieldInterface
     protected $allowMultiple = false;
 
     /**
+     * Flag to indicate values can be added inline for this field
+     * 
+     * @var boolean
+     */
+    protected $addable = false;
+
+    /**
      * Field configuration.
      *
      * @var array
      */
     protected $configuration = array();
-
 
     /**
      * {@inheritdoc}
@@ -166,6 +172,29 @@ class Field implements FieldInterface
     public function setAllowMultiple($allowMultiple)
     {
         $this->allowMultiple = (boolean) $allowMultiple;
+
+        return $this;
+    }
+
+    /**
+     * Indicate values can be added inline for this field
+     *
+     * @return boolean
+     */
+    public function isAddable()
+    {
+        return $this->addable;
+    }
+
+    /**
+     * Set if values can be added inline for this field
+     *
+     * @param boolean $addable
+     * @return FieldValueInterface
+     */
+    public function setAddable($addable)
+    {
+        $this->addable = (boolean) $addable;
 
         return $this;
     }

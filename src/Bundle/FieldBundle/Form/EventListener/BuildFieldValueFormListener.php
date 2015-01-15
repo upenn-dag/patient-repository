@@ -31,7 +31,6 @@ class BuildFieldValueFormListener implements EventSubscriberInterface
      */
     private $factory;
 
-
     /**
      * Constructor.
      *
@@ -67,6 +66,7 @@ class BuildFieldValueFormListener implements EventSubscriberInterface
             'auto_initialize' => false,
             'attr' => array(
                 'data-field-name' => $fieldValue->getName(),
+                'data-field-addable' => false
             ));
 
         if (is_array($fieldValue->getConfiguration())) {
@@ -82,6 +82,7 @@ class BuildFieldValueFormListener implements EventSubscriberInterface
                 $options['multiple'] = true;
                 $options['expanded'] = true;
             }
+            $options['attr']['data-field-addable'] = $fieldValue->isAddable() ? '1' : '0';
         } else {
             $type = $fieldValue->getType();
         }

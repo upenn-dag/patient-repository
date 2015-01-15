@@ -305,6 +305,16 @@ class FieldValue implements FieldValueInterface
     /**
      * {@inheritdoc}
      */
+    public function isAddable()
+    {
+        $this->assertFieldIsSet();
+
+        return $this->field->isAddable();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getConfiguration()
     {
         $this->assertFieldIsSet();

@@ -49,6 +49,7 @@
                 {{ form_row(form.option) }}
                 <span class="pull-right">
                     {{ form_widget(form.allowMultiple) }}
+                    {{ form_widget(form.addable) }}
                 </span>
             </div>
         </div>
@@ -86,6 +87,11 @@
             })
             .behavior('type', {
                 target: 'allowMultiple',
+                condition: ['not_equal', 'choice'],
+                action: 'clear'
+            })
+            .behavior('type', {
+                target: 'addable',
                 condition: ['not_equal', 'choice'],
                 action: 'clear'
             })

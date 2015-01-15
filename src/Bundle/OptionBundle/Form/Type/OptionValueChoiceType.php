@@ -13,6 +13,8 @@ namespace Accard\Bundle\OptionBundle\Form\Type;
 use Doctrine\ORM\EntityRepository;
 use Accard\Component\Option\Model\OptionInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
 
@@ -38,6 +40,22 @@ class OptionValueChoiceType extends AbstractType
     public function __construct(OptionInterface $option)
     {
         $this->option = $option;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
+        parent::finishView($view, $form, $options);
+
+        $view->vars['option']     = $this->option;
+        $view->vars['is_addable'] = 
+            array_key_exists('data-field-addable', $options['attr'])
+                ? (bool)$options['attr']['data-field-addable']
+                : false;
+
     }
 
     /**
