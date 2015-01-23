@@ -25,6 +25,7 @@
 
     {% block sample_tabs  %}
         {% include 'AccardWebBundle:Frontend/Sample:tabs.html.twig' %}
+        {{ render(controller('AccardWebBundle:Frontend:prototypeChoiceForm', { 'type' : 'sample' })) }}
     {% endblock %}
 
     {% block sample_content %}

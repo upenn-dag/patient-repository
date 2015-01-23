@@ -70,6 +70,80 @@ class FrontendController extends Controller
     }
 
     /**
+     * Create a prototype choice form.
+     *
+     * @param Request $request
+     * @param string $type
+     * @return Response
+     */
+    public function prototypeChoiceFormAction(Request $request, $type)
+    {
+        $form = $this->createPrototypeChoiceForm($type);
+
+        return $this->render('AccardWebBundle:Common/Form:prototypeChoiceForm.html.twig', array(
+            'form' => $form->createView(),
+            'type' => $type,
+        ));
+    }
+
+    /**
+     * Redirect to proper place from prototype selection.
+     *
+     * @param Request $request
+     * @param string $type
+     * @return RedirectResponse
+     */
+    public function prototypeRedirectAction(Request $request, $type)
+    {
+        $form = $this->createPrototypeChoiceForm($type);
+        $form->handleRequest($request);
+        $prototype = $form->get('prototype')->getData();
+
+        if ($form->get('create')->isClicked()) {
+            $route = sprintf('accard_frontend_%s_create', $type);
+            $url = $this->generateUrl($route, array('prototype' => $prototype->getName()));
+        } elseif ($form->get('index')->isClicked()) {
+            $route = sprintf('accard_frontend_%s_index_by_prototype', $type);
+            $url = $this->generateUrl($route, array('prototype' => $prototype->getName()));
+        }
+
+        if (isset($url)) {
+            return $this->redirect($url);
+        }
+
+        throw $this->createNotFoundException();
+    }
+
+    /**
+     * Create prototype choice form.
+     *
+     * @param string $type
+     */
+    private function createPrototypeChoiceForm($type)
+    {
+        $prototypeChoiceType = sprintf('accard_%s_prototype_choice', $type);
+        $builder = $this->get('form.factory')->createNamedBuilder(null, 'form', array(), array(
+            'csrf_protection' => false,
+            'method' => 'GET',
+        ));
+
+        $builder->add('prototype', $prototypeChoiceType, array(
+            'required' => true,
+            'placeholder' => 'accard.prototype_choice.action.choose',
+        ));
+
+        $builder->add('create', 'submit', array(
+            'label' => 'accard.prototype_choice.action.create',
+        ));
+
+        $builder->add('index', 'submit', array(
+            'label' => 'accard.prototype_choice.action.index',
+        ));
+
+        return $builder->getForm();
+    }
+
+    /**
      * Present option 'quick add' form.
      *
      * @param Request $request
@@ -113,7 +187,7 @@ class FrontendController extends Controller
     /**
      * Create a form for the quick add.
      *
-     * @param OptionInteface $option
+     * @param OptionInterface $option
      */
     private function createQuickAddForm(OptionInterface $option)
     {

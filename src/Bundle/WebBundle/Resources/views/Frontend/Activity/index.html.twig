@@ -25,6 +25,7 @@
 
     {% block activity_tabs %}
         {% include 'AccardWebBundle:Frontend/Activity:tabs.html.twig' %}
+        {{ render(controller('AccardWebBundle:Frontend:prototypeChoiceForm', { 'type' : 'activity' })) }}
     {% endblock %}
 
     {% block activity_content %}
