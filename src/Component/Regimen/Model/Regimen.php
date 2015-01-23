@@ -183,4 +183,12 @@ class Regimen implements RegimenInterface
             $activity->setRegimen(null);
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return sprintf('Regimen #%d', $this->id);
+    }
 }

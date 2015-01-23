@@ -20,7 +20,7 @@ $(function() {
 });
 
 // Intercept the search button and direct to proper search page.
-$(function($, Accard) {
+$(function() {
     var search = function(event) {
         var field = $('#accard-search-field');
         var val = field.val();
@@ -40,4 +40,4 @@ $(function($, Accard) {
             search.call(event);
         }
     });
-})(jQuery, Accard);
+});
