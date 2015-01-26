@@ -50,6 +50,47 @@ fos_rest:
     serializer:
         serialize_null: true
 
+fos_elastica:
+    clients:
+        default: { host: %elasticsearch_host%, port: %elasticsearch_port% }
+    serializer: ~
+    indexes:
+        accard:
+            client: default
+            finder: ~
+            index_name: %accard_app_name%
+            types:
+                patient:
+                    mappings:
+                        firstName: { boost: 5 }
+                        lastName: { boost: 5 }
+                    serializer:
+                        groups: [search]
+                    persistence:
+                        driver: orm
+                        model: Accard\Component\Core\Model\Patient
+                        finder: ~
+                        provider: ~
+                        listener: ~
+                diagnosis:
+                    serializer:
+                        groups: [search]
+                    persistence:
+                        driver: orm
+                        model: Accard\Component\Core\Model\Diagnosis
+                        finder: ~
+                        provider: ~
+                        listener: ~
+                diagnosis_code:
+                    serializer:
+                        groups: [search]
+                    persistence:
+                        driver: orm
+                        model: Accard\Component\Diagnosis\Model\Code
+                        finder: ~
+                        provider: ~
+                        listener: ~
+
 jms_serializer:
     metadata:
         auto_detection: false

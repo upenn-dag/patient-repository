@@ -40,3 +40,6 @@ accard:
             create: Create a New Option Value
             update: Update Option Value
             list: Option Values
+    form:
+        option_value:
+            locked: Locked

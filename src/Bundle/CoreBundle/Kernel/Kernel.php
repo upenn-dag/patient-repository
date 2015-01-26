@@ -53,6 +53,7 @@ abstract class Kernel extends BaseKernel
             new \Accard\Bundle\WebBundle\AccardWebBundle(),
             new \Accard\Bundle\CPDBundle\AccardCPDBundle(),
             new \Accard\Bundle\HMTBBundle\AccardHMTBBundle(),
+            new \Accard\Bundle\CanvasBundle\AccardCanvasBundle(),
 
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
@@ -71,6 +72,7 @@ abstract class Kernel extends BaseKernel
             new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
+            new \FOS\ElasticaBundle\FOSElasticaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

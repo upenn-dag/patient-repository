@@ -44,25 +44,13 @@
 {% endblock %}
 
 {% block page_javascripts %}
-    <script type="text/javascript">
-        var formClass = Accard.get('form');
-        var manager = new formClass('form');
-        var addActivity = $('#add-activity');
-
-        manager
-            .collection("#activities", {
-                adder: addActivity
-            })
-           .bindAll()
-        ;
-
+<script type="text/javascript">
+    +function($, Accard) {
         $('#accard_regimen_patient').on('change', function(event) {
             var field = $('#accard_regimen_diagnosis');
             field.find('option').remove();
 
-            if (!event.added.id) {            
-                return;
-            }
+            if (!event.added.id) return;
 
             var urlClass = window.Accard.get('url');
             var url = new urlClass('{{ path('accard_api_patient_diagnoses', { patient: 99999 }) }}')
@@ -75,13 +63,15 @@
             field.prop('readonly', true);
 
             $.getJSON(url, function(diagnoses) {
+                field.append($('<option>Select a diagnosis</option>'));
                 $(diagnoses).each(function(index, diagnosis) {
                     field.append($('<option value="'+diagnosis.id+'">'+diagnosis.canonical+'</option>'));
                 })
                 field.prop('readonly', false);
-            })
+            });
         });
-    </script>
+    }(jQuery, Accard);
+</script>
 {% endblock %}
 
 {% block stylesheets %}

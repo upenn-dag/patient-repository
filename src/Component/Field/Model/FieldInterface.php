@@ -96,6 +96,21 @@ interface FieldInterface extends ResourceInterface
     public function setAllowMultiple($allowMultiple);
 
     /**
+     * Indicate values can be added inline for this field
+     *
+     * @return boolean
+     */
+    public function isAddable();
+
+    /**
+     * Set if values can be added inline for this field
+     *
+     * @param boolean $addable
+     * @return FieldValueInterface
+     */
+    public function setAddable($addable);
+
+    /**
      * Get field configuration.
      *
      * @return array

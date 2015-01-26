@@ -35,4 +35,14 @@ interface PrototypeSubjectInterface
      * @return PrototypeSubjectInterface
      */
     public function setPrototype(PrototypeInterface $prototype = null);
+
+    /**
+     * Get a description of the subject.
+     *
+     * This uses the prototype system to get a description for this specific
+     * resource based on configuration.
+     *
+     * @return string
+     */
+    public function getDescription();
 }

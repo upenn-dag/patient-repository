@@ -23,7 +23,9 @@
         {{ page_title('accard.behavior.title.index'|trans, designBtn) }}
     {% endblock %}
 
-    {% block behavior_tabs '' %}
+    {% block behavior_tabs %}
+        {{ render(controller('AccardWebBundle:Frontend:prototypeChoiceForm', { 'type' : 'behavior' })) }}
+    {% endblock %}
 
     {% block behavior_content %}
         {{ list(behaviors) }}

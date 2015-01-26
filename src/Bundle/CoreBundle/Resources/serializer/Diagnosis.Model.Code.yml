@@ -15,19 +15,19 @@ Accard\Component\Diagnosis\Model\Code:
             type: integer
             serialized_name: id
             since_version: 1.0
-            groups: [api, limited]
+            groups: [search, api, limited]
         code:
             expose: true
             type: string
             serialized_name: code
             since_version: 1.0
-            groups: [api, limited]
+            groups: [search, api, limited]
         description:
             expose: true
             type: string
             serialized_name: description
             since_version: 1.0
-            groups: [api]
+            groups: [search, api]
         groups:
             expose: true
             type: id

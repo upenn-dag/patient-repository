@@ -7,63 +7,70 @@
 
 {% from 'AccardWebBundle:Common/Macros:form.html.twig' import select_patient %}
 
-{% macro prototype(field) %}
-<div class="form-group">
+{% set count = form.fields|length %}
+{% set half_count = (count/2)|round(0, 'ceil') %}
+
+{% if count > 0 %}
+    {% set row1fields = form.fields|slice(0, half_count) %}
+{% endif %}
+{% if count > 1 %}
+    {% set row2fields = form.fields|slice(half_count, count) %}
+{% endif %}
+
+{% macro render_field(field) %}
     {{ form_widget(field) }}
-</div>
 {% endmacro %}
 
 {% if form.patient is defined %}
-<div class="row">
-    <div class="col-md-12">
-        {{ select_patient(form.patient) }}
-    </div>
-</div>
-{% endif %}
-
-<div class="row well">
-    <div class="col-md-6 row-split">
-        {% if form.diagnosis is defined %}
-            {{ form_row(form.diagnosis) }}
-        {% endif %}
-        {{ form_row(form.startDate) }}
-        {{ form_row(form.endDate) }}
-        {% if form.drug is defined %}
-            {{ form_row(form.drug) }}
-        {% endif %}
-    </div>
-    <div class="col-md-6">
-    {% if form.activities is defined %}
-        <div id="activities" data-prototype="{{ _self.activity_form(form.activities.vars.prototype)|e }}">
-        {% for activity in form.activities %}
-            {{ _self.activity_form(activity) }}
-        {% endfor %}
+    <div class="row">
+        <div class="col-md-12">
+            {{ select_patient(form.patient) }}
         </div>
-        <button id="add-activity" class="btn btn-success pull-right"><i class="glyphicon glyphicon-plus"></i>
-            {{- 'accard.activity.action.add'|trans -}}
-        </button>
-    {% endif %}
     </div>
-</div>
-
-{% if form.fields is not empty %}
-<div class="row">
-    {% for field in form.fields %}
-    <div class="col-md-6">
-        {{ _self.prototype(field) }}
-    </div>
-    {% endfor %}
-</div>
 {% endif %}
 
-<hr>
+{% from _self import render_field %}
+{% include 'AccardWebBundle:Frontend/Regimen:formTabs.html.twig' %}
 
-{% macro activity_form(field) %}
-    <div class="form-group">
-        {{ form_label(field, 'accard.activity.entity_name'|trans) }}
-        {{ form_widget(field) }}
+<div class="tab-content">
+    <div class="tab-pane fade in active" id="regimen-base">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="col-md-6 row-split">
+                    {% if form.diagnosis is defined %}
+                        {{ form_row(form.diagnosis) }}
+                    {% endif %}
+                    {% if form.drug is defined %}
+                        {{ form_row(form.drug) }}
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.startDate) }}
+                    {{ form_row(form.endDate) }}
+                </div>
+            </div>
+        </div>
     </div>
-{% endmacro %}
-
+    <div class="tab-pane fade" id="regimen-custom">
+        <div class="row">
+            <div class="col-md-6">
+            {% if count > 0 %}
+                {% for field in row1fields %}
+                    {{ render_field(field) }}
+                {% endfor %}
+            {% endif %}
+            </div>
+            <div class="col-md-6">
+            {% if count > 1 %}
+                {% for field in row2fields %}
+                    {{ render_field(field) }}
+                {% endfor %}
+            {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="regimen-activities">
+    </div>
+</div>
 
 

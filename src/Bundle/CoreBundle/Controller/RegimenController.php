@@ -11,6 +11,8 @@
 namespace Accard\Bundle\CoreBundle\Controller;
 
 use Accard\Bundle\ResourceBundle\Controller\ResourceController;
+use Accard\Bundle\RegimenBundle\Model\RegimenActivitiesChoice;
+use Accard\Bundle\RegimenBundle\Form\Type\RegimenActivitiesChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Pagerfanta\Pagerfanta;
@@ -36,6 +38,38 @@ class RegimenController extends ResourceController
         if (!$settings['enabled']) {
             throw $this->createNotFoundException('Activities have been disabled. Please contact your administrator to turn them back on.');
         }
+    }
+
+    /**
+     * Regimen activities action.
+     *
+     * @param Request $request
+     * @param string $prototype
+     * @param integer $id
+     */
+    public function activitiesAction(Request $request, $prototype, $id)
+    {
+        $resource = $this->findOr404($request);
+        $formData = new RegimenActivitiesChoice($resource);
+        $form = $this->createForm(new RegimenActivitiesChoiceType($resource), $formData);
+
+        if (in_array($request->getMethod(), array('POST', 'PUT', 'PATCH')) &&
+            $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+            $this->domainManager->update($resource);
+
+            return $this->redirectHandler->redirectTo($resource);
+        }
+
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('activities.html'))
+            ->setData(array(
+                $this->config->getResourceName() => $resource,
+                'form' => $form->createView()
+            ))
+        ;
+
+        return $this->handleView($view);
     }
 
     /**

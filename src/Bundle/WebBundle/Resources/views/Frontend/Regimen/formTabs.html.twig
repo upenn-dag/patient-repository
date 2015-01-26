@@ -1,0 +1,25 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% set add_activities = false %}
+
+{% if add_activities %}
+{% endif %}
+
+<ul class="nav nav-tabs grid-tabs" role="tablist">
+    <li class="active">
+        <a href="#regimen-base" role="tab" data-toggle="tab">{{ 'accard.interface.nav.regimen.base'|trans }}</a>
+    </li>
+    <li>
+        <a href="#regimen-custom" role="tab" data-toggle="tab">{{ 'accard.interface.nav.regimen.custom'|trans }}</a>
+    </li>
+    {% if add_activities %}
+    <li>
+        <a href="#regimen-activities" role="tab" data-toggle="tab">{{ 'accard.interface.nav.regimen.activities'|trans }}</a>
+    </li>
+    {% endif %}
+</ul>

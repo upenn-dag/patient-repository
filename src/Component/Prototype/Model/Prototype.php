@@ -13,6 +13,7 @@ namespace Accard\Component\Prototype\Model;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Accard\Component\Field\Model\FieldInterface;
+use Accard\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage;
 
 /**
  * Prototype model.
@@ -41,6 +42,13 @@ class Prototype implements PrototypeInterface
      * @var string
      */
     protected $presentation;
+
+    /**
+     * Description.
+     *
+     * @var string|null
+     */
+    protected $description;
 
     /**
      * Prototype subjects.
@@ -106,6 +114,32 @@ class Prototype implements PrototypeInterface
     public function setPresentation($presentation)
     {
         $this->presentation = $presentation;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParsedDescription(PrototypeSubjectInterface $subject)
+    {
+        return AccardLanguage::getInstance()->createPrototypeDescription($subject);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDescription($description = null)
+    {
+        $this->description = $description;
 
         return $this;
     }

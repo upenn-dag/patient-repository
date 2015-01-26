@@ -14,6 +14,7 @@ accard:
             type: Type
             option: Option
             allow_multiple: Allow multiple options
+            addable: Addable
         action:
             add: Add Field
             create: Create Field

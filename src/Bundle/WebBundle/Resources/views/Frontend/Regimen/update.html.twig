@@ -29,18 +29,3 @@
         </div>
     </form>
 {% endblock %}
-
-{% block page_javascripts %}
-    <script type="text/javascript">
-        var formClass = Accard.get('form');
-        var manager = new formClass('form');
-        var addActivity = $('#add-activity');
-
-        manager
-            .collection("#activities", {
-                adder: addActivity
-            })
-           .bindAll()
-        ;
-    </script>
-{% endblock %}

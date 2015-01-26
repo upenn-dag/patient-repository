@@ -14,3 +14,21 @@
     {{ block('form_widget') }}
 {% endblock typeahead_widget %}
 
+
+{% block choice_widget %}
+    {% if form.vars.is_addable|default(false) %}
+        <div class="input-group">
+            {{ parent() }}
+            <span class="input-group-btn">
+                <a href="{{ path('accard_frontend_option_quickadd', {'option': form.vars.option.id}) }}"
+                   data-toggle="modal"
+                   data-target="#quick-add-modal"
+                   data-option-target="#{{ form.vars.id }}"
+                   class="btn btn-success quick-add">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </a>
+            </span>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock choice_widget %}

@@ -27,6 +27,18 @@ accard_frontend_regimen_index_by_prototype:
                 prototype: $prototype
             paginate: 25
 
+accard_frontend_regimen_activities:
+    pattern: /{prototype}/{id}/activities
+    methods: [GET, PUT, POST]
+    requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
+    defaults:
+        _controller: accard.controller.regimen:activitiesAction
+        _accard:
+            template: AccardWebBundle:Frontend/Regimen:activities.html.twig
+            redirect:
+                route: accard_frontend_regimen_index_by_prototype
+                parameters: { prototype: resource.prototype.name, id: resource.id }
+
 accard_frontend_regimen_show:
     pattern: /{prototype}/{id}
     methods: [GET]

@@ -22,7 +22,11 @@
 
 <div class="row">
     <div class="col-md-8 row-split">
-        {{ form_row(form.presentation) }}
+        {% if form.vars.value.id is null %}
+            {{ form_row(form.presentation, { widget_addon_append: { icon: 'remove'}}) }}
+        {% else %}
+            {{ form_row(form.presentation) }}
+        {% endif %}
         {{ form_row(form.name) }}
     </div>
     <div class="col-md-4">

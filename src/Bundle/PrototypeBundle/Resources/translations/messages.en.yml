@@ -25,3 +25,8 @@ accard:
         message:
             none_found: No prototypes can be found.
             not_found: Prototype can not be found.
+    prototype_choice:
+        action:
+            create: Create
+            index: List
+            choose: Choose a prototype

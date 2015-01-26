@@ -32,6 +32,11 @@ Accard\Component\Field\Model\Field:
         allowMultiple:
             type: boolean
             nullable: false
+        addable:
+            type: boolean
+            nullable: false
+            options:
+                default: false
         configuration:
             type: array
 

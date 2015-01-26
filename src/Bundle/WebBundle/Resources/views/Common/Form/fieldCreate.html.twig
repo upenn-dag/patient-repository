@@ -49,6 +49,7 @@
                 {{ form_row(form.option) }}
                 <span class="pull-right">
                     {{ form_widget(form.allowMultiple) }}
+                    {{ form_widget(form.addable) }}
                 </span>
             </div>
         </div>
@@ -89,21 +90,27 @@
                 condition: ['not_equal', 'choice'],
                 action: 'clear'
             })
+            .behavior('type', {
+                target: 'addable',
+                condition: ['not_equal', 'choice'],
+                action: 'clear'
+            })
             .bindAll();
 
         {% if form.vars.value.id is null -%}
+
         // Enable or disable automatic slugging...
         !(function($) {
-            var presentationField = $('[id$="field_presentation"]:first');
-            var nameField = $('[id$="field_name"]:first');
-            var presentationButton = presentationField.next();
+            var presentation = $('[id$="field_presentation"]:first');
+            var field        = $('[id$="field_name"]:first');
+            var button       = presentation.next();
 
-            if (presentationButton.is('span')) {
-                presentationButton.on('click', function() {
-                    presentationField.off('keyup');
-                    presentationButton.remove();
-                    presentationField.parent().removeClass('input-group');
-                    nameField.prop('readonly', false);
+            if (button.is('span')) {
+                button.on('click', function() {
+                    presentation.off('keyup');
+                    button.remove();
+                    presentation.parent().removeClass('input-group');
+                    field.prop('readonly', false);
                 })
             }
         })(jQuery);

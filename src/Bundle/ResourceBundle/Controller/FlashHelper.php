@@ -89,7 +89,9 @@ class FlashHelper
     private function translateFlashMessage($message, $params = array())
     {
         $resource = ucfirst(str_replace('_', ' ', $this->config->getResourceName()));
+        $resourceLower = strtolower($resource);
+        $baseParams = array('%resource%' => $resource, '%resource_lower%' => $resourceLower);
 
-        return $this->translator->trans($message, array_merge(array('%resource%' => $resource), $params), 'flashes');
+        return $this->translator->trans($message, array_merge($baseParams, $params), 'flashes');
     }
 }

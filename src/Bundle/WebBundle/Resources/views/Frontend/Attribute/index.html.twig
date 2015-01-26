@@ -23,7 +23,9 @@
         {{ page_title('accard.attribute.title.index'|trans, designBtn) }}
     {% endblock %}
 
-    {% block attribute_tabs '' %}
+    {% block attribute_tabs %}
+        {{ render(controller('AccardWebBundle:Frontend:prototypeChoiceForm', { 'type' : 'attribute' })) }}
+    {% endblock %}
 
     {% block attribute_content %}
         {{ list(attributes) }}

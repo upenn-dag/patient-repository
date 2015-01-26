@@ -41,7 +41,7 @@ Accard\Component\Field\Model\FieldValue:
                     optionValueId:
                         name: optionValueId
                         referencedColumnName: id
-                    fieldId:
-                        name: fieldId
-                        onDelete: CASCADE
+                inverseJoinColumns:
+                    fieldValueId:
+                        name: fieldValueId
                         referencedColumnName: id

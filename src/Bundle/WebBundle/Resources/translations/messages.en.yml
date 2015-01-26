@@ -109,6 +109,10 @@ accard:
                 base: Base Fields
                 custom: Custom
                 phases: Phases
+            regimen:
+                base: Base Fields
+                custom: Custom
+                activities: Activities
     patient:
         form:
             select_patient: Select a patient

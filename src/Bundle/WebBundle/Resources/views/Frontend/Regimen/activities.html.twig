@@ -1,0 +1,49 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'AccardWebBundle:Frontend:layout.html.twig' %}
+
+{% from 'AccardWebBundle:Common/Macros:actions.html.twig' import update %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h1>{{ regimen }} Activities</h1>
+            <p>Showing activities for patient {{ regimen.patient.fullName }}.</p>
+            {% if regimen.diagnosis %}
+            <p>Showing only activities for diagnosis {{ regimen.diagnosis }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <form action="{{ path('accard_frontend_regimen_activities', { prototype: regimen.prototype.name, id: regimen.id }) }}" method="post" {{ form_enctype(form) }}>
+        <input type="hidden" name="_method" value="PUT">
+        {{ form_widget(form._token) }}
+        {% if form.activities.vars.choices|length > 0 %}
+            {{ form_row(form.activities) }}
+        {% else %}
+            <div class="alert alert-info">
+                There are no activities available to add to this regimen.
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-12">
+                <span class="pull-right">{{ update() }}</span>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
+
+{% block page_javascripts %}
+
+<script type="text/javascript">
++function($, Accard) {
+
+}(jQuery, Accard);
+</script>
+{% endblock %}

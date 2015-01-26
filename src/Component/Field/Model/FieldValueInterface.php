@@ -143,6 +143,13 @@ interface FieldValueInterface
     public function getAllowMultiple();
 
     /**
+     * Proxy access to addablity flag on field.
+     *
+     * @return boolean
+     */
+    public function isAddable();
+
+    /**
      * Get field configuration.
      *
      * @return array

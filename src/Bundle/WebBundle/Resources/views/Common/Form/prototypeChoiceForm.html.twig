@@ -1,0 +1,25 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% form_theme form 'form_div_layout.html.twig' %}
+
+<div id="{{ type }}-filter">
+    <a data-toggle="collapse"
+       data-parent="#{{ type }}-filter"
+       href="#{{ type }}-filter-collapse"
+       class="{% spaceless %}filter-bar{% endspaceless %}">
+        <span class="caret"></span>
+    </a>
+    <div id="{{ type }}-filter-collapse" class="collapse">
+        <form action="{{ path('accard_frontend_prototype_redirect', { type: type }) }}" class="form-filter">
+            {{ form_widget(form.prototype) }}
+            {{ form_widget(form.create) }}
+            {{ form_widget(form.index) }}
+        </form>
+    </div>
+</div>
+

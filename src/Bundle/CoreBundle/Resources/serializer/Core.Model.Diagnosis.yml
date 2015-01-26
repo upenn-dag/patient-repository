@@ -10,3 +10,10 @@ Accard\Component\Core\Model\Diagnosis:
     xml_root_name: diagnosis
     read_only: true
     access_type: public_method
+    virtual_properties:
+        getPatientFullName:
+            expose: true
+            type: string
+            serialized_name: patient_name
+            since_version: 1.0
+            groups: [search]

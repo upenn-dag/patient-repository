@@ -59,6 +59,28 @@ interface PrototypeInterface extends ResourceInterface
     public function setPresentation($presentation);
 
     /**
+     * Get description.
+     *
+     * @return string|null
+     */
+    public function getDescription();
+
+    /**
+     * Get parsed description.
+     *
+     * @return string
+     */
+    public function getParsedDescription(PrototypeSubjectInterface $subject);
+
+    /**
+     * Set description.
+     *
+     * @param string|null $description
+     * @return PrototypeInterface
+     */
+    public function setDescription($description = null);
+
+    /**
      * Get all subjects.
      *
      * @return Collection|PrototypeSubjectInterface[]

@@ -119,8 +119,11 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     public function createQueryBuilder($alias, $indexBy = null)
     {
         $queryBuilderClass = $this->getQueryBuilderClass();
+        $queryBuilder = new $queryBuilderClass($this->getEntityManager(), $this);
 
-        return new $queryBuilderClass($this->getEntityManager(), $this);
+        return $queryBuilder
+            ->select($alias)
+            ->from($this->_entityName, $alias, $indexBy);
     }
 
     /**

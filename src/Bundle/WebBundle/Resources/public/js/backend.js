@@ -18,3 +18,26 @@ $(function() {
         $('input[type=date]').attr('type', 'text').datepicker({ format: 'yyyy-mm-dd' });
     }
 });
+
+// Intercept the search button and direct to proper search page.
+$(function() {
+    var search = function(event) {
+        var field = $('#accard-search-field');
+        var val = field.val();
+        var Urler = Accard.get('url');
+        var searchUrl = new Urler(field.data('search-url'));
+
+        if (val) {
+            searchUrl.addParam('q', val);
+        }
+
+        searchUrl.replace();
+    }
+
+    $('#accard-search').on('click', search);
+    $('#accard-search-field').on('keypress', function(event) {
+        if (event.which == 13) {
+            search.call(event);
+        }
+    });
+});

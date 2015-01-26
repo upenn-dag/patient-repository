@@ -46,6 +46,10 @@ accard_frontend_flow:
     resource: @AccardFlowBundle/Resources/config/routing.yml
     prefix: /flow
 
+accard_frontend_search:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/search.yml
+    prefix: /search
+
 accard_frontend_pds:
     resource: @AccardPDSBundle/Resources/config/routing.yml
     prefix: /pds
@@ -53,3 +57,23 @@ accard_frontend_pds:
 accard_frontend_cpd:
     resource: @AccardCPDBundle/Resources/config/routing.yml
     prefix: /cpd
+
+accard_frontend_option_quickadd:
+    path: /option/add/{option}
+    defaults:
+        _controller: AccardWebBundle:Frontend:quickAddOption
+        _requirements: { option: \d+ }
+
+accard_frontend_prototype_form:
+    path: /prototype/form/{type}
+    defaults:
+        _controller: AccardWebBundle:Frontend:prototypeChoiceForm
+        _requirements: { type: activity|attribute|behavior|regimen|sample }
+
+accard_frontend_prototype_redirect:
+    path: /prototype/redirect/{type}
+    defaults:
+        _controller: AccardWebBundle:Frontend:prototypeRedirect
+        _requirements: { type: activity|attribute|behavior|regimen|sample }
+
+
