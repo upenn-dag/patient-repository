@@ -69,6 +69,10 @@ class PrototypeType extends AbstractType
             ->add('presentation', 'text', array(
                 'label' => sprintf('accard.%s_prototype.form.presentation', $this->subjectName),
             ))
+            ->add('description', 'text', array(
+                'label' => sprintf('accard.%s_prototype.form.description', $this->subjectName),
+                'required' => false,
+            ))
             ->add('fields', 'collection', array(
                   'label' => sprintf('accard.%s_prototype.form.fields', $this->subjectName),
                   'type' => sprintf('accard_%s_prototype_field_choice', $this->subjectName),

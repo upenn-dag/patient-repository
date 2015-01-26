@@ -13,6 +13,7 @@ namespace Accard\Bundle\ResourceBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Accard\Component\Resource\Repository\RepositoryInterface;
+use Accard\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -91,6 +92,10 @@ class ResourceController extends FOSRestController implements InitializableContr
     public function setContainer(ContainerInterface $container = null)
     {
         parent::setContainer($container);
+
+        // Initialize the expression language.
+        // This may not be the best place to put this...
+        AccardLanguage::setExpressionLanguage($container->get('accard.expression_language'));
 
         $this->resourceResolver = new ResourceResolver($this->config);
         if (null !== $container) {

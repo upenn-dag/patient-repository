@@ -23,3 +23,7 @@ Accard\Component\Prototype\Model\Prototype:
             type: string
             length: 120
             nullable: false
+        description:
+            type: string
+            length: 255
+            nullable: true

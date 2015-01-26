@@ -42,4 +42,12 @@ trait PrototypeSubjectTrait
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    final public function getDescription()
+    {
+        return $this->getPrototype()->getParsedDescription($this);
+    }
 }
