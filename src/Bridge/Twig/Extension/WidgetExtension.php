@@ -15,6 +15,9 @@ use Twig_Environment;
 use Twig_SimpleFunction;
 use Accard\Bridge\Twig\TokenParser\WidgetThemeTokenParser;
 use Accard\Bridge\Twig\Widget\TwigRendererInterface;
+use Accard\Component\Widget\Grid\Grid;
+use Accard\Component\Widget\Grid\GridBuilder;
+use Accard\Component\Widget\Grid\GridProvider;
 //use Symfony\Component\Widget\Extension\Core\View\ChoiceView;
 
 /**
@@ -34,13 +37,20 @@ class WidgetExtension extends Twig_Extension
     public $renderer;
 
     /**
+     * Grid Provider
+     */
+    public $gridProvider;
+
+    /**
      * Constructor.
      *
      * @param TwigRendererInterface $renderer
      */
-    public function __construct(TwigRendererInterface $renderer)
+    public function __construct(TwigRendererInterface $renderer, 
+                                GridProvider $gridProvider)
     {
         $this->renderer = $renderer;
+        $this->gridProvider = $gridProvider;
     }
 
     /**
@@ -69,8 +79,16 @@ class WidgetExtension extends Twig_Extension
     {
         return array(
             new Twig_SimpleFunction('widget', null, array('node_class' => 'Accard\Bridge\Twig\Node\SearchAndRenderBlockNode', 'is_safe' => array('html'))),
+            //createCanvas needs some type of node
+            new Twig_SimpleFunction('canvas', array($this, 'createCanvas'), array('is_safe' => array('html', 'js'))),
         );
     }
+
+    public function createCanvas($defaultGridLayout, $storedGridIdentifier, $data)
+    {
+        return $this->gridProvider->createCanvas($defaultGridLayout, $storedGridIdentifier, $data);
+    }
+
 
     /**
      * {@inheritdoc}

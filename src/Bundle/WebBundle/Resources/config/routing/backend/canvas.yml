@@ -28,3 +28,8 @@ accard_backend_canvas_widget:
     methods: [GET, POST]
     defaults:
          _controller: accard.controller.canvas:widgetAction
+
+accard_backend_canvas_test:
+    pattern: /view/test
+    defaults:
+        _controller: accard.controller.canvas:renderAction

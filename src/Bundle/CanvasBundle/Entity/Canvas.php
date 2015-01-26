@@ -10,6 +10,7 @@
 namespace Accard\Bundle\CanvasBundle\Entity;
 
 use DateTime;
+use JsonSerializable;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -17,7 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-class Canvas
+class Canvas implements JsonSerializable
 {
     protected $id;
 
@@ -60,9 +61,18 @@ class Canvas
     /**
      * @param mixed $grid
      */
-    public function setGrid($grid)
+    public function setGrid(array $grid)
     {
         $this->grid = $grid;
+    }
+
+    public function jsonSerialize()
+    {
+        return array(
+            'id' => $this->id,
+            'route' => $this->route,
+            'grid' => $this->grid,
+        );
     }
 
 }

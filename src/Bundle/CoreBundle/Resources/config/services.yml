@@ -55,7 +55,7 @@ services:
         class: %doctrine.oracle.session_listener.class%
         tags: [{ name: doctrine.event_listener, event: postConnect, connection: accard }]
 
-    kernel.event_listener.json_request_transformer:
-        class: %accard.json.transformer.listener%
-        tags:
-            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }
+#    kernel.event_listener.json_request_transformer:
+#        class: %accard.json.transformer.listener%
+#        tags:
+#            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }

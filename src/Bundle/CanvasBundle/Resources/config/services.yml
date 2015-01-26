@@ -5,21 +5,28 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
+imports:
+    - { resource: 'grid.yml' }
+
 parameters:
+
      accard.controller.canvas.class: Accard\Bundle\CanvasBundle\Controller\CanvasController
      accard.repository.canvas.class: Accard\Bundle\CanvasBundle\Doctrine\ORM\CanvasRepository
 
 services:
+
      accard.repository.canvas:
             class: %accard.repository.canvas.class%
             factory_service: doctrine
             factory_method: getRepository
             arguments:
-                 - ['AccardCanvasBundle:Canvas']
+                 - AccardCanvasBundle:Canvas
 
 
      accard.controller.canvas:
           class: %accard.controller.canvas.class%
-          arguments: [%accard.repository.canvas.class%]
+          arguments: [@accard.repository.canvas]
           calls:
               - ['setContainer', ["@service_container"]]
+
+

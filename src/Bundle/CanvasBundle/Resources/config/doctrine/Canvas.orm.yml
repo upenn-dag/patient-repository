@@ -12,8 +12,9 @@ Accard\Bundle\CanvasBundle\Entity\Canvas:
 
      id:
          id:
-             type: integer
-             generate: { strategy: AUTO }
+            type: integer
+            generator:
+                strategy: AUTO
 
      fields:
            route:

@@ -54,6 +54,6 @@ services:
 
     accard.twig.extension.widget:
         class: %accard.twig.extension.widget.class%
-        arguments: ['@accard.widget.twig_renderer']
+        arguments: ['@accard.widget.twig_renderer', '@accard.grid.provider']
         tags:
             - { name: twig.extension }

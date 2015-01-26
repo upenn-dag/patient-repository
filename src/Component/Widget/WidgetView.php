@@ -158,7 +158,40 @@ class WidgetView implements ArrayAccess, IteratorAggregate, Countable, JsonSeria
      */
     public function jsonSerialize()
     {
-        // May need logic to only include scalar variables.
-        return $this->vars;
+        $prepared = array();
+
+        $prepared['name'] = $this->vars['name'];
+        $prepared['type'] = $this->vars['type'];
+
+        foreach ($this->vars as $index => $var) {
+            if ($this->isAcceptable($index, $var)) {
+                $prepared['vars'][$index] = $var;
+            }
+        }
+
+        $prepared['children'] = $this->children;
+
+        return $prepared;
+    }
+
+    /**
+     * List all acceptable variables for JSON output.
+     * 
+     * @param mixed $item
+     * @return boolean
+     */
+    private function isAcceptable($index, $item)
+    {
+        if (is_array($item)) {
+            foreach($item as $arrIndex => $arrItem) {
+                if (!$this->isAcceptable($arrIndex, $arrItem)) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return is_scalar($item);
     }
 }

@@ -10,7 +10,7 @@
 namespace Accard\Bundle\CanvasBundle\Doctrine\ORM;
 
 use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-
+use Accard\Bundle\CanvasBundle\Entity\Canvas;
 /**
  * Basic canvas repository.
  *
@@ -18,4 +18,22 @@ use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class CanvasRepository extends EntityRepository
 {
+    public function findOneOrCreate($criteria)
+    {
+        $canvas = $this->findOneBy($criteria);
+
+        if (null === $canvas)
+        {
+            $canvas = new Canvas;
+            $canvas->setRoute($criteria['route']);
+        }
+
+        return $canvas;
+    }
+
+    public function save(Canvas $canvas)
+    {
+        return $canvas;
+    }
+
 }
