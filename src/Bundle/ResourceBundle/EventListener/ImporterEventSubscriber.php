@@ -89,7 +89,7 @@ class ImporterEventSubscriber implements EventSubscriberInterface
                 }
             }
 
-            $entity->addDescription($importer, $record['import_description']);
+            //$entity['diagnosis_resource']->addDescription($importer, $record['import_description']);
             $records[$record['identifier']] = $entity;
             unset($records[$key]);
         }

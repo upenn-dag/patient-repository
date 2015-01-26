@@ -47,8 +47,8 @@ abstract class SampleImporter implements ImporterInterface
         $resolver->setRequired(array('patient', 'activity_date'));
 
         $resolver->setAllowedTypes(array(
-            'patient' => array('Accard\Component\Patient\Model\PatientInterface', 'null'),
-            'activity_date' => array('DateTime'),
+            'patient' => array('Accard\Component\Patient\Model\PatientInterface', 'null', 'string'),
+            'activity_date' => array('DateTime', 'string'),
         ));
 
         $resolver->setNormalizers(array(

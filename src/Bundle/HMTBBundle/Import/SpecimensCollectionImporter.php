@@ -106,6 +106,8 @@ class SpecimensCollectionImporter extends SampleImporter
             $record['identifier'] = $result['hmtb_id'];
             $result['import_description'] = sprintf('%s specimen on the %s.', $result['hmtb_id'], $result['patient']);
 
+            $result['patient'] = $this->provider->getPatientByMRN($result['patient']);
+            // $result['activity_date'] = new DateTime( $result['activity_date'] );
             $record = $resolver->resolve($result);
 
             if ($record['patient'] && $record['restricted'] == 'No') {
