@@ -110,6 +110,7 @@ class WidgetType extends AbstractType
             'attr' => $options['attr'],
             'block_prefixes' => $blockPrefixes,
             'cache_key' => $uniqueBlockPrefix.'_'.$widget->getConfig()->getType()->getName(),
+            //'children' => $view->children,
             'compound' => $widget->getConfig()->getCompound(),
             'data' => $widget->getData(),
             'full_name' => $fullName,
@@ -142,6 +143,7 @@ class WidgetType extends AbstractType
         };
 
         $resolver->setDefaults(array(
+            'accessor' => $this->propertyAccessor,
             'attr' => array(),
             'auto_initialize' => true,
             'block_name' => null,

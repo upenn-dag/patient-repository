@@ -25,10 +25,18 @@ class CoreExtension extends AbstractExtension
      */
     protected function loadTypes()
     {
+        $accessor = PropertyAccess::createPropertyAccessor();
+
         return array(
-            new Type\WidgetType(PropertyAccess::createPropertyAccessor()),
+            new Type\WidgetType($accessor),
             new Type\TextType(),
             new Type\HeadingType(),
+            new Type\ResourceType($accessor),
+            new Type\DateType(),
+            new Type\NumberType(),
+            new Type\StringType(),
+            new Type\ScalarType(),
+            new Type\GridType(),
         );
     }
 }

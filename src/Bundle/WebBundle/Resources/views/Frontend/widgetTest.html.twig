@@ -1,6 +1,13 @@
 {# Changes the theming for rendering widgets... #}
+
 {# widget_theme widget "AccardWebBundle::widgets.html.twig" #}
 
-{{ widget(widget) }}
+{#}
+{% for row in grid.rows %}
+	{% for column in row.columns %}
+		{{ widget(column.widget) }}
+	{% endfor %}
+{% endfor %}
+#}
 
-{# canvas(widget, { layout: '2x2', editable: true }) #}
+{{ canvas('1x4:2x2', 'test/route', widget) }}

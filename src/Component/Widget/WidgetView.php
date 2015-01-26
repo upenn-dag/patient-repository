@@ -14,6 +14,7 @@ use ArrayAccess;
 use ArrayIterator;
 use IteratorAggregate;
 use Countable;
+use JsonSerializable;
 use Accard\Component\Widget\Exception\BadMethodCallException;
 
 /**
@@ -21,7 +22,7 @@ use Accard\Component\Widget\Exception\BadMethodCallException;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class WidgetView implements ArrayAccess, IteratorAggregate, Countable
+class WidgetView implements ArrayAccess, IteratorAggregate, Countable, JsonSerializable
 {
     /**
      * Variables.
@@ -150,5 +151,47 @@ class WidgetView implements ArrayAccess, IteratorAggregate, Countable
     public function count()
     {
         return count($this->children);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        $prepared = array();
+
+        $prepared['name'] = $this->vars['name'];
+        $prepared['type'] = $this->vars['type'];
+
+        foreach ($this->vars as $index => $var) {
+            if ($this->isAcceptable($index, $var)) {
+                $prepared['vars'][$index] = $var;
+            }
+        }
+
+        $prepared['children'] = $this->children;
+
+        return $prepared;
+    }
+
+    /**
+     * List all acceptable variables for JSON output.
+     * 
+     * @param mixed $item
+     * @return boolean
+     */
+    private function isAcceptable($index, $item)
+    {
+        if (is_array($item)) {
+            foreach($item as $arrIndex => $arrItem) {
+                if (!$this->isAcceptable($arrIndex, $arrItem)) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return is_scalar($item);
     }
 }

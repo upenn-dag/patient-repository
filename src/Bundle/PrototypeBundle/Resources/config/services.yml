@@ -8,6 +8,7 @@
 parameters:
 
     accard.event_subscriber.prototype.load_orm_metadata.class: Accard\Bundle\PrototypeBundle\EventListener\LoadORMMetadataSubscriber
+    accard.repository.prototype.class: Accard\Bundle\PrototypeBundle\Doctrine\ORM\PrototypeRepository
 
 services:
 
@@ -16,3 +17,10 @@ services:
         arguments: ["%accard.prototype.subjects%"]
         tags:
             - { name: doctrine.event_subscriber }
+
+    accard.repository.prototype:
+        class: %accard.repository.prototype.class%
+        factory_service: doctrine
+        factory_method: getRepository
+        arguments:
+             - Accard\Component\Prototype\Model\Prototype
