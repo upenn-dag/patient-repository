@@ -328,7 +328,7 @@ class GeneticResultsImporter extends ActivityImporter
                 FRD,
                 FAD,
                 FAF
-            FROM CPD.RESULTS_VW
+            FROM CPD.RESULTS_MVW
             WHERE TEST_DATE IS NOT NULL
             ORDER BY PATIENT_MRN";
     }
