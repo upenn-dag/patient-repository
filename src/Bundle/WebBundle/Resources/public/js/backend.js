@@ -25,7 +25,7 @@ $(function() {
         var field = $('#accard-search-field');
         var val = field.val();
         var Urler = Accard.get('url');
-        var searchUrl = new Urler(field.data('search-url'));
+        var searchUrl = new Urler($('#accard-search').data('search-url'));
 
         if (val) {
             searchUrl.addParam('q', val);

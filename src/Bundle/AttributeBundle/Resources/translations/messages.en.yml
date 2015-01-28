@@ -10,6 +10,7 @@ accard:
         entity_name: Attribute
         attributes: Attributes
         form:
+            description: Description
             id: Id
             prototype: Prototype
             prototype_label: Attribute Type
@@ -30,6 +31,7 @@ accard:
     attribute_prototype:
         entity_name: Attribute Prototype
         form:
+            description: Description
             name: Name
             presentation: Presentation
             fields: Fields

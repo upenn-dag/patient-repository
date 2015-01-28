@@ -8,6 +8,7 @@
 {% extends 'AccardWebBundle:Backend:layout.html.twig' %}
 
 {% block content %}
+
 {% verbatim %}
 <!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -18,82 +19,65 @@
 <![endif]-->
 
 <div ng-controller="CanvasController">
-    <h2>Canvas</h2>
-    <div class='contentWrapper ng-cloak'>
-        <div class='content'>
-            <div class="row">
-                <div ng-repeat="row in rows" class="row">
-                    <div ng-repeat="column in row.columns" class="col-md-6">
-                        <div class="well well-lg" data-drop="true" ng-model='column.widget' jqyoui-droppable="{index: {{$index}}}">
-                            <div class="btn btn-info btn-draggable"  ng-show="column.widget.name" data-drag="{{design}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="column.widget" jqyoui-draggable="{index: {{$index}}, placeholder:true, animate:true}">{{column.widget.name}}
+    <div class="canvas-buttons pull-right">
+        <button class="btn btn-primary" type="button" data-canvas-action="design" ng-hide="design" ng-click="enableDesign()" ng-model="canvas.design">design</button>
+    </div>
+
+<div ng-hide="design">
+{% endverbatim %}
+
+    {# Start of rendered widgets #}
+    {# Changes the theming for rendering widgets... #}
+    {# widget_theme widget "AccardWebBundle::widgets.html.twig" #}
+
+    {#{{ widget(widget) }}#}
+
+
+    {# canvas(widget, { layout: '2x2', editable: true }) #}
+
+{% verbatim %}
+</div>
+
+    <div ng-show="design" id="canvas">
+        <h2>Canvas Mode</h2>
+        <div class='contentWrapper ng-cloak'>
+            <div class='content'>
+                <div class="row">
+                    <div ng-repeat="row in rows" class="row">
+                        <div ng-repeat="column in row.columns" class="col-md-6">
+                            <div class="well well-lg" data-drop="true"  ng-repeat="widget in column.widgets" ng-model="column.widgets" data-drop="true" jqyoui-droppable="{ index: {{ $index }} }">
+
+                                <div class="btn btn-info btn-draggable"  ng-show="widget.name || column.widget.name" data-drag="{{ design }}" data-jqyoui-options="{revert: 'invalid'}" ng-model="column.widgets" jqyoui-draggable="{index: {{ $index }}, placeholder:true, animate:true}">{{ column.widget.name }}
+                                    {{ widget.name }}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="navbar-inner">
-        <div class="container form-inline" style="text-align: center;">
-            <div class="btn btn-droppable" ng-repeat="item in widgets | orderBy : 'name'" data-drop="true" ng-model='widgets' jqyoui-droppable="{index: {{$index}} }">
-                <div class="btn btn-info btn-draggable" data-drag="{{design}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="widgets" jqyoui-draggable="{index: {{$index}}, animate:true}" ng-hide="!item.name">{{item.name}}</div>
+
+        <div ng-view></div>
+
+        <div class="navbar-inner">
+            <div class="container form-inline" style="text-align: center;">
+                <div class="btn btn-droppable" ng-repeat="item in widgets" data-drop="true" ng-model="widgets" jqyoui-droppable="{index: {{ $index }} }">
+                    <div class="btn btn-info btn-draggable" data-drag="{{design}}" data-jqyoui-options="{ revert: 'invalid' }" ng-model="widgets" jqyoui-draggable="{ index: {{ $index }}, animate : true }" ng-hide="!item.name">{{ item.name }}</div>
+                </div>
             </div>
+        </div>
+
+        <!-- If edit mode is on -->
+        <div class="canvas-buttons">
+            <button class="btn btn-success" type="button" data-canvas-action="save" ng-show="design" ng-click="saveDesign()">save</button>
+            <button class="btn btn-default" type="button" data-canvas-action="cancel" ng-show="design" ng-click="cancelDesign()">cancel</button>
         </div>
     </div>
 
-    <!-- If edit mode is on -->
-    <div class="canvas-buttons">
-        <button class="btn btn-success" type="button" data-canvas-action="save" ng-show="design" ng-click="saveDesign()">save</button>
-        <button class="btn btn-primary" type="button" data-canvas-action="design" ng-hide="design" ng-click="enableDesign()" ng-model="canvas.design">design</button>
-    </div>
-
-    <div id="canvas-recycle-bin" class="inactive-recycle-bin"></div>
 
 
 </div>
 
-<div ng-view></div>
-
 
 {% endverbatim %}
-{% endblock %}
-
-{% block page_javascripts %}
-    {% javascripts '@AccardWebBundle/Resources/public/js/angular/app/*'
-    "@AccardWebBundle/Resources/public/js/angular/app/bower_components/jquery/dist/jquery.js"
-    "@AccardWebBundle/Resources/public/js/angular/app/bower_components/jquery-ui/jquery-ui.js"
-    "@AccardWebBundle/Resources/public/js/angular/app/bower_components/angular/angular.js"
-    "@AccardWebBundle/Resources/public/js/angular/app/bower_components/angular-bootstrap/ui-bootstrap.js"
-    "@AccardWebBundle/Resources/public/js/angular/app/bower_components/angular-animate/angular-animate.js"
-    "@AccardWebBundle/Resources/public/js/angular/app/bower_components/angular-dragdrop/src/angular-dragdrop.js"
-    "@AccardWebBundle/Resources/public/js/angular/app/bower_components/angular-route/angular-route.js"
-    "@AccardWebBundle/Resources/public/js/angular/app/bower_components/angular-resource/angular-resource.js"
-    "@AccardWebBundle/Resources/public/js/angular/app/app.js"
-    "@AccardWebBundle/Resources/public/js/angular/app/canvas/canvas.js"
-    "@AccardWebBundle/Resources/public/js/angular/app/palette/palette.js"
-    "@AccardWebBundle/Resources/public/js/angular/app/services/services.js"
-    "@AccardWebBundle/Resources/public/js/angular/app/components/version/version.js"
-    "@AccardWebBundle/Resources/public/js/angular/app/components/version/version-directive.js"
-    "@AccardWebBundle/Resources/public/js/angular/app/components/version/interpolate-filter.js"
-    %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-    <!-- In production use:
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-    -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-dragdrop/src/angular-dragdrop.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="app.js"></script>
-    <script src="canvas/canvas.js"></script>
-    <script src="palette/palette.js"></script>
-    <script src="services/services.js"></script>
-    <script src="components/version/version.js"></script>
-    <script src="components/version/version-directive.js"></script>
-    <script src="components/version/interpolate-filter.js"></script>
 {% endblock %}

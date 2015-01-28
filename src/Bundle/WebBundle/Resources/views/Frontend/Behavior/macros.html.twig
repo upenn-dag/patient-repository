@@ -15,6 +15,7 @@
     <table id="behaviors" class="behavior table table-bordered table-striped table-hover">
         <thead>
             <tr>
+                <th class="description">{{ 'accard.behavior.form.description'|trans }}</th>
                 <th class="prototype">{{ accard_resource_sort('prototype', 'accard.behavior.form.prototype'|trans) }}</th>
                 <th class="patient">{{ accard_resource_sort('patient', 'accard.behavior.form.patient'|trans) }}</th>
                 <th class="actions"></th>
@@ -23,6 +24,7 @@
         <tbody>
         {% for behavior in behaviors %}
             <tr id="behavior-{{ behavior.id }}">
+                <td class="description">{{ behavior.description }}</td>
                 <td class="prototype">
                     <a href="{{ path('accard_frontend_behavior_index_by_prototype', {'prototype': behavior.prototype.name}) }}">
                         {{- behavior.prototype.presentation -}}

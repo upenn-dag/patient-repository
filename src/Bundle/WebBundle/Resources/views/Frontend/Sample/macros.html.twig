@@ -15,6 +15,7 @@
     <table id="samples" class="sample table table-bordered table-striped table-hover">
         <thead>
             <tr>
+                <th class="description">{{ 'accard.sample.form.description'|trans }}</th>
                 <th class="prototype">{{ accard_resource_sort('prototype', 'accard.sample.form.prototype'|trans) }}</th>
                 <th class="patient">{{ accard_resource_sort('patient', 'accard.sample.form.patient'|trans) }}</th>
                 <th class="amount">{{ accard_resource_sort('sampleDate', 'accard.sample.form.amount'|trans) }}</th>
@@ -24,6 +25,7 @@
         <tbody>
         {% for sample in samples %}
             <tr id="sample-{{ sample.id }}">
+                <td class="description">{{ sample.description }}</td>
                 <td class="prototype">
                     <a href="{{ path('accard_frontend_sample_index_by_prototype', {'prototype': sample.prototype.name}) }}">
                         {{- sample.prototype.presentation -}}

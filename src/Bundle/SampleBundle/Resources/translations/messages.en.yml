@@ -13,6 +13,7 @@ accard:
         samples: Samples
         form:
             id: Id
+            description: Description
             source: Collection
             amount: Amount
             derivatives: Derivatives
@@ -89,6 +90,7 @@ accard:
         entity_name: Sample Prototype
         form:
             name: Name
+            description: Description
             presentation: Presentation
             fields: Fields
             subjects: Subjects

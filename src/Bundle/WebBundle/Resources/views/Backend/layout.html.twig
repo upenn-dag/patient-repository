@@ -21,11 +21,11 @@
 
     {% block stylesheets -%}
     {% stylesheets output='assets/compiled/backend.css' filter='cssrewrite'
-        'bundles/accardweb/css/bootstrap.min.css'
-        'bundles/accardweb/css/plugins/datepicker/bootstrap-datepicker-3.css'
+        '@AccardWebBundle/Resources/public/css/bootstrap.min.css'
+        '@AccardWebBundle/Resources/public/css/plugins/datepicker/bootstrap-datepicker-3.css'
         'bundles/accardweb/css/font-awesome.css'
-        'bundles/accardweb/css/backend/backend.css'
-        'bundles/accardweb/css/backend/custom.css'
+        '@AccardWebBundle/Resources/public/css/backend/backend.css'
+        '@AccardWebBundle/Resources/public/css/backend/custom.css'
     %}
 <link href="{{ asset_url }}" rel="stylesheet" type="text/css">
     {% endstylesheets %}
@@ -154,9 +154,9 @@
                     <ul class="nav" id="side-menu-search">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <input id="accard-search-field" type="text" class="form-control" placeholder="Search..."{% if last_search is defined %} value="{{ last_search }}"{% endif %}>
                                 <span class="input-group-btn">
-                                    <button data-search-url="{{ path('accard_frontend_search') }}" class="btn btn-default" type="button">
+                                    <button data-search-url="{{ path('accard_frontend_search') }}" id="accard-search" class="btn btn-default" type="button">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
@@ -179,20 +179,37 @@
 
     {% block javascripts -%}
         {% javascripts output='assets/compiled/backend.js'
-            'bundles/accardweb/js/plugins/modernizr/modernizr.js'
-            'bundles/accardweb/js/jquery.js'
-            'bundles/accardweb/js/bootstrap.js'
-            'bundles/accardweb/js/plugins/datepicker/bootstrap-datepicker.js'
-            'bundles/accardweb/js/accard.js'
-            'bundles/accardweb/js/forms.js'
-            'bundles/accardweb/js/tables.js'
-            'bundles/accardweb/js/tables-filter.js'
-            'bundles/accardweb/js/tables-highlight.js'
-            'bundles/accardweb/js/tables-sort.js'
-            'bundles/accardweb/js/menu.js'
-            'bundles/accardweb/js/alerts.js'
-            'bundles/accardweb/js/collections.js'
-            'bundles/accardweb/js/backend.js'
+            '@AccardWebBundle/Resources/public/js/plugins/modernizr/modernizr.js'
+            '@AccardWebBundle/Resources/public/js/jquery.js'
+            '@AccardWebBundle/Resources/public/js/bootstrap.js'
+            '@AccardWebBundle/Resources/public/js/angular/bower_components/underscore/underscore.js'
+            '@AccardWebBundle/Resources/public/js/angular/app/bower_components/jquery-ui/jquery-ui.js'
+            '@AccardWebBundle/Resources/public/js/angular/app/bower_components/angular/angular.js'
+            '@AccardWebBundle/Resources/public/js/angular/app/bower_components/angular-animate/angular-animate.js'
+            '@AccardWebBundle/Resources/public/js/angular/app/bower_components/angular-dragdrop/src/angular-dragdrop.js'
+            '@AccardWebBundle/Resources/public/js/angular/app/bower_components/angular-route/angular-route.js'
+            '@AccardWebBundle/Resources/public/js/angular/app/bower_components/angular-resource/angular-resource.js'
+            '@AccardWebBundle/Resources/public/js/angular/app/app.js'
+            '@AccardWebBundle/Resources/public/js/angular/app/grid/grid.js'
+            '@AccardWebBundle/Resources/public/js/angular/app/canvas/canvas.js'
+            '@AccardWebBundle/Resources/public/js/angular/app/palette/palette.js'
+            '@AccardWebBundle/Resources/public/js/angular/app/services/services.js'
+            '@AccardWebBundle/Resources/public/js/angular/app/services/canvasProvider.js'
+            '@AccardWebBundle/Resources/public/js/angular/app/components/version/version.js'
+            '@AccardWebBundle/Resources/public/js/angular/app/components/version/version-directive.js'
+            '@AccardWebBundle/Resources/public/js/angular/app/components/version/interpolate-filter.js'
+
+            '@AccardWebBundle/Resources/public/js/plugins/datepicker/bootstrap-datepicker.js'
+            '@AccardWebBundle/Resources/public/js/accard.js'
+            '@AccardWebBundle/Resources/public/js/forms.js'
+            '@AccardWebBundle/Resources/public/js/tables.js'
+            '@AccardWebBundle/Resources/public/js/tables-filter.js'
+            '@AccardWebBundle/Resources/public/js/tables-highlight.js'
+            '@AccardWebBundle/Resources/public/js/tables-sort.js'
+            '@AccardWebBundle/Resources/public/js/menu.js'
+            '@AccardWebBundle/Resources/public/js/alerts.js'
+            '@AccardWebBundle/Resources/public/js/collections.js'
+            '@AccardWebBundle/Resources/public/js/backend.js'
         %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}

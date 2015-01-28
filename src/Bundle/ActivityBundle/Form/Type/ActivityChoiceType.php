@@ -61,7 +61,7 @@ class ActivityChoiceType extends AbstractType
         $resolver
             ->setDefaults(array(
                 'class' => $this->dataClass,
-                'property' => 'canonical',
+                'property' => 'description',
                 'label' => 'accard.activity.entity_name',
                 'query_builder' => function (EntityRepository $er) {
                     static $qb;

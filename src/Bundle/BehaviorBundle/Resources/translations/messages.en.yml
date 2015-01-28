@@ -10,6 +10,7 @@ accard:
         entity_name: Behavior
         behaviors: Behaviors
         form:
+            description: Description
             id: Id
             prototype: Prototype
             prototype_label: Behavior Type
@@ -30,6 +31,7 @@ accard:
     behavior_prototype:
         entity_name: Behavior Prototype
         form:
+            description: Description
             name: Name
             presentation: Presentation
             fields: Fields

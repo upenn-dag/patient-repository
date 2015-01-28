@@ -10,3 +10,27 @@ accard_backend_canvas_design:
     methods: [GET]
     defaults:
         _controller: accard.controller.canvas:designAction
+
+accard_backend_canvas_grid:
+    pattern: /view/canvas
+    methods: [GET]
+    defaults:
+         _controller: accard.controller.canvas:gridAction
+
+accard_backend_canvas_grid_config:
+    pattern: /view/canvas
+    methods: [POST]
+    defaults:
+         _controller: accard.controller.canvas:configAction
+
+accard_backend_canvas_widget:
+    pattern: /view/widget
+    methods: [GET, POST]
+    defaults:
+         _controller: accard.controller.canvas:widgetAction
+
+accard_backend_canvas_test:
+    pattern: /view/test
+    defaults:
+        _controller: accard.controller.canvas:renderAction
+
