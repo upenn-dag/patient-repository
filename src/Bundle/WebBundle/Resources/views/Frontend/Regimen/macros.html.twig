@@ -15,6 +15,7 @@
     <table id="regimens" class="regimen table table-bordered table-striped table-hover">
         <thead>
             <tr>
+                <th class="description">{{ 'accard.regimen.form.description'|trans }}</th>
                 <th class="prototype">{{ accard_resource_sort('prototype', 'accard.regimen.form.prototype'|trans) }}</th>
                 <th class="patient">{{ accard_resource_sort('patient', 'accard.regimen.form.patient'|trans) }}</th>
                 <th class="start-date">{{ accard_resource_sort('startDate', 'accard.regimen.form.start_date'|trans) }}</th>
@@ -25,6 +26,7 @@
         <tbody>
         {% for regimen in regimens %}
             <tr id="regimen-{{ regimen.id }}">
+                <td class="description">{{ regimen.description }}</td>
                 <td class="prototype">
                     <a href="{{ path('accard_frontend_regimen_index_by_prototype', {'prototype': regimen.prototype.name}) }}">
                         {{- regimen.prototype.presentation -}}

@@ -11,8 +11,10 @@
 namespace Accard\Bundle\ResourceBundle\ExpressionLanguage;
 
 use Closure;
+use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Accard\Bundle\ResourceBundle\Exception\UnexpectedTypeException;
+use Accard\Component\Field\Model\FieldSubjectInterface;
 
 /**
  * Resource expression language extension.
@@ -70,6 +72,60 @@ class ResourceExtension extends ContainerAwareExtension
             $this->createArrayFunctionArray('shift', 'array_shift'),
             $this->createArrayFunctionArray('slice', '\Accard\Bundle\ResourceBundle\ExpressionLanguage\accard_slice'),
             $this->createArrayFunctionArray('values', 'array_values'),
+            $this->createArrayFunctionArray('join', 'implode'),
+            $this->createArrayFunctionArray('split', 'explode'),
+
+            // Date functions
+            array(
+                'date',
+                function(DateTime $date = null, $format = 'm/d/Y') {
+                    $date = $date ?: new DateTime();
+
+                    return sprintf('(is_integer(%1$d)) ? date(%1%d) : %1$d', $date->getTimestamp());
+                },
+                function(array $variables, DateTime $date = null, $format = 'm/d/Y') {
+                    $date = $date ?: new DateTime();
+
+                    return $date->format($format);
+                }
+            ),
+
+            // Accard functions
+            array(
+                'field',
+                function($object, $field) {
+                    return sprintf('($object instanceof \Accard\Component\Field\Model\FieldSubjectInterface && $object->hasFieldByName(%1%s)) ? $object->getField(%1$s) : null', $field);
+                },
+                function(array $variables, $object, $field) {
+                    if (!$object instanceof FieldSubjectInterface) {
+                        throw new \InvalidArgumentException('Object passed to field() expression language function must implement FieldSubjectInterface.');
+                    }
+
+                    if ($object->hasFieldByName($field)) {
+                        $field = $object->getFieldByName($field);
+
+                        return $field->getValue();
+                    }
+
+                    return '';
+                }
+            ),
+
+            array(
+                'field_object',
+                function($object, $field) {
+                    return sprintf('($object instanceof \Accard\Component\Field\Model\FieldSubjectInterface && $object->hasFieldByName(%1%s)) ? $object->getField(%1$s) : null', $field);
+                },
+                function(array $variables, $object, $field) {
+                    if (!$object instanceof FieldSubjectInterface) {
+                        throw new \InvalidArgumentException('Object passed to field() expression language function must implement FieldSubjectInterface.');
+                    }
+
+                    if ($object->hasFieldByName($field)) {
+                        return $object->getFieldByName($field);
+                    }
+                }
+            ),
         );
     }
 

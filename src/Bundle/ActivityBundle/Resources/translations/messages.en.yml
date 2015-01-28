@@ -6,6 +6,7 @@ accard:
         form:
             id: Id
             activity_date: Activity Date
+            description: Description
             drug: Drug
             prototype: Prototype
             prototype_label: Activity Type
@@ -27,6 +28,7 @@ accard:
     activity_prototype:
         entity_name: Activity Prototype
         form:
+            description: Description
             name: Name
             presentation: Presentation
             fields: Fields

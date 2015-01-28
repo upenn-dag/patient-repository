@@ -11,6 +11,7 @@ accard:
         regimens: Regimens
         form:
             id: Id
+            description: Description
             prototype: Prototype
             drug: Drug
             start_date: Start Date
@@ -33,6 +34,7 @@ accard:
     regimen_prototype:
         entity_name: Regimen Prototype
         form:
+            description: Description
             name: Name
             presentation: Presentation
             fields: Fields

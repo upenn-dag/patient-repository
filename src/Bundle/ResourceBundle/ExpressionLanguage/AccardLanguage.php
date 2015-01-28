@@ -77,9 +77,13 @@ final class AccardLanguage
             throw new InvalidArgumentException('Resources passed to prototype descriptor must be an instance of PrototypeSubjectInterface.');
         }
 
-        $template = $resource->getPrototype()->getDescription();
+        try {
+            $template = $resource->getPrototype()->getDescription();
 
-        return $this->getExpressionLanguage()->evaluate($template, array('resource' => $resource));
+            return $this->getExpressionLanguage()->evaluate($template, array('resource' => $resource));
+        } catch (\Exception $exception) {
+            return 'No description';
+        }
     }
 
     /**
