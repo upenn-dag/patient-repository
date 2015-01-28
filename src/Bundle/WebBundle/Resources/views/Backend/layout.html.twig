@@ -154,7 +154,7 @@
                     <ul class="nav" id="side-menu-search">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <input id="accard-search-field" type="text" class="form-control" placeholder="Search..."{% if last_search is defined %} value="{{ last_search }}"{% endif %}>
                                 <span class="input-group-btn">
                                     <button data-search-url="{{ path('accard_frontend_search') }}" id="accard-search" class="btn btn-default" type="button">
                                         <i class="fa fa-search"></i>
