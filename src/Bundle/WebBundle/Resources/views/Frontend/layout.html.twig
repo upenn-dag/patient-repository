@@ -153,7 +153,7 @@
                             <div class="input-group custom-search-form">
                                 <input id="accard-search-field" type="text" class="form-control" placeholder="Search..."{% if last_search is defined %} value="{{ last_search }}"{% endif %}>
                                 <span class="input-group-btn">
-                                    <button id="accard-search" class="btn btn-default" type="button">
+                                    <button data-search-url="{{ path('accard_frontend_search') }}" id="accard-search" class="btn btn-default" type="button">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>
