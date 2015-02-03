@@ -74,6 +74,7 @@ accard:
             sample: Sample
             options: Options
             drugs: Drugs
+            translations: Translations
         frontend:
             home: Home
             repositories: Repositories
