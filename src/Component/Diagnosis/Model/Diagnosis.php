@@ -376,7 +376,7 @@ class Diagnosis implements DiagnosisInterface
         $canonical = null === $this->code ? 'Diagnosis' : $this->code->getDescription();
 
         if (null !== $this->startDate) {
-            $canonical .= ' on '.$this->startDate->format('d/m/Y');
+            $canonical .= ' on '.$this->startDate->format('m/d/Y');
         }
 
         return $canonical;
