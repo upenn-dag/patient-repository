@@ -96,4 +96,12 @@ class Behavior implements BehaviorInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isAfterStartDate()
+    {
+        return ($this->startDate < $this->endDate);
+    }
 }

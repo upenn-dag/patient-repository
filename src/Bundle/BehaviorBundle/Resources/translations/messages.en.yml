@@ -28,6 +28,8 @@ accard:
             create: Create a New Behavior
             update: Update Behavior
             list: Behaviors
+        error:
+            end_date_before_start_date:  Start date must be after end date
     behavior_prototype:
         entity_name: Behavior Prototype
         form:
