@@ -202,7 +202,7 @@ class GeneticResultsImporter extends ActivityImporter
 
         $sql = "SELECT a.id AS activityId, a.patientId, v.fieldId, v.stringValue
             FROM accard_activity_proto_fldval AS v
-            LEFT JOIN accard_activity AS a ON (v.activity_prototypeId = a.id)
+            LEFT JOIN accard_activity AS a ON (v.activityId = a.id)
             WHERE v.fieldId IN (%s)";
 
         return sprintf($sql, implode(', ', $fieldIds));
