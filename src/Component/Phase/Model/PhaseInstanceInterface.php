@@ -20,6 +20,21 @@ use Accard\Component\Resource\Model\ResourceInterface;
  */
 interface PhaseInstanceInterface extends ResourceInterface
 {
+    /** 
+     * Get id.
+     * 
+     * @return integer
+     */
+    public function getId();
+
+    /**
+     * Set id.
+     * 
+     * @param integer | id
+     * @return PhaseInstanceInterface
+     */
+    public function setId($id);
+
     /**
      * Get phase.
      *

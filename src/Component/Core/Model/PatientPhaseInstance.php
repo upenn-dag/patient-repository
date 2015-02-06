@@ -49,6 +49,31 @@ class PatientPhaseInstance implements PatientPhaseInstanceInterface
      */
     protected $endDate;
 
+    /** 
+     * Id.
+     * 
+     * @var int
+     */
+    protected $id;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $id;
+    }
+
 
     /**
      * {@inheritdoc}

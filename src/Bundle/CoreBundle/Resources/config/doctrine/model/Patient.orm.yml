@@ -39,6 +39,7 @@ Accard\Component\Core\Model\Patient:
             mappedBy: patient
             orphanRemoval: true
             cascade: ["persist", "remove"]
+            orderBy: {'activityDate' : 'ASC'}
         attributes:
             targetEntity: Accard\Component\Attribute\Model\AttributeInterface
             mappedBy: patient
@@ -54,3 +55,8 @@ Accard\Component\Core\Model\Patient:
             mappedBy: patient
             orphanRemoval: true
             casecade: ["persist", "remove"]
+        samples:
+            targetEntity: Accard\Component\Sample\Model\SampleInterface
+            mappedBy: patient
+            orphanRemoval: true
+            cascade: ["persist", "remove"]

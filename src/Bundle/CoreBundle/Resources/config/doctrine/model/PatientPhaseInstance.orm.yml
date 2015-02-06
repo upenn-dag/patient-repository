@@ -10,10 +10,10 @@ Accard\Component\Core\Model\PatientPhaseInstance:
     table: accard_patient_phase_instance
 
     id:
-        target:
-            associationKey: true
-        phase:
-            associationKey: true
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
 
 
     fields:

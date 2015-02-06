@@ -10,11 +10,10 @@ Accard\Component\Core\Model\DiagnosisPhaseInstance:
     table: accard_diagnosis_phase_instance
 
     id:
-        target:
-            associationKey: true
-        phase:
-            associationKey: true
-
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
 
     fields:
         startDate:
