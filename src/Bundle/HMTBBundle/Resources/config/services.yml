@@ -22,6 +22,8 @@ services:
         class: %accard.import.importer.hmtb_specimens_collection.class%
         arguments:
             - @accard.provider.import_patient
+            - @accard.provider.sample_prototype
             - @accard.connection.pds
+            - @doctrine.dbal.default_connection
             - ['205', '205.0', '205.00', '205.01', '205.02']
         tags: [{ name: accard.importer, importer: hmtb_specimens_collection }]

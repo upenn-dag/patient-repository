@@ -33,6 +33,7 @@ class PersistImporterRecordsListener
 
         $om->transactional(function($om) use ($records) {
             foreach ($records as $record => $value ) {
+
                 $om->persist($value);
             }
         });

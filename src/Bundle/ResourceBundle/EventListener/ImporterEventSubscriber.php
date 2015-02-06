@@ -29,7 +29,7 @@ class ImporterEventSubscriber implements EventSubscriberInterface
     {
         return array(
             Events::PRE_IMPORT => array('initializeImport', 255),
-            Events::CONVERT => array('convertRecords', -255),
+            //Events::CONVERT => array('convertRecords', -255),
         );
     }
 

@@ -34,6 +34,10 @@ abstract class SampleImporter implements ImporterInterface
                 $resource = $options['patient_resource']->getRepository();
             }
 
+            if(is_null($value)) {
+                return null;
+            }
+            
             return $resource->getByMRN($value);
         };
 

@@ -37,7 +37,6 @@
                 <td class="regimen">{% if activity.regimen %}{{ activity.regimen.prototype.presentation }}{% endif %}</td>
                 <td class="actions">
                     <div class="pull-right">
-                        {{ show(path('accard_frontend_activity_show', {'prototype': activity.prototype.name, 'id': activity.id}), null, 'xs') }}
                         {{ edit(path('accard_frontend_activity_update', {'prototype': activity.prototype.name, 'id': activity.id}), null, 'xs') }}
                         {{ delete(path('accard_frontend_activity_delete', {'prototype': activity.prototype.name, 'id': activity.id}), null, 'xs') }}
                     </div>
