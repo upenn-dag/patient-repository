@@ -72,6 +72,13 @@ class Patient extends BasePatient implements PatientInterface, ImportSubjectInte
      */
     protected $regimens;
 
+    /**
+     * Samples.
+     * 
+     * @var Collection|RegimenInterface[]
+     */
+    protected $samples;
+
 
     /**
      * Constructor.
@@ -85,6 +92,7 @@ class Patient extends BasePatient implements PatientInterface, ImportSubjectInte
         $this->attributes = new ArrayCollection();
         $this->phases = new ArrayCollection();
         $this->regimens = new ArrayCollection();
+        $this->samples = new ArrayCollection();
 
         parent::__construct();
     }
@@ -328,6 +336,46 @@ class Patient extends BasePatient implements PatientInterface, ImportSubjectInte
         if ($this->hasRegimen($regimen)) {
             $this->regimens->removeElement($regimen);
             $regimen->setPatient(null);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSamples()
+    {
+        return $this->samples;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasSample(SampleInterface $sample)
+    {
+        return $this->samples->contains($sample);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addSample(SampleInterface $sample)
+    {
+        if (!$this->hasSample($sample)) {
+            $sample->setPatient($this);
+            $this->samples->add($activity);
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeSample(SampleInterface $sample)
+    {
+        if ($this->hasSample($sample)) {
+            $this->samples->removeElement($sample);
+            $sample->setPatient(null);
         }
     }
 }
