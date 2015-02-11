@@ -77,6 +77,28 @@ class PatientRepository extends EntityRepository implements PatientRepositoryInt
             $sorting = array();
         }
 
+        if (!empty($criteria['firstName'])) {
+            $firstName = $criteria['firstName'];
+            $statement = false !== strpos($firstName, '%') ? 'LIKE' : '=';
+
+            $queryBuilder
+                ->andWhere(sprintf('LOWER(patient.firstName) %s :firstName', $statement))
+                ->setParameter('firstName', strtolower($criteria['firstName']));
+
+            unset($criteria['firstName']);
+        }
+
+        if (!empty($criteria['lastName'])) {
+            $lastName = $criteria['lastName'];
+            $statement = false !== strpos($lastName, '%') ? 'LIKE' : '=';
+
+            $queryBuilder
+                ->andWhere(sprintf('LOWER(patient.lastName) %s :lastName', $statement))
+                ->setParameter('lastName', strtolower($criteria['lastName']));
+
+            unset($criteria['lastName']);
+        }
+
         if (!empty($criteria['phase'])) {
             $queryBuilder
                 ->join('patient.phases', 'phase_instance')
