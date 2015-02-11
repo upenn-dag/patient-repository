@@ -98,6 +98,8 @@ class ResourceController extends FOSRestController implements InitializableContr
         AccardLanguage::setExpressionLanguage($container->get('accard.expression_language'));
 
         $this->resourceResolver = new ResourceResolver($this->config);
+        $this->actionLogger = new ActionLogger($this->config, $this->getUser());
+
         if (null !== $container) {
             $this->redirectHandler = new RedirectHandler($this->config, $container->get('router'));
             $this->flashHelper = new FlashHelper(
@@ -115,29 +117,15 @@ class ResourceController extends FOSRestController implements InitializableContr
     }
 
     /**
-     * @param Request $request
+     * Resource index action.
      *
-     * @return Response
-     */
-    public function showAction(Request $request)
-    {
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('show.html'))
-            ->setTemplateVar($this->config->getResourceName())
-            ->setData($this->findOr404($request))
-        ;
-
-        return $this->handleView($view);
-    }
-
-    /**
      * @param Request $request
-     *
      * @return Response
      */
     public function indexAction(Request $request)
     {
+        //$this->actionLogger->indexLog();
+
         $criteria = $this->config->getCriteria();
         $sorting = $this->config->getSorting();
 
@@ -164,6 +152,23 @@ class ResourceController extends FOSRestController implements InitializableContr
             ->setTemplate($this->config->getTemplate('index.html'))
             ->setTemplateVar($this->config->getPluralResourceName())
             ->setData($resources)
+        ;
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function showAction(Request $request)
+    {
+        $view = $this
+            ->view()
+            ->setTemplate($this->config->getTemplate('show.html'))
+            ->setTemplateVar($this->config->getResourceName())
+            ->setData($this->findOr404($request))
         ;
 
         return $this->handleView($view);
