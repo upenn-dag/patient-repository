@@ -7,6 +7,8 @@
 
 parameters:
 
+    accard.state.class: Accard\Bundle\CoreBundle\AccardState
+    accard.state.registry.class: Accard\Bundle\CoreBundle\State\DecoratorRegistry
     accard.form.extension.accard_attribute.class: Accard\Bundle\CoreBundle\Form\Extension\AttributeTypeExtension
     accard.provider.import_patient.class: Accard\Bundle\CoreBundle\Provider\ImportPatientProvider
     accard.provider.import_activity.class: Accard\Bundle\CoreBundle\Provider\ImportActivityProvider
@@ -18,6 +20,15 @@ parameters:
     doctrine.oracle.session_listener.class: Accard\Bundle\ResourceBundle\EventListener\OracleSessionInit
 
 services:
+
+    accard.state:
+        class: %accard.state.class%
+        arguments: ['@accard.state.registry']
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    accard.state.registry:
+        class: %accard.state.registry.class%
 
     accard.provider.import_patient:
         class: %accard.provider.import_patient.class%

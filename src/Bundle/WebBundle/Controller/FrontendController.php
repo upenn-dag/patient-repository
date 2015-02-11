@@ -30,9 +30,11 @@ class FrontendController extends Controller
      */
     public function mainAction(Request $request)
     {
-        // $domain = $this->get('accard.expression_language');
-        // $return = $domain->evaluate('count(slice(patient("000000000").getDiagnoses(), 1))');
-        // die(var_dump($return));
+        // $accard = $this->get('accard.state');
+        // $theState = $accard->getState();
+        // //die(var_dump($theState));
+        // die(json_encode($theState, JSON_PRETTY_PRINT));
+        // die(serialize($theState));
 
         return $this->render('AccardWebBundle:Frontend:main.html.twig');
     }
