@@ -69,6 +69,7 @@ accard:
             diagnosis: Diagnosis
             behavior: Behavior
             attribute: Attribute
+            template: Template
             activity: Activity
             regimen: Regimen
             sample: Sample
@@ -141,6 +142,7 @@ accard:
     behavior:
         title:
             index_by_prototype: Browse %prototype% Behaviors
+
     form:
         choose: Choose one
         field:

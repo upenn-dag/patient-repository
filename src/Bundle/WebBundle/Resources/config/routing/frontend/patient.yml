@@ -11,7 +11,7 @@ accard_frontend_patient_index:
     defaults:
         _controller: accard.controller.patient:indexAction
         _accard:
-            template: AccardWebBundle:Frontend/Patient:index.html.twig
+            template: Theme:Frontend/Patient:index.html.twig
             sortable: true
             filterable: true
             method: createFilterPaginator
@@ -24,7 +24,7 @@ accard_frontend_patient_import:
     defaults:
         _controller: accard.controller.patient:importAction
         _accard:
-            template: AccardWebBundle:Frontend/Patient:import.html.twig
+            template: Theme:Frontend/Patient:import.html.twig
             sortable: true
             paginate: 25
 
@@ -35,7 +35,7 @@ accard_frontend_patient_show:
     defaults:
         _controller: accard.controller.patient:showAction
         _accard:
-            template: AccardWebBundle:Frontend/Patient:show.html.twig
+            template: Theme:Frontend/Patient:show.html.twig
 
 accard_frontend_patient_create:
     pattern: /new
@@ -43,7 +43,7 @@ accard_frontend_patient_create:
     defaults:
         _controller: accard.controller.patient:createAction
         _accard:
-            template: AccardWebBundle:Frontend/Patient:create.html.twig
+            template: Theme:Frontend/Patient:create.html.twig
             redirect: accard_frontend_patient_show
 
 accard_frontend_patient_update:
@@ -53,7 +53,7 @@ accard_frontend_patient_update:
     defaults:
         _controller: accard.controller.patient:updateAction
         _accard:
-            template: AccardWebBundle:Frontend/Patient:update.html.twig
+            template: Theme:Frontend/Patient:update.html.twig
             redirect: accard_frontend_patient_show
 
 accard_frontend_patient_delete:
@@ -63,5 +63,5 @@ accard_frontend_patient_delete:
     defaults:
         _controller: accard.controller.patient:deleteAction
         _accard:
-            template: AccardWebBundle:Frontend/Patient:delete.html.twig
+            template: Theme:Frontend/Patient:delete.html.twig
             redirect: accard_frontend_patient_index

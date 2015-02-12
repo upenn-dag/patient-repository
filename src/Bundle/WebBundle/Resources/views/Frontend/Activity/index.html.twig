@@ -19,14 +19,14 @@
 {% endif %}
 
 {% block content %}
-    {% block activity_title %}
+    {% block page_title %}
         {{ page_title('accard.activity.title.index'|trans, designBtn) }}
     {% endblock %}
 
-    {% block activity_tabs %}
-        {% include 'AccardWebBundle:Frontend/Activity:tabs.html.twig' %}
-        {{ render(controller('AccardWebBundle:Frontend:prototypeChoiceForm', { 'type' : 'activity' })) }}
-    {% endblock %}
+
+    {% include 'AccardWebBundle:Frontend/Activity:tabs.html.twig' %}
+    {{ render(controller('AccardWebBundle:Frontend:prototypeChoiceForm', { 'type' : 'activity' })) }}
+
 
     {% block activity_content %}
         {{ list(activities) }}

@@ -14,20 +14,24 @@
 {% set pds = false %}
 
 {% block content %}
-    {{ page_title('accard.patient.action.update'|trans) }}
+    {% block patient_title %}
+        {{ page_title('accard.patient.action.update'|trans) }}
+    {% endblock %}
 
-    {{ form_errors(form) }}
-    
-    <form action="{{ path('accard_frontend_patient_update', { id: patient.id }) }}" method="post" {{ form_enctype(form) }}>
-        <input type="hidden" name="_method" value="PUT">
-        {{ form_widget(form._token) }}
-        {% include 'AccardWebBundle:Frontend/Patient:form.html.twig' %}
-        <div class="row">
-            <div class="col-md-12">
-                <span class="pull-right">{{ update() }}</span>
+    {% block patient_update_form %}
+        {{ form_errors(form) }}
+        
+        <form action="{{ path('accard_frontend_patient_update', { id: patient.id }) }}" method="post" {{ form_enctype(form) }}>
+            <input type="hidden" name="_method" value="PUT">
+            {{ form_widget(form._token) }}
+            {% include 'AccardWebBundle:Frontend/Patient:form.html.twig' %}
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="pull-right">{{ update() }}</span>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    {% endblock %}
 {% endblock %}
 
 {% block page_javascripts -%}

@@ -11,5 +11,8 @@
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
 
 {% block content %}
+	{% block page_title %}
     {{ page_title('accard.regimen.title.show'|trans) }}
+    {% endblock %}
+
 {% endblock %}

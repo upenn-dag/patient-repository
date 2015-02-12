@@ -13,12 +13,15 @@
 </div>
 {% endmacro %}
 
+{% block sample_patient_form %}
 <div class="row">
     <div class="col-md-12">
         {{ select_patient(form.patient) }}
     </div>
 </div>
+{% endblock %}
 
+{% block sample_amount_form %}
 <div class="col-md-12 well">
     <div class="row">
         <div class="col-md-6 row-split">
@@ -29,7 +32,9 @@
         </div>
     </div>
 </div>
+{% endblock %}
 
+{% block sample_additional_fields_form %}
 {% for field in form.fields %}
 <div class="row">
     <div class="col-md-6">
@@ -37,4 +42,5 @@
     </div>
 </div>
 {% endfor %}
+{% endblock %}
 

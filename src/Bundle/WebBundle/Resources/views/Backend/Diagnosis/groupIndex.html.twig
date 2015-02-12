@@ -12,16 +12,19 @@
 {% from 'AccardWebBundle:Backend/Diagnosis:macros.html.twig' import list_groups, list_codes %}
 
 {% block content %}
-
+    {% block page_title %}
     {{ page_title('accard.diagnosis_code_group.action.index'|trans,
         [
             create(path('accard_backend_diagnosis_code_group_create'), 'accard.diagnosis_code_group.action.create'|trans),
             create(path('accard_backend_diagnosis_code_create'), 'accard.diagnosis_code.action.create'|trans)
         ])
     }}
+    {% endblock %}
 
-    {{ list_groups(diagnosis_code_groups) }}
-    {{ list_codes(diagnosis_codes) }}
+    {% block diagnosis_code_group_content %}
+        {{ list_groups(diagnosis_code_groups) }}
+        {{ list_codes(diagnosis_codes) }}
+    {% endblock %}
 {% endblock %}
 
 {% block page_javascripts %}

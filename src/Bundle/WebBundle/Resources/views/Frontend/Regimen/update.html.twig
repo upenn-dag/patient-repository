@@ -14,8 +14,11 @@
 {% set prototype = form.vars.value.prototype is defined ? form.vars.value.prototype.name : 'default' %}
 
 {% block content %}
+    {% block page_title %}
     {{ page_title('accard.regimen.title.update'|trans) }}
+    {% endblock %}
 
+    {% block regimen_form %}
     {{ form_errors(form) }}
     
     <form action="{{ path('accard_frontend_regimen_update', { prototype: prototype, id: regimen.id }) }}" method="post" {{ form_enctype(form) }}>
@@ -28,4 +31,5 @@
             </div>
         </div>
     </form>
+    {% endblock %}
 {% endblock %}

@@ -29,20 +29,18 @@
         )}}
     {% endblock %}
 
-    {% block patient_tabs %}
-    {% if settings.import_enabled %}
-        <ul class="nav nav-tabs nav-justified grid-tabs" role="tablist">
-            <li class="{{ active_if_current('accard_frontend_patient_index') }}">
-                <a href="{{ path('accard_frontend_patient_index') }}">{{ 'accard.patient.registered'|trans }}</a>
-            </li>
-            <li class="{{ active_if_current('accard_frontend_patient_import') }}{{ active_if_current('accard_frontend_import_importer_records') }}">
-                <a href="{{ path('accard_frontend_patient_import') }}">{{ 'accard.patient.unregistered'|trans }}</a>
-            </li>
-        </ul>
-    {% endif %}
-    {% endblock %}
-
     {% block patient_content %}
+        {% if settings.import_enabled %}
+            <ul class="nav nav-tabs nav-justified grid-tabs" role="tablist">
+                <li class="{{ active_if_current('accard_frontend_patient_index') }}">
+                    <a href="{{ path('accard_frontend_patient_index') }}">{{ 'accard.patient.registered'|trans }}</a>
+                </li>
+                <li class="{{ active_if_current('accard_frontend_patient_import') }}{{ active_if_current('accard_frontend_import_importer_records') }}">
+                    <a href="{{ path('accard_frontend_patient_import') }}">{{ 'accard.patient.unregistered'|trans }}</a>
+                </li>
+            </ul>
+        {% endif %}
+
         {% render(controller('AccardWebBundle:Frontend:filter', {'type': 'accard_patient_filter', 'template': 'AccardWebBundle:Frontend/Patient:filterForm.html.twig'})) %}
         {{ list(patients) }}
         {{ pagination(patients) }}

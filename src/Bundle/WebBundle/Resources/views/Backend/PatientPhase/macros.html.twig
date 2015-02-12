@@ -11,34 +11,35 @@
 {% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete, show %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
 
-{% if phases|length > 0 %} 
-    <table class="phase table table-bordered table-striped table-hover">
-        <thead>
-            <tr>
-                <th class="label-field">{{ accard_resource_sort('label', 'accard.patient_phase.form.label'|trans) }}</th>
-                <th class="presentation">{{ accard_resource_sort('presentation', 'accard.patient_phase.form.presentation'|trans) }}</th>
-                <th class="order">{{ accard_resource_sort('order', 'accard.patient_phase.form.order'|trans) }}</th>
-                <th class="actions"></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for phase in phases %}
-            <tr id="{{ phase.id }}">
-                <td class="label-field">{{ phase.label }}</td>
-                <td class="presentation">{{ phase.presentation }}</td>
-                <td class="order">{{ phase.order }}</td>
-                <td class="actions">
-                    <div class="pull-right">
-                        {{ edit(path('accard_backend_patient_phase_update', {'id': phase.id}), null, 'xs') }}
-                        {{ delete(path('accard_backend_patient_phase_delete', {'id': phase.id}), null, 'xs') }}
-                    </div>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    {{ info('accard.patient_phase.none_found'|trans) }}
-{% endif %}
-
+{% block patient_phases_listing %}
+    {% if phases|length > 0 %} 
+        <table class="phase table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th class="label-field">{{ accard_resource_sort('label', 'accard.patient_phase.form.label'|trans) }}</th>
+                    <th class="presentation">{{ accard_resource_sort('presentation', 'accard.patient_phase.form.presentation'|trans) }}</th>
+                    <th class="order">{{ accard_resource_sort('order', 'accard.patient_phase.form.order'|trans) }}</th>
+                    <th class="actions"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for phase in phases %}
+                <tr id="{{ phase.id }}">
+                    <td class="label-field">{{ phase.label }}</td>
+                    <td class="presentation">{{ phase.presentation }}</td>
+                    <td class="order">{{ phase.order }}</td>
+                    <td class="actions">
+                        <div class="pull-right">
+                            {{ edit(path('accard_backend_patient_phase_update', {'id': phase.id}), null, 'xs') }}
+                            {{ delete(path('accard_backend_patient_phase_delete', {'id': phase.id}), null, 'xs') }}
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        {{ info('accard.patient_phase.none_found'|trans) }}
+    {% endif %}
+{% endblock %}
 {% endmacro %}

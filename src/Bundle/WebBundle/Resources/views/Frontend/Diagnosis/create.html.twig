@@ -14,19 +14,23 @@
 {% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import generic %}
 
 {% block content %}
-    {{ page_title('accard.diagnosis.action.create'|trans)}}
-    
-    {{ form_errors(form)}}
+    {% block page_title %}
+        {{ page_title('accard.diagnosis.action.create'|trans)}}
+    {% endblock %}
 
-    <form action="{{ path('accard_frontend_diagnosis_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form._token) }}
-        {% include 'AccardWebBundle:Frontend/Diagnosis:form.html.twig' %}
-        <div class="row">
-            <div class="col-md-12">
-                <span class="pull-right">{{ create() }}</span>
+    {% block diagnosis_form %}
+        {{ form_errors(form)}}
+
+        <form action="{{ path('accard_frontend_diagnosis_create') }}" method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form._token) }}
+            {% include 'AccardWebBundle:Frontend/Diagnosis:form.html.twig' %}
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="pull-right">{{ create() }}</span>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    {% endblock %}
 
 {% endblock %}
 

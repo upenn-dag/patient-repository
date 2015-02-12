@@ -9,9 +9,11 @@
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
 
 {% block content %}
+    {% block page_title %}
+        {{ page_title(message is defined ? message : 'accard.confirmation.message'|trans) }}
+    {% endblock %}
 
-    {{ page_title(message is defined ? message : 'accard.confirmation.message'|trans) }}
-
+    {% block misc_form %}
     <form action="{{ app.request.requestUri }}" method="post" class="delete-action-form">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="confirmed" value="1">
@@ -22,5 +24,5 @@
             <a href="{{ app.request.headers.get('referer') }}" class="btn btn-info"><i class="glyphicon glyphicon-remove"></i> {{ 'accard.cancel'|trans }}</a>
         </div>
     </form>
-
+    {% endblock %}
 {% endblock %}

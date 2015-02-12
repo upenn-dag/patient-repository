@@ -11,7 +11,7 @@ accard_frontend_activity_index:
     defaults:
         _controller: accard.controller.activity:indexAction
         _accard:
-            template: AccardWebBundle:Frontend/Activity:index.html.twig
+            template: Theme:Frontend/Activity:index.html.twig
             sortable: true
             paginate: 25
 
@@ -21,7 +21,7 @@ accard_frontend_activity_index_by_prototype:
     defaults:
         _controller: accard.controller.activity:indexByPrototypeAction
         _accard:
-            template: AccardWebBundle:Frontend/Activity:indexByPrototype.html.twig
+            template: Theme:Frontend/Activity:indexByPrototype.html.twig
             sortable: true
             criteria:
                 prototype: $prototype
@@ -34,7 +34,7 @@ accard_frontend_activity_show:
     defaults:
         _controller: accard.controller.activity:showAction
         _accard:
-            template: AccardWebBundle:Frontend/Activity:show.html.twig
+            template: Theme:Frontend/Activity:show.html.twig
 
 accard_frontend_activity_create:
     pattern: /{prototype}/new
@@ -43,7 +43,7 @@ accard_frontend_activity_create:
     defaults:
         _controller: accard.controller.activity:createAction
         _accard:
-            template: AccardWebBundle:Frontend/Activity:create.html.twig
+            template: Theme:Frontend/Activity:create.html.twig
             redirect:
                 route: accard_frontend_activity_index_by_prototype
                 parameters: { prototype: resource.prototype.name, id: resource.id }
@@ -55,7 +55,7 @@ accard_frontend_activity_update:
     defaults:
         _controller: accard.controller.activity:updateAction
         _accard:
-            template: AccardWebBundle:Frontend/Activity:update.html.twig
+            template: Theme:Frontend/Activity:update.html.twig
             redirect:
                 route: accard_frontend_activity_index_by_prototype
                 parameters: { prototype: resource.prototype.name, id: resource.id }
@@ -67,7 +67,7 @@ accard_frontend_activity_delete:
     defaults:
         _controller: accard.controller.activity:deleteAction
         _accard:
-            template: AccardWebBundle:Frontend/Activity:delete.html.twig
+            template: Theme:Frontend/Activity:delete.html.twig
             redirect:
                 route: accard_frontend_activity_index_by_prototype
                 parameters: { prototype: resource.prototype.name, id: resource.id }

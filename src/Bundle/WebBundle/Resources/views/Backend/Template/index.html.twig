@@ -1,0 +1,32 @@
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import update, create %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
+
+{% extends 'AccardWebBundle:Backend:layout.html.twig' %}
+
+{% block content %}
+	{{ page_title('Templates', create( path('accard_backend_template_create'), 'Create', 'md') ) }}
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Location</th>
+				<th>{# Placeholder for actions #}</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for template in templates %}
+			<tr>
+				<td>
+					{{ template.name }}
+				</td>
+				<td>
+					{{ template.location }}
+				</td>
+				<td>
+					{{ update( path('accard_backend_template_design', {'name':template.name}), 'Design', 'xs') }}
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

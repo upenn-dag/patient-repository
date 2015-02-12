@@ -13,14 +13,17 @@
 </div>
 {% endmacro %}
 
-{% if form.patient is defined %}
-<div class="row">
-    <div class="col-md-12">
-        {{ select_patient(form.patient) }}
+{% block behavior_patient_form %}
+    {% if form.patient is defined %}
+    <div class="row">
+        <div class="col-md-12">
+            {{ select_patient(form.patient) }}
+        </div>
     </div>
-</div>
-{% endif %}
+    {% endif %}
+{% endblock %}
 
+{% block behavior_timespan_form %}
 <div class="row">
     <div class="col-md-6">
         {{ form_row(form.startDate) }}
@@ -29,13 +32,16 @@
         {{ form_row(form.endDate) }}
     </div>
 </div>
+{% endblock %}
 
-{% if form.fields is not empty %}
-<div class="row">
-    {% for field in form.fields %}
-    <div class="col-md-6">
-        {{ _self.prototype(field) }}
+{% block behavior_additional_fields_block %}
+    {% if form.fields is not empty %}
+    <div class="row">
+        {% for field in form.fields %}
+        <div class="col-md-6">
+            {{ _self.prototype(field) }}
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
-{% endif %}
+    {% endif %}
+{% endblock %}

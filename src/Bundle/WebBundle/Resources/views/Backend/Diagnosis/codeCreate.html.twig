@@ -10,17 +10,20 @@
 {% from 'AccardWebBundle:Common/Macros:actions.html.twig' import create %}
 
 {% block content %}
+    {% block page_title %}
     {{ page_title('accard.diagnosis_code.action.create'|trans) }}
+    {% endblock %}
 
-    {{ form_errors(form) }}
+    {% block diagnosis_form %}
+        {{ form_errors(form) }}
 
-    <form action="{{ path('accard_backend_diagnosis_code_create') }}" method="post" {{ form_enctype(form) }}>
-        {% include 'AccardWebBundle:Backend/Diagnosis:codeForm.html.twig' %}
-        <div class="row">
-            <div class="col-md-12">
-                <span class="pull-right">{{ create() }}</span>
+        <form action="{{ path('accard_backend_diagnosis_code_create') }}" method="post" {{ form_enctype(form) }}>
+            {% include 'AccardWebBundle:Backend/Diagnosis:codeForm.html.twig' %}
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="pull-right">{{ create() }}</span>
+                </div>
             </div>
-        </div>
-    </form>
-
+        </form>
+    {% endblock %}
 {% endblock %}

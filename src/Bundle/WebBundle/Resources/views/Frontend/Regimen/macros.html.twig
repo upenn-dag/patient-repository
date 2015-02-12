@@ -11,63 +11,66 @@
 {% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete, show, generic %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
 
-{% if regimens|length > 0 %}
-    <table id="regimens" class="regimen table table-bordered table-striped table-hover">
-        <thead>
-            <tr>
-                <th class="description">{{ 'accard.regimen.form.description'|trans }}</th>
-                <th class="prototype">{{ accard_resource_sort('prototype', 'accard.regimen.form.prototype'|trans) }}</th>
-                <th class="patient">{{ accard_resource_sort('patient', 'accard.regimen.form.patient'|trans) }}</th>
-                <th class="start-date">{{ accard_resource_sort('startDate', 'accard.regimen.form.start_date'|trans) }}</th>
-                <th class="end-date">{{ accard_resource_sort('endDate', 'accard.regimen.form.end_date'|trans) }}</th>
-                <th class="actions"></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for regimen in regimens %}
-            <tr id="regimen-{{ regimen.id }}">
-                <td class="description">{{ regimen.description }}</td>
-                <td class="prototype">
-                    <a href="{{ path('accard_frontend_regimen_index_by_prototype', {'prototype': regimen.prototype.name}) }}">
-                        {{- regimen.prototype.presentation -}}
-                    </a>
-                </td>
-                <td class="patient">{{ regimen.patient.fullName }}</td>
-                <td class="start-date">{{ regimen.startDate|localizeddate('medium', 'none') }}</td>
-                <td class="end-date">{{ regimen.endDate|localizeddate('medium', 'none') }}</td>
-                <td class="actions">
-                    <div class="pull-right">
-                        {{ show(path('accard_frontend_regimen_show', {'prototype': regimen.prototype.name, 'id': regimen.id}), null, 'xs') }}
-                        {{ generic(path('accard_frontend_regimen_activities', {'prototype': regimen.prototype.name, 'id': regimen.id}), 'accard.activity.activities'|trans, null, 'xs') }}
-                        {{ edit(path('accard_frontend_regimen_update', {'prototype': regimen.prototype.name, 'id': regimen.id}), null, 'xs') }}
-                        {{ delete(path('accard_frontend_regimen_delete', {'prototype': regimen.prototype.name, 'id': regimen.id}), null, 'xs') }}
-                    </div>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    {{ info('accard.regimen.none_found'|trans) }}
-{% endif %}
-
+    {% block regimen_listing %}
+    {% if regimens|length > 0 %}
+        <table id="regimens" class="regimen table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th class="description">{{ 'accard.regimen.form.description'|trans }}</th>
+                    <th class="prototype">{{ accard_resource_sort('prototype', 'accard.regimen.form.prototype'|trans) }}</th>
+                    <th class="patient">{{ accard_resource_sort('patient', 'accard.regimen.form.patient'|trans) }}</th>
+                    <th class="start-date">{{ accard_resource_sort('startDate', 'accard.regimen.form.start_date'|trans) }}</th>
+                    <th class="end-date">{{ accard_resource_sort('endDate', 'accard.regimen.form.end_date'|trans) }}</th>
+                    <th class="actions"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for regimen in regimens %}
+                <tr id="regimen-{{ regimen.id }}">
+                    <td class="description">{{ regimen.description }}</td>
+                    <td class="prototype">
+                        <a href="{{ path('accard_frontend_regimen_index_by_prototype', {'prototype': regimen.prototype.name}) }}">
+                            {{- regimen.prototype.presentation -}}
+                        </a>
+                    </td>
+                    <td class="patient">{{ regimen.patient.fullName }}</td>
+                    <td class="start-date">{{ regimen.startDate|localizeddate('medium', 'none') }}</td>
+                    <td class="end-date">{{ regimen.endDate|localizeddate('medium', 'none') }}</td>
+                    <td class="actions">
+                        <div class="pull-right">
+                            {{ show(path('accard_frontend_regimen_show', {'prototype': regimen.prototype.name, 'id': regimen.id}), null, 'xs') }}
+                            {{ generic(path('accard_frontend_regimen_activities', {'prototype': regimen.prototype.name, 'id': regimen.id}), 'accard.activity.activities'|trans, null, 'xs') }}
+                            {{ edit(path('accard_frontend_regimen_update', {'prototype': regimen.prototype.name, 'id': regimen.id}), null, 'xs') }}
+                            {{ delete(path('accard_frontend_regimen_delete', {'prototype': regimen.prototype.name, 'id': regimen.id}), null, 'xs') }}
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        {{ info('accard.regimen.none_found'|trans) }}
+    {% endif %}
+    {% endblock %}
 {% endmacro %}
 
 {% macro list_descriptions(regimen) %}
-{% spaceless %}
-{% set importers = regimen.registeredImporters %}
-<ul class="list-unstyled">
-    {% for importer in importers %}
-    {% set translation = 'accard.import.importer.' ~ importer %}
-    <li>
-        {{ translation|trans }}
-        <ol>
-        {% for description in regimen.getDescriptionsFor(importer) %}
-            <li>{{ description|raw }}</li>
+    {% block regimen_descriptions %}
+    {% spaceless %}
+    {% set importers = regimen.registeredImporters %}
+    <ul class="list-unstyled">
+        {% for importer in importers %}
+        {% set translation = 'accard.import.importer.' ~ importer %}
+        <li>
+            {{ translation|trans }}
+            <ol>
+            {% for description in regimen.getDescriptionsFor(importer) %}
+                <li>{{ description|raw }}</li>
+            {% endfor %}
+            </ol>
+        </li>
         {% endfor %}
-        </ol>
-    </li>
-    {% endfor %}
-</ul>
-{% endspaceless %}
+    </ul>
+    {% endspaceless %}
+    {% endblock %}
 {% endmacro %}

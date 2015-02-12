@@ -13,20 +13,24 @@
 </div>
 {% endmacro %}
 
-{% if form.patient is defined %}
-<div class="row">
-    <div class="col-md-12">
-        {{ select_patient(form.patient) }}
-    </div>
-</div>
-{% endif %}
+{% block attribute_patient_form %}
+	{% if form.patient is defined %}
+	<div class="row">
+	    <div class="col-md-12">
+	        {{ select_patient(form.patient) }}
+	    </div>
+	</div>
+	{% endif %}
+{% endblock %}
 
-{% if form.fields is not empty %}
-<div class="row">
-    {% for field in form.fields %}
-    <div class="col-md-6">
-        {{ _self.prototype(field) }}
-    </div>
-    {% endfor %}
-</div>
-{% endif %}
+{% block attribute_additional_fields %}
+	{% if form.fields is not empty %}
+	<div class="row">
+	    {% for field in form.fields %}
+	    <div class="col-md-6">
+	        {{ _self.prototype(field) }}
+	    </div>
+	    {% endfor %}
+	</div>
+	{% endif %}
+{% endblock %}

@@ -12,21 +12,24 @@
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
 
 {% block content %}
-    {{ page_title('accard.patient_phase.action.create'|trans, [
-        design(path('accard_backend_patient_design'), 'accard.patient.action.design'|trans)
-    ]) }}
-
-    {{ form_errors(form) }}
-    
-    <form action="{{ path('accard_backend_patient_phase_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form._token) }}
-        {% include 'AccardWebBundle:Backend/PatientPhase:form.html.twig' %}
-        <div class="row">
-            <div class="col-md-12">
-                <span class="pull-right">{{ create() }}</span>
+    {% block page_title %}
+        {{ page_title('accard.patient_phase.action.create'|trans, [
+            design(path('accard_backend_patient_design'), 'accard.patient.action.design'|trans)
+        ]) }}
+    {% endblock %}
+    {% block patient_phase_form %}
+        {{ form_errors(form) }}
+        
+        <form action="{{ path('accard_backend_patient_phase_create') }}" method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form._token) }}
+            {% include 'AccardWebBundle:Backend/PatientPhase:form.html.twig' %}
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="pull-right">{{ create() }}</span>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    {% endblock %}
 {% endblock %}
 
 {% block page_javascripts %}

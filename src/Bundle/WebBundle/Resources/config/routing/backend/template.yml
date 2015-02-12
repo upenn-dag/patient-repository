@@ -1,0 +1,18 @@
+
+accard_backend_template_index:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.template:indexAction
+
+accard_backend_template_design:
+    pattern: /{name}
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.template:designAction
+
+accard_backend_template_create:
+    pattern: /create
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.template:createAction

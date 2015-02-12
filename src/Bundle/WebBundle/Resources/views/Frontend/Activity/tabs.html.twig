@@ -9,13 +9,15 @@
 
 {% set settings = accard_settings('activity') %}
 
-<ul class="nav nav-tabs nav-justified grid-tabs" role="tablist">
-    <li class="{% spaceless %}{{ active_if_current('accard_frontend_activity_index') }} {{ active_if_current('accard_frontend_activity_index_by_prototype') }}{% endspaceless %}">
-        <a href="{{ path('accard_frontend_activity_index') }}">{{ 'accard.activity.activities'|trans }}</a>
-    </li>
-    {% if settings.show_regimens -%}
-    <li class="{% spaceless %}{{ active_if_current('accard_frontend_regimen_index') }} {{ active_if_current('accard_frontend_regimen_index_by_prototype') }}{% endspaceless %}">
-        <a href="{{ path('accard_frontend_regimen_index') }}">{{ 'accard.activity.regimens'|trans }}</a>
-    </li>
-    {%- endif %}
-</ul>
+{% block activity_tabs %}
+	<ul class="nav nav-tabs nav-justified grid-tabs" role="tablist">
+	    <li class="{% spaceless %}{{ active_if_current('accard_frontend_activity_index') }} {{ active_if_current('accard_frontend_activity_index_by_prototype') }}{% endspaceless %}">
+	        <a href="{{ path('accard_frontend_activity_index') }}">{{ 'accard.activity.activities'|trans }}</a>
+	    </li>
+	    {% if settings.show_regimens -%}
+	    <li class="{% spaceless %}{{ active_if_current('accard_frontend_regimen_index') }} {{ active_if_current('accard_frontend_regimen_index_by_prototype') }}{% endspaceless %}">
+	        <a href="{{ path('accard_frontend_regimen_index') }}">{{ 'accard.activity.regimens'|trans }}</a>
+	    </li>
+	    {%- endif %}
+	</ul>
+{% endblock %}

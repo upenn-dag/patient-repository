@@ -1,4 +1,4 @@
-{# This file is part of the Accard package. #}
+Yup{# This file is part of the Accard package. #}
 
 {# (c) University of Pennsylvania #}
 
@@ -10,19 +10,22 @@
 {% from 'AccardWebBundle:Common/Macros:actions.html.twig' import create %}
 
 {% block content %}
-    {{ page_title('accard.drug.action.create'|trans) }}
+    {% block page_title %}
+        {{ page_title('accard.drug.action.create'|trans) }}
+    {% endblock %}
 
-    {{ form_errors(form) }}
+    {% block drug_form %}
+        {{ form_errors(form) }}
 
-    <form action="{{ path('accard_backend_drug_create') }}" method="post" {{ form_enctype(form) }}>
-        {% include 'AccardWebBundle:Backend/Drug:drugForm.html.twig' %}
-        <div class="row">
-            <div class="col-md-12">
-                <span class="pull-right">{{ create() }}</span>
+        <form action="{{ path('accard_backend_drug_create') }}" method="post" {{ form_enctype(form) }}>
+            {% include 'AccardWebBundle:Backend/Drug:drugForm.html.twig' %}
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="pull-right">{{ create() }}</span>
+                </div>
             </div>
-        </div>
-    </form>
-
+        </form>
+    {% endblock %}
 {% endblock %}
 
 {% block page_javascripts %}

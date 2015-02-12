@@ -1,0 +1,32 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+Accard\Bundle\TemplateBundle\Entity\Template:
+    type: entity
+    table: accard_template
+    repositoryClass: Accard\Bundle\TemplateBundle\Doctrine\ORM\TemplateRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+
+    fields:
+        parent:
+            type: string
+            length: 180
+            nullable: true
+        name:
+            type: string
+            length: 200
+            unique: true
+        location:
+            type: string
+            length: 200
+        content:
+            type: text

@@ -21,6 +21,7 @@
     {{ form_widget(field) }}
 {% endmacro %}
 
+{% block regimen_patient_form %}
 {% if form.patient is defined %}
     <div class="row">
         <div class="col-md-12">
@@ -28,11 +29,14 @@
         </div>
     </div>
 {% endif %}
+{% endblock %}
 
 {% from _self import render_field %}
 {% include 'AccardWebBundle:Frontend/Regimen:formTabs.html.twig' %}
 
+
 <div class="tab-content">
+{% block regimen_base_form %}
     <div class="tab-pane fade in active" id="regimen-base">
         <div class="row">
             <div class="col-md-12 ">
@@ -51,6 +55,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block regimen_custom_form %}
     <div class="tab-pane fade" id="regimen-custom">
         <div class="row">
             <div class="col-md-6">
@@ -69,8 +75,12 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block regimen_activites_form %}
     <div class="tab-pane fade" id="regimen-activities">
     </div>
+{% endblock %}
 </div>
+
 
 

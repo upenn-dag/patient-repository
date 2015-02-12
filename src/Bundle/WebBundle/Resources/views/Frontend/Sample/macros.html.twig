@@ -11,6 +11,7 @@
 {% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete, show %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
 
+{% block samples_listing %}
 {% if samples|length > 0 %}
     <table id="samples" class="sample table table-bordered table-striped table-hover">
         <thead>
@@ -48,6 +49,8 @@
     {{ info('accard.sample.none_found'|trans) }}
 {% endif %}
 
+{% endblock %}
+
 {% endmacro %}
 
 {% macro list_sources(sources) %}
@@ -56,6 +59,7 @@
 {% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete, show %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
 
+{% block sample_sources_listing %}
 {% if sources|length > 0 %}
     <table id="sample-sources" class="sample table table-bordered table-striped table-hover">
         <thead>
@@ -96,5 +100,5 @@
 {% else %}
     {{ info('accard.source.none_found'|trans) }}
 {% endif %}
-
+{% endblock %}
 {% endmacro %}
