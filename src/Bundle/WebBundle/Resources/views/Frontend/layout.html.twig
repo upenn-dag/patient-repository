@@ -131,12 +131,6 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        {% if is_granted('ROLE_SUPERUSER') %}
-                        <li><a href="?_switch=user"><i class="fa fa-user fa-fw"></i> Switch to User</a></li>
-                        <li><a href="?_switch=admin"><i class="fa fa-user fa-fw"></i> Switch to Admin</a></li>
-                        <li><a href="?_switch=super"><i class="fa fa-user fa-fw"></i> Switch to Super</a></li>
-                        <li class="divider"></li>
-                        {% endif %}
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
                         <li class="divider"></li>
