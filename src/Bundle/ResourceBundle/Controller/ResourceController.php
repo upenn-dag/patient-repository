@@ -98,7 +98,6 @@ class ResourceController extends FOSRestController implements InitializableContr
         AccardLanguage::setExpressionLanguage($container->get('accard.expression_language'));
 
         $this->resourceResolver = new ResourceResolver($this->config);
-        $this->actionLogger = new ActionLogger($this->config, $this->getUser());
 
         if (null !== $container) {
             $this->redirectHandler = new RedirectHandler($this->config, $container->get('router'));
@@ -113,6 +112,7 @@ class ResourceController extends FOSRestController implements InitializableContr
                 $this->flashHelper,
                 $this->config
             );
+            $this->actionLogger = new ActionLogger($this->config, $this->getUser(), $container->get('accard.manager.log'));
         }
     }
 
@@ -124,8 +124,6 @@ class ResourceController extends FOSRestController implements InitializableContr
      */
     public function indexAction(Request $request)
     {
-        //$this->actionLogger->indexLog();
-
         $criteria = $this->config->getCriteria();
         $sorting = $this->config->getSorting();
 
@@ -154,7 +152,13 @@ class ResourceController extends FOSRestController implements InitializableContr
             ->setData($resources)
         ;
 
-        return $this->handleView($view);
+        $response = $this->handleView($view);
+
+        if ($response->isSuccessful()) {
+            $this->actionLogger->indexLog();
+        }
+
+        return $response;
     }
 
     /**
@@ -171,7 +175,13 @@ class ResourceController extends FOSRestController implements InitializableContr
             ->setData($this->findOr404($request))
         ;
 
-        return $this->handleView($view);
+        $response = $this->handleView($view);
+
+        if ($response->isSuccessful()) {
+            $this->actionLogger->showLog();
+        }
+
+        return $response;
     }
 
     /**
@@ -186,6 +196,8 @@ class ResourceController extends FOSRestController implements InitializableContr
 
         if ($form->handleRequest($request)->isValid()) {
             $resource = $this->domainManager->create($resource);
+
+            $this->actionLogger->createLog();
 
             if (null === $resource) {
                 return $this->redirectHandler->redirectToIndex();
@@ -207,7 +219,13 @@ class ResourceController extends FOSRestController implements InitializableContr
             ))
         ;
 
-        return $this->handleView($view);
+        $response = $this->handleView($view);
+
+        if ($response->isSuccessful() && !$form->isSubmitted()) {
+            $this->actionLogger->newLog();
+        }
+
+        return $response;
     }
 
     /**
@@ -225,6 +243,10 @@ class ResourceController extends FOSRestController implements InitializableContr
             $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->domainManager->update($resource);
 
+            if ($form->isValid()) {
+                $this->actionLogger->updateLog();
+            }
+
             return $this->redirectHandler->redirectTo($resource);
         }
 
@@ -241,17 +263,13 @@ class ResourceController extends FOSRestController implements InitializableContr
             ))
         ;
 
-        return $this->handleView($view);
-    }
+        $response = $this->handleView($view);
 
-    public function moveUpAction(Request $request)
-    {
-        return $this->move($request, 1);
-    }
+        if ($response->isSuccessful() && !$form->isSubmitted()) {
+            $this->actionLogger->editLog();
+        }
 
-    public function moveDownAction(Request $request)
-    {
-        return $this->move($request, -1);
+        return $response;
     }
 
     /**
@@ -262,33 +280,13 @@ class ResourceController extends FOSRestController implements InitializableContr
     {
         $resource = $this->findOr404($request);
         $clonedResource = $this->domainManager->delete($resource);
+        $response = $this->redirectHandler->redirectTo($clonedResource);
 
-        return $this->redirectHandler->redirectTo($clonedResource);
-    }
-
-    public function updateStateAction(Request $request, $transition, $graph = null)
-    {
-        $resource = $this->findOr404($request);
-
-        if (null === $graph) {
-            $graph = $this->stateMachineGraph;
+        if ($response->isSuccessful() || $response->isRedirection()) {
+           $this->actionLogger->deleteLog();
         }
 
-        $stateMachine = $this->get('sm.factory')->get($resource, $graph);
-        if (!$stateMachine->can($transition)) {
-            throw new NotFoundHttpException(sprintf(
-                'The requested transition %s cannot be applied on the given %s with graph %s.',
-                $transition,
-                $this->config->getResourceName(),
-                $graph
-            ));
-        }
-
-        $stateMachine->apply($transition);
-
-        $this->domainManager->update($resource);
-
-        return $this->redirectHandler->redirectToReferer();
+        return $response;
     }
 
     /**
@@ -301,7 +299,6 @@ class ResourceController extends FOSRestController implements InitializableContr
 
     /**
      * @param object|null $resource
-     *
      * @return FormInterface
      */
     public function getForm($resource = null)
@@ -316,9 +313,7 @@ class ResourceController extends FOSRestController implements InitializableContr
     /**
      * @param Request $request
      * @param array   $criteria
-     *
      * @return object
-     *
      * @throws NotFoundHttpException
      */
     public function findOr404(Request $request, array $criteria = array())
@@ -356,14 +351,5 @@ class ResourceController extends FOSRestController implements InitializableContr
     public function getRepository()
     {
         return $this->get($this->config->getServiceName('repository'));
-    }
-
-    protected function move(Request $request, $movement)
-    {
-        $resource = $this->findOr404($request);
-
-        $this->domainManager->move($resource, $movement);
-
-        return $this->redirectHandler->redirectToIndex();
     }
 }
