@@ -1,0 +1,86 @@
+<?php
+
+/**
+ * This file is part of the Accard package.
+ *
+ * (c) University of Pennsylvania
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+namespace Accard\Bridge\Twig\Loader;
+
+use Twig_LoaderInterface;
+use Twig_Error_Loader;
+use Accard\Bundle\TemplateBundle\Doctrine\ORM\TemplateRepository;
+
+/**
+ * Twig Database Loader
+ *
+ * @author Dylan Pierce <dylan@booksmart.it>
+ */
+
+class TwigDatabaseLoader implements Twig_LoaderInterface
+{
+    const MAGIC_TEMPLATE = 'Theme';
+    const MAGIC_PREFIX = 'Accard';
+
+    private $repository;
+
+    public function __construct($repository)
+    {
+        $this->repository= $repository;
+    }
+
+    public function getSource($name)
+    {
+        // If we aren't using Symfony style loading, ignore this loader.
+        // $themedLocation = sprintf('%s:%s:%s', self::MAGIC_TEMPLATE, $parts[1], $parts[2]);
+        $parts = explode(':', $name);
+
+        if (3 === count($parts) && self::MAGIC_TEMPLATE === $parts[0]) {
+            $baseName = sprintf('%s:%s', $parts[1], $parts[2]);
+            $themeName = sprintf('%s:%s:%s', self::MAGIC_TEMPLATE, $parts[1], $parts[2]);
+            if ($template = $this->getTemplate($themeName)) {
+                $content = $template->getContent();
+
+                // Auto-add the extends tag, if it doesn't already exist.
+                if ($template->getParent() && false === strpos($content, '{% extends')) {
+                    $tag = sprintf('{%% extends "%s:%s" %%}', $template->getParent(), $baseName);
+                    $content = $tag.PHP_EOL.$content;
+                }
+
+                return $content;
+            }
+        }
+
+        throw new Twig_Error_Loader(sprintf('Template for "%s" does not exist.', $name));
+    }
+
+    public function isFresh($name, $time)
+    {
+        return false;
+    }
+
+    public function getCacheKey($name)
+    {
+        return 'AccardDB:' . $name;
+    }
+
+    protected function getTemplate($base)
+    {
+        return $this->repository->findOneBy(array(
+            'location' => $base,
+        ));
+    }
+
+    protected function getValue($column, $name)
+    {
+        //die(var_dump($this->repository->findOneBy(array($column => $name))));
+        return $this->repository->findOneBy(array($column => $name));
+        //$sth = $this->dbh->prepare('SELECT '.$column.' FROM templates WHERE name = :name');
+        //$sth->execute(array(':name' => (string) $name));
+
+        //return $sth->fetchColumn();
+    }
+}

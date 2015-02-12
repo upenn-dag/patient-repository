@@ -1,0 +1,57 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import create %}
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
+
+{% extends 'AccardWebBundle:Backend:layout.html.twig' %}
+
+{% block content %}
+  <style type="text/css" media="screen">
+    body {
+    	height:100px;
+    }
+    
+    #editor { 
+    	height: 600px;
+    }
+  </style>
+
+<form method="post">
+
+    {{ form_widget(form._token) }}
+
+    <h3>{{ name }}</h3><hr>
+    <pre id="editor"></pre>
+
+    {{ form_widget(form.content) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.parent) }}
+    {{ form_row(form.location) }}
+
+    {{ form_widget(form.save) }}
+
+</form>
+
+{% endblock %}
+
+{% block page_javascripts %}
+	{% javascripts '@AccardWebBundle/Resources/public/js/ace/ace.js'
+                    '@AccardWebBundle/Resources/public/js/ace/mode-twig.js' %}
+		<script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+
+<script>
+	var $textarea = $('#template_content').hide();
+    var editor = ace.edit("editor");
+    editor.getSession().setMode('ace/mode/twig');
+    editor.getSession().setValue($textarea.val());
+    editor.getSession().on('change', function() {
+        $textarea.val(editor.getSession().getValue());
+    });
+    // editor.setTheme("ace/theme/dawn");
+</script>
+{% endblock %}

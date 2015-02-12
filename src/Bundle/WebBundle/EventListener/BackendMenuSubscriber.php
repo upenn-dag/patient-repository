@@ -69,6 +69,7 @@ class BackendMenuSubscriber implements EventSubscriberInterface
 
         $behavior = $this->createSimpleItem($event, $design, 'behavior', 'behavior_design', 'behavior');
         $attribute = $this->createSimpleItem($event, $design, 'attribute', 'attribute_design', 'attribute');
+        $template = $this->createSimpleItem($event, $design, 'template', 'template_index', 'template');
 
         $settings = $menu->getChild('settings');
         $this->createSimpleItem($event, $settings, 'general', "general_settings", 'general_settings');
