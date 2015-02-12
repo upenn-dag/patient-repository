@@ -142,7 +142,6 @@ accard:
     behavior:
         title:
             index_by_prototype: Browse %prototype% Behaviors
-
     form:
         choose: Choose one
         field:
@@ -173,3 +172,10 @@ accard:
             username: Username
             password: Password
             login: Log-in
+    log:
+        index: Viewed %resource% index
+        show: Viewed %resource% with id %id%
+        new: Began creating a new %resource%
+        create: Created a new %resource%
+        edit: Began editing a %resource% with id %id%
+        update: Updated %resource% with id %id%

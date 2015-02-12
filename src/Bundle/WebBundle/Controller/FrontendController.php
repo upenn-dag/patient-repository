@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Accard\Component\Option\Model\OptionInterface;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 
 /**
  * Base frontend controller.
@@ -55,6 +57,25 @@ class FrontendController extends Controller
             ->createNamed('criteria', $type, $criteria, array('csrf_protection' => false));
 
         return $this->render($template, array('form' => $form->createView(), 'filter_criteria' => $criteria));
+    }
+
+    /**
+     * List logs for user.
+     *
+     * @param Request $request
+     */
+    public function userLogAction(Request $request)
+    {
+        $repository = $this->get('accard.manager.log')->getRepository($this->container->getParameter('accard.model.log.class'));
+        $queryBuilder = $repository->getUserLogBuilder($this->getUser());
+        $logs = new Pagerfanta(new DoctrineORMAdapter($queryBuilder));
+
+        $logs->setMaxPerPage(15);
+        $logs->setCurrentPage($request->get('page', 1));
+
+        return $this->render('AccardWebBundle:Frontend:userLog.html.twig', array(
+            'logs' => $logs,
+        ));
     }
 
     /**

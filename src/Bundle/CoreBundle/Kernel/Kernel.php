@@ -50,6 +50,7 @@ abstract class Kernel extends BaseKernel
             new \Accard\Bundle\RegimenBundle\AccardRegimenBundle(),
             new \Accard\Bundle\FlowBundle\AccardFlowBundle(),
             new \Accard\Bundle\ActivityBundle\AccardActivityBundle(),
+            new \Accard\Bundle\TemplateBundle\AccardTemplateBundle(),
             new \Accard\Bundle\WebBundle\AccardWebBundle(),
             new \Accard\Bundle\CPDBundle\AccardCPDBundle(),
             new \Accard\Bundle\HMTBBundle\AccardHMTBBundle(),

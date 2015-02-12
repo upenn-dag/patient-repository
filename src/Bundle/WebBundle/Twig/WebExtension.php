@@ -12,6 +12,7 @@ namespace Accard\Bundle\WebBundle\Twig;
 
 use Twig_Extension;
 use Twig_SimpleFunction;
+use Twig_SimpleFilter;
 use Twig_Environment;
 use Accard\Bundle\WebBundle\Templating\Helper\WebHelper;
 use Accard\Bundle\ResourceBundle\Search\SearchCollection;
@@ -32,6 +33,33 @@ class WebExtension extends Twig_Extension
     public function initRuntime(Twig_Environment $environment)
     {
         $this->environment = $environment;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFilters()
+    {
+        return array(
+            new Twig_SimpleFilter('timeago', function ($datetime) {
+                if ($datetime instanceof \DateTime) {
+                    $time = time() - $datetime->getTimestamp();
+                } else {
+                    $time = time() - strtotime($datetime);
+                }
+
+                $units = array(31536000 => 'year', 2592000 => 'month', 604800 => 'week', 86400 => 'day', 3600 => 'hour', 60 => 'minute', 1 => 'second');
+                foreach ($units as $unit => $val) {
+                    if ($time < $unit) {
+                        continue;
+                    }
+
+                    $numberOfUnits = floor($time / $unit);
+
+                    return ($val == 'second')? 'a few seconds ago' : (($numberOfUnits>1) ? $numberOfUnits : 'an').' '.$val.(($numberOfUnits>1) ? 's' : '').' ago';
+                }
+            })
+        );
     }
 
     /**

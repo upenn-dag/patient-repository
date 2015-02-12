@@ -112,7 +112,14 @@ class ResourceController extends FOSRestController implements InitializableContr
                 $this->flashHelper,
                 $this->config
             );
-            $this->actionLogger = new ActionLogger($this->config, $this->getUser(), $container->get('accard.manager.log'));
+
+            if ($this->getUser()) {
+                $this->actionLogger = new ActionLogger(
+                    $this->config,
+                    $this->getUser(),
+                    $container->get('accard.manager.log')
+                );
+            }
         }
     }
 
@@ -155,7 +162,7 @@ class ResourceController extends FOSRestController implements InitializableContr
         $response = $this->handleView($view);
 
         if ($response->isSuccessful()) {
-            $this->actionLogger->indexLog();
+            $this->actionLogger && $this->actionLogger->indexLog();
         }
 
         return $response;
@@ -178,7 +185,7 @@ class ResourceController extends FOSRestController implements InitializableContr
         $response = $this->handleView($view);
 
         if ($response->isSuccessful()) {
-            $this->actionLogger->showLog();
+            $this->actionLogger && $this->actionLogger->showLog();
         }
 
         return $response;
@@ -197,7 +204,7 @@ class ResourceController extends FOSRestController implements InitializableContr
         if ($form->handleRequest($request)->isValid()) {
             $resource = $this->domainManager->create($resource);
 
-            $this->actionLogger->createLog();
+            $this->actionLogger && $this->actionLogger->createLog();
 
             if (null === $resource) {
                 return $this->redirectHandler->redirectToIndex();
@@ -222,7 +229,7 @@ class ResourceController extends FOSRestController implements InitializableContr
         $response = $this->handleView($view);
 
         if ($response->isSuccessful() && !$form->isSubmitted()) {
-            $this->actionLogger->newLog();
+            $this->actionLogger && $this->actionLogger->newLog();
         }
 
         return $response;
@@ -244,7 +251,7 @@ class ResourceController extends FOSRestController implements InitializableContr
             $this->domainManager->update($resource);
 
             if ($form->isValid()) {
-                $this->actionLogger->updateLog();
+                $this->actionLogger && $this->actionLogger->updateLog();
             }
 
             return $this->redirectHandler->redirectTo($resource);
@@ -266,7 +273,7 @@ class ResourceController extends FOSRestController implements InitializableContr
         $response = $this->handleView($view);
 
         if ($response->isSuccessful() && !$form->isSubmitted()) {
-            $this->actionLogger->editLog();
+            $this->actionLogger && $this->actionLogger->editLog();
         }
 
         return $response;
@@ -283,7 +290,7 @@ class ResourceController extends FOSRestController implements InitializableContr
         $response = $this->redirectHandler->redirectTo($clonedResource);
 
         if ($response->isSuccessful() || $response->isRedirection()) {
-           $this->actionLogger->deleteLog();
+           $this->actionLogger && $this->actionLogger->deleteLog();
         }
 
         return $response;
