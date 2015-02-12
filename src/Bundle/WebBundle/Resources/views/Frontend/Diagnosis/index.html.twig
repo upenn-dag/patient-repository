@@ -21,21 +21,24 @@
 {% endif %}
 
 {% block content %}
-
-   {{ page_title(
-        'accard.diagnosis.action.index'|trans,
-        [
-            create(path('accard_frontend_diagnosis_create'), 'accard.diagnosis.action.create'|trans),
-            designBtn
-        ]
-    )}}
+    {% block page_title %}
+        {{ page_title(
+            'accard.diagnosis.action.index'|trans,
+            [
+                create(path('accard_frontend_diagnosis_create'), 'accard.diagnosis.action.create'|trans),
+                designBtn
+            ]
+        )}}
+    {% endblock %}
 
     {% if not settings.enabled %}
         {{ disabled('accard.diagnosis.entity_name'|trans) }}
     {% endif %}
 
-     {{ list(diagnoses) }}
-     {{ pagination(diagnoses) }}    
+    {% block diagnosis_content %}
+        {{ list(diagnoses) }}
+        {{ pagination(diagnoses) }} 
+    {% endblock %}   
 {% endblock %}
 
 {% block page_javascripts %}

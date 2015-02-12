@@ -38,6 +38,7 @@
 {% include 'AccardWebBundle:Frontend/Diagnosis:formTabs.html.twig' %}
 
 <div class="tab-content">
+    {% block diagnosis_base_form %}
     <div class="tab-pane fade in active" id="diagnosis-base">
         <div class="row">
             <div class="col-md-6">
@@ -58,15 +59,18 @@
             </div>
         </div>
     </div>
-    {% if accard_setting('diagnosis.collect_phases') %}
-    <div class="tab-pane fade" id="diagnosis-phases">
-        <div class="row">
-            <div id="phases" data-prototype="{{ _self.phase_form(form.phases.vars.prototype)|e }}">
-            {% for phase in form.phases %}
-                {{ _self.phase_form(phase) }}
-            {% endfor %}
+    {% endblock %}
+    {% block diganosis_collect_phases %}
+        {% if accard_setting('diagnosis.collect_phases') %}
+        <div class="tab-pane fade" id="diagnosis-phases">
+            <div class="row">
+                <div id="phases" data-prototype="{{ _self.phase_form(form.phases.vars.prototype)|e }}">
+                {% for phase in form.phases %}
+                    {{ _self.phase_form(phase) }}
+                {% endfor %}
+                </div>
             </div>
         </div>
-    </div>
-    {% endif %}
+        {% endif %}
+    {% endblock %}
 </div>

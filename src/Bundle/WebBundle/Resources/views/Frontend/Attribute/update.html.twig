@@ -14,18 +14,22 @@
 {% set prototype = form.vars.value.prototype is defined ? form.vars.value.prototype.name : 'default' %}
 
 {% block content %}
+    {% block page_title %}
     {{ page_title('accard.attribute.title.update'|trans) }}
+    {% endblock %}
 
-    {{ form_errors(form) }}
-    
-    <form action="{{ path('accard_frontend_attribute_update', { prototype: prototype, id: attribute.id }) }}" method="post" {{ form_enctype(form) }}>
-        <input type="hidden" name="_method" value="PUT">
-        {{ form_widget(form._token) }}
-        {% include 'AccardWebBundle:Frontend/Attribute:form.html.twig' %}
-        <div class="row">
-            <div class="col-md-12">
-                <span class="pull-right">{{ update() }}</span>
+    {% block attribute_form %}
+        {{ form_errors(form) }}
+        
+        <form action="{{ path('accard_frontend_attribute_update', { prototype: prototype, id: attribute.id }) }}" method="post" {{ form_enctype(form) }}>
+            <input type="hidden" name="_method" value="PUT">
+            {{ form_widget(form._token) }}
+            {% include 'AccardWebBundle:Frontend/Attribute:form.html.twig' %}
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="pull-right">{{ update() }}</span>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    {% endblock %}
 {% endblock %}

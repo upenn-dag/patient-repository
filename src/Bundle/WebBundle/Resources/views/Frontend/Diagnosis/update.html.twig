@@ -12,20 +12,24 @@
 {% from 'AccardWebBundle:Common/Macros:form.html.twig' import select_patient_js, select_patient_css %}
 
 {% block content %}
-    {{ page_title('accard.interface.frontend.titles.update_diagnosis'|trans) }}
+    {% block page_title %}
+        {{ page_title('accard.interface.frontend.titles.update_diagnosis'|trans) }}
+    {% endblock %}
 
-    {{ form_errors(form) }}
-    
-    <form action="{{ path('accard_frontend_diagnosis_update', { id: diagnosis.id }) }}" method="post" {{ form_enctype(form) }}>
-        <input type="hidden" name="_method" value="PUT">
-        {{ form_widget(form._token) }}
-        {% include 'AccardWebBundle:Frontend/Diagnosis:form.html.twig' %}
-        <div class="row">
-            <div class="col-md-12">
-                <span class="pull-right">{{ update() }}</span>
+    {% block diagnosis_form %}
+        {{ form_errors(form) }}
+        
+        <form action="{{ path('accard_frontend_diagnosis_update', { id: diagnosis.id }) }}" method="post" {{ form_enctype(form) }}>
+            <input type="hidden" name="_method" value="PUT">
+            {{ form_widget(form._token) }}
+            {% include 'AccardWebBundle:Frontend/Diagnosis:form.html.twig' %}
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="pull-right">{{ update() }}</span>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    {% endblock %}
 {% endblock %}
 
 {% block javascripts %}

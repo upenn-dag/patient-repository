@@ -5,6 +5,7 @@
 {# For the full copyright and license information, please view the LICENSE #}
 {# file that was distributed with this source code. #}
 
+{% block drug_group_form %}
 {{ form_widget(form._token) }}
 <div class="row">
     <div class="col-md-6">
@@ -19,3 +20,4 @@
         {{ form_row(form.drugs) }}
     </div>
 </div>
+{% endblock %}

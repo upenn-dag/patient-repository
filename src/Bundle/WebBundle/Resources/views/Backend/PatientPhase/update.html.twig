@@ -12,22 +12,26 @@
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
 
 {% block content %}
-    {{ page_title('accard.interface.backend.titles.update_patient_phase'|trans, [
-        design(path('accard_backend_patient_design'), 'accard.patient.action.design'|trans)
-    ]) }}
+    {% block page_title %}
+        {{ page_title('accard.interface.backend.titles.update_patient_phase'|trans, [
+            design(path('accard_backend_patient_design'), 'accard.patient.action.design'|trans)
+        ]) }}
+    {% endblock %}
 
-    {{ form_errors(form) }}
-    
-    <form action="{{ path('accard_backend_patient_phase_update', { id: patient_phase.id }) }}" method="post" {{ form_enctype(form) }}>
-        <input type="hidden" name="_method" value="PUT">
-        {{ form_widget(form._token) }}
-        {% include 'AccardWebBundle:Backend/PatientPhase:form.html.twig' %}
-        <div class="row">
-            <div class="col-md-12">
-                <span class="pull-right">{{ update() }}</span>
+    {% block patient_phase_form %}
+        {{ form_errors(form) }}
+        
+        <form action="{{ path('accard_backend_patient_phase_update', { id: patient_phase.id }) }}" method="post" {{ form_enctype(form) }}>
+            <input type="hidden" name="_method" value="PUT">
+            {{ form_widget(form._token) }}
+            {% include 'AccardWebBundle:Backend/PatientPhase:form.html.twig' %}
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="pull-right">{{ update() }}</span>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    {% endblock %}
 {% endblock %}
 
 {% block page_javascripts %}

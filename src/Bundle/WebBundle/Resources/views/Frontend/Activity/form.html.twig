@@ -13,31 +13,39 @@
 </div>
 {% endmacro %}
 
+{% block activity_patient_form %}
 <div class="row">
     <div class="col-md-12">
         {{ select_patient(form.patient) }}
     </div>
 </div>
+{% endblock %}
 
 <div class="col-md-12 well">
     <div class="row">
-        <div class="col-md-6 row-split">
-            {{ form_row(form.diagnosis) }}
-            {% if form.drug is defined %}
-                {{ form_row(form.drug) }}
-            {% endif %}
-        </div>
-        <div class="col-md-6">
-            {{ form_row(form.activityDate) }}
-        </div>
+        {% block activity_diagnosis_form %}
+            <div class="col-md-6 row-split">
+                {{ form_row(form.diagnosis) }}
+                {% if form.drug is defined %}
+                    {{ form_row(form.drug) }}
+                {% endif %}
+            </div>
+        {% endblock %}
+        {% block activity_date_form %}
+            <div class="col-md-6">
+                {{ form_row(form.activityDate) }}
+            </div>
+        {% endblock %}
     </div>
 </div>
 
-{% for field in form.fields %}
-<div class="row">
-    <div class="col-md-6">
-        {{ _self.prototype(field) }}
+{% block activity_additional_fields %}
+    {% for field in form.fields %}
+    <div class="row">
+        <div class="col-md-6">
+            {{ _self.prototype(field) }}
+        </div>
     </div>
-</div>
-{% endfor %}
+    {% endfor %}
+{% endblock %}
 

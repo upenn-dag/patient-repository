@@ -13,4 +13,8 @@
 {% block content %}
     {{ page_title('accard.interface.frontend.titles.show_patient'|trans({ '%patient%': patient.firstName })) }}
 
+    {% block patient_details %}
+
+    {% endblock %}
+
 {% endblock %}

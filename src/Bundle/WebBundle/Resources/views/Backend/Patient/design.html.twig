@@ -14,6 +14,7 @@
 
 
 {% block content %}
+    {% block page_title %}
     {{ page_title(
         'accard.patient.action.design'|trans,
         [
@@ -21,8 +22,11 @@
             create(path('accard_frontend_patient_create'), 'accard.patient.action.create'|trans)
         ]
     ) }}
+    {% endblock %}
 
+    {% block patient_content %}
     <div class="row">
+        {% block patient_field_panel %}
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -36,14 +40,18 @@
                 {{ list_fields(fields, 'accard_backend_patient_field_update', 'accard_backend_patient_field_delete') }}
             </div>
         </div>
+        {% endblock %}
+        {% block patient_options_panel %}
         <div class="col-md-4">
             {{ button(path('accard_backend_option_update_redirect', { name: 'gender' }), 'accard.patient.field.update_gender'|trans, 'block') }}
             {{ button(path('accard_backend_option_update_redirect', { name: 'race' }), 'accard.patient.field.update_race'|trans, 'block') }}
             {{ button(path('accard_backend_patient_phase_index'), 'accard.patient.action.manage_phases'|trans, 'block') }}
         </div>
+        {% endblock %}
     </div>
 
     <div class="row">
+        {% block patient_settings_panel %}
         <div class="col-md-8">
             <form action="{{ path('accard_backend_patient_settings_update') }}" method="POST" enctype="{{ form_enctype(settings_form) }}">
                 {{ form_widget(settings_form._token) }}
@@ -65,11 +73,15 @@
                 </div>
             </form>
         </div>
+        {% endblock %}
+        {% block patient_statistics_panel %}
         <div class="col-md-4">
             {{ statistics([
                 'accard.patient.message.count'|trans({'%total%': patient_count}),
                 'accard.patient.field.count'|trans({'%total%': fields|length})
             ]) }}
         </div>
+        {% endblock %}
     </div>
+    {% endblock %}
 {% endblock %}

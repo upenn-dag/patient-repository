@@ -16,26 +16,29 @@
 {% set prototype = form.vars.value.prototype is defined ? form.vars.value.prototype.name : 'default' %}
 
 {% block content %}
+    {% block page_title %}
+        {{ page_title('accard.regimen.action.create'|trans,
+            [
+                generic(path('accard_frontend_regimen_index'), 'accard.regimen.action.manage'|trans, 'user')
+            ]
+        ) }}
+    {% endblock %}
 
-    {{ page_title('accard.regimen.action.create'|trans,
-        [
-            generic(path('accard_frontend_regimen_index'), 'accard.regimen.action.manage'|trans, 'user')
-        ]
-    ) }}
+    {% block regimen_form %}
+        {{ no_javascript() }}
 
-    {{ no_javascript() }}
+        {{ form_errors(form) }}
 
-    {{ form_errors(form) }}
-
-    <form action="{{ path('accard_frontend_regimen_create', { prototype: prototype }) }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form._token) }}
-        {% include 'AccardWebBundle:Frontend/Regimen:form.html.twig' %}
-        <div class="row">
-            <div class="col-md-12">
-                <span class="pull-right">{{ create() }}</span>
+        <form action="{{ path('accard_frontend_regimen_create', { prototype: prototype }) }}" method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form._token) }}
+            {% include 'AccardWebBundle:Frontend/Regimen:form.html.twig' %}
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="pull-right">{{ create() }}</span>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    {% endblock %}
 {% endblock %}
 
 {% block javascripts %}

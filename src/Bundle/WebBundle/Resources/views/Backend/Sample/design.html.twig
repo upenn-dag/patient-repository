@@ -12,6 +12,7 @@
 {% from 'AccardWebBundle:Common/Macros:fields.html.twig' import list_prototypes, list_fields %}
 
 {% macro action_buttons() %}
+    {% block sample_nav %}
     <div class="btn-group">
         <a href="{{ path('accard_frontend_sample_index') }}" class="btn btn-primary">{{ 'accard.sample.action.manage_all'|trans }}</a>
         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -23,12 +24,14 @@
             <li><a href="{{ path('accard_backend_sample_field_create') }}">{{ 'accard.sample_prototype_field.action.create'|trans }}</a></li>
         </ul>
     </div>
+    {% endblock %}
 {% endmacro %}
 
 {% block content %}
-
-    {{ page_title('accard.sample.action.design'|trans, _self.action_buttons()) }}
-
+    {% page_title %}
+        {{ page_title('accard.sample.action.design'|trans, _self.action_buttons()) }}
+    {% endblock %}
+    {% block sample_nav %}
     <ul class="nav nav-tabs" role="tablist">
         <li class="{{ _self.active_tab(['prototype', 'none'], 'active') }}">
             <a href="#prototypes" role="tab" data-toggle="tab">
@@ -46,8 +49,11 @@
             </a>
         </li>
     </ul>
+    {% endblock %}
 
+    {% block sample_content %}
     <div class="tab-content grid-tabs">
+        {% block sample_prototypes %}
         <div id="prototypes" class="tab-pane fade{{ _self.active_tab(['prototype', 'none'], ' in active') }}">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -58,6 +64,8 @@
                 {{ list_prototypes(prototypes, 'accard_backend_sample_prototype_update', 'accard_backend_sample_prototype_delete') }}
             </div>
         </div>
+        {% endblock %}
+        {% block sample_prototype_fields %}
         <div id="fields" class="tab-pane fade{{ _self.active_tab('field', ' in active') }}">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -68,6 +76,8 @@
                 {{ list_fields(fields, 'accard_backend_sample_field_update', 'accard_backend_sample_field_delete') }}
             </div>
         </div>
+        {% endblock %}
+        {% block sample_settings %}
         <div id="settings" class="tab-pane fade{{ _self.active_tab('settings', ' in active') }}">
             <form action="{{ path('accard_backend_sample_settings_update') }}" method="POST" enctype="{{ form_enctype(settings_form) }}">
                 {{ form_widget(settings_form._token) }}
@@ -88,8 +98,9 @@
                 </div>
             </form>
         </div>
+        {% endblock %}
     </div>
-
+    {% endblock %}
 {% endblock %}
 
 {% block page_javascripts %}

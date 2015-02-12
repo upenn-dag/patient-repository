@@ -15,23 +15,27 @@
 {% set pds = settings.pds_enabled is defined and settings.pds_enabled %}
 
 {% block content %}
-    {{ page_title('accard.patient.action.create'|trans,
-        [
-            generic(path('accard_frontend_patient_index'), 'accard.patient.action.manage'|trans, 'user')
-        ]
-    ) }}
+    {% block dpage_title %}
+        {{ page_title('accard.patient.action.create'|trans,
+            [
+                generic(path('accard_frontend_patient_index'), 'accard.patient.action.manage'|trans, 'user')
+            ]
+        ) }}
+    {% endblock %}
 
-    {{ form_errors(form) }}
-    
-    <form action="{{ path('accard_frontend_patient_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form._token) }}
-        {% include 'AccardWebBundle:Frontend/Patient:form.html.twig' %}
-        <div class="row">
-            <div class="col-md-12">
-                <span class="pull-right">{{ create() }}</span>
+    {% block patient_form %}
+        {{ form_errors(form) }}
+        
+        <form action="{{ path('accard_frontend_patient_create') }}" method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form._token) }}
+            {% include 'AccardWebBundle:Frontend/Patient:form.html.twig' %}
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="pull-right">{{ create() }}</span>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    {% endblock %}
 {% endblock %}
 
 {% block page_javascripts -%}

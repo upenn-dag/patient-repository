@@ -12,8 +12,12 @@
 
 {% block content %}
 
-{{ page_title('accard.interface.backend.titles.dashboard'|trans) }}
-
-{{ construction('Backend Dashboard') }}
+	{% block page_title %}
+		{{ page_title('accard.interface.backend.titles.dashboard'|trans) }}
+	{% endblock %}
+	
+	{% block dashboard_content %}
+		{{ construction('Backend Dashboard') }}
+	{% endblock %}
 
 {% endblock %}

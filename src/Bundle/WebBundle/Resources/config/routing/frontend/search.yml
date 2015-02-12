@@ -8,4 +8,4 @@
 accard_frontend_search:
     path: /
     defaults:
-        _controller: AccardWebBundle:Search:search
+        _controller: Theme:Search:search

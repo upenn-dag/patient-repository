@@ -7,10 +7,14 @@
 
 {{ form_widget(form._token) }}
 <div class="row">
+	{% block behavior_code_form %}
     <div class="col-md-6">
         {{ form_row(form.code) }}
     </div>
+    {% endblock %}
+    {% block behavior_description_form %}
     <div class="col-md-6">
         {{ form_row(form.description) }}
     </div>
+    {% endblock %}
 </div>

@@ -57,3 +57,7 @@ accard_backend_canvas:
 accard_backend_translations:
     resource: "@LexikTranslationBundle/Resources/config/routing.yml"
     prefix: /translations
+
+accard_backend_template:
+    resource: @AccardWebBundle/Resources/config/routing/backend/template.yml
+    prefix: /template

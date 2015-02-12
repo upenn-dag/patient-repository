@@ -10,7 +10,8 @@
 {% from 'AccardWebBundle:Common/Macros:alerts.html.twig' import info %}
 {% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label %}
-
+    
+{% block diagnosis_code_listing %}
 {% if codes|length > 0 %}
     <table class="diagnosis-code table table-bordered table-condensed table-striped table-hover">
         <thead>
@@ -39,7 +40,7 @@
 {% else %}
     {{ info('accard.diagnosis.code.none_found'|trans) }}
 {% endif %}
-
+{% endblock %}
 {% endmacro %}
 
 
@@ -49,6 +50,7 @@
 {% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label %}
 
+{% block diagnosis_code_group_listing %}
 {% if groups|length > 0 %}
     <table class="diagnosis-code-group table table-bordered table-striped table-hover">
         <thead>
@@ -84,5 +86,5 @@
 {% else %}
     {{ info('accard.diagnosis.code_group.none_found'|trans) }}
 {% endif %}
-
+{% endblock %}
 {% endmacro %}

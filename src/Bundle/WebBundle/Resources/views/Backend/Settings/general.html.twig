@@ -11,9 +11,11 @@
 {% from 'AccardWebBundle:Common/Macros:actions.html.twig' import update %}
 
 {% block content %}
+    {% block page_title %}
+        {{ page_title('accard.interface.backend.titles.general_settings'|trans) }}
+    {% endblock %}
 
-    {{ page_title('accard.interface.backend.titles.general_settings'|trans) }}
-
+    {% block settings_form %}
     {{ form_errors(form) }}
 
     <form action="{{ path('accard_backend_general_settings') }}" method="post" {{ form_enctype(form) }}>
@@ -32,5 +34,5 @@
             </div>
         </div>
     {{ form_end(form) }}
-
+    {% endblock %}
 {% endblock %}

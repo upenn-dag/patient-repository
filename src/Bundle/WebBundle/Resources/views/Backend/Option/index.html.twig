@@ -12,12 +12,16 @@
 {% from 'AccardWebBundle:Backend/Option:macros.html.twig' import list %}
 
 {% block content %}
+	{% block page_title %}
     {{ page_title(
         'accard.interface.backend.titles.manage_options'|trans,
         create(path('accard_backend_option_create'), 'accard.form.option.create'|trans)
     )}}
+    {% endblock %}
 
-    {{ pagination(options) }}
-    {{ list(options) }}
-    {{ pagination(options) }}
+    {% block options_content %}
+	    {{ pagination(options) }}
+	    {{ list(options) }}
+	    {{ pagination(options) }}
+    {% endblock %}
 {% endblock %}

@@ -11,39 +11,41 @@
 {% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete, show %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label, icon %}
 
-{% if attributes|length > 0 %}
-    <table id="attributes" class="attribute table table-bordered table-striped table-hover">
-        <thead>
-            <tr>
-                <th class="description">{{ 'accard.attribute.form.description'|trans }}</th>
-                <th class="prototype">{{ accard_resource_sort('prototype', 'accard.attribute.form.prototype'|trans) }}</th>
-                <th class="patient">{{ accard_resource_sort('patient', 'accard.attribute.form.patient'|trans) }}</th>
-                <th class="actions"></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for attribute in attributes %}
-            <tr id="attribute-{{ attribute.id }}">
-                <td class="description">{{ attribute.description }}</td>
-                <td class="prototype">
-                    <a href="{{ path('accard_frontend_attribute_index_by_prototype', {'prototype': attribute.prototype.name}) }}">
-                        {{- attribute.prototype.presentation -}}
-                    </a>
-                </td>
-                <td class="patient">{{ attribute.patient.fullName }}</td>
-                <td class="actions">
-                    <div class="pull-right">
-                        {{ show(path('accard_frontend_attribute_show', {'prototype': attribute.prototype.name, 'id': attribute.id}), null, 'xs') }}
-                        {{ edit(path('accard_frontend_attribute_update', {'prototype': attribute.prototype.name, 'id': attribute.id}), null, 'xs') }}
-                        {{ delete(path('accard_frontend_attribute_delete', {'prototype': attribute.prototype.name, 'id': attribute.id}), null, 'xs') }}
-                    </div>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    {{ info('accard.attribute.none_found'|trans) }}
-{% endif %}
+    {% block attributes_list %}
+        {% if attributes|length > 0 %}
+            <table id="attributes" class="attribute table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="description">{{ 'accard.attribute.form.description'|trans }}</th>
+                        <th class="prototype">{{ accard_resource_sort('prototype', 'accard.attribute.form.prototype'|trans) }}</th>
+                        <th class="patient">{{ accard_resource_sort('patient', 'accard.attribute.form.patient'|trans) }}</th>
+                        <th class="actions"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for attribute in attributes %}
+                    <tr id="attribute-{{ attribute.id }}">
+                        <td class="description">{{ attribute.description }}</td>
+                        <td class="prototype">
+                            <a href="{{ path('accard_frontend_attribute_index_by_prototype', {'prototype': attribute.prototype.name}) }}">
+                                {{- attribute.prototype.presentation -}}
+                            </a>
+                        </td>
+                        <td class="patient">{{ attribute.patient.fullName }}</td>
+                        <td class="actions">
+                            <div class="pull-right">
+                                {{ show(path('accard_frontend_attribute_show', {'prototype': attribute.prototype.name, 'id': attribute.id}), null, 'xs') }}
+                                {{ edit(path('accard_frontend_attribute_update', {'prototype': attribute.prototype.name, 'id': attribute.id}), null, 'xs') }}
+                                {{ delete(path('accard_frontend_attribute_delete', {'prototype': attribute.prototype.name, 'id': attribute.id}), null, 'xs') }}
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            {{ info('accard.attribute.none_found'|trans) }}
+        {% endif %}
+    {% endblock %}
 
 {% endmacro %}

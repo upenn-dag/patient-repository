@@ -6,11 +6,15 @@
 {# file that was distributed with this source code. #}
 
 <div class="row">
+	{% block diagnosis_phase_order_form %}
     <div class="col-md-6">
         {{ form_row(form.label) }}
         {{ form_row(form.order) }}
     </div>
+    {% endblock %}
+    {% block diagnosis_phase_presentation_form %}
     <div class="col-md-6">
         {{ form_row(form.presentation) }}
     </div>
+    {% endblock %}
 </div>

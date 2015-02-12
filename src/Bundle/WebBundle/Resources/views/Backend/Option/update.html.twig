@@ -12,22 +12,26 @@
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
 
 {% block content %}
-    {{ page_title('accard.interface.backend.titles.update_option'|trans({ '%option%': option })) }}
+    {% block page_title %}
+        {{ page_title('accard.interface.backend.titles.update_option'|trans({ '%option%': option })) }}
+    {% endblock %}
 
-    {{ no_javascript() }}
-    {{ form_errors(form) }}
-    
-    <form action="{{ path('accard_backend_option_update', { id: option.id }) }}" method="post" {{ form_enctype(form) }}>
-        <input type="hidden" name="_method" value="PUT">
-        {{ form_widget(form._token) }}
-        {% include 'AccardWebBundle:Backend/Option:form.html.twig' %}
-        <hr>
-        <div class="row">
-            <div class="col-md-12">
-                <span class="pull-right">{{ update() }}</span>
+    {% block option_form %}
+        {{ no_javascript() }}
+        {{ form_errors(form) }}
+        
+        <form action="{{ path('accard_backend_option_update', { id: option.id }) }}" method="post" {{ form_enctype(form) }}>
+            <input type="hidden" name="_method" value="PUT">
+            {{ form_widget(form._token) }}
+            {% include 'AccardWebBundle:Backend/Option:form.html.twig' %}
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="pull-right">{{ update() }}</span>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    {% endblock %}
 {% endblock %}
 
 {% block page_javascripts %}

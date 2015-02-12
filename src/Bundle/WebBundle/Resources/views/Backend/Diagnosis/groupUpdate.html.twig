@@ -10,17 +10,20 @@
 {% from 'AccardWebBundle:Common/Macros:actions.html.twig' import update %}
 
 {% block content %}
-    {{ page_title('accard.diagnosis_code_group.action.update'|trans) }}
+    {% block page_title %}
+        {{ page_title('accard.diagnosis_code_group.action.update'|trans) }}
+    {% endblock %}
 
-    {{ form_errors(form) }}
+    {% block diagnosis_code_group_form %}
+        {{ form_errors(form) }}
 
-    <form action="{{ path('accard_backend_diagnosis_code_group_update', { id: diagnosis_code_group.id }) }}" method="post" {{ form_enctype(form) }}>
-        {% include 'AccardWebBundle:Backend/Diagnosis:groupForm.html.twig' %}
-        <div class="row">
-            <div class="col-md-12">
-                <span class="pull-right">{{ update() }}</span>
+        <form action="{{ path('accard_backend_diagnosis_code_group_update', { id: diagnosis_code_group.id }) }}" method="post" {{ form_enctype(form) }}>
+            {% include 'AccardWebBundle:Backend/Diagnosis:groupForm.html.twig' %}
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="pull-right">{{ update() }}</span>
+                </div>
             </div>
-        </div>
-    </form>
-
+        </form>
+    {% endblock %}
 {% endblock %}

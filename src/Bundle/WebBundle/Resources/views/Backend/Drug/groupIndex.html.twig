@@ -12,14 +12,16 @@
 {% from 'AccardWebBundle:Backend/Drug:macros.html.twig' import list_groups, list_drugs %}
 
 {% block content %}
-
+	{% block page_title %}
     {{ page_title('accard.drug_group.action.index'|trans,
         [
             create(path('accard_backend_drug_group_create'), 'accard.drug_group.action.create'|trans),
             create(path('accard_backend_drug_create'), 'accard.drug.action.create'|trans)
         ])
-    }}
-
-    {{ list_groups(drug_groups) }}
-    {{ list_drugs(drugs) }}
+    }}	
+   	{% endblock %}
+   	{% block drug_group_content %}
+	    {{ list_groups(drug_groups) }}
+	    {{ list_drugs(drugs) }}
+    {% endblock %}
 {% endblock %}

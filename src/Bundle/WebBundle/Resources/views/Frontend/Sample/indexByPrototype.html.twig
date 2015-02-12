@@ -13,7 +13,7 @@
 {% set prototype = app.request.get('prototype') %}
 {% set createBtn = prototype ? create(path('accard_frontend_sample_create', { prototype: prototype }), 'accard.sample.action.create'|trans) : null %}
 
-{% block sample_title %}
+{% block page_title %}
     {{ page_title(
         'accard.sample.title.index_by_prototype'|trans({'%prototype%': prototype|humanize}),
         [

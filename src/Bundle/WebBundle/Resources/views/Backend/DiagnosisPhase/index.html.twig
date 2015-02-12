@@ -12,13 +12,15 @@
 {% from 'AccardWebBundle:Backend/DiagnosisPhase:macros.html.twig' import list %}
 
 {% block content %}
+	{% block page_title %}
+	    {{ page_title('accard.diagnosis_phase.title.index'|trans, [
+	        create(path('accard_backend_diagnosis_phase_create'), 'accard.diagnosis_phase.action.create'|trans),
+	        design(path('accard_backend_diagnosis_design'), 'accard.diagnosis.action.design'|trans)
+	    ]) }}
+    {% endblock %}
 
-    {{ page_title('accard.diagnosis_phase.title.index'|trans, [
-        create(path('accard_backend_diagnosis_phase_create'), 'accard.diagnosis_phase.action.create'|trans),
-        design(path('accard_backend_diagnosis_design'), 'accard.diagnosis.action.design'|trans)
-    ]) }}
-
-    {{ list(diagnosis_phases) }}
-    {{ pagination(diagnosis_phases) }}
-
+    {% block diagnosis_phase_content %}
+	    {{ list(diagnosis_phases) }}
+	    {{ pagination(diagnosis_phases) }}
+	{% endblock %}
 {% endblock %}

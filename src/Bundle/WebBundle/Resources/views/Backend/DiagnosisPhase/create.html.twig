@@ -12,10 +12,13 @@
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
 
 {% block content %}
+    {% block page_title %}
     {{ page_title('accard.diagnosis_phase.action.create'|trans, [
         design(path('accard_backend_diagnosis_design'), 'accard.diagnosis.action.design'|trans)
     ]) }}
+    {% endblock %}
 
+    {% block diagnosis_phase_form %}
     {{ form_errors(form) }}
     
     <form action="{{ path('accard_backend_diagnosis_phase_create') }}" method="post" {{ form_enctype(form) }}>
@@ -27,4 +30,5 @@
             </div>
         </div>
     </form>
+    {% endblock %}
 {% endblock %}

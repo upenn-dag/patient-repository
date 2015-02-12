@@ -11,39 +11,40 @@
 {% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import edit, delete %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import label %}
 
-{% if options|length > 0 %}
-    <table class="table table-responsive table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>{{ accard_resource_sort('presentation', 'accard.form.option.presentation'|trans) }}</th>
-                <th>{{ accard_resource_sort('name', 'accard.form.option.name'|trans) }}</th>
-                <th>{{ 'accard.form.option.values'|trans }}</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for option in options %}
-            <tr id="{{ option.id }}">
-                <td>{{ option.presentation }}</td>
-                <td>{{ option.name }}</td>
-                <td>
-                {% for value in option.values %}
-                    {{ label(value) }}
-                {% else %}
-                    No values provided.
-                {% endfor %}
-                </td>
-                <td>
-                    <div class="pull-right">
-                        {{ edit(path('accard_backend_option_update', {'id': option.id}), null, 'xs') }}
-                    </div>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    {{ info('accard.option.none_found'|trans) }}
-{% endif %}
-
+{% block options_listing %}
+    {% if options|length > 0 %}
+        <table class="table table-responsive table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>{{ accard_resource_sort('presentation', 'accard.form.option.presentation'|trans) }}</th>
+                    <th>{{ accard_resource_sort('name', 'accard.form.option.name'|trans) }}</th>
+                    <th>{{ 'accard.form.option.values'|trans }}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for option in options %}
+                <tr id="{{ option.id }}">
+                    <td>{{ option.presentation }}</td>
+                    <td>{{ option.name }}</td>
+                    <td>
+                    {% for value in option.values %}
+                        {{ label(value) }}
+                    {% else %}
+                        No values provided.
+                    {% endfor %}
+                    </td>
+                    <td>
+                        <div class="pull-right">
+                            {{ edit(path('accard_backend_option_update', {'id': option.id}), null, 'xs') }}
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        {{ info('accard.option.none_found'|trans) }}
+    {% endif %}
+{% endblock %}
 {% endmacro %}

@@ -10,8 +10,11 @@
 {% from 'AccardWebBundle:Common/Macros:actions.html.twig' import create %}
 
 {% block content %}
+    {% block page_title %}
     {{ page_title('accard.drug_group.action.create'|trans) }}
+    {% endblock %}
 
+    {% block drug_group_form %}
     {{ form_errors(form) }}
 
     <form action="{{ path('accard_backend_drug_group_create') }}" method="post" {{ form_enctype(form) }}>
@@ -22,7 +25,7 @@
             </div>
         </div>
     </form>
-
+    {% endblock %}
 {% endblock %}
 
 {% block page_javascripts %}

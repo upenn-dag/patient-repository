@@ -12,13 +12,17 @@
 {% from 'AccardWebBundle:Backend/PatientPhase:macros.html.twig' import list %}
 
 {% block content %}
+	
+	{% block page_title %}
+	    {{ page_title('accard.patient_phase.title.index'|trans, [
+	        create(path('accard_backend_patient_phase_create'), 'accard.patient_phase.action.create'|trans),
+	        design(path('accard_backend_patient_design'), 'accard.patient.action.design'|trans)
+	    ]) }}
+    {% endblock %}
 
-    {{ page_title('accard.patient_phase.title.index'|trans, [
-        create(path('accard_backend_patient_phase_create'), 'accard.patient_phase.action.create'|trans),
-        design(path('accard_backend_patient_design'), 'accard.patient.action.design'|trans)
-    ]) }}
-
-    {{ list(patient_phases) }}
-    {{ pagination(patient_phases) }}
+    {% block patient_phase_content %}
+	    {{ list(patient_phases) }}
+	    {{ pagination(patient_phases) }}
+    {% endblock %}
 
 {% endblock %}

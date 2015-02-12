@@ -17,26 +17,28 @@
 
 
 {% block content %}
-
+    {% block page_title %}
     {{ page_title('accard.activity.action.create'|trans,
         [
             generic(path('accard_frontend_activity_index'), 'accard.activity.action.manage'|trans, 'user')
         ]
     ) }}
+    {% endblock %}
 
-    {{ no_javascript() }}
+    {% block activity_form %}
+        {{ no_javascript() }}
+        {{ form_errors(form) }}
 
-    {{ form_errors(form) }}
-
-    <form action="{{ path('accard_frontend_activity_create', { prototype: prototype }) }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form._token) }}
-        {% include 'AccardWebBundle:Frontend/Activity:form.html.twig' %}
-        <div class="row">
-            <div class="col-md-12">
-                <span class="pull-right">{{ create() }}</span>
+        <form action="{{ path('accard_frontend_activity_create', { prototype: prototype }) }}" method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form._token) }}
+            {% include 'AccardWebBundle:Frontend/Activity:form.html.twig' %}
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="pull-right">{{ create() }}</span>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    {% endblock %}
 {% endblock %}
 
 {% block javascripts %}
