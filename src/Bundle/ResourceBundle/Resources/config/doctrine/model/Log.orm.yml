@@ -33,6 +33,7 @@ Accard\Component\Resource\Model\Log:
             length: 16
             nullable: false
         resource:
+            column: resourceName
             type: string
             length: 32
             nullable: false
@@ -44,11 +45,14 @@ Accard\Component\Resource\Model\Log:
             length: 100
             nullable: false
         attributes:
+            column: uriAttributes
             type: json_array
             nullable: true
         query:
+            column: uriQuery
             type: json_array
             nullable: true
         request:
+            column: uriRequest
             type: json_array
             nullable: true
