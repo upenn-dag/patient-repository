@@ -50,10 +50,6 @@ accard_backend_attribute:
     resource: @AccardWebBundle/Resources/config/routing/backend/attribute.yml
     prefix: /attribute
 
-accard_backend_canvas:
-    resource: @AccardWebBundle/Resources/config/routing/backend/canvas.yml
-    prefix: /canvas
-
 accard_backend_translations:
     resource: "@LexikTranslationBundle/Resources/config/routing.yml"
     prefix: /translations
