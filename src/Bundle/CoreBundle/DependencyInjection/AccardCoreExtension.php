@@ -45,7 +45,7 @@ class AccardCoreExtension extends AbstractResourceExtension implements PrependEx
      *
      * @var array
      */
-    protected $configFiles = array('services', 'settings', 'forms', 'flows', 'providers', 'events');
+    protected $configFiles = array('services', 'settings', 'forms', 'providers', 'events');
 
 
     /**
