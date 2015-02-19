@@ -29,7 +29,6 @@
         "knplabs/knp-menu-bundle":               "2.0.*@dev",
         "mopa/bootstrap-bundle":                 "~3.0@dev",
         "twbs/bootstrap":                        "v3.2.0",
-        "winzou/state-machine-bundle":           "~0.2",
         "friendsofsymfony/elastica-bundle":      "~3.1@dev",
         "lexik/translation-bundle":              "~2.0",
         "gedmo/doctrine-extensions":             "2.3.11"

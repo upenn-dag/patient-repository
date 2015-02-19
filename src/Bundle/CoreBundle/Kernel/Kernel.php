@@ -73,7 +73,6 @@ abstract class Kernel extends BaseKernel
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new \FOS\ElasticaBundle\FOSElasticaBundle(),
         );
 
