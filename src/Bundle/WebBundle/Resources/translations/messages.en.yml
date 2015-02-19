@@ -34,19 +34,6 @@ accard:
     set: Set
     confirmation:
         message: Are you sure you want to delete this resource?
-    flow:
-        basic_patient:
-            create_patient: Create a Patient
-            create_diagnosis: First Presentation
-            create_pre_existing_conditions: Pre-existing Conditions
-            finalize_patient: Finalize Patient
-        create_regimen:
-            dump: TEST DUMP
-            select_diagnosis: Select diagnosis
-            select_patient: Select patient
-            select_patient_diagnosis: "Select patient & diagnosis"
-            select_regimen: Select regimen
-            create_regimen: Create regimen
     alert:
         info: Information
         success: Success
