@@ -1,0 +1,97 @@
+/* Forms */
+label.optional {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Tables */
+
+/* Sidebar Menu Styles */
+
+#side-menu li.current > a {
+    color: black;
+}
+
+#side-menu li.ancestor {
+
+}
+
+/* Drag */
+.drag-over {
+    background-color: rgba(0, 15, 235, 0.1) !important;
+}
+
+.drag-reject {
+    background-color: rgba(235, 15, 0 0.1) !important;
+}
+
+/* Delete form */
+
+.delete-action-form {
+    display: inline;
+}
+
+/* Filter form */
+
+.filter-bar {
+    width: 100%;
+    height: 12px;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: inline-block;
+    text-align: center;
+    color: white;
+}
+
+.filter-bar:hover, .filter-bar.in {
+    background: #428bca;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.filter-bar .caret {
+    margin-top: -8px;
+}
+
+.form-filter {
+    background-color: #f1f1f1;
+    padding: 15px;
+    margin: -8px 0 10px 0;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.form-filter .row .form-group {
+    margin-right: 10px;
+    width: 100%;
+}
+
+/* Tabs */
+.grid-tabs {
+    margin: 10px auto;
+}
+
+/* Alerts */
+body > .alert {
+    position: fixed;
+    top: 51;
+    z-index: 1050;
+    width: 100%;
+    border-radius: 0;
+    text-align: center;
+}
+
+
+.alert-construction .alert-heading,
+.alert-construction p {
+    margin-left: 115px;
+}
+
+.alert-construction i {
+    float: left;
+    margin-left: 15px;
+}
+
+/* Layout */
+
+.row-split {
+    border-right: 1px solid #eee;
+}
+

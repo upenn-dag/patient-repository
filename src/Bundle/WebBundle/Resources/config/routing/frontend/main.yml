@@ -18,13 +18,13 @@ accard_frontend_diagnosis:
     resource: @AccardWebBundle/Resources/config/routing/frontend/diagnosis.yml
     prefix: /diagnosis
 
-accard_frontend_activity:
-    resource: @AccardWebBundle/Resources/config/routing/frontend/activity.yml
-    prefix: /activity
-
 accard_frontend_regimen:
     resource: @AccardWebBundle/Resources/config/routing/frontend/regimen.yml
     prefix: /activity/regimen
+
+accard_frontend_activity:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/activity.yml
+    prefix: /activity
 
 accard_frontend_sample:
     resource: @AccardWebBundle/Resources/config/routing/frontend/sample.yml
@@ -41,6 +41,10 @@ accard_frontend_attribute:
 accard_frontend_import:
     resource: @AccardWebBundle/Resources/config/routing/frontend/import.yml
     prefix: /import
+
+accard_frontend_flow:
+    resource: @AccardFlowBundle/Resources/config/routing.yml
+    prefix: /flow
 
 accard_frontend_search:
     resource: @AccardWebBundle/Resources/config/routing/frontend/search.yml

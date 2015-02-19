@@ -38,7 +38,6 @@ class AccardResourceBundle extends Bundle
     {
         $interfaces = array(
             'Accard\Component\Resource\Model\ImportInterface' => 'accard.model.import.class',
-            'Accard\Component\Resource\Model\LogInterface' => 'accard.model.log.class',
         );
 
         $mappings = array(
