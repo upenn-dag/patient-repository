@@ -15,6 +15,8 @@ use Accard\Bundle\RegimenBundle\Model\RegimenActivitiesChoice;
 use Accard\Bundle\RegimenBundle\Form\Type\RegimenActivitiesChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
+use Accard\Component\Diagnosis\Exception\DiagnosisNotFoundException;
+use Accard\Component\Patient\Exception\PatientNotFoundException;
 use Pagerfanta\Pagerfanta;
 
 /**
@@ -140,6 +142,44 @@ class RegimenController extends ResourceController
         }
 
         return parent::getForm($resource);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function createNew()
+    {
+        $resource = parent::createNew();
+
+        if (!$request = $this->config->getRequest()) {
+            return $resource;
+        }
+
+        $patient = $request->get('patient');
+        $diagnosis = $request->get('diagnosis');
+
+        if ($diagnosis) {
+            try {
+                $diagnosisProvider = $this->get('accard.provider.diagnosis');
+                $diagnosis = $diagnosisProvider->getDiagnosis($diagnosis);
+                $resource->setDiagnosis($diagnosis);
+                $resource->setPatient($diagnosis->getPatient());
+            } catch (DiagnosisNotFoundException $e) {
+                throw $this->createNotFoundException('Diagnosis could not be found.', $e);
+            }
+        }
+
+        if ($patient) {
+            try {
+                $patientProvider = $this->get('accard.provider.patient');
+                $patient = $patientProvider->getPatient($patient);
+                $resource->setPatient($patient);
+            } catch (PatientNotFoundException $e) {
+                throw $this->createNotFoundException('Patient could not be found.', $e);
+            }
+        }
+
+        return $resource;
     }
 
     /**

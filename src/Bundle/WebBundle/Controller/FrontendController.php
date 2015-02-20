@@ -96,6 +96,27 @@ class FrontendController extends Controller
     }
 
     /**
+     * Create a prototype list form.
+     * Lists all activity prototypes in create buttons
+     * @param Request $request
+     * @param string $type
+     * @return Response
+     */
+    public function prototypeListFormAction(Request $request, $type,$activities)
+    {
+
+
+        $form = $this->createPrototypeListForm($type);
+
+        return $this->render('AccardWebBundle:Common/Form:prototypeListForm.html.twig', array(
+            'form' => $form->createView(),
+            'type' => $type,
+            'activities' => $activities,
+        ));
+    }
+
+
+    /**
      * Redirect to proper place from prototype selection.
      *
      * @param Request $request
@@ -121,6 +142,52 @@ class FrontendController extends Controller
         }
 
         throw $this->createNotFoundException();
+    }
+
+    /**
+     * Redirect to proper place activity prototype selection.
+     *
+     * @param Request $request
+     * @param string $type
+     * @return RedirectResponse
+     */
+    public function prototypeListAction($type)
+    {
+
+
+            $route = 'accard_frontend_activity_create';
+            $url = $this->generateUrl($route, array('prototype' => $type));
+    
+        if (isset($url)) {
+           
+            return $this->redirect($url);
+        }
+
+        throw $this->createNotFoundException();
+    }
+
+    /**
+     * Create prototype list form.
+     *
+     * @param string $type
+     */
+    private function createPrototypeListForm($type)
+    {
+        $prototypeListType = sprintf('accard_%s_prototype_choice', $type);
+        $builder = $this->get('form.factory')->createNamedBuilder(null, 'form', array(), array(
+            'csrf_protection' => false,
+            'method' => 'GET',
+        ));
+
+        $builder->add('prototypes', $prototypeListType, array(
+            'required' => true,
+            'placeholder' => 'accard.prototype_choice.action.choose',
+        ));
+
+       $builder->add('create', 'submit', array(
+            'label' => 'accard.prototype_choice.action.create',
+        ));
+        return $builder->getForm();
     }
 
     /**

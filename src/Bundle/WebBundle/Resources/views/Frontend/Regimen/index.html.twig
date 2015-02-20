@@ -7,20 +7,28 @@
 
 {% extends 'AccardWebBundle:Frontend:layout.html.twig' %}
 
-{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import design %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import design, create %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import pagination, page_title %}
 {% from 'AccardWebBundle:Frontend/Regimen:macros.html.twig' import list %}
 
 {% set settings = accard_settings('regimen') %}
 {% set designBtn = null %}
 
+{% set prototype = app.request.get('prototype') %}
+{% set createBtn = null %}
+
 {% if is_granted('ROLE_ADMIN') %}
     {% set designBtn = design(path('accard_backend_regimen_design'), 'accard.regimen.action.design'|trans) %}
+
+    {% if (prototype) %}
+    {% set createBtn = create(path('accard_frontend_regimen_create',{prototype: prototype}), 'accard.regimen.action.create'|trans) %}
+    {% endif %}
+
 {% endif %}
 
 {% block content %}
     {% block page_title %}
-        {{ page_title('accard.regimen.title.index'|trans, designBtn) }}
+        {{ page_title('accard.regimen.title.index'|trans, [designBtn,createBtn]) }}
     {% endblock %}
 
     {% block regimen_tabs %}
@@ -32,6 +40,7 @@
         {{ list(regimens) }}
         {{ pagination(regimens) }}
     {% endblock %}
+
 {% endblock %}
 
 {% block page_javascripts %}

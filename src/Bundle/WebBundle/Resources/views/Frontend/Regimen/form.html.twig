@@ -32,8 +32,7 @@
 {% endblock %}
 
 {% from _self import render_field %}
-{% include 'AccardWebBundle:Frontend/Regimen:formTabs.html.twig' %}
-
+{% include 'AccardWebBundle:Frontend/Regimen:formTabs.html.twig' with { showActivityTab: form.activities is defined } %}
 
 <div class="tab-content">
 {% block regimen_base_form %}
@@ -76,10 +75,30 @@
         </div>
     </div>
 {% endblock %}
-{% block regimen_activites_form %}
-    <div class="tab-pane fade" id="regimen-activities">
-    </div>
-{% endblock %}
+
+{% if form.activities is defined %}
+    {% block regimen_activites_form %}
+        <div class="tab-pane fade" id="regimen-activities">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    Create an activity <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                {% for activityPrototype in regimen.prototype.activityPrototypes %}
+                    <li>
+                        <a href="{{ path('accard_frontend_activity_create', { prototype: activityPrototype.name }) }}" onclick="return false" data-target="#regimen-activity-modal">
+                            <i class="glyphicon glyphicon-plus-sign"></i><span> {{ activityPrototype.presentation }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+            
+            {{ form_row(form.activities) }}
+        </div>
+    {% endblock %}
+{% endif %}
+
 </div>
 
 

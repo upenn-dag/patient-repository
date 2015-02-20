@@ -19,6 +19,7 @@
 {% endif %}
 
 {% block content %}
+
     {% block page_title %}
         {{ page_title('accard.activity.title.index'|trans, designBtn) }}
     {% endblock %}
@@ -27,11 +28,11 @@
     {% include 'AccardWebBundle:Frontend/Activity:tabs.html.twig' %}
     {{ render(controller('AccardWebBundle:Frontend:prototypeChoiceForm', { 'type' : 'activity' })) }}
 
-
     {% block activity_content %}
         {{ list(activities) }}
         {{ pagination(activities) }}
     {% endblock %}
+ 
 {% endblock %}
 
 {% block page_javascripts %}

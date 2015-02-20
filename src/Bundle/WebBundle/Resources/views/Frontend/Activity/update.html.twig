@@ -11,7 +11,8 @@
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
 {% from 'AccardWebBundle:Common/Macros:form.html.twig' import select_patient_js, select_patient_css %}
 
-{% set prototype = form.vars.value.prototype is defined ? form.vars.value.prototype.name : 'default' %}
+{% set activity = form.vars.value %}
+{% set prototype = activity.prototype is defined ? activity.prototype.name : 'default' %}
 
 {% block content %}
     {% block page_title %}
@@ -21,7 +22,9 @@
     {% block activity_form %}
         {{ form_errors(form) }}
 
-        <form action="{{ path('accard_frontend_activity_update', { prototype: prototype, id: activity.id }) }}" method="post" {{ form_enctype(form) }}>
+        {% set updatePath = path('accard_frontend_activity_update', { prototype: prototype, id: activity.id }) %}
+
+        <form action="{{ updatePath }}" method="post" {{ form_enctype(form) }}>
             <input type="hidden" name="_method" value="PUT">
             {{ form_widget(form._token) }}
             {% include 'AccardWebBundle:Frontend/Activity:form.html.twig' %}

@@ -46,7 +46,8 @@ class PrototypeDescriber
     /**
      * Property accessor.
      * 
-     * @var 
+     * @var
+     */ 
     private $accessor;
 
     /**

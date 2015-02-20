@@ -21,6 +21,7 @@ use Accard\Component\Activity\Repository\ActivityRepositoryInterface;
 use Accard\Bundle\CoreBundle\Form\EventListener\PatientDiagnosesListener;
 use Accard\Bundle\CoreBundle\Form\EventListener\DiagnosisActivitiesListener;
 
+
 /**
  * Regimen form type extension.
  *
@@ -95,26 +96,84 @@ class RegimenTypeExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // Attempt to grab existing data...
+        $regimen = isset($options['data']) ? $options['data'] : null;
+        $disableFields = false;
+        $patient = false;
+        $diagnosis = false;
+
+        if ($regimen) {
+            if ($regimen->getPatient()) {
+                $disableFields = true;
+                $patient = $regimen->getPatient();
+            }
+        
+            if ($regimen->getDiagnosis()) {
+                $diagnosis = $regimen->getDiagnosis();
+            }
+        }
+
         if ($options['use_patient']) {
-            $builder->add('patient', 'accard_patient_choice');
+            $builder->add('patient', 'accard_patient_choice', array(
+                'disabled' => $disableFields,
+            ));
         }
 
         if ($options['use_diagnosis']) {
             $builder
-                ->add('diagnosis', 'accard_diagnosis_choice', array('required' => false))
+                ->add('diagnosis', 'accard_diagnosis_choice', array(
+                    'required' => false,
+                    'disabled' => $disableFields,
+                ))
                 ->addEventSubscriber(new PatientDiagnosesListener($this->diagnosisRepository))
             ;
         }
 
-        if ($options['use_activities']) {
+        $activitiesAllowed = ($regimen && (($diagnosis && $patient) || $diagnosis));
+
+        if ($activitiesAllowed && $options['use_activities']) {
+
+            $queryBuilder = function(EntityRepository $er) use ($regimen) {
+                $qb = $er->getQueryBuilder();
+
+                if ($regimen->getDiagnosis()) {
+                    $where = $qb->expr()->eq('activity.diagnosis', ':diagnosis');
+                    $qb->setParameter('diagnosis', $regimen->getDiagnosis());
+                } else {
+                    $where = $qb->expr()->eq('activity.patient', ':patient');
+                    $qb->setParameter('patient', $regimen->getPatient());
+                }
+
+                if ($regimen->getId()) {
+                    $qb->where(
+                        $qb->expr()->orX(
+                            $qb->expr()->isNull('activity.regimen'),
+                            $qb->expr()->andX(
+                                $qb->expr()->eq('activity.regimen', ':regimen'),
+                                $where
+                            )
+                        )
+                    );
+
+                    $qb->setParameter('regimen', $regimen);
+                } else {
+                    $qb->where(
+                        $qb->expr()->andX(
+                            $qb->expr()->isNull('activity.regimen'),
+                            $where
+                        )
+                    );
+                }
+                return $qb;
+            };
+
             $builder
-                ->add('activities', 'collection', array(
-                      'type' => 'accard_activity_choice',
-                      'allow_add' => true,
-                      'allow_delete' => true,
-                      'by_reference' => false,
+                ->add('activities', 'accard_activity_choice', array(
+                    'multiple' => true,
+                    'expanded' => true,
+                    'query_builder' => $queryBuilder,
+                    'by_reference' => false,
                 ))
-                ->addEventSubscriber(new DiagnosisActivitiesListener($this->activityRepository))
             ;
         }
     }

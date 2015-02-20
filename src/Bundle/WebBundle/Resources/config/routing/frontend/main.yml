@@ -18,13 +18,13 @@ accard_frontend_diagnosis:
     resource: @AccardWebBundle/Resources/config/routing/frontend/diagnosis.yml
     prefix: /diagnosis
 
-accard_frontend_activity:
-    resource: @AccardWebBundle/Resources/config/routing/frontend/activity.yml
-    prefix: /activity
-
 accard_frontend_regimen:
     resource: @AccardWebBundle/Resources/config/routing/frontend/regimen.yml
     prefix: /activity/regimen
+
+accard_frontend_activity:
+    resource: @AccardWebBundle/Resources/config/routing/frontend/activity.yml
+    prefix: /activity
 
 accard_frontend_sample:
     resource: @AccardWebBundle/Resources/config/routing/frontend/sample.yml
@@ -72,4 +72,8 @@ accard_frontend_prototype_redirect:
         _controller: AccardWebBundle:Frontend:prototypeRedirect
         _requirements: { type: activity|attribute|behavior|regimen|sample }
 
-
+accard_frontend_prototype_list:
+    path: /prototype/form/activity/{type}
+    defaults:
+        _controller: AccardWebBundle:Frontend:prototypeList
+    

@@ -1,0 +1,19 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import design, create %}
+
+{# array activities contain the regimen activities. It can be used to load just
+   the regimen activities instead of all the activities as given here #}
+  {% for id, values in form.prototypes.vars.choices %}
+
+        {% set createBtn = create(path('accard_frontend_prototype_list',{type: values.data.name}), values.label ) %}
+
+        {{createBtn}}
+  
+
+
+  {% endfor %}

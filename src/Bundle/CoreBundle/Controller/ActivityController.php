@@ -109,6 +109,44 @@ class ActivityController extends ResourceController
     }
 
     /**
+     * @inheritdoc
+     */
+    public function createNew()
+    {
+        $resource = parent::createNew();
+
+        if (!$request = $this->config->getRequest()) {
+            return $resource;
+        }
+
+        $patient = $request->get('patient');
+        $diagnosis = $request->get('diagnosis');
+
+        if ($diagnosis) {
+            try {
+                $diagnosisProvider = $this->get('accard.provider.diagnosis');
+                $diagnosis = $diagnosisProvider->getDiagnosis($diagnosis);
+                $resource->setDiagnosis($diagnosis);
+                $resource->setPatient($diagnosis->getPatient());
+            } catch (DiagnosisNotFoundException $e) {
+                throw $this->createNotFoundException('Diagnosis could not be found.', $e);
+            }
+        } else {
+            if ($patient) {
+                try {
+                    $patientProvider = $this->get('accard.provider.patient');
+                    $patient = $patientProvider->getPatient($patient);
+                    $resource->setPatient($patient);
+                } catch (PatientNotFoundException $e) {
+                    throw $this->createNotFoundException('Patient could not be found.', $e);
+                }
+            }
+        }
+
+        return $resource;
+    }
+
+    /**
      * Get activity prototypes.
      *
      * @return array

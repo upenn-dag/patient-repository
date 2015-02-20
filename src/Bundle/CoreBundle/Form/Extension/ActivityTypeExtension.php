@@ -66,13 +66,28 @@ class ActivityTypeExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+        // Attempt to grab existing data...
+        $activity = isset($options['data']) ? $options['data'] : null;
+        $disableFields = false;
+
+        if ($activity && ($activity->getDiagnosis() || $activity->getPatient())) {
+            $disableFields = true;
+        }
+
         if ($options['use_patient']) {
-            $builder->add('patient', 'accard_patient_choice');
+            $builder->add('patient', 'accard_patient_choice', array(
+                'disabled' => $disableFields,
+            ));
         }
 
         if ($options['use_diagnosis']) {
             $builder
-                ->add('diagnosis', 'accard_diagnosis_choice', array('required' => false))
+                ->add('diagnosis', 'accard_diagnosis_choice', array(
+                    'required' => false,
+                    'disabled' => $disableFields,
+
+                ))
                 ->addEventSubscriber(new PatientDiagnosesListener($this->diagnosisRepository))
             ;
         }

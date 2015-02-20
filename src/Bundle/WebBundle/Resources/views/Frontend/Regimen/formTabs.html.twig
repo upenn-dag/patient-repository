@@ -6,10 +6,6 @@
 {# file that was distributed with this source code. #}
 
 {% block regimen_form_tabs %}
-{% set add_activities = false %}
-
-{% if add_activities %}
-{% endif %}
 
 <ul class="nav nav-tabs grid-tabs" role="tablist">
     <li class="active">
@@ -18,7 +14,7 @@
     <li>
         <a href="#regimen-custom" role="tab" data-toggle="tab">{{ 'accard.interface.nav.regimen.custom'|trans }}</a>
     </li>
-    {% if add_activities %}
+    {% if showActivityTab is defined and showActivityTab %}
     <li>
         <a href="#regimen-activities" role="tab" data-toggle="tab">{{ 'accard.interface.nav.regimen.activities'|trans }}</a>
     </li>
