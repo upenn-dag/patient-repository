@@ -42,10 +42,6 @@ accard_frontend_import:
     resource: @AccardWebBundle/Resources/config/routing/frontend/import.yml
     prefix: /import
 
-accard_frontend_flow:
-    resource: @AccardFlowBundle/Resources/config/routing.yml
-    prefix: /flow
-
 accard_frontend_search:
     resource: @AccardWebBundle/Resources/config/routing/frontend/search.yml
     prefix: /search

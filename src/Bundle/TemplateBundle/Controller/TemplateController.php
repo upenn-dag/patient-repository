@@ -51,7 +51,7 @@ class TemplateController extends Controller
                 $em->persist($template);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('accard_backend_template_design', array( 'name' => $name )));
+                return $this->redirect($this->generateUrl('accard_backend_template_index'));
             }
         }
 
@@ -75,15 +75,7 @@ class TemplateController extends Controller
             }
         }
 
-        if($template) {
-            $action = $this->generateUrl('accard_backend_template_design', array('name' => $template->getName()));
-        } else {
-            $action = $this->generateUrl('accard_backend_template_design');
-        }
-
         return $this->createForm(new TemplateType(), $template, array(
-            'action'         => $action,
-            'method'         => 'POST',
             'bundle_choices' => $bundles,
             'default_bundle' => 'AccardWebBundle',
         ));

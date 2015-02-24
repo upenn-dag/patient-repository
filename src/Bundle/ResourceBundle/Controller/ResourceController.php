@@ -98,7 +98,6 @@ class ResourceController extends FOSRestController implements InitializableContr
         AccardLanguage::setExpressionLanguage($container->get('accard.expression_language'));
 
         $this->resourceResolver = new ResourceResolver($this->config);
-        $this->actionLogger = new ActionLogger($this->config, $this->getUser());
 
         if (null !== $container) {
             $this->redirectHandler = new RedirectHandler($this->config, $container->get('router'));
@@ -113,6 +112,14 @@ class ResourceController extends FOSRestController implements InitializableContr
                 $this->flashHelper,
                 $this->config
             );
+
+            if ($this->getUser()) {
+                $this->actionLogger = new ActionLogger(
+                    $this->config,
+                    $this->getUser(),
+                    $container->get('accard.manager.log')
+                );
+            }
         }
     }
 
@@ -124,8 +131,6 @@ class ResourceController extends FOSRestController implements InitializableContr
      */
     public function indexAction(Request $request)
     {
-        //$this->actionLogger->indexLog();
-
         $criteria = $this->config->getCriteria();
         $sorting = $this->config->getSorting();
 
@@ -198,6 +203,8 @@ class ResourceController extends FOSRestController implements InitializableContr
 
         if ($form->handleRequest($request)->isValid()) {
             $resource = $this->domainManager->create($resource);
+
+            $this->actionLogger && $this->actionLogger->createLog();
 
             if (null === $resource) {
                 return $this->redirectHandler->redirectToIndex();
@@ -273,17 +280,13 @@ class ResourceController extends FOSRestController implements InitializableContr
             ))
         ;
 
-        return $this->handleView($view);
-    }
+        $response = $this->handleView($view);
 
-    public function moveUpAction(Request $request)
-    {
-        return $this->move($request, 1);
-    }
+        if ($response->isSuccessful() && !$form->isSubmitted()) {
+            $this->actionLogger && $this->actionLogger->editLog();
+        }
 
-    public function moveDownAction(Request $request)
-    {
-        return $this->move($request, -1);
+        return $response;
     }
 
     /**
@@ -294,8 +297,13 @@ class ResourceController extends FOSRestController implements InitializableContr
     {
         $resource = $this->findOr404($request);
         $clonedResource = $this->domainManager->delete($resource);
+        $response = $this->redirectHandler->redirectTo($clonedResource);
 
-        return $this->redirectHandler->redirectTo($clonedResource);
+        if ($response->isSuccessful() || $response->isRedirection()) {
+           $this->actionLogger && $this->actionLogger->deleteLog();
+        }
+
+        return $response;
     }
 
     /**
@@ -308,7 +316,6 @@ class ResourceController extends FOSRestController implements InitializableContr
 
     /**
      * @param object|null $resource
-     *
      * @return FormInterface
      */
     public function getForm($resource = null)
@@ -323,9 +330,7 @@ class ResourceController extends FOSRestController implements InitializableContr
     /**
      * @param Request $request
      * @param array   $criteria
-     *
      * @return object
-     *
      * @throws NotFoundHttpException
      */
     public function findOr404(Request $request, array $criteria = array())

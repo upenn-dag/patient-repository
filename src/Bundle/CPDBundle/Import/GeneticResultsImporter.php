@@ -13,18 +13,19 @@ namespace Accard\Bundle\CPDBundle\Import;
 use DateTime;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Accard\Bundle\ActivityBundle\Import\ActivityImporter;
 use Accard\Bundle\ResourceBundle\Import\ImporterInterface;
 use Accard\Bundle\CoreBundle\Provider\ImportPatientProvider;
 use Accard\Component\Prototype\Provider\PrototypeProviderInterface;
-use Accard\Bundle\ResourceBundle\Import\SourceAdapterInterface;
-use Accard\Bundle\SampleBundle\Import\SampleImporter;
+use Accard\Component\Prototype\Model\PrototypeInterface;
+use Doctrine\DBAL\Connection;
 
 /**
  * Genetic results importer.
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-class GeneticResultsImporter extends SampleImporter
+class GeneticResultsImporter extends ActivityImporter
 {
     /**
      * Patient provider.
@@ -34,41 +35,81 @@ class GeneticResultsImporter extends SampleImporter
     private $provider;
 
     /**
-     * Local CPD source.
-     * 
-     * @var SourceInterface
+     * PDS connection.
+     *
+     * @var Connection
      */
-    private $cpdSource;
+    private $connection;
 
     /**
-     * CPD source.
+     * Local connection.
      * 
-     * @var SourceInterface
+     * @var Connection
      */
-    private $sourceInterface;
+    private $defaultConnection;
+
+    /**
+     * Prototype provider.
+     * 
+     * @var PrototypeProviderInterface
+     */
+    private $prototypeProvider;
+
+    /**
+     * Diagnosis codes.
+     *
+     * @var array
+     */
+    private $codes;
+
 
     /**
      * Constructor.
      *
      * @param ImportPatientProvider $provider
+     * @param Connection $connection
+     * @param Connection $defaultConnection
+     * @param array $code
+     * @param PrototypeProviderInterface $prototypeProvider
+     * @param string|null $defaultStartDate
      */
     public function __construct(ImportPatientProvider $provider,
-                                SourceAdapterInterface $localSource,
-                                SourceAdapterInterface $cpdSource)
+                                Connection $connection,
+                                Connection $defaultConnection,
+                                PrototypeProviderInterface $prototypeProvider,
+                                array $codes)
     {
         $this->provider = $provider;
-        $this->localSource = $localSource;
-        $this->cpdSource = $cpdSource;
+        $this->connection = $connection;
+        $this->defaultConnection = $defaultConnection;
+        $this->prototypeProvider = $prototypeProvider;
+        $this->codes = $codes;
+    }
+
+    public function getCodes()
+    {
+        return $this->codes;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function run(OptionsResolverInterface $resolver)
+    public function run(OptionsResolverInterface $resolver, array $criteria)
     {
         $records = array();
-        $results = $this->cpdSource->execute();
-        $localRecords = $this->localSource->execute();
+        $stmt = $this->connection->prepare($this->getSQL());
+        $stmt->execute();
+        $results = $stmt->fetchAll();
+        $stmt->closeCursor();
+
+        $prototype = $this->prototypeProvider->getPrototypeByName('genetic-results');
+        
+        $sql = $this->getHasFieldSQL($prototype);
+        $stmt = $this->defaultConnection->prepare($sql);
+        $stmt->execute();
+
+        $localRecords = $this->fixLocalResults($stmt->fetchAll(), $prototype);
+        $stmt->closeCursor();  
 
         foreach($results as $key => $result) {
             $result = array_change_key_case($result, CASE_LOWER);
@@ -93,6 +134,79 @@ class GeneticResultsImporter extends SampleImporter
         unset($localRecords);
 
         return $records;
+    }
+
+    private function concatenateLocalRecords(array $localResults, array $fields)
+    {
+        $concatenatedLocalRecords = array();
+
+        foreach($localResults as $localResult)
+        {
+            $concatenatedId = '';
+            foreach($fields as $field)
+            {
+                if(isset($localResult[$field->getId()]))
+                {
+                    $concatenatedId .= $localResult[$field->getId()];
+                }
+            }
+            $concatenatedLocalRecords[] = $concatenatedId;
+        }
+
+        unset($localResults);
+        unset($fields);
+
+        return $concatenatedLocalRecords;
+    }
+
+    private function fixLocalResults(array $results, PrototypeInterface $prototype)
+    {
+        $localResults = array();
+        foreach ($results as $key => $result) {
+            $activityId = $result['activityId'];
+            $fieldId = $result['fieldId'];
+            if (!isset($localResults[$activityId])) {
+                $localResults[$activityId] = array();
+            }
+            $localResults[$activityId][$fieldId] = $result['stringValue'];
+
+            unset($results[$key]);
+        }
+
+        unset($results);
+
+        $fields = array(
+            $prototype->getFieldByName('genetic-results-cpd-id'),
+            $prototype->getFieldByName('genetic-results-gene-id'),
+            $prototype->getFieldByName('genetic-results-transcript-id'),
+            $prototype->getFieldByName('genetic-results-position'),
+            $prototype->getFieldByName('genetic-results-genotype'),
+            $prototype->getFieldByName('genetic-results-fdp'),
+            $prototype->getFieldByName('genetic-results-frd'),
+            $prototype->getFieldByName('genetic-results-fad'),
+            $prototype->getFieldByName('genetic-results-faf')
+        );
+
+        // Turn this into an array like;
+        // array('MyConcatIdForComparison', 'SomeOtherCocatenation');
+
+        $concatenatedLocalRecords = $this->concatenateLocalRecords($localResults, $fields);
+        return $concatenatedLocalRecords;
+    }
+
+    private function getHasFieldSQL(PrototypeInterface $prototype)
+    {
+        $fieldIds = array();
+        foreach ($prototype->getFields() as $field) {
+            $fieldIds[] = $field->getId();
+        }
+
+        $sql = "SELECT a.id AS activityId, a.patientId, v.fieldId, v.stringValue
+            FROM accard_activity_proto_fldval AS v
+            LEFT JOIN accard_activity AS a ON (v.activityId = a.id)
+            WHERE v.fieldId IN (%s)";
+
+        return sprintf($sql, implode(', ', $fieldIds));
     }
 
     /**
@@ -162,7 +276,7 @@ class GeneticResultsImporter extends SampleImporter
     /**
      * {@inheritdoc}
      */
-    public function getCriteria(array $history = null)
+    public function getCriteria(array $history)
     {
         return array();
     }
@@ -181,5 +295,42 @@ class GeneticResultsImporter extends SampleImporter
     public function getName()
     {
         return 'cpd_genetic_results';
+    }
+
+    /**
+     * Get SQL statement.
+     *
+     * @return string
+     */
+    private function getSQL()
+    {
+        $codes = "'".implode("', '", $this->codes)."'";
+
+        return "SELECT
+                CPD_ID,
+                PK_ID,
+                LPAD(PATIENT_MRN, 9, '0') AS PATIENT,
+                CONCAT(LPAD(PATIENT_MRN, 9, '0'), GENE) AS IDENTIFIER,
+                TO_CHAR(TEST_DATE, 'mm/dd/yyyy') AS ACTIVITY_DATE,
+                GENE,
+                GENE_ID,
+                VARIANT_DETECTED,
+                VARIANT_CATEGORIZATION,
+                CDNA_CHANGE,
+                PROTEIN_CHANGE,
+                MUTATION_TYPE_CDNA,
+                MUTATION_TYPE_PROTEIN,
+                VARIANT_ALIAS,
+                GENETIC_TEST_VERSION_ID,
+                TRANSCRIPT_ID,
+                POSITION,
+                GENOTYPE,
+                FDP,
+                FRD,
+                FAD,
+                FAF
+            FROM CPD.RESULTS_MVW
+            WHERE TEST_DATE IS NOT NULL
+            ORDER BY PATIENT_MRN";
     }
 }

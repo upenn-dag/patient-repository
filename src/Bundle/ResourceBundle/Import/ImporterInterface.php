@@ -29,7 +29,7 @@ interface ImporterInterface
      * @param OptionsResolverInterface $resolver
      * @param array $criteria
      */
-    public function run(OptionsResolverInterface $resolver);
+    public function run(OptionsResolverInterface $resolver, array $criteria);
 
     /**
      * Configure options resolver.

@@ -49,6 +49,7 @@ abstract class Kernel extends BaseKernel
             new \Accard\Bundle\SampleBundle\AccardSampleBundle(),
             new \Accard\Bundle\RegimenBundle\AccardRegimenBundle(),
             new \Accard\Bundle\ActivityBundle\AccardActivityBundle(),
+            new \Accard\Bundle\TemplateBundle\AccardTemplateBundle(),
             new \Accard\Bundle\WebBundle\AccardWebBundle(),
             new \Accard\Bundle\CPDBundle\AccardCPDBundle(),
             new \Accard\Bundle\HMTBBundle\AccardHMTBBundle(),
@@ -76,6 +77,7 @@ abstract class Kernel extends BaseKernel
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+            $bundles[] = new \Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new \Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new \Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();

@@ -35,6 +35,7 @@ class TwigDatabaseLoader implements Twig_LoaderInterface
     public function getSource($name)
     {
         // If we aren't using Symfony style loading, ignore this loader.
+        // $themedLocation = sprintf('%s:%s:%s', self::MAGIC_TEMPLATE, $parts[1], $parts[2]);
         $parts = explode(':', $name);
 
         if (3 === count($parts) && self::MAGIC_TEMPLATE === $parts[0]) {
@@ -75,6 +76,11 @@ class TwigDatabaseLoader implements Twig_LoaderInterface
 
     protected function getValue($column, $name)
     {
+        //die(var_dump($this->repository->findOneBy(array($column => $name))));
         return $this->repository->findOneBy(array($column => $name));
+        //$sth = $this->dbh->prepare('SELECT '.$column.' FROM templates WHERE name = :name');
+        //$sth->execute(array(':name' => (string) $name));
+
+        //return $sth->fetchColumn();
     }
 }
