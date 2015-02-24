@@ -41,7 +41,6 @@ abstract class SampleImporter implements ImporterInterface
             return $resource->getByMRN($value);
         };
 
-        $codes = $this->getCodes();
 
         $dateNormalizer = function (Options $options, $value) {
             return empty($value) ? null : new DateTime($value);

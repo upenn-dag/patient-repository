@@ -21,10 +21,11 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  * Import runner.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
+ * @author Dylan Pierce <piercedy@upenn.edu>
  */
 class Runner
 {
-    protected $dispatcher;
+    protected $manager;
     protected $factory;
     protected $registry;
     protected $option;
@@ -32,11 +33,9 @@ class Runner
     protected $patient;
     protected $diagnosis;
 
-    public function __construct(EventDispatcherInterface $dispatcher,
-                                ResourceResolvingFactory $factory,
+    public function __construct(ResourceResolvingFactory $factory,
                                 Registry $registry)
     {
-        $this->dispatcher = $dispatcher;
         $this->factory = $factory;
         $this->registry = $registry;
 
@@ -44,16 +43,6 @@ class Runner
         $this->import = $this->factory->resolveResource('import', ResourceInterface::NONE);
         $this->patient = $this->factory->resolveResource('patient', ResourceInterface::NONE);
         $this->diagnosis = $this->factory->resolveResource('diagnosis', ResourceInterface::NONE);
-    }
-
-    /**
-     * Get event dispatcher.
-     *
-     * @return EventDispatcherInterface
-     */
-    public function getEventDispatcher()
-    {
-        return $this->dispatcher;
     }
 
     /**
@@ -68,7 +57,7 @@ class Runner
             $importer = $this->registry->getImporter($importer);
         }
 
-        $evd = $this->dispatcher;
+        $manager = $this->manager;
         $subjectName = $importer->getSubject();
 
         $subject = $this->factory->resolveResource($subjectName, ResourceInterface::SUBJECT);
@@ -76,39 +65,42 @@ class Runner
         $event = new ImportEvent($subject, $target);
         $resolver = new OptionsResolver();
         $this->configureDefaultResolver($resolver, $subject, $target);
-
-        $evd->dispatch(Events::INITIALIZE, $event);
-        $event = $this->cloneEvent($event);
         $event->setImporter($importer);
+
+        $manager->initialize($event);
+
         $event->setHistory($this->import->getRepository()->getAllFor($importer->getName()));
-        $evd->dispatch(Events::PRE_IMPORT, $event);
-        $event = $this->cloneEvent($event);
+
         $importer->configureResolver($resolver);
-        $event->setRecords($importer->run($resolver, $event->getImport()->getCriteria()));
-        $evd->dispatch(Events::CONVERT, $event);
-        $event = $this->cloneEvent($event);
-        $evd->dispatch(Events::POST_IMPORT, $event);
-        $event = $this->cloneEvent($event);
+        $event->setRecords($importer->run($resolver));
+
+        $manager->convert($event);
+        $manager->persist($event);
         $event->setImporter(null);
-        $evd->dispatch(Events::FINISH, $event);
 
         return $event->getRecords();
     }
 
     /**
-     * Clone to event, and pass old data into it.
+     * Get manager.
      * 
-     * @param ImportEvent $oldEvent
-     * @return ImportEvent
+     * @return ManagerInterface $manager
      */
-    private function cloneEvent($oldEvent)
+    public function getManager()
     {
-        $event = new ImportEvent($oldEvent->getSubject(), $oldEvent->getTarget(), $oldEvent->getImport());
-        $event->setImporter($oldEvent->getImporter());
-        $oldEvent->getHistory() && $event->setHistory($oldEvent->getHistory());
-        $event->setRecords($oldEvent->getRecords());
+        return $this->manager;
+    }
 
-        return $event;
+    /** 
+     * Set manager.
+     * 
+     * @param ManagerInterface $manager
+     * @return $this
+     */
+    public function setManager(ManagerInterface $manager)
+    {
+        $this->manager = $manager;
+        return $this;
     }
 
     /**

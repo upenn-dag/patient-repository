@@ -78,27 +78,22 @@ class PatientRepository extends EntityRepository implements PatientRepositoryInt
         }
 
         if (!empty($criteria['firstName'])) {
+            $firstName = $criteria['firstName'];
+            $statement = false !== strpos($firstName, '%') ? 'LIKE' : '=';
 
-            //remove % just in case if user inputs it
-            $criteria['firstName'] = str_replace('%', '',  $criteria['firstName']);
-            $criteria['firstName'] = "%" . $criteria['firstName'] . "%";
-
-             $queryBuilder
-                ->andWhere('LOWER(patient.firstName) LIKE :firstName')
+            $queryBuilder
+                ->andWhere(sprintf('LOWER(patient.firstName) %s :firstName', $statement))
                 ->setParameter('firstName', strtolower($criteria['firstName']));
 
             unset($criteria['firstName']);
         }
 
-
         if (!empty($criteria['lastName'])) {
-          
-             //remove % just in case if user inputs it
-            $criteria['lastName'] = str_replace('%', '',  $criteria['lastName']);
-            $criteria['lastName'] = "%" . $criteria['lastName'] . "%";
+            $lastName = $criteria['lastName'];
+            $statement = false !== strpos($lastName, '%') ? 'LIKE' : '=';
 
             $queryBuilder
-                 ->andWhere('LOWER(patient.lastName) LIKE :lastName')
+                ->andWhere(sprintf('LOWER(patient.lastName) %s :lastName', $statement))
                 ->setParameter('lastName', strtolower($criteria['lastName']));
 
             unset($criteria['lastName']);
@@ -121,6 +116,7 @@ class PatientRepository extends EntityRepository implements PatientRepositoryInt
         unset($criteria['phase'], $criteria['deceased']);
         $this->applyCriteria($queryBuilder, $criteria);
         $this->applySorting($queryBuilder, $sorting);
+
         return $this->getPaginator($queryBuilder);
     }
 

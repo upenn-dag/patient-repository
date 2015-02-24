@@ -75,11 +75,7 @@ fos_elastica:
                         model: Accard\Component\Core\Model\Patient
                         finder: ~
                         provider: ~
-                        listener:
-                            insert: %elasticsearch_enabled%
-                            update: %elasticsearch_enabled%
-                            delete: %elasticsearch_enabled%
-                            flush: %elasticsearch_enabled%
+                        listener: ~
                 diagnosis:
                     serializer:
                         groups: [search]
@@ -88,11 +84,7 @@ fos_elastica:
                         model: Accard\Component\Core\Model\Diagnosis
                         finder: ~
                         provider: ~
-                        listener:
-                            insert: %elasticsearch_enabled%
-                            update: %elasticsearch_enabled%
-                            delete: %elasticsearch_enabled%
-                            flush: %elasticsearch_enabled%
+                        listener: ~
                 diagnosis_code:
                     serializer:
                         groups: [search]
@@ -101,11 +93,7 @@ fos_elastica:
                         model: Accard\Component\Diagnosis\Model\Code
                         finder: ~
                         provider: ~
-                        listener:
-                            insert: %elasticsearch_enabled%
-                            update: %elasticsearch_enabled%
-                            delete: %elasticsearch_enabled%
-                            flush: %elasticsearch_enabled%
+                        listener: ~
 
 jms_serializer:
     metadata:

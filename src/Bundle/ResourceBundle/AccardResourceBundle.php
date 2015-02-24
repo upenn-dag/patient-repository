@@ -15,6 +15,7 @@ use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappi
 use Accard\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Accard\Bundle\ResourceBundle\DependencyInjection\Compiler\ObjectToIdentifierServicePass;
 use Accard\Bundle\ResourceBundle\DependencyInjection\Compiler\RegisterImporterPass;
+use Accard\Bundle\ResourceBundle\DependencyInjection\Compiler\RegisterImporterManagerPass;
 use Accard\Bundle\ResourceBundle\DependencyInjection\Compiler\RegisterExpressionLanguagePass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -38,7 +39,6 @@ class AccardResourceBundle extends Bundle
     {
         $interfaces = array(
             'Accard\Component\Resource\Model\ImportInterface' => 'accard.model.import.class',
-            'Accard\Component\Resource\Model\LogInterface' => 'accard.model.log.class',
         );
 
         $mappings = array(
@@ -47,6 +47,7 @@ class AccardResourceBundle extends Bundle
 
         $container->addCompilerPass(new ObjectToIdentifierServicePass());
         $container->addCompilerPass(new RegisterImporterPass());
+        $container->addCompilerPass(new RegisterImporterManagerPass());
         $container->addCompilerPass(new RegisterExpressionLanguagePass());
         $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('accard_resource', $interfaces));
         $container->addCompilerPass(

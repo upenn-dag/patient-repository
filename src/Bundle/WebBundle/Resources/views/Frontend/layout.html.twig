@@ -25,6 +25,7 @@
         'bundles/accardweb/css/plugins/datepicker/bootstrap-datepicker-3.css'
         'bundles/accardweb/css/font-awesome.css'
         'bundles/accardweb/css/backend/backend.css'
+        'bundles/accardweb/css/backend/custom.css'
     %}
 <link href="{{ asset_url }}" rel="stylesheet" type="text/css">
     {% endstylesheets %}
@@ -63,14 +64,7 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-history fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-history">
-                        {{ render(controller('AccardWebBundle:Frontend:userLog')) }}
-                    </ul>
-                </li>
+                <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -131,6 +125,12 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
+                        {% if is_granted('ROLE_SUPERUSER') %}
+                        <li><a href="?_switch=user"><i class="fa fa-user fa-fw"></i> Switch to User</a></li>
+                        <li><a href="?_switch=admin"><i class="fa fa-user fa-fw"></i> Switch to Admin</a></li>
+                        <li><a href="?_switch=super"><i class="fa fa-user fa-fw"></i> Switch to Super</a></li>
+                        <li class="divider"></li>
+                        {% endif %}
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
                         <li class="divider"></li>
