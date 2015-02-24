@@ -20,9 +20,7 @@
     }
   </style>
 
-<form method="post">
-
-    {{ form_widget(form._token) }}
+{{ form_start(form) }}
 
     <h3>{{ name }}</h3><hr>
     <pre id="editor"></pre>
@@ -32,9 +30,7 @@
     {{ form_row(form.parent) }}
     {{ form_row(form.location) }}
 
-    {{ form_widget(form.save) }}
-
-</form>
+{{ form_end(form) }}
 
 {% endblock %}
 
@@ -46,6 +42,7 @@
 
 <script>
 	var $textarea = $('#template_content').hide();
+    $textarea.removeAttr("required");
     var editor = ace.edit("editor");
     editor.getSession().setMode('ace/mode/twig');
     editor.getSession().setValue($textarea.val());
