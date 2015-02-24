@@ -38,3 +38,9 @@ Accard\Component\Activity\Model\Activity:
             serialized_name: canonical
             since_version: 1.0
             groups: [api]
+        getDescription:
+            expose: true
+            type: string
+            serialized_name: description
+            since_version: 1.0
+            groups: [api]

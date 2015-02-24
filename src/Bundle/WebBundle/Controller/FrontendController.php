@@ -15,6 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Accard\Component\Option\Model\OptionInterface;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
+use Accard\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage;
 
 /**
  * Base frontend controller.
@@ -30,13 +33,51 @@ class FrontendController extends Controller
      */
     public function mainAction(Request $request)
     {
-        // $accard = $this->get('accard.state');
-        // $theState = $accard->getState();
-        // //die(var_dump($theState));
-        // die(json_encode($theState, JSON_PRETTY_PRINT));
-        // die(serialize($theState));
-
         return $this->render('AccardWebBundle:Frontend:main.html.twig');
+    }
+
+    /**
+     * Get the Accard State object.
+     *
+     * @return JsonResponse
+     */
+    public function stateAction(Request $request)
+    {
+        $theState = $this->get('accard.state')->getState();
+
+        return new JsonResponse($theState);
+    }
+
+    /**
+     * Get the description for a given resource and id.
+     *
+     * @param Request $request
+     * @param string $type
+     * @param integer $id
+     * @return JsonResponse
+     */
+    public function lastCreatedAction(Request $request)
+    {
+        // This needs to be done because we are accessing the expression
+        // language outside of the resource controller.
+        AccardLanguage::setExpressionLanguage($this->get('accard.expression_language'));
+
+        $session = $this->get('session');
+        $response = new JsonResponse();
+        $lastResourceType = $session->get('accard-last-created-resource-type');
+        $lastResourceId = $session->get('accard-last-created-resource-id');
+
+        if (!$lastResourceId || !$lastResourceType) {
+            $response->setData(array());
+            $response->setStatusCode(400);
+        } else {
+            $serializer = $this->get('jms_serializer');
+            $repository = $this->get(sprintf('accard.repository.%s', $lastResourceType));
+            $resource = $repository->find($lastResourceId);
+            $response->setContent($serializer->serialize($resource, 'json'));
+        }
+
+        return $response;
     }
 
     /**
@@ -75,27 +116,6 @@ class FrontendController extends Controller
     }
 
     /**
-     * Create a prototype list form.
-     * Lists all activity prototypes in create buttons
-     * @param Request $request
-     * @param string $type
-     * @return Response
-     */
-    public function prototypeListFormAction(Request $request, $type,$activities)
-    {
-
-
-        $form = $this->createPrototypeListForm($type);
-
-        return $this->render('AccardWebBundle:Common/Form:prototypeListForm.html.twig', array(
-            'form' => $form->createView(),
-            'type' => $type,
-            'activities' => $activities,
-        ));
-    }
-
-
-    /**
      * Redirect to proper place from prototype selection.
      *
      * @param Request $request
@@ -121,52 +141,6 @@ class FrontendController extends Controller
         }
 
         throw $this->createNotFoundException();
-    }
-
-    /**
-     * Redirect to proper place activity prototype selection.
-     *
-     * @param Request $request
-     * @param string $type
-     * @return RedirectResponse
-     */
-    public function prototypeListAction($type)
-    {
-
-
-            $route = 'accard_frontend_activity_create';
-            $url = $this->generateUrl($route, array('prototype' => $type));
-    
-        if (isset($url)) {
-           
-            return $this->redirect($url);
-        }
-
-        throw $this->createNotFoundException();
-    }
-
-    /**
-     * Create prototype list form.
-     *
-     * @param string $type
-     */
-    private function createPrototypeListForm($type)
-    {
-        $prototypeListType = sprintf('accard_%s_prototype_choice', $type);
-        $builder = $this->get('form.factory')->createNamedBuilder(null, 'form', array(), array(
-            'csrf_protection' => false,
-            'method' => 'GET',
-        ));
-
-        $builder->add('prototypes', $prototypeListType, array(
-            'required' => true,
-            'placeholder' => 'accard.prototype_choice.action.choose',
-        ));
-
-       $builder->add('create', 'submit', array(
-            'label' => 'accard.prototype_choice.action.create',
-        ));
-        return $builder->getForm();
     }
 
     /**

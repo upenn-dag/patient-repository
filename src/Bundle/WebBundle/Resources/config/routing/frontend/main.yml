@@ -80,4 +80,8 @@ accard_frontend_prototype_list:
     path: /prototype/form/activity/{type}
     defaults:
         _controller: AccardWebBundle:Frontend:prototypeList
-    
+
+accard_frontend_last_created:
+    path: /resource/last-created
+    defaults:
+        _controller: AccardWebBundle:Frontend:lastCreated

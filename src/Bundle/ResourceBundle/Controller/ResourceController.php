@@ -154,7 +154,13 @@ class ResourceController extends FOSRestController implements InitializableContr
             ->setData($resources)
         ;
 
-        return $this->handleView($view);
+        $response = $this->handleView($view);
+
+        if ($response->isSuccessful()) {
+            $this->actionLogger && $this->actionLogger->indexLog();
+        }
+
+        return $this->prepareResponse($response);
     }
 
     /**
@@ -171,7 +177,13 @@ class ResourceController extends FOSRestController implements InitializableContr
             ->setData($this->findOr404($request))
         ;
 
-        return $this->handleView($view);
+        $response = $this->handleView($view);
+
+        if ($response->isSuccessful()) {
+            $this->actionLogger && $this->actionLogger->showLog();
+        }
+
+        return $this->prepareResponse($response);
     }
 
     /**
@@ -191,6 +203,11 @@ class ResourceController extends FOSRestController implements InitializableContr
                 return $this->redirectHandler->redirectToIndex();
             }
 
+            // On success, add last saved resource to session for later use...
+            $session = $this->get('session');
+            $session->set('accard-last-created-resource-type', $this->config->getResourceName(), true);
+            $session->set('accard-last-created-resource-id', $resource->getId(), true);
+
             return $this->redirectHandler->redirectTo($resource);
         }
 
@@ -207,7 +224,13 @@ class ResourceController extends FOSRestController implements InitializableContr
             ))
         ;
 
-        return $this->handleView($view);
+        $response = $this->handleView($view);
+
+        if ($response->isSuccessful() && !$form->isSubmitted()) {
+            $this->actionLogger && $this->actionLogger->newLog();
+        }
+
+        return $this->prepareResponse($response);
     }
 
     /**
@@ -224,6 +247,15 @@ class ResourceController extends FOSRestController implements InitializableContr
         if (in_array($method, array('POST', 'PUT', 'PATCH')) &&
             $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $this->domainManager->update($resource);
+
+            if ($form->isValid()) {
+                $this->actionLogger && $this->actionLogger->updateLog();
+            }
+
+            // On success, add last saved resource to session for later use...
+            $session = $this->get('session');
+            $session->set('accard-last-updated-resource-type', $this->config->getResourceName(), true);
+            $session->set('accard-last-updated-resource-id', $resource->getId(), true);
 
             return $this->redirectHandler->redirectTo($resource);
         }
@@ -264,31 +296,6 @@ class ResourceController extends FOSRestController implements InitializableContr
         $clonedResource = $this->domainManager->delete($resource);
 
         return $this->redirectHandler->redirectTo($clonedResource);
-    }
-
-    public function updateStateAction(Request $request, $transition, $graph = null)
-    {
-        $resource = $this->findOr404($request);
-
-        if (null === $graph) {
-            $graph = $this->stateMachineGraph;
-        }
-
-        $stateMachine = $this->get('sm.factory')->get($resource, $graph);
-        if (!$stateMachine->can($transition)) {
-            throw new NotFoundHttpException(sprintf(
-                'The requested transition %s cannot be applied on the given %s with graph %s.',
-                $transition,
-                $this->config->getResourceName(),
-                $graph
-            ));
-        }
-
-        $stateMachine->apply($transition);
-
-        $this->domainManager->update($resource);
-
-        return $this->redirectHandler->redirectToReferer();
     }
 
     /**
@@ -358,12 +365,19 @@ class ResourceController extends FOSRestController implements InitializableContr
         return $this->get($this->config->getServiceName('repository'));
     }
 
-    protected function move(Request $request, $movement)
+    private function prepareResponse(Response $response)
     {
-        $resource = $this->findOr404($request);
+        if (!$session = $this->get('session')) {
+            return $response;
+        }
 
-        $this->domainManager->move($resource, $movement);
+        $response->headers->set('Accard-Last-Created-Resource-Type', $session->get('accard-last-created-resource-type'));
+        $response->headers->set('Accard-Last-Created-Resource-Id', $session->get('accard-last-created-resource-id'));
+        $response->headers->set('Accard-Last-Updated-Resource-Type', $session->get('accard-last-updated-resource-type'));
+        $response->headers->set('Accard-Last-Updated-Resource-Id', $session->get('accard-last-updated-resource-id'));
+        $response->headers->set('Accard-Last-Deleted-Resource-Type', $session->get('accard-last-deleted-resource-type'));
+        $response->headers->set('Accard-Last-Deleted-Resource-Id', $session->get('accard-last-deleted-resource-id'));
 
-        return $this->redirectHandler->redirectToIndex();
+        return $response;
     }
 }

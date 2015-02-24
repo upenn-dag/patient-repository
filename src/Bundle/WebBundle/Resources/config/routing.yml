@@ -21,6 +21,10 @@ accard_partial:
     resource: @AccardWebBundle/Resources/config/routing/partial/main.yml
     prefix: /partial
 
+accard_outcomes:
+    resource: @AccardOutcomesBundle/Resources/config/routing.yml
+    prefix: /outcomes
+
 accard_login:
     path: /login
     defaults:

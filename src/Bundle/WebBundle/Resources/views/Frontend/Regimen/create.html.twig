@@ -48,6 +48,26 @@
         </form>
     {% endblock %}
 
+    {% block regimen_modal %}
+    <div id="regimen-activity-modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Creating a new activity</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Loading&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="regimen-activity-submit" type="button" class="btn btn-primary">Save activity</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
 {% endblock %}
 
 {% block javascripts %}
@@ -80,6 +100,83 @@
                     field.append($('<option value="'+diagnosis.id+'">'+diagnosis.canonical+'</option>'));
                 })
                 field.prop('readonly', false);
+            });
+        });
+    }(jQuery, Accard);
+
+    +function($, Accard) {
+        var $regimenActivityModal = $('#regimen-activity-modal');
+        var $regimenPatient = $('#accard_regimen_patient');
+        var $regimenDiagnosis = $('#accard_regimen_diagnosis');
+
+        // Behaviors to intercept form submission in activity modal...
+        $regimenActivityModal.on('submit', 'form', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        });
+
+        $regimenActivityModal.on('click', '#regimen-activity-submit', function() {
+            var $form = $regimenActivityModal.find('form');
+            var data = $form.serializeArray();
+            var jqxhr = $.ajax({
+                type: "POST",
+                url: $form.attr('action'),
+                data: data
+            });
+
+            jqxhr.complete(function(response) {
+                var lastCreatedUrl = "{{ path('accard_frontend_last_created') }}";
+                var lastXhr = $.ajax({
+                    type: "GET",
+                    url: lastCreatedUrl
+                });
+
+                lastXhr.done(function(lastResponse) {
+                    var lastId = lastResponse.id;
+                    var description = lastResponse.description;
+                    var newItem = $('<div class="checkbox"><label><input type="checkbox" name="accard_regimen[activities][]" value="'+lastId+'" checked> '+description+'</label></div>');
+
+                    $('#regimen-activities').append(newItem);
+                });
+
+                $regimenActivityModal.modal('hide');
+            });
+
+            jqxhr.fail(function(response) {
+                alert('Failed to create activity.');
+            });
+        });
+
+        $('[data-target="#regimen-activity-modal"]').on('click', function(event) {
+            event.preventDefault();
+
+            var $this = $(this);
+            var action = $this.attr('href');
+            var patientVal = $regimenPatient.val();
+            var diagnosisVal = $regimenDiagnosis.val();
+
+            if (diagnosisVal) {
+                action = action + "?diagnosis=" + diagnosisVal;
+            } else if (patientVal) {
+                action = action + "?patient=" + patientval;
+            } else {
+                alert("You must select a patient and/or diagnosis to create a new activity within this regimen.");
+                throw "No patient or diagnosis has been selected, aborting.";
+            }
+
+            var jqxhr = $.ajax({
+                url: action,
+            });
+
+            jqxhr.complete(function(response) {
+                $regimenActivityModal.find('.modal-body').html(response.responseText);
+                $regimenActivityModal.modal('show');
+            });
+
+            jqxhr.fail(function(response) {
+                $regimenActivityModal.find('.modal-body').html("Unable to load activity create page.");
+                $regimenActivityModal.modal('show');
             });
         });
     }(jQuery, Accard);

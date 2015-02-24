@@ -84,13 +84,26 @@ $(function() {
         });
 
         jqxhr.complete(function(response) {
-             $regimenActivityModal.modal('hide');
-             location.reload(); 
+            var lastCreatedUrl = "{{ path('accard_frontend_last_created') }}";
+            var lastXhr = $.ajax({
+                type: "GET",
+                url: lastCreatedUrl
+            });
+
+            lastXhr.done(function(lastResponse) {
+                var lastId = lastResponse.id;
+                var description = lastResponse.description;
+                var newItem = $('<div class="checkbox"><label><input type="checkbox" name="accard_regimen[activities][]" value="'+lastId+'" checked> '+description+'</label></div>');
+
+                $('#regimen-activities').append(newItem);
+            });
+
+            $regimenActivityModal.modal('hide');
         });
 
         jqxhr.fail(function(response) {
             alert('Failed to create activity.');
-        })
+        });
     });
 
     $('[data-target="#regimen-activity-modal"]').on('click', function(event) {
