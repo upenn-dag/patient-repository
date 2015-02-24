@@ -54,7 +54,6 @@ abstract class Kernel extends BaseKernel
             new \Accard\Bundle\CPDBundle\AccardCPDBundle(),
             new \Accard\Bundle\HMTBBundle\AccardHMTBBundle(),
             new \Accard\Bundle\OutcomesBundle\AccardOutcomesBundle(),
-            new \Accard\Bundle\TemplateBundle\AccardTemplateBundle(),
 
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
