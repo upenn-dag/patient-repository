@@ -13,8 +13,12 @@ parameters:
     accard.event_subscriber.load_orm_metadata.class: Accard\Bundle\ResourceBundle\EventListener\LoadORMMetadataSubscriber
     accard.event_subscriber.kernel_controller.class: Accard\Bundle\ResourceBundle\EventListener\KernelControllerSubscriber
     accard.import.resource_factory.class: Accard\Bundle\ResourceBundle\Import\ResourceResolvingFactory
+    accard.import.manager_registry.class: Accard\Bundle\ResourceBundle\Import\ManagerRegistry
     accard.import.registry.class: Accard\Bundle\ResourceBundle\Import\Registry
     accard.import.record_resolver.class: Accard\Bundle\ResourceBundle\Import\RecordResolver
+    accard.import.initializer.class: Accard\Bundle\ResourceBundle\Import\Initializer
+    accard.import.converter.class: Accard\Bundle\ResourceBundle\Import\Converter
+    accard.import.persister.class: Accard\Bundle\ResourceBundle\Import\Persister
     accard.import.runner.class: Accard\Bundle\ResourceBundle\Import\Runner
     accard.import.event_subscriber.class: Accard\Bundle\ResourceBundle\EventListener\ImporterEventSubscriber
     jms_serializer.identifier_handler.class: Accard\Bundle\ResourceBundle\Serializer\IdentifierHandler
@@ -56,6 +60,10 @@ services:
         class: %accard.import.registry.class%
         calls: [["setContainer", ["@service_container"]]]
 
+    accard.import.manager_registry:
+        class: %accard.import.manager_registry.class%
+        calls: [["setContainer", ["@service_container"]]]
+
     accard.import.resource_factory:
         class: %accard.import.resource_factory.class%
         calls: [["setContainer", ["@service_container"]]]
@@ -68,9 +76,17 @@ services:
     accard.import.runner:
         class: %accard.import.runner.class%
         arguments:
-            - @event_dispatcher
             - @accard.import.resource_factory
             - @accard.import.registry
+
+    accard.import.initializer.default:
+        class: %accard.import.initializer.class%
+
+    accard.import.persister.default:
+        class: %accard.import.persister.class%
+
+    accard.import.converter.default:
+        class: %accard.import.converter.class%
 
     accard.import.event.post_import:
         class: %accard.import.event_subscriber.class%

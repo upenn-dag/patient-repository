@@ -46,19 +46,18 @@ class ImportRunnerCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         $registry = $container->get('accard.import.registry');
+        $managerRegistry = $container->get('accard.import.manager_registry');
         $runner = $container->get('accard.import.runner');
         $importer = $registry->getImporter($input->getArgument('importer'));
-        $dispatcher = $runner->getEventDispatcher();
 
         $dry = $input->getOption('dry-run');
 
-        if (!$dry) {
-            $persister = new PersistImporterRecordsListener();
-            // We should remove the SQL logger, it causes HUGE memory problems.
-            $dispatcher->addListener(Events::FINISH, array($persister, 'disableSQLLog'));
-            $dispatcher->addListener(Events::FINISH, array($persister, 'persistImport'));
-            $dispatcher->addListener(Events::FINISH, array($persister, 'persistRecords'));
-        } else {
+        $manager = $managerRegistry->getManager($input->getArgument('importer'));
+
+        $manager->setDryRunOption($dry);
+        $runner->setManager($manager);
+
+        if ($dry) {
             $output->writeln('<comment>Performing dry run.</comment>'); 
         }
 

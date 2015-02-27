@@ -8,6 +8,11 @@ parameters:
 
     accard_hmtb.controller.class: Accard\Bundle\HMTBBundle\Controller\HMTBController
     accard.import.importer.hmtb_specimens_collection.class: Accard\Bundle\HMTBBundle\Import\SpecimensCollectionImporter
+    accard.import.manager.hmtb.class: Accard\Bundle\HMTBBundle\Import\Manager
+    accard.import.converter.hmtb.class: Accard\Bundle\HMTBBundle\Import\Converter
+    accard.import.source.local_hmtb.class: Accard\Bundle\HMTBBundle\Import\LocalSource
+    accard.import.source.hmtb.class: Accard\Bundle\HMTBBundle\Import\HMTBSource
+    accard.import.criteria.hmtb.class: Accard\Bundle\HMTBBundle\Import\Criteria
 
 services:
 
@@ -18,12 +23,43 @@ services:
         class: "%accard_hmtb.controller.class%"
         arguments: ["@doctrine.orm.accard_entity_manager"]
 
+    accard.import.source.local_hmtb:
+        class: %accard.import.source.local_hmtb.class%
+        arguments:
+            - @doctrine.dbal.default_connection
+            - @accard.provider.sample_prototype
+
+    accard.import.source.hmtb:
+        class: %accard.import.source.hmtb.class%
+        arguments:
+            - @accard.connection.pds
+            - ['205', '205.0', '205.00', '205.01', '205.02']
+
     accard.import.importer.hmtb_specimens_collection:
         class: %accard.import.importer.hmtb_specimens_collection.class%
         arguments:
             - @accard.provider.import_patient
-            - @accard.provider.sample_prototype
-            - @accard.connection.pds
-            - @doctrine.dbal.default_connection
-            - ['205', '205.0', '205.00', '205.01', '205.02']
+            - @accard.import.source.local_hmtb
+            - @accard.import.source.hmtb
+            - @accard.import.criteria.hmtb
         tags: [{ name: accard.importer, importer: hmtb_specimens_collection }]
+
+    accard.import.converter.hmtb:
+        class: %accard.import.converter.hmtb.class%
+        arguments:
+             - @accard.provider.sample_prototype
+
+    accard.import.criteria.hmtb:
+        class: %accard.import.criteria.hmtb.class%
+        arguments:
+            - @accard.connection.pds
+            - @accard.repository.import
+
+    accard.import.manager.hmtb:
+        class: %accard.import.manager.hmtb.class%
+        arguments:
+            - @accard.import.initializer.default
+            - @accard.import.converter.hmtb
+            - @accard.import.persister.default
+        tags: [{ name: accard.manager , manager: hmtb_specimens_collection }]
+        

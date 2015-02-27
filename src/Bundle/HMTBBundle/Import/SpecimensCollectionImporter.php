@@ -17,10 +17,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Accard\Bundle\SampleBundle\Import\SampleImporter;
 use Accard\Bundle\ResourceBundle\Import\ImporterInterface;
 use Accard\Bundle\CoreBundle\Provider\ImportPatientProvider;
-use Accard\Component\Sample\Provider\SampleProvider;
-use Accard\Component\Prototype\Provider\PrototypeProviderInterface;
-use Accard\Component\Prototype\Model\PrototypeInterface;
-use Doctrine\DBAL\Connection;
+use Accard\Bundle\ResourceBundle\Import\SourceAdapterInterface;
+use Accard\Bundle\ResourceBundle\Import\CriteriaInterface;
 
 /**
  *  HMTB Specimens importer.
@@ -37,86 +35,58 @@ class SpecimensCollectionImporter extends SampleImporter
     private $provider;
 
     /**
-     * Prototype provider.
-     * 
-     * @var PrototypeProviderInterface
-     */
-    private $prototypeProvider;
-
-    /**
-     * PDS connection.
+     * Local HMTB results source..
      *
-     * @var Connection
+     * @var SourceAdapterInterface
      */
-    private $connection;
+    private $localSource;
 
     /**
-     * Local connection.
+     * HMTB results source.
      * 
-     * @var Connection
+     * @var SourceAdapterInterface
      */
-    private $defaultConnection;
+    private $hmtbSource;
 
-    /**
-     * Diagnosis codes.
-     *
-     * @var string
+    /** 
+     * HMTB criteria.
+     * 
+     * @var Criteria Interface
      */
-    private $codes;
+    private $criteria;
 
     /**
      * Constructor.
      *
      * @param ImportPatientProvider $provider
-     * @param Connection $connection
-     * @param Sample Provider
-     * @param array $code
-     * @param string|null $defaultStartDate
+     * @param SourceAdapterInterface Interface $localSource
+     * @param SourceAdapterInterface Interface $hmtbSource
+     * @param CriteraInterface $criteria
      */
     public function __construct(ImportPatientProvider $provider,
-                                PrototypeProviderInterface $prototypeProvider,
-                                Connection $connection,
-                                Connection $defaultConnection,
-                                array $codes)
+                                SourceAdapterInterface $localSource,
+                                SourceAdapterInterface $hmtbSource,
+                                CriteriaInterface $criteria)
     {
         $this->provider = $provider;
-        $this->prototypeProvider = $prototypeProvider;
-        $this->connection = $connection;
-        $this->defaultConnection = $defaultConnection;
-        $this->codes = $codes;
-    }
-
-    /**
-     * Get diagnosis codes.
-     * 
-     * @return array
-     */
-    public function getCodes()
-    {
-        return $this->codes;
+        $this->localSource = $localSource;
+        $this->hmtbSource = $hmtbSource;
+        $this->criteria = $criteria;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function run(OptionsResolverInterface $resolver, array $criteria)
+    public function run(OptionsResolverInterface $resolver)
     {
         $records = array();
 
-        if ($criteria['first_id'] == $criteria['last_id']) {
+        if ($this->criteria->passes()) {
             return $records;
         }
 
-        $stmt = $this->connection->prepare($this->getSQL());
-        $stmt->execute(array(
-            'first_id' => $criteria['first_id'],
-            'last_id' => $criteria['last_id'],
-        ));
-
-        $results = $stmt->fetchAll();
-        $stmt->closeCursor();
-        $prototype = $this->prototypeProvider->getPrototypeByName('hmtb-samples');
-        $localRecords = $this->fixLocalRecords($prototype);
+        $results = $this->hmtbSource->execute($this->criteria->retrieve());
+        $localRecords = $this->localSource->execute();
 
         foreach($results as $key => $result) {
             $result = array_change_key_case($result, CASE_LOWER);
@@ -185,24 +155,9 @@ class SpecimensCollectionImporter extends SampleImporter
     /**
      * {@inheritdoc}
      */
-    public function getCriteria(array $history)
+    public function getCriteria(array $history = null)
     {
-        if (empty($history)) {
-            return;
-        }
-
-        $criteria = $history[0]->getCriteria();
-
-        $stmt = $this->connection->prepare($this->getMaxCollectionId());
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        $newLastId = $result['MAX'];
-        $stmt->closeCursor();
-
-        return array(
-            'first_id' => $criteria['last_id'],
-            'last_id' => $newLastId,
-        );
+        return $this->criteria->retrieve();
     }
 
     /**
@@ -210,55 +165,9 @@ class SpecimensCollectionImporter extends SampleImporter
      */
     public function getDefaultCriteria()
     {
-        $stmt = $this->connection->prepare($this->getMaxCollectionId());
-        $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        $newLastId = $result['MAX'];
-        $stmt->closeCursor();
-
-        return array(
-            'first_id' => 0,
-            'last_id' => $newLastId,
-        );
+        return array();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function fixLocalRecords(PrototypeInterface $prototype)
-    {
-        $sql = $this->getHasFieldSQL($prototype);
-        $stmt = $this->defaultConnection->prepare($sql);
-        $stmt->execute();
-        $localRecords = $stmt->fetchAll();
-        $stmt->closeCursor();  
-
-        //Cleansing localRecords to a simple array of htmb-ids that are existant in the local database
-        $hmtbIds = array();
-        foreach($localRecords as $localRecord) {
-            $hmtbIds[] = $localRecord['stringValue'];
-        }
-
-        return $localRecords;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    private function getHasFieldSQL(PrototypeInterface $prototype)
-    {
-        /**
-         * Need to get all hmtb id's that are stored locally.
-         */
-        $hmtbFieldId = $prototype->getFieldByName('hmtb-id')->getId();
-
-        $sql = "SELECT v.stringValue
-            FROM accard_sample_proto_fldval AS v
-            LEFT JOIN accard_sample AS a ON (v.sampleId = a.id)
-            WHERE v.fieldId IN (%s)";
-
-        return sprintf($sql, $hmtbFieldId);
-    }
 
     /**
      * {@inheritdoc}
@@ -268,43 +177,4 @@ class SpecimensCollectionImporter extends SampleImporter
         return 'hmtb_specimens_collection';
     }
 
-    /**
-     * Get SQL statement.
-     *
-     * @return string
-     */
-    private function getSQL()
-    {
-        return "SELECT
-                COLLECTION_ID AS HMTB_ID,
-                MEDRECNUM AS PATIENT,
-                COLLECTION_ID AS IDENTIFIER,
-                TO_CHAR(COLLECTED_DATEDRAWN, 'mm/dd/yyyy') AS ACTIVITY_DATE,
-                SAMPLETYPE AS SAMPLE_TYPE,
-                RESTRICTEDACCESS_CHECKBOX AS RESTRICTED,
-                DIAGNOSIS,
-                SUBTYPE,
-                TOTAL_SUM_VIALSREMAINING AS TOTAL_SUM_VIALS_REMAINING,
-                BLASTS,
-                CT_CYCLE,
-                CT_STUDYDAY AS CT_STUDY_DAY,
-                CT_PEAKTROUGH AS CT_PEAK_THROUGH,
-                CT_TIMEPOSTDRUG AS CT_TIME_POST_DRUG,
-                CT_TIMEPOSTDRUG_UNIT AS CT_TIME_POST_DRUG_UNIT,
-                CT_TIMEINRELATIONTOTREATMENT AS CT_TREATMENT_RELATION_TIME,
-                WHENMODIFIED AS WHEN_MODIFIED
-            FROM HMTB.INVENTORY_VW
-            WHERE COLLECTION_ID > :first_id AND COLLECTION_ID <= :last_id
-            ORDER BY MEDRECNUM";
-    }
-
-    /**
-     * Find the biggest collection id SQL.
-     * 
-     * @return string
-     */
-    private function getMaxCollectionId()
-    {
-        return "SELECT MAX(COLLECTION_ID) AS MAX FROM HMTB.INVENTORY_VW";
-    }
 }
