@@ -9,6 +9,7 @@ parameters:
 
     accard.event_subscriber.prototype.load_orm_metadata.class: Accard\Bundle\PrototypeBundle\EventListener\LoadORMMetadataSubscriber
     accard.repository.prototype.class: Accard\Bundle\PrototypeBundle\Doctrine\ORM\PrototypeRepository
+    accard.twig.prototype.class: Accard\Bundle\PrototypeBundle\Twig\PrototypeExtension
 
 services:
 
@@ -24,3 +25,7 @@ services:
         factory_method: getRepository
         arguments:
              - Accard\Component\Prototype\Model\Prototype
+
+    accard.twig.prototype:
+        class: %accard.twig.prototype.class%
+        tags: [{ name: twig.extension }]
