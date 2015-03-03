@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Accard Outcomes</title>
+
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css" rel="stylesheet">
+        <style>
+            html, body { width: 100%; height: 100%; }
+            body { padding-top: 60px;  }
+
+            #navbar-debugger {
+                z-index: 9999;
+            }
+
+            #overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 9998;
+                background-color: rgba(0, 0, 0, 0.5);
+                background: linear-gradient(45deg, rgba(0, 0, 0, 0.8), rgba(20, 20, 20, 0.8));
+                border-radius: 1%;
+            }
+
+            #overlay div {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                height: 200px;
+                width: 180px;
+                margin: -125px 0 0 -95px;
+                text-align: center;
+                padding: 30px;
+
+                background-color: rgba(255, 255, 255, 0.1);
+                border-radius: 20px;
+                box-shadow: 0 0  15px rgba(0, 0, 0, 0.3);
+
+                -webkit-animation-duration: 1.8s;
+            }
+
+            #overlay div span.glyphicon {
+                font-size: 130px;
+            }
+
+            #overlay div p {
+                margin-top: -60px;
+                color: rgba(255, 255, 255, 0.8);
+                text-transform: uppercase;
+            }
+        </style>
+        <script type="text/javascript"
+            data-application="outcomes"
+            data-debug="true"
+            src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.16/require.min.js">
+        </script>
+        <script type="text/javascript">
+
+            require.config({
+                waitSeconds: 2,
+                baseUrl: '/bundles/accardoutcomes/js',
+                shim: {
+                    jquery: { exports: '$' },
+                    bootstrap: { deps: ['jquery'], exports: 'Bootstrap' },
+                    backbone: { deps: ['jquery', 'underscore'], exports: 'Backbone' },
+                    backboneLocalstorage: { deps: ['backbone'], exports: 'Store' },
+                    underscore: { exports: '_' }
+                },
+                paths: {
+                    jquery: 'libs/jquery',
+                    bootstrap: 'libs/bootstrap',
+                    underscore: 'libs/underscore',
+                    backbone: 'libs/backbone',
+                    backboneLocalstorage: 'libs/backboneLocalstorage',
+                    domReady: 'libs/domReady',
+                    text: 'libs/text',
+                    json: 'libs/json',
+                }
+            });
+
+            // Bootstrap the application, first we need to load the app
+            // state object synchronously so we have the Accard structure.
+            require([ 'jquery', 'main', 'util', 'bootstrap', 'domReady!' ], function($, Main, Util) {
+                //Util.lock();
+
+                var debug = $('script[data-application="outcomes"]').data('debug');
+                var outcomeState = {};
+
+                // Synchronous request required?!
+                $.ajax({
+                    get: 'GET',
+                    url: "{{ path('accard_outcomes_state') }}",
+                    async: false,
+                    complete: function(response) {
+                        outcomeState = response.responseJSON;
+                    }
+                });
+
+                Main.initialize(outcomeState, debug);
+                Util.unlock();
+            });
+
+        </script>
+    </head>
+    <body>
+        <div id="overlay"><div class="animated pulse infinite"><span class="glyphicon glyphicon-lock"></span></div></div>
+        <div id="outcomes-application"></div>
+    </body>
+</html>

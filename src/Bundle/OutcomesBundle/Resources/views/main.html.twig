@@ -4,109 +4,141 @@
         <title>Accard Outcomes</title>
 
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css" rel="stylesheet">
+
+        <link href="{{ asset("bundles/accardoutcomes/css/notifier-base.css") }}" rel="stylesheet">
+        <link href="{{ asset("bundles/accardoutcomes/css/notifier-theme-plastic.css") }}" rel="stylesheet">
+        
+        {% set background = asset('bundles/accardoutcomes/img/background-1.jpg') %}
         <style>
             html, body { width: 100%; height: 100%; }
-            body { padding-top: 60px;  }
-
-            #navbar-debugger {
-                z-index: 9999;
+            body {
+                padding-top: 20px;
+                background: url("{{ background }}") no-repeat center center fixed;
+                filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{{ background }}, sizingMethod='scale');
+                -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{{ background }}', sizingMethod='scale')";
             }
 
-            #overlay {
-                position: fixed;
+            .section-container {
+                background: #fff;
+                padding: 2% 4%;
+                border-radius: 10px;
+                margin-bottom: 20px;
+
+                display: block;
+                width: 100%;
+                position: absolute;
                 top: 0;
                 left: 0;
+                visibility: hidden;
+
+                -webkit-backface-visibility: hidden;
+
+                -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.9);
+                   -moz-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.9);
+                        box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.9);
+            }
+
+            .section-container.animated {
+                visibility: visible !important;
+            }
+
+            .section-icon {
+                color: rgb(227, 87, 0);
+            }
+
+            .section-padding {
                 width: 100%;
-                height: 100%;
-                z-index: 9998;
-                background-color: rgba(0, 0, 0, 0.5);
-                background: linear-gradient(45deg, rgba(0, 0, 0, 0.8), rgba(20, 20, 20, 0.8));
-                border-radius: 1%;
+                padding-top: 20px;
             }
 
-            #overlay div {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                height: 200px;
-                width: 180px;
-                margin: -125px 0 0 -95px;
-                text-align: center;
-                padding: 30px;
+            .section-icon.active {
+                color: rgba(227, 87, 0, 1);
 
+                -webkit-transition: color .5s ease-in-out;
+                   -moz-transition: color .5s ease-in-out;
+                    -ms-transition: color .5s ease-in-out;
+                     -o-transition: color .5s ease-in-out;
+                        transition: color .5s ease-in-out;
+            }
+
+            #header-container {
+                margin-bottom: 5px;
+            }
+
+            #header-container .navbar-toggle {
                 background-color: rgba(255, 255, 255, 0.1);
-                border-radius: 20px;
-                box-shadow: 0 0  15px rgba(0, 0, 0, 0.3);
+                border-color: rgba(255, 255, 255, 0.6);
 
-                -webkit-animation-duration: 1.8s;
+                -webkit-transition: all .5s ease-in-out;
+                   -moz-transition: all .5s ease-in-out;
+                    -ms-transition: all .5s ease-in-out;
+                     -o-transition: all .5s ease-in-out;
+                        transition: all .5s ease-in-out;
             }
 
-            #overlay div span.glyphicon {
-                font-size: 130px;
+            #header-container .navbar-toggle:hover,
+            #header-container .navbar-toggle:focus {
+                background-color: rgba(255, 255, 255, 0.4);
             }
 
-            #overlay div p {
-                margin-top: -60px;
-                color: rgba(255, 255, 255, 0.8);
-                text-transform: uppercase;
+            #header-container .navbar-toggle .icon-bar {
+                background-color: rgba(0, 0, 0, 0.6);
+            }
+
+            #targets .target {
+                border-radius: 10px;
+                cursor: pointer;
+            }
+
+            #targets .target:hover {
+                background: #337ab7;
+                color: #FFF;
+
+                -webkit-transition: all .3s ease-in-out;
+                   -moz-transition: all .3s ease-in-out;
+                    -ms-transition: all .3s ease-in-out;
+                     -o-transition: all .3s ease-in-out;
+                        transition: all .3s ease-in-out;
+            }
+
+            #targets .target.active {
+                background: rgb(227, 87, 0);
+                color: #FFF;
+            }
+
+            #targets .target-inner {
+                height: 60px;
+                max-height: 60px;
+                overflow: auto;
             }
         </style>
         <script type="text/javascript"
-            data-application="outcomes"
-            data-debug="true"
+            data-main="/bundles/accardoutcomes/js/main"
             src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.16/require.min.js">
-        </script>
-        <script type="text/javascript">
-
-            require.config({
-                waitSeconds: 2,
-                baseUrl: '/bundles/accardoutcomes/js',
-                shim: {
-                    jquery: { exports: '$' },
-                    bootstrap: { deps: ['jquery'], exports: 'Bootstrap' },
-                    backbone: { deps: ['jquery', 'underscore'], exports: 'Backbone' },
-                    backboneLocalstorage: { deps: ['backbone'], exports: 'Store' },
-                    underscore: { exports: '_' }
-                },
-                paths: {
-                    jquery: 'libs/jquery',
-                    bootstrap: 'libs/bootstrap',
-                    underscore: 'libs/underscore',
-                    backbone: 'libs/backbone',
-                    backboneLocalstorage: 'libs/backboneLocalstorage',
-                    domReady: 'libs/domReady',
-                    text: 'libs/text',
-                    json: 'libs/json',
-                }
-            });
-
-            // Bootstrap the application, first we need to load the app
-            // state object synchronously so we have the Accard structure.
-            require([ 'jquery', 'main', 'util', 'bootstrap', 'domReady!' ], function($, Main, Util) {
-                //Util.lock();
-
-                var debug = $('script[data-application="outcomes"]').data('debug');
-                var outcomeState = {};
-
-                // Synchronous request required?!
-                $.ajax({
-                    get: 'GET',
-                    url: "{{ path('accard_outcomes_state') }}",
-                    async: false,
-                    complete: function(response) {
-                        outcomeState = response.responseJSON;
-                    }
-                });
-
-                Main.initialize(outcomeState, debug);
-                Util.unlock();
-            });
-
         </script>
     </head>
     <body>
-        <div id="overlay"><div class="animated pulse infinite"><span class="glyphicon glyphicon-lock"></span></div></div>
-        <div id="outcomes-application"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <header id="header"></header>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="content">
+                        <div id="targets-container" class="section-container"></div>
+                        <div id="filters-container" class="section-container"></div>
+                        <div id="transformations-container" class="section-container"></div>
+                        <div id="export-container" class="section-container"></div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
     </body>
 </html>

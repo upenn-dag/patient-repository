@@ -8,7 +8,7 @@ define([
     var overlay = $('#overlay').addClass('animated bounceInDown');
     var animEvents = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
 
-    return {
+    var Util = {
 
         getBody: function() {
             return body;
@@ -94,6 +94,7 @@ define([
                 this.view.$el.fadeToggle(fade);
             }
         }
-
     };
+
+    return Util;
 });

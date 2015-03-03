@@ -1,16 +1,7 @@
 // app.js
-define([
-    'backbone',
-    'routers/outcomes',
-    'views/app'
-], function(Backbone, Workspace, AppView) {
-    var initialize = function(state, debug) {
-        this.router = new Workspace();
-        Backbone.history.start();
-        this.view = new AppView({ state: state, debug: debug }).render();
-    }
+define(function(require, exports, module) {
+    "use strict";
 
-    return {
-        initialize: initialize
-    };
+    exports.root = "/app_dev.php/outcomes/";
+    exports.stateUri = "/app_dev.php/outcomes/state.json";
 });

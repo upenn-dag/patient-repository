@@ -1,12 +1,8 @@
-// models/state.js
+// modules/common/models/state.js
+define(function(require, exports, module) {
+    "use strict";
 
-define([
-    'underscore',
-    'backbone',
-    'collections/objects',
-], function(_, Backbone, Objects) {
-    'use strict';
-
+    var Objects = require("modules/common/collections/objects");
     var State = Backbone.Model.extend({
         initialize: function(options) {
             var objKeys = Object.keys(options.objects);
@@ -15,12 +11,13 @@ define([
                 Objects.add(options.objects[objKeys[i]]);
             }
 
-            this.set('objects', Objects);
+            this.set("objects", Objects);
         },
-
-        // Return an object by name
+        getObjects: function() {
+            return this.get("objects");
+        },
         getObject: function(name) {
-            return this.get('objects').get(name);
+            return this.getObjects().get(name);
         }
     });
 
