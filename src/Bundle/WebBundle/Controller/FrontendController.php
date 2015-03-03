@@ -33,7 +33,94 @@ class FrontendController extends Controller
      */
     public function mainAction(Request $request)
     {
-        return $this->render('Theme:Frontend:main.html.twig');
+        $patientRepository = $this->get('accard.repository.patient');
+        $patients = $patientRepository->findAll();
+
+
+        $genderCount = array();
+        
+        foreach($patients as $patient) {
+            if(is_object($patient->getGender())) {
+                if(! array_key_exists($patient->getGender()->getValue(), $genderCount) ) {
+                    $genderCount[$patient->getGender()->getValue()] = 1;
+                } else {
+                    $genderCount[$patient->getGender()->getValue()] = $genderCount[$patient->getGender()->getValue()] + 1;
+                }
+            }
+        }
+
+        $raceCount = array();
+
+        foreach($patients as $patient) {
+            if(is_object($patient->getRace())) {
+                if(! array_key_exists($patient->getRace()->getValue(), $raceCount) ) {
+                    $raceCount[$patient->getRace()->getValue()] = 1;
+                } else {
+                    $raceCount[$patient->getRace()->getValue()] = $raceCount[$patient->getRace()->getValue()] + 1;
+                }
+            }
+        }
+
+        $diagnosisRepository = $this->get('accard.repository.diagnosis');
+        $diagnoses = $diagnosisRepository->findall();
+
+        $dxCodeCount = array();
+        foreach($diagnoses as $diagnosis) {
+            if(is_object($diagnosis->getCode())) {
+                if(! array_key_exists($diagnosis->getCode()->getCode(), $dxCodeCount) ) {
+                    $dxCodeCount[$diagnosis->getCode()->getCode()] = 1;
+                } else {
+                    $dxCodeCount[$diagnosis->getCode()->getCode()] = $dxCodeCount[$diagnosis->getCode()->getCode()] + 1;
+                }
+            }
+        }
+
+        $dxAges = array();
+        foreach($diagnoses as $diagnosis) {
+            $diagnosisDate = $diagnosis->getStartDate();
+            $patient = $diagnosis->getPatient();
+            $dob = $patient->getDateOfBirth();
+
+            $ageAtDx = $diagnosisDate->diff($dob);
+
+            $dxAges[] = $ageAtDx->y;
+        }
+
+        $dxAgeMean = array_sum($dxAges) / count($dxAges);
+
+
+        $dxPhaseCount = array();
+        foreach($diagnoses as $diagnosis) {
+            foreach($diagnosis->getPhases()->getValues() as $phase) {
+                if(! array_key_exists($phase->getPhase()->getPresentation(), $dxPhaseCount)) {
+                    $dxPhaseCount[$phase->getPhase()->getPresentation()] = 1;
+                } else {
+                    $dxPhaseCount[$phase->getPhase()->getPresentation()] + 1;
+                }
+            }
+        }
+
+        $patientPhaseCount = array();
+        foreach($patients as $patient) {
+            foreach($patient->getPhases()->getValues() as $phase) {
+                if(! array_key_exists($phase->getPhase()->getPresentation(), $patientPhaseCount)) {
+                    $patientPhaseCount[$phase->getPhase()->getPresentation()] = 1;
+                } else {
+                    $patientPhaseCount[$phase->getPhase()->getPresentation()] + 1;
+                }
+            }
+        }
+
+        return $this->render('Theme:Frontend:main.html.twig', array(
+                'patients'          => $patients,
+                'raceCount'         => $raceCount,
+                'genderCount'       => $genderCount,
+                'dxCodeCount'       => $dxCodeCount,
+                'dxAgeMean'         => $dxAgeMean,
+                'dxAges'            => $dxAges,
+                'dxPhaseCount'      => $dxPhaseCount,
+                'patientPhaseCount' => $patientPhaseCount,
+        ));
     }
 
     /**
