@@ -71,9 +71,9 @@ abstract class PatientImporter implements ImporterInterface
         $resolver->setAllowedTypes(array(
             'first_name' => 'string',
             'last_name' => 'string',
-            'date_of_birth' => array('DateTime'),
-            'date_of_death' => array('DateTime', 'null'),
-            'gender' => array('Accard\Component\Option\Model\OptionValueInterface'),
+            'date_of_birth' => array('DateTime', 'string'),
+            'date_of_death' => array('DateTime', 'null', 'string'),
+            'gender' => array('Accard\Component\Option\Model\OptionValueInterface', 'string'),
             'race' => array('string', 'null'),
         ));
 
