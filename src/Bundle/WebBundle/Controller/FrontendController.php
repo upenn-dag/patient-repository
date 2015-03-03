@@ -40,20 +40,24 @@ class FrontendController extends Controller
         $genderCount = array();
         
         foreach($patients as $patient) {
-            if(! array_key_exists($patient->getGender()->getValue(), $genderCount) ) {
-                $genderCount[$patient->getGender()->getValue()] = 1;
-            } else {
-                $genderCount[$patient->getGender()->getValue()] = $genderCount[$patient->getGender()->getValue()] + 1;
+            if(is_object($patient->getGender())) {
+                if(! array_key_exists($patient->getGender()->getValue(), $genderCount) ) {
+                    $genderCount[$patient->getGender()->getValue()] = 1;
+                } else {
+                    $genderCount[$patient->getGender()->getValue()] = $genderCount[$patient->getGender()->getValue()] + 1;
+                }
             }
         }
 
         $raceCount = array();
 
         foreach($patients as $patient) {
-            if(! array_key_exists($patient->getRace()->getValue(), $raceCount) ) {
-                $raceCount[$patient->getRace()->getValue()] = 1;
-            } else {
-                $raceCount[$patient->getRace()->getValue()] = $raceCount[$patient->getRace()->getValue()] + 1;
+            if(is_object($patient->getRace())) {
+                if(! array_key_exists($patient->getRace()->getValue(), $raceCount) ) {
+                    $raceCount[$patient->getRace()->getValue()] = 1;
+                } else {
+                    $raceCount[$patient->getRace()->getValue()] = $raceCount[$patient->getRace()->getValue()] + 1;
+                }
             }
         }
 
@@ -62,10 +66,12 @@ class FrontendController extends Controller
 
         $dxCodeCount = array();
         foreach($diagnoses as $diagnosis) {
-            if(! array_key_exists($diagnosis->getCode()->getCode(), $dxCodeCount) ) {
-                $dxCodeCount[$diagnosis->getCode()->getCode()] = 1;
-            } else {
-                $dxCodeCount[$diagnosis->getCode()->getCode()] = $dxCodeCount[$diagnosis->getCode()->getCode()] + 1;
+            if(is_object($diagnosis->getCode())) {
+                if(! array_key_exists($diagnosis->getCode()->getCode(), $dxCodeCount) ) {
+                    $dxCodeCount[$diagnosis->getCode()->getCode()] = 1;
+                } else {
+                    $dxCodeCount[$diagnosis->getCode()->getCode()] = $dxCodeCount[$diagnosis->getCode()->getCode()] + 1;
+                }
             }
         }
 
