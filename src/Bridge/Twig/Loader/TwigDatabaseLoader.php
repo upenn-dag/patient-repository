@@ -25,13 +25,28 @@ class TwigDatabaseLoader implements Twig_LoaderInterface
     const MAGIC_TEMPLATE = 'Theme';
     const MAGIC_PREFIX = 'Accard';
 
+    /**
+     * Template repository.
+     * 
+     * @var TemplateRepository
+     */
     private $repository;
 
+    /**
+     * Constructor.
+     * 
+     * @param TemplateRepository
+     */
     public function __construct($repository)
     {
         $this->repository= $repository;
     }
 
+    /**
+     * Get Source
+     * 
+     * @var string $name
+     */
     public function getSource($name)
     {
         // If we aren't using Symfony style loading, ignore this loader.
@@ -41,6 +56,7 @@ class TwigDatabaseLoader implements Twig_LoaderInterface
         if (3 === count($parts) && self::MAGIC_TEMPLATE === $parts[0]) {
             $baseName = sprintf('%s:%s', $parts[1], $parts[2]);
             $themeName = sprintf('%s:%s:%s', self::MAGIC_TEMPLATE, $parts[1], $parts[2]);
+
             if ($template = $this->getTemplate($themeName)) {
                 $content = $template->getContent();
 
@@ -76,11 +92,6 @@ class TwigDatabaseLoader implements Twig_LoaderInterface
 
     protected function getValue($column, $name)
     {
-        //die(var_dump($this->repository->findOneBy(array($column => $name))));
         return $this->repository->findOneBy(array($column => $name));
-        //$sth = $this->dbh->prepare('SELECT '.$column.' FROM templates WHERE name = :name');
-        //$sth->execute(array(':name' => (string) $name));
-
-        //return $sth->fetchColumn();
     }
 }

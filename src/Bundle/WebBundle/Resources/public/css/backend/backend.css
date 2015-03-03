@@ -425,3 +425,6 @@ body > .alert {
 a.unlinked {
     cursor: not-allowed;
 }
+
+/* Collapse table row override */
+table.table tr.collapse.in { display: table-row; }
