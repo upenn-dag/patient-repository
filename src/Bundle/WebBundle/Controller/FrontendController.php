@@ -104,7 +104,7 @@ class FrontendController extends Controller
                 }
             }
         }
-die(var_dump($genderCount));
+
         return $this->render('Theme:Frontend:main.html.twig', array(
                 'patients'          => $patients,
                 'raceCount'         => $raceCount,
