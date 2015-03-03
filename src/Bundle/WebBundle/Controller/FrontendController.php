@@ -66,7 +66,7 @@ class FrontendController extends Controller
 
         $dxCodeCount = array();
         foreach($diagnoses as $diagnosis) {
-            if(is_object($patient->getCode())) {
+            if(is_object($diagnosis->getCode())) {
                 if(! array_key_exists($diagnosis->getCode()->getCode(), $dxCodeCount) ) {
                     $dxCodeCount[$diagnosis->getCode()->getCode()] = 1;
                 } else {
