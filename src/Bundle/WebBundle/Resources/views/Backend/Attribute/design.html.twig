@@ -76,7 +76,7 @@
             </div>
         </div>
         {% endblock %}
-        {% attribute_settings %}
+        {% block attribute_settings %}
         <div id="settings" class="tab-pane fade{{ _self.active_tab('settings', ' in active') }}">
             <form action="{{ path('accard_backend_attribute_settings_update') }}" method="POST" enctype="{{ form_enctype(settings_form) }}">
                 {{ form_widget(settings_form._token) }}

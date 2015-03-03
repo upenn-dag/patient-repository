@@ -12,7 +12,7 @@
 {% from 'AccardWebBundle:Common/Macros:fields.html.twig' import list_prototypes, list_fields %}
 
 {% macro action_buttons() %}
-    {% block sample_nav %}
+    {% block action_buttons %}
     <div class="btn-group">
         <a href="{{ path('accard_frontend_sample_index') }}" class="btn btn-primary">{{ 'accard.sample.action.manage_all'|trans }}</a>
         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -28,7 +28,7 @@
 {% endmacro %}
 
 {% block content %}
-    {% page_title %}
+    {% block page_title %}
         {{ page_title('accard.sample.action.design'|trans, _self.action_buttons()) }}
     {% endblock %}
     {% block sample_nav %}
