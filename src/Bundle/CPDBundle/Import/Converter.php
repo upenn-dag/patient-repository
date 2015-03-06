@@ -14,6 +14,7 @@ use Accard\Bundle\ResourceBundle\Import\ConverterInterface;
 use Accard\Bundle\ResourceBundle\Import\Events;
 use Accard\Bundle\ResourceBundle\Event\ImportEvent;
 use Accard\Component\Core\Model\Sample;
+use Accard\Component\Core\Model\Source;
 use Accard\Component\Prototype\Provider\PrototypeProviderInterface;
 use Accard\Component\Sample\Model\FieldValue;
 
@@ -49,17 +50,16 @@ class Converter implements ConverterInterface
         $repo = $event->getTarget()->getRepository();
         $prototype = $this->prototypeProvider->getPrototypeByName('genetic-results');
 
-        $fields['activity-date'] = $prototype->getFieldByName('activity-date');
         $fields['cpd-id'] = $prototype->getFieldByName('genetic-results-cpd-id');
         $fields['gene-id'] = $prototype->getFieldByName('genetic-results-gene-id');
         $fields['gene'] = $prototype->getFieldByName('genetic-results-gene');
         $fields['variant-detected'] = $prototype->getFieldByName('genetic-results-variant-detected');
-        $fields['variant-categorization'] = $prototype->getFieldByName('genetic-results-variant-ategorization');
+        $fields['variant-categorization'] = $prototype->getFieldByName('genetic-results-variant-categorization');
         $fields['cdna-change'] = $prototype->getFieldByName('genetic-results-cdna-change');
-        $fields['mutation-type-cdna'] = $prototype->getFieldByName('genetic-results-mutation-type-dna');
-        $fields['mutation-type-protein'] = $prototype->getFieldByName('genetic-results-mutation-type-rotein');
+        $fields['mutation-type-cdna'] = $prototype->getFieldByName('genetic-results-mutation-type-cdna');
+        $fields['mutation-type-protein'] = $prototype->getFieldByName('genetic-results-mutation-type-protein');
         $fields['variant-alias'] = $prototype->getFieldByName('genetic-results-variant-alias');
-        $fields['genetic-test-version-id'] = $prototype->getFieldByName('genetic-results-genetic-test-ersion-id');
+        $fields['genetic-test-version-id'] = $prototype->getFieldByName('genetic-results-genetic-test-version-id');
         $fields['transcript-id'] = $prototype->getFieldByName('genetic-results-transcript-id');
         $fields['position'] = $prototype->getFieldByName('genetic-results-position');
         $fields['genotype'] = $prototype->getFieldByName('genetic-results-genotype');
@@ -68,32 +68,35 @@ class Converter implements ConverterInterface
         $fields['fad'] = $prototype->getFieldByName('genetic-results-fad');
         $fields['faf'] = $prototype->getFieldByName('genetic-results-faf');
 
-        $samples = array();
+        $sources = array();
         foreach ($records as $key => $record) {
+            $source = new Source();
+            $source->setPatient($record['patient']);
+            $source->setSourceDate($record['activity_date']);
+            $source->setAmount(1);
 
             $sample = new Sample();
             $sample->setPrototype($prototype);
             $sample->setPatient($record['patient']);
-	    if (array_key_exists('diagnosis', $record)) {
-		$sample->setDiagnosis($record['diagnosis']);
-	    }
-            //$sample->setActivityDate($record['activity_date']);
 
-            foreach($fields as $key => $field) {
-                if(method_exists($field, 'getName')) {                
-                    $fieldValue = new FieldValue;
-                    $fieldValue->setField($field);
-                    $fieldValue->setSample($sample);
-                    $fieldValue->setValue($record[str_replace('genetic_results_', '', str_replace('-', '_', $field->getName()))]);
-                    $samples[$record['pk_id'] . $field->getName()] = $fieldValue;
-                }
+            $source->addSample($sample);
+
+            if (array_key_exists('diagnosis', $record)) {
+                $sample->setDiagnosis($record['diagnosis']);
             }
 
-            $samples[$record['pk_id']] = $sample;
+            foreach($fields as $key => $field) {
+                $fieldValue = new FieldValue;
+                $fieldValue->setField($field);
+                $fieldValue->setValue($record[str_replace('genetic_results_', '', str_replace('-', '_', $field->getName()))]);
 
+                $sample->addField($fieldValue);
+            }
+
+            $sources[$record['pk_id']] = $source;
             unset($records[$key]);
         }
 
-        $event->setRecords($samples);
+        $event->setRecords($sources);
    }
 }
