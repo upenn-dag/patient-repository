@@ -1,11 +1,8 @@
 <?php
+
 namespace Accard\Bundle\PrototypeBundle\Twig;
 
-/**
- * Prototype Bundle \ Twig \ Prototype Extension
- *
- * @author Dylan Pierce <dylan@booksmart.it>
- */
+use Twig_Environment;
 use Twig_Extension;
 use Twig_SimpleFunction;
 use Doctrine\Common\Collections\Collection;
@@ -18,6 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Accard prototype Twig extension.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
+ * @author Dylan Pierce <dylan@booksmart.it>
  */
 class PrototypeExtension extends Twig_Extension implements ContainerAwareInterface
 {
@@ -68,7 +66,7 @@ class PrototypeExtension extends Twig_Extension implements ContainerAwareInterfa
 
         $provider = $this->container->get($provider);
 
-        die(var_dump($provider));
+        die(var_dump($provider->getPrototypes()));
     }
 
     /**
