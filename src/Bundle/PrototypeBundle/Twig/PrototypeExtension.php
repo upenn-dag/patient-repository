@@ -66,7 +66,7 @@ class PrototypeExtension extends Twig_Extension implements ContainerAwareInterfa
 
         $provider = $this->container->get($provider);
 
-        die(var_dump($provider->getPrototypes()));
+            return $provider->getPrototypes();
     }
 
     /**
