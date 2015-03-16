@@ -67,14 +67,21 @@ class GeneticResultsImporter extends SampleImporter
     public function run(OptionsResolverInterface $resolver)
     {
         $records = array();
-        $results = $this->cpdSource->execute();
         $localRecords = $this->localSource->execute();
+        $results = $this->cpdSource->execute();
+        $cachedMrns = array();
 
         foreach($results as $key => $result) {
             $result = array_change_key_case($result, CASE_LOWER);
+            $mrn = $result['patient'];
 
             try {
-                $result['previous_record'] = $this->provider->getPatientByMRN($result['patient']);
+                if (!isset($cachedMrns[$mrn])) {
+                    $result['previous_record'] = $this->provider->getPatientByMRN($mrn);
+                    $cachedMrns[$mrn] = $result['previous_record'];
+                } else {
+                    $result['previous_record'] = $cachedMrns[$mrn];
+                }
             } catch (PatientNotFoundException $e) {
                 unset($result, $results[$key]);
                 continue;
@@ -88,9 +95,11 @@ class GeneticResultsImporter extends SampleImporter
             if($record['patient'] && $record['genetic_test_version_id'] == '2' && !in_array($record['pk_id'], $localRecords)) {
                 $records[] = $record;
             }
+
             unset($results[$key]);
         }
-        unset($localRecords);
+
+        unset($cachedMrns, $localRecords);
 
         return $records;
     }

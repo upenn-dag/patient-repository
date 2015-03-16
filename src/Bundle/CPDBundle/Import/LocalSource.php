@@ -60,8 +60,8 @@ class LocalSource implements SourceAdapterInterface
         }
 
         $sql = "SELECT a.id AS sampleId, a.patientId, v.fieldId, v.stringValue
-            FROM accard_sample_proto_fldval AS v
-            LEFT JOIN accard_sample AS a ON (v.sampleId = a.id)
+            FROM accard_sample_proto_fldval v
+            LEFT JOIN accard_sample a ON (v.sampleId = a.id)
             WHERE v.fieldId IN (%s)";
 
         return sprintf($sql, implode(', ', $fieldIds));
@@ -74,12 +74,13 @@ class LocalSource implements SourceAdapterInterface
     {
         $localResults = array();
         foreach ($results as $key => $result) {
-            $sampleId = $result['sampleId'];
-            $fieldId = $result['fieldId'];
+            $result = array_change_key_case($result, CASE_LOWER);
+            $sampleId = $result['sampleid'];
+            $fieldId = $result['fieldid'];
             if (!isset($localResults[$sampleId])) {
                 $localResults[$sampleId] = array();
             }
-            $localResults[$sampleId][$fieldId] = $result['stringValue'];
+            $localResults[$sampleId][$fieldId] = $result['stringvalue'];
 
             unset($results[$key]);
         }
