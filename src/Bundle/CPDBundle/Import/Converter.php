@@ -67,6 +67,8 @@ class Converter implements ConverterInterface
         $fields['frd'] = $prototype->getFieldByName('genetic-results-frd');
         $fields['fad'] = $prototype->getFieldByName('genetic-results-fad');
         $fields['faf'] = $prototype->getFieldByName('genetic-results-faf');
+        $fields['exon-id'] = $prototype->getFieldByName('exon-id');
+        $fields['exon'] = $prototype->getFieldByName('exon');
 
         $sources = array();
         foreach ($records as $key => $record) {
