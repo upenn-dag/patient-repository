@@ -9,7 +9,7 @@ parameters:
 
     accard.event_subscriber.prototype.load_orm_metadata.class: Accard\Bundle\PrototypeBundle\EventListener\LoadORMMetadataSubscriber
     accard.repository.prototype.class: Accard\Bundle\PrototypeBundle\Doctrine\ORM\PrototypeRepository
-    accard.twig.prototype.class: Accard\Bundle\PrototypeBundle\Twig\PrototypeExtension
+    accard.twig.extension.prototype.class: Accard\Bundle\PrototypeBundle\Twig\PrototypeExtension
 
 services:
 
@@ -26,6 +26,9 @@ services:
         arguments:
              - Accard\Component\Prototype\Model\Prototype
 
-    accard.twig.prototype:
-        class: %accard.twig.prototype.class%
+    accard.twig.extension.prototype:
+        class: %accard.twig.extension.prototype.class%
+        calls:
+            - ["setContainer", ["@service_container"]]
+        public: false
         tags: [{ name: twig.extension }]
