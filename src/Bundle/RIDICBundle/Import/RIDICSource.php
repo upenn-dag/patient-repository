@@ -47,8 +47,34 @@ class RIDICSource implements SourceAdapterInterface
      */
     private function buildQuery()
     {
-        return "SELECT
-            *
-            FROM ARIA.V_COURSE_DOSE";
+        return "
+            SELECT
+            aria.v_COURSE_DOSE.COURSE_SER,
+            REF_POINT_ID,
+            REF_POINT_SER,
+            RX_DAILY_DOSE,
+            RX_FRACTIONS,
+            RX_SESSION_DOSE,
+            RX_TOTAL_DOSE,
+            TREATED_FRACTIONS,
+            TREATED_TOTAL_DOSE,
+            DX_COMMENTS,
+            DX_DESC,
+            G,
+            M,
+            N,
+            T,
+            PSA,
+            STAGE,
+            STAGE_BASIS,
+            ICD9_CODE,
+            FIRST_TREATMENT_DT,
+            LAST_TREATMENT_DT
+            FROM aria.v_COURSE_DOSE
+                JOIN aria.v_COURSE_PRIM_CA_DX
+                ON aria.v_COURSE_DOSE.COURSE_SER = aria.v_COURSE_PRIM_CA_DX.COURSE_SER
+                JOIN aria.TREATED_COURSES
+                ON aria.v_COURSE_DOSE.COURSE_SER = aria.TREATED_COURSES.COURSE_SER;
+        ";
     }
 }

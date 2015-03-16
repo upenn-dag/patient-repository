@@ -75,7 +75,7 @@ class RIDICImporter extends SampleImporter
 
         foreach($results as $key => $result) {
             $result = array_change_key_case($result, CASE_LOWER);
-            $mrn = $result['patient'];
+            $mrn = $result['hup_mrn'];
 
             try {
                 $result['previous_record'] = $this->provider->getPatientByMRN($mrn);
@@ -85,18 +85,17 @@ class RIDICImporter extends SampleImporter
             }
 
             $record['identifier'] = $result['course_serv'];
-            $result['import_description'] = sprintf('%s genetic results on the %s.', $result['cpd_id'], $result['patient']);
+
+            $result['import_description'] = sprintf('%s ridic dose on the %s.', $result['course_serv'], $result['patient']);
 
             $record = $resolver->resolve($result);
 
-            if($record['patient'] && $record['genetic_test_version_id'] == '2' && !in_array($record['pk_id'], $localRecords)) {
+            if($record['patient'] && !in_array($record['course_serv'], $localRecords)) {
                 $records[] = $record;
             }
 
             unset($results[$key]);
         }
-
-        unset($cachedMrns, $localRecords);
 
         return $records;
     }
@@ -108,18 +107,58 @@ class RIDICImporter extends SampleImporter
     {
         parent::configureResolver($resolver);
 
-        $mutations = array('substitution', 'deletion', 'missense', 'frameshift', 'deletion/insertion', 'insertion', 'duplication');
-
         $resolver->setRequired(array(
-
+            //from TREATED_COURSES table
+            'first_treatment',
+            'last_treatment',
+            'course_serv',
+            'hup_mrn',
+            //from v_COURSE_DOSE
+            'ref_point_serv',
+            'ref_point_id',
+            'rx_total_dose',
+            'rx_daily_dose',
+            'rx_session_dose',
+            'rx_fraction',
+            'treated_total_dose',
+            'treated_fractions',
+            //from v_COURSE_PRIM_CaDx
+            'icd9_code',
+            'dx_desc',
         ));
 
         $resolver->setOptional(array(
-
+            //from v_COURSE_PRIM_CaDx
+            'dx_comments',
+            'stage',
+            'stage_basis',
+            't',
+            'n',
+            'm',
+            'g',
+            'psa',
         ));
 
         $resolver->setAllowedTypes(array(
-
+            'course_serv'           => 'string',
+            'ref_point_serv'        => 'string',
+            'ref_point_id'          => 'string',
+            'rx_total_dose'         => 'string',
+            'rx_daily_dose'         => 'string',
+            'rx_session_dose'       => 'string',
+            'rx_fraction'           => 'string',
+            'treated_total_dose'    => 'string',
+            'treated_fractions'     => 'string',
+            'icd9_code'             => 'string',
+            'dx_desc'               => 'string',
+            'dx_comments'           => 'string',
+            'stage'                 => 'string',
+            'stage_basis'           => 'string',
+            't'                     => 'string',
+            'n'                     => 'string',
+            'm'                     => 'string',
+            'g'                     => 'string',
+            'psa'                   => 'string',
         ));
 
         $resolver->setAllowedValues(array(

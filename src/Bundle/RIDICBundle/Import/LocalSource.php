@@ -40,8 +40,16 @@ class LocalSource implements SourceAdapterInterface
 	{
 		$prototype = $this->provider->getPrototypeByName('ridic-dose');
         $activities = $this->repository->findBy(array('prototype' => $prototype));
-        // Make sure to only return the course_serv id
 
-        return $activities;
+        $course_servs = [];
+
+        foreach( $activities as $activity ) {
+        	$course_serv = $activity->getFieldByName('ridic-dose-course-serve');
+
+        	$course_servs[] = $course_serv;
+        }
+
+        return $course_servs;
+
 	}
 }

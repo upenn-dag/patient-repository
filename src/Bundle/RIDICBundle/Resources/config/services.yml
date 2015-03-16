@@ -7,7 +7,8 @@ parameters:
 
 services:
     accard.connection.ridic:
-        alias: doctrine.dbal.sql_cluster_connection
+        alias: doctrine.dbal.accard_connection
+
 
     accard.import.importer.ridic:
         class: "%accard.import.importer.ridic.class%"
