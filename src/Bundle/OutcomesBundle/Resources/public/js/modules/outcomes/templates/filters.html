@@ -9,6 +9,9 @@
     <hr class="visible-xs">
     <div id="filters-next" class="col-sm-2">
         <div class="section-padding hidden-xs"></div>
+        <a href="#" id="preview-base-dataset" class="btn btn-primary btn-block">
+            <i class="fa fa-arrow-circle-o-right"></i> Preview Dataset
+        </a>
         <a href="#transformations" id="filters-button-next" class="btn btn-primary btn-block">
             <i class="fa fa-arrow-circle-o-right"></i> Next Step 
         </a>
@@ -16,41 +19,13 @@
 </div>
 <hr>
 <div class="row">
-    <div class="fields col-sm-4 col-md-3">
-        <ul id="fields" role="tablist" class="nav nav-pills nav-stacked">
-            <li role="presentation">
-                <a href="#" role="tab" data-target="#fields-help" data-toggle="pill">Help</a>
-            </li>
-        </ul>
+    <div class="col-sm-12">
+        <div id="fields"></div>
     </div>
-    <div class="col-sm-8 col-md-9">
-        <div class="filters tab-content">
-            <div role="tabpanel" class="tab-pane fade" id="fields-help">
-                <h4><%= _.titleize(target.name) %> Filtering</h4>
-                <p>
-                    Filtering <%= _.pluralize(target.name) %> creates your base dataset. This may also be called
-                    your &lsquo;Cohort&rsquo;. It does not constitute your final dataset but, instead,
-                    creates the foundation of data on which you will perform your transformations.
-                </p>
-                <p>
-                    To the left, you will find all fields available for filtering your <%= target.name %>.
-                    To add a data filter to any one of these fields:
-                </p>
-                <ul class="fa-ul">
-                    <li><i class="fa-li fa fa-square-o"></i>Select field you wish to filter.</li>
-                    <li><i class="fa-li fa fa-square-o"></i>Select one available filter.</li>
-                    <li><i class="fa-li fa fa-square-o"></i>Fill out required filter options.</li>
-                </ul>
-            </div>
-            <% _.each(fields, function(field) { %>
-            <div role="tabpanel" class="tab-pane fade" id="fields-<%= field.name %>">
-                This is the <%= field.name %> panel.
-            </div>
-            <% }); %>
-        </div>
-    </div>
-
-
-    <div id="filters" class="filters"></div>
     <div class="clearfix"></div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div id="base-dataset" class="base-dataset">Loading dataset</div>
+    </div>
 </div>

@@ -9,6 +9,7 @@
 
         <link href="{{ asset("bundles/accardoutcomes/css/notifier-base.css") }}" rel="stylesheet">
         <link href="{{ asset("bundles/accardoutcomes/css/notifier-theme-plastic.css") }}" rel="stylesheet">
+        <link href="{{ asset("bundles/accardoutcomes/css/grid.css") }}" rel="stylesheet">
         
         {% set background = asset('bundles/accardoutcomes/img/background-1.jpg') %}
         <style>
@@ -112,6 +113,15 @@
                 height: 60px;
                 max-height: 60px;
                 overflow: auto;
+            }
+
+            .field .field {
+            }
+
+            .field .field-filters {
+                min-height: 80px;
+                max-height: 80px;
+                overflow: scroll;
             }
         </style>
         <script type="text/javascript"

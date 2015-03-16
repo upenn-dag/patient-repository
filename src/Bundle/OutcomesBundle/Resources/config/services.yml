@@ -7,4 +7,18 @@
 
 parameters:
 
+    accard.outcomes.manager.class: Accard\Bundle\OutcomesBundle\Outcomes\Manager
+    accard.outcomes.filter_registry.class: Accard\Bundle\OutcomesBundle\Outcomes\FilterRegistry
+
 services:
+
+    accard.outcomes.manager:
+        class: %accard.outcomes.manager.class%
+        arguments:
+            - @accard.outcomes.filter_registry
+        calls:
+            - [ "setContainer", ["@service_container"]]
+            - [ "setState", ["@=service('accard.state').getState()"]]
+
+    accard.outcomes.filter_registry:
+        class: %accard.outcomes.filter_registry.class%

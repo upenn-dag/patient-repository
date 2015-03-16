@@ -21,6 +21,12 @@ accard_partial:
     resource: @AccardWebBundle/Resources/config/routing/partial/main.yml
     prefix: /partial
 
+#accard_outcomes:
+#    type: rest
+#    prefix: /outcomes
+#    #name_prefix: outcomes_
+#    resource: Accard\Bundle\OutcomesBundle\Controller\OutcomesController
+
 accard_outcomes:
     resource: @AccardOutcomesBundle/Resources/config/routing.yml
     prefix: /outcomes

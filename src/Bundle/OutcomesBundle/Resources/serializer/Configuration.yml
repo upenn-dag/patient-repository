@@ -1,0 +1,39 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+Accard\Bundle\OutcomesBundle\Outcomes\Configuration:
+    exclusion_policy: ALL
+    xml_root_name: config
+    properties:
+        target:
+            expose: true
+            type: string
+            serialized_name: target
+            since_version: 1.0
+            xml_attribute: true
+        targetPrototype:
+            expose: true
+            type: string
+            serialized_name: target-prototype
+            since_version: 1.0
+            xml_attribute: true
+        filters:
+            expose: true
+            type: array<string, Accard\Bundle\OutcomesBundle\Outcomes\FilterConfiguration>
+            serialized_name: filters
+            since_version: 1.0
+            xml_map:
+                inline: true
+                key_attribute_name: field
+                entry_name: filter
+        transformations:
+            expose: true
+            type: array<string, array>
+            serialized_name: transformations
+            since_version: 1.0
+            xml_list:
+                entry_name: transformation

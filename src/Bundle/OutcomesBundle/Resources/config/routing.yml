@@ -5,12 +5,33 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
+accard_outcomes_test:
+    path: /test
+    defaults:
+        _controller: AccardOutcomesBundle:Outcomes:test
+
 accard_outcomes_main:
     path: /
     defaults:
         _controller: AccardOutcomesBundle:Outcomes:main
 
+accard_outcomes_filters:
+    path: /filters.{_format}
+    requirements:
+        _format: json|xml
+    defaults:
+        _controller: AccardOutcomesBundle:Outcomes:filters
+
+accard_outcomes_filtered_dataset:
+    path: /filtered.{_format}
+    requirements:
+        _format: json|xml
+    defaults:
+        _controller: AccardOutcomesBundle:Outcomes:filteredDataset
+
 accard_outcomes_state:
     path: /state.json
     defaults:
         _controller: AccardWebBundle:Frontend:state
+
+

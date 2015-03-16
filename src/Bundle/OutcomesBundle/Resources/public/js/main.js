@@ -7,6 +7,7 @@ require.config({
 
         "backbone": { deps: ["jquery", "underscore.mixed"], exports: "Backbone" },
         "backbone.notifier": { deps: ["jquery", "backbone", "underscore"], exports: "Backbone.notifier" },
+        "backbone.grid": { deps: ["jquery", "bootstrap", "backbone", "underscore"], exports: "Backbone.grid" },
         "backbone.localstorage": { deps: ["backbone"], exports: "Store" },
 
         jquery: { exports: "$" },
@@ -36,7 +37,7 @@ define(function(require, exports, module) {
     var App = require("app");
     var state = {};
 
-    $.ajax({ // Synchronous request required?!
+    $.ajax({
         get: "GET",
         url: App.stateUri,
         complete: function(response) {

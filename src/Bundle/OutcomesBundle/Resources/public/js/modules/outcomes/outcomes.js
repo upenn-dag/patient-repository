@@ -12,6 +12,63 @@ define(function(require, exports, module) {
     var Notifier = Utils.notifier;
 
 
+    // APP EXTENSIONS
+    app.filterExists = function(filter) {
+        var found = false;
+        app.availableFilters.forEach(function(aFilter) {
+            if (aFilter == filter) {
+                found = true;
+            }
+        });
+
+        return found;
+    }
+
+    app.filterTypes = function(filter) {
+        if (!app.filterExists(filter)) throw 'Filter "'+filter+'" could not be found.';
+
+        return app.filterData.filters[filter].types;
+    }
+
+    app.filterAllowsType = function(filter, type) {
+        var found = false;
+        var filterTypes = app.filterTypes(filter);
+        filterTypes.forEach(function(fType) {
+            if (fType == type) {
+                found = true;
+            }
+        });
+
+        return found;
+    }
+
+    app.allowedFilters = function(fieldType) {
+        var allowed = [];
+        app.availableFilters.forEach(function(aFilter) {
+            if (app.filterAllowsType(aFilter, fieldType)) {
+                allowed.push(aFilter);
+            }
+        });
+
+        return allowed;
+    }
+
+    // LOAD ALL FILTERS
+    $.ajax({
+        type: "GET",
+        url: app.filtersUri,
+        dataType: "json",
+        complete: function(response) {
+            app.filterData = response.responseJSON;
+            app.availableFilters = Object.keys(app.filterData.filters);
+        },
+        fail: function() {
+            // Handle this better, with app locking?!
+            alert("Unable to load filters.");
+        }
+    });
+
+
     // ROUTER
     module.Router = Backbone.Router.extend({
         routes: {
@@ -50,7 +107,7 @@ define(function(require, exports, module) {
 
         target: function() {
             this.trigger("routeChange", "target");
-            this.targetsView = this.targetsView || new module.Views.Targets({ collection: this.state.getObjects() }).render();
+            this.targetsView = this.targetsView || new module.Views.Targets({ collection: this.state.getObjects() });
             this.setCurrentView(this.targetsView);
         },
 
@@ -72,7 +129,7 @@ define(function(require, exports, module) {
             }
 
             this.trigger("routeChange", "transformations");
-            this.transformationsView = this.transformationsView || new module.Views.Transformations().render();
+            this.transformationsView = this.transformationsView || new module.Views.Transformations();
             this.setCurrentView(this.transformationsView);
         },
 
@@ -129,8 +186,6 @@ define(function(require, exports, module) {
         },
 
         initialize: function(options) {
-            this.render();
-
             // We had to create a custom routeChange event on the router
             // otherwise, the route events will be called out of "logical order".
             this.listenTo(options.router, "routeChange", this.enable);
@@ -241,12 +296,48 @@ define(function(require, exports, module) {
         }
     });
 
+    var FilterModel = require("modules/outcomes/models/filter");
     module.Views.Filter = Backbone.View.extend({
-        model: require("modules/outcomes/models/filter"),
+        tagName: "li",
+        className: "list-group-item",
+        model: FilterModel,
         template: _.template(require("text!modules/outcomes/templates/filter.html")),
 
+        events: {
+            "click .field-filter-configure" : "configure",
+        },
+
         initialize: function() {
-            this.render();
+            this.listenTo(this.model, "change:state", this._handleStateChange);
+        },
+
+        _handleStateChange: function(model, state) {
+            var previousState = model.previous("state");
+
+            switch (previousState) {
+                case model.getActiveState(): this.$el.removeClass("list-group-item-success"); break;
+                case model.getDisabledState(): this.$el.removeClass("list-group-item-warning"); break;
+            }
+
+            switch (state) {
+                case model.getActiveState(): this.$el.addClass("list-group-item-success"); break;
+                case model.getDisabledState(): this.$el.addClass("list-group-item-warning"); break;
+            }
+        },
+
+        configure: function() {
+            var field = this.model.get("field");
+            var fieldType = field.get("type")
+            var allowedFilters = app.allowedFilters(fieldType);
+
+            if (0 == allowedFilters.length) {
+                Notifier.navigationWarning('There are no filters capable of handling "'+fieldType+'" fields.');
+                this.model.disable();
+                return;
+            }
+
+            alert("Configuring filter");
+            this.model.activate();
         },
 
         render: function() {
@@ -255,16 +346,53 @@ define(function(require, exports, module) {
         }
     });
 
+    // Right now, we only allow a single filter...Later, we will allow more.
     module.Views.Field = Backbone.View.extend({
         model: require("modules/common/models/field"),
         template: _.template(require("text!modules/outcomes/templates/field.html")),
+        filterList: null,
+
+        events: {
+            "click .field-filter-add": "addFilter",
+            "click .field-filter-remove": "removeFilter",
+        },
 
         initialize: function() {
-            this.render();
+            this.listenTo(this.model, "change:filter", this._handleFilterChange);
+        },
+
+        _handleFilterChange: function(model, filter) {
+            this.renderFilter();
+        },
+
+        addFilter: function() {
+            if (!!this.model.get("filter")) {
+                alert("We currently only allow on filter per field");
+                return;
+            }
+
+            var model = new FilterModel();
+            model.set("field", this.model);
+            this.model.set("filter", model);
+        },
+
+        removeFilter: function() {
+            this.model.set("filter", null);
+        },
+
+        renderFilter: function() {
+            this.filterList.html("");
+            var filter = this.model.get("filter");
+            if (filter) {
+                var filterView = new module.Views.Filter({ model: filter }).render();
+                this.filterList.append(filterView.$el);
+            }
         },
 
         render: function() {
-            this.$el = $(this.template(this.model.toJSON()));
+            this.$el.html($(this.template(this.model.toJSON())));
+            this.filterList = this.$el.find(".field-filters");
+
             return this;
         }
     });
@@ -273,29 +401,42 @@ define(function(require, exports, module) {
         el: document.getElementById('filters-container'),
         template: _.template(require("text!modules/outcomes/templates/filters.html")),
 
-        initialize: function() {
-            this.render();
-            this.listenTo(this.collection, "add", this.addFilter);
-            this.listenTo(this.collection, "remove", this.removeFilter);
+        events: {
+            "click #preview-base-dataset": "_handleDatasetPreview",
+        },
+
+        _handleDatasetPreview: function() {
+            event.preventDefault();
+            this.preview();
+            return false;
+        },
+
+        loadDataset: function() {
+            var config = app.model.getConfig();
+            var jqxhr = $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: app.filteredUri,
+                data: JSON.stringify(config),
+            });
+
+            jqxhr.done(function(response) {
+                $("#base-dataset").html(JSON.stringify(response));
+            });
         },
 
         getFields: function() {
             var object = app.model.getObject();
 
             if (app.model.hasObjectPrototype()) {
-                // Synth field list from prototype list
-                var objectPrototype = app.model.getObjectPrototype();
+                return object.getFields();
             } else {
                 return object.getFields();
             }
         },
 
-        addFilter: function(filter) {
-            console.log(arguments);
-        },
-
-        removeFilter: function(filter) {
-            console.log(arguments);
+        preview: function() {
+            this.loadDataset();
         },
 
         render: function() {
@@ -310,15 +451,8 @@ define(function(require, exports, module) {
             // Render active fields...
             var $elFields = this.$el.find("#fields");
             fields.each(function(field) {
-                var field = new module.Views.Field({ model: field });
+                var field = new module.Views.Field({ model: field }).render();
                 $elFields.append(field.$el);
-            });
-
-            // Render active filters...
-            var $elFilters = this.$el.find('#filters');
-            this.collection.each(function(filter) {
-                var filter = new module.Views.Filter({ model: filter });
-                $elFilters.append(filter.$el);
             });
 
             return this;

@@ -20,6 +20,22 @@ define(function(require, exports, module) {
             this.set("transformations", new Transformations());
         },
 
+        getConfig: function() {
+            var config = { target: this.getObject().get("name") };
+
+            config["target-prototype"] = this.hasObjectPrototype() ? this.getObjectPrototype().get("name") : null;
+            config["filters"] = {};
+            this.getFilters().each(function(filter) {
+                console.log('Add filter to config');
+            });
+
+            config["transformations"] = {};
+            // this.getTransformations().each(function(transformation) {
+            //     console.log('Add transformation to config');
+            // });
+
+            return config;
+        },
 
         // TARGETING METHODS
 
@@ -61,6 +77,10 @@ define(function(require, exports, module) {
 
         addFilter: function(filter) {
             this.getFilters().add(filter);
+        },
+
+        removeFilter: function(filter) {
+            this.getFilters().remove(filter);
         },
 
         hasFilter: function(filter) {

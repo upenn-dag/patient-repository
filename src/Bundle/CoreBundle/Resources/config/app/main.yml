@@ -50,7 +50,7 @@ fos_rest:
         failed_validation: HTTP_BAD_REQUEST
         default_engine: twig
     routing_loader:
-        default_format: json
+        default_format: html
     serializer:
         serialize_null: true
 

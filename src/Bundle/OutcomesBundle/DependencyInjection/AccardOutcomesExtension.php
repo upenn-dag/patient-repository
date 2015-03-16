@@ -11,19 +11,20 @@
 namespace Accard\Bundle\OutcomesBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader;
 
 /**
  * Accard outcomes extension.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class AccardOutcomesExtension extends Extension
+class AccardOutcomesExtension extends Extension implements PrependExtensionInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -32,5 +33,36 @@ class AccardOutcomesExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        if ($container->hasExtension("jms_serializer")) {
+            $container->prependExtensionConfig("jms_serializer", $this->createJmsSerializerConfig());
+        }
+    }
+
+    /**
+     * Create the base JMS Serializer config to include outcomes definitions.
+     *
+     * @return array
+     */
+    private function createJmsSerializerConfig()
+    {
+        $config = array(
+            "metadata" => array(
+                "directories" => array(
+                    "outcomes" => array(
+                        "namespace_prefix" => "Accard\\Bundle\\OutcomesBundle\\Outcomes",
+                        "path" => "@AccardOutcomesBundle/Resources/serializer"
+                    )
+                )
+            )
+        );
+
+        return $config;
     }
 }

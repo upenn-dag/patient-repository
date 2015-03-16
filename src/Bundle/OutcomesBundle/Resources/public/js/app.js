@@ -2,6 +2,13 @@
 define(function(require, exports, module) {
     "use strict";
 
-    exports.root = "/app_dev.php/outcomes/";
-    exports.stateUri = "/app_dev.php/outcomes/state.json";
+    var root = "/app_dev.php/outcomes/";
+
+    exports.root        = root;
+    exports.stateUri    = root + "state.json";
+    exports.filtersUri  = root + "filters.json";
+    exports.filteredUri = root + "filtered.json";
+
+    exports.availableFilters = [];
+    exports.filterData       = null;
 });
