@@ -80,7 +80,9 @@ class CPDSource implements SourceAdapterInterface
                 FDP,
                 FRD,
                 FAD,
-                FAF
+                FAF,
+                EXON_ID,
+                EXON
             FROM CPD.RESULTS_MVW
             WHERE TEST_DATE IS NOT NULL
             ORDER BY PATIENT_MRN";
