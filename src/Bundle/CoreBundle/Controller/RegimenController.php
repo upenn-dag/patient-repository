@@ -85,12 +85,19 @@ class RegimenController extends ResourceController
         $settingsForm = $this->get('accard.settings.form_factory')->create('regimen');
         $settingsForm->setData($manager->load('regimen'));
 
+        $criteria = $this->config->getCriteria();
+        $sorting = $this->config->getSorting();
+
+
+        // Paginator
+        $repository = $this->getRepository();
+
         $view = $this
             ->view()
             ->setTemplate($this->config->getTemplate('design.html'))
             ->setData(array(
                 'prototypes' => $this->getPrototypes(),
-                'fields' => $this->getFields(),
+                'fields' => $this->getFields($request, $criteria, $sorting),
                 'settings_form' => $settingsForm->createView(),
                 'regimen_count' => $this->getRegimenCount(),
             ))
@@ -197,9 +204,27 @@ class RegimenController extends ResourceController
      *
      * @return array
      */
-    private function getFields()
+    private function getFields($request, $criteria, $sorting)
     {
-        return $this->Get('accard.repository.regimen_prototype_field')->createPaginator();
+        $fieldRepository =  $this->get('accard.repository.regimen_prototype_field');
+
+        if ($this->config->isPaginated()) {
+            $resources = $this->resourceResolver->getResource(
+                $this->get('accard.repository.regimen_prototype_field'),
+                'createPaginator',
+                array($criteria, $sorting)
+            );
+            $resources->setCurrentPage($request->get('page', 1), true, true);
+            $resources->setMaxPerPage($this->config->getPaginationMaxPerPage());
+        } else {
+            $resources = $this->resourceResolver->getResource(
+                $repository,
+                'findBy',
+                array($criteria, $sorting, $this->config->getLimit())
+            );
+        }
+
+        return $resources;
     }
 
     /**

@@ -54,7 +54,7 @@ class SampleController extends ResourceController
             ->setTemplate($this->config->getTemplate('design.html'))
             ->setData(array(
                 'prototypes' => $this->getPrototypes(),
-                'fields' => $this->getFields(),
+                'fields' => $this->getFields($request),
                 'settings_form' => $settingsForm->createView(),
                 'sample_count' => $this->getSampleCount(),
             ))
@@ -123,9 +123,29 @@ class SampleController extends ResourceController
      *
      * @return array
      */
-    private function getFields()
+    private function getFields($request)
     {
-        return $this->Get('accard.repository.sample_prototype_field')->createPaginator();
+        $respository =  $this->get('accard.repository.sample_prototype_field')->createPaginator();
+        $criteria = $this->config->getCriteria();
+        $sorting = $this->config->getSorting();
+
+        if ($this->config->isPaginated()) {
+            $resources = $this->resourceResolver->getResource(
+                $this->get('accard.repository.regimen_prototype_field'),
+                'createPaginator',
+                array($criteria, $sorting)
+            );
+            $resources->setCurrentPage($request->get('page', 1), true, true);
+            $resources->setMaxPerPage($this->config->getPaginationMaxPerPage());
+        } else {
+            $resources = $this->resourceResolver->getResource(
+                $repository,
+                'findBy',
+                array($criteria, $sorting, $this->config->getLimit())
+            );
+        }
+
+        return $resources;
     }
 
     /**
