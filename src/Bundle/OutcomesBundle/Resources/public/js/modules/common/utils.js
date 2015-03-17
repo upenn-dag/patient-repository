@@ -5,6 +5,13 @@ define(function(require, exports, module) {
     require("backbone.notifier");
 
     return {
-        notifier: new Backbone.Notifier({})
+        notifier: new Backbone.Notifier({}),
+        objectSize: function(obj) {
+        	var size = 0, key;
+        	for (key in obj) {
+        		if (obj.hasOwnProperty(key)) size++;
+        	}
+        	return size;
+        }
     };
 });

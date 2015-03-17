@@ -6,7 +6,7 @@ define(function(require, exports, module) {
 
 
     // UTILITIES
-    require("bootstrap");
+    require("bootstrap.table");
     var app = require("app");
     var Utils = require("modules/outcomes/utils");
     var Notifier = Utils.notifier;
@@ -400,6 +400,9 @@ define(function(require, exports, module) {
     module.Views.Filters = Backbone.View.extend({
         el: document.getElementById('filters-container'),
         template: _.template(require("text!modules/outcomes/templates/filters.html")),
+        rendered: false,
+        dataset: null,
+        datasetModal: null,
 
         events: {
             "click #preview-base-dataset": "_handleDatasetPreview",
@@ -412,6 +415,7 @@ define(function(require, exports, module) {
         },
 
         loadDataset: function() {
+            var self = this;
             var config = app.model.getConfig();
             var jqxhr = $.ajax({
                 type: "POST",
@@ -421,7 +425,33 @@ define(function(require, exports, module) {
             });
 
             jqxhr.done(function(response) {
-                $("#base-dataset").html(JSON.stringify(response));
+                var t = response.data;
+
+                if (0 === Utils.objectSize(t)) {
+                    self.dataset.html("No results were returned.");
+                    return;
+                }
+
+                var columns = Object.keys(t[0]);
+                var table = document.createElement("table");
+                var thead = document.createElement("thead");
+                var thRow = document.createElement("tr");
+
+                for (var i = 0; i < columns.length; i++) {
+                    var th = document.createElement("th");
+                    th.setAttribute("data-field", columns[i]);
+                    th.appendChild(document.createTextNode(columns[i]));
+                    thRow.appendChild(th);
+                };
+
+                thead.appendChild(thRow);
+                table.appendChild(thead);
+
+                console.log(t, table);
+
+                var $table = $(table).bootstrapTable({ data: t });
+
+                self.dataset.html($table);
             });
         },
 
@@ -436,7 +466,13 @@ define(function(require, exports, module) {
         },
 
         preview: function() {
+            if (!this.rendered) {
+                throw "Base dataset may not be generated before rendering the filter page.";
+            }
+
+            this.dataset.html("Loading dataset.");
             this.loadDataset();
+            this.datasetModal.modal("show");
         },
 
         render: function() {
@@ -454,6 +490,10 @@ define(function(require, exports, module) {
                 var field = new module.Views.Field({ model: field }).render();
                 $elFields.append(field.$el);
             });
+
+            this.datasetModal = this.$el.find("#base-dataset-modal");
+            this.dataset = this.$el.find("#base-dataset");
+            this.rendered = true;
 
             return this;
         }

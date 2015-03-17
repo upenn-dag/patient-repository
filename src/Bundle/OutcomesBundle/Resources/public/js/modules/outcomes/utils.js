@@ -14,5 +14,9 @@ define(function(require, exports, module) {
         });
     };
 
+    BaseUtil.dataTranslate = function(data) {
+        console.log(data);
+    };
+
     return BaseUtil;
 });

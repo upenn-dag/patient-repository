@@ -3,6 +3,8 @@ require.config({
     waitSeconds: 2,
     baseUrl: "/bundles/accardoutcomes/js",
     shim: {
+        jquery: { exports: "$" },
+
         "underscore.inflection": { deps: ["underscore", "underscore.string"] },
 
         "backbone": { deps: ["jquery", "underscore.mixed"], exports: "Backbone" },
@@ -10,8 +12,8 @@ require.config({
         "backbone.grid": { deps: ["jquery", "bootstrap", "backbone", "underscore"], exports: "Backbone.grid" },
         "backbone.localstorage": { deps: ["backbone"], exports: "Store" },
 
-        jquery: { exports: "$" },
-        bootstrap: { deps: ["jquery"], exports: "Bootstrap" },
+        "bootstrap": { deps: ["jquery"], exports: "Bootstrap" },
+        "bootstrap.table": { deps: ["bootstrap"], exports: "BootstrapTable" },
     },
     paths: {
         "underscore": "libs/underscore",
@@ -23,8 +25,10 @@ require.config({
         "backbone.notifier": "libs/backbone.notifier",
         "backbone.localstorage": "libs/backboneLocalstorage",
 
+        "bootstrap": "libs/bootstrap",
+        "bootstrap.table": "libs/bootstrap-table",
+
         jquery: "libs/jquery",
-        bootstrap: "libs/bootstrap",
         domReady: "libs/domReady",
         text: "libs/text",
         json: "libs/json",
