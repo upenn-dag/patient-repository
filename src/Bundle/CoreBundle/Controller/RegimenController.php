@@ -206,7 +206,7 @@ class RegimenController extends ResourceController
      */
     private function getFields($request, $criteria, $sorting)
     {
-        $this->get('accard.repository.regimen_prototype_field')->getFields();
+        $this->get('accard.repository.regimen_prototype_field')->findAll();
     }
 
     /**

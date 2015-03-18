@@ -150,7 +150,7 @@ class PatientController extends ResourceController
      */
     private function getFields()
     {
-        return $this->get('accard.repository.patient_field')->getFields();
+        return $this->get('accard.repository.patient_field')->findAll();
     }
 
     /**

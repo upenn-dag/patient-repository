@@ -125,7 +125,7 @@ class SampleController extends ResourceController
      */
     private function getFields($request)
     {
-        return $this->get('accard.repository.sample_prototype_field')->getFields();
+        return $this->get('accard.repository.sample_prototype_field')->findAll();
     }
 
     /**

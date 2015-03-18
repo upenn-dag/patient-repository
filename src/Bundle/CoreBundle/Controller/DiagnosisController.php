@@ -110,7 +110,7 @@ class DiagnosisController extends ResourceController
      */
     private function getFields()
     {
-        return $this->get('accard.repository.diagnosis_field')->getFields();
+        return $this->get('accard.repository.diagnosis_field')->findAll();
     }
 
     /**
