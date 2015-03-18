@@ -206,25 +206,7 @@ class RegimenController extends ResourceController
      */
     private function getFields($request, $criteria, $sorting)
     {
-        $fieldRepository =  $this->get('accard.repository.regimen_prototype_field');
-
-        if ($this->config->isPaginated()) {
-            $resources = $this->resourceResolver->getResource(
-                $this->get('accard.repository.regimen_prototype_field'),
-                'createPaginator',
-                array($criteria, $sorting)
-            );
-            $resources->setCurrentPage($request->get('page', 1), true, true);
-            $resources->setMaxPerPage($this->config->getPaginationMaxPerPage());
-        } else {
-            $resources = $this->resourceResolver->getResource(
-                $repository,
-                'findBy',
-                array($criteria, $sorting, $this->config->getLimit())
-            );
-        }
-
-        return $resources;
+        $this->get('accard.repository.regimen_prototype_field')->getFields();
     }
 
     /**
