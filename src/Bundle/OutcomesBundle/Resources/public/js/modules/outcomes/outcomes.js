@@ -403,6 +403,7 @@ define(function(require, exports, module) {
         rendered: false,
         dataset: null,
         datasetModal: null,
+        datasetTable: null,
 
         events: {
             "click #preview-base-dataset": "_handleDatasetPreview",
@@ -440,6 +441,8 @@ define(function(require, exports, module) {
                 for (var i = 0; i < columns.length; i++) {
                     var th = document.createElement("th");
                     th.setAttribute("data-field", columns[i]);
+                    th.setAttribute("data-title", _.humanize(columns[i]));
+                    th.setAttribute("data-sortable", "true");
                     th.appendChild(document.createTextNode(columns[i]));
                     thRow.appendChild(th);
                 };
@@ -449,8 +452,13 @@ define(function(require, exports, module) {
 
                 console.log(t, table);
 
-                var $table = $(table).bootstrapTable({ data: t });
+                var $table = $(table).bootstrapTable({
+                    data: t,
+                    striped: true,
+                    classes: "table table-hover table-condensed",
+                });
 
+                self.bootstrapTable = $table;
                 self.dataset.html($table);
             });
         },
