@@ -29,16 +29,19 @@
     <form action="{{ updatePath }}" method="post" {{ form_enctype(form) }}>
         <input type="hidden" name="_method" value="PUT">
         {{ form_widget(form._token) }}
-        {% include 'AccardWebBundle:Frontend/Regimen:form.html.twig' %}
+
+        {% include ['Theme:Frontend/Regimen:{#prototype}-form.html.twig','Theme:Frontend/Regimen:form.html.twig'] %}
+
         <div class="row">
             <div class="col-md-12">
                 <span class="pull-right">{{ update() }}</span>
             </div>
         </div>
     </form>
-    {% endblock %}
 
-    {% block regimen_modal %}
+{% endblock %}
+
+{% block regimen_modal %}
     <div id="regimen-activity-modal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -56,7 +59,7 @@
             </div>
         </div>
     </div>
-    {% endblock %}
+{% endblock %}
 
 {% endblock %}
 
@@ -139,4 +142,6 @@ $(function() {
     });
 });
 </script>
+
+    {% include 'Theme:Frontend/Regimen:{#prototype}-javascript.js.twig' ignore missing %}
 {% endblock %}

@@ -31,7 +31,7 @@
 
         <form action="{{ path('accard_frontend_attribute_create', { prototype: prototype }) }}" method="post" {{ form_enctype(form) }}>
             {{ form_widget(form._token) }}
-            {% include 'AccardWebBundle:Frontend/Attribute:form.html.twig' %}
+            {% include ['Theme:Frontend/Attribute:{#prototype}-form.html.twig', 'Theme:Frontend/Attribute:form.html.twig'] %}
             <div class="row">
                 <div class="col-md-12">
                     <span class="pull-right">{{ create() }}</span>
@@ -44,9 +44,13 @@
 {% block javascripts %}
     {{ parent() }}
     {{ select_patient_js('#accard_attribute_patient') }}
+
+    {% include 'Theme:Frontend/Attribute:{#prototype}-javascript.js.twig' ignore missing %}
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
     {{ select_patient_css() }}
+
+    {% include 'Theme:Frontend/Attribute:{#prototype}-style.css.twig' %}
 {% endblock %}

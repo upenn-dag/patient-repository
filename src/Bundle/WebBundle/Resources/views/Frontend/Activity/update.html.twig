@@ -27,7 +27,7 @@
         <form action="{{ updatePath }}" method="post" {{ form_enctype(form) }}>
             <input type="hidden" name="_method" value="PUT">
             {{ form_widget(form._token) }}
-            {% include 'AccardWebBundle:Frontend/Activity:form.html.twig' %}
+            {% include ["Theme:Frontend/Activity:#{prototype}-form.html.twig", "AccardWebBundle:Frontend/Activity:form.html.twig"] %}
             <div class="row">
                 <div class="col-md-12">
                     <span class="pull-right">{{ update() }}</span>
@@ -40,9 +40,13 @@
 {% block javascripts %}
     {{ parent() }}
     {{ select_patient_js('#accard_activity_patient') }}
+
+    {% include "Theme:Frontend/Activity:#{prototype}-javascript.js.twig" ignore missing %}
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
     {{ select_patient_css() }}
+
+    {% include "Theme:Frontend/Activity:#{prototype}-style.css.twig" ignore missing %}
 {% endblock %}

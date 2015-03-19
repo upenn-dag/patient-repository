@@ -24,7 +24,9 @@
         <form action="{{ path('accard_frontend_attribute_update', { prototype: prototype, id: attribute.id }) }}" method="post" {{ form_enctype(form) }}>
             <input type="hidden" name="_method" value="PUT">
             {{ form_widget(form._token) }}
-            {% include 'AccardWebBundle:Frontend/Attribute:form.html.twig' %}
+
+            {% include ['Theme:Frontend/Activity:#{prototype}-form.html.twig', 'Theme:Frontend/Attribute:form.html.twig'] %}
+
             <div class="row">
                 <div class="col-md-12">
                     <span class="pull-right">{{ update() }}</span>
@@ -33,3 +35,5 @@
         </form>
     {% endblock %}
 {% endblock %}
+
+
