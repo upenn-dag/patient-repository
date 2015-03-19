@@ -51,7 +51,7 @@ class TemplateController extends Controller
                 $em->persist($template);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('accard_backend_template_index'));
+                return $this->redirect($this->generateUrl('accard_backend_template_design', array('name' => $name)));
             }
         }
 
