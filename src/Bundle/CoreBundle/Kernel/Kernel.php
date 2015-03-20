@@ -73,6 +73,7 @@ abstract class Kernel extends BaseKernel
             new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new \FOS\ElasticaBundle\FOSElasticaBundle(),
+            //new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

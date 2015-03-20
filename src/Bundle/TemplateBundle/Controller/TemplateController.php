@@ -39,10 +39,20 @@ class TemplateController extends Controller
     /**
      * Design a template
      */
-    public function designAction(Request $request, $name)
+    public function designAction(Request $request, $name, $version)
     {
+        $em = $this->getDoctrine()->getManager();
+        $logRepo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry');
+
         $template = $this->repository->findOneOrCreate(array('name' => $name));
+
+        if(!is_null($version)) {
+            $logRepo->revert($template, $version);
+        }
+
         $form = $this->createTemplateForm($template);
+
+        $logs = $logRepo->getLogEntries($template);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -51,13 +61,16 @@ class TemplateController extends Controller
                 $em->persist($template);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('accard_backend_template_design', array('name' => $name)));
+                return $this->redirect($this->generateUrl('accard_backend_template_design', array(
+                    'name' => $name
+                )));
             }
         }
 
         return $this->render('AccardWebBundle:Backend/Template:design.html.twig', array(
             'name'  => $name,
             'form'  => $form->createView(),
+            'history'   => array_slice($logs, 0, 3),
         ));
     }
 
@@ -84,12 +97,43 @@ class TemplateController extends Controller
     /**
      * Create a template
      */
-    public function createAction()
+    public function createAction(Request $request)
     {
+        if ($request->isMethod('POST')) {
+            $template = new Template();
+
+            $form = $this->createTemplateForm($template);
+
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($template);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('accard_backend_template_design', array('name' => $template->getName())));
+            }
+        }
+
         $form = $this->createTemplateForm();
 
         return $this->render('AccardWebBundle:Backend/Template:create.html.twig', array(
-            'form' => $form,
+            'form' => $form->createView(),
+        ));
+    }
+
+    public function historyAction($name)
+    {
+        $template = $this->repository->findOneBy(array('name' => $name));
+        $em = $this->getDoctrine()->getManager();
+
+        $logRepo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry');
+
+        $history = $logRepo->getLogEntries($template);
+
+        return $this->render('Theme:Backend/Template:history.html.twig', array(
+            'history' => $history,
+            'name' => $name,
         ));
     }
 }
