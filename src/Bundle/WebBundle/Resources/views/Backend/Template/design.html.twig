@@ -10,21 +10,33 @@
 {% extends 'AccardWebBundle:Backend:layout.html.twig' %}
 
 {% block content %}
-  <style type="text/css" media="screen">
-    body {
-    	height:100px;
-    }
-    
-    #editor { 
-    	height: 600px;
-    }
-  </style>
-
 <form method="post">
 
     {{ form_widget(form._token) }}
+    {{ page_title(name) }}
 
-    <h3>{{ name }}</h3><hr>
+    <ol class="breadcrumb">
+    {% if history is empty %}
+        <li>
+            First Version
+        </li>
+    {% else %}
+        {% for version in history %}
+            <li>
+                <a href="{{ path('accard_backend_template_design', { 'name' : name , 'version' : version.version }) }}">
+                    Version #{{ version.version }} - {{ version.loggedAt|date('m/d/Y h:i') }}
+                </a>
+            </li>
+        {% endfor %}
+            <li>
+                <a href="{{ path('accard_backend_template_history', { 'name' : name }) }}">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                    Full History
+                </a>
+            </li>
+    {% endif %}
+    </ol>
+
     <pre id="editor"></pre>
 
     {{ form_widget(form.content) }}
@@ -44,14 +56,26 @@
 		<script type="text/javascript" src="{{ asset_url }}"></script>
 	{% endjavascripts %}
 
-<script>
-	var $textarea = $('#template_content').hide();
-    var editor = ace.edit("editor");
-    editor.getSession().setMode('ace/mode/twig');
-    editor.getSession().setValue($textarea.val());
-    editor.getSession().on('change', function() {
-        $textarea.val(editor.getSession().getValue());
-    });
-    // editor.setTheme("ace/theme/dawn");
-</script>
+    <script>
+        var $textarea = $('#template_content').hide();
+        var editor = ace.edit("editor");
+        editor.getSession().setMode('ace/mode/twig');
+        editor.getSession().setValue($textarea.val());
+        editor.getSession().on('change', function() {
+            $textarea.val(editor.getSession().getValue());
+        });
+    </script>
 {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css" media="screen">
+        body {
+            height:100px;
+        }
+
+        #editor {
+            height: 600px;
+        }
+    </style>
+{% endblock  %}
