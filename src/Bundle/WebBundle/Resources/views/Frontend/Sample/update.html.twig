@@ -25,9 +25,17 @@
 {% block form_submit_action path('accard_frontend_sample_update', { prototype: prototype, id: sample.id }) %}
 
 {% block form_body %}
-    {% include 'AccardWebBundle:Frontend/Sample:form.html.twig' %}
+    {% include ['Theme:Frontend/Sample:{#prototype}-form.html.twig', 'Theme:Frontend/Sample:form.html.twig'] %}
 {% endblock %}
 
-{% block form_javascripts select_patient_js('#accard_sample_patient') %}
+{% block form_javascripts %}
+    select_patient_js('#accard_sample_patient')
 
-{% block form_stylesheets select_patient_css() %}
+    {% include 'Theme:Frontend/Sample:{#prototype}-javascript.js.twig' ignore missing %}
+{% endblock %}
+
+{% block form_stylesheets %}
+    select_patient_css()
+
+    {% include 'Theme:Frontend/Sample:{#prototype}-style.css.twig' ignore missing %}
+{% endblock %}

@@ -11,7 +11,7 @@ accard_backend_attribute_design:
     defaults:
         _controller: accard.controller.attribute:designAction
         _accard:
-            template: AccardWebBundle:Backend/Attribute:design.html.twig
+            template: Theme:Backend/Attribute:design.html.twig
 
 accard_backend_attribute_settings_update:
     pattern: /settings/update
@@ -30,7 +30,7 @@ accard_backend_attribute_prototype_create:
     defaults:
         _controller: accard.controller.attribute_prototype:createAction
         _accard:
-            template: AccardWebBundle:Backend/Attribute:prototypeCreate.html.twig
+            template: Theme:Backend/Attribute:prototypeCreate.html.twig
             redirect:
                 route: accard_backend_attribute_design
                 parameters: { type: prototype, action: create, id: resource.id }
@@ -41,7 +41,7 @@ accard_backend_attribute_prototype_update:
     defaults:
         _controller: accard.controller.attribute_prototype:updateAction
         _accard:
-            template: AccardWebBundle:Backend/Attribute:prototypeUpdate.html.twig
+            template: Theme:Backend/Attribute:prototypeUpdate.html.twig
             redirect:
                 route: accard_backend_attribute_design
                 parameters: { type: prototype, action: update, id: resource.id }
@@ -63,7 +63,7 @@ accard_backend_attribute_field_create:
     defaults:
         _controller: accard.controller.attribute_prototype_field:createAction
         _accard:
-            template: AccardWebBundle:Backend/Attribute:fieldCreate.html.twig
+            template: Theme:Backend/Attribute:fieldCreate.html.twig
             redirect:
                 route: accard_backend_attribute_design
                 parameters: { type: field, action: create, id: resource.id }
@@ -74,7 +74,7 @@ accard_backend_attribute_field_update:
     defaults:
         _controller: accard.controller.attribute_prototype_field:updateAction
         _accard:
-            template: AccardWebBundle:Backend/Attribute:fieldUpdate.html.twig
+            template: Theme:Backend/Attribute:fieldUpdate.html.twig
             redirect:
                 route: accard_backend_attribute_design
                 parameters: { type: field, action: update, id: resource.id }

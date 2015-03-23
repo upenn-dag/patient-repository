@@ -11,7 +11,7 @@ accard_backend_patient_design:
     defaults:
         _controller: accard.controller.patient:designAction
         _accard:
-            template: AccardWebBundle:Backend/Patient:design.html.twig
+            template: Theme:Backend/Patient:design.html.twig
 
 accard_backend_patient_settings_update:
     pattern: /settings/update
@@ -27,7 +27,7 @@ accard_backend_patient_field_create:
     defaults:
         _controller: accard.controller.patient_field:createAction
         _accard:
-            template: AccardWebBundle:Backend/Patient:fieldCreate.html.twig
+            template: Theme:Backend/Patient:fieldCreate.html.twig
             redirect: accard_backend_patient_design
 
 accard_backend_patient_field_update:
@@ -36,7 +36,7 @@ accard_backend_patient_field_update:
     defaults:
         _controller: accard.controller.patient_field:updateAction
         _accard:
-            template: AccardWebBundle:Backend/Patient:fieldUpdate.html.twig
+            template: Theme:Backend/Patient:fieldUpdate.html.twig
             redirect: accard_backend_patient_design
 
 accard_backend_patient_field_delete:
@@ -45,7 +45,7 @@ accard_backend_patient_field_delete:
     defaults:
         _controller: accard.controller.patient_field:deleteAction
         _accard:
-            template: AccardWebBundle:Backend/Misc:delete.html.twig
+            template: Theme:Backend/Misc:delete.html.twig
             redirect: accard_backend_patient_design
 
 accard_backend_patient_phase_index:
@@ -54,7 +54,7 @@ accard_backend_patient_phase_index:
     defaults:
         _controller: accard.controller.patient_phase:indexAction
         _accard:
-            template: AccardWebBundle:Backend/PatientPhase:index.html.twig
+            template: Theme:Backend/PatientPhase:index.html.twig
             sortable: true
             paginate: 12
             sorting:
@@ -76,7 +76,7 @@ accard_backend_patient_phase_update:
     defaults:
         _controller: accard.controller.patient_phase:updateAction
         _accard:
-            template: AccardWebBundle:Backend/PatientPhase:update.html.twig
+            template: Theme:Backend/PatientPhase:update.html.twig
             redirect: accard_backend_patient_phase_index
 
 accard_backend_patient_phase_delete:
@@ -86,5 +86,5 @@ accard_backend_patient_phase_delete:
     defaults:
         _controller: accard.controller.patient_phase:deleteAction
         _accard:
-            template: AccardWebBundle:Backend/PatientPhase:delete.html.twig
+            template: Theme:Backend/PatientPhase:delete.html.twig
             redirect: accard_backend_patient_phase_index

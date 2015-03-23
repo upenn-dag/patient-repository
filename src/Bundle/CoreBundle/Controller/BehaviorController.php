@@ -125,7 +125,7 @@ class BehaviorController extends ResourceController
      */
     private function getFields()
     {
-        return $this->Get('accard.repository.behavior_prototype_field')->createPaginator();
+        return $this->Get('accard.repository.behavior_prototype_field')->findAll();
     }
 
     /**

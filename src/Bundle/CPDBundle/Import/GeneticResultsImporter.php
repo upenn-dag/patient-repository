@@ -135,7 +135,9 @@ class GeneticResultsImporter extends SampleImporter
             'frd',
             'fad',
             'faf',
-            'genotype'
+            'genotype',
+            'exon_id',
+            'exon'
         ));
 
         $resolver->setAllowedTypes(array(

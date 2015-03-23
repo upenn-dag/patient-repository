@@ -163,7 +163,7 @@ class ActivityController extends ResourceController
      */
     private function getFields()
     {
-        return $this->get('accard.provider.activity_prototype_field')->getFields();
+        return $this->get('accard.repository.activity_prototype_field')->findAll();
     }
 
     /**

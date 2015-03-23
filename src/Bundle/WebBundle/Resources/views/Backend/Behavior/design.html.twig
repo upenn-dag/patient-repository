@@ -30,7 +30,7 @@
     {{ page_title('accard.behavior.action.design'|trans, _self.action_buttons()) }}
     {% endblock %}
 
-    {% behavior_nav %}
+    {% block behavior_nav %}
     <ul class="nav nav-tabs" role="tablist">
         <li class="{{ _self.active_tab(['prototype', 'none'], 'active') }}">
             <a href="#prototypes" role="tab" data-toggle="tab">

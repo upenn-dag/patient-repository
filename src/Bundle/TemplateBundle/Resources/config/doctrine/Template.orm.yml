@@ -9,7 +9,8 @@ Accard\Bundle\TemplateBundle\Entity\Template:
     type: entity
     table: accard_template
     repositoryClass: Accard\Bundle\TemplateBundle\Doctrine\ORM\TemplateRepository
-
+    gedmo:
+        loggable: true
     id:
         id:
             type: integer
@@ -30,3 +31,5 @@ Accard\Bundle\TemplateBundle\Entity\Template:
             length: 200
         content:
             type: text
+            gedmo:
+                - versioned

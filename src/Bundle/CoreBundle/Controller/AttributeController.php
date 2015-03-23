@@ -125,7 +125,7 @@ class AttributeController extends ResourceController
      */
     private function getFields()
     {
-        return $this->Get('accard.repository.attribute_prototype_field')->createPaginator();
+        return $this->Get('accard.repository.attribute_prototype_field')->findAll();
     }
 
     /**

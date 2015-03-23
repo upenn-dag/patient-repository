@@ -1,0 +1,51 @@
+{% extends 'AccardWebBundle:Backend:layout.html.twig' %}
+
+{% block content %}
+
+    <h3>Create Template</h3><hr>
+    <pre id="editor"></pre>
+
+    {{ form_start(form, {'action' : path('accard_backend_template_create')} ) }}
+    {{ form_widget(form._token) }}
+    {{ form_widget(form.content) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.parent) }}
+    {{ form_row(form.location) }}
+
+    {{ form_widget(form.save) }}
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+
+{% block page_javascripts %}
+    {% javascripts '@AccardWebBundle/Resources/public/js/ace/ace.js'
+    '@AccardWebBundle/Resources/public/js/ace/mode-twig.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script>
+        var $textarea = $('#template_content').hide();
+        var editor = ace.edit("editor");
+        editor.getSession().setMode('ace/mode/twig');
+        editor.getSession().setValue($textarea.val());
+        editor.getSession().on('change', function() {
+            $textarea.val(editor.getSession().getValue());
+        });
+        // editor.setTheme("ace/theme/dawn");
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css" media="screen">
+        body {
+            height:100px;
+        }
+
+        #editor {
+            height: 600px;
+        }
+    </style>
+{% endblock %}

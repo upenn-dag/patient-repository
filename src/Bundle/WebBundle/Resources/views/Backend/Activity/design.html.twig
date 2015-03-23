@@ -102,29 +102,29 @@
 {% endblock %}
 
 {% block page_javascripts %}
-<script type="text/javascript" defer>
+    <script type="text/javascript" defer>
 
-    var Tabler = Accard.get('table');
-    var prototypes = new Tabler('#prototypes');
-    var fields = new Tabler('#fields');
+        var Tabler = Accard.get('table');
+        var prototypes = new Tabler('#prototypes');
+        var fields = new Tabler('#fields');
 
-    prototypes
-        .plugin('autohighlighting', {
-            id: 'prototype-{{ app.request.query.get('id', 0) }}',
-            className: 'warning'
-        })
-        .bindAll()
-    ;
+        prototypes
+            .plugin('autohighlighting', {
+                id: 'prototype-{{ app.request.query.get('id', 0) }}',
+                className: 'warning'
+            })
+            .bindAll()
+        ;
 
-    fields
-        .plugin('autohighlighting', {
-            id: 'field-{{ app.request.query.get('id', 0) }}',
-            className: 'warning'
-        })
-        .bindAll()
-    ;
+        fields
+            .plugin('autohighlighting', {
+                id: 'field-{{ app.request.query.get('id', 0) }}',
+                className: 'warning'
+            })
+            .bindAll()
+        ;
 
-</script>
+    </script>
 {% endblock %}
 
 {# Figure out if the current tab has been set, if not default to prototypes #}

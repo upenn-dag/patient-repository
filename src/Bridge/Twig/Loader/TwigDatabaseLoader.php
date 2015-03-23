@@ -17,11 +17,14 @@ use Accard\Bundle\TemplateBundle\Doctrine\ORM\TemplateRepository;
 /**
  * Twig Database Loader
  *
- * @author Dylan Pierce <dylan@booksmart.it>
+ * @author Dylan Pierce <piercedy@upenn.edu>
  */
 
 class TwigDatabaseLoader implements Twig_LoaderInterface
 {
+    /**
+     *
+     */
     const MAGIC_TEMPLATE = 'Theme';
     const MAGIC_PREFIX = 'Accard';
 
@@ -44,8 +47,10 @@ class TwigDatabaseLoader implements Twig_LoaderInterface
 
     /**
      * Get Source
-     * 
+     *
      * @var string $name
+     * @return string
+     * @throws Twig_Error_Loader
      */
     public function getSource($name)
     {
@@ -59,12 +64,6 @@ class TwigDatabaseLoader implements Twig_LoaderInterface
 
             if ($template = $this->getTemplate($themeName)) {
                 $content = $template->getContent();
-
-                // Auto-add the extends tag, if it doesn't already exist.
-                if ($template->getParent() && false === strpos($content, '{% extends')) {
-                    $tag = sprintf('{%% extends "%s:%s" %%}', $template->getParent(), $baseName);
-                    $content = $tag.PHP_EOL.$content;
-                }
 
                 return $content;
             }
