@@ -21,6 +21,16 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 abstract class AbstractFilter implements FilterInterface
 {
     /**
+     * Get a list of options and their parameters.
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return array();
+    }
+
+    /**
      * {@inheritdoc}
      */
     final public function configureOptions(OptionsResolverInterface $resolver)
@@ -32,7 +42,6 @@ abstract class AbstractFilter implements FilterInterface
         ));
 
         $resolver->setRequired(array("name", "class", "types"));
-
         $this->setDefaultOptions($resolver);
     }
 
@@ -49,5 +58,7 @@ abstract class AbstractFilter implements FilterInterface
      *
      * @param OptionsResolverInterface $resolver
      */
-    abstract protected function setDefaultOptions(OptionsResolverInterface $resolver);
+    protected function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+    }
 }

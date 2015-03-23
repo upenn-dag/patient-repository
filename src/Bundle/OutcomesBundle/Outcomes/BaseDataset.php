@@ -11,6 +11,10 @@
 namespace Accard\Bundle\OutcomesBundle\Outcomes;
 
 use ArrayIterator;
+use LogicException;
+use InvalidArgumentException;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Base dataset.
@@ -19,6 +23,33 @@ use ArrayIterator;
  */
 class BaseDataset implements DatasetInterface
 {
+    /**
+     * Filter a result set for a given configuration.
+     *
+     * @param ActiveConfigurationInterface $config
+     * @param array $data
+     * @return array
+     */
+    public static function filter(ActiveConfigurationInterface $config, array $data)
+    {
+        $data = new ArrayCollection($data);
+        $originalConfig = $config->getOriginalConfig();
+        $fields = $config->getFilteredFields();
+        $filters = $config->getFilters();
+        $filterOptions = $originalConfig->getFilters();
+        $criteria = Criteria::create();
+
+        foreach ($filters as $key => $filter) {
+            $resolver = new OptionsResolver();
+            $filter->configureOptions($resolver);
+            $options = $filter->resolveOptions($resolver, $filterOptions[$key]->getOptions());
+            $filter->filter($criteria, $fields[$key], $options);
+        }
+
+        return $data->matching($criteria)->getValues();
+    }
+
+
     /**
      * Configuration object.
      *
@@ -37,12 +68,26 @@ class BaseDataset implements DatasetInterface
     /**
      * Constructor.
      *
+     * If data is set at construction time, we need to filter it. We may only do
+     * so if we received an active configuration, otherwise we have to reject
+     * the data.
+     *
      * @param ConfigurationInterface $configuration
      * @param array $data
+     * @param boolean $filter
      */
-    public function __construct(ConfigurationInterface $configuration, array $data = array())
+    public function __construct(ConfigurationInterface $configuration, array $data = array(), $filter = true)
     {
         $this->setConfiguration($configuration);
+
+        if (!empty($data)) {
+            if (!$configuration instanceof ActiveConfigurationInterface) {
+                throw new LogicException("You may only set data at construction time if you provide an active configuration.");
+            }
+
+            $data = $filter ? static::filter($configuration, $data) : $data;
+        }
+
         $this->setData($data);
     }
 
@@ -90,6 +135,10 @@ class BaseDataset implements DatasetInterface
      */
     public function setData(array $data)
     {
+        if (!empty($this->data)) {
+            throw new InvalidArgumentException("Data may not be reset in a base dataset.");
+        }
+
         $this->data = $data;
     }
 

@@ -14,20 +14,26 @@ use DateTime;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Accard\Bundle\CoreBundle\State\ObjectFieldStateInterface;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * Abstract filter.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class BetweenFilter extends AbstractFilter
+class DateBetweenFilter extends AbstractFilter
 {
     /**
      * {@inheritdoc}
      */
-    public function filter(ObjectFieldStateInterface $field, array $options)
+    public function filter(Criteria $criteria, ObjectFieldStateInterface $field, array $options)
     {
-        dump($options);
+        $criteria->andWhere(
+            $criteria->expr()->andX(
+                $criteria->expr()->gt($field->name, $options["start"]),
+                $criteria->expr()->lt($field->name, $options["end"])
+            )
+        );
     }
 
     /**
@@ -36,12 +42,10 @@ class BetweenFilter extends AbstractFilter
     protected function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $dateNormalizer = function(Options $options, $value) {
-            if ("date" === $options["type"]) {
-                if (is_string($value)) {
-                    return new DateTime($value);
-                } elseif (is_numeric($value)) {
-                    return DateTime::createFromFormat("U", $value);
-                }
+            if (is_string($value)) {
+                return new DateTime($value);
+            } elseif (is_numeric($value)) {
+                return DateTime::createFromFormat("U", $value);
             }
 
             return $value;
@@ -49,12 +53,9 @@ class BetweenFilter extends AbstractFilter
 
         $resolver
             ->setDefault("end", function(Options $options) {
-                if ("date" === $options["type"]) {
-                    return new Datetime();
-                }
+                return new Datetime();
             })
-            ->setRequired(array("type", "start", "end"))
-            ->setAllowedValues("type", array("date", "integer"))
+            ->setRequired(array("start", "end"))
             ->setAllowedTypes("start", array("int", "string", "DateTime"))
             ->setAllowedTypes("end", array("int", "string", "DateTime"))
             ->setNormalizer("start", $dateNormalizer)
@@ -65,9 +66,30 @@ class BetweenFilter extends AbstractFilter
     /**
      * {@inheritdoc}
      */
+    public function getOptions()
+    {
+        return array(
+            "start" => array(
+                "type" => "date",
+                "label" => "Start Date",
+                "required" => true,
+                "default" => null,
+            ),
+            "end" => array(
+                "type" => "date",
+                "label" => "End date",
+                "required" => false,
+                "default" => "now",
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
-        return "between";
+        return "date_between";
     }
 
     /**
@@ -75,6 +97,6 @@ class BetweenFilter extends AbstractFilter
      */
     public function respondsTo()
     {
-        return array("date", "datetime", "integer", "number");
+        return array("date", "datetime");
     }
 }

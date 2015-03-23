@@ -22,11 +22,22 @@ define(function(require, exports, module) {
 
         getConfig: function() {
             var config = { target: this.getObject().get("name") };
+            var fields = this.getObject().getFields();
+
+            // This should accomodate multiple filters at some point.
 
             config["target-prototype"] = this.hasObjectPrototype() ? this.getObjectPrototype().get("name") : null;
             config["filters"] = {};
-            this.getFilters().each(function(filter) {
-                console.log('Add filter to config');
+
+            fields.each(function(field) {
+                var fieldName = field.get("name");
+                var filter = field.get("filter");
+                if (filter) {
+                    config["filters"][fieldName] = {
+                        name: filter.get("type"),
+                        options: filter.get("options") || [],
+                    }
+                }
             });
 
             config["transformations"] = {};
@@ -34,6 +45,8 @@ define(function(require, exports, module) {
             //     console.log('Add transformation to config');
             // });
 
+            console.log("Configuration generated: ", config);
+            
             return config;
         },
 

@@ -10,7 +10,8 @@ define(function(require, exports, module) {
     var Backbone = require("backbone");
     var Filter = Backbone.Model.extend({
         defaults: {
-            defaultName: "New Filter",
+            name: "New Filter",
+            type: null,
             state: FILTER_INACTIVE,
         },
 

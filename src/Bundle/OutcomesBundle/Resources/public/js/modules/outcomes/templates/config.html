@@ -1,0 +1,18 @@
+
+<form id="filter-config-form" onsubmit="return false;">
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="filter-config-name">Choose a <%= field.type %> filter</label>
+            <select id="filter-config-name" name="type" class="form-control">
+                <option>Choose a filter</option>
+            <% filters.forEach(function(aFilter) { %>
+                <option value="<%= aFilter %>" <%= filter.type == aFilter ? "selected" : "" %>><%= _.humanize(aFilter) %></option>
+            <% }) %>
+            </select>
+        </div>
+        <hr>
+        <div id="filter-config-options"></div>
+    </div>
+</div>
+</form>

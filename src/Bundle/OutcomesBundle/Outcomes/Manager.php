@@ -40,6 +40,15 @@ class Manager extends ContainerAware
      */
     private $filterRegistry;
 
+    /**
+     * Base dataset actory builder.
+     *
+     * At the moment, we only need one of these ever. So we'lll cache it.
+     *
+     * @var BaseDatasetFactoryBuilder
+     */
+    private $factoryBuilderCache;
+
 
     /**
      * Constructor.
@@ -64,95 +73,61 @@ class Manager extends ContainerAware
     /**
      * Create an active configuration.
      *
-     * @param ConfigurationInterface $configuration
+     * @param ConfigurationInterface $config
      * @return ActiveConfiguration
      */
     public function createActiveConfig(ConfigurationInterface $config)
     {
         $this->assertRequirementsMet();
 
-        return new ActiveConfiguration($config, $this->state);
+        return new ActiveConfiguration($config, $this->state, $this->filterRegistry);
     }
 
     /**
-     * Create base database from configuration.
+     * Create a base dataset factory builder.
+     *
+     * @todo Remove dependency on the container, it's ugly.
+     * @return BaseDatasetFactoryBuilder
+     */
+    public function createBaseDatasetFactoryBuilder()
+    {
+        $this->assertRequirementsMet();
+
+        if (null == $this->factoryBuilderCache) {
+            $this->factoryBuilderCache = new BaseDatasetFactoryBuilder($this->container);
+        }
+
+        return $this->factoryBuilderCache;
+    }
+
+    /**
+     * Generate a base dataset factory for a given configuration.
      *
      * @param ConfigurationInterface $config
-     * @param integer|null $limit
+     * @return BaseDatasetFactory
+     */
+    public function createBaseDatasetFactory(ConfigurationInterface $config)
+    {
+        if ($config instanceof ActiveConfigurationInterface) {
+            $config = $config->getOriginalConfig();
+        }
+
+        return $this->createBaseDatasetFactoryBuilder()->create($config->getTarget());
+    }
+
+    /**
+     * Generate a base dataset for a given configuration.
+     *
+     * @param ConfigurationInterface $config
      * @return BaseDataset
      */
-    public function createBaseDataset(ConfigurationInterface $config, $limit = null)
-    {
-        $result = $this
-            ->createBaseDatasetQueryBuilder($config)
-            ->getQuery()
-            ->setMaxResults($limit)
-            ->getResult();
-
-        return new BaseDataset($config, $result);
-    }
-
-    /**
-     * Create base dataset for configuration.
-     *
-     * @param ConfigurationInterface $config
-     * @return QueryBuilder
-     */
-    public function createBaseDatasetQueryBuilder(ConfigurationInterface $config)
+    public function createBaseDataset(ConfigurationInterface $config)
     {
         if (!$config instanceof ActiveConfigurationInterface) {
             $config = $this->createActiveConfig($config);
         }
 
-        $target = $config->getTarget();
-        $queryBuilder = $this->getTargetQueryBuilder($target);
-
-        if ($target->isPrototyped()) {
-            $actualPrototype = $this->getTargetPrototype($target, $config->getTargetPrototype());
-            $queryBuilder->filterByColumn("prototype", $actualPrototype);
-        }
-
-        // Now we add the filters from the active configuration...
-
-        return $queryBuilder;
-    }
-
-    /**
-     * Get query builder for a target.
-     *
-     * @param ... $target
-     * @return QueryBuilder
-     */
-    private function getTargetQueryBuilder($target)
-    {
-        // This needs to be better...
-        $repository = sprintf("accard.repository.%s", $target->getName());
-        $repository = $this->container->get($repository);
-
-        return $repository->getQueryBuilder();
-    }
-
-    /**
-     * Get prototype for our target prototype.
-     *
-     * @throws TargetPrototypeNotFoundException If prototype can not be located.
-     * @param ... $target
-     * @param ... $prototype
-     * @return PrototypeInterface
-     */
-    private function getTargetPrototype($target, $prototype)
-    {
-        // This needs to be better...
-        $repository = sprintf("accard.repository.%s_prototype", $target->getName());
-        $repository = $this->container->get($repository);
-
-        $actualPrototype = $repository->findOneByName($prototype->getName());
-
-        if (!$actualPrototype) {
-            throw new TargetPrototypeNotFoundException($prototype->getName());
-        }
-
-        return $actualPrototype;
+        return $this->createBaseDatasetFactory($config)->create($config);
     }
 
     /**

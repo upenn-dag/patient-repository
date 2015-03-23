@@ -14,8 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
 use Accard\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage;
+use Accard\Bundle\OutcomesBundle\Exception\OutcomesException;
 
 /**
  * Accard outcomes controller.

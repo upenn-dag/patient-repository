@@ -39,16 +39,28 @@ class ActiveConfiguration implements ActiveConfigurationInterface
      */
     private $state;
 
+    /**
+     * Filter registry.
+     *
+     * @var FilterRegistry
+     */
+    private $filterRegistry;
+
 
     /**
      * Constructor.
      *
      * @param Configuration $configuration
+     * @param StateInstance $state
+     * @param FilterRegistry $filterRegistry
      */
-    public function __construct(Configuration $configuration, StateInstance $state)
+    public function __construct(Configuration $configuration,
+                                StateInstance $state,
+                                FilterRegistry $filterRegistry)
     {
         $this->configuration = $configuration;
         $this->state = $state;
+        $this->filterRegistry = $filterRegistry;
     }
 
     /**
@@ -107,9 +119,23 @@ class ActiveConfiguration implements ActiveConfigurationInterface
      */
     public function getFilters()
     {
+        $target = $this->getActualTarget();
         $parentFilters = $this->configuration->getFilters();
+        $filters = array();
 
-        // This will be a little complex in terms of actually setting up a list of active filters...
+        foreach ($parentFilters as $field => $filter) {
+            if (!$target->hasField($field)) {
+                throw new FieldNotFoundException($field);
+            }
+
+            if (!$this->filterRegistry->hasFilter($filter->getFilterName())) {
+                throw new \Exception("Can't find that filter");
+            }
+
+            $filters[$field] = $this->filterRegistry->getFilter($filter->getFilterName());
+        }
+
+        return $filters;
     }
 
     /**
@@ -118,7 +144,7 @@ class ActiveConfiguration implements ActiveConfigurationInterface
     public function getFilteredFields()
     {
         $parentFilteredFields = $this->configuration->getFilteredFields();
-        $target = $this->getResolvedTarget();
+        $target = $this->getActualTarget();
         $fields = array();
 
         foreach ($parentFilteredFields as $field) {

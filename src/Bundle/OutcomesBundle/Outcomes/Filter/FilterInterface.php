@@ -10,6 +10,7 @@
  */
 namespace Accard\Bundle\OutcomesBundle\Outcomes\Filter;
 
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Accard\Bundle\CoreBundle\State\ObjectFieldStateInterface;
 
@@ -23,10 +24,12 @@ interface FilterInterface
     /**
      * Filter a given field.
      *
+     * @param Criteria $criteria
      * @param ObjectFieldStateInterface $field
      * @param array $options
+     * @return Criteria
      */
-    public function filter(ObjectFieldStateInterface $field, array $options);
+    public function filter(Criteria $criteria, ObjectFieldStateInterface $field, array $options);
 
     /**
      * Test if filter may respond to a given field.

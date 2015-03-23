@@ -3,7 +3,8 @@ require.config({
     waitSeconds: 2,
     baseUrl: "/bundles/accardoutcomes/js",
     shim: {
-        jquery: { exports: "$" },
+        "jquery": { exports: "$" },
+        "jquery.serialize": { deps: ["jquery"] },
 
         "underscore.inflection": { deps: ["underscore", "underscore.string"] },
 
@@ -16,6 +17,9 @@ require.config({
         "bootstrap.table": { deps: ["bootstrap"], exports: "BootstrapTable" },
     },
     paths: {
+        "jquery": "libs/jquery",
+        "jquery.serialize": "libs/jquery.serialize",
+
         "underscore": "libs/underscore",
         "underscore.inflection": "libs/underscore.inflection",
         "underscore.string": "libs/underscore.string",
@@ -28,7 +32,6 @@ require.config({
         "bootstrap": "libs/bootstrap",
         "bootstrap.table": "libs/bootstrap-table",
 
-        jquery: "libs/jquery",
         domReady: "libs/domReady",
         text: "libs/text",
         json: "libs/json",

@@ -12,10 +12,17 @@ Accard\Bundle\OutcomesBundle\Outcomes\Filter\AbstractFilter:
     discriminator:
         field_name: name
         map:
-            between: Accard\Bundle\OutcomesBundle\Outcomes\Filter\BetweenFilter
+            date_between: Accard\Bundle\OutcomesBundle\Outcomes\Filter\DateBetweenFilter
+            empty: Accard\Bundle\OutcomesBundle\Outcomes\Filter\EmptyFilter
+            not_empty: Accard\Bundle\OutcomesBundle\Outcomes\Filter\NotEmptyFilter
     virtual_properties:
         respondsTo:
             serialized_name: types
+            type: array
+            xml_list:
+                entry_name: type
+        getOptions:
+            serialized_name: options
             type: array
             xml_list:
                 entry_name: type

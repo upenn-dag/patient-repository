@@ -8,6 +8,7 @@
 Accard\Bundle\OutcomesBundle\Outcomes\BaseDataset:
     exclusion_policy: ALL
     xml_root_name: base-dataset
+    read_only: true
     properties:
         configuration:
             expose: true
@@ -21,3 +22,9 @@ Accard\Bundle\OutcomesBundle\Outcomes\BaseDataset:
             since_version: 1.0
             xml_list:
                 entry_name: datum
+    virtual_properties:
+        count:
+            expose: true
+            type: integer
+            serialized_name: count
+            since_version: 1.0

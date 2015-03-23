@@ -40,7 +40,9 @@ class FilterRegistry
     public function __construct()
     {
         $this->filters = array();
-        $this->addFilter(new Filter\BetweenFilter());
+        $this->addFilter(new Filter\DateBetweenFilter());
+        $this->addFilter(new Filter\EmptyFilter());
+        $this->addFilter(new Filter\NotEmptyFilter());
     }
 
     /**

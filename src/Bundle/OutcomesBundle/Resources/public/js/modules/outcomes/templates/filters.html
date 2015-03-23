@@ -33,7 +33,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">Base Dataset Preview</h4>
+                <h4 class="modal-title">Base Dataset (<span id="base-dataset-count">0</span> samples found)</h4>
             </div>
             <div class="modal-body">
                 <div id="base-dataset">Loading dataset.</div>
@@ -53,7 +53,10 @@
                 <h4 class="modal-title">Filter Configuration</h4>
             </div>
             <div class="modal-body">
-                Configuration body.
+                <div id="configuration">Loading configuration</div>
+            </div>
+            <div class="modal-footer">
+                <button id="configuration-save" type="button" class="btn btn-primary">Save Configuration</button>
             </div>
         </div>
     </div>

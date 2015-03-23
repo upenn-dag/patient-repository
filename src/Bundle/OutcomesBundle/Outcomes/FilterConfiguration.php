@@ -21,14 +21,14 @@ class FilterConfiguration
 {
     /**
      * Filter name.
-     * 
+     *
      * @var string
      */
     protected $filterName;
 
     /**
      * Filter options.
-     * 
+     *
      * @var array
      */
     protected $options;
@@ -36,7 +36,7 @@ class FilterConfiguration
 
     /**
      * Constructor.
-     * 
+     *
      * @param string $filterName
      * @param array $options
      */
@@ -48,7 +48,7 @@ class FilterConfiguration
 
     /**
      * Get filter name.
-     * 
+     *
      * @return string
      */
     public function getFilterName()
@@ -58,7 +58,7 @@ class FilterConfiguration
 
     /**
      * Get filter options.
-     * 
+     *
      * @return array
      */
     public function getOptions()
@@ -67,8 +67,22 @@ class FilterConfiguration
     }
 
     /**
+     * Set filter options.
+     *
+     * @return self
+     */
+    public function setOptions(array $options)
+    {
+        foreach ($options as $name => $option) {
+            $this->setOption($name, $option);
+        }
+
+        return $this;
+    }
+
+    /**
      * Test for presence of a filter option.
-     * 
+     *
      * @param string $optionName
      * @return boolean
      */
@@ -79,7 +93,7 @@ class FilterConfiguration
 
     /**
      * Get a filter option by name.
-     * 
+     *
      * @param string $optionName
      * @return mixed
      */
@@ -94,7 +108,7 @@ class FilterConfiguration
 
     /**
      * Set a filter option by name.
-     * 
+     *
      * @param string $optionName
      * @param mixed $optionValue
      * @return self
