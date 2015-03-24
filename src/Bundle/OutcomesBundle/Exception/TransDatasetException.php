@@ -13,10 +13,10 @@ namespace Accard\Bundle\OutcomesBundle\Exception;
 use Exception;
 
 /**
- * Generic base dataset factory exception.
+ * Generic trans dataset exception.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class BaseDatasetFactoryException extends Exception implements OutcomesException
+class TransDatasetException extends Exception implements OutcomesException
 {
 }

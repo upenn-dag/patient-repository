@@ -26,66 +26,40 @@ class OutcomesController extends Controller
 {
     public function testAction(Request $request)
     {
-        // HOW TO SET UP A FILTER...
-        // $resolver = new \Symfony\Component\OptionsResolver\OptionsResolver();
-        // $betweenFilter = new \Accard\Bundle\OutcomesBundle\Outcomes\Filter\BetweenFilter();
-        // $betweenFilter->configureOptions($resolver);
-        // $options = $betweenFilter->resolveOptions($resolver, array(
-        //     "type" => "date",
-        //     "start" => "now",
-        // ));
-        // dump($betweenFilter);
-
-        // FILTER REGISTRY
-        // $registry = $this->get("accard.outcomes.filter_registry");
-        // dump($registry);
-
-
-        // GRAB THE MANAGER...
-        $manager = $this->get("accard.outcomes.manager");
-        //dump($manager);
-
-
-        // GET OR CREATE A CONFIGURATION OBJECT
-        $config = new \Accard\Bundle\OutcomesBundle\Outcomes\Configuration($state);
-        $config->setTarget("activity");
-        $config->setTargetPrototype("radiation");
-        $dateFilter = $config->createFilterConfig("between", array("type" => "datetime", "start" => "01/01/2000", "end" => "now"));
-        $cycleFilter = $config->createFilterConfig("between", array("type" => "number", "start" => 2, "end" => 5));
-        $config->setFilter("activityDate", $dateFilter);
-        $config->setFilter("cycles", $cycleFilter);
-
-
-        // TURN THAT CONFIGURATION INTO AN ACTIVE CONFIG OBJECT
-        // $config = $manager->createActiveConfig($config);
-        // dump($config->getTarget());
-        // dump($config->getTargetPrototype());
-        // dump($config->getFilteredFields());
-
-
-        // GET BASE DATASET FROM WHAT IS IN THAT CONFIG
-        // Initialize the expression language.
-        // This may not be the best place to put this...
         \Accard\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage::setExpressionLanguage($this->get('accard.expression_language'));
-        $baseDataset = $manager->createBaseDataset($config, 5);
+        $manager = $this->get("accard.outcomes.manager");
+        $serializer = $this->get("serializer");
 
-        // $serializer = $this->get("serializer");
+        $json = '{"target":"patient","target_prototype":null,"filters":{"dateOfBirth":{"name":"date_between","options":{"start":"01\/01\/2000","end":""}}}}';
+        $config = $serializer->deserialize($json, "Accard\\Bundle\\OutcomesBundle\\Outcomes\\Configuration", "json");
 
-        // $json = '{"target":"activity","target_prototype":"radiation","filters":{"activityDate":{"name":"between","options":{"type":"datetime","start":"01\/01\/2000","end":"now"}},"cycles":{"name":"between","options":{"type":"number","start":2,"end":5}}}}';
-        // $serializer->deserialize($json, "Accard\\Bundle\\OutcomesBundle\\Outcomes\\Configuration", "json");
+        dump($config);
 
-        // $response = new Response($serializer->serialize($baseDataset, "xml"));
+        $dataset = $manager->createBaseDataset($config, 10);
+        // $serializer->serialize($dataset, "xml");
+
+        // $response = new Response();
+        // $response->setContent($serializer->serialize($dataset, "xml"));
         // $response->headers->set("Content-Type", "application/xml");
         // return $response;
 
-        // $response = new JsonResponse();
-        // $json = $serializer->serialize($baseDataset, "json");
-        // $response->setContent($json);
-        // return $response;
+        $config->setTranslations(array(
+            "first-name" => "patient.getFirstName()",
+            "last-name" => "patient.getLastName()",
+        ));
 
-        die('');
+        $translator = $manager->createDatasetTranslator();
+        $translated = $translator->translate($dataset);
 
-        return new Response("<html><body></body></html>");
+        // $response = new Response("<html><body></body></html>");
+        // $response = new Response();
+        // $response->setContent($serializer->serialize($translated, "xml"));
+        // $response->headers->set("Content-Type", "application/xml");
+        $response = new Response();
+        $response->setContent($serializer->serialize($translated, "json"));
+        $response->headers->set("Content-Type", "application/json");
+
+        return $response;
     }
 
     /**

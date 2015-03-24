@@ -46,11 +46,11 @@ class Configuration implements ConfigurationInterface
     protected $filters = array();
 
     /**
-     * Target transformations.
+     * Target translations.
      *
      * @var array
      */
-    //protected $transformations = array();
+    protected $translations = array();
 
 
     /**
@@ -176,6 +176,39 @@ class Configuration implements ConfigurationInterface
         }
 
         unset($this->filters[$field]);
+
+        return $this;
+    }
+
+    /**
+     * Get all translations.
+     *
+     * @return array
+     */
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+    /**
+     * Get all translation keys.
+     *
+     * @return array
+     */
+    public function getTranslationKeys()
+    {
+        return array_keys($this->translations);
+    }
+
+    /**
+     * Set all translations.
+     *
+     * @param array $translations
+     * @return self
+     */
+    public function setTranslations(array $translations)
+    {
+        $this->translations = $translations;
 
         return $this;
     }

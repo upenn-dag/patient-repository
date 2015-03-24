@@ -17,6 +17,7 @@ use Accard\Bundle\OutcomesBundle\Exception\ManagerNotInitializedException;
 use Accard\Bundle\OutcomesBundle\Exception\TargetNotFoundException;
 use Accard\Bundle\OutcomesBundle\Exception\TargetPrototypeNotFoundException;
 use Accard\Bundle\CoreBundle\State\StateInstance;
+use Accard\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage;
 
 
 /**
@@ -41,13 +42,22 @@ class Manager extends ContainerAware
     private $filterRegistry;
 
     /**
-     * Base dataset actory builder.
+     * Base dataset factory builder.
      *
      * At the moment, we only need one of these ever. So we'lll cache it.
      *
      * @var BaseDatasetFactoryBuilder
      */
     private $factoryBuilderCache;
+
+    /**
+     * Dataset translator.
+     *
+     * At the moment, we only need one of these. So cache it.
+     *
+     * @var DatasetTranslator
+     */
+    private $datasetTranslatorCache;
 
 
     /**
@@ -128,6 +138,22 @@ class Manager extends ContainerAware
         }
 
         return $this->createBaseDatasetFactory($config)->create($config);
+    }
+
+    /**
+     * Create a dataset translator.
+     *
+     * @return DatasetTranslator
+     */
+    public function createDatasetTranslator()
+    {
+        if (null === $this->datasetTranslatorCache) {
+            $exprLanguage = $this->container->get('accard.expression_language');
+            AccardLanguage::setExpressionLanguage($exprLanguage);
+            $this->datasetTranslatorCache = new DatasetTranslator(AccardLanguage::getInstance());
+        }
+
+        return $this->datasetTranslatorCache;
     }
 
     /**
