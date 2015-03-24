@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Accard\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage;
+use Accard\Bundle\ResourceBundle\Controller\ExpressionAwareController;
 use Accard\Bundle\OutcomesBundle\Exception\OutcomesException;
 
 /**
@@ -22,11 +22,10 @@ use Accard\Bundle\OutcomesBundle\Exception\OutcomesException;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class OutcomesController extends Controller
+class OutcomesController extends Controller implements ExpressionAwareController
 {
     public function testAction(Request $request)
     {
-        \Accard\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage::setExpressionLanguage($this->get('accard.expression_language'));
         $manager = $this->get("accard.outcomes.manager");
         $serializer = $this->get("serializer");
 
@@ -76,8 +75,6 @@ class OutcomesController extends Controller
      */
     public function filtersAction(Request $request)
     {
-        AccardLanguage::setExpressionLanguage($this->get('accard.expression_language'));
-
         $registry = $this->get("accard.outcomes.filter_registry");
         $format = $request->get("_format");
         $serializer = $this->get("serializer");
@@ -95,8 +92,6 @@ class OutcomesController extends Controller
      */
     public function filteredDatasetAction(Request $request)
     {
-        AccardLanguage::setExpressionLanguage($this->get('accard.expression_language'));
-
         $format = $request->get("_format");
         $serializer = $this->get("serializer");
         $config = $serializer->deserialize($request->getContent(), "Accard\Bundle\OutcomesBundle\Outcomes\Configuration", $format);
@@ -116,8 +111,6 @@ class OutcomesController extends Controller
      */
     public function translatedDatasetAction(Request $request)
     {
-        AccardLanguage::setExpressionLanguage($this->get('accard.expression_language'));
-
         $format = $request->get("_format");
         $serializer = $this->get("serializer");
         $config = $serializer->deserialize($request->getContent(), "Accard\Bundle\OutcomesBundle\Outcomes\Configuration", $format);

@@ -13,6 +13,8 @@ namespace Accard\Bundle\ResourceBundle\EventListener;
 
 use Accard\Bundle\ResourceBundle\Controller\ResourceController;
 use Accard\Bundle\ResourceBundle\Controller\InitializableController;
+use Accard\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage;
+use Accard\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\Security\Core\SecurityContextInterface;
@@ -32,13 +34,24 @@ class KernelControllerSubscriber implements EventSubscriberInterface
     private $securityContext;
 
     /**
+     * Expression language.
+     *
+     * @var ExpressionLanguage
+     */
+    private $exprLanguage;
+
+
+    /**
      * Constructor.
      *
      * @param SecurityContextInterface $securityContext
+     * @param ExpressionLanguage $exprLanguage
      */
-    public function __construct(SecurityContextInterface $securityContext)
+    public function __construct(SecurityContextInterface $securityContext,
+                                ExpressionLanguage $exprLanguage)
     {
         $this->securityContext = $securityContext;
+        $this->exprLanguage = $exprLanguage;
     }
 
     /**
@@ -62,6 +75,11 @@ class KernelControllerSubscriber implements EventSubscriberInterface
 
         if (!is_array($controller)) {
             return;
+        }
+
+        if ($controller[0] instanceof ExpressionAwareController) {
+            // Initialize Accard Language component.
+            AccardLanguage::setExpressionLanguage($this->exprLanguage);
         }
 
         // Inject the request if required.
