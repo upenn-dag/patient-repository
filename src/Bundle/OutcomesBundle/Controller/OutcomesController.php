@@ -30,7 +30,7 @@ class OutcomesController extends Controller
         $manager = $this->get("accard.outcomes.manager");
         $serializer = $this->get("serializer");
 
-        $json = '{"target":"patient","target_prototype":null,"filters":{"dateOfBirth":{"name":"date_between","options":{"start":"01\/01\/2000","end":""}}}}';
+        $json = '{"target":"patient","target_prototype":null,"filters":{"dateOfBirth":{"name":"date_between","options":{"start":"01\/01\/2000","end":""}}},"translations":{"first-name":"this.getFirstName()","last-name":"this.getLastName()"}}';
         $config = $serializer->deserialize($json, "Accard\\Bundle\\OutcomesBundle\\Outcomes\\Configuration", "json");
 
         dump($config);
@@ -42,11 +42,6 @@ class OutcomesController extends Controller
         // $response->setContent($serializer->serialize($dataset, "xml"));
         // $response->headers->set("Content-Type", "application/xml");
         // return $response;
-
-        $config->setTranslations(array(
-            "first-name" => "patient.getFirstName()",
-            "last-name" => "patient.getLastName()",
-        ));
 
         $translator = $manager->createDatasetTranslator();
         $translated = $translator->translate($dataset);
@@ -109,6 +104,29 @@ class OutcomesController extends Controller
         $manager = $this->get("accard.outcomes.manager");
         $baseDataset = $manager->createBaseDataset($config, (int) $request->get("limit", 10));
         $content = $serializer->serialize($baseDataset, $format);
+
+        return new Response($content, 200, array("Content-Type" => "application/".$format));
+    }
+
+    /**
+     * Outcomes translated data set.
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function translatedDatasetAction(Request $request)
+    {
+        AccardLanguage::setExpressionLanguage($this->get('accard.expression_language'));
+
+        $format = $request->get("_format");
+        $serializer = $this->get("serializer");
+        $config = $serializer->deserialize($request->getContent(), "Accard\Bundle\OutcomesBundle\Outcomes\Configuration", $format);
+
+        $manager = $this->get("accard.outcomes.manager");
+        $translator = $manager->createDatasetTranslator();
+        $baseDataset = $manager->createBaseDataset($config, (int) $request->get("limit", 10));
+        $translated = $translator->translate($baseDataset);
+        $content = $serializer->serialize($translated, $format);
 
         return new Response($content, 200, array("Content-Type" => "application/".$format));
     }

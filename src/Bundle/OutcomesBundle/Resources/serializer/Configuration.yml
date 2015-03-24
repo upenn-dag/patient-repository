@@ -30,10 +30,10 @@ Accard\Bundle\OutcomesBundle\Outcomes\Configuration:
                 inline: true
                 key_attribute_name: field
                 entry_name: filter
-        transformations:
+        translations:
             expose: true
-            type: array<string, array>
-            serialized_name: transformations
+            type: array<string, string>
+            serialized_name: translations
             since_version: 1.0
             xml_list:
-                entry_name: transformation
+                entry_name: translation

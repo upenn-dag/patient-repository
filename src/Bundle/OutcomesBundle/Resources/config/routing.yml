@@ -29,6 +29,13 @@ accard_outcomes_filtered_dataset:
     defaults:
         _controller: AccardOutcomesBundle:Outcomes:filteredDataset
 
+accard_outcomes_trans_dataset:
+    path: /translated.{_format}
+    requirements:
+        _format: json|xml
+    defaults:
+        _controller: AccardOutcomesBundle:Outcomes:translatedDataset
+
 accard_outcomes_state:
     path: /state.json
     defaults:

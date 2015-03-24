@@ -41,23 +41,30 @@ class DatasetTranslator
      * Translate the base dataset.
      *
      * @param BaseDataset $baseDataset
+     * @param integer|null $limit
      * @return TransDataset
      */
-    public function translate(BaseDataset $baseDataset)
+    public function translate(BaseDataset $baseDataset, $limit = null)
     {
         $config = $baseDataset->getConfiguration();
         $target = $config->getTarget();
         $translations = $config->getTranslations();
         $data = array();
+        $i = 0;
 
         foreach ($baseDataset->getData() as $datum) {
+            $i++;
             $row = array();
-            $values = array($target => $datum);
+            $values = array("this" => $datum);
             foreach ($translations as $key => $trans) {
                 $row[$key] = $this->exprLanguage->evaluate($trans, $values);
             }
 
             $data[] = $row;
+
+            if ($limit && $i == $limit) {
+                break;
+            }
         }
 
         return new TransDataset($config, $data);

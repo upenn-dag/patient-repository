@@ -9,6 +9,7 @@ Accard\Bundle\OutcomesBundle\Outcomes\TransDataset:
     exclusion_policy: ALL
     xml_root_name: trans-dataset
     read_only: true
+    custom_accessor_order: [configuration, count, data]
     properties:
         configuration:
             expose: true
