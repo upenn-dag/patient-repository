@@ -5,7 +5,7 @@ accard:
         regimens: Regimens
         form:
             id: Id
-            activity_date: Activity Date
+            activity_date: Start Date
             description: Description
             drug: Drug
             prototype: Prototype
