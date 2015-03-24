@@ -12,12 +12,13 @@ define(function(require, exports, module) {
     var AppView = require("modules/outcomes/views/app");
     var TargetsView = require("modules/outcomes/views/targets");
     var FiltersView = require("modules/outcomes/views/filters");
+    var TranslationsView = require("modules/outcomes/views/translations");
 
     var Router = Backbone.Router.extend({
         routes: {
             "target":          "target",
             "filters":         "filters",
-            "transformations": "transformations",
+            "translations":    "translations",
             "export":          "export",
             "*path":           "default"
         },
@@ -27,7 +28,7 @@ define(function(require, exports, module) {
         currentView: null,
         targetsView: null,
         filtersView: null,
-        transformationsView: null,
+        translationsView: null,
         exportView: null,
 
         app: null,
@@ -65,21 +66,21 @@ define(function(require, exports, module) {
             this.setCurrentView(this.filtersView);
         },
 
-        transformations: function() {
-            if (!this.app.transformable()) {
-                Utils.notifier.navigationWarning("Unable to transform until data has been filtered.");
+        translations: function() {
+            if (!this.app.translatable()) {
+                Utils.notifier.navigationWarning("Unable to translate until data has been filtered.");
                 return this.navigate("filters", { trigger: true, replace: true });
             }
 
-            this.trigger("routeChange", "transformations");
-            this.transformationsView = this.transformationsView || new module.Views.Transformations();
-            this.setCurrentView(this.transformationsView);
+            this.trigger("routeChange", "translations");
+            this.translationsView = this.translationsView || new TranslationsView().render();
+            this.setCurrentView(this.translationsView);
         },
 
         export: function() {
             if (!this.app.exportable()) {
                 Utils.notifier.navigationWarning("Not enough data to export.");
-                return this.navigate("transformations", { trigger: true, replace: true });
+                return this.navigate("translations", { trigger: true, replace: true });
             }
 
             this.trigger("routeChange", "export");

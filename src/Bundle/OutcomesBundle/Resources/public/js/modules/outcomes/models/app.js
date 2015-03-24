@@ -4,20 +4,20 @@ define(function(require, exports, module) {
 
     var Backbone = require("backbone");
     var Filters = require("modules/outcomes/collections/filters");
-    var Transformations = require("modules/outcomes/collections/transformations");
+    var Translations = require("modules/outcomes/collections/translations");
     var App = Backbone.Model.extend({
         defaults: {
             object: null,
             objectPrototype: null,
             filtered: false,
             filters: null,
-            transformed: false,
-            transformations: null,
+            translated: false,
+            translations: null,
         },
 
         initialize: function() {
             this.set("filters", new Filters());
-            this.set("transformations", new Transformations());
+            this.set("translations", new Translations());
         },
 
         getConfig: function() {
@@ -40,9 +40,9 @@ define(function(require, exports, module) {
                 }
             });
 
-            config["transformations"] = {};
-            // this.getTransformations().each(function(transformation) {
-            //     console.log('Add transformation to config');
+            config["translations"] = {};
+            // this.getTranslations().each(function(translation) {
+            //     console.log('Add translation to config');
             // });
 
             console.log("Configuration generated: ", config);
@@ -103,20 +103,20 @@ define(function(require, exports, module) {
 
         // TRANSFORMING METHODS
 
-        addTransformation: function(transformation) {
-            this.transformations.add(transformation);
+        addTranslation: function(translation) {
+            this.translations.add(translation);
         },
 
-        hasTransformation: function(transformation) {
-            return -1 < this.transformations.indexOf(transformation);
+        hasTranslation: function(translation) {
+            return -1 < this.translations.indexOf(translation);
         },
 
-        transformable: function() {
-            return this.get("filtered");
+        translatable: function() {
+            return this.filterable();
         },
 
         exportable: function() {
-            return this.get("transformed");
+            return this.get("translated");
         }
     });
 
