@@ -42,7 +42,13 @@ define(function(require, exports, module) {
     "use strict";
 
     var App = require("app");
+    var Backbone = require("backbone");
     var state = {};
+
+    // Globally ignore Backbone sync.
+    Backbone.sync = function() {
+        return false;
+    };
 
     $.ajax({
         get: "GET",

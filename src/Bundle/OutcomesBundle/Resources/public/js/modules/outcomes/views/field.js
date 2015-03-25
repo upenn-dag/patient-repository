@@ -56,7 +56,7 @@ define(function(require, exports, module) {
         },
 
         render: function() {
-            this.$el.html($(this.template(this.model.toJSON())));
+            this.$el.html(this.template(this.model.toJSON()));
             this.filterList = this.$el.find(".field-filters");
 
             return this;

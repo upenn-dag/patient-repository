@@ -9,6 +9,7 @@ define(function(require, exports, module) {
 
     var Backbone = require("backbone");
     var Filter = Backbone.Model.extend({
+        sync: function() { return false; },
         defaults: {
             name: "New Filter",
             type: null,

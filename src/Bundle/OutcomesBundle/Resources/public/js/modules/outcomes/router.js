@@ -39,7 +39,7 @@ define(function(require, exports, module) {
                 throw "State & model must be provided to the router, none found.";
             }
 
-            this.headerView = new HeaderView({ router: this }).render();
+            // this.headerView = new HeaderView({ router: this }).render();
             this.appView = new AppView({ router: this, model: app.model }).render();
             this.app = app.model;
             this.state = options.state;
@@ -73,13 +73,13 @@ define(function(require, exports, module) {
             }
 
             this.trigger("routeChange", "translations");
-            this.translationsView = this.translationsView || new TranslationsView().render();
+            this.translationsView = this.translationsView || new TranslationsView({ collection: this.app.getTranslations() }).render();
             this.setCurrentView(this.translationsView);
         },
 
         export: function() {
             if (!this.app.exportable()) {
-                Utils.notifier.navigationWarning("Not enough data to export.");
+                Utils.notifier.navigationWarning("You must create at least one translation to export your dataset.");
                 return this.navigate("translations", { trigger: true, replace: true });
             }
 

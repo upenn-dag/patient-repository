@@ -9,6 +9,9 @@
     <hr class="visible-xs">
     <div id="translations-next" class="col-sm-2">
         <div class="section-padding hidden-xs"></div>
+        <button type="button" id="add-translation" class="btn btn-primary btn-block">
+            <i class="fa fa-arrow-circle-o-right"></i> Add a Translation
+        </button>
         <a href="#export" id="transformations-button-next" class="btn btn-primary btn-block">
             <i class="fa fa-arrow-circle-o-right"></i> Next Step 
         </a>
@@ -16,6 +19,33 @@
 </div>
 <hr>
 <div class="row">
+    <div class="col-sm-12">
+        <div id="translations" class="translations"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <button type="button" id="preview-translated-dataset" class="btn btn-primary btn-block">
+            Preview
+        </button>
+    </div>
+    <div class="clearfix">
+</div>
 
-<div id="translations" class="translations"></div>
-<div class="clearfix"></div>
+<!-- Translated Dataset Modal -->
+<div id="translated-dataset-modal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Translated Dataset (<span id="translated-dataset-count">0</span> samples found)</h4>
+            </div>
+            <div class="modal-body">
+                <div id="translated-dataset">Loading dataset.</div>
+            </div>
+        </div>
+    </div>
+</div>

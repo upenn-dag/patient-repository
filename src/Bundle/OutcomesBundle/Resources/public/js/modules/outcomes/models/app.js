@@ -23,27 +23,28 @@ define(function(require, exports, module) {
         getConfig: function() {
             var config = { target: this.getObject().get("name") };
             var fields = this.getObject().getFields();
+            var translations = this.getTranslations();
 
             // This should accomodate multiple filters at some point.
 
             config["target-prototype"] = this.hasObjectPrototype() ? this.getObjectPrototype().get("name") : null;
             config["filters"] = {};
+            config["translations"] = {};
 
             fields.each(function(field) {
                 var fieldName = field.get("name");
                 var filter = field.get("filter");
                 if (filter) {
-                    config["filters"][fieldName] = {
+                    config.filters[fieldName] = {
                         name: filter.get("type"),
                         options: filter.get("options") || [],
                     }
                 }
             });
 
-            config["translations"] = {};
-            // this.getTranslations().each(function(translation) {
-            //     console.log('Add translation to config');
-            // });
+            translations.each(function(translation) {
+                config.translations[translation.get("key")] = translation.get("definition");
+            });
 
             console.log("Configuration generated: ", config);
             
@@ -103,17 +104,28 @@ define(function(require, exports, module) {
 
         // TRANSFORMING METHODS
 
-        addTranslation: function(translation) {
-            this.translations.add(translation);
-        },
-
-        hasTranslation: function(translation) {
-            return -1 < this.translations.indexOf(translation);
-        },
-
         translatable: function() {
             return this.filterable();
         },
+
+        getTranslations: function() {
+            return this.get("translations");
+        },
+
+        addTranslation: function(translation) {
+            this.getTranslations().add(translation);
+        },
+
+        removeTranslation: function(translation) {
+            this.getTranslations().remove(translation);
+        },
+
+        hasTranslation: function(translation) {
+            return -1 < this.getTranslations().indexOf(translation);
+        },
+
+        
+        // EXPORT METHODS
 
         exportable: function() {
             return this.get("translated");

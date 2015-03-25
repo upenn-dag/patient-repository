@@ -4,11 +4,11 @@ define(function(require, exports, module) {
 
     var root = "/app_dev.php/outcomes/";
 
-    exports.root        = root;
-    exports.stateUri    = root + "state.json";
-    exports.filtersUri  = root + "filters.json";
-    exports.filteredUri = root + "filtered.json";
-
+    exports.root             = root;
+    exports.stateUri         = root + "state.json";
+    exports.filtersUri       = root + "filters.json";
+    exports.filteredUri      = root + "filtered.json";
+    exports.translatedUri    = root + "translated.json";
     exports.availableFilters = [];
     exports.filterData       = null;
 
