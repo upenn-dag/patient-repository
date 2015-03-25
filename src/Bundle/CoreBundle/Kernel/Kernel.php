@@ -38,8 +38,8 @@ abstract class Kernel extends BaseKernel
             new \Accard\Bundle\CoreBundle\AccardCoreBundle(),
 
             new \Accard\Bundle\OptionBundle\AccardOptionBundle(),
-            new \Accard\Bundle\FieldBundle\AccardFieldBundle(),
             new \Accard\Bundle\PrototypeBundle\AccardPrototypeBundle(),
+            new \Accard\Bundle\FieldBundle\AccardFieldBundle(),
             new \Accard\Bundle\DrugBundle\AccardDrugBundle(),
             new \Accard\Bundle\PatientBundle\AccardPatientBundle(),
             new \Accard\Bundle\DiagnosisBundle\AccardDiagnosisBundle(),
@@ -73,7 +73,6 @@ abstract class Kernel extends BaseKernel
             new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new \FOS\ElasticaBundle\FOSElasticaBundle(),
-            //new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
