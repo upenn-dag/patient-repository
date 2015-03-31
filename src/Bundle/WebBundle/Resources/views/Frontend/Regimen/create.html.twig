@@ -39,7 +39,7 @@
 
         <form action="{{ createPath }}" method="post" {{ form_enctype(form) }}>
             {{ form_widget(form._token) }}
-            {% include ['Theme:Frontend/Regimen:{#prototype}-form-html.twig','Theme:Frontend/Regimen:form.html.twig'] %}
+            {% include ['Theme:Frontend/Regimen:#{prototype}.form-html.twig','Theme:Frontend/Regimen:form.html.twig'] %}
             <div class="row">
                 <div class="col-md-12">
                     <span class="pull-right">{{ create() }}</span>
