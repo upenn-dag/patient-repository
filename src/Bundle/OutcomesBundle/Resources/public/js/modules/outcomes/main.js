@@ -18,6 +18,8 @@ require.config({
         "bootstrap.table": { deps: ["bootstrap"], exports: "BootstrapTable" },
     },
     paths: {
+        "debug": "libs/debug",
+
         "jquery": "libs/jquery",
         "jquery.serialize": "libs/jquery.serialize",
 
@@ -27,6 +29,7 @@ require.config({
         "underscore.mixed": "libs/underscore.mixed",
 
         "backbone": "libs/backbone",
+        "marionette": "libs/backbone.marionette",
         "backbone.notifier": "libs/backbone.notifier",
         "backbone.localstorage": "libs/backboneLocalstorage",
 
@@ -42,28 +45,41 @@ require.config({
 define(function(require, exports, module) {
     "use strict";
 
-    var App = require("app");
-    var Backbone = require("backbone");
-    var state = {};
+    // Require globally available modules.
+    require("debug");
 
-    // Globally ignore Backbone sync.
-    Backbone.sync = function() {
-        return false;
-    };
+    var State = require("modules/common/models/state");
+    var outcomes = require("modules/outcomes/application");
+    var options = {};
 
-    $.ajax({
-        get: "GET",
-        url: App.stateUri,
-        complete: function(response) {
-            var AppModel = require("modules/outcomes/models/app");
-            var Outcomes = require("modules/outcomes/outcomes");
-            var State = require("modules/common/models/state");
+    // Initialize sub apps?
+    require("modules/outcomes/apps/targets/app");
 
-            state = response.responseJSON;
-            state = new State(state);
-            App.model = new AppModel();
-            App.router = new Outcomes.Router({ state: state });
-            Backbone.history.start({ root: App.root });
-        }
+    // Preload state data.
+    var stateDf = $.ajax({
+        url: "/app_dev.php/outcomes/state.json"
+    })
+    .done(function(response) {
+        options.state = new State(response);
+    });
+
+    // Preload filter data.
+    var filtersDf = $.ajax({
+        url: "/app_dev.php/outcomes/filters.json",
+    })
+    .done(function(response) {
+        options.filters = response;
+    });
+
+    // Perform preload, when promises are fufilled start outcomes.
+    $.when(
+        stateDf,
+        filtersDf
+    )
+    .done(function() {
+        outcomes.start(options)
+    })
+    .fail(function() {
+        debug.error("Application failed to start due to pre-load failures.", { options: options });
     });
 });

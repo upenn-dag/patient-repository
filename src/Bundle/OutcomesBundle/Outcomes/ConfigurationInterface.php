@@ -34,11 +34,18 @@ interface ConfigurationInterface
     public function getTargetPrototype();
 
     /**
-     * Get all filters.
+     * Get all fields.
      *
-     * @return FilterConfiguration[]
+     * @return FilterConfigurationCollection[]
      */
-    public function getFilters();
+    public function getFields();
+
+    /**
+     * Get list of filtered fields.
+     *
+     * @return string[]
+     */
+    public function getFilteredFields();
 
     /**
      * Test for presence of filter for a given field.
@@ -46,7 +53,7 @@ interface ConfigurationInterface
      * @param string $field
      * @return boolean
      */
-    public function hasFilter($field);
+    public function hasField($field);
 
     /**
      * Get filter for a given field.
@@ -55,12 +62,5 @@ interface ConfigurationInterface
      * @param string $field
      * @return FilterConfiguration
      */
-    public function getFilter($field);
-
-    /**
-     * Get list of filtered fields.
-     *
-     * @return string[]
-     */
-    public function getFilteredFields();
+    public function getField($field);
 }

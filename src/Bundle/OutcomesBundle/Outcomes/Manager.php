@@ -44,11 +44,20 @@ class Manager extends ContainerAware
     /**
      * Base dataset factory builder.
      *
-     * At the moment, we only need one of these ever. So we'lll cache it.
+     * At the moment, we only need one of these ever. So we'll cache it.
      *
      * @var BaseDatasetFactoryBuilder
      */
     private $factoryBuilderCache;
+
+    /**
+     * Export factory.
+     *
+     * At the moment, we only need one of these. So cache it.
+     *
+     * @var ExportFactory
+     */
+    private $exportFactoryCache;
 
     /**
      * Dataset translator.
@@ -91,6 +100,82 @@ class Manager extends ContainerAware
         $this->assertRequirementsMet();
 
         return new ActiveConfiguration($config, $this->state, $this->filterRegistry);
+    }
+
+    /**
+     * Create an export factory instance.
+     *
+     * @return ExportFactory
+     */
+    public function createExportFactory()
+    {
+        $this->assertRequirementsMet();
+
+        if (null === $this->exportFactoryCache) {
+            $this->exportFactoryCache = new ExportFactory();
+        }
+
+        return $this->exportFactoryCache;
+    }
+
+    /**
+     * Export a dataset.
+     *
+     * Exports a dataset via the export factory. This message is a proxy method
+     * for exporting via more verbose methods.
+     *
+     * @param TransDataset $dataset
+     * @param string $exportFactory
+     * @return string
+     */
+    public function export(TransDataset $dataset, $exportFactory)
+    {
+        return $this->createExportFactory()->export($dataset, $exportFactory);
+    }
+
+    /**
+     * Generate a consistent file path.
+     *
+     * @param string $filename
+     * @return string
+     */
+    public function generateExportFilePath($filename)
+    {
+        return $this->getExportFolderPath().$filename;
+    }
+
+    /**
+     * Generate the export folder path.
+     *
+     * @return string
+     */
+    public function getExportFolderPath()
+    {
+        return sys_get_temp_dir()."outcomes".DIRECTORY_SEPARATOR;
+    }
+
+    /**
+     * Export a dataset, and format a response.
+     *
+     * @param TransDataset $dataset
+     * @param string $exportFactory
+     * @param string $filename
+     * @param array|null $options
+     * @return string
+     */
+    public function exportToFile(TransDataset $dataset, $exportFactory, $filename, array $options = null)
+    {
+        $exporter = $this->createExportFactory()->getExporter($exportFactory);
+
+        // Make temp file.
+        @mkdir($this->getExportFolderPath(), 0777, true);
+        $tempfile = $this->generateExportFilePath($filename);
+        touch($tempfile);
+        $temp = fopen($tempfile, "w");
+        fwrite($temp, $exporter->export($dataset, $options));
+        fclose($temp);
+
+        return $tempfile;
     }
 
     /**
@@ -154,6 +239,20 @@ class Manager extends ContainerAware
         }
 
         return $this->datasetTranslatorCache;
+    }
+
+    /**
+     * Translate a base dataset.
+     *
+     * Convenience method, acting as a proxy for creating a translated vs more
+     * verbose methods.
+     *
+     * @param BaseDataset $dataset
+     * @return TransDataset
+     */
+    public function translate(BaseDataset $dataset)
+    {
+        return $this->createDatasetTranslator()->translate($dataset);
     }
 
     /**

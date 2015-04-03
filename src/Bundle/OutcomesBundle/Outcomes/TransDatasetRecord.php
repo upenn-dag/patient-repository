@@ -56,6 +56,16 @@ class TransDatasetRecord implements ArrayAccess, IteratorAggregate, Countable
     }
 
     /**
+     * Get all values.
+     *
+     * @return array
+     */
+    public function all()
+    {
+        return $this->values;
+    }
+
+    /**
      * Get record values.
      *
      * @return array
@@ -90,6 +100,11 @@ class TransDatasetRecord implements ArrayAccess, IteratorAggregate, Countable
         return array_keys($this->values);
     }
 
+    /**
+     * Remove a value by key.
+     *
+     * @param string $key
+     */
     public function remove($key)
     {
         if (!$this->has($key)) {

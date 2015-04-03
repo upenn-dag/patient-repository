@@ -21,15 +21,11 @@ Accard\Bundle\OutcomesBundle\Outcomes\Configuration:
             serialized_name: target-prototype
             since_version: 1.0
             xml_attribute: true
-        filters:
+        fields:
             expose: true
-            type: array<string, Accard\Bundle\OutcomesBundle\Outcomes\FilterConfiguration>
-            serialized_name: filters
+            type: array<string, Accard\Bundle\OutcomesBundle\Outcomes\FilterConfigurationCollection>
+            serialized_name: fields
             since_version: 1.0
-            xml_map:
-                inline: true
-                key_attribute_name: field
-                entry_name: filter
         translations:
             expose: true
             type: array<string, string>

@@ -33,17 +33,18 @@ class BaseDataset implements DatasetInterface
     public static function filter(ActiveConfigurationInterface $config, array $data)
     {
         $data = new ArrayCollection($data);
-        $originalConfig = $config->getOriginalConfig();
-        $fields = $config->getFilteredFields();
-        $filters = $config->getFilters();
-        $filterOptions = $originalConfig->getFilters();
+        $filters = $config->getFields();
+        $filterOptions = $config->getOriginalConfig()->getFields();
+        $fields  = array_keys($filters);
         $criteria = Criteria::create();
 
-        foreach ($filters as $key => $filter) {
-            $resolver = new OptionsResolver();
-            $filter->configureOptions($resolver);
-            $options = $filter->resolveOptions($resolver, $filterOptions[$key]->getOptions());
-            $filter->filter($criteria, $fields[$key], $options);
+        foreach ($fields as $field) {
+            foreach ($filters[$field] as $key => $filter) {
+                $resolver = new OptionsResolver();
+                $filter->configureOptions($resolver);
+                $options = $filter->resolveOptions($resolver, $filterOptions[$field][$key]->getOptions());
+                $filter->filter($criteria, $config->getField($field), $options);
+            }
         }
 
         return $data->matching($criteria)->getValues();

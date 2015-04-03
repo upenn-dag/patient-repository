@@ -7,7 +7,7 @@
 
 Accard\Bundle\OutcomesBundle\Outcomes\FilterConfiguration:
     exclusion_policy: ALL
-    xml_root_name: filter_config
+    xml_root_name: config
     properties:
         filterName:
             expose: true

@@ -48,9 +48,9 @@ abstract class AbstractFilter implements FilterInterface
     /**
      * {@inheritdoc}
      */
-    final public function resolveOptions(OptionsResolverInterface $resolver, array $options = array())
+    final public function resolveOptions(OptionsResolverInterface $resolver, array $options = null)
     {
-        return $resolver->resolve($options);
+        return $resolver->resolve((array) $options);
     }
 
     /**

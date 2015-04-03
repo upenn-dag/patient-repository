@@ -39,11 +39,11 @@ class Configuration implements ConfigurationInterface
     protected $targetPrototype;
 
     /**
-     * Target filters.
+     * Target fields.
      *
      * @var array
      */
-    protected $filters = array();
+    protected $fields = array();
 
     /**
      * Target translations.
@@ -98,29 +98,9 @@ class Configuration implements ConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFields()
     {
-        return $this->filters;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasFilter($field)
-    {
-        return isset($this->filters[$field]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFilter($field)
-    {
-        if (!$this->hasFilter($field)) {
-            throw new FieldNotFoundException($field);
-        }
-
-        return $this->filters[$field];
+        return $this->fields;
     }
 
     /**
@@ -128,7 +108,27 @@ class Configuration implements ConfigurationInterface
      */
     public function getFilteredFields()
     {
-        return array_keys($this->filters);
+        return array_keys($this->fields);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasField($field)
+    {
+        return isset($this->fields[$field]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getField($field)
+    {
+        if (!$this->hasField($field)) {
+            throw new FieldNotFoundException($field);
+        }
+
+        return $this->fields[$field];
     }
 
     /**
@@ -136,46 +136,31 @@ class Configuration implements ConfigurationInterface
      *
      * @param FilterConfiguration[] $filters
      */
-    public function setFilters(array $filters)
+    public function setFields(array $filters)
     {
-        foreach ($filters as $field => $filter) {
-            $this->addFilter($field, $filter);
+        foreach ($filters as $field => $filters) {
+            foreach ($filters as $filter) {
+                $this->addFilter($field, $filter);
+            }
         }
 
         return $this;
     }
 
     /**
-     * Set filter for a given field.
+     * Add filter for field.
      *
      * @param string $field
      * @param FilterConfiguration $filter
      * @return self
      */
-    public function setFilter($field, FilterConfiguration $filter)
+    public function addFilter($field, FilterConfiguration $filter)
     {
-        if ($this->hasFilter($field)) {
-            throw new DuplicateFieldException($field);
+        if (!isset($this->fields[$field])) {
+            $this->fields[$field] = new FilterConfigurationCollection();
         }
 
-        $this->filters[$field] = $filter;
-
-        return $this;
-    }
-
-    /**
-     * Remove filter for a given field.
-     *
-     * @param string $field
-     * @return self
-     */
-    public function removeFilter($field)
-    {
-        if (!$this->hasFilter($field)) {
-            throw new FieldNotFoundException($field);
-        }
-
-        unset($this->filters[$field]);
+        $this->fields[$field][] = $filter;
 
         return $this;
     }

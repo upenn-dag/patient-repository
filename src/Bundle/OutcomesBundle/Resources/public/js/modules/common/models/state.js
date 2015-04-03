@@ -6,12 +6,13 @@ define(function(require, exports, module) {
     var State = Backbone.Model.extend({
         initialize: function(options) {
             var objKeys = Object.keys(options.objects);
+            var objects = new Objects();
 
             for (var i = 0; i < objKeys.length; i++) {
-                Objects.add(options.objects[objKeys[i]]);
+                objects.add(options.objects[objKeys[i]]);
             }
 
-            this.set("objects", Objects);
+            this.set("objects", objects);
         },
         getObjects: function() {
             return this.get("objects");

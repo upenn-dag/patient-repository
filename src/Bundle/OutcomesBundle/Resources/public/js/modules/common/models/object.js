@@ -53,9 +53,11 @@ define(function(require, exports, module) {
 
         activate: function() {
             this.set("active", true);
+            return this;
         },
         deactivate: function() {
             this.set("active", false);
+            return this;
         }
     });
 

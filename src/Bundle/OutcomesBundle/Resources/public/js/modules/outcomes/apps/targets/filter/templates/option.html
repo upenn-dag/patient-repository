@@ -1,0 +1,8 @@
+<div class="form-group">
+    <label for="filter-config-<%= name %>" class="<%= required ? "required" : "" %>"><%= label %></label>
+    <% if ("choice" == type) { %>
+        Render the field!
+    <% } else { %>
+        <input type="<%= type %>" id="filter-config-<%= name %>" name="options[<%= name %>]" class="form-control"<%= required ? " required" : ""%>>
+    <% } %>
+</div>

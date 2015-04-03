@@ -117,25 +117,29 @@ class ActiveConfiguration implements ActiveConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFields()
     {
         $target = $this->getActualTarget();
-        $parentFilters = $this->configuration->getFilters();
-        $filters = array();
+        $parentFilters = $this->configuration->getFields();
+        $output = array();
 
-        foreach ($parentFilters as $field => $filter) {
+        foreach ($parentFilters as $field => $filters) {
             if (!$target->hasField($field)) {
                 throw new FieldNotFoundException($field);
             }
 
-            if (!$this->filterRegistry->hasFilter($filter->getFilterName())) {
-                throw new \Exception("Can't find that filter");
-            }
+            $output[$field] = array();
 
-            $filters[$field] = $this->filterRegistry->getFilter($filter->getFilterName());
+            foreach ($filters as $filter) {
+                if (!$this->filterRegistry->hasFilter($filter->getFilterName())) {
+                    throw new \Exception(sprintf('The filter "%s" has not been registered.', $filter->getFilterName()));
+                }
+
+                $output[$field][] = $this->filterRegistry->getFilter($filter->getFilterName());
+            }
         }
 
-        return $filters;
+        return $output;
     }
 
     /**
@@ -161,16 +165,17 @@ class ActiveConfiguration implements ActiveConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function hasFilter($field)
+    public function hasField($field)
     {
-        return $this->configuration->hasFilter($field);
+        return $this->configuration->hasField($field);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getFilter($field)
+    public function getField($field)
     {
-        $parentFilter = $this->configuration->getFilter($field);
+        return $this->getTarget()->getField($field);
+        $parentFilter = $this->configuration->getField($field);
     }
 }

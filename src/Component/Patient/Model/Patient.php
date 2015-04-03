@@ -193,9 +193,9 @@ class Patient implements PatientInterface
             return;
         }
 
-        $endDate = $this->dateOfDeath ?: new \DateTime('now');
+        $endDate = $this->dateOfDeath ?: new DateTime();
 
-        return $this->dateOfBirth->diff($endDate);
+        return $endDate->diff($this->dateOfBirth);
     }
 
     /**
