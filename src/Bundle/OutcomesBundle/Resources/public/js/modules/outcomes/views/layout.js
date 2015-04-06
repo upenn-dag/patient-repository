@@ -8,10 +8,6 @@ define(function(require, exports, module) {
         id: "app",
         regions: {
             mainRegion: "#main-container",
-            // targetsRegion: "#targets-container",
-            // filtersRegion: "#filters-container",
-            // translationsRegion: "#translations-container",
-            // exportRegion: "#export-container"
         },
 
         activate: function(view) {

@@ -27,11 +27,6 @@ use JMS\Serializer\SerializationContext;
  */
 class OutcomesController extends Controller implements ExpressionAwareController
 {
-    public function testAction(Request $request)
-    {
-        return $this->render("AccardOutcomesBundle::marionette.html.twig");
-    }
-
     /**
      * Outcomes main.
      *
