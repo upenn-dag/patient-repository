@@ -23,8 +23,6 @@
         "jms/serializer-bundle":                 "0.13.*",
         "white-october/pagerfanta-bundle":       "~1.0",
         "knplabs/knp-menu-bundle":               "~2.0",
-        "mopa/bootstrap-bundle":                 "~3.0@dev",
-        "twbs/bootstrap":                        "v3.2.0",
         "lexik/translation-bundle":              "~2.1",
         "gedmo/doctrine-extensions":             "~2.4",
         "friendsofsymfony/elastica-bundle":      "~3.1"
