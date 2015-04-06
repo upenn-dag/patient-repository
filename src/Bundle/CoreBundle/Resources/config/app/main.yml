@@ -18,11 +18,11 @@ doctrine_cache:
             type: apc
             namespace: accard_%accard_app_name%_settings
 
-mopa_bootstrap:
-    form:
-        templating: AccardWebBundle::forms.html.twig
-        horizontal: false
-        render_optional_text: false
+#mopa_bootstrap:
+#    form:
+#        templating: AccardWebBundle::forms.html.twig
+#        horizontal: false
+#        render_optional_text: false
 
 sensio_framework_extra:
     view:

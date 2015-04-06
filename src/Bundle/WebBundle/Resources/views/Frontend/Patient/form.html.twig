@@ -5,6 +5,7 @@
 {# For the full copyright and license information, please view the LICENSE #}
 {# file that was distributed with this source code. #}
 
+{% from 'AccardWebBundle:Common/Macros:misc.html.twig' import icon %}
 
 {% set count = form.fields|length %}
 {% set half_count = (count/2)|round(0, 'ceil') %}
