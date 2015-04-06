@@ -320,7 +320,7 @@ define(function(require, exports, module) {
                 var jqxhr = $.ajax({
                     type: "POST",
                     dataType: "json",
-                    url: "/app_dev.php/outcomes/filtered.json",
+                    url: outcomes.getOption("filteredUrl"),
                     data: JSON.stringify(config.serialize()),
                 });
 
@@ -495,7 +495,7 @@ define(function(require, exports, module) {
                 var jqxhr = $.ajax({
                     type: "POST",
                     dataType: "json",
-                    url: "/app_dev.php/outcomes/translated.json",
+                    url: outcomes.getOption("translatedUrl"),
                     data: JSON.stringify(config.serialize()),
                 });
 
@@ -663,12 +663,12 @@ define(function(require, exports, module) {
                     var jqxhr = $.ajax({
                         type: "POST",
                         dataType: "json",
-                        url: "/app_dev.php/outcomes/generate?as=" + config.getExportFormat(),
+                        url: outcomes.getOption("generateUrl") + config.getExportFormat(),
                         data: JSON.stringify(config.serialize()),
                     });
 
                     jqxhr.done(function(response) {
-                        var downloadUrl = "/app_dev.php/outcomes/download?file=" + response.file;
+                        var downloadUrl = outcomes.getOption("downloadUrl") + response.file;
                         var $iframe = $("<iframe src='"+downloadUrl+"' style='display:none;' class='target-iframe'/>");
                         $(".target-iframe").remove(); // Remove other downloads.
                         $("body").append($iframe);

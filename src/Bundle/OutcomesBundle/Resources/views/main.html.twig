@@ -193,9 +193,27 @@
             }
 
         </style>
-        <script type="text/javascript"
-            data-main="/bundles/accardoutcomes/js/modules/outcomes/main"
-            src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.16/require.min.js">
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.16/require.min.js"></script>
+        <script type="text/javascript">
+
+            requirejs.config({
+                baseUrl: "/bundles/accardoutcomes/js"
+            });
+
+            require(["modules/outcomes/main"], function(main) {
+                var rootUrl = "{{ path("accard_frontend_homepage") }}";
+                var options = {
+                    rootUrl: rootUrl,
+                    stateUrl: rootUrl + "outcomes/state.json",
+                    filterUrl: rootUrl + "outcomes/filters.json",
+                    filteredUrl: rootUrl + "outcomes/filtered.json",
+                    translatedUrl: rootUrl + "outcomes/translated.json",
+                    generateUrl: rootUrl + "outcomes/generate?as=",
+                    downloadUrl: rootUrl + "outcomes/download?file="
+                };
+
+                main.initialize(options);
+            });
         </script>
     </head>
     <body>

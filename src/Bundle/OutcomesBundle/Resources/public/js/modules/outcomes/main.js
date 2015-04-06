@@ -48,38 +48,42 @@ define(function(require, exports, module) {
     // Require globally available modules.
     require("debug");
 
-    var State = require("modules/common/models/state");
-    var outcomes = require("modules/outcomes/application");
-    var options = {};
+    return {
+        initialize: function(options) {
+            var State = require("modules/common/models/state");
+            var outcomes = require("modules/outcomes/application");
+            var options = options || {};
 
-    // Initialize sub apps?
-    require("modules/outcomes/apps/targets/app");
+            // Initialize sub apps?
+            require("modules/outcomes/apps/targets/app");
 
-    // Preload state data.
-    var stateDf = $.ajax({
-        url: "/app_dev.php/outcomes/state.json"
-    })
-    .done(function(response) {
-        options.state = new State(response);
-    });
+            // Preload state data.
+            var stateDf = $.ajax({
+                url: options.stateUrl
+            })
+            .done(function(response) {
+                options.state = new State(response);
+            });
 
-    // Preload filter data.
-    var filtersDf = $.ajax({
-        url: "/app_dev.php/outcomes/filters.json",
-    })
-    .done(function(response) {
-        options.filters = response;
-    });
+            // Preload filter data.
+            var filtersDf = $.ajax({
+                url: options.filterUrl
+            })
+            .done(function(response) {
+                options.filters = response;
+            });
 
-    // Perform preload, when promises are fufilled start outcomes.
-    $.when(
-        stateDf,
-        filtersDf
-    )
-    .done(function() {
-        outcomes.start(options)
-    })
-    .fail(function() {
-        debug.error("Application failed to start due to pre-load failures.", { options: options });
-    });
+            // Perform preload, when promises are fufilled start outcomes.
+            $.when(
+                stateDf,
+                filtersDf
+            )
+            .done(function() {
+                outcomes.start(options)
+            })
+            .fail(function() {
+                debug.error("Application failed to start due to pre-load failures.", { options: options });
+            });
+        }
+    }
 });

@@ -103,11 +103,23 @@ define(function(require, exports, module) {
         // This should be pluggable from the options array...
         options.config || (options.config = new ConfigModel());
 
+        // Need some more validation...
         if (!options.state || !options.filters) {
             throw "State and filters must be supplied to start outcomes.";
         }
 
-        this.mergeOptions(options, ["state", "filters", "config"]);
+        this.mergeOptions(options, [
+            "state", 
+            "filters", 
+            "config", 
+            "rootUrl", 
+            "stateUrl", 
+            "filterUrl",
+            "filteredUrl",
+            "translatedUrl",
+            "generateUrl",
+            "downloadUrl"
+        ]);
 
         // Create layout view.
         var LayoutView = require("modules/outcomes/views/layout");
