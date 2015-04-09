@@ -21,45 +21,97 @@ use FOS\ElasticaBundle\HybridResult;
  */
 class SearchResult
 {
+    /**
+     * Elastica hybrid result.
+     *
+     * @var HybridResult
+     */
     private $elasticaResult;
+
+    /**
+     * Transformed search result.
+     *
+     * @var mixed
+     */
     private $transformedResult;
 
+
+    /**
+     * Constructor.
+     *
+     * @param HybridResult $result
+     */
     public function __construct(HybridResult $result)
     {
         $this->elasticaResult = $result->getResult();
         $this->transformedResult = $result->getTransformed();
     }
 
+    /**
+     * Get result id.
+     *
+     * @return mixed
+     */
     public function getId()
     {
         return $this->elasticaResult->getId();
     }
 
+    /**
+     * Get result index.
+     *
+     * @return integer
+     */
     public function getIndex()
     {
         return $this->elasticaResult->getIndex();
     }
 
+    /**
+     * Get result relevance score.
+     *
+     * @return float
+     */
     public function getScore()
     {
         return $this->elasticaResult->getScore();
     }
 
+    /**
+     * Get result relevance percentage.
+     *
+     * @return float
+     */
     public function getPercentage()
     {
         return round($this->elasticaResult->getScore() * 100, 2, PHP_ROUND_HALF_UP);
     }
 
+    /**
+     * Get result type.
+     *
+     * @return string
+     */
     public function getType()
     {
         return $this->elasticaResult->getType();
     }
 
+    /**
+     * Get result raw data.
+     *
+     * @return array
+     */
     public function getRawData()
     {
         return $this->elasticaResult->getData();
     }
 
+    /**
+     * Get transformed result data.
+     *
+     * @return mixed
+     */
     public function getData()
     {
         return $this->transformedResult;

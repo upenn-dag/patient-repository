@@ -26,11 +26,28 @@ use Elastica\Query\AbstractQuery;
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
 class SearchCollection implements Countable, IteratorAggregate
-//implements Collection
 {
+    /**
+     * Query.
+     *
+     * @var AbstractQuery
+     */
     private $query;
+
+    /**
+     * Results.
+     *
+     * @var array
+     */
     private $results = array();
 
+
+    /**
+     * Constructor.
+     *
+     * @param AbstractQuery $query
+     * @param array $results
+     */
     public function __construct(AbstractQuery $query, array $results = array())
     {
         $this->query = new Query($query);
@@ -39,16 +56,35 @@ class SearchCollection implements Countable, IteratorAggregate
         }
     }
 
+    /**
+     * Get query.
+     *
+     * @return mixed
+     */
     public function getQuery()
     {
         return $this->query->getQuery();
     }
 
+    /**
+     * Get query text.
+     *
+     * @return string
+     */
     public function getText()
     {
         return $this->query->getText();
     }
 
+    /**
+     * Add result.
+     *
+     * Converts a result into an Accard search result locally before it is
+     * added to the collection.
+     *
+     * @param HybridResult $result
+     * @return self
+     */
     public function add(HybridResult $result)
     {
         $hash = spl_object_hash($result);
@@ -58,21 +94,39 @@ class SearchCollection implements Countable, IteratorAggregate
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function count()
     {
         return count($this->results);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getIterator()
     {
         return new ArrayIterator($this->results);
     }
 
+    // Helper methods?
+
+    /**
+     * Get patient results.
+     *
+     * @return array
+     */
     public function getPatients()
     {
         return array_filter($this->results, function($v) { return 'patient' === $v->getType(); });
     }
 
+    /**
+     * Get diagnosis results.
+     *
+     * @return array
+     */
     public function getDiagnoses()
     {
         return array_filter($this->results, function($v) { return 'diagnosis' === $v->getType(); });

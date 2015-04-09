@@ -11,7 +11,7 @@
 namespace Accard\Bundle\ResourceBundle\Search;
 
 /**
- * Query.
+ * Query object.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
@@ -20,17 +20,32 @@ class Query
     private $rawQuery;
     private $queryText;
 
+    /**
+     * Constructor.
+     *
+     * @param mixed $query
+     */
     public function __construct($query)
     {
         $this->rawQuery = $query;
         $this->queryText = $query->getParam('query');
     }
 
+    /**
+     * Get query.
+     *
+     * @return mixed
+     */
     public function getQuery()
     {
         return $this->rawQuery;
     }
 
+    /**
+     * Get query text.
+     *
+     * @return string
+     */
     public function getText()
     {
         return $this->queryText;
