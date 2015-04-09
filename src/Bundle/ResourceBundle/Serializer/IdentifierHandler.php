@@ -16,6 +16,7 @@ use JMS\Serializer\GraphNavigator;
 use JMS\Serializer\VisitorInterface;
 use Doctrine\Common\Collections\Collection;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
+use JMS\Serializer\Exception\RuntimeException;
 use JMS\Serializer\Exception\UnsupportedFormatException;
 
 /**
@@ -130,6 +131,7 @@ class IdentifierHandler implements SubscribingHandlerInterface
      *
      * Converts an id or array of ids to an object or collection of objects.
      *
+     * @throws RuntimeException Until this is implemented.
      * @param VisitorInterface $visitor
      * @param mixed $data
      * @param array $type
@@ -138,6 +140,6 @@ class IdentifierHandler implements SubscribingHandlerInterface
      */
     public function deserializeIdentifier(VisitorInterface $visitor, $data, array $type, Context $context)
     {
-        die('deserializing identifier');
+        throw new RuntimeException("Deserialization is not yet supported.");
     }
 }
