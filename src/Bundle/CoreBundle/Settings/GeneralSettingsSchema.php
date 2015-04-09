@@ -10,7 +10,6 @@
  */
 namespace Accard\Bundle\CoreBundle\Settings;
 
-use Accard\Bundle\SettingsBundle\Schema\Schema;
 use Accard\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Locale;
@@ -22,25 +21,8 @@ use Symfony\Component\Validator\Constraints\Length;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class GeneralSettingsSchema extends Schema
+class GeneralSettingsSchema extends AbstractSettingsSchema
 {
-    /**
-     * Default data.
-     *
-     * @var array
-     */
-    protected $defaults;
-
-    /**
-     * Constructor.
-     *
-     * @param array $defaults
-     */
-    public function __construct(array $defaults = array())
-    {
-        $this->defaults = $defaults;
-    }
-
     /**
      * {@inheritdoc}
      */

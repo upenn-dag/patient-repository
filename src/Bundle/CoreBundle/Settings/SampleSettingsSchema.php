@@ -19,25 +19,8 @@ use Symfony\Component\Form\FormBuilderInterface;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class SampleSettingsSchema extends Schema
+class SampleSettingsSchema extends AbstractSettingsSchema
 {
-    /**
-     * Default data.
-     *
-     * @var array
-     */
-    protected $defaults;
-
-    /**
-     * Constructor.
-     *
-     * @param array $defaults
-     */
-    public function __construct(array $defaults = array())
-    {
-        $this->defaults = $defaults;
-    }
-
     /**
      * {@inheritdoc}
      */

@@ -10,11 +10,9 @@
  */
 namespace Accard\Bundle\CoreBundle\Settings;
 
-use Accard\Bundle\SettingsBundle\Schema\Schema;
 use Accard\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
-use Accard\Bundle\SettingsBundle\Form\ArrayToStringTransformer;
 
 /**
  * Behavior settings schema.
@@ -22,25 +20,8 @@ use Accard\Bundle\SettingsBundle\Form\ArrayToStringTransformer;
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-class BehaviorSettingsSchema extends Schema
+class BehaviorSettingsSchema extends AbstractSettingsSchema
 {
-    /**
-     * Default data.
-     *
-     * @var array
-     */
-    protected $defaults;
-
-    /**
-     * Constructor.
-     *
-     * @param array $defaults
-     */
-    public function __construct(array $defaults = array())
-    {
-        $this->defaults = $defaults;
-    }
-
     /**
      * {@inheritdoc}
      */

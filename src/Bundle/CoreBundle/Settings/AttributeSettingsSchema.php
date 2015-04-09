@@ -10,7 +10,6 @@
  */
 namespace Accard\Bundle\CoreBundle\Settings;
 
-use Accard\Bundle\SettingsBundle\Schema\Schema;
 use Accard\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -19,25 +18,8 @@ use Symfony\Component\Form\FormBuilderInterface;
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-class AttributeSettingsSchema extends Schema
+class AttributeSettingsSchema extends AbstractSettingsSchema
 {
-    /**
-     * Default data.
-     *
-     * @var array
-     */
-    protected $defaults;
-
-    /**
-     * Constructor.
-     *
-     * @param array $defaults
-     */
-    public function __construct(array $defaults = array())
-    {
-        $this->defaults = $defaults;
-    }
-
     /**
      * {@inheritdoc}
      */
