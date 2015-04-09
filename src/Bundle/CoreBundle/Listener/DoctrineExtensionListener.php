@@ -1,32 +1,33 @@
 <?php
-namespace Accard\Bundle\CoreBundle\Listener;
 
 /**
- *  Doctrine Extension Listener
+ * This file is part of the Accard package.
+ *
+ * (c) University of Pennsylvania
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+namespace Accard\Bundle\CoreBundle\Listener;
+
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\DependencyInjection\ContainerAware;
+
+/**
+ * Doctrine extensions listener.
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
-class DoctrineExtensionListener implements ContainerAwareInterface
+class DoctrineExtensionListener extends ContainerAware
 {
     /**
-     * @var ContainerInterface
+     * On kernel request listener.
+     *
+     * When the kernel request is made, attach the current user to the loggable
+     * Doctrine extension.
+     *
+     * @param GetResponseEvent $event
      */
-    protected $container;
-
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
-    public function onLateKernelRequest(GetResponseEvent $event)
-    {
-
-    }
-
     public function onKernelRequest(GetResponseEvent $event)
     {
         $securityContext = $this->container->get('security.context', ContainerInterface::NULL_ON_INVALID_REFERENCE);
