@@ -31,7 +31,7 @@
 
         <form action="{{ path('accard_frontend_behavior_create', { prototype: prototype }) }}" method="post" {{ form_enctype(form) }}>
             {{ form_widget(form._token) }}
-            {% include 'AccardWebBundle:Frontend/Behavior:form.html.twig' %}
+            {% include ["Theme:Frontend/Behavior:#{prototype}-form.html.twig", "AccardWebBundle:Frontend/Behavior:form.html.twig"] %}
             <div class="row">
                 <div class="col-md-12">
                     <span class="pull-right">{{ create() }}</span>
@@ -45,12 +45,12 @@
     {{ parent() }}
     {{ select_patient_js('#accard_behavior_patient') }}
 
-    {% include 'Theme:Frontend/Behavior:{#prototype}-javascript.js.twig' ignore missing  %}
+    {% include "Theme:Frontend/Behavior:#{prototype}-javascript.js.twig" ignore missing  %}
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
     {{ select_patient_css() }}
 
-    {% include 'Theme:Frontend/Behavior:{#prototype}-style.css.twig' ignore missing %}
+    {% include "Theme:Frontend/Behavior:#{prototype}-style.css.twig" ignore missing %}
 {% endblock %}
