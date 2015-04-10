@@ -49,7 +49,7 @@ services:
 
     accard.event_subscriber.kernel_controller:
         class: %accard.event_subscriber.kernel_controller.class%
-        arguments: ["@security.context"]
+        arguments: ["@security.context", "@accard.expression_language"]
         tags: [{ name: kernel.event_subscriber }]
 
     accard.form.type.object_to_identifier:

@@ -17,7 +17,7 @@ use JsonSerializable;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class ObjectStaticFieldState implements JsonSerializable
+class ObjectStaticFieldState implements ObjectFieldStateInterface, JsonSerializable
 {
     protected $parent;
     protected $hash;

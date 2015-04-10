@@ -54,6 +54,16 @@ class ObjectPrototypeState implements JsonSerializable
     }
 
     /**
+     * Get prototype name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Set prototype presentation.
      *
      * @param string $presentation

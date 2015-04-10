@@ -1,0 +1,60 @@
+<div id="export-header" class="row"></div>
+<hr>
+<div class="row row-no-top-margin row-no-bottom-margin row-2-col-with-line">
+    <div class="col-sm-6 col-left">
+        <div class="col-inner">
+            <h3 class="lead">Download your data</h3>
+            <p>
+                Your dataset can be downloaded in various formats. Typically, you're going
+                to want a spreadsheet; but, incertain instances, other file types will be
+                required.
+            </p>
+            <hr>
+            <div class="export-types row">
+                <div class="col-sm-4">
+                    <button type="button" id="export-csv" class="btn btn-lg btn-block btn-default">
+                        <i class="fa fa-file-excel-o fa-3x"></i>
+                    </button>
+                    <h5 class="text-center">Spreadsheet</h5>
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" id="export-xml" class="btn btn-lg btn-block btn-default" disabled>
+                        <i class="fa fa-file-code-o fa-3x"></i>
+                    </button>
+                    <h5 class="text-center text-muted">XML</h5>
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" id="export-json" class="btn btn-lg btn-block btn-default" disabled>
+                        <i class="fa fa-file-text-o fa-3x"></i>
+                    </button>
+                    <h5 class="text-center text-muted">JSON</h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button
+                        type="button"
+                        id="export-download"
+                        data-downloading-text="Downloading your dataset..."
+                        data-error-text="Unable to download dataset"
+                        class="btn btn-success btn-block"
+                        disabled>
+                            Download My Dataset
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-right">
+        <div class="col-inner">
+            <h3 class="lead">Save for later</h3>
+            <div class="alert alert-info">
+                <strong>Coming Soon</strong>
+                At the moment, we are unable to save the configuration you just created.
+                Soon, there will be a feature to save the config for future use.
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

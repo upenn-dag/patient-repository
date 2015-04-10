@@ -1,0 +1,30 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+Accard\Bundle\OutcomesBundle\Outcomes\BaseDataset:
+    exclusion_policy: ALL
+    xml_root_name: base-dataset
+    read_only: true
+    properties:
+        configuration:
+            expose: true
+            type: Accard\Bundle\OutcomesBundle\Outcomes\Configuration
+            serialized_name: configuration
+            since_version: 1.0
+        data:
+            expose: true
+            type: array
+            serialized_name: data
+            since_version: 1.0
+            xml_list:
+                entry_name: datum
+    virtual_properties:
+        count:
+            expose: true
+            type: integer
+            serialized_name: count
+            since_version: 1.0

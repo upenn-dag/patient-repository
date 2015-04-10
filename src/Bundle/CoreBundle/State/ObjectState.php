@@ -12,6 +12,7 @@ namespace Accard\Bundle\CoreBundle\State;
 
 use Accard\Bundle\CoreBundle\AccardState;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
+use Accard\Bundle\CoreBundle\Exception\ObjectPrototypeNotFoundException;
 
 /**
  * Accard state object representation.
@@ -144,18 +145,27 @@ class ObjectState implements ObjectStateInterface
     }
 
     /**
+     * Test for presence of prototype state.
+     *
+     * @param string $prototypeName
+     * @return boolean
+     */
+    public function hasPrototype($prototypeName)
+    {
+        return isset($this->prototypes[$prototypeName]);
+    }
+
+    /**
      * Get prototype by name.
      *
-     * @throws InvalidArgumentException If prototype does not exist.
+     * @throws ObjectPrototypeNotFoundException If prototype does not exist.
      * @param string $prototypeName
      * @return ObjectPrototypeState
      */
     public function getPrototype($prototypeName)
     {
-        if (!isset($this->prototypes[$prototypeName])) {
-            throw new \InvalidArgumentException(
-                sprintf('The prototype "%s" is not part of the %s object.', $prototypeName, $this->name)
-            );
+        if (!$this->hasPrototype($prototypeName)) {
+            throw new ObjectPrototypeNotFoundException($this->name, $prototypeName);
         }
 
         return $this->prototypes[$prototypeName];
@@ -207,6 +217,17 @@ class ObjectState implements ObjectStateInterface
     }
 
     /**
+     * Test for presence of field by name.
+     *
+     * @param string $fieldName
+     * @return boolean
+     */
+    public function hasField($fieldName)
+    {
+        return isset($this->fields[$fieldName]);
+    }
+
+    /**
      * Get field by name.
      *
      * @throws InvalidArgumentException If field does not exist.
@@ -215,7 +236,7 @@ class ObjectState implements ObjectStateInterface
      */
     public function getField($fieldName)
     {
-        if (!isset($this->fields[$fieldName])) {
+        if (!$this->hasField($fieldName)) {
             throw new \InvalidArgumentException(
                 sprintf('The field "%s" is not part of the %s object.', $fieldName, $this->name)
             );

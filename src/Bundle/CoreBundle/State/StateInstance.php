@@ -12,6 +12,8 @@ namespace Accard\Bundle\CoreBundle\State;
 
 use JsonSerializable;
 use Accard\Bundle\CoreBundle\AccardState;
+use Accard\Bundle\CoreBundle\Exception\DuplicateObjectException;
+use Accard\Bundle\CoreBundle\Exception\ObjectNotFoundException;
 
 /**
  * State instance.
@@ -117,7 +119,7 @@ class StateInstance implements JsonSerializable
         }
 
         if ($this->hasObject($name)) {
-            throw new \InvalidArgumentException(sprintf('Can not overwrite state object with name "%s".', $name));
+            throw new DuplicateObjectException($name);
         }
 
         $this->objects[$name] = $object;
@@ -191,7 +193,7 @@ class StateInstance implements JsonSerializable
     private function assertObjectExists($name)
     {
         if (!$this->hasObject($name)) {
-            throw new \InvalidArgumentException(sprintf('No state object named "%s" has been added to state.', $name));
+            throw new ObjectNotFoundException($name);
         }
     }
 }

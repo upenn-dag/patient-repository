@@ -1,0 +1,35 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+Accard\Bundle\OutcomesBundle\Outcomes\Configuration:
+    exclusion_policy: ALL
+    xml_root_name: config
+    properties:
+        target:
+            expose: true
+            type: string
+            serialized_name: target
+            since_version: 1.0
+            xml_attribute: true
+        targetPrototype:
+            expose: true
+            type: string
+            serialized_name: target-prototype
+            since_version: 1.0
+            xml_attribute: true
+        fields:
+            expose: true
+            type: array<string, Accard\Bundle\OutcomesBundle\Outcomes\FilterConfigurationCollection>
+            serialized_name: fields
+            since_version: 1.0
+        translations:
+            expose: true
+            type: array<string, string>
+            serialized_name: translations
+            since_version: 1.0
+            xml_list:
+                entry_name: translation
