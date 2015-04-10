@@ -44,8 +44,6 @@ abstract class Kernel extends BaseKernel
             new \Accard\Bundle\ActivityBundle\AccardActivityBundle(),
             new \Accard\Bundle\TemplateBundle\AccardTemplateBundle(),
             new \Accard\Bundle\WebBundle\AccardWebBundle(),
-            new \Accard\Bundle\CPDBundle\AccardCPDBundle(),
-            new \Accard\Bundle\HMTBBundle\AccardHMTBBundle(),
             new \Accard\Bundle\OutcomesBundle\AccardOutcomesBundle(),
 
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -57,7 +55,6 @@ abstract class Kernel extends BaseKernel
             new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-
             new \Lexik\Bundle\TranslationBundle\LexikTranslationBundle(),
             new \FOS\RestBundle\FOSRestBundle(),
             new \JMS\SerializerBundle\JMSSerializerBundle(),
