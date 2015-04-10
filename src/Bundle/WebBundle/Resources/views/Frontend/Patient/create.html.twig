@@ -28,7 +28,7 @@
         
         <form action="{{ path('accard_frontend_patient_create') }}" method="post" {{ form_enctype(form) }}>
             {{ form_widget(form._token) }}
-            {% include 'AccardWebBundle:Frontend/Patient:form.html.twig' %}
+            {% include 'Theme:Frontend/Patient:form.html.twig' %}
             <div class="row">
                 <div class="col-md-12">
                     <span class="pull-right">{{ create() }}</span>

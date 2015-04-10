@@ -39,7 +39,7 @@
 
         <form action="{{ createPath }}" method="post" {{ form_enctype(form) }}>
             {{ form_widget(form._token) }}
-            {% include ['Theme:Frontend/Regimen:#{prototype}.form-html.twig','Theme:Frontend/Regimen:form.html.twig'] %}
+            {% include ["Theme:Frontend/Regimen:#{prototype}.form-html.twig","Theme:Frontend/Regimen:form.html.twig"] %}
             <div class="row">
                 <div class="col-md-12">
                     <span class="pull-right">{{ create() }}</span>
@@ -182,7 +182,7 @@
     }(jQuery, Accard);
 </script>
 
-    {% include 'Theme:Frontend/Regimen:{#prototype}-javascript.js.twig' ignore missing %}
+    {% include "Theme:Frontend/Regimen:{#prototype}-javascript.js.twig" ignore missing %}
 
 {% endblock %}
 
@@ -190,6 +190,6 @@
     {{ parent() }}
     {{ select_patient_css() }}
 
-    {% include 'Theme:Frontend/Regimen:{#prototype}-style.css.twig' ingore missing %}
+    {% include "Theme:Frontend/Regimen:{#prototype}-style.css.twig" ignore missing %}
 
 {% endblock %}
