@@ -26,10 +26,9 @@ abstract class Kernel extends BaseKernel
     public function registerBundles()
     {
         $bundles = array(
-            new \Accard\Bundle\SettingsBundle\AccardSettingsBundle(),
             new \Accard\Bundle\ResourceBundle\AccardResourceBundle(),
+            new \Accard\Bundle\SettingsBundle\AccardSettingsBundle(),
             new \Accard\Bundle\CoreBundle\AccardCoreBundle(),
-
             new \Accard\Bundle\OptionBundle\AccardOptionBundle(),
             new \Accard\Bundle\PrototypeBundle\AccardPrototypeBundle(),
             new \Accard\Bundle\FieldBundle\AccardFieldBundle(),
@@ -53,7 +52,6 @@ abstract class Kernel extends BaseKernel
             //new \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new \Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new \Lexik\Bundle\TranslationBundle\LexikTranslationBundle(),
             new \FOS\RestBundle\FOSRestBundle(),
@@ -69,6 +67,7 @@ abstract class Kernel extends BaseKernel
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new \Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new \Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+            $bundles[] = new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle();
         }
 
         return $bundles;

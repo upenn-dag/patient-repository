@@ -34,6 +34,15 @@ class AccardResourceExtension extends AbstractResourceExtension
     public function load(array $config, ContainerBuilder $container)
     {
         $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
+
+        $this->addClassesToCompile(array(
+            'Accard\\Component\\Resource\\Model\\ResourceInterface',
+            'Accard\\Component\\Resource\\Provider\\ProviderInterface',
+            'Accard\\Component\\Resource\\Repository\\RepositoryInterface',
+            'Accard\\Component\\Resource\\Model\\UserInterface',
+            'Accard\\Component\\Resource\\Model\\User',
+
+        ));
     }
 
     /**
