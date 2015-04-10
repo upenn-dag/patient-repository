@@ -32,6 +32,16 @@ accard:
             count: Collecting %total% patient fields.
             update_gender: Update Gender Options
             update_race: Update Race Options
+        gender:
+            male: Male
+            female: Female
+            unknown: Unknown
+        race:
+            american_indian_or_alaska_native: American Indian or Alaska Native
+            asian: Asian
+            black_or_african_american: Black or African American
+            native_hawaiian_or_other_pacific_islander: Native Hawaiian or Other Pacific Islander
+            white: White
     patient_field:
         entity_name: Patient Field
         form:

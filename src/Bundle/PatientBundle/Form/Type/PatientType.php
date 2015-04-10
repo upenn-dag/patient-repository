@@ -14,10 +14,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
 use Accard\Component\Patient\Builder\PatientBuilderInterface;
+use Accard\Component\Patient\Model\Patient;
 use Accard\Bundle\PatientBundle\Form\EventListener\DefaultPatientFieldListener;
-use Accard\Bundle\OptionBundle\Form\Type\OptionValueChoiceType;
-use Accard\Component\Option\Provider\OptionProviderInterface;
 
 /**
  * Patient form type.
@@ -47,13 +47,6 @@ class PatientType extends AbstractType
      */
     protected $patientBuilder;
 
-    /**
-     * Option provider..
-     *
-     * @var OptionProviderInterface
-     */
-    protected $optionProvider;
-
 
     /**
      * Constructor.
@@ -61,17 +54,34 @@ class PatientType extends AbstractType
      * @param string $dataClass
      * @param array $validationGroups
      * @param PatientBuilderInterface $builder
-     * @param OptionProviderInterface $optionProvider
      */
     public function __construct($dataClass,
                                 array $validationGroups,
-                                PatientBuilderInterface $patientBuilder,
-                                OptionProviderInterface $optionProvider)
+                                PatientBuilderInterface $patientBuilder)
     {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
         $this->patientBuilder = $patientBuilder;
-        $this->optionProvider = $optionProvider;
+    }
+
+    private function getGenderChoiceLabels()
+    {
+        $genders = Patient::getAvailableGenders();
+        array_walk($genders, function(&$gender) {
+            $gender = sprintf('accard.patient.gender.%s', str_replace(' ', '_', $gender));
+        });
+
+        return $genders;
+    }
+
+    private function getRaceChoiceLabels()
+    {
+        $races = Patient::getAvailableRaces();
+        array_walk($races, function(&$race) {
+            $race = sprintf('accard.patient.race.%s', str_replace(' ', '_', $race));
+        });
+
+        return $races;
     }
 
     /**
@@ -79,9 +89,6 @@ class PatientType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $genderOption = $this->optionProvider->getOptionByName('gender');
-        $raceOption = $this->optionProvider->getOptionByName('race');
-
         $builder
             ->add('mrn', 'text', array(
                 'label' => 'accard.patient.form.mrn',
@@ -103,13 +110,15 @@ class PatientType extends AbstractType
                 'label' => 'accard.patient.form.date_of_death',
                 'required' => false,
             ))
-            ->add('gender', new OptionValueChoiceType($genderOption), array(
+            ->add('gender', 'choice', array(
                 'label' => 'accard.patient.form.gender',
                 'required' => false,
+                'choice_list' => new ChoiceList(Patient::getAvailableGenders(), $this->getGenderChoiceLabels()),
             ))
-            ->add('race', new OptionValueChoiceType($raceOption), array(
+            ->add('race', 'choice', array(
                 'label' => 'accard.patient.form.race',
                 'required' => false,
+                'choice_list' => new ChoiceList(Patient::getAvailableRaces(), $this->getRaceChoiceLabels()),
             ))
             ->add('fields', 'collection', array(
                 'required'     => false,

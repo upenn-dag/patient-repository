@@ -13,7 +13,6 @@ namespace Accard\Component\Patient\Model;
 use DateTime;
 use DateInterval;
 use Accard\Component\Field\Model\FieldSubjectInterface;
-use Accard\Component\Option\Model\OptionValueInterface;
 use Accard\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -23,6 +22,23 @@ use Accard\Component\Resource\Model\ResourceInterface;
  */
 interface PatientInterface extends FieldSubjectInterface, ResourceInterface
 {
+    /*
+     * Gender constants.
+     */
+    const GENDER_MASCULINE = 'male';
+    const GENDER_FEMININE = 'female';
+    const GENDER_UNKNOWN = 'unknown';
+
+    /*
+     * Race constants.
+     */
+    const RACE_AMERICAN_NATIVE = 'american indian or alaska native';
+    const RACE_ASIAN = 'asian';
+    const RACE_BLACK = 'black or african american';
+    const RACE_PACIFIC = 'native hawaiian or other pacific islander';
+    const RACE_WHITE = 'white';
+
+
     /**
      * Get id.
      *
@@ -124,28 +140,28 @@ interface PatientInterface extends FieldSubjectInterface, ResourceInterface
     /**
      * Get gender.
      *
-     * @return OptionValueInterface
+     * @return string
      */
     public function getGender();
 
     /**
      * Set gender
      *
-     * @param OptionValueInterface $gender
+     * @param string $gender
      */
-    public function setGender(OptionValueInterface $gender = null);
+    public function setGender($gender = null);
 
     /**
      * Get race.
      *
-     * @return OptionValueInterface
+     * @return string
      */
     public function getRace();
 
     /**
      * Set race.
      *
-     * @return OptionValueInterface
+     * @return string
      */
-    public function setRace(OptionValueInterface $race = null);
+    public function setRace($race = null);
 }

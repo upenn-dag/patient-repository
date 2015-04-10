@@ -24,10 +24,10 @@ Accard\Component\Patient\Model\Patient:
             - DateTime: { message: accard.patient.date_of_death.date, groups: ['accard'] }
         gender:
             - NotBlank: { message: accard.patient.gender.not_blank, groups: ['accard'] }
-            - Type: { type: Accard\Component\Option\Model\OptionValueInterface, message: accard.patient.gender.type, groups: ['accard'] }
+            - Choice: { message: accard.patient.gender.choice, callback: getAvailableGenders, groups: ['accard'] }
         race:
             - NotBlank: { message: accard.patient.race.not_blank, groups: ['accard'] }
-            - Type: { type: Accard\Component\Option\Model\OptionValueInterface, message: accard.patient.race.type, groups: ['accard'] }
+            - Choice: { message: accard.patient.race.choice, callback: getAvailableRaces, groups: ['accard'] }
         fields:
             - Valid: ~
             - All:

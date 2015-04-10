@@ -15,7 +15,6 @@ use DateInterval;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Accard\Component\Field\Model\FieldValueInterface as BaseFieldValueInterface;
-use Accard\Component\Option\Model\OptionValueInterface;
 
 /**
  * Accard patient model.
@@ -24,6 +23,36 @@ use Accard\Component\Option\Model\OptionValueInterface;
  */
 class Patient implements PatientInterface
 {
+    /**
+     * Get available genders.
+     *
+     * @return array
+     */
+    public static function getAvailableGenders()
+    {
+        return array(
+            PatientInterface::GENDER_MASCULINE,
+            PatientInterface::GENDER_FEMININE,
+            PatientInterface::GENDER_UNKNOWN
+        );
+    }
+
+    /**
+     * Get available races.
+     *
+     * @return array
+     */
+    public static function getAvailableRaces()
+    {
+        return array(
+            PatientInterface::RACE_AMERICAN_NATIVE,
+            PatientInterface::RACE_ASIAN,
+            PatientInterface::RACE_BLACK,
+            PatientInterface::RACE_PACIFIC,
+            PatientInterface::RACE_WHITE
+        );
+    }
+
     /**
      * Patient id.
      *
@@ -69,14 +98,14 @@ class Patient implements PatientInterface
     /**
      * Gender.
      *
-     * @var OptionValueInterface
+     * @var string
      */
     protected $gender;
 
     /**
      * Race.
      *
-     * @var OptionValueInterface
+     * @var string
      */
     protected $race;
 
@@ -247,7 +276,7 @@ class Patient implements PatientInterface
     /**
      * {@inheritdoc}
      */
-    public function setGender(OptionValueInterface $gender = null)
+    public function setGender($gender = null)
     {
         $this->gender = $gender;
 
@@ -265,7 +294,7 @@ class Patient implements PatientInterface
     /**
      * {@inheritdoc}
      */
-    public function setRace(OptionValueInterface $race = null)
+    public function setRace($race = null)
     {
         $this->race = $race;
 

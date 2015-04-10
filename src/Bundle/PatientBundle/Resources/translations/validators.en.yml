@@ -28,9 +28,9 @@ accard:
             valid: Date of death must be empty or greater than date of birth.
         gender:
             not_blank: Gender may not be left blank.
-            type: Gender must be a valid option value.
+            choice: Gender selected is invalid.
         race:
             not_blank: Race may not be left blank.
-            type: Race must be a valid option value.
+            choice: Race selected is invalid.
         fields:
             type: Fields must all be valid patient field values.

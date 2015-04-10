@@ -35,18 +35,12 @@ Accard\Component\Patient\Model\Patient:
         dateOfDeath:
             type: datetime
             nullable: true
-
-    manyToOne:
         gender:
-            targetEntity: Accard\Component\Option\Model\OptionValueInterface
-            joinColumn:
-                name: genderId
-                nullable: false
+            type: string
+            nullable: true
         race:
-            targetEntity: Accard\Component\Option\Model\OptionValueInterface
-            joinColumn:
-                name: raceId
-                nullable: true
+            type: string
+            nullable: true
 
     oneToMany:
         fields:

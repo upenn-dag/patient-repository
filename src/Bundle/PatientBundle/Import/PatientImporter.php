@@ -14,6 +14,7 @@ use DateTime;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Accard\Bundle\ResourceBundle\Import\ImporterInterface;
+use Accard\Component\Patient\Model\PatientInterface;
 
 /**
  * Abstract patient importer.
@@ -28,26 +29,13 @@ abstract class PatientImporter implements ImporterInterface
     public function configureResolver(OptionsResolverInterface $resolver)
     {
         $genderNormalizer = function(Options $options, $value) {
-            static $genderValues;
-
-            if (null === $genderValues) {
-                $resource = $options['option_resource']->getRepository();
-                $genderValues = $resource->findOneByName('gender')->getValues();
-            }
-
             $value = substr(trim(strtolower($value)), 0, 1);
 
-            if (empty($value)) {
-                $value = 'u';
+            switch ($value) {
+                switch 'm': return PatientInterface::GENDER_MASCULINE; break;
+                switch 'f': return PatientInterface::GENDER_FEMININE; break;
+                default:    return PatientInterface::GENDER_UNKNOWN;
             }
-
-            foreach ($genderValues as $genderValue) {
-                if (substr(strtolower($genderValue->getValue()), 0, 1) === $value) {
-                    return $genderValue;
-                }
-            }
-
-            return $genderValues->last();
         };
 
         $dateNormalizer = function (Options $options, $value) {
@@ -73,7 +61,7 @@ abstract class PatientImporter implements ImporterInterface
             'last_name' => 'string',
             'date_of_birth' => array('DateTime', 'string'),
             'date_of_death' => array('DateTime', 'null', 'string'),
-            'gender' => array('Accard\Component\Option\Model\OptionValueInterface', 'string'),
+            'gender' => array('string'),
             'race' => array('string', 'null'),
         ));
 
