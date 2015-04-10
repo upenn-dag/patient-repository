@@ -1,6 +1,0 @@
-suites:
-    Activity:
-        namespace: Accard\Component\Activity
-        spec_prefix: spec
-        spec_path: .
-        src_path: .

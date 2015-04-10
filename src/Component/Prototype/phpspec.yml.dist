@@ -1,6 +1,0 @@
-suites:
-    Prototype:
-        namespace: Accard\Component\Prototype
-        spec_prefix: spec
-        spec_path: .
-        src_path: .

@@ -1,6 +1,0 @@
-suites:
-    Phase:
-        namespace: Accard\Component\Phase
-        spec_prefix: spec
-        spec_path: .
-        src_path: .

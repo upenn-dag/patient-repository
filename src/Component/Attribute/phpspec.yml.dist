@@ -1,6 +1,0 @@
-suites:
-    Attribute:
-        namespace: Accard\Component\Attribute
-        spec_prefix: spec
-        spec_path: .
-        src_path: .

@@ -1,6 +1,0 @@
-suites:
-    Diagnosis:
-        namespace: Accard\Component\Diagnosis
-        spec_prefix: spec
-        spec_path: .
-        src_path: .

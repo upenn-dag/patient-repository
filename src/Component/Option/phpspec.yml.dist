@@ -1,6 +1,0 @@
-suites:
-    Option:
-        namespace: Accard\Component\Option
-        spec_prefix: spec
-        spec_path: .
-        src_path: .
