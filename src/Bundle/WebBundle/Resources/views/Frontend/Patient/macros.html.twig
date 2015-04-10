@@ -32,7 +32,7 @@
                         <td class="first-name">{{ patient.firstName }}</td>
                         <td class="last-name">{{ patient.lastName }}</td>
                         <td class="date-of-birth">{{ patient.dateOfBirth|localizeddate('medium', 'none') }}</td>
-                        <td class="gender text-center">{{ patient.gender }}</td>
+                        <td class="gender text-center">{{ patient.gender ? "accard.patient.gender.#{patient.gender}"|trans : "" }}</td>
                         <td class="deceased text-center text-success">{%- if patient.deceased %}{{ icon('fa fa-check') }}{% endif -%}</td>
                         <td class="actions">
                             <div class="pull-right">
