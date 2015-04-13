@@ -2,36 +2,25 @@
     "name": "accard/sample",
     "type": "library",
     "description": "Accard sample component",
-    "keywords": ["sample"],
+    "keywords": ["accard", "sample"],
     "homepage": "http://accard.med.upenn.edu",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Frank Bardon Jr.",
-            "homepage": "http://frankbardon.com"
-        },
-        {
-            "name": "Database and Applications Group",
-            "homepage": "http://dag.med.upenn.edu"
-        }
-    ],
     "require": {
-        "php": ">=5.3.3",
-        "accard/resource": "dev-develop"
+        "php": ">=5.4.0",
+        "accard/resource": "~1.0",
+        "accard/prototype": "~1.0"
     },
-    "require-dev": {},
     "autoload": {
         "psr-4": { "Accard\\Component\\Sample\\": "" }
     },
-    "autoload-dev": {
-        "psr-4": { "Accard\\Component\\Sample\\spec\\": "spec/" }
-    },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.1.0-dev"
+            "dev-master": "1.0-dev"
         }
     },
     "repositories": [
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Resource.git" }
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Resource.git" },
+        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Prototype.git" }
     ]
 }

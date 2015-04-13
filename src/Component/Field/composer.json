@@ -1,36 +1,22 @@
-
 {
     "name": "accard/field",
     "type": "library",
     "description": "Accard field component",
-    "keywords": ["field"],
+    "keywords": ["accard", "field"],
     "homepage": "http://accard.med.upenn.edu",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Frank Bardon Jr.",
-            "homepage": "http://frankbardon.com"
-        },
-        {
-            "name": "Database and Applications Group",
-            "homepage": "http://dag.med.upenn.edu"
-        }
-    ],
     "require": {
-        "php": ">=5.3.3",
-        "accard/resource": "dev-develop",
-        "accard/option": "dev-develop"
+        "php": ">=5.4.0",
+        "accard/resource": "~1.0",
+        "accard/option": "~1.0"
     },
-    "require-dev": {},
     "autoload": {
         "psr-4": { "Accard\\Component\\Field\\": "" }
     },
-    "autoload-dev": {
-        "psr-4": { "Accard\\Component\\Field\\spec\\": "spec/" }
-    },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.1.0-dev"
+            "dev-master": "1.0-dev"
         }
     },
     "repositories": [

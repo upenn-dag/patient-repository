@@ -1,8 +1,8 @@
 {
-    "name": "accard/phase",
+    "name": "accard/drug",
     "type": "library",
-    "description": "Accard phase component",
-    "keywords": ["accard", "phase"],
+    "description": "Accard drug component",
+    "keywords": ["accard", "drug"],
     "homepage": "http://accard.med.upenn.edu",
     "license": "MIT",
     "require": {
@@ -10,7 +10,7 @@
         "accard/resource": "~1.0"
     },
     "autoload": {
-        "psr-4": { "Accard\\Component\\Phase\\": "" }
+        "psr-4": { "Accard\\Component\\Drug\\": "" }
     },
     "minimum-stability": "dev",
     "extra": {

@@ -1,36 +1,22 @@
-
 {
     "name": "accard/patient",
     "type": "library",
     "description": "Accard patient component",
-    "keywords": ["patient"],
+    "keywords": ["accard", "patient"],
     "homepage": "http://accard.med.upenn.edu",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Frank Bardon Jr.",
-            "homepage": "http://frankbardon.com"
-        },
-        {
-            "name": "Database and Applications Group",
-            "homepage": "http://dag.med.upenn.edu"
-        }
-    ],
     "require": {
-        "php": ">=5.3.3",
-        "accard/resource": "dev-develop",
-        "accard/field": "dev-develop"
+        "php": ">=5.4.0",
+        "accard/resource": "~1.0",
+        "accard/field": "~1.0"
     },
-    "require-dev": {},
     "autoload": {
         "psr-4": { "Accard\\Component\\Patient\\": "" }
     },
-    "autoload-dev": {
-        "psr-4": { "Accard\\Component\\Patient\\spec\\": "spec/" }
-    },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.1.0-dev"
+            "dev-master": "1.0-dev"
         }
     },
     "repositories": [

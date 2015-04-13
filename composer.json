@@ -3,12 +3,26 @@
     "license": "MIT",
     "type": "library",
     "description": "Accard Patient Repository",
+    "authors": [
+        {
+            "name": "Frank Bardon Jr.",
+            "homepage": "http://frankbardon.me"
+        },
+        {
+            "name": "Database and Applications Group",
+            "homepage": "http://dag.med.upenn.edu"
+        }
+    ],
     "autoload": {
-        "psr-4": { "Accard\\": "src/" }
+        "psr-4": {
+            "Accard\\Bridge\\Twig": "src/Bridge/Twig/",
+            "Accard\\Bundle\\": "src/Bundle/",
+            "Accard\\Component\\": "src/Component/"
+        }
     },
     "require": {
-        "php":                                   ">=5.3.3",
-        "symfony/symfony":                       "2.6.*",
+        "php":                                   ">=5.4.0",
+        "symfony/symfony":                       "~2.7",
         "symfony/assetic-bundle":                "~2.6",
         "symfony/monolog-bundle":                "~2.7",
         "sensio/distribution-bundle":            "~3.0",
@@ -26,5 +40,15 @@
         "lexik/translation-bundle":              "~2.1",
         "gedmo/doctrine-extensions":             "~2.4",
         "friendsofsymfony/elastica-bundle":      "~3.1"
+    },
+    "replace": {
+        "accard/resource": "self.version",
+        "accard/patient": "self.version"
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
     }
 }

@@ -2,33 +2,20 @@
     "name": "accard/option",
     "type": "library",
     "description": "Accard option component",
-    "keywords": ["option"],
+    "keywords": ["accard", "option"],
     "homepage": "http://accard.med.upenn.edu",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Frank Bardon Jr.",
-            "homepage": "http://frankbardon.com"
-        },
-        {
-            "name": "Database and Applications Group",
-            "homepage": "http://dag.med.upenn.edu"
-        }
-    ],
     "require": {
-        "php": ">=5.3.3",
-        "accard/resource": "dev-develop"
+        "php": ">=5.4.0",
+        "accard/resource": "~1.0"
     },
-    "require-dev": {},
     "autoload": {
         "psr-4": { "Accard\\Component\\Option\\": "" }
     },
-    "autoload-dev": {
-        "psr-4": { "Accard\\Component\\Option\\spec\\": "spec/" }
-    },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.1.0-dev"
+            "dev-master": "1.0-dev"
         }
     },
     "repositories": [
