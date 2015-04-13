@@ -3,14 +3,16 @@
 function accard-subtree-executor {
 
     executor="\
-        git subtree split --prefix=src/Component/${1} --branch=${1}-split && \
-        git checkout ${1}-split && \
-        git filter-branch --tag-name-filter cat --prune-empty HEAD && \
-        git remote add -f ${1} git@gitlab.med.upenn.edu:prototype/${1}.git && \
-        git push ${1} ${1}-split:master && \
-        git remote rm ${1} && \
-        git checkout develop && \
-        git branch -D ${1}-split"
+        {
+            git subtree split --prefix=src/Component/${1} --branch=${1}-split && \
+            git checkout ${1}-split && \
+            git filter-branch --tag-name-filter cat --prune-empty HEAD && \
+            git remote add -f ${1} git@gitlab.med.upenn.edu:prototype/${1}.git && \
+            git push ${1} ${1}-split:master && \
+            git remote rm ${1} && \
+            git checkout develop && \
+            git branch -D ${1}-split \
+        } &> /dev/null"
 
     echo "  Starting subtree split of $1"
 
@@ -56,3 +58,5 @@ function accard-subtree {
         sleep 1 # Added for coherence of output
     done
 }
+
+accard-subtree
