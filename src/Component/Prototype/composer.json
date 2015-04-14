@@ -7,8 +7,8 @@
     "license": "MIT",
     "require": {
         "php": ">=5.4.0",
-        "accard/resource": "~1.0",
-        "accard/field": "~1.0"
+        "accard/resource": "~0.5",
+        "accard/field": "~0.5"
     },
     "autoload": {
         "psr-4": { "Accard\\Component\\Prototype\\": "" }
@@ -16,7 +16,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "0.5-dev"
         }
     },
     "repositories": [
