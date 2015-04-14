@@ -36,3 +36,44 @@ do
     git subsplit publish "src/Bridge/${bridge}:git@gitlab.med.upenn.edu:prototype/${bridge}.git" --heads="master"
     sleep 1 # Added for coherence of output
 done
+
+## This is the listing of currently running splits.
+
+#  Activity
+#  Attribute
+#  Behavior
+#  Core
+#  Diagnosis
+#  Drug
+#  Field
+#  Option
+#  Patient
+#  Phase
+#  Prototype
+#  Regimen
+#  Resource
+#  Sample#  
+
+#  ActivityBundle
+#  AttributeBundle
+#  BehaviorBundle
+#  CPDBundle
+#  CoreBundle
+#  DiagnosisBundle
+#  DrugBundle
+#  FieldBundle
+#  HMTBBundle
+#  OptionBundle
+#  OutcomesBundle
+#  PDSBundle
+#  PatientBundle
+#  PhaseBundle
+#  PrototypeBundle
+#  RegimenBundle
+#  ResourceBundle
+#  SampleBundle
+#  SettingsBundle
+#  TemplateBundle
+#  WebBundle#  
+
+#  Twig
