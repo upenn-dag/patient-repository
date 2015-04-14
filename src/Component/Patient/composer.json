@@ -16,11 +16,10 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.0.x-dev"
         }
     },
     "repositories": [
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Resource.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Field.git" }
+        { "type": "composer", "url": "http://accard-dev.med.upenn.edu/satis" }
     ]
 }

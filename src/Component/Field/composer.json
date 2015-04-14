@@ -7,8 +7,8 @@
     "license": "MIT",
     "require": {
         "php": ">=5.4.0",
-        "accard/resource": "~0.5",
-        "accard/option": "~0.5"
+        "accard/resource": "~1.0",
+        "accard/option": "~1.0"
     },
     "autoload": {
         "psr-4": { "Accard\\Component\\Field\\": "" }
@@ -16,11 +16,10 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "0.5-dev"
+            "dev-master": "1.0.x-dev"
         }
     },
     "repositories": [
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Option.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Resource.git" }
+        { "type": "composer", "url": "http://accard-dev.med.upenn.edu/satis" }
     ]
 }

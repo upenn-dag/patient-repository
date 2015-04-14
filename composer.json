@@ -42,13 +42,25 @@
         "friendsofsymfony/elastica-bundle":      "~3.1"
     },
     "replace": {
+        "accard/activity": "self.version",
+        "accard/attribute": "self.version",
+        "accard/behavior": "self.version",
+        "accard/core": "self.version",
+        "accard/diagnosis": "self.version",
+        "accard/drug": "self.version",
+        "accard/field": "self.version",
+        "accard/option": "self.version",
+        "accard/patient": "self.version",
+        "accard/phase": "self.version",
+        "accard/prototype": "self.version",
+        "accard/regimen": "self.version",
         "accard/resource": "self.version",
-        "accard/patient": "self.version"
+        "accard/sample": "self.version"
     },
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.0.x-dev"
         }
     }
 }
