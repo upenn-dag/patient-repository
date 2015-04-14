@@ -2,50 +2,20 @@
     "name": "accard/core",
     "type": "library",
     "description": "Accard core component",
-    "keywords": ["core"],
+    "keywords": ["accard", "core"],
     "homepage": "http://accard.med.upenn.edu",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Frank Bardon Jr.",
-            "homepage": "http://frankbardon.com"
-        },
-        {
-            "name": "Database and Applications Group",
-            "homepage": "http://dag.med.upenn.edu"
-        }
-    ],
     "require": {
-        "php": ">=5.3.3",
-        "accard/activity": "dev-develop",
-        "accard/attribute": "dev-develop",
-        "accard/behavior": "dev-develop",
-        "accard/diagnosis": "dev-develop",
-        "accard/field": "dev/develop",
-        "accard/patient": "dev-develop",
-        "accard/phase": "dev-develop",
-        "accard/regimen": "dev-develop",
-        "accard/resource": "dev-develop",
-        "accard/sample": "dev-develop"
+        "php": ">=5.4.0",
+        "accard/resource": "~1.0"
     },
-    "require-dev": {},
     "autoload": {
         "psr-4": { "Accard\\Component\\Core\\": "" }
     },
-    "autoload-dev": {
-        "psr-4": { "Accard\\Component\\Core\\spec\\": "spec/" }
-    },
-    "repositories": [
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Activity.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Attribute.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Behavior.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Diagnosis.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Field.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Option.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Patient.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Phase.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Regimen.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Resource.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Sample.git" }
-    ]
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
 }
