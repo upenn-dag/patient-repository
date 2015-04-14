@@ -1,62 +1,38 @@
 #!/bin/bash
 
-function accard-subtree-executor {
+# Ensure git subsplit is installed.
+if [ ! type "git subsplit" > /dev/null ]; then
 
-    executor="\
-        {
-            git subtree split --prefix=src/Component/${1} --branch=${1}-split && \
-            git checkout ${1}-split && \
-            git filter-branch --tag-name-filter cat --prune-empty HEAD && \
-            git remote add -f ${1} git@gitlab.med.upenn.edu:prototype/${1}.git && \
-            git push ${1} ${1}-split:master && \
-            git remote rm ${1} && \
-            git checkout develop && \
-            git branch -D ${1}-split \
-        } &> /dev/null"
-
-    echo "  Starting subtree split of $1"
-
-    if eval "$executor"; then
-        echo "  Success!"
-    else
-        echo "  Failure!"
-    fi
-}
-
-function accard-subtree-marker {
+    echo "To run this command, you must first install git subsplit."
+    echo "Visit: https://github.com/dflydev/git-subsplit"
     exit 1
-}
 
-function accard-subtree {
+fi
 
-    ## Define all entities on which we work.
-    components=("Activity") # "Attribute" "Behavior" "Core" "Diagnosis" "Drug" "Field" "Option" "Patient" "Phase" "Prototype" "Regimen" "Resource" "Sample")
-    bundles=() #("ActivityBundle" "AttributeBundle" "BehaviorBundle" "CPDBundle" "CoreBundle" "DiagnosisBundle" "DrugBundle" "FieldBundle" "HMTBBundle" "OptionBundle" "OutcomesBundle" "PDSBundle" "PatientBundle" "PhaseBundle" "PrototypeBundle" "RegimenBundle" "ResourceBundle" "SampleBundle" "SettingsBundle" "TemplateBundle" "WebBundle")
-    bridges=() #("Twig")
+components=("Activity" "Attribute" "Behavior" "Core" "Diagnosis" "Drug" "Field" "Option" "Patient" "Phase" "Prototype" "Regimen" "Resource" "Sample")
+bundles=("ActivityBundle" "AttributeBundle" "BehaviorBundle" "CPDBundle" "CoreBundle" "DiagnosisBundle" "DrugBundle" "FieldBundle" "HMTBBundle" "OptionBundle" "OutcomesBundle" "PDSBundle" "PatientBundle" "PhaseBundle" "PrototypeBundle" "RegimenBundle" "ResourceBundle" "SampleBundle" "SettingsBundle" "TemplateBundle" "WebBundle")
+bridges=("Twig")
 
-    ## Let's do the components first
-    echo "Starting subtree split of components"
-    for component in "${components[@]}"
-    do
-        accard-subtree-executor $component
-        sleep 1 # Added for coherence of output
-    done
+git subsplit init git@gitlab.med.upenn.edu:prototype/PatientRepository.git
+git subsplit update
 
-    ## Next the bundles
-    echo "Starting subtree split of bundles"
-    for bundle in "${bundles[@]}"
-    do
-        accard-subtree-executor $bundle
-        sleep 1 # Added for coherence of output
-    done
+for component in "${components[@]}"
+do
+    echo "Splitting ${component} component"
+    git subsplit publish "src/Component/${component}:git@gitlab.med.upenn.edu:prototype/${component}.git" --heads="master"
+    sleep 1 # Added for coherence of output
+done
 
-    ## Finally the bridges
-    echo "Starting subtree split of bridges"
-    for bridge in "${bridges[@]}"
-    do
-        accard-subtree-executor $bundle
-        sleep 1 # Added for coherence of output
-    done
-}
+for bundle in "${bundles[@]}"
+do
+    echo "Splitting ${bundle} bundle"
+    git subsplit publish "src/Bundle/${bundle}:git@gitlab.med.upenn.edu:prototype/${bundle}.git" --heads="master"
+    sleep 1 # Added for coherence of output
+done
 
-accard-subtree
+for bridge in "${bridges[@]}"
+do
+    echo "Splitting ${bridge}"
+    git subsplit publish "src/Bridge/${bridge}:git@gitlab.med.upenn.edu:prototype/${bridge}.git" --heads="master"
+    sleep 1 # Added for coherence of output
+done
