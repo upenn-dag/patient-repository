@@ -53,11 +53,4 @@ class FieldTypes
     {
         return array_keys(static::getChoices());
     }
-
-    /**
-     * Disabled constructor.
-     */
-    private function __construct()
-    {
-    }
 }

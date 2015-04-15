@@ -139,26 +139,32 @@ class FieldValue implements FieldValueInterface
      */
     public function getValue()
     {
+        $this->assertFieldIsSet();
+
         if ($this->field && FieldTypes::CHECKBOX === $this->field->getType()) {
             return (boolean) $this->numberValue;
         }
 
+        $value = null;
+
         switch ($this->field->getType()) {
             case FieldTypes::NUMBER:
             case FieldTypes::PERCENTAGE:
-                return $this->numberValue;
+                $value = $this->numberValue;
                 break;
             case FieldTypes::CHOICE:
-                return $this->optionValue;
+                $value = $this->optionValue;
                 break;
             case FieldTypes::TEXT:
-                return $this->stringValue;
+                $value = $this->stringValue;
                 break;
             case FieldTypes::DATE:
             case FieldTypes::DATETIME:
-                return $this->dateValue;
+                $value = $this->dateValue;
                 break;
         }
+
+        return $value;
     }
 
     /**
@@ -166,6 +172,8 @@ class FieldValue implements FieldValueInterface
      */
     public function setValue($value)
     {
+        $this->assertFieldIsSet();
+
         switch ($this->field->getType()) {
             case FieldTypes::CHECKBOX:
             case FieldTypes::NUMBER:
@@ -184,7 +192,7 @@ class FieldValue implements FieldValueInterface
                 break;
             case null:
             default:
-                throw new \RuntimeException('Type must be set');
+                throw new \RuntimeException('Field type has not been set.');
         }
 
         return $this;
@@ -351,6 +359,6 @@ class FieldValue implements FieldValueInterface
      */
     public function __toString()
     {
-        return $this->value;
+        return (string) $this->getValue();
     }
 }
