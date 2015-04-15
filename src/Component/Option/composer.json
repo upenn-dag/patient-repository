@@ -9,6 +9,10 @@
         "php": ">=5.4.0",
         "accard/resource": "~1.0"
     },
+    "require-dev": {
+        "codeception/codeception": "dev-master",
+        "codeception/specify": "dev-master"
+    },
     "autoload": {
         "psr-4": { "Accard\\Component\\Option\\": "" }
     },
