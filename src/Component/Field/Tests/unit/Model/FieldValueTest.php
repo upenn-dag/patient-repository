@@ -14,7 +14,6 @@ use DateTime;
 use Mockery;
 use Accard\Component\Field\Model\FieldTypes;
 use Accard\Component\Field\Model\FieldValue;
-use Accard\Component\Field\Model\FieldValueInterface;
 
 /**
  * Field value model tests.

@@ -66,7 +66,7 @@ class Field implements FieldInterface
 
     /**
      * Flag to indicate values can be added inline for this field
-     * 
+     *
      * @var boolean
      */
     protected $addable = false;
@@ -151,7 +151,7 @@ class Field implements FieldInterface
     /**
      * {@inheritdoc}
      */
-    public function setOption(OptionInterface $option)
+    public function setOption(OptionInterface $option = null)
     {
         $this->option = $option;
 
@@ -222,6 +222,6 @@ class Field implements FieldInterface
      */
     public function __toString()
     {
-        return $this->name;
+        return (string) $this->getName();
     }
 }

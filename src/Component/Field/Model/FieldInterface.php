@@ -75,10 +75,10 @@ interface FieldInterface extends ResourceInterface
     /**
      * Set choice option.
      *
-     * @param OptionInterface $option
+     * @param OptionInterface|null $option
      * @return FieldInterface
      */
-    public function setOption(OptionInterface $option);
+    public function setOption(OptionInterface $option = null);
 
     /**
      * Test if multiple options are allowed.
