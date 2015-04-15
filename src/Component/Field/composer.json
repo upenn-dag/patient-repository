@@ -12,7 +12,7 @@
     },
     "require-dev": {
         "codeception/codeception": "dev-master",
-        "codeception/specify": "dev-master"
+        "codeception/mockery-module": "dev-master"
     },
     "autoload": {
         "psr-4": { "Accard\\Component\\Field\\": "" }
