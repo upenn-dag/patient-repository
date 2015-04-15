@@ -10,6 +10,10 @@
         "accard/resource": "~1.0",
         "accard/field": "~1.0"
     },
+    "require-dev": {
+        "codeception/codeception": "dev-master",
+        "codeception/specify": "dev-master"
+    },
     "autoload": {
         "psr-4": { "Accard\\Component\\Prototype\\": "" }
     },
