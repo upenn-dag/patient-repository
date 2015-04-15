@@ -158,6 +158,6 @@ class Option implements OptionInterface
      */
     public function __toString()
     {
-        return $this->name;
+        return (string) $this->name;
     }
 }
