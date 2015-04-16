@@ -1,1 +1,6 @@
-/.subsplit/*
+vendor/
+bin/
+.subsplit/
+
+composer.phar
+composer.lock

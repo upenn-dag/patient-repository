@@ -41,6 +41,10 @@
         "gedmo/doctrine-extensions":             "~2.4",
         "friendsofsymfony/elastica-bundle":      "~3.1"
     },
+    "require-dev": {
+        "codeception/codeception": "dev-master",
+        "codeception/mockery-module": "dev-master"
+    },
     "replace": {
         "accard/activity": "self.version",
         "accard/attribute": "self.version",
@@ -62,5 +66,8 @@
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         }
+    },
+    "config": {
+        "bin-dir": "bin"
     }
 }
