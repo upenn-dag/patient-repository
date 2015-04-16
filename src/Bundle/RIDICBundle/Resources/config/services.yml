@@ -1,0 +1,44 @@
+parameters:
+    accard.import.manager.ridic.class: Accard\Bundle\RIDICBundle\Import\Manager
+    accard.import.source.ridic.class: Accard\Bundle\RIDICBundle\Import\RIDICSource
+    accard.import.source.local_ridic.class: Accard\Bundle\RIDICBundle\Import\LocalSource
+    accard.import.importer.ridic.class: Accard\Bundle\RIDICBundle\Import\RIDICImporter
+    accard.import.converter.ridic.class: Accard\Bundle\RIDICBundle\Import\Converter
+
+services:
+    accard.connection.ridic:
+        alias: doctrine.dbal.accard_connection
+
+
+    accard.import.importer.ridic:
+        class: "%accard.import.importer.ridic.class%"
+        arguments:
+            - @accard.provider.import_patient
+            - @accard.import.source.ridic
+            - @accard.import.source.local_ridic
+        tags: [{ name: accard.importer, importer: ridic_doses }]
+
+    accard.import.manager.ridic:
+        class: "%accard.import.manager.ridic.class%"
+        arguments:
+            - @accard.import.initializer.default
+            - @accard.import.converter.ridic
+            - @accard.import.persister.default
+        tags: [{ name: accard.manager, manager: ridic_doses }]
+
+    accard.import.source.ridic:
+        class: "%accard.import.source.ridic.class%"
+        arguments:
+            - @accard.connection.ridic
+
+    accard.import.converter.ridic:
+        class: %accard.import.converter.ridic.class%
+        arguments:
+            - @accard.provider.activity_prototype
+
+
+    accard.import.source.local_ridic:
+        class: %accard.import.source.local_ridic.class%
+        arguments:
+            - @accard.provider.activity_prototype
+            - @accard.repository.activity

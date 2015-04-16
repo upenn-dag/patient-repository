@@ -80,7 +80,6 @@ class ImportEvent extends Event
                                 $import = null)
     {
         if (!$subject->isSubject()) {
-            die(var_dump($subject));
             throw new ResourceNotSubjectException($subject);
         }
 
