@@ -9,6 +9,10 @@
         "php": ">=5.4.0",
         "accard/resource": "~1.0"
     },
+    "require-dev": {
+        "codeception/codeception": "dev-master",
+        "codeception/mockery-module": "dev-master"
+    },
     "autoload": {
         "psr-4": { "Accard\\Component\\Drug\\": "" }
     },
@@ -17,6 +21,9 @@
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         }
+    },
+    "config": {
+        "bin-dir": "bin"
     },
     "repositories": [
         { "type": "composer", "url": "http://accard-dev.med.upenn.edu/satis" }
