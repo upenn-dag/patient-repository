@@ -18,7 +18,7 @@ use Accard\Component\Field\Exception\FieldNotFoundException;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class FileNotFoundExceptionTest extends \Codeception\TestCase\Test
+class FieldNotFoundExceptionTest extends \Codeception\TestCase\Test
 {
     public function testExceptionMessageContainsFieldNameIfString()
     {
