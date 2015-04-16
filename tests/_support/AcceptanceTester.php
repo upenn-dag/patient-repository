@@ -1,5 +1,5 @@
 <?php
-namespace AccardTest\Component\Prototype;
+
 
 /**
  * Inherited Methods
@@ -16,9 +16,9 @@ namespace AccardTest\Component\Prototype;
  *
  * @SuppressWarnings(PHPMD)
 */
-class UnitTester extends \Codeception\Actor
+class AcceptanceTester extends \Codeception\Actor
 {
-    use _generated\UnitTesterActions;
+    use _generated\AcceptanceTesterActions;
 
    /**
     * Define custom actions here

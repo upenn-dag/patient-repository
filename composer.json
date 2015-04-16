@@ -15,7 +15,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Accard\\Bridge\\Twig": "src/Bridge/Twig/",
+            "Accard\\Bridge\\Twig\\": "src/Bridge/Twig/",
             "Accard\\Bundle\\": "src/Bundle/",
             "Accard\\Component\\": "src/Component/"
         }
