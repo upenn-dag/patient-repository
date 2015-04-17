@@ -1,4 +1,4 @@
-namespace: AccardTest\Component\Drug\
+namespace: AccardTest\Component\Drug
 actor: Tester
 paths:
     tests: Tests

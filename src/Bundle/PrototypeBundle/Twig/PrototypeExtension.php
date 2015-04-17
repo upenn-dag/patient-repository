@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Accard prototype Twig extension.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
- * @author Dylan Pierce <dylan@booksmart.it>
+ * @author Dylan Pierce <piercedy@upenn.edu>
  */
 class PrototypeExtension extends Twig_Extension implements ContainerAwareInterface
 {

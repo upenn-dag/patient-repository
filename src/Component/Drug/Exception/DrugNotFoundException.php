@@ -14,7 +14,7 @@ use RuntimeException;
 
 /**
  * Drug not found exception.
- *
+ *  
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
 class DrugNotFoundException extends RuntimeException implements DrugException

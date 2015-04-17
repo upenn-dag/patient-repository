@@ -233,7 +233,7 @@ class Drug implements DrugInterface
      */
     public function __toString()
     {
-        $str = sprintf('Drug #%d ', $this->id);
+        $str = sprintf('Drug #%s ', $this->name);
 
         return $str.($this->isGeneric() ? '(generic)' : '(brand)');
     }
