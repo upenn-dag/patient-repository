@@ -271,4 +271,12 @@ class Prototype implements PrototypeInterface
             }
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return (string) $this->getName();
+    }
 }
