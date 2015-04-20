@@ -189,6 +189,6 @@ class Regimen implements RegimenInterface
      */
     public function __toString()
     {
-        return sprintf('Regimen #%d', $this->id);
+        return sprintf("Regimen #%s", $this->id);
     }
 }

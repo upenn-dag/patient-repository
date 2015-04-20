@@ -8,7 +8,13 @@
     "require": {
         "php": ">=5.4.0",
         "accard/resource": "~1.0",
-        "accard/prototype": "~1.0"
+        "accard/prototype": "~1.0",
+        "accard/activity": "~1.0",
+        "accard/drug": "~1.0"
+    },
+    "require-dev": {
+        "codeception/codeception": "dev-master",
+        "codeception/mockery-module": "dev-master"
     },
     "autoload": {
         "psr-4": { "Accard\\Component\\Regimen\\": "" }
