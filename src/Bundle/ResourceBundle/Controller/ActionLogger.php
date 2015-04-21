@@ -49,7 +49,9 @@ class ActionLogger
      *
      * @param Configuration $config
      */
-    public function __construct(Configuration $config, UserInterface $user, ObjectManager $manager)
+    public function __construct(Configuration $config,
+                                UserInterface $user,
+                                ObjectManager $manager)
     {
         $this->config = $config;
         $this->user = $user;
@@ -62,7 +64,8 @@ class ActionLogger
     public function indexLog()
     {
         $log = $this->prepareLog('index');
-        $this->persistLog($log);
+
+        return $this->persistLog($log);
     }
 
     /**
@@ -71,7 +74,8 @@ class ActionLogger
     public function showLog()
     {
         $log = $this->prepareLog('show');
-        $this->persistLog($log);
+
+        return $this->persistLog($log);
     }
 
     /**
@@ -80,7 +84,8 @@ class ActionLogger
     public function newLog()
     {
         $log = $this->prepareLog('new');
-        $this->persistLog($log);
+
+        return $this->persistLog($log);
     }
 
     /**
@@ -89,7 +94,8 @@ class ActionLogger
     public function createLog()
     {
         $log = $this->prepareLog('create');
-        $this->persistLog($log);
+
+        return $this->persistLog($log);
     }
 
     /**
@@ -98,7 +104,8 @@ class ActionLogger
     public function editLog()
     {
         $log = $this->prepareLog('edit');
-        $this->persistLog($log);
+
+        return $this->persistLog($log);
     }
 
     /**
@@ -107,7 +114,8 @@ class ActionLogger
     public function updateLog()
     {
         $log = $this->prepareLog('update');
-        $this->persistLog($log);
+
+        return $this->persistLog($log);
     }
 
     /**
@@ -116,7 +124,8 @@ class ActionLogger
     public function deleteLog()
     {
         $log = $this->prepareLog('delete');
-        $this->persistLog($log);
+
+        return $this->persistLog($log);
     }
 
     /**
@@ -126,12 +135,15 @@ class ActionLogger
      * functionality or database calls.
      *
      * @param LogInterface $log
+     * @return LogInterface
      */
     private function persistLog(LogInterface $log)
     {
         $this->manager->transactional(function($em) use ($log) {
             $em->persist($log);
         });
+
+        return $log;
     }
 
     /**

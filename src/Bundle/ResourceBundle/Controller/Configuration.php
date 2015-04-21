@@ -244,7 +244,7 @@ class Configuration
 
     public function isPaginated()
     {
-        return (Boolean) $this->get('paginate', true);
+        return (boolean) $this->get('paginate', true);
     }
 
     public function getPaginationMaxPerPage()
@@ -254,7 +254,7 @@ class Configuration
 
     public function isFilterable()
     {
-        return (Boolean) $this->get('filterable', false);
+        return (boolean) $this->get('filterable', false);
     }
 
     public function getCriteria($default = array())
@@ -270,7 +270,7 @@ class Configuration
 
     public function isSortable()
     {
-        return (Boolean) $this->get('sortable', false);
+        return (boolean) $this->get('sortable', false);
     }
 
     public function getSorting()

@@ -1,47 +1,38 @@
 {
     "name": "accard/resource-bundle",
     "type": "symfony-bundle",
-    "description": "Accard resource component",
+    "description": "Accard resource bundle",
     "keywords": ["resource", "storage", "persistence", "accard"],
     "homepage": "http://accard.med.upenn.edu",
-    "minimum-stability": "dev",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Frank Bardon Jr.",
-            "homepage": "http://frankbardon.com"
-        },
-        {
-            "name": "Database and Applications Group",
-            "homepage": "http://dag.med.upenn.edu"
-        }
-    ],
     "require": {
         "php": ">=5.3.3",
-
-        "symfony/framework-bundle":        "~2.3",
-        "symfony/twig-bundle":             "~2.3",
-        "symfony/expression-language":     "~2.4",
-        "symfony/form":                    "~2.3",
-        "accard/resource":                 "dev-develop",
-        "friendsofsymfony/rest-bundle":    "~1.0",
-        "jms/serializer-bundle":           "0.12.*",
-        "white-october/pagerfanta-bundle": "1.0.*",
-        "doctrine/doctrine-bundle":        "~1.3@dev"
+        "accard/resource":                  "~1.0",
+        "symfony/framework-bundle":         "~2.7|~3.0",
+        "symfony/property-access":          "~2.7|~3.0",
+        "symfony/form":                     "~2.7|~3.0",
+        "symfony/expression-language":      "~2.7|~3.0",
+        "friendsofsymfony/rest-bundle":     "~1.5",
+        "white-october/pagerfanta-bundle":  "~1.0",
+        "friendsofsymfony/elastica-bundle": "~3.1"
     },
     "require-dev": {
-        "twig/twig":            "~1.11",
-        "doctrine/orm":         "~2.3"
-    },
-    "suggest": {
-        "fsc/hateoas-bundle":   "0.3.*@dev",
-        "doctrine/orm":         "~2.3",
-        "doctrine/mongodb-odm": "1.0.*@dev"
+        "codeception/codeception":          "dev-master",
+        "codeception/mockery-module":       "dev-master"
     },
     "autoload": {
         "psr-4": { "Accard\\Bundle\\ResourceBundle\\": "" }
     },
-    "autoload-dev": {
-        "psr-4": { "Accard\\Bundle\\ResourceBundle\\spec\\": "spec/" }
-    }
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "repositories": [
+        { "type": "composer", "url": "http://accard-dev.med.upenn.edu/satis" }
+    ]
 }

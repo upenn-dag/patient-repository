@@ -1,0 +1,34 @@
+namespace: AccardTest\Bundle\ResourceBundle
+actor: Tester
+paths:
+    tests: Tests
+    log: Tests/_output
+    data: Tests/_data
+    support: Tests/_support
+    envs: Tests/_envs
+settings:
+    bootstrap: _bootstrap.php
+    colors: true
+    memory_limit: 1024M
+coverage:
+    enabled: true
+    include:
+        - Command/*
+        - Controller/*
+        - DependencyInjection/*
+        - Doctrine/*
+        - Event/*
+        - EventListener/*
+        - Exception/*
+        - ExpressionLanguage/*
+        - Form/*
+        - Import/*
+        - Repository/*
+        - Search/*
+        - Serializer/*
+        - Twig/*
+        - AccardResourceBundle.php
+    exclude:
+        - bin/*
+        - tests/*
+        - vendor/*
