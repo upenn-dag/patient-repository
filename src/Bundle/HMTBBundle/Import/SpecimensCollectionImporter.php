@@ -81,7 +81,7 @@ class SpecimensCollectionImporter extends SampleImporter
     {
         $records = array();
 
-        if ($this->criteria->passes()) {
+        if (!$this->criteria->passes()) {
             return $records;
         }
 

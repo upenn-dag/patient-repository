@@ -40,18 +40,18 @@ class Converter implements ConverterInterface
         $repo = $event->getTarget()->getRepository();
         $prototype = $this->prototypeProvider->getPrototypeByName('specimen-collection');
 
-        $fields['sample-type'] = $prototype->getFieldByName('specimen-collection-sample-type');
-        $fields['restricted'] = $prototype->getFieldByName('specimen-collection-restricted');
-        $fields['subtype'] = $prototype->getFieldByName('specimen-collection-subtype');
-        $fields['total-sum-vials-remaining'] = $prototype->getFieldByName('specimen-collection-total-sum-vials-remaining');
-        $fields['blasts'] = $prototype->getFieldByName('specimen-collection-blasts');
-        $fields['ct-cyle'] = $prototype->getFieldByName('specimen-collection-ct-cycle');
-        $fields['ct-study-day'] = $prototype->getFieldByName('specimen-collection-ct-study-day');
-        $fields['ct-peak-through'] = $prototype->getFieldByName('specimen-collection-ct-peak-through');
-        $fields['ct-time-post-drug'] = $prototype->getFieldByName('specimen-collection-ct-time-post-drug');
-        $fields['ct-time-post-drug-unit'] = $prototype->getFieldByName('specimen-collection-ct-time-post-drug-unit');
-        $fields['ct-treatment-relation-time'] = $prototype->getFieldByName('specimen-collection-ct-treatment-relation-time');
-        $fields['when-modified'] = $prototype->getFieldByName('specimen-collection-when-modified');
+        $fields['sample-type'] = $prototype->getFieldByName('hmtb-sample-type');
+        $fields['restricted'] = $prototype->getFieldByName('hmtb-restricted');
+        $fields['subtype'] = $prototype->getFieldByName('hmtb-subtype');
+        $fields['total-sum-vials-remaining'] = $prototype->getFieldByName('hmtb-total-sum-vials-remaining');
+        $fields['blasts'] = $prototype->getFieldByName('hmtb-blasts');
+        $fields['ct-cyle'] = $prototype->getFieldByName('hmtb-ct-cycle');
+        $fields['ct-study-day'] = $prototype->getFieldByName('hmtb-ct-study-day');
+        $fields['ct-peak-through'] = $prototype->getFieldByName('hmtb-ct-peak-through');
+        $fields['ct-time-post-drug'] = $prototype->getFieldByName('hmtb-ct-time-post-drug');
+        $fields['ct-time-post-drug-unit'] = $prototype->getFieldByName('hmtb-ct-time-post-drug-unit');
+        $fields['ct-treatment-relation-time'] = $prototype->getFieldByName('hmtb-ct-treatment-relation-time');
+        $fields['when-modified'] = $prototype->getFieldByName('hmtb-when-modified');
 
         $sources = array();
 
@@ -65,6 +65,7 @@ class Converter implements ConverterInterface
             $sample = new Sample();
             $sample->setPrototype($prototype);
             $sample->setAmount(1);
+            $sample->setPatient($record['patient']);
 
             $source->addSample($sample);
 
@@ -73,7 +74,7 @@ class Converter implements ConverterInterface
                     $fieldValue = new FieldValue;
                     $fieldValue->setField($field);
                     $fieldValue->setSample($sample);
-                    $fieldValue->setValue($record[str_replace('specimen_collection_', '', str_replace('-', '_', $field->getName()))]);
+                    $fieldValue->setValue($record[str_replace('hmtb_', '', str_replace('-', '_', $field->getName()))]);
                     $sources[$record['identifier'] . $field->getName()] = $fieldValue;
                 }
             }
