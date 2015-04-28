@@ -22,7 +22,7 @@
     },
     "require": {
         "php":                                   ">=5.4.0",
-        "symfony/symfony":                       "~2.7",
+        "symfony/symfony":                       "~2.6",
         "symfony/assetic-bundle":                "~2.6",
         "symfony/monolog-bundle":                "~2.7",
         "sensio/distribution-bundle":            "~3.0",
