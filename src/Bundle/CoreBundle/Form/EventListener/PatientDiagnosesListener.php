@@ -64,7 +64,7 @@ class PatientDiagnosesListener implements EventSubscriberInterface
     {
         $activity = $event->getData();
         $qb = $event->getForm()->get('diagnosis')->getConfig()->getOption('query_builder');
-        $qb = $qb($this->diagnosisRepository);
+        //$qb = $qb($this->diagnosisRepository);
 
         // If no patient is present, only show unassigned diagnoses.
         if (null === $activity || null === $activity->getPatient()) {

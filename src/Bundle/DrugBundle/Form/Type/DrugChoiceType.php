@@ -47,30 +47,9 @@ class DrugChoiceType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $qbNormalizer = function(Options $options, $qb)
-        {
-            // If the group is set, don't use a query builder
-            if ($options['group']) {
-                $group = $options['group'];
-                return function(EntityRepository $er) use ($group) {
-                    return $er->getQueryBuilder()
-                        ->innerJoin('drug.groups', 'g', 'WITH', 'g.id = :groupId')
-                        ->setParameter('groupId', $group->getId());
-
-                    return $qb;
-                };
-            }
-
-            if ($options['generic_only']) {
-                return function(EntityRepository $er) {
-                    return $er->getQueryBuilder()->filterByStatement('drug.generic IS NULL');
-                };
-            }
-
-            if ($options['brand_only']) {
-                return function(EntityRepository $er) {
-                    return $er->getQueryBuilder()->filterByStatement('drug.generic IS NOT NULL');
-                };
+        $choiceNormalizer = function(Options $options) {
+            if ($options["group"]) {
+                return $options['group']->getDrugs();
             }
         };
 
@@ -86,7 +65,7 @@ class DrugChoiceType extends AbstractType
                 'group' => array('null', 'Accard\Component\Drug\Model\DrugGroupInterface')
             ))
             ->setNormalizers(array(
-                'query_builder' => $qbNormalizer,
+                'choices' => $choiceNormalizer,
             ))
         ;
     }
