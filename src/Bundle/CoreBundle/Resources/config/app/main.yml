@@ -28,12 +28,6 @@ sensio_framework_extra:
     view:
         annotations: false
 
-doctrine_migrations:
-    dir_name: %kernel.root_dir%/migrations/%database_driver%
-    namespace: Application\Migrations
-    table_name: migration_versions
-    name: Accard Migrations
-
 fos_rest:
     param_fetcher_listener: true
     body_listener: true
