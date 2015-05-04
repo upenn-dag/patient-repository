@@ -163,12 +163,3 @@ class PatientType extends AbstractType
         return 'accard_patient';
     }
 }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'accard_patient';
-    }
-}
