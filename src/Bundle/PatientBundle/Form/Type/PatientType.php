@@ -14,7 +14,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
+use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Accard\Component\Patient\Builder\PatientBuilderInterface;
 use Accard\Component\Patient\Model\Patient;
 use Accard\Bundle\PatientBundle\Form\EventListener\DefaultPatientFieldListener;
@@ -64,24 +64,21 @@ class PatientType extends AbstractType
         $this->patientBuilder = $patientBuilder;
     }
 
-    private function getGenderChoiceLabels()
+    /**
+     * Preps choices for dropdowns.
+     *
+     * @param array $choices
+     * @param string $translationKey
+     * @return string
+     */
+    private function prepareChoices(array $choices, $translationKey)
     {
-        $genders = Patient::getAvailableGenders();
-        array_walk($genders, function(&$gender) {
-            $gender = sprintf('accard.patient.gender.%s', str_replace(' ', '_', $gender));
+        $labels = $choices;
+        array_walk($labels, function(&$value) use ($translationKey) {
+            $value = sprintf("accard.patient.%s.%s", $translationKey, str_replace(' ', '_', $value));
         });
 
-        return $genders;
-    }
-
-    private function getRaceChoiceLabels()
-    {
-        $races = Patient::getAvailableRaces();
-        array_walk($races, function(&$race) {
-            $race = sprintf('accard.patient.race.%s', str_replace(' ', '_', $race));
-        });
-
-        return $races;
+        return array_combine($choices, $labels);
     }
 
     /**
@@ -113,12 +110,12 @@ class PatientType extends AbstractType
             ->add('gender', 'choice', array(
                 'label' => 'accard.patient.form.gender',
                 'required' => false,
-                'choice_list' => new ChoiceList(Patient::getAvailableGenders(), $this->getGenderChoiceLabels()),
+                'choices' => $this->prepareChoices(Patient::getAvailableGenders(), 'gender'),
             ))
             ->add('race', 'choice', array(
                 'label' => 'accard.patient.form.race',
                 'required' => false,
-                'choice_list' => new ChoiceList(Patient::getAvailableRaces(), $this->getRaceChoiceLabels()),
+                'choices' => $this->prepareChoices(Patient::getAvailableRaces(), 'race'),
             ))
             ->add('fields', 'collection', array(
                 'required'     => false,
@@ -157,6 +154,15 @@ class PatientType extends AbstractType
             ))
         ;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'accard_patient';
+    }
+}
 
     /**
      * {@inheritdoc}
