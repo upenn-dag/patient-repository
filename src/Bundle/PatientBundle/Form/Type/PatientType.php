@@ -110,7 +110,7 @@ class PatientType extends AbstractType
             ->add('gender', 'choice', array(
                 'label' => 'accard.patient.form.gender',
                 'required' => false,
-                'choices' => $this->prepareChoices(Patient::getAvailableRaces(), 'gender'),
+                'choices' => $this->prepareChoices(Patient::getAvailableGenders(), 'gender'),
             ))
             ->add('race', 'choice', array(
                 'label' => 'accard.patient.form.race',
