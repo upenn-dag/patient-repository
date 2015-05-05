@@ -37,6 +37,7 @@ interface PatientInterface extends FieldSubjectInterface, ResourceInterface
     const RACE_BLACK = 'black or african american';
     const RACE_PACIFIC = 'native hawaiian or other pacific islander';
     const RACE_WHITE = 'white';
+    const RACE_UNKNOWN = 'unknown';
 
 
     /**

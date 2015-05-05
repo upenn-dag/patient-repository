@@ -96,7 +96,10 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     {
         $definition = new Definition('Accard\Bundle\ResourceBundle\Controller\Configuration');
         $definition
-            ->setFactory('accard.controller.configuration_factory', 'createConfiguration')
+            ->setFactory(array(
+                new Reference('accard.controller.configuration_factory'),
+                'createConfiguration'
+            ))
             ->setArguments(array($this->prefix, $this->resourceName, $this->templates))
             ->setPublic(false)
         ;
@@ -129,7 +132,10 @@ abstract class AbstractDatabaseDriver implements DatabaseDriverInterface
     {
         $definition = new Definition($this->getClassMetadataClassname());
         $definition
-            ->setFactory($this->getManagerServiceKey(), 'getClassMetadata')
+            ->setFactory(array(
+                new Reference($this->getManagerServiceKey()),
+                'getClassMetadata'
+            ))
             ->setArguments(array($models))
             ->setPublic(false)
         ;

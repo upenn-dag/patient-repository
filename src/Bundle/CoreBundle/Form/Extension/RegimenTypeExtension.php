@@ -107,7 +107,7 @@ class RegimenTypeExtension extends AbstractTypeExtension
                 $disableFields = true;
                 $patient = $regimen->getPatient();
             }
-        
+
             if ($regimen->getDiagnosis()) {
                 $diagnosis = $regimen->getDiagnosis();
             }
@@ -147,7 +147,10 @@ class RegimenTypeExtension extends AbstractTypeExtension
                 if ($regimen->getId()) {
                     $qb->where(
                         $qb->expr()->orX(
-                            $qb->expr()->isNull('activity.regimen'),
+                            $qb->expr()->andX(
+                                $qb->expr()->isNull('activity.regimen'),
+                                $where
+                            ),
                             $qb->expr()->andX(
                                 $qb->expr()->eq('activity.regimen', ':regimen'),
                                 $where
@@ -164,6 +167,7 @@ class RegimenTypeExtension extends AbstractTypeExtension
                         )
                     );
                 }
+
                 return $qb;
             };
 
