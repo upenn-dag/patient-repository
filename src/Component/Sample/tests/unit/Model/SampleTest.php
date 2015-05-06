@@ -28,7 +28,7 @@ class SampleTest extends \Codeception\TestCase\Test
 
     /////	TEST IMPLEMENT OF THE INTERFACE /////
     
-    public function testGetIdImplementsInterface()
+    public function testSampleImplementsInterface()
     {
 		$this->assertTrue(method_exists($this->sample,'getId'));
     }
