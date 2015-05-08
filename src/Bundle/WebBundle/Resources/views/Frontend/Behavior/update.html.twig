@@ -21,11 +21,25 @@
     <form action="{{ path('accard_frontend_behavior_update', { prototype: prototype, id: behavior.id }) }}" method="post" {{ form_enctype(form) }}>
         <input type="hidden" name="_method" value="PUT">
         {{ form_widget(form._token) }}
-        {% include ['Theme:Fronent/Behavior:{#prototype}-form.html.twig','Theme:Frontend/Behavior:form.html.twig'] %}
+        {% include ["Theme:Fronent/Behavior:#{prototype}-form.html.twig",'Theme:Frontend/Behavior:form.html.twig'] %}
         <div class="row">
             <div class="col-md-12">
                 <span class="pull-right">{{ update() }}</span>
             </div>
         </div>
     </form>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ select_patient_js('#accard_behavior_patient') }}
+
+    {% include "Theme:Frontend/Behavior:#{prototype}-javascript.js.twig" ignore missing  %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ select_patient_css() }}
+
+    {% include "Theme:Frontend/Behavior:#{prototype}-style.css.twig" ignore missing %}
 {% endblock %}
