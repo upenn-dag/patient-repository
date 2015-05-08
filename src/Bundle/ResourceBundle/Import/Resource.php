@@ -74,7 +74,7 @@ class Resource implements ResourceInterface
                                 $type,
                                 FormTypeInterface $form = null)
     {
-        if (!in_array($type, $this->getTypes())) {
+        if (!in_array($type, $this->getTypes(), true)) {
             throw new ResourceInvalidTypeException($type);
         }
 

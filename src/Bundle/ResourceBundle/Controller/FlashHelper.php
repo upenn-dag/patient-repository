@@ -74,7 +74,7 @@ class FlashHelper
                 return $translatedMessage;
             }
 
-            return $this->translateFlashMessage('accard.resource.'.$eventName, $params);
+            return $this->translateFlashMessage('accard.resource.' . $eventName, $params);
         }
 
         return $this->translateFlashMessage($eventName, $params);

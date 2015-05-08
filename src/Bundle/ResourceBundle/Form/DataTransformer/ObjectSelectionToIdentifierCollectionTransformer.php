@@ -19,22 +19,15 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 class ObjectSelectionToIdentifierCollectionTransformer implements DataTransformerInterface
 {
     /**
-     * @var object[]
-     */
-    protected $objects;
-
-    /**
      * @var boolean
      */
     protected $saveObjects;
 
     /**
-     * @param object[] $objects
      * @param boolean  $saveObjects
      */
-    public function __construct(array $objects, $saveObjects = true)
+    public function __construct($saveObjects = true)
     {
-        $this->objects = $objects;
         $this->saveObjects = $saveObjects;
     }
 
