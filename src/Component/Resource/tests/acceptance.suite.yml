@@ -9,4 +9,4 @@ modules:
     enabled:
         PhpBrowser:
             url: 'http://localhost/myapp/'
-        0: \Helper\Acceptance
+        0: \AccardTest\Component\Resource\Helper\Acceptance

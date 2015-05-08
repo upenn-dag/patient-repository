@@ -6,4 +6,4 @@
 
 class_name: FunctionalTester
 modules:
-    enabled: [Filesystem, \Helper\Functional]
+    enabled: [Filesystem, \AccardTest\Component\Resource\Helper\Functional]

@@ -26,60 +26,29 @@ class SampleTest extends \Codeception\TestCase\Test
     {
     }
 
-    /////	TEST IMPLEMENT OF THE INTERFACE /////
-    
-    public function testGetIdImplementsInterface()
+    /**
+     * All methods from interface are implemented
+     */
+    public function testClassInterfaceIsFollowed()
     {
-		$this->assertTrue(method_exists($this->sample,'getId'));
-    }
-
-    public function testGetSourceImplementsInterface()
-    {
-    	$this->assertTrue(method_exists($this->sample,'getSource'));
-    }
-
-    public function testSetSourceImplementsInterface()
-    {
-    	$this->assertTrue(method_exists($this->sample,'setSource'));
-    }
-
-    public function testGetAmountImplementsInterface()
-    {
-    	$this->assertTrue(method_exists($this->sample,'getAmount'));
-    }
-
-    public function testSetAmountImplementsInterface()
-    {
-    	$this->assertTrue(method_exists($this->sample,'setAmount'));
-    }
-
-    public function testGetDerivativesImplementsInterface()
-    {
-    	$this->assertTrue(method_exists($this->sample,'getDerivatives'));
-    }
-
-    public function testHasDerivativeImplementsInterface()
-    {
-    	$this->assertTrue(method_exists($this->sample,'hasDerivative'));
-    }
-
-    public function testHasDerivativesImplementsInterface()
-    {
-    	$this->assertTrue(method_exists($this->sample,'hasDerivatives'));
-    }
-
-    public function testAddDerivativeImplementsInterface()
-    {
-    	$this->assertTrue(method_exists($this->sample,'addDerivative'));
-    }
-
-    public function testRemoveDerivativeImplementsInterface()
-    {
-    	$this->assertTrue(method_exists($this->sample,'removeDerivative'));
+        $this->assertInstanceOf(
+            'Accard\Component\Sample\Model\SampleInterface',
+            $this->sample
+        );
     }
     
     /////	TEST CORRECT FUNCTIONALITY OF THE CLASS METHODS /////
-    
+
+    public function testSampleDerivativesAreEmptyCollectionOnClassConstruct()
+    {
+        $this->assertInstanceOf(
+            'Doctrine\Common\Collections\ArrayCollection',
+            $this->sample->getDerivatives()
+        );
+ 
+        $this->assertEquals(0, $this->sample->getDerivatives()->count());
+    }
+
     public function testGetIdReturnsNullValue()
     {
 		$this->assertNull($this->sample->getId());

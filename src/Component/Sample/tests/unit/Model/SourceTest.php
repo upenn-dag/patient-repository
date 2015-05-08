@@ -29,70 +29,26 @@ class SourceTest extends \Codeception\TestCase\Test
     {
     }	
 
-    /////	TEST IMPLEMENT OF THE INTERFACE METHODS /////
-    
-    public function testGetIdImplementsInterface()
+    /**
+     * All methods from interface are implemented
+     */
+    public function testClassInterfaceIsFollowed()
     {
-		$this->assertTrue(method_exists($this->source,'getId'));
-    }	
-
-    public function testGetSampleImplementsInterface()
-    {
-		$this->assertTrue(method_exists($this->source,'getSample'));
-    }	
-
-    public function testSetSampleImplementsInterface()
-    {
-		$this->assertTrue(method_exists($this->source,'setSample'));
+        $this->assertInstanceOf(
+            'Accard\Component\Sample\Model\SourceInterface',
+            $this->source
+        );
     }
 
-    public function testIsDerivationImplementsInterface()
+    public function testSourceDerivativesAreEmptyCollectionOnClassConstruct()
     {
-		$this->assertTrue(method_exists($this->source,'isDerivation'));
-    }
-
-    public function testGetSourceDateImplementsInterface()
-    {
-		$this->assertTrue(method_exists($this->source,'getSourceDate'));
-    }
-
-    public function testSetSourceDateImplementsInterface()
-    {
-		$this->assertTrue(method_exists($this->source,'setSourceDate'));
-    }
-
-    public function testGetAmountImplementsInterface()
-    {
-		$this->assertTrue(method_exists($this->source,'getAmount'));
-    }
-
-    public function testSetAmountImplementsInterface()
-    {
-		$this->assertTrue(method_exists($this->source,'setAmount'));
-    }
-
-    public function testGetSamplesImplementsInterface()
-    {
-		$this->assertTrue(method_exists($this->source,'getSamples'));
-    }
-
-    public function testHasSampleImplementsInterface()
-    {
-		$this->assertTrue(method_exists($this->source,'hasSample'));
-    }
-
-    public function testAddSampleImplementsInterface()
-    {
-		$this->assertTrue(method_exists($this->source,'addSample'));
-    }
-
-    public function testRemoveSampleImplementsInterface()
-    {
-		$this->assertTrue(method_exists($this->source,'removeSample'));
-    }
-    
-    /////  TEST CORRECT FUNCTIONALITY OF THE CLASS METHODS /////
-    
+        $this->assertInstanceOf(
+            'Doctrine\Common\Collections\ArrayCollection',
+            $this->source->getDerivatives()
+        );
+ 
+        $this->assertEquals(0, $this->sample->getDerivatives()->count());
+    }    
     public function testGetIdReturnsNullValue()
     {
         $this->assertNull($this->source->getId());
