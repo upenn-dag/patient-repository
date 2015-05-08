@@ -182,7 +182,7 @@
     }(jQuery, Accard);
 </script>
 
-    {% include "Theme:Frontend/Regimen:{#prototype}-javascript.js.twig" ignore missing %}
+    {% include "Theme:Frontend/Regimen:#{prototype}-javascript.js.twig" ignore missing %}
 
 {% endblock %}
 
@@ -190,6 +190,6 @@
     {{ parent() }}
     {{ select_patient_css() }}
 
-    {% include "Theme:Frontend/Regimen:{#prototype}-style.css.twig" ignore missing %}
+    {% include "Theme:Frontend/Regimen:#{prototype}-style.css.twig" ignore missing %}
 
 {% endblock %}

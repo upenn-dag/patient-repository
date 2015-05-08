@@ -9,6 +9,7 @@
  * LICENSE file that was distributed with this source code.
  */
 namespace Accard\Component\Resource\Model;
+use DateInterval;
 
 /**
  * Import model.
@@ -83,10 +84,12 @@ class Import implements ImportInterface
     /**
      * {@inheritdoc}
      */
+    
     public function isActive()
     {
         return $this->active;
     }
+    
 
     /**
      * {@inheritdoc}
@@ -167,7 +170,7 @@ class Import implements ImportInterface
     {
         return $this->criteria;
     }
-
+    
     /**
      * {@inheritdoc}
      */
