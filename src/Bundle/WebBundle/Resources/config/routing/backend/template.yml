@@ -23,3 +23,9 @@ accard_backend_template_history:
     methods: [GET]
     defaults:
         _controller: accard.controller.template:historyAction
+
+accard_backend_template_delete:
+    pattern: /delete/{name}
+    methods: [DELETE, GET]
+    defaults:
+        _controller: accard.controller.template:deleteAction
