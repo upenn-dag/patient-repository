@@ -121,7 +121,10 @@ class TemplateController extends Controller
             'form' => $form->createView(),
         ));
     }
-
+    
+    /**
+     * View the history of a file
+     */
     public function historyAction($name)
     {
         $template = $this->repository->findOneBy(array('name' => $name));
@@ -135,5 +138,19 @@ class TemplateController extends Controller
             'history' => $history,
             'name' => $name,
         ));
+    }
+
+    /**
+     * Delete a template
+     */
+    public function deleteAction($name)
+    {
+        $template = $this->repository->findOneBy(array('name' => $name));
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($template);
+        $em->flush();
+
+        return $this->redirectToRoute('accard_backend_template_index');
     }
 }
