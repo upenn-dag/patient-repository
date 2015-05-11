@@ -49,7 +49,8 @@ class Patient implements PatientInterface
             PatientInterface::RACE_ASIAN,
             PatientInterface::RACE_BLACK,
             PatientInterface::RACE_PACIFIC,
-            PatientInterface::RACE_WHITE
+            PatientInterface::RACE_WHITE,
+            PatientInterface::RACE_UNKNOWN
         );
     }
 
