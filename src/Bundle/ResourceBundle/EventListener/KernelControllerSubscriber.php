@@ -17,7 +17,7 @@ use Accard\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage;
 use Accard\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\SecurityContext;
 
 /**
  * Doctrine listener used to set the request on the configurable controllers.
@@ -47,7 +47,7 @@ class KernelControllerSubscriber implements EventSubscriberInterface
      * @param SecurityContextInterface $securityContext
      * @param ExpressionLanguage $exprLanguage
      */
-    public function __construct(Security $securityContext,
+    public function __construct(SecurityContext $securityContext,
                                 ExpressionLanguage $exprLanguage)
     {
         $this->securityContext = $securityContext;
