@@ -30,15 +30,23 @@ class RunnerTest extends \Codeception\TestCase\Test
         ;
 
         $this->runner = new Runner($this->factory, $this->registry);
+
+        $this->manager = Mockery::mock('Accard\Bundle\ResourceBundle\Import\ManagerInterface');
+
+        $this->runner->setManager($this->manager);
     }
 
     // tests
     public function testRunnerGetsImporterFromRegistry()
     {
         $subjectName = 'SUBJECT_NAME';
+        $importerName = 'IMPORTER_NAME';
 
-        $importer = Mockery::mock('Accard\Bundle\ResourceBundle\Importer\ImporterInterface')
+        $importer = Mockery::mock('Accard\Bundle\ResourceBundle\Import\ImporterInterface')
             ->shouldReceive('getSubject')->andReturn($subjectName)
+            ->shouldReceive('getName')->andReturn($importerName)
+            ->shouldReceive('configureResolver')
+            ->shouldReceive('run')
             ->getMock()
         ;
 
@@ -59,8 +67,29 @@ class RunnerTest extends \Codeception\TestCase\Test
 
         $this->registry->shouldReceive('getImporter')->andReturn($importer);
 
+        $repository = Mockery::mock()
+            ->shouldReceive('getAllFor')->with($importerName)->andReturn([])
+            ->getMock()
+        ;
+
+        $this->import->shouldReceive('getRepository')->andReturn($repository);
+
+        $this->manager
+            ->shouldReceive('initialize')
+            ->shouldReceive('convert')
+            ->shouldReceive('persist')
+        ;
+
         $this->runner->run('NOT_AN_IMPORTERINTERFACE');
 
     }
 
+    public function testRunnerManagerisMutable()
+    {
+        $manager = Mockery::mock('Accard\Bundle\ResourceBundle\Import\ManagerInterface');
+
+        $this->runner->setManager($manager);
+
+        $this->assertSame($manager, $this->runner->getManager());
+    }
 }
