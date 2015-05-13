@@ -18,6 +18,7 @@ use Accard\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Doctrine listener used to set the request on the configurable controllers.
@@ -29,9 +30,9 @@ class KernelControllerSubscriber implements EventSubscriberInterface
     /**
      * Security context.
      *
-     * @var SecurityContextInterface
+     * @var AuthorizationCheckerInterface
      */
-    private $securityContext;
+    private $authChecker;
 
     /**
      * Expression language.
@@ -44,13 +45,13 @@ class KernelControllerSubscriber implements EventSubscriberInterface
     /**
      * Constructor.
      *
-     * @param SecurityContextInterface $securityContext
+     * @param AuthorizationCheckerInterface $authChecker
      * @param ExpressionLanguage $exprLanguage
      */
-    public function __construct(Security $securityContext,
+    public function __construct(AuthorizationCheckerInterface $authChecker,
                                 ExpressionLanguage $exprLanguage)
     {
-        $this->securityContext = $securityContext;
+        $this->authChecker = $authChecker;
         $this->exprLanguage = $exprLanguage;
     }
 
@@ -89,7 +90,7 @@ class KernelControllerSubscriber implements EventSubscriberInterface
 
         // Run initialization if required.
         if ($controller[0] instanceof InitializableController) {
-            $controller[0]->initialize($event->getRequest(), $this->securityContext);
+            $controller[0]->initialize($event->getRequest(), $this->authChecker);
         }
     }
 }

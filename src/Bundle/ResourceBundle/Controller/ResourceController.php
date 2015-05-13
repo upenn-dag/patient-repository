@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Base resource controller for Accard.
@@ -80,7 +80,7 @@ class ResourceController extends FOSRestController implements InitializableContr
     /**
      * {@inheritdoc}
      */
-    public function initialize(Request $request, SecurityContextInterface $securityContext)
+    public function initialize(Request $request, AuthorizationCheckerInterface $authChecker)
     {
     }
 

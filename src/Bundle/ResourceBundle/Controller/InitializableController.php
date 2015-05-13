@@ -11,7 +11,7 @@
 namespace Accard\Bundle\ResourceBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Initlializable controller.
@@ -28,7 +28,7 @@ interface InitializableController
      * Before controller action.
      *
      * @param Request $request
-     * @param SecurityContextInterface $securityContext
+     * @param AuthorizationCheckerInterface $authChecker
      */
-    public function initialize(Request $request, SecurityContextInterface $securityContext);
+    public function initialize(Request $request, AuthorizationCheckerInterface $authChecker);
 }

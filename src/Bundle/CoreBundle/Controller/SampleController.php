@@ -12,7 +12,7 @@ namespace Accard\Bundle\CoreBundle\Controller;
 
 use Accard\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Pagerfanta\Pagerfanta;
 
 /**
@@ -25,11 +25,11 @@ class SampleController extends ResourceController
     /**
      * {@inheritdoc}
      */
-    public function initialize(Request $request, SecurityContextInterface $securityContext)
+    public function initialize(Request $request, AuthorizationCheckerInterface $authChecker)
     {
         $settings = $this->get('accard.settings.manager')->load('sample');
 
-        if ($securityContext->isGranted('ROLE_ADMIN')) {
+        if ($authChecker->isGranted('ROLE_ADMIN')) {
             return;
         }
 

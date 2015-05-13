@@ -14,7 +14,7 @@ use Accard\Bundle\ResourceBundle\Controller\ResourceController;
 use Accard\Bundle\RegimenBundle\Model\RegimenActivitiesChoice;
 use Accard\Bundle\RegimenBundle\Form\Type\RegimenActivitiesChoiceType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Accard\Component\Diagnosis\Exception\DiagnosisNotFoundException;
 use Accard\Component\Patient\Exception\PatientNotFoundException;
 use Pagerfanta\Pagerfanta;
@@ -29,11 +29,11 @@ class RegimenController extends ResourceController
     /**
      * {@inheritdoc}
      */
-    public function initialize(Request $request, SecurityContextInterface $securityContext)
+    public function initialize(Request $request, AuthorizationCheckerInterface $authChecker)
     {
         $settings = $this->get('accard.settings.manager')->load('regimen');
 
-        if ($securityContext->isGranted('ROLE_ADMIN')) {
+        if ($authChecker->isGranted('ROLE_ADMIN')) {
             return;
         }
 
