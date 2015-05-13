@@ -1,4 +1,4 @@
-{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import update, create %}
+{% from 'AccardWebBundle:Common/Macros:buttons.html.twig' import update, create, delete %}
 {% from 'AccardWebBundle:Common/Macros:misc.html.twig' import page_title %}
 
 {% extends 'AccardWebBundle:Backend:layout.html.twig' %}
@@ -24,6 +24,7 @@
 				</td>
 				<td>
 					{{ update( path('accard_backend_template_design', {'name':template.name}), 'Design', 'xs') }}
+					{{ delete( path('accard_backend_template_delete', { 'name': template.name}), 'Delete', 'xs') }}
 				</td>
 			</tr>
 		{% endfor %}

@@ -55,6 +55,7 @@ abstract class FieldChoiceType extends AbstractType
             ->setDefaults(array(
                 'class' => $this->className,
                 'property' => 'presentation',
+                'required' => false,
             ))
         ;
     }

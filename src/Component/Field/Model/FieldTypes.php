@@ -24,7 +24,7 @@ class FieldTypes
     const NUMBER = 'number';
     const PERCENTAGE = 'percent';
     const TEXT = 'text';
-
+    const MULTICHOICE = 'choice';
 
     /**
      * Get field type choices.
@@ -41,6 +41,7 @@ class FieldTypes
             self::NUMBER => 'Number',
             self::PERCENTAGE => 'Percentage',
             self::TEXT => 'Text',
+            self::MULTICHOICE => 'Choice',
         );
     }
 

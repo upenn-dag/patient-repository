@@ -27,7 +27,7 @@
         "symfony/monolog-bundle":                "~2.7",
         "sensio/distribution-bundle":            "~3.0",
         "sensio/framework-extra-bundle":         "~3.0",
-        "doctrine/orm":                          "~2.5",
+        "doctrine/orm":                          "~2.4.0",
         "doctrine/doctrine-bundle":              "~1.4",
         "doctrine/doctrine-cache-bundle":        "~1.0",
         "doctrine/doctrine-migrations-bundle":   "2.1.*@dev",

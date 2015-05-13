@@ -25,7 +25,7 @@
             <input type="hidden" name="_method" value="PUT">
             {{ form_widget(form._token) }}
 
-            {% include ['Theme:Frontend/Attribute:#{prototype}-form.html.twig', 'Theme:Frontend/Attribute:form.html.twig'] %}
+            {% include ["Theme:Frontend/Attribute:#{prototype}-form.html.twig", 'Theme:Frontend/Attribute:form.html.twig'] %}
 
             <div class="row">
                 <div class="col-md-12">
@@ -36,4 +36,17 @@
     {% endblock %}
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {{ select_patient_js('#accard_attribute_patient') }}
+
+    {% include "Theme:Frontend/Attribute:#{prototype}-javascript.js.twig" ignore missing %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ select_patient_css() }}
+
+    {% include "Theme:Frontend/Attribute:#{prototype}-style.css.twig" ignore missing %}
+{% endblock %}
 

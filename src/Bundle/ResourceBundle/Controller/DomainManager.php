@@ -67,11 +67,7 @@ class DomainManager
         $event = $this->dispatchEvent('pre_create', new ResourceEvent($resource, array('objectManager' => $this->manager)));
 
         if ($event->isStopped()) {
-            $this->flashHelper->setFlash(
-                $event->getMessageType(),
-                $event->getMessage(),
-                $event->getMessageParameters()
-            );
+            $this->setFlashMessageToEventParams($event);
 
             return null;
         }
@@ -97,11 +93,7 @@ class DomainManager
         $event = $this->dispatchEvent('pre_update', new ResourceEvent($resource, array('objectManager' => $this->manager)));
 
         if ($event->isStopped()) {
-            $this->flashHelper->setFlash(
-                $event->getMessageType(),
-                $event->getMessage(),
-                $event->getMessageParameters()
-            );
+            $this->setFlashMessageToEventParams($event);
 
             return null;
         }
@@ -141,12 +133,7 @@ class DomainManager
         $event = $this->dispatchEvent('pre_delete', new ResourceEvent($resource, array('objectManager' => $this->manager)));
 
         if ($event->isStopped()) {
-            $this->flashHelper->setFlash(
-                $event->getMessageType(),
-                $event->getMessage(),
-                $event->getMessageParameters()
-            );
-
+            $this->setFlashMessageToEventParams($event);
             return null;
         }
 
@@ -172,5 +159,19 @@ class DomainManager
         $name = $this->config->getEventName($name);
 
         return $this->eventDispatcher->dispatch($name, $event);
+    }
+
+    /**
+     * @param Event $event
+     * 
+     * @return void
+     */
+    private function setFlashMessageToEventParams(Event $event)
+    {
+        $this->flashHelper->setFlash(
+            $event->getMessageType(),
+            $event->getMessage(),
+            $event->getMessageParameters()
+        );
     }
 }
