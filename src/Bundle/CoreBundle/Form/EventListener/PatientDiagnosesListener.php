@@ -76,7 +76,7 @@ class PatientDiagnosesListener implements EventSubscriberInterface
         $qb
             ->resetDQLPart('where')
             ->where('diagnosis.patient = :patient')
-            ->setParameter(':patient', $activity->getPatient())
+            ->setParameter('patient', $activity->getPatient())
         ;
     }
 }
