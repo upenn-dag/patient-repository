@@ -3,4 +3,4 @@
 # suite for unit (internal) tests.
 class_name: UnitTester
 modules:
-    enabled: [Asserts, \AccardTest\Bundle\ActivityBundle\Helper\Unit]
+    enabled: [Asserts, Mockery, \AccardTest\Bundle\ActivityBundle\Helper\Unit]

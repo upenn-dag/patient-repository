@@ -1,4 +1,4 @@
-namespace: AccardTest\Bundle\ActivityBundle\
+namespace: AccardTest\Bundle\ActivityBundle
 actor: Tester
 paths:
     tests: tests

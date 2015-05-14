@@ -22,8 +22,11 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "accard/resource-bundle":   "~1.0",
-        "accard/activity":          "~1.0"
+        "accard/resource-bundle":           "~1.0",
+        "accard/activity":                  "~1.0",
+        "accard/prototype-bundle":          "~1.0",
+        "doctrine/orm":                     "~2.5",
+        "doctrine/doctrine-bundle":         "~1.4"
     },
     "require-dev": {
         "codeception/codeception":          "dev-master",
