@@ -1,8 +1,8 @@
 {
-    "name": "accard/behavior-bundle",
+    "name": "accard/attribute-bundle",
     "type": "symfony-bundle",
-    "description": "Accard behavior bundle",
-    "keywords": ["accard", "behavior"],
+    "description": "Accard attribute bundle",
+    "keywords": ["accard", "attribute"],
     "homepage": "http://accard.med.upenn.edu",
     "minimum-stability": "dev",
     "license": "MIT",
@@ -13,8 +13,8 @@
         },
         {
             "name": "Dylan Pierce",
-            "homepage": "http://dylanjohnpierce.com"
-        }
+            "homepage": "http://dylanjpierce.com"
+        },
         {
             "name": "Database and Applications Group",
             "homepage": "http://dag.med.upenn.edu"
@@ -22,18 +22,20 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "accard/resource-bundle":   "dev-develop",
-        "accard/behavior":         "dev-develop"
+        "accard/resource-bundle":   "~1.0",
+        "accard/attribute":          "~1.0"
+    },
+    "require-dev": {
+        "codeception/codeception":          "dev-master",
+        "codeception/mockery-module":       "dev-master"
     },
     "autoload": {
-        "psr-4": { "Accard\\Bundle\\BehaviorBundle\\": "" }
+        "psr-4": { "Accard\\Bundle\\AttributeBundle\\": "" }
     },
-    "autoload-dev": {
-        "psr-4": { "Accard\\Bundle\\BehaviorBundle\\spec\\": "spec/" }
+    "config": {
+        "bin-dir": "bin"
     },
     "repositories": [
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Resource.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/ResourceBundle.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Behavior.git" }
+        { "type": "composer", "url": "http://accard-dev.med.upenn.edu/satis" }
     ]
 }

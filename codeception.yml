@@ -13,3 +13,12 @@ include:
     - src/Component/Option
     - src/Component/Field
     - src/Component/Prototype
+    - src/Component/Activity
+    - src/Component/Phase
+    - src/Component/Diagnosis
+    - src/Component/Patient
+    - src/Component/Resource
+    - src/Component/Behavior
+    - src/Component/Regimen
+    - src/Component/Sample
+    - src/Bundle/ResourceBundle

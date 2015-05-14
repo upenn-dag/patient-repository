@@ -123,24 +123,27 @@ class SearchCollectionTest extends \Codeception\TestCase\Test
         ;
 
         $one = Mockery::mock('FOS\ElasticaBundle\HybridResult')
-            ->shouldReceive('getResult')->andReturn($patientResult)
+            ->shouldReceive('getResult')->andReturn('result')
             ->shouldReceive('getTransformed')->andReturn('TRANSFORMED')
             ->getMock()
         ;
 
         $two = Mockery::mock('FOS\ElasticaBundle\HybridResult')
-            ->shouldReceive('getResult')->andReturn($patientResult)
+            ->shouldReceive('getResult')->andReturn('result')
             ->shouldReceive('getTransformed')->andReturn('TRANSFORMED')
-            ->getMock();
+            ->getMock()
+        ;
+
         $three = Mockery::mock('FOS\ElasticaBundle\HybridResult')
-            ->shouldReceive('getResult')->andReturn($patientResult)
+            ->shouldReceive('getResult')->andReturn('result')
             ->shouldReceive('getTransformed')->andReturn('TRANSFORMED')
-            ->getMock();
+            ->getMock()
+        ;
 
         $results = array($one, $two, $three);
 
         $searchCollection = new SearchCollection($query, $results);
 
-        $this->assertEquals(count($results), $this->searchCollection->count());
+        $this->assertEquals(count($results), $searchCollection->count());
     }
 }
