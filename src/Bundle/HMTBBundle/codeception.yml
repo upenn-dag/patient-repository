@@ -1,4 +1,4 @@
-namespace: AccardTest\Bundle\AttributeBundle\
+namespace: AccardTest\Bundle\HMTBBundle\
 actor: Tester
 paths:
     tests: tests
@@ -20,10 +20,3 @@ modules:
             user: ''
             password: ''
             dump: tests/_data/dump.sql
-coverage:
-    enabled: true
-    include:
-        - Doctrine/*
-        - Form/*
-    exclude:
-        - DependencyInjection/*

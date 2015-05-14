@@ -1,8 +1,8 @@
 {
-    "name": "accard/web-bundle",
+    "name": "accard/prototype-bundle",
     "type": "symfony-bundle",
-    "description": "Accard web bundle",
-    "keywords": ["web"],
+    "description": "Accard prototype bundle",
+    "keywords": ["prototype"],
     "homepage": "http://accard.med.upenn.edu",
     "minimum-stability": "dev",
     "license": "MIT",
@@ -21,14 +21,20 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "accard/resource-bundle":     "~1.0",
+        "accard/prototype":           "~1.0"
     },
     "require-dev": {
         "codeception/codeception":          "dev-master",
         "codeception/mockery-module":       "dev-master"
     },
+    "suggest": {
+        "accard/web-bundle": "Provides the default web interface",
+        "accard/fixtures-bundle": "Provides the default Accard fixtures"
+    },
     "autoload": {
-        "psr-4": { "Accard\\Bundle\\WebBundle\\": "" }
+        "psr-4": { "Accard\\Bundle\\PrototypeBundle\\": "" }
     },
     "config": {
         "bin-dir": "bin"

@@ -25,6 +25,10 @@
         "accard/resource-bundle":     "~1.0",
         "accard/option":              "~1.0"
     },
+    "require-dev": {
+        "codeception/codeception":          "dev-master",
+        "codeception/mockery-module":       "dev-master"
+    },
     "suggest": {
         "accard/web-bundle": "Provides the default web interface",
         "accard/fixtures-bundle": "Provides the default Accard fixtures"

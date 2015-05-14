@@ -1,8 +1,8 @@
 {
-    "name": "accard/web-bundle",
+    "name": "accard/drug-bundle",
     "type": "symfony-bundle",
-    "description": "Accard web bundle",
-    "keywords": ["web"],
+    "description": "Accard drug bundle",
+    "keywords": ["accard", "drug"],
     "homepage": "http://accard.med.upenn.edu",
     "minimum-stability": "dev",
     "license": "MIT",
@@ -21,14 +21,16 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "accard/resource-bundle":   "~1.0",
+        "accard/drug":          "~1.0"
     },
     "require-dev": {
         "codeception/codeception":          "dev-master",
         "codeception/mockery-module":       "dev-master"
     },
     "autoload": {
-        "psr-4": { "Accard\\Bundle\\WebBundle\\": "" }
+        "psr-4": { "Accard\\Bundle\\DrugBundle\\": "" }
     },
     "config": {
         "bin-dir": "bin"
