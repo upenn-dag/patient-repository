@@ -12,13 +12,21 @@
             "homepage": "http://frankbardon.com"
         },
         {
+            "name": "Dylan Pierce",
+            "homepage": "http://dylanjpierce.com"
+        },
+        {
             "name": "Database and Applications Group",
             "homepage": "http://dag.med.upenn.edu"
         }
     ],
     "require": {
         "php": ">=5.3.3",
-        "accard/resource-bundle": "dev-develop"
+        "accard/resource-bundle":      "~1.0"
+    },
+    "require-dev": {
+        "codeception/codeception":          "dev-master",
+        "codeception/mockery-module":       "dev-master"
     },
     "autoload": {
         "psr-4": { "Accard\\Bundle\\SettingsBundle\\": "" }
@@ -26,8 +34,10 @@
     "autoload-dev": {
         "psr-4": { "Accard\\Bundle\\SettingsBundle\\spec\\": "spec/" }
     },
+    "config": {
+        "bin-dir": "bin"
+    },
     "repositories": [
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Resource.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/ResourceBundle.git" }
+        { "type": "composer", "url": "http://accard-dev.med.upenn.edu/satis" }
     ]
 }

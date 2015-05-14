@@ -125,15 +125,13 @@ class Runner
 
         $resolver->setRequired(array('identifier', 'previous_record', 'import_description'));
 
-        $resolver->setAllowedTypes(array(
-            'identifier' => array('array', 'string'),
-            'subject_resource' => array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'),
-            'target_resource' => array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'),
-            'option_resource' => array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'),
-            'import_resource' => array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'),
-            'patient_resource' => array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'),
-            'diagnosis_resource' => array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'),
-            'import_description' => 'string',
-        ));
+        $resolver->setAllowedTypes('identifier', array('array', 'string'));
+        $resolver->setAllowedTypes('subject_resource', array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'));
+        $resolver->setAllowedTypes('target_resource', array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'));
+        $resolver->setAllowedTypes('option_resource', array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'));
+        $resolver->setAllowedTypes('import_resource', array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'));
+        $resolver->setAllowedTypes('patient_resource', array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'));
+        $resolver->setAllowedTypes('diagnosis_resource', array('Accard\Bundle\ResourceBundle\Import\ResourceInterface'));
+        $resolver->setAllowedTypes('import_description', 'string');
     }
 }

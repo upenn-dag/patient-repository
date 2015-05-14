@@ -13,7 +13,6 @@ settings:
 coverage:
     enabled: true
     include:
-        - Command/*
         - Controller/*
         - DependencyInjection/*
         - Doctrine/*
@@ -32,3 +31,8 @@ coverage:
         - bin/*
         - Tests/*
         - vendor/*
+        - Command/*
+        - DependencyInjection/*
+        - Repository/*
+        - Expression/Accard Language Cheat Sheet.md
+        - Expression/ExtensionInterface.php

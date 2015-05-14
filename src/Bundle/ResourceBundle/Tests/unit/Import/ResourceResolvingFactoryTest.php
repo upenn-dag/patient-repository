@@ -22,29 +22,88 @@ class ResourceResolvingFactoryTest extends \Codeception\TestCase\Test
     public function testResourceResolvingFactoryResolveResourceReturnsResource()
     {
         $resource = 'RESOURCE';
-        $resourceName = 'RESOURCE_NAME';
+        $resourceType = 1;
 
         $managerName = 'accard.manager.RESOURCE';
         $repositoryName = 'accard.repository.RESOURCE';
+        $formName = 'accard.form.type.RESOURCE';
 
         $manager = Mockery::mock('Doctrine\Common\Persistence\ObjectManager');
         $repo = Mockery::mock('Doctrine\Common\Persistence\ObjectRepository');
         $form = Mockery::mock('Symfony\Component\Form\FormTypeInterface');
 
-
         $this->container
-            ->shouldReceieve('has')->with($managerName)->once()->andReturn(true)
-            ->shouldReceieve('get')->with($managerName)->once()->andReturn($manager)
-            ->shouldReceieve('has')->with($repoName)->once()->andReturn(true)
-            ->shouldReceieve('get')->with($repoName)->once()->andReturn($repo)
-            ->shouldReceieve('has')->with($formName)->once()->andReturn(true)
-            ->shouldReceieve('get')->with($formName)->once()->andReturn($form)
+            ->shouldReceive('has')->with($managerName)->once()->andReturn(true)
+            ->shouldReceive('get')->with($managerName)->once()->andReturn($manager)
+            ->shouldReceive('has')->with($repositoryName)->once()->andReturn(true)
+            ->shouldReceive('get')->with($repositoryName)->once()->andReturn($repo)
+            ->shouldReceive('has')->with($formName)->once()->andReturn(true)
+            ->shouldReceive('get')->with($formName)->once()->andReturn($form)
         ;
 
         $this->assertInstanceOf(
             'Accard\Bundle\ResourceBundle\Import\Resource',
-            $this->resource->resolveResource($resource, $resourceName)
+            $this->factory->resolveResource($resource, $resourceType)
         );
     }
 
+    public function testResourceResolvingFactoryResolveSubjectReturnsResource()
+    {
+        $resource = 'RESOURCE';
+        $resourceType = 1;
+
+        $managerName = 'accard.manager.RESOURCE';
+        $repositoryName = 'accard.repository.RESOURCE';
+        $formName = 'accard.form.type.RESOURCE';
+
+        $manager = Mockery::mock('Doctrine\Common\Persistence\ObjectManager');
+        $repo = Mockery::mock('Doctrine\Common\Persistence\ObjectRepository');
+        $form = Mockery::mock('Symfony\Component\Form\FormTypeInterface');
+
+        $this->container
+            ->shouldReceive('has')->with($managerName)->once()->andReturn(true)
+            ->shouldReceive('get')->with($managerName)->once()->andReturn($manager)
+            ->shouldReceive('has')->with($repositoryName)->once()->andReturn(true)
+            ->shouldReceive('get')->with($repositoryName)->once()->andReturn($repo)
+            ->shouldReceive('has')->with($formName)->once()->andReturn(true)
+            ->shouldReceive('get')->with($formName)->once()->andReturn($form)
+        ;
+
+        $this->assertInstanceOf(
+            'Accard\Bundle\ResourceBundle\Import\Resource',
+            $this->factory->resolveResource($resource, $resourceType)
+        );
+
+        $this->factory->resolveSubject($resource);
+    }
+
+    public function testResourceResolvingFactoryResolveTargetReturnsResource()
+    {
+        $resource = 'RESOURCE';
+        $resourceType = 2;
+
+        $managerName = 'accard.manager.RESOURCE';
+        $repositoryName = 'accard.repository.RESOURCE';
+        $formName = 'accard.form.type.RESOURCE';
+
+        $manager = Mockery::mock('Doctrine\Common\Persistence\ObjectManager');
+        $repo = Mockery::mock('Doctrine\Common\Persistence\ObjectRepository');
+        $form = Mockery::mock('Symfony\Component\Form\FormTypeInterface');
+
+        $this->container
+            ->shouldReceive('has')->with($managerName)->once()->andReturn(true)
+            ->shouldReceive('get')->with($managerName)->once()->andReturn($manager)
+            ->shouldReceive('has')->with($repositoryName)->once()->andReturn(true)
+            ->shouldReceive('get')->with($repositoryName)->once()->andReturn($repo)
+            ->shouldReceive('has')->with($formName)->once()->andReturn(true)
+            ->shouldReceive('get')->with($formName)->once()->andReturn($form)
+        ;
+
+        $this->assertInstanceOf(
+            'Accard\Bundle\ResourceBundle\Import\Resource',
+            $this->factory->resolveResource($resource, $resourceType)
+        );
+
+        $this->factory->resolveSubject($resource);
+    }
 }

@@ -18,8 +18,12 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "accard/core":              "dev-develop",
-        "accard/resource-bundle":   "dev-develop"
+        "accard/core":              "~1.0",
+        "accard/resource-bundle":   "~1.0"
+    },
+    "require-dev": {
+        "codeception/codeception":          "dev-master",
+        "codeception/mockery-module":       "dev-master"
     },
     "suggest": {
         "accard/web-bundle": "Provides the default web interface",
@@ -31,9 +35,10 @@
     "autoload-dev": {
         "psr-4": { "Accard\\Bundle\\CoreBundle\\spec\\": "spec/" }
     },
+    "config": {
+        "bin-dir": "bin"
+    },
     "repositories": [
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Core.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/Resource.git" },
-        { "type": "vcs", "url": "git@gitlab.med.upenn.edu:prototype/ResourceBundle.git" }
+        { "type": "composer", "url": "http://accard-dev.med.upenn.edu/satis" }
     ]
 }
