@@ -20,7 +20,13 @@
         "php": ">=5.3.3",
         "accard/core":              "~1.0",
         "accard/resource-bundle":   "~1.0",
-        "accard/activity-bundle":   "~1.0"
+        "accard/activity-bundle":   "~1.0",
+        "accard/behavior-bundle":   "~1.0",
+        "accard/diagnosis-bundle":  "~1.0",
+        "accard/drug-bundle":       "~1.0",
+        "accard/patient-bundle":    "~1.0",
+        "accard/sample-bundle":     "~1.0",
+        "accard/regimen-bundle":    "~1.0"
     },
     "require-dev": {
         "codeception/codeception":          "dev-master",
@@ -35,6 +41,11 @@
     },
     "autoload-dev": {
         "psr-4": { "Accard\\Bundle\\CoreBundle\\spec\\": "spec/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
     },
     "config": {
         "bin-dir": "bin"

@@ -1,8 +1,8 @@
 {
-    "name": "accard/drug-bundle",
+    "name": "accard/outcomes-bundle",
     "type": "symfony-bundle",
-    "description": "Accard drug bundle",
-    "keywords": ["accard", "drug"],
+    "description": "Accard outcomes-bundle bundle",
+    "keywords": ["web"],
     "homepage": "http://accard.med.upenn.edu",
     "minimum-stability": "dev",
     "license": "MIT",
@@ -21,16 +21,14 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
-        "accard/resource-bundle":   "~1.0",
-        "accard/drug":          "~1.0"
+        "php": ">=5.3.3"
     },
     "require-dev": {
         "codeception/codeception":          "dev-master",
         "codeception/mockery-module":       "dev-master"
     },
     "autoload": {
-        "psr-4": { "Accard\\Bundle\\DrugBundle\\": "" }
+        "psr-4": { "Accard\\Bundle\\OutcomesBundle\\": "" }
     },
     "extra": {
         "branch-alias": {
