@@ -13,6 +13,12 @@ components=("Activity" "Attribute" "Behavior" "Core" "Diagnosis" "Drug" "Field" 
 bundles=("ActivityBundle" "AttributeBundle" "BehaviorBundle" "CoreBundle" "CPDBundle" "DiagnosisBundle" "DrugBundle" "FieldBundle" "HMTBBundle" "OptionBundle" "OutcomesBundle" "PDSBundle" "PatientBundle" "PhaseBundle" "PrototypeBundle" "RegimenBundle" "ResourceBundle" "SampleBundle" "SettingsBundle" "TemplateBundle" "WebBundle")
 bridges=("Twig")
 
+# These are here so we can easily, and selectively split certain pieces without running the whole thing.
+
+#components=()
+#bundles=()
+#bridges=()
+
 git subsplit init git@gitlab.med.upenn.edu:prototype/PatientRepository.git
 git subsplit update
 
