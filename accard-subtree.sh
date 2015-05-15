@@ -10,7 +10,7 @@ if [ ! type "git subsplit" > /dev/null ]; then
 fi
 
 components=("Activity" "Attribute" "Behavior" "Core" "Diagnosis" "Drug" "Field" "Option" "Patient" "Phase" "Prototype" "Regimen" "Resource" "Sample")
-bundles=("ActivityBundle" "AttributeBundle" "BehaviorBundle" "CPDBundle" "CoreBundle" "DiagnosisBundle" "DrugBundle" "FieldBundle" "HMTBBundle" "OptionBundle" "OutcomesBundle" "PDSBundle" "PatientBundle" "PhaseBundle" "PrototypeBundle" "RegimenBundle" "ResourceBundle" "SampleBundle" "SettingsBundle" "TemplateBundle" "WebBundle")
+bundles=("ActivityBundle" "AttributeBundle" "BehaviorBundle" "CoreBundle" "CPDBundle" "DiagnosisBundle" "DrugBundle" "FieldBundle" "HMTBBundle" "OptionBundle" "OutcomesBundle" "PDSBundle" "PatientBundle" "PhaseBundle" "PrototypeBundle" "RegimenBundle" "ResourceBundle" "SampleBundle" "SettingsBundle" "TemplateBundle" "WebBundle")
 bridges=("Twig")
 
 git subsplit init git@gitlab.med.upenn.edu:prototype/PatientRepository.git
