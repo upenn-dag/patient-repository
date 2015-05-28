@@ -10,15 +10,18 @@ settings:
     colors: true
     memory_limit: 1024M
 include:
-    - src/Component/Option
-    - src/Component/Field
-    - src/Component/Prototype
     - src/Component/Activity
-    - src/Component/Phase
-    - src/Component/Diagnosis
-    - src/Component/Patient
-    - src/Component/Resource
+    - src/Component/Attribute
     - src/Component/Behavior
+    #- src/Component/Core
+    - src/Component/Diagnosis
+    - src/Component/Drug
+    - src/Component/Field
+    - src/Component/Option
+    - src/Component/Patient
+    - src/Component/Phase
+    - src/Component/Prototype
     - src/Component/Regimen
+    - src/Component/Resource
     - src/Component/Sample
     - src/Bundle/ResourceBundle
