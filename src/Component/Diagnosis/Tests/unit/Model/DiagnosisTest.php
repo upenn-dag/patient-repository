@@ -1,8 +1,23 @@
 <?php
-namespace model;
+
+/**
+ * This file is part of the Accard package.
+ *
+ * (c) University of Pennsylvania
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+namespace AccardTest\Component\Diagnosis\Model;
+
 use Accard\Component\Diagnosis\Model\Diagnosis;
 use Mockery;
 
+/**
+ * Diagnosis model tests.
+ *
+ * @author Frank Bardon Jr. <bardonf@upenn.edu>
+ */
 class DiagnosisTest extends \Codeception\TestCase\Test
 {
     /**
@@ -15,16 +30,8 @@ class DiagnosisTest extends \Codeception\TestCase\Test
          $this->diagnosis = new Diagnosis;
     }
 
-    protected function _after()
-    {
-    }
-
-    /**
-     * Interface tests
-     */
     public function testDiagnosisInterfaceIsFollowed()
     {
-
         $this->assertInstanceOf(
             'Accard\Component\Diagnosis\Model\DiagnosisInterface',
             $this->diagnosis
@@ -39,42 +46,26 @@ class DiagnosisTest extends \Codeception\TestCase\Test
         );
     }
 
-    /**
-     * Diagnosis->id
-     */
     public function testDiagnosisIdIsUnsetOnCreation()
     {
         $this->assertNull($this->diagnosis->getId());
     }
 
-    /**
-     * Diagnosis->parent
-     */
     public function testDiagnosisParentIsUnsetOnCreation()
     {
         $this->assertNull($this->diagnosis->getParent());
     }
 
-    /**
-     * Diagnosis->primary
-     */
     public function testDiagnosisPrimaryIsUnsetOnCreation()
     {
         $this->assertNull($this->diagnosis->getPrimary());
     }
 
-
-    /**
-     * Diagnosis->startDate
-     */
     public function testDiagnosisStartDateIsUnsetOnCreation()
     {
         $this->assertNull($this->diagnosis->getStartDate());
     }
 
-    /**
-     * Diagnosis->endDate
-     */
     public function testDiagnosisEndDateIsUnsetOnCreation()
     {
         $this->assertNull($this->diagnosis->getEndDate());
@@ -84,6 +75,4 @@ class DiagnosisTest extends \Codeception\TestCase\Test
     {
         $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $this->diagnosis->getFields());
     }
-
-   
 }

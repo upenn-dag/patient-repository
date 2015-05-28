@@ -1,3 +1,4 @@
+namespace: AccardTest\Component\Diagnosis
 actor: Tester
 paths:
     tests: Tests
@@ -7,15 +8,16 @@ paths:
     envs: Tests/_envs
 settings:
     bootstrap: _bootstrap.php
-    colors: false
+    colors: true
     memory_limit: 1024M
-extensions:
-    enabled:
-        - Codeception\Extension\RunFailed
-modules:
-    config:
-        Db:
-            dsn: ''
-            user: ''
-            password: ''
-            dump: Tests/_data/dump.sql
+coverage:
+    enabled: true
+    include:
+        - Builder/*
+        - Exception/*
+        - Provider/*
+        - Repository/*
+        - Model/*
+    exclude:
+        - Resources/*
+        - Tests/*

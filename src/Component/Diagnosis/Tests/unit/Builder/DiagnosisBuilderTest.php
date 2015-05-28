@@ -1,16 +1,25 @@
 <?php
+
+/**
+ * This file is part of the Accard package.
+ *
+ * (c) University of Pennsylvania
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
 namespace AccardTest\Component\Diagnosis\Builder;
 
-use Accard\Component\Diagnosis\Builder\DiagnosisBuilder;
 use Mockery;
+use Accard\Component\Diagnosis\Builder\DiagnosisBuilder;
 
+/**
+ * Diagnosis builder tests.
+ *
+ * @author Frank Bardon Jr. <bardonf@upenn.edu>
+ */
 class DiagnosisBuilderTest extends \Codeception\TestCase\Test
 {
-    /**
-     * @var \UnitTester
-     */
-    protected $tester;
-
     protected function _before()
     {
         $this->objectManager = Mockery::mock('Doctrine\Common\Persistence\ObjectManager');
@@ -19,17 +28,11 @@ class DiagnosisBuilderTest extends \Codeception\TestCase\Test
         $this->fieldValueRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
 
         $this->builder = new DiagnosisBuilder($this->objectManager, $this->diagnosisRepository, $this->fieldRepository, $this->fieldValueRepository);
-
-    }
-
-    protected function _after()
-    {
     }
 
     public function testDiagnosisBuilderGetFieldRepositoryReceivesCreateNew()
     {
         $this->diagnosisRepository->shouldReceive('createNew');
-
         $this->assertSame($this->builder, $this->builder->create());
     }
 
