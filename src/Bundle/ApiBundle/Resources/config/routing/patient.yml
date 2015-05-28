@@ -1,0 +1,22 @@
+accard_api_patient_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.patient:indexAction
+        _accard:
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting]
+            paginate: $limit
+            sortable: true
+            sorting:
+                id: desc
+            serialization_groups: [Default]
+
+accard_api_patient_show:
+    path: /{id}
+    methods: [GET]
+    defaults:
+        _controller: accard.controller.patient:showAction
+        _accard:
+            serialization_groups: [api]

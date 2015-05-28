@@ -57,6 +57,7 @@ abstract class Kernel extends BaseKernel
             new \Lexik\Bundle\TranslationBundle\LexikTranslationBundle(),
             new \FOS\RestBundle\FOSRestBundle(),
             new \JMS\SerializerBundle\JMSSerializerBundle(),
+            new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),

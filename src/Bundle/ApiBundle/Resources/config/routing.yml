@@ -1,0 +1,3 @@
+accard_api_patient:
+    resource: @AccardApiBundle/Resources/config/routing/patient.yml
+    prefix: /patients

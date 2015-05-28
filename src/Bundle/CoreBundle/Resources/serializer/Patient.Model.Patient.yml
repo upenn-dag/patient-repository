@@ -16,47 +16,47 @@ Accard\Component\Patient\Model\Patient:
             type: integer
             serialized_name: id
             since_version: 1.0
-            groups: [search, api, limited]
+            groups: [Default, search, api, limited]
         mrn:
             expose: true
             type: string
             serialized_name: mrn
             since_version: 1.0
-            groups: [search, api, limited]
+            groups: [Default, search, api, limited]
         firstName:
             expose: true
             type: string
-            serialized_name: first_name
+            serialized_name: firstName
             since_version: 1.0
-            groups: [search, api, limited]
+            groups: [Default, search, api, limited]
         lastName:
             expose: true
             type: string
-            serialized_name: last_name
+            serialized_name: lastName
             since_version: 1.0
-            groups: [search, api, limited]
+            groups: [Default, search, api, limited]
         dateOfBirth:
             expose: true
             type: DateTime
-            serialized_name: date_of_birth
+            serialized_name: dateOfBirth
             since_version: 1.0
-            groups: [search, api, limited]
+            groups: [Default, search, api, limited]
         dateOfDeath:
             expose: true
             type: DateTime
-            serialized_name: date_of_death
+            serialized_name: dateOfDeath
             since_version: 1.0
-            groups: [search, api, limited]
+            groups: [Default, search, api, limited]
         gender:
             expose: true
-            type: property<"value">
+            type: string
             serialized_name: gender
             since_version: 1.0
-            groups: [search, api, limited]
+            groups: [Default, search, api, limited]
         race:
             expose: true
-            type: property<"value">
+            type: string
             serialized_name: race
             since_version: 1.0
-            groups: [search, api, limited]
+            groups: [Default, search, api, limited]
 

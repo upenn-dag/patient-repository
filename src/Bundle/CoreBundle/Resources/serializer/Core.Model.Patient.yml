@@ -16,4 +16,4 @@ Accard\Component\Core\Model\Patient:
             type: ArrayCollection<Accard\Component\Core\Model\Diagnosis>
             serialized_name: diagnoses
             since_version: 1.0
-            groups: [api, limited]
+            groups: [extended]

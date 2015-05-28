@@ -12,6 +12,10 @@
 namespace Accard\Bundle\ResourceBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\View\View;
+use JMS\Serializer\SerializationContext;
+use Hateoas\Configuration\Route;
+use Hateoas\Representation\Factory\PagerfantaFactory;
 use Accard\Component\Resource\Repository\RepositoryInterface;
 use Accard\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -113,7 +117,9 @@ class ResourceController extends FOSRestController implements InitializableContr
                 $this->config
             );
 
-            if ($this->getUser()) {
+            $authChecker = $this->get('security.authorization_checker');
+
+            if ($this->getUser() && $authChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
                 $this->actionLogger = new ActionLogger(
                     $this->config,
                     $this->getUser(),
@@ -144,6 +150,16 @@ class ResourceController extends FOSRestController implements InitializableContr
             );
             $resources->setCurrentPage($request->get('page', 1), true, true);
             $resources->setMaxPerPage($this->config->getPaginationMaxPerPage());
+
+            if ($this->config->isApiRequest()) {
+                $resources = $this->getPagerfantaFactory()->createRepresentation(
+                    $resources,
+                    new Route(
+                        $request->attributes->get('_route'),
+                        array_merge($request->attributes->get('_route_params'), $request->query->all())
+                    )
+                );
+            }
         } else {
             $resources = $this->resourceResolver->getResource(
                 $repository,
@@ -368,6 +384,27 @@ class ResourceController extends FOSRestController implements InitializableContr
     public function getRepository()
     {
         return $this->get($this->config->getServiceName('repository'));
+    }
+
+    protected function getPagerfantaFactory()
+    {
+        return new PagerfantaFactory();
+    }
+
+    protected function handleView(View $view)
+    {
+        $handler = $this->get('fos_rest.view_handler');
+        $context = $view->getSerializationContext();
+
+        if ($groups = $this->config->getSerializationGroups()) {
+            $context->setGroups($groups);
+        }
+
+        if ($version = $this->config->getSerializationVersion()) {
+            $context->setVersion($version);
+        }
+
+        return $handler->handle($view);
     }
 
     private function prepareResponse(Response $response)
