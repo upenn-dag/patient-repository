@@ -15,6 +15,6 @@ namespace Accard\Component\Resource\Exception;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface StateExcetion
+interface StateException
 {
 }
