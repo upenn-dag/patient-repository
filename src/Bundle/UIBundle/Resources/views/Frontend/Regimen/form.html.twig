@@ -1,16 +1,63 @@
-{% from 'AccardUIBundle:Macros:form.html.twig' import prototype, static %}
+{% set count = form.fields|length %}
+{% set half_count = (count/2)|round(0, 'ceil') %}
+{% set activity = form.vars.data %}
 
-<div class="row">
-  <div class="col-md-6">
-    {% if regimen is defined and regimen and regimen.patient %}
-      {{ static(regimen.patient.fullName, 'accard.patient.entity_name'|trans) }}
-    {% endif %}
-    {{ form_row(form.startDate) }}
-    {{ form_row(form.endDate) }}
+{% if count > 0 %}
+  {% set row1fields = form.fields|slice(0, half_count) %}
+{% endif %}
+{% if count > 1 %}
+  {% set row2fields = form.fields|slice(half_count, count) %}
+{% endif %}
+
+{% from 'AccardUIBundle:Macros:form.html.twig' import prototype, static %}
+{% include 'AccardUIBundle:Frontend/Regimen:formTabs.html.twig' with { showActivityTab: form.activities is defined } %}
+
+<div class="tab-content">
+  <div class="tab-pane fade in active" id="regimen-base">
+    <div class="row">
+      <div class="col-md-12 ">
+        <div class="col-md-6">
+          {% if regimen is defined and regimen and regimen.patient %}
+            {{ static(regimen.patient.fullName, 'accard.patient.entity_name'|trans) }}
+          {% endif %}
+          {% if form.diagnosis is defined %}
+            {{ form_row(form.diagnosis) }}
+          {% endif %}
+          {% if form.drug is defined %}
+            {{ form_row(form.drug) }}
+          {% endif %}
+        </div>
+        <div class="col-md-6">
+          {{ form_row(form.startDate) }}
+          {{ form_row(form.endDate) }}
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="col-md-6">
-  {% for field in form.fields %}
-    {{ prototype(field) }}
-  {% endfor %}
+  <div class="tab-pane fade" id="regimen-custom">
+    <div class="row">
+      <div class="col-md-6">
+      {% if count > 0 %}
+        {% for field in row1fields %}
+          {{ prototype(field) }}
+        {% endfor %}
+      {% endif %}
+      </div>
+      <div class="col-md-6">
+      {% if count > 1 %}
+        {% for field in row2fields %}
+          {{ prototype(field) }}
+        {% endfor %}
+      {% endif %}
+      </div>
+    </div>
   </div>
+
+  {% if form.activities is defined %}
+  <div class="tab-pane fade" id="regimen-activities">
+    {{ form_widget(form.activities) }}
+  </div>
+  {% endif %}
+
 </div>
+

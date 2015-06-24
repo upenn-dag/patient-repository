@@ -20,7 +20,7 @@
   {% endblock %}
 
   {% block regimen_form %}
-    <form action="{{ path('accard_frontend_regimen_create', { patient: regimen.patient.id, prototype: prototype }) }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('accard_frontend_regimen_create', { patient: (regimen.patient ? regimen.patient.id : null), diagnosis: (regimen.diagnosis ? regimen.diagnosis.id : null), prototype: prototype }) }}" method="post" {{ form_enctype(form) }}>
       {{ form_widget(form._token) }}
       {% include ["Theme:Frontend/Regimen:#{prototype}-form.html.twig", "Theme:Frontend/Regimen:form.html.twig"] with { regimen: regimen } %}
       <div class="row">

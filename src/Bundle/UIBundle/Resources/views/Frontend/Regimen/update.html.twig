@@ -14,8 +14,7 @@
 {% endblock regimen_header %}
 
 {% block regimen_form %}
-  {% set updatePath = path('accard_frontend_regimen_update', { patient: regimen.patient.id, id: regimen.id }) %}
-  <form action="{{ updatePath }}" method="post" {{ form_enctype(form) }}>
+  <form action="{{ path('accard_frontend_regimen_update', { patient: (regimen.patient ? regimen.patient.id : null), diagnosis: (regimen.diagnosis ? regimen.diagnosis.id : null), id: regimen.id }) }}" method="post" {{ form_enctype(form) }}>
     <input type="hidden" name="_method" value="PUT">
     {{ form_widget(form._token) }}
     {% include ["Theme:Frontend/Regimen:#{prototype}-form.html.twig", "Theme:Frontend/Regimen:form.html.twig"] with { regimen: regimen } %}

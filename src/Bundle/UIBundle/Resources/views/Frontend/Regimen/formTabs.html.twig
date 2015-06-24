@@ -1,0 +1,13 @@
+<ul class="nav nav-tabs grid-tabs" role="tablist">
+    <li class="active">
+        <a href="#regimen-base" role="tab" data-toggle="tab">{{ 'accard.interface.nav.regimen.base'|trans }}</a>
+    </li>
+    <li>
+        <a href="#regimen-custom" role="tab" data-toggle="tab">{{ 'accard.interface.nav.regimen.custom'|trans }}</a>
+    </li>
+    {% if showActivityTab is defined and showActivityTab %}
+    <li>
+        <a href="#regimen-activities" role="tab" data-toggle="tab">{{ 'accard.interface.nav.regimen.activities'|trans }}</a>
+    </li>
+    {% endif %}
+</ul>

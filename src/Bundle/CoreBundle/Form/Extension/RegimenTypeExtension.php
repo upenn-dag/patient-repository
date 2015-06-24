@@ -113,9 +113,12 @@ class RegimenTypeExtension extends AbstractTypeExtension
             }
         }
 
+        $disablePt = (boolean) $patient;
+        $disableDx = (boolean) $diagnosis;
+
         if ($options['use_patient']) {
             $builder->add('patient', 'accard_patient_choice', array(
-                'disabled' => $disableFields,
+                'disabled' => $disablePt,
             ));
         }
 
@@ -123,13 +126,13 @@ class RegimenTypeExtension extends AbstractTypeExtension
             $builder
                 ->add('diagnosis', 'accard_diagnosis_choice', array(
                     'required' => false,
-                    'disabled' => $disableFields,
+                    'disabled' => $disableDx,
                 ))
                 ->addEventSubscriber(new PatientDiagnosesListener($this->diagnosisRepository))
             ;
         }
 
-        $activitiesAllowed = ($regimen && (($diagnosis && $patient) || $diagnosis));
+        $activitiesAllowed = ($regimen && (($patient && $diagnosis) || $diagnosis));
 
         if ($activitiesAllowed && $options['use_activities']) {
 
@@ -189,7 +192,7 @@ class RegimenTypeExtension extends AbstractTypeExtension
     {
         $resolver
             ->setDefaults(array(
-                'use_patient' => true,
+                'use_patient' => false,
                 'use_diagnosis' => true,
                 'use_activities' => true,
             ))
