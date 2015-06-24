@@ -707,13 +707,18 @@ var LeftDrawer = React.createClass({displayName: "LeftDrawer",
         ), 
         React.createElement("li", {className: "divider"}), 
         React.createElement("li", null, React.createElement("a", {href: "#", onClick: this._handleNewPatientClick}, "New Patient")), 
-        React.createElement("li", null, React.createElement("a", {href: "#"}, "Outcomes")), 
-        React.createElement("li", null, React.createElement("a", {href: "#"}, "Reports")), 
-        React.createElement("li", null, React.createElement("a", {href: "#"}, "System Log")), 
+        React.createElement("li", null, React.createElement("a", {href: "#", onClick: this.comingSoon}, "Outcomes")), 
+        React.createElement("li", null, React.createElement("a", {href: "#", onClick: this.comingSoon}, "Reports")), 
+        React.createElement("li", null, React.createElement("a", {href: "#", onClick: this.comingSoon}, "System Log")), 
         React.createElement("li", {className: "divider"}), 
         React.createElement("li", null, React.createElement("a", {href: "#"}, "Credits"))
       )
     );
+  },
+
+  comingSoon:function(e) {
+    if (e.preventDefault) e.preventDefault();
+    alert('Coming soon! This feature has been planned for the near future, and will become available upon completion.');
   },
 
   _handlePatientClick:function(e) {
@@ -1762,7 +1767,7 @@ start(initConfig)
 ;
 
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_784d222e.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_be5b65e6.js","/")
 },{"+7ZJp0":97,"./accard":1,"./api":2,"bluebird":37,"buffer":93}],24:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var EventEmitter = require('events').EventEmitter;
