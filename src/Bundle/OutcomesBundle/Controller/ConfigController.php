@@ -17,7 +17,7 @@ use FOS\RestBundle\Controller\FOSRestController as Controller;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class OutcomesController extends Controller
+class ConfigController extends Controller
 {
     public function getConfigsAction()
     {
