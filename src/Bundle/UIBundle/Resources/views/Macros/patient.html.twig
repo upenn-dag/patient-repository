@@ -1,0 +1,19 @@
+{% macro displayRace(race) %}
+  {{- "accard.patient.race.#{race|replace(' ', '_')}"|trans -}}
+{% endmacro %}
+
+{% macro displayGender(gender) %}
+  {{- "accard.patient.gender.#{gender}"|trans -}}
+{% endmacro %}
+
+{% macro genderToIcon(gender) %}
+{% spaceless %}
+  {% if gender and gender == constant('Accard\\Component\\Patient\\Model\\PatientInterface::GENDER_MASCULINE') %}
+    <span class="fa fa-mars"></span>
+  {% elseif gender and gender == constant('Accard\\Component\\Patient\\Model\\PatientInterface::GENDER_FEMININE') %}
+    <span class="fa fa-venus"></span>
+  {% else %}
+    <span class="fa fa-question"></span>
+  {% endif %}
+{% endspaceless %}
+{% endmacro %}

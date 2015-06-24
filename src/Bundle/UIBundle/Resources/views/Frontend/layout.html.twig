@@ -1,0 +1,59 @@
+{%- set general = accard_settings('general') -%}
+
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    {%- block title general.title|default('accard.interface.frontend.title'|trans) -%}
+  </title>
+
+  {% block stylesheets -%}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/accardui/css/accard.css') }}">
+  {% endblock %}
+
+  <script type="text/javascript">
+    window.accardReady = false;
+    function isAccardReady() {
+      return window.accardReady;
+    }
+    window.isAccardReady = isAccardReady;
+  </script>
+</head>
+<body class="inner-content">
+
+{% block flashes -%}
+  {%- for type in ['success', 'warning', 'error'] -%}
+    {%- for flash in app.session.flashbag.get(type) -%}
+    <div class="alert alert-{{ type == 'error' ? 'danger' : type == 'notice' ? 'warning' : type }}">
+      <a class="close" data-dismiss="alert" href="#">×</a>
+      {{ flash|trans }}
+    </div>
+    {%- endfor -%}
+  {%- endfor -%}
+{%- endblock %}
+
+{% block main -%}
+<div class="container-fluid">
+  {% block content 'accard.message.no_content_found'|trans %}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+  <script src="{{ asset('bundles/accardui/js/vendor/jquery.min.js') }}"></script>
+  <script src="{{ asset('bundles/accardui/js/vendor/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('bundles/accardui/js/utils.js') }}"></script>
+  <script src="{{ asset('bundles/accardui/js/platform.js') }}"></script>
+  <script src="{{ asset('bundles/accardui/js/forms.js') }}"></script>
+  <script type="text/javascript">
+  $(function() {
+    window.accardReady = true;
+  });
+  </script>
+{% endblock %}
+</body>
+
+</html>

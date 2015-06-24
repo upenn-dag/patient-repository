@@ -1,0 +1,104 @@
+#accard-tray-area {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  >div {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 4;
+
+    /* Animation */
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+
+    >button {
+      float: right;
+      margin-right: @interface-padding-lg;
+      padding: 0;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  }
+
+  >div.tray-opened {
+    height: 200px;
+
+    @media (min-height: 400px)  {
+      height: 300px;
+    }
+
+    @media (min-height: 500px)  {
+      height: 400px;
+    }
+
+    @media (min-height: 600px) {
+      height: 500px;
+    }
+
+    @media (min-height: 700px) {
+      height: 575px;
+    }
+
+    @media (min-height: 750px) {
+      height: 625px;
+    }
+  }
+
+  >div.tray-closed {
+    height: 40px;
+  }
+
+  .tab-content {
+    background: @interface-overlay-color-dark;
+    padding: @interface-padding-lg;
+    height: 100%;
+  }
+}
+
+#accard-tray-wrapper {
+  height: 100%;
+
+  >div {
+    height: 100%;
+  }
+}
+
+.accard-trays {
+  height: 100%;
+}
+
+.accard-tray {
+  background: rgb(20, 20, 20);
+  height: 100%;
+}
+
+ul.nav-tray {
+  padding: 0 20px;
+
+  >li {}
+
+  >li > a {
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  >li > a:hover {
+    background-color: @interface-overlay-color-dark;
+  }
+}
+
+ul.nav-tray > li.active > a,
+ul.nav-tray > li.active > a:hover,
+ul.nav-tray > li.active > a:active {
+  background-color: @interface-overlay-color-dark !important;
+}
+
+

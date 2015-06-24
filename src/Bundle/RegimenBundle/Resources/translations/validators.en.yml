@@ -12,5 +12,6 @@ accard:
             datetime: Start date must be a valid date.
         end_date:
             datetime: Start date must be a valid date.
+        end_date_before_start_date:  Start date must be after end date
     regimen_prototype:
     regimen_field: ~

@@ -46,7 +46,7 @@ class SampleTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($options['use_patient']) {
-            $builder->add('patient', 'accard_patient_choice');
+            $builder->add('patient', 'accard_patient_choice', array());
         }
     }
 
@@ -57,7 +57,7 @@ class SampleTypeExtension extends AbstractTypeExtension
     {
         $resolver
             ->setDefaults(array(
-                'use_patient' => true,
+                'use_patient' => false,
             ))
         ;
     }

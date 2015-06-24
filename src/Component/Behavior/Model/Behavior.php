@@ -102,6 +102,6 @@ class Behavior implements BehaviorInterface
      */
     public function isAfterStartDate()
     {
-        return ($this->startDate < $this->endDate);
+        return null === $this->endDate || ($this->startDate < $this->endDate);
     }
 }

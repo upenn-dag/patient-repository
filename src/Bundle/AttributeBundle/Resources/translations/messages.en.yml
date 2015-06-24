@@ -9,6 +9,7 @@ accard:
     attribute:
         entity_name: Attribute
         attributes: Attributes
+        not_found: No attributes found.
         form:
             description: Description
             id: Id

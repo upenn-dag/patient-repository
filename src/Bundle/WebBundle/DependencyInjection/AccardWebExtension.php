@@ -28,7 +28,7 @@ class AccardWebExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        foreach (array('services', 'twig', 'menu', 'forms') as $config) {
+        foreach (array('menu') as $config) {
             $loader->load("$config.yml");
         }
     }

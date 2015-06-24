@@ -1,0 +1,30 @@
+{% extends 'AccardUIBundle:Frontend:layout.html.twig' %}
+{% from 'AccardUIBundle:Macros:action.html.twig' import create %}
+
+{% block content %}
+
+  {% block diagnosis_header %}
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>
+          {{- 'accard.creating'|trans({ '%created%': 'diagnosis' }) -}}
+        </h2>
+      </div>
+    </div>
+  {% endblock diagnosis_header %}
+
+  {% block diagnosis_errors %}
+    {{ form_errors(form) }}    
+  {% endblock %}
+
+  {% block diagnosis_form %}
+    <form action="{{ path('accard_frontend_diagnosis_create', { patient: diagnosis.patient.id }) }}" method="post" {{ form_enctype(form) }}>
+      {{ form_widget(form._token) }}
+      {% include "Theme:Frontend/Diagnosis:form.html.twig" with { diagnosis: diagnosis } %}
+      <div class="row">
+        <div class="col-md-12">{{ create() }}</div>
+      </div>
+    </form>
+  {% endblock %}
+
+{% endblock %}

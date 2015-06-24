@@ -6,4 +6,4 @@ Accard\Component\Behavior\Model\Behavior:
             - Date: ~ 
     getters:
         afterStartDate:
-            - "True" : { message: "accard.behavior.error.end_date_before_start_date", groups: ['accard']}
+            - "True" : { message: 'accard.behavior.end_date_before_start_date', groups: ['accard']}

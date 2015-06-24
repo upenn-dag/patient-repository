@@ -1,0 +1,207 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body.inner-content {
+  background: transparent;
+  overflow: auto;
+  padding-bottom: 100px;
+}
+
+body > div:not([class]) {
+  height: 100%;
+}
+
+* { cursor: inherit; }
+
+html.waiting,
+html.waiting *
+html.waiting div {
+  cursor: wait !important;
+}
+
+/* Content */
+.accard-content-area {
+  background-color: @interface-main-color;
+  padding-top: @navbar-height;
+  overflow: hidden;
+  height: 100%;
+
+  iframe {
+    height: 100%;
+    width: 100%;
+    border: 0;
+  }
+}
+
+.accard-content-wrapper {
+  height: 100%;
+  padding: 10px (@grid-gutter-width) 60px (@grid-gutter-width);
+}
+
+.accard-content {
+  height: 100%;
+
+  >div {
+    height: 100%;
+  }
+}
+
+.accard-main-wrapper {
+  height: 100%;
+  padding: (@grid-gutter-width/2);
+  background: @interface-overlay-color-light;
+  overflow: hidden;
+  border-right: @interface-overlay-color-dark;
+}
+
+.inset {
+  padding: (@grid-gutter-width/2);
+  background: @interface-overlay-color-mid;
+
+  -webkit-box-shadow: inset 1px 1px 5px 0px @interface-overlay-color-mid;
+     -moz-box-shadow: inset 1px 1px 5px 0px @interface-overlay-color-mid;
+          box-shadow: inset 1px 1px 5px 0px @interface-overlay-color-mid;
+}
+
+
+@media (max-width: 767px) {
+  .accard-content-area {
+    padding-top: 113px;
+  }
+}
+
+/* Delete form */
+.delete-action-form {
+    display: inline;
+}
+
+/* Extend fixed-table-data.css with active stuff... */
+.accardFixedDataTableRow:hover {
+  background-color: lighten(@interface-main-color, 70%); 
+}
+
+.accardFixedDataTableRow .public_fixedDataTableCell_main {
+  background-color: transparent;
+}
+/*.accardFixedDataTableRow:hover {
+  cursor: pointer;
+}*/
+.accardFixedDataTableRow:active,
+.accardFixedDataTableRow.active {
+  background-color: lighten(@interface-main-color, 60%);
+}
+
+.accardFixedDataTableCell {
+  background-color: rgb(255, 255, 255);
+}
+
+/*.table-sorter:hover {
+  cursor: ns-resize;
+}*/
+
+/* Extend react-bootstrap */
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}
+
+.accard-input-modal {
+  height: 100%;
+
+  >div {
+    height: 100%;
+  }
+
+  .modal {
+    height: 100%;
+
+    .modal-dialog {
+      height: 90%;
+      width: 92%;
+
+      .modal-content {
+        height: 100%;
+
+        .modal-body {
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+}
+
+
+/* Font awesome extensions */
+.fa-venus { color: @brand-female; }
+.fa-mars { color: @brand-male; }
+
+
+/* Bootstrap stuff */
+label {
+  font-weight: 300;
+}
+
+label.required {
+  font-weight: 400;
+}
+
+.form-actions {
+  border-top: 1px solid @gray-lighter;
+  padding-top: @padding-large-vertical;
+  margin-top: @padding-large-vertical;
+}
+
+form[data-accard="formdelete"], form[data-accard="formmodal"] {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.grid-tabs {
+  margin-bottom: @padding-large-vertical;
+}
+
+.table-accard {
+  background: #fff;
+}
+
+.caret.caret-reversed {
+  border-top-width: 0;
+  border-bottom: 4px solid #fff;
+}
+
+.diagnosis {
+  margin-bottom: @interface-padding-md;
+}
+
+/* Iframe buttons */
+.iframe-buttons {
+  float: right;
+  position: absolute;
+  top: @padding-large-vertical;
+  right: @padding-large-horizontal;
+  z-index: (@zindex-modal + 10);
+  margin: @padding-small-vertical @padding-small-horizontal;
+
+  .closer, .refresher {
+    background-color: @interface-main-color;
+    color: rgb(255, 255, 255);
+    font-size: @font-size-small;
+    padding: @padding-base-vertical @padding-base-horizontal;
+    margin-left: @padding-small-horizontal;
+    border: 0;
+    opacity: 0.4;
+  }
+}
+

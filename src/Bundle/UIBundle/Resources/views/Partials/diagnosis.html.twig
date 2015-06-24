@@ -1,0 +1,22 @@
+{% from 'AccardUIBundle:Macros:button.html.twig' import edit_in_modal, delete_with_confirmation %}
+
+<div class="diagnosis">
+  <div class="row">
+    <div class="col-md-12">
+      <h4>
+        {{- diagnosis.code ? diagnosis.code.description : 'No code provided' -}}
+      </h4>
+      <p>This is a diagnosis with code {{ diagnosis.code.description }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-actions">
+        <div class="pull-right">
+          {{ edit_in_modal(path('accard_frontend_diagnosis_update', { patient: diagnosis.patient.id, id: diagnosis.id }), null, 'xs') }}
+          {{ delete_with_confirmation(path('accard_frontend_diagnosis_delete', { patient: diagnosis.patient.id, id: diagnosis.id }), null, 'xs') }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

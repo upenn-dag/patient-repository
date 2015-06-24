@@ -1,0 +1,82 @@
+/**
+ * Variables
+ */
+@rootPath:  "../../..";
+@nodePath: "@{rootPath}/node_modules";
+
+/**
+ * Bootstrap import (copy/paste from bootstrap, replacing variables).
+ */
+// Core variables and mixins
+//@import "@{nodePath}/bootstrap/less/variables"; // REPLACE WITH OURS
+@import "default-theme"; 
+@import "@{nodePath}/bootstrap/less/mixins";
+
+// Reset and dependencies
+@import "@{nodePath}/bootstrap/less/normalize";
+//@import "@{nodePath}/bootstrap/less/print";
+//@import "@{nodePath}/bootstrap/less/glyphicons";
+
+// Core CSS
+@import "@{nodePath}/bootstrap/less/scaffolding";
+@import "@{nodePath}/bootstrap/less/type";
+//@import "@{nodePath}/bootstrap/less/code";
+@import "@{nodePath}/bootstrap/less/grid";
+@import "@{nodePath}/bootstrap/less/tables";
+@import "@{nodePath}/bootstrap/less/forms";
+@import "@{nodePath}/bootstrap/less/buttons";
+
+// Components
+@import "@{nodePath}/bootstrap/less/component-animations";
+@import "@{nodePath}/bootstrap/less/dropdowns";
+@import "@{nodePath}/bootstrap/less/button-groups";
+@import "@{nodePath}/bootstrap/less/input-groups";
+@import "@{nodePath}/bootstrap/less/navs";
+@import "@{nodePath}/bootstrap/less/navbar";
+//@import "@{nodePath}/bootstrap/less/breadcrumbs";
+@import "@{nodePath}/bootstrap/less/pagination";
+//@import "@{nodePath}/bootstrap/less/pager";
+@import "@{nodePath}/bootstrap/less/labels";
+@import "@{nodePath}/bootstrap/less/badges";
+//@import "@{nodePath}/bootstrap/less/jumbotron";
+//@import "@{nodePath}/bootstrap/less/thumbnails";
+@import "@{nodePath}/bootstrap/less/alerts";
+@import "@{nodePath}/bootstrap/less/progress-bars";
+@import "@{nodePath}/bootstrap/less/media";
+//@import "@{nodePath}/bootstrap/less/list-group";
+@import "@{nodePath}/bootstrap/less/panels";
+@import "@{nodePath}/bootstrap/less/responsive-embed";
+//@import "@{nodePath}/bootstrap/less/wells";
+@import "@{nodePath}/bootstrap/less/close";
+
+// Components w/ JavaScript
+@import "@{nodePath}/bootstrap/less/modals";
+@import "@{nodePath}/bootstrap/less/tooltip";
+//@import "@{nodePath}/bootstrap/less/popovers";
+//@import "@{nodePath}/bootstrap/less/carousel";
+
+// Utility classes
+@import "bootswatch"; // PROVIDED BY BOOTSWATCH
+@import "@{nodePath}/bootstrap/less/utilities";
+@import "@{nodePath}/bootstrap/less/responsive-utilities";
+
+/**
+ * Dependencies!
+ */
+@import "@{nodePath}/font-awesome/less/font-awesome";
+//@import "@{nodePath}/bootstrap3-dialog/src/less/bootstrap-dialog";
+@import "animate";
+@import "fixed-data-table";
+
+/**
+ * Components.
+ */
+@import "custom";
+@import "components/buttons";
+@import "components/drawer";
+@import "components/inspector";
+@import "components/layout";
+@import "components/navbar";
+@import "components/sidebar";
+@import "components/tray";
+@import "components/filter";

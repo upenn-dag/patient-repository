@@ -5,31 +5,12 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
-accard_frontend:
-    resource: @AccardWebBundle/Resources/config/routing/frontend/main.yml
+# accard_frontend:
+#    resource: @AccardWebBundle/Resources/config/routing/frontend/main.yml
 
 accard_backend:
     resource: @AccardWebBundle/Resources/config/routing/backend/main.yml
     prefix: /administration
-
-accard_api:
-    type: rest
-    resource: @AccardWebBundle/Resources/config/routing/api/main.yml
-    prefix: /api
-
-accard_partial:
-    resource: @AccardWebBundle/Resources/config/routing/partial/main.yml
-    prefix: /partial
-
-#accard_outcomes:
-#    type: rest
-#    prefix: /outcomes
-#    #name_prefix: outcomes_
-#    resource: Accard\Bundle\OutcomesBundle\Controller\OutcomesController
-
-accard_outcomes:
-    resource: @AccardOutcomesBundle/Resources/config/routing.yml
-    prefix: /outcomes
 
 accard_login:
     path: /login
@@ -41,3 +22,22 @@ accard_login_check:
 
 accard_logout:
     path: /logout
+
+# accard_api:
+#     type: rest
+#     resource: @AccardWebBundle/Resources/config/routing/api/main.yml
+#     prefix: /api
+
+# accard_partial:
+#     resource: @AccardWebBundle/Resources/config/routing/partial/main.yml
+#     prefix: /partial
+
+#accard_outcomes:
+#    type: rest
+#    prefix: /outcomes
+#    #name_prefix: outcomes_
+#    resource: Accard\Bundle\OutcomesBundle\Controller\OutcomesController
+
+# accard_outcomes:
+#     resource: @AccardOutcomesBundle/Resources/config/routing.yml
+#     prefix: /outcomes

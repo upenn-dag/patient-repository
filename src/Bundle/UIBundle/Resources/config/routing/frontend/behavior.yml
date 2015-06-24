@@ -1,0 +1,48 @@
+accard_frontend_behavior_show:
+    pattern: /{id}
+    methods: [GET]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.behavior:showAction
+        _accard:
+            template: Theme:Frontend/Behavior:show.html.twig
+    options:
+        expose: true
+
+accard_frontend_behavior_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.behavior:createAction
+        _accard:
+            template: Theme:Frontend/Behavior:create.html.twig
+            redirect:
+                route: accard_frontend_behavior_update
+                parameters: { patient: $patient, id: resource.id }
+    options:
+        expose: true
+
+accard_frontend_behavior_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT, POST]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.behavior:updateAction
+        _accard:
+            template: Theme:Frontend/Behavior:update.html.twig
+            redirect:
+                route: accard_frontend_behavior_update
+                parameters: { patient: $patient, id: $id }
+    options:
+        expose: true
+
+accard_frontend_behavior_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.behavior:deleteAction
+        _accard:
+            redirect:
+                route: accard_frontend_deleted
+                parameters: { type: 'behavior', id: $id }

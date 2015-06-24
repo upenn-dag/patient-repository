@@ -7,10 +7,8 @@
 
 parameters:
 
-    accard.menu_builder.frontend.class: Accard\Bundle\WebBundle\Menu\FrontendMenuBuilder
     accard.menu_builder.backend.class: Accard\Bundle\WebBundle\Menu\BackendMenuBuilder
     accard.menu_builder.event.backend.sidebar.class: Accard\Bundle\WebBundle\EventListener\BackendMenuSubscriber
-    accard.menu_builder.event.frontend.sidebar.class: Accard\Bundle\WebBundle\EventListener\FrontendMenuSubscriber
 
 services:
 
@@ -43,37 +41,5 @@ services:
 
     accard.menu_builder.event.backend.sidebar:
         class: %accard.menu_builder.event.backend.sidebar.class%
-        tags:
-            - { name: kernel.event_subscriber }
-
-    accard.menu_builder.frontend:
-        class: %accard.menu_builder.frontend.class%
-        arguments:
-            - "@knp_menu.factory"
-            - "@security.context"
-            - "@translator"
-            - "@event_dispatcher"
-            - "@accard.settings.manager"
-
-    accard.menu.frontend.main:
-        class: Knp\Menu\MenuItem
-        factory_service: accard.menu_builder.frontend
-        factory_method: createMainMenu
-        arguments: ["@request"]
-        scope: request
-        tags:
-            - { name: knp_menu.menu, alias: accard.frontend.main }
-
-    accard.menu.frontend.sidebar:
-        class: Knp\Menu\MenuItem
-        factory_service: accard.menu_builder.frontend
-        factory_method: createSidebarMenu
-        arguments: ["@request"]
-        scope: request
-        tags:
-            - { name: knp_menu.menu, alias: accard.frontend.sidebar }
-
-    accard.menu_builder.event.frontend.sidebar:
-        class: %accard.menu_builder.event.frontend.sidebar.class%
         tags:
             - { name: kernel.event_subscriber }

@@ -1,0 +1,54 @@
+{% from 'AccardUIBundle:Macros:misc.html.twig' import prototype_dropdown %}
+{% from 'AccardUIBundle:Macros:button.html.twig' import delete_with_confirmation, edit_in_modal %}
+
+{% set prototypes = accard_prototypes('behavior') %}
+{% set selector = prototype_dropdown('behavior', prototypes, patient) %}
+
+{% if behaviors|length > 0 %}
+  <table id="behaviors" class="behavior-table table table-accard table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="start-date">{{ 'accard.behavior.form.start_date'|trans }}</th>
+        <th class="end-date">{{ 'accard.behavior.form.end_date'|trans }}</th>
+        <th class="prototype">{{ 'accard.behavior.form.prototype'|trans }}</th>
+        <th class="description">{{ 'accard.behavior.form.description'|trans }}</th>
+        <th class="actions">{{ selector }}</th>
+      </tr>
+    </thead>
+    <tbody data-accard="prototypes" style="display: none">
+      <tr>
+        <th class="text-center" colspan="5">
+          <div class="btn-group" data-toggle="buttons">
+          {% for prototype in prototypes %}
+            <label class="btn btn-primary">
+              <input type="radio" name="prototypes" id="prototype-{{ prototype.name }}" data-accard="{{ prototype.name }}" autocomplete="off"> {{ prototype.presentation }}
+            </label>
+          {% endfor %}
+          </div>
+        </th>
+      </tr>
+    </tbody>
+    <tbody>
+    {% for behavior in behaviors %}
+      <tr id="behavior-{{ behavior.id }}">
+        <td class="start-date">{{ behavior.startDate|localizeddate('medium', 'none') }}</td>
+        <td class="end-date">{{ behavior.endDate ? behavior.endDate|localizeddate('medium', 'none') : 'accard.ongoing'|trans }}</td>
+        <td class="prototype">{{ behavior.prototype.presentation }}</td>
+        <td class="description">{{ behavior.description }}</td>
+        <td class="actions">
+          <div class="pull-right">
+            {{ edit_in_modal(path('accard_frontend_behavior_update', { patient: behavior.patient.id, id: behavior.id }), null, 'xs') }}
+            {{ delete_with_confirmation(path('accard_frontend_behavior_delete', { patient: behavior.patient.id, id: behavior.id }), null, 'xs') }}
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <div class="alert alert-info">
+    {{ selector }}
+    <h4 class="alert-heading">{{ 'accard.alert.info'|trans }}</h4>
+    <p>{{ 'accard.behavior.not_found'|trans }}</p>
+  </div>
+{% endif %}

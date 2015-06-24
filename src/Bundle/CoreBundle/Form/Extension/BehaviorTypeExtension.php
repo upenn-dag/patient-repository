@@ -13,6 +13,7 @@ namespace Accard\Bundle\CoreBundle\Form\Extension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Diagnosis form type extension.
@@ -27,7 +28,7 @@ class BehaviorTypeExtension extends AbstractTypeExtension
      * Constructor.
      *
      * @param string $patientClass
-     * 
+     *
      */
     public function __construct($patientClass)
     {
@@ -39,10 +40,19 @@ class BehaviorTypeExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('patient', 'entity', array(
-                'class' => $this->patientClass,
-                'property' => 'fullName',
+        if ($options['use_patient']) {
+            $builder->add('patient', 'accard_patient_choice', array());
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver
+            ->setDefaults(array(
+                'use_patient' => false,
             ))
         ;
     }

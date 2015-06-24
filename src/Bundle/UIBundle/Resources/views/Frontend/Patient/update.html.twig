@@ -1,0 +1,28 @@
+{% extends 'AccardUIBundle:Frontend/Patient:create.html.twig' %}
+
+{% from 'AccardUIBundle:Macros:action.html.twig' import update %}
+{% from 'AccardUIBundle:Macros:button.html.twig' import generic %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>
+        Updating {{ patient.fullName }}
+      </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      {{ form_errors(form) }}
+    </div>
+  </div>
+
+  <form action="{{ path('accard_frontend_patient_update', { id: patient.id }) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form._token) }}
+    {% include 'Theme:Frontend/Patient:form.html.twig' %}
+    <div class="row">
+        <div class="col-md-12">{{ update() }}</div>
+    </div>
+  </form>
+{% endblock %}

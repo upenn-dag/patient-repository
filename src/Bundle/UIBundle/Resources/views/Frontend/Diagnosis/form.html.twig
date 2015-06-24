@@ -1,0 +1,17 @@
+{% from 'AccardUIBundle:Macros:form.html.twig' import prototype, static %}
+
+<div class="row">
+  <div class="col-md-6">
+    {% if diagnosis is defined and diagnosis and diagnosis.patient %}
+      {{ static(diagnosis.patient.fullName, 'accard.patient.entity_name'|trans) }}
+    {% endif %}
+    {{ form_row(form.code) }}
+    {{ form_row(form.startDate) }}
+    {{ form_row(form.endDate) }}
+  </div>
+  <div class="col-md-6">
+  {% for field in form.fields %}
+    {{ prototype(field) }}
+  {% endfor %}
+  </div>
+</div>

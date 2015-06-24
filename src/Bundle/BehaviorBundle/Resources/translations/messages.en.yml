@@ -9,11 +9,14 @@ accard:
     behavior:
         entity_name: Behavior
         behaviors: Behaviors
+        not_found: No behaviors found.
         form:
             description: Description
             id: Id
             prototype: Prototype
             prototype_label: Behavior Type
+            start_date: Start Date
+            end_date: End Date
         action:
             add: Add Behavior
             create: Create Behavior
@@ -28,8 +31,6 @@ accard:
             create: Create a New Behavior
             update: Update Behavior
             list: Behaviors
-        error:
-            end_date_before_start_date:  Start date must be after end date
     behavior_prototype:
         entity_name: Behavior Prototype
         form:

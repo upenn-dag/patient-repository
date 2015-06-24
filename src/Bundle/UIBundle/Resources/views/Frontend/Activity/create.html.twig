@@ -1,0 +1,31 @@
+{% extends 'AccardUIBundle:Frontend:layout.html.twig' %}
+{% from 'AccardUIBundle:Macros:action.html.twig' import create %}
+{% set prototype = activity.prototype is defined ? activity.prototype.name : 'default' %}
+
+{% block content %}
+
+  {% block activity_header %}
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>
+          {{- 'accard.creating'|trans({ '%created%': prototype }) -}}
+        </h2>
+      </div>
+    </div>
+  {% endblock activity_header %}
+
+  {% block activity_errors %}
+    {{ form_errors(form) }}    
+  {% endblock %}
+
+  {% block activity_form %}
+    <form action="{{ path('accard_frontend_activity_create', { patient: activity.patient.id, prototype: prototype }) }}" method="post" {{ form_enctype(form) }}>
+      {{ form_widget(form._token) }}
+      {% include ["Theme:Frontend/Activity:#{prototype}-form.html.twig", "Theme:Frontend/Activity:form.html.twig"] with { activity: activity } %}
+      <div class="row">
+        <div class="col-md-12">{{ create() }}</div>
+      </div>
+    </form>
+  {% endblock %}
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'AccardUIBundle:Frontend/Diagnosis:create.html.twig' %}
+{% from 'AccardUIBundle:Macros:action.html.twig' import update %}
+
+{% set prototype = diagnosis.prototype is defined ? diagnosis.prototype.name : 'default' %}
+
+{% block diagnosis_header %}
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>
+        {{- 'accard.updating'|trans({ '%updated%': 'diagnosis' }) -}}
+      </h2>
+    </div>
+  </div>
+{% endblock diagnosis_header %}
+
+{% block diagnosis_form %}
+  {% set updatePath = path('accard_frontend_diagnosis_update', { patient: diagnosis.patient.id, id: diagnosis.id }) %}
+  <form action="{{ updatePath }}" method="post" {{ form_enctype(form) }}>
+    <input type="hidden" name="_method" value="PUT">
+    {{ form_widget(form._token) }}
+    {% include "Theme:Frontend/Diagnosis:form.html.twig" with { diagnosis: diagnosis } %}
+    <div class="row">
+        <div class="col-md-12">{{ update() }}</div>
+    </div>
+    </div>
+  </form>
+{% endblock diagnosis_form %}

@@ -1,0 +1,115 @@
+{% extends 'AccardUIBundle:Frontend:layout.html.twig' %}
+{% from _self import makeTab %}
+{% from 'AccardUIBundle:Macros:button.html.twig' import update, delete_with_confirmation %}
+{% from 'AccardUIBundle:Macros:patient.html.twig' import displayRace, displayGender, genderToIcon %}
+
+{% macro makeTab(id, label, active) %}
+  <li role="presentation"{% if active %}class="active"{% endif %}>
+    <a href="#{{ id }}" aria-controls="{{ id }}" role="tab" data-toggle="tab">{{ label }}</a>
+  </li>
+{% endmacro %}
+
+{% block content %}
+
+  {% block patient_header %}
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>
+        {{- genderToIcon(patient.gender) }} {{ patient.fullName -}}
+      </h2>
+    </div>
+  </div>
+  {% endblock patient_header %}
+
+  {% block patient_content %}
+  <div class="row">
+    <div class="col-sm-3">
+    {% block patient_show_column_1 %}
+      <div class="row">
+        <div class="col-xs-6 col-sm-12">
+          {% block patient_show_details %}
+          <h3>Patient details</h3>
+          <ul class="list-unstyled">
+            <li><span title="Medical Record Number">{{ patient.mrn|default('No MRN provided') }}</span></li>
+            <li>
+              {{ patient.race ? displayRace(patient.race) : '' }}{{ patient.gender ? (", " ~ displayGender(patient.gender)) : '' }}</li>
+            <li>Born {{ patient.dateOfBirth ? patient.dateOfBirth|localizeddate('medium', 'none') : 'none' }}</li>
+            {% if patient.dateOfDeath %}<li>Died {{ patient.dateOfDeath|localizeddate('medium', 'none') }}</li>{% endif %}
+            <li>&nbsp;</li>
+            <li>
+              {{ update(path('accard_frontend_patient_update', { id: patient.id }), null, 'xs') }}
+              {# path('accard_frontend_patient_delete', { id: patient.id }) #}
+              {# delete_with_confirmation('', null, 'xs', true) #}
+            </li>
+          </ul>
+          {% endblock patient_show_details %}
+        </div>
+
+        <div class="col-xs-6 col-sm-12">
+          {% block patient_show_custom_details %}
+          <h3>Custom details</h3>
+          <ul class="list-unstyled">
+          {% for field in patient.fields %}
+            <li><strong>{{ field.name|humanize }}</strong> {{ field.value }}</li>
+          {% else %}
+            <li>No custom fields collected</li>
+          {% endfor %}
+          </ul>
+          {% endblock patient_show_custom_details %}
+        </div>
+      </div>
+    {% endblock patient_show_column_1 %}
+    </div>
+
+    <hr class="visible-xs hidden-sm hidden-md hidden-lg">
+
+    <div class="col-sm-9">
+    {% block patient_show_column_2 %}
+      <div role="tabpanel">
+        <ul class="nav nav-tabs grid-tabs" role="tablist">
+          {% block patient_show_tab_diagnoses makeTab('diagnoses', 'Diagnoses', true) %}
+          {% block patient_show_tab_activities makeTab('activities', 'Activities') %}
+          {% block patient_show_tab_regimens makeTab('regimens', 'Regimens') %}
+          {% block patient_show_tab_behaviors makeTab('behaviors', 'Behaviors') %}
+          {% block patient_show_tab_attributes makeTab('attributes', 'Attributes') %}
+          {% block patient_show_tab_samples makeTab('samples', 'Samples') %}
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="diagnoses">
+          {% block patient_show_tabcontent_diagnoses %}
+            {% include 'Theme:Frontend/Patient:diagnoses.html.twig' with { patient: patient, diagnoses: patient.diagnoses } %}
+          {% endblock patient_show_tabcontent_diagnoses %}
+          </div>
+          <div role="tabpanel" class="tab-pane" id="activities">
+          {% block patient_show_tabcontent_activities %}
+            {% include 'Theme:Frontend/Patient:activities.html.twig' with { patient: patient, activities: patient.activities } %}
+          {% endblock patient_show_tabcontent_activities %}
+          </div>
+          <div role="tabpanel" class="tab-pane" id="regimens">
+          {% block patient_show_tabcontent_regimens %}
+            {% include 'Theme:Frontend/Patient:regimens.html.twig' with { patient: patient, regimens: patient.regimens } %}
+          {% endblock patient_show_tabcontent_regimens %}
+          </div>
+          <div role="tabpanel" class="tab-pane" id="behaviors">
+          {% block patient_show_tabcontent_behaviors %}
+            {% include 'Theme:Frontend/Patient:behaviors.html.twig' with { patient: patient, behaviors: patient.behaviors } %}
+          {% endblock patient_show_tabcontent_behaviors %}
+          </div>
+          <div role="tabpanel" class="tab-pane" id="attributes">
+          {% block patient_show_tabcontent_attributes %}
+            {% include 'Theme:Frontend/Patient:attributes.html.twig' with { patient: patient, attributes: patient.attributes } %}
+          {% endblock patient_show_tabcontent_attributes %}
+          </div>
+          <div role="tabpanel" class="tab-pane" id="samples">
+          {% block patient_show_tabcontent_samples %}
+            {% include 'Theme:Frontend/Patient:samples.html.twig' with { patient: patient, samples: patient.samples } %}
+          {% endblock patient_show_tabcontent_samples %}
+          </div>
+        </div>
+      </div>
+    {% endblock patient_show_column_2 %}
+    </div>
+  </div>
+  {% endblock patient_content %}
+
+{% endblock %}

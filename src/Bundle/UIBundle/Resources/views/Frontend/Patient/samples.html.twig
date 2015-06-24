@@ -1,0 +1,53 @@
+{% from 'AccardUIBundle:Macros:misc.html.twig' import prototype_dropdown %}
+{% from 'AccardUIBundle:Macros:button.html.twig' import delete_with_confirmation, edit_in_modal %}
+
+{% set prototypes = accard_prototypes('sample') %}
+{% set selector = prototype_dropdown('sample', prototypes, patient) %}
+
+{% if samples|length > 0 %}
+  <table id="samples" class="sample-table table table-accard table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="prototype">{{ 'accard.sample.form.prototype'|trans }}</th>
+        <th class="amount">{{ 'accard.sample.form.amount'|trans }}</th>
+        <th class="description">{{ 'accard.sample.form.description'|trans }}</th>
+        <th class="actions">{{ selector }} </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody data-accard="prototypes" style="display: none">
+      <tr>
+        <th class="text-center" colspan="4">
+          <div class="btn-group" data-toggle="buttons">
+          {% for prototype in prototypes %}
+            <label class="btn btn-primary">
+              <input type="radio" name="prototypes" id="prototype-{{ prototype.name }}" data-accard="{{ prototype.name }}" autocomplete="off"> {{ prototype.presentation }}
+            </label>
+          {% endfor %}
+          </div>
+        </th>
+      </tr>
+    </tbody>
+    <tbody>
+    {% for sample in samples %}
+      <tr id="sample-{{ sample.id }}">
+        <td class="prototype">{{ sample.prototype.presentation }}</td>
+        <td class="amount">{{ sample.amount }}</td>
+        <td class="description">{{ sample.description }}</td>
+        <td class="actions">
+          <div class="pull-right">
+            {{ edit_in_modal(path('accard_frontend_sample_update', { patient: sample.patient.id, id: sample.id }), null, 'xs') }}
+            {{ delete_with_confirmation(path('accard_frontend_sample_delete', { patient: sample.patient.id, id: sample.id }), null, 'xs') }}
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <div class="alert alert-info">
+    {{ selector }}
+    <h4 class="alert-heading">{{ 'accard.alert.info'|trans }}</h4>
+    <p>{{ 'accard.sample.not_found'|trans }}</p>
+  </div>
+{% endif %}

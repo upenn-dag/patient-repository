@@ -1,0 +1,12 @@
+{% macro prototype(field) %}
+<div class="form-group">
+  {{ form_widget(field) }}
+</div>
+{% endmacro %}
+
+{% macro static(text, label) %}
+<div class="form-group">
+  <label class="control-label">{{ label|default('no label') }}</label>
+  <p class="form-control-static">{{ text }}</p>
+</div>
+{% endmacro %}

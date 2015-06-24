@@ -1,0 +1,19 @@
+{% macro create(url) %}
+<div class="form-actions">
+  <div class="pull-right">
+    <button type="submit" class="btn btn-create btn-primary btn-lg">
+      <i class="icon-ok"></i> {{ 'accard.create'|trans }}
+    </button>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro update(url) %}
+<div class="form-actions">
+  <div class="pull-right">
+    <button type="submit" class="btn btn-update btn-primary btn-lg">
+      <i class="icon-save"></i> {{ 'accard.save_changes'|trans }}
+    </button>
+  </div>
+</div>
+{% endmacro %}

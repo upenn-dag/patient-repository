@@ -30,5 +30,4 @@ services:
         class: %accard.twig.extension.prototype.class%
         calls:
             - ["setContainer", ["@service_container"]]
-        public: false
         tags: [{ name: twig.extension }]

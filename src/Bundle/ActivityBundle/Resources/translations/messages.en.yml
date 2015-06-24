@@ -2,6 +2,7 @@ accard:
     activity:
         entity_name: Activity
         activities: Activities
+        not_found: No activities found.
         regimens: Regimens
         form:
             id: Id

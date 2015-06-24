@@ -1,0 +1,93 @@
+.drawer-handle {
+  position: absolute;
+  left: 0;
+  top: @drawer-handle-vertical-position;
+  padding-left: 2px;
+  width: @interface-padding-lg;
+  height: @drawer-handle-height;
+  z-index: 3;
+
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.65);
+  line-height: 40px;
+  color: @interface-overlay-color-light;
+}
+
+.drawer-open-left {
+  border-left: 0;
+}
+
+.drawer-open-right {
+  border-right: 0;
+  left: auto;
+  right: 0;
+}
+
+.drawer-handle.active, .drawer-handle:active {
+  color: @brand-warning;
+}
+
+.drawer-content {
+  position: absolute;
+  top: 0 !important;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  z-index: 2;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transform: translate3d(0, 0, 0);
+     -moz-transform: translate3d(0, 0, 0);
+      -ms-transform: translate3d(0, 0, 0);
+       -o-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+.drawers {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+}
+
+.drawer {
+  padding-top: @navbar-height;
+  position: absolute;
+  top: 0;
+  right: auto;
+  bottom: 0;
+  left: auto;
+  width: (@drawer-width - 1);
+  height: auto;
+  overflow: auto;
+  z-index: 1;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transition: width 0.3s ease;
+     -moz-transition: width 0.3s ease;
+      -ms-transition: width 0.3s ease;
+       -o-transition: width 0.3s ease;
+          transition: width 0.3s ease;
+}
+
+.drawer-left {
+  left: 0;
+}
+
+.drawer-right {
+  right: 0;
+}
+
+.drawer-left .drawer-right,
+.drawer-right .drawer-left {
+  display: none;
+}
+
+.drawer-expand-left .drawer-left,
+.drawer-expand-right .drawer-right {
+  width: 100%;
+}

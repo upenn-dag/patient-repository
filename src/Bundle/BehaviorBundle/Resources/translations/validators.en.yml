@@ -1,0 +1,3 @@
+accard:
+    diagnosis:
+        end_date_before_start_date:  Start date must be after end date

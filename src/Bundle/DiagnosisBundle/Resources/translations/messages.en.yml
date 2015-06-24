@@ -1,6 +1,7 @@
 accard:
     diagnosis:
         entity_name: Diagnosis
+        not_found: No diagnoses found.
         title: Diagnosis
         form:
             code: Code
@@ -15,6 +16,7 @@ accard:
             create: Create Diagnosis
             design: Design Diagnosis
             manage: Manage Diagnoses
+            update: Update Diagnosis
         message:
             count: %total% diagnoses registered.
             count_fields: Collecting %total% diagnosis fields.

@@ -1,0 +1,33 @@
+accard_frontend_patient_show:
+    pattern: /{id}
+    methods: [GET]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.patient:showAction
+        _accard:
+            template: Theme:Frontend/Patient:show.html.twig
+    options:
+        expose: true
+
+accard_frontend_patient_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.patient:createAction
+        _accard:
+            template: Theme:Frontend/Patient:create.html.twig
+            redirect: accard_frontend_patient_show
+    options:
+        expose: true
+
+accard_frontend_patient_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT, POST]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.patient:updateAction
+        _accard:
+            template: Theme:Frontend/Patient:update.html.twig
+            redirect: accard_frontend_patient_show
+    options:
+        expose: true

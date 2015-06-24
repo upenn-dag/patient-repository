@@ -21,7 +21,7 @@ services:
     accard.twig_filesystem_loader:
         class: Accard\Bridge\Twig\Loader\TwigAccardFilesystemLoader
         arguments:
-            - "AccardWebBundle"
+            - "AccardUIBundle"
             - @templating.locator
             - @templating.name_parser
 

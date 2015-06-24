@@ -1,0 +1,4 @@
+services:
+#    accard_ui.example:
+#        class: Accard\Bundle\UIBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

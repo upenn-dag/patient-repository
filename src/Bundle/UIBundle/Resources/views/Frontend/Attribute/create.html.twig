@@ -1,0 +1,32 @@
+{% extends 'AccardUIBundle:Frontend:layout.html.twig' %}
+{% from 'AccardUIBundle:Macros:action.html.twig' import create %}
+
+{% set prototype = attribute.prototype is defined ? attribute.prototype.name : 'default' %}
+
+{% block content %}
+
+  {% block attribute_header %}
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>
+          {{- 'accard.creating'|trans({ '%created%': prototype }) -}}
+        </h2>
+      </div>
+    </div>
+  {% endblock attribute_header %}
+
+  {% block attribute_errors %}
+    {{ form_errors(form) }}    
+  {% endblock %}
+
+  {% block attribute_form %}
+    <form action="{{ path('accard_frontend_attribute_create', { patient: attribute.patient.id, prototype: prototype }) }}" method="post" {{ form_enctype(form) }}>
+      {{ form_widget(form._token) }}
+      {% include ["Theme:Frontend/Attribute:#{prototype}-form.html.twig", "Theme:Frontend/Attribute:form.html.twig"] with { attribute: attribute } %}
+      <div class="row">
+        <div class="col-md-12">{{ create() }}</div>
+    </div>
+    </form>
+  {% endblock %}
+
+{% endblock %}

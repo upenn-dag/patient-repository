@@ -10,6 +10,7 @@ accard:
         entity_name: Sample
         collections: Collections
         derivations: Derivations
+        not_found: No samples found.
         samples: Samples
         form:
             id: Id

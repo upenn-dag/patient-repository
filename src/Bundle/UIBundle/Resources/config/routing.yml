@@ -1,0 +1,52 @@
+accard_frontend:
+    pattern: /
+    methods: [GET]
+    defaults:
+        _controller: AccardUIBundle:UI:main
+
+accard_frontend_deleted:
+    pattern: /{type}/{id}/deleted
+    requirements:
+        type: patient|diagnosis|activity|attribute|behavior|regimen|sample
+        id: \d+
+    methods: [GET]
+    defaults:
+        _controller: AccardUIBundle:UI:deleted
+
+accard_frontend_patient:
+    resource: @AccardUIBundle/Resources/config/routing/frontend/patient.yml
+    prefix: /patient
+
+accard_frontend_diagnosis:
+    resource: @AccardUIBundle/Resources/config/routing/frontend/diagnosis.yml
+    prefix: /patient/{patient}/diagnosis
+    requirements: { patient: \d+ }
+
+accard_frontend_activity:
+    resource: @AccardUIBundle/Resources/config/routing/frontend/activity.yml
+    prefix: /patient/{patient}/activity
+    requirements: { patient: \d+ }
+
+accard_frontend_regimen:
+    resource: @AccardUIBundle/Resources/config/routing/frontend/regimen.yml
+    prefix: /patient/{patient}/regimen
+    requirements: { patient: \d+ }
+
+accard_frontend_attribute:
+    resource: @AccardUIBundle/Resources/config/routing/frontend/attribute.yml
+    prefix: /patient/{patient}/attribute
+    requirements: { patient: \d+ }
+
+accard_frontend_behavior:
+    resource: @AccardUIBundle/Resources/config/routing/frontend/behavior.yml
+    prefix: /patient/{patient}/behavior
+    requirements: { patient: \d+ }
+
+accard_frontend_sample:
+    resource: @AccardUIBundle/Resources/config/routing/frontend/sample.yml
+    prefix: /patient/{patient}/sample
+    requirements: { patient: \d+ }
+
+accard_outcomes:
+    resource: @AccardOutcomesBundle/Resources/config/routing.yml
+    prefix: /outcomes

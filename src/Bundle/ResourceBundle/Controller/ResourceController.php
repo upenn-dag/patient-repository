@@ -130,6 +130,19 @@ class ResourceController extends FOSRestController implements InitializableContr
     }
 
     /**
+     * Resource send action.
+     *
+     * This action is used to return a resource via API when called.
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function sendAction(Request $request)
+    {
+        // Reserved...
+    }
+
+    /**
      * Resource index action.
      *
      * @param Request $request

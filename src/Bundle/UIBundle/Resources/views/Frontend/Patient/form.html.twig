@@ -1,0 +1,90 @@
+{% from 'AccardUIBundle:Macros:form.html.twig' import prototype %}
+
+{% set count = form.fields|length %}
+{% set half_count = (count/2)|round(0, 'ceil') %}
+
+{% if count > 0 %}
+    {% set row1fields = form.fields|slice(0, half_count) %}
+{% endif %}
+{% if count > 1 %}
+    {% set row2fields = form.fields|slice(half_count, count) %}
+{% endif %}
+
+{% macro phase_form(phase) %}
+{% spaceless %}
+  <div class="row">
+    <div class="col-md-4">
+      {{ form_widget(phase.phase) }}
+    </div>
+    <div class="col-md-3">
+      {{ form_widget(phase.startDate) }}
+    </div>
+    <div class="col-md-3">
+      {{ form_widget(phase.endDate) }}
+    </div>
+  </div>
+  <hr>
+{% endspaceless %}
+{% endmacro %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group{% if form.mrn.vars.errors|length %} has-error{% endif %}">
+      {{ form_widget(form.mrn, {
+          widget_addon_append: { text: 'accard.patient.form.mrn'|trans },
+          attr: {
+              placeholder: 'accard.patient.form.mrn_extended'|trans 
+          }
+      }) }}
+      {% if form.mrn.vars.errors|length %}{{ form_errors(form.mrn) }}{% endif %}
+    </div>
+  </div>
+</div>
+
+{% include 'AccardUIBundle:Frontend/Patient:formTabs.html.twig' %}
+
+<div class="tab-content">
+  <div class="tab-pane fade in active" id="patient-base">
+    <div class="row">
+      <div class="col-md-6">
+        {{ form_row(form.firstName) }}
+        {{ form_row(form.lastName) }}
+        {{ form_row(form.gender) }}
+      </div>
+      <div class="col-md-6">
+        {{ form_row(form.race) }}
+        {{ form_row(form.dateOfBirth) }}
+        {{ form_row(form.dateOfDeath) }}
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="patient-custom">
+    <div class="row">
+      <div class="col-md-6">
+      {% if count > 0 %}
+        {% for field in row1fields %}
+          {{ prototype(field) }}
+        {% endfor %}
+      {% endif %}
+      </div>
+      <div class="col-md-6">
+      {% if count > 1 %}
+        {% for field in row2fields %}
+          {{ prototype(field) }}
+        {% endfor %}
+      {% endif %}
+      </div>
+    </div>
+  </div>
+  {% if accard_setting('patient.collect_phases') %}
+  <div class="tab-pane fade" id="patient-phases">
+    <div class="row">
+      <div id="phases" class="col-md-12" data-prototype="{{ _self.phase_form(form.phases.vars.prototype)|e }}">
+      {% for phase in form.phases %}
+        {{ _self.phase_form(phase) }}
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
