@@ -36,8 +36,8 @@
   <script type="text/javascript">
     window.accardConfig = {
       urls: {
-        routes: '/js/fos_js_routes.js',
-        state: '/app_dev.php/outcomes/state.json'
+        routes: '{{ asset('js/fos_js_routes.js') }}',
+        state: '{{ path('accard_outcomes_state') }}'
       },
       drawers: {
         right: { initialize: false }
