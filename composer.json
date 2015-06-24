@@ -37,7 +37,11 @@
         "jms/serializer-bundle":                 "0.13.*",
         "white-october/pagerfanta-bundle":       "~1.0",
         "lexik/translation-bundle":              "~2.1",
-        "gedmo/doctrine-extensions":             "~2.4"
+        "gedmo/doctrine-extensions":             "~2.4",
+        "willdurand/hateoas-bundle":             "~0.5",
+        "friendsofsymfony/jsrouting-bundle":     "^2.0@dev",
+        "knplabs/knp-menu-bundle":               "~2.0",
+        "symfony/assetic-bundle":                "~2.3"
     },
     "require-dev": {
         "codeception/codeception": "dev-master",
