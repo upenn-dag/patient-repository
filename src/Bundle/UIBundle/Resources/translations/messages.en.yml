@@ -20,6 +20,8 @@ accard:
     filter: Filter
     go: Go
     link: Link
+    none: None
+    no_value: No value
     ongoing: Ongoing
     update: Update
     updating: Updating %updated%

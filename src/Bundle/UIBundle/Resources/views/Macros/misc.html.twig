@@ -16,3 +16,28 @@
     </ul>
   </div>
 {% endmacro %}
+
+{% macro field_value(fv) %}
+{% spaceless %}
+  {% set type = fv.type %}
+  {% if type == constant('Accard\\Component\\Field\\Model\\FieldTypes::CHECKBOX') %}
+    {% if fv.value %}
+      <span class="fa fa-check"></span>
+    {% endif %}
+  {% elseif type == constant('Accard\\Component\\Field\\Model\\FieldTypes::CHOICE') %}
+    {{ fv.allowMultiple ? fv.values|join(', ') : fv.value }}
+  {% elseif type == constant('Accard\\Component\\Field\\Model\\FieldTypes::DATE') %}
+    {{ fv.value ? fv.value|localizeddate('medium', 'none') : '' }}
+  {% elseif type == constant('Accard\\Component\\Field\\Model\\FieldTypes::DATETIME') %}
+    {{ fv.value ? fv.value|localizeddate('medium', 'short') : '' }}
+  {% elseif type == constant('Accard\\Component\\Field\\Model\\FieldTypes::NUMBER') %}
+    {{ fv.value }}
+  {% elseif type == constant('Accard\\Component\\Field\\Model\\FieldTypes::PERCENTAGE') %}
+    {{ fv.value ~ '%' }}
+  {% elseif type == constant('Accard\\Component\\Field\\Model\\FieldTypes::TEXT') %}
+    {{ fv.value }}
+  {% else %}
+    {{ 'accard.no_value'|trans }}
+  {% endif %}
+{% endspaceless %}
+{% endmacro %}

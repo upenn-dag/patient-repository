@@ -2,6 +2,7 @@
 {% from _self import makeTab %}
 {% from 'AccardUIBundle:Macros:button.html.twig' import update, delete_with_confirmation %}
 {% from 'AccardUIBundle:Macros:patient.html.twig' import displayRace, displayGender, genderToIcon %}
+{% from 'AccardUIBundle:Macros:misc.html.twig' import field_value %}
 
 {% macro makeTab(id, label, active) %}
   <li role="presentation"{% if active %}class="active"{% endif %}>
@@ -50,7 +51,7 @@
           <h3>Custom details</h3>
           <ul class="list-unstyled">
           {% for field in patient.fields %}
-            <li><strong>{{ field.name|humanize }}</strong> {{ field.value }}</li>
+            <li><strong>{{ field.name|humanize }}</strong> {{ field_value(field) }}</li>
           {% else %}
             <li>No custom fields collected</li>
           {% endfor %}
