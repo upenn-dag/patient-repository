@@ -28,3 +28,45 @@
   {% endblock %}
 
 {% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+        var formClass = Accard.get('form');
+        var manager = new formClass('form');
+        var addPhase = $('#add-phase').hide();
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function(event) {
+            if (event.target.href.indexOf('diagnosis-phase') != -1) {
+                addPhase.fadeIn();
+            } else {
+                addPhase.fadeOut();
+            }
+        });
+
+        function makeToday() {
+            var now = new Date();
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + now.getMonth()).slice(-2);
+
+            return now.getFullYear() + "-" + (month) + "-" + (day);
+        }
+
+        manager
+            //.plugin("pds", "#pds")
+            .collection("#phases", {
+                adder: addPhase,
+                startup: function(collection) {
+                    var field = $(this).find('input[type="date"]').first();
+
+                    if (!field.val()) field.val(makeToday());
+                    $(this).on('click', '.input-group-addon', function(event) {
+                        var prev = $(this).prev();
+                        $(prev).val(makeToday());
+                    });
+                }
+            })
+           .bindAll()
+        ;
+    </script>
+{% endblock %}

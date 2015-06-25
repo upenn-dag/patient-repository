@@ -103,6 +103,10 @@ accard:
                 base: Base Fields
                 custom: Custom
                 phases: Phases
+            diagnosis:
+                base: Base Fields
+                custom: Custom
+                phases: Phases
             regimen:
                 base: Base Fields
                 custom: Custom
