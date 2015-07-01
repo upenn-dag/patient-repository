@@ -26,16 +26,14 @@ class SampleTest extends \Codeception\TestCase\Test
     {
     }
 
-<<<<<<< HEAD
+
     /**
      * All methods from interface are implemented
      */
     public function testClassInterfaceIsFollowed()
-=======
-    /////	TEST IMPLEMENT OF THE INTERFACE /////
+
     
     public function testSampleImplementsInterface()
->>>>>>> eed20ef7e4c62c7640bf64aa63b230edd73f967c
     {
         $this->assertInstanceOf(
             'Accard\Component\Sample\Model\SampleInterface',
@@ -43,7 +41,6 @@ class SampleTest extends \Codeception\TestCase\Test
         );
     }
     
-    /////	TEST CORRECT FUNCTIONALITY OF THE CLASS METHODS /////
 
     public function testSampleDerivativesAreEmptyCollectionOnClassConstruct()
     {
