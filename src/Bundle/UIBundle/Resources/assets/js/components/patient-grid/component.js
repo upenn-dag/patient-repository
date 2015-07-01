@@ -110,8 +110,9 @@ var PatientGrid = React.createClass({
   },
 
   _createDateRenderer: function(cellData, cellDataKey, rowData, rowIndex, columnData, width) {
-    var date = cellData ? Utils.createDateString(new Date(cellData)) : null;
-    return <div>{date}</div>;
+    var str = cellData ? Utils.createDateString(cellData) : null;
+
+    return <div>{str}</div>;
   },
 
   _createGenderRenderer: function(cellData, cellDataKey, rowData, rowIndex, columnData, width) {
