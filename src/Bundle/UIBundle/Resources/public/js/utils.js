@@ -124,4 +124,15 @@
     $list.not('[data-accard-activity="' + prototype + '"]').hide();
   });
 
+  // Init date fields with fallback...
+  if (!Modernizr.touch || !Modernizr.inputtypes.date) {
+    $('input[type=date]')
+      .attr('type', 'text')
+      .datepicker({
+        autoclose: true,
+        clearBtn: true,
+        format: 'yyyy-mm-dd'
+      });
+  }
+
 })(window.jQuery);
