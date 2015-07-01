@@ -1,0 +1,76 @@
+{% from 'AccardUIBundle:Macros:form.html.twig' import prototype, static %}
+
+{% set count = form.fields|length %}
+{% set half_count = (count/2)|round(0, 'ceil') %}
+
+{% if count > 0 %}
+    {% set row1fields = form.fields|slice(0, half_count) %}
+{% endif %}
+{% if count > 1 %}
+    {% set row2fields = form.fields|slice(half_count, count) %}
+{% endif %}
+
+{% macro phase_form(phase) %}
+{% spaceless %}
+  <div class="row">
+    <div class="col-md-4">
+      {{ form_widget(phase.phase) }}
+    </div>
+    <div class="col-md-3">
+      {{ form_widget(phase.startDate) }}
+    </div>
+    <div class="col-md-3">
+      {{ form_widget(phase.endDate) }}
+    </div>
+  </div>
+  <hr>
+{% endspaceless %}
+{% endmacro %}
+
+{% include 'AccardUIBundle:Frontend/Diagnosis:formTabs.html.twig' %}
+
+<div class="tab-content">
+  <div class="tab-pane fade in active" id="diagnosis-base">
+    <div class="row">
+      <div class="col-md-6">
+        {% if diagnosis is defined and diagnosis and diagnosis.patient %}
+          {{ static(diagnosis.patient.fullName, 'accard.patient.entity_name'|trans) }}
+        {% endif %}
+        {{ form_row(form.code) }}
+      </div>
+      <div class="col-md-6">
+        {{ form_row(form.startDate) }}
+        {{ form_row(form.endDate) }}
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="diagnosis-custom">
+    <div class="row">
+      <div class="col-md-6">
+      {% if count > 0 %}
+        {% for field in row1fields %}
+          {{ prototype(field) }}
+        {% endfor %}
+      {% endif %}
+      </div>
+      <div class="col-md-6">
+      {% if count > 1 %}
+        {% for field in row2fields %}
+          {{ prototype(field) }}
+        {% endfor %}
+      {% endif %}
+      </div>
+    </div>
+  </div>
+  {% if accard_setting('diagnosis.collect_phases') %}
+  <div class="tab-pane fade" id="diagnosis-phases">
+    <div class="row">
+      <div id="phases" class="col-md-12" data-prototype="{{ _self.phase_form(form.phases.vars.prototype)|e }}">
+      {% for phase in form.phases %}
+        {{ _self.phase_form(phase) }}
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>

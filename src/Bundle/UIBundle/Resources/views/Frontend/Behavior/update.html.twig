@@ -1,0 +1,27 @@
+{% extends 'AccardUIBundle:Frontend/Behavior:create.html.twig' %}
+{% from 'AccardUIBundle:Macros:action.html.twig' import update %}
+
+{% set prototype = behavior.prototype is defined ? behavior.prototype.name : 'default' %}
+
+{% block behavior_header %}
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>
+        {{- 'accard.updating'|trans({ '%updated%': behavior.description }) -}}
+      </h2>
+    </div>
+  </div>
+{% endblock behavior_header %}
+
+{% block behavior_form %}
+  {% set updatePath = path('accard_frontend_behavior_update', { patient: behavior.patient.id, id: behavior.id }) %}
+  <form action="{{ updatePath }}" method="post" {{ form_enctype(form) }}>
+    <input type="hidden" name="_method" value="PUT">
+    {{ form_widget(form._token) }}
+    {% include ["Theme:Frontend/Behavior:#{prototype}-form.html.twig", "Theme:Frontend/Behavior:form.html.twig"] with { behavior: behavior } %}
+    <div class="row">
+        <div class="col-md-12">{{ update() }}</div>
+    </div>
+    </div>
+  </form>
+{% endblock behavior_form %}

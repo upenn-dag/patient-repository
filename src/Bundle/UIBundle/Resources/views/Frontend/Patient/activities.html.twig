@@ -1,0 +1,52 @@
+{% from 'AccardUIBundle:Macros:misc.html.twig' import prototype_dropdown %}
+{% from 'AccardUIBundle:Macros:button.html.twig' import delete_with_confirmation, edit_in_modal %}
+
+{% set prototypes = accard_prototypes('activity') %}
+{% set selector = prototype_dropdown('activity', prototypes, patient) %}
+
+{% if activities|length > 0 %}
+  <table id="activities" class="activity-table table table-accard table-bordered table-hover table-striped">
+    <thead>
+      <tr>
+        <th class="activity-date">{{ 'accard.activity.form.activity_date'|trans }}</th>
+        <th class="prototype">{{ 'accard.activity.form.prototype'|trans }}</th>
+        <th class="description">{{ 'accard.activity.form.description'|trans }}</th>
+        <th class="actions">{{ selector }}</th>
+      </tr>
+    </thead>
+    <tbody data-accard="prototypes" style="display: none">
+      <tr>
+        <th class="text-center" colspan="4">
+          <div class="btn-group" data-toggle="buttons">
+          {% for prototype in prototypes %}
+            <label class="btn btn-primary">
+              <input type="radio" name="prototypes" id="prototype-{{ prototype.name }}" data-accard="{{ prototype.name }}" autocomplete="off"> {{ prototype.presentation }}
+            </label>
+          {% endfor %}
+          </div>
+        </th>
+      </tr>
+    </tbody>
+    <tbody>
+    {% for activity in activities %}
+      <tr id="activity-{{ activity.id }}" data-accard-activity="{{ activity.prototype.name }}">
+        <td class="activity-date">{{ activity.activityDate|localizeddate('medium', 'none') }}</td>
+        <td class="prototype">{{ activity.prototype.presentation }}</td>
+        <td class="description">{{ activity.description }}</td>
+        <td class="actions">
+          <div class="pull-right">
+            {{ edit_in_modal(path('accard_frontend_activity_update', { patient: activity.patient.id, id: activity.id }), null, 'xs') }}
+            {{ delete_with_confirmation(path('accard_frontend_activity_delete', { patient: activity.patient.id, id: activity.id }), null, 'xs') }}
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <div class="alert alert-info">
+    {{ selector }}
+    <h4 class="alert-heading">{{ 'accard.alert.info'|trans }}</h4>
+    <p>{{ 'accard.activity.not_found'|trans }}</p>
+  </div>
+{% endif %}

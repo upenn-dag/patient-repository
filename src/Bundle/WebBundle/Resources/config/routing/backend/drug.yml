@@ -11,7 +11,7 @@ accard_backend_drug_group_index:
     defaults:
         _controller: accard.controller.drug_group:drugGroupAction
         _accard:
-            template: Theme:Backend/Drug:groupIndex.html.twig
+            template: AccardWebBundle:Backend/Drug:groupIndex.html.twig
 
 accard_backend_drug_group_add:
     pattern: /group/add
@@ -31,7 +31,7 @@ accard_backend_drug_group_create:
     defaults:
         _controller: accard.controller.drug_group:createAction
         _accard:
-            template: Theme:Backend/Drug:groupCreate.html.twig
+            template: AccardWebBundle:Backend/Drug:groupCreate.html.twig
             redirect: accard_backend_drug_group_index
 
 accard_backend_drug_group_update:
@@ -40,7 +40,7 @@ accard_backend_drug_group_update:
     defaults:
         _controller: accard.controller.drug_group:updateAction
         _accard:
-            template: Theme:Backend/Drug:groupUpdate.html.twig
+            template: AccardWebBundle:Backend/Drug:groupUpdate.html.twig
             redirect: accard_backend_drug_group_index
 
 accard_backend_drug_group_delete:
@@ -49,7 +49,7 @@ accard_backend_drug_group_delete:
     defaults:
         _controller: accard.controller.drug_group:deleteAction
         _accard:
-            template: Theme:Backend/Misc:delete.html.twig
+            template: AccardWebBundle:Backend/Misc:delete.html.twig
             redirect: accard_backend_drug_group_index
 
 accard_backend_drug_create:
@@ -58,7 +58,7 @@ accard_backend_drug_create:
     defaults:
         _controller: accard.controller.drug:createAction
         _accard:
-            template: Theme:Backend/Drug:drugCreate.html.twig
+            template: AccardWebBundle:Backend/Drug:drugCreate.html.twig
             redirect: accard_backend_drug_group_index
 
 accard_backend_drug_update:
@@ -67,7 +67,7 @@ accard_backend_drug_update:
     defaults:
         _controller: accard.controller.drug:updateAction
         _accard:
-            template: Theme:Backend/Drug:drugUpdate.html.twig
+            template: AccardWebBundle:Backend/Drug:drugUpdate.html.twig
             redirect: accard_backend_drug_group_index
 
 accard_backend_drug_delete:
@@ -76,5 +76,5 @@ accard_backend_drug_delete:
     defaults:
         _controller: accard.controller.drug:deleteAction
         _accard:
-            template: Theme:Backend/Misc:delete.html.twig
+            template: AccardWebBundle:Backend/Misc:delete.html.twig
             redirect: accard_backend_drug_group_index

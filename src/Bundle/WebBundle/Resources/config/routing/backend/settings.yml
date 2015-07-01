@@ -10,11 +10,11 @@ accard_backend_general_settings:
     defaults:
         _controller: accard.controller.settings:updateAction
         namespace: general
-        template: Theme:Backend/Settings:general.html.twig
+        template: AccardWebBundle:Backend/Settings:general.html.twig
 
 accard_backend_theme_settings:
     pattern: /theme
     defaults:
         _controller: accard.controller.settings:updateAction
         namespace: theme
-        template: Theme:Backend/Settings:theme.html.twig
+        template: AccardWebBundle:Backend/Settings:theme.html.twig

@@ -45,12 +45,7 @@ class AttributeTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($options['use_patient']) {
-            $builder
-                ->add('patient', 'entity', array(
-                    'class' => $this->patientClass,
-                    'property' => 'fullName',
-                ))
-            ;
+            $builder->add('patient', 'accard_patient_choice', array());
         }
     }
 
@@ -61,7 +56,7 @@ class AttributeTypeExtension extends AbstractTypeExtension
     {
         $resolver
             ->setDefaults(array(
-                'use_patient' => true,
+                'use_patient' => false,
             ))
         ;
     }

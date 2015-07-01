@@ -1,0 +1,91 @@
+#accard-inspector {
+  height: 100%;
+  overflow: scroll;
+
+  /* INSPECTOR */
+
+  .inspector {
+    margin-bottom: @interface-padding-md; /* set to bootstrap gutter margin */
+    padding: @interface-padding-sm;
+    background: @interface-overlay-color-light;
+    border: 1px solid @interface-overlay-color-dark;
+    border-radius: 0;
+
+    -webkit-box-shadow: 0px 0px @interface-padding-sm 0px @interface-overlay-color-mid;
+       -moz-box-shadow: 0px 0px @interface-padding-sm 0px @interface-overlay-color-mid;
+            box-shadow: 0px 0px @interface-padding-sm 0px @interface-overlay-color-mid;
+
+    :last-child {
+      margin-bottom: 0;
+    }
+
+    .inspector-header {
+      padding: @padding-base-vertical @padding-base-horizontal;
+      background: @interface-main-color;
+      color: @interface-overlay-color-light;
+      border-radius: @border-radius-small;
+      line-height: 100%;
+      margin-bottom: @interface-padding-sm;    
+
+      .inspector-title {
+        .close {
+          margin-left: @interface-padding-md;
+          color: @interface-overlay-color-light;
+          opacity: 1;
+          text-shadow: @interface-overlay-color-dark;
+          outline: 0;
+          font-size: @font-size-base;
+        }
+      }
+    }
+
+    .inspector-body {
+      .col {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    }
+
+    form {
+      font-size: @font-size-base;
+      line-height: @line-height-base;
+
+      .checkbox {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        line-height: 22px;
+      }
+
+      .form-group {
+        margin-bottom: 7px;
+      }
+
+      .form-control {
+        height: 24px;
+        padding: 3px 6px;
+        border-radius: 0;
+        font-size: @font-size-base;
+        line-height: @line-height-base;
+      }
+    }
+  }
+
+  /* ANIMATIONS */
+
+  .inspector-enter {
+    .animated;
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s;
+  }
+
+  .inspector-enter.inspector-enter-active {
+    .slideInUp;
+  }
+}
+
+@media (max-width: @screen-sm-max) {
+  #accard-inspector {
+    height: auto;
+    overflow: auto;
+  }
+}

@@ -1,0 +1,24 @@
+{% from 'AccardUIBundle:Macros:alert.html.twig' import info %}
+{% from 'AccardUIBundle:Macros:button.html.twig' import create_in_modal %}
+
+{% if 0 < diagnoses|length %}
+<div class="row">
+  {% for diagnosis in diagnoses %}
+  <div class="col-sm-12 col-md-6">
+    {% include 'AccardUIBundle:Partials:diagnosis.html.twig' with { diagnosis: diagnosis } %}
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+  {{ info('accard.diagnosis.not_found'|trans) }}
+{% endif %}
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="form-actions">
+      <div class="pull-right">
+        {{ create_in_modal(path('accard_frontend_diagnosis_create', { patient: patient.id }), 'accard.diagnosis.action.create'|trans) }}
+      </div>
+    </div>
+  </div>
+</div>

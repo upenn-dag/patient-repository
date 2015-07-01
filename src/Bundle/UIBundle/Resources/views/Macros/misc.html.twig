@@ -1,0 +1,43 @@
+{% macro prototype_dropdown(type, prototypes, patient) %}
+  {% from 'AccardUIBundle:Macros:button.html.twig' import link_in_modal %}
+  {% set transString = "accard.#{type}.action.create" %}
+
+  <div class="btn-group pull-right">
+    <button type="button" class="btn btn-primary btn-xs" data-accard="prototype-activator">
+      <span class="caret"></span>
+    </button>
+    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      {{ transString|trans }} <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+    {% for prototype in prototypes %}
+      <li>{{ link_in_modal(path("accard_frontend_#{type}_create", { patient: patient.id, prototype: prototype.name }), prototype.presentation) }}</li>
+    {% endfor %}
+    </ul>
+  </div>
+{% endmacro %}
+
+{% macro field_value(fv) %}
+{% spaceless %}
+  {% set type = fv.type %}
+  {% if type == constant('Accard\\Component\\Field\\Model\\FieldTypes::CHECKBOX') %}
+    {% if fv.value %}
+      <span class="fa fa-check"></span>
+    {% endif %}
+  {% elseif type == constant('Accard\\Component\\Field\\Model\\FieldTypes::CHOICE') %}
+    {{ fv.allowMultiple ? fv.values|join(', ') : fv.value }}
+  {% elseif type == constant('Accard\\Component\\Field\\Model\\FieldTypes::DATE') %}
+    {{ fv.value ? fv.value|localizeddate('medium', 'none') : '' }}
+  {% elseif type == constant('Accard\\Component\\Field\\Model\\FieldTypes::DATETIME') %}
+    {{ fv.value ? fv.value|localizeddate('medium', 'short') : '' }}
+  {% elseif type == constant('Accard\\Component\\Field\\Model\\FieldTypes::NUMBER') %}
+    {{ fv.value }}
+  {% elseif type == constant('Accard\\Component\\Field\\Model\\FieldTypes::PERCENTAGE') %}
+    {{ fv.value ~ '%' }}
+  {% elseif type == constant('Accard\\Component\\Field\\Model\\FieldTypes::TEXT') %}
+    {{ fv.value }}
+  {% else %}
+    {{ 'accard.no_value'|trans }}
+  {% endif %}
+{% endspaceless %}
+{% endmacro %}

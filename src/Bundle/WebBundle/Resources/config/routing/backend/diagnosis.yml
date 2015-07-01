@@ -11,7 +11,7 @@ accard_backend_diagnosis_design:
     defaults:
         _controller: accard.controller.diagnosis:designAction
         _accard:
-            template: Theme:Backend/Diagnosis:design.html.twig
+            template: AccardWebBundle:Backend/Diagnosis:design.html.twig
 
 accard_backend_diagnosis_code_group_index:
     pattern: /code/group
@@ -19,7 +19,7 @@ accard_backend_diagnosis_code_group_index:
     defaults:
         _controller: accard.controller.diagnosis:codeGroupAction
         _accard:
-            template: Theme:Backend/Diagnosis:groupIndex.html.twig
+            template: AccardWebBundle:Backend/Diagnosis:groupIndex.html.twig
 
 accard_backend_diagnosis_code_group_add:
     pattern: /code/group/add
@@ -39,7 +39,7 @@ accard_backend_diagnosis_code_group_create:
     defaults:
         _controller: accard.controller.diagnosis_code_group:createAction
         _accard:
-            template: Theme:Backend/Diagnosis:groupCreate.html.twig
+            template: AccardWebBundle:Backend/Diagnosis:groupCreate.html.twig
             redirect: accard_backend_diagnosis_code_group_index
 
 accard_backend_diagnosis_code_group_update:
@@ -48,7 +48,7 @@ accard_backend_diagnosis_code_group_update:
     defaults:
         _controller: accard.controller.diagnosis_code_group:updateAction
         _accard:
-            template: Theme:Backend/Diagnosis:groupUpdate.html.twig
+            template: AccardWebBundle:Backend/Diagnosis:groupUpdate.html.twig
             redirect: accard_backend_diagnosis_code_group_index
 
 accard_backend_diagnosis_code_group_delete:
@@ -57,7 +57,7 @@ accard_backend_diagnosis_code_group_delete:
     defaults:
         _controller: accard.controller.diagnosis_code_group:deleteAction
         _accard:
-            template: Theme:Backend/Misc:delete.html.twig
+            template: AccardWebBundle:Backend/Misc:delete.html.twig
             redirect: accard_backend_diagnosis_code_group_index
 
 accard_backend_diagnosis_code_create:
@@ -66,7 +66,7 @@ accard_backend_diagnosis_code_create:
     defaults:
         _controller: accard.controller.diagnosis_code:createAction
         _accard:
-            template: Theme:Backend/Diagnosis:codeCreate.html.twig
+            template: AccardWebBundle:Backend/Diagnosis:codeCreate.html.twig
             redirect: accard_backend_diagnosis_code_group_index
 
 accard_backend_diagnosis_code_update:
@@ -75,7 +75,7 @@ accard_backend_diagnosis_code_update:
     defaults:
         _controller: accard.controller.diagnosis_code:updateAction
         _accard:
-            template: Theme:Backend/Diagnosis:codeUpdate.html.twig
+            template: AccardWebBundle:Backend/Diagnosis:codeUpdate.html.twig
             redirect: accard_backend_diagnosis_code_group_index
 
 accard_backend_diagnosis_code_delete:
@@ -84,7 +84,7 @@ accard_backend_diagnosis_code_delete:
     defaults:
         _controller: accard.controller.diagnosis_code:deleteAction
         _accard:
-            template: Theme:Backend/Misc:delete.html.twig
+            template: AccardWebBundle:Backend/Misc:delete.html.twig
             redirect: accard_backend_diagnosis_code_group_index
 
 accard_backend_diagnosis_settings_update:
@@ -101,7 +101,7 @@ accard_backend_diagnosis_field_create:
     defaults:
         _controller: accard.controller.diagnosis_field:createAction
         _accard:
-            template: Theme:Backend/Diagnosis:fieldCreate.html.twig
+            template: AccardWebBundle:Backend/Diagnosis:fieldCreate.html.twig
             redirect: accard_backend_diagnosis_design
 
 accard_backend_diagnosis_field_update:
@@ -110,7 +110,7 @@ accard_backend_diagnosis_field_update:
     defaults:
         _controller: accard.controller.diagnosis_field:updateAction
         _accard:
-            template: Theme:Backend/Diagnosis:fieldUpdate.html.twig
+            template: AccardWebBundle:Backend/Diagnosis:fieldUpdate.html.twig
             redirect: accard_backend_diagnosis_design
 
 accard_backend_diagnosis_field_delete:
@@ -119,7 +119,7 @@ accard_backend_diagnosis_field_delete:
     defaults:
         _controller: accard.controller.diagnosis_field:deleteAction
         _accard:
-            template: Theme:Backend/Misc:delete.html.twig
+            template: AccardWebBundle:Backend/Misc:delete.html.twig
             redirect: accard_backend_diagnosis_design
 
 accard_backend_diagnosis_phase_index:
@@ -128,7 +128,7 @@ accard_backend_diagnosis_phase_index:
     defaults:
         _controller: accard.controller.diagnosis_phase:indexAction
         _accard:
-            template: Theme:Backend/DiagnosisPhase:index.html.twig
+            template: AccardWebBundle:Backend/DiagnosisPhase:index.html.twig
             sortable: true
             paginate: 12
             sorting:
@@ -140,7 +140,7 @@ accard_backend_diagnosis_phase_create:
     defaults:
         _controller: accard.controller.diagnosis_phase:createAction
         _accard:
-            template: Theme:Backend/DiagnosisPhase:create.html.twig
+            template: AccardWebBundle:Backend/DiagnosisPhase:create.html.twig
             redirect: accard_backend_diagnosis_phase_index
 
 accard_backend_diagnosis_phase_update:
@@ -150,7 +150,7 @@ accard_backend_diagnosis_phase_update:
     defaults:
         _controller: accard.controller.diagnosis_phase:updateAction
         _accard:
-            template: Theme:Backend/DiagnosisPhase:update.html.twig
+            template: AccardWebBundle:Backend/DiagnosisPhase:update.html.twig
             redirect: accard_backend_diagnosis_phase_index
 
 accard_backend_diagnosis_phase_delete:
@@ -160,5 +160,5 @@ accard_backend_diagnosis_phase_delete:
     defaults:
         _controller: accard.controller.diagnosis_phase:deleteAction
         _accard:
-            template: Theme:Backend/DiagnosisPhase:delete.html.twig
+            template: AccardWebBundle:Backend/DiagnosisPhase:delete.html.twig
             redirect: accard_backend_diagnosis_phase_index

@@ -1,0 +1,32 @@
+{% extends 'AccardUIBundle:Frontend:layout.html.twig' %}
+{% from 'AccardUIBundle:Macros:action.html.twig' import create %}
+
+{% set prototype = regimen.prototype is defined ? regimen.prototype.name : 'default' %}
+
+{% block content %}
+
+  {% block regimen_header %}
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>
+          {{- 'accard.creating'|trans({ '%created%': prototype }) -}}
+        </h2>
+      </div>
+    </div>
+  {% endblock regimen_header %}
+
+  {% block regimen_errors %}
+    {{ form_errors(form) }}    
+  {% endblock %}
+
+  {% block regimen_form %}
+    <form action="{{ path('accard_frontend_regimen_create', { patient: (regimen.patient ? regimen.patient.id : null), diagnosis: (regimen.diagnosis ? regimen.diagnosis.id : null), prototype: prototype }) }}" method="post" {{ form_enctype(form) }}>
+      {{ form_widget(form._token) }}
+      {% include ["Theme:Frontend/Regimen:#{prototype}-form.html.twig", "Theme:Frontend/Regimen:form.html.twig"] with { regimen: regimen } %}
+      <div class="row">
+        <div class="col-md-12">{{ create() }}</div>
+    </div>
+    </form>
+  {% endblock %}
+
+{% endblock %}

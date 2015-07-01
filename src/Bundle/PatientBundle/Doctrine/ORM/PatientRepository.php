@@ -10,6 +10,7 @@
  */
 namespace Accard\Bundle\PatientBundle\Doctrine\ORM;
 
+use DateTime;
 use Accard\Component\Patient\Utils;
 use PagerFanta\PagerfantaInterface;
 use Accard\Component\Patient\Model\PatientInterface;
@@ -77,6 +78,8 @@ class PatientRepository extends EntityRepository implements PatientRepositoryInt
             $sorting = array();
         }
 
+        // Name handling
+
         if (!empty($criteria['firstName'])) {
 
             //remove % just in case if user inputs it
@@ -90,19 +93,20 @@ class PatientRepository extends EntityRepository implements PatientRepositoryInt
             unset($criteria['firstName']);
         }
 
-
         if (!empty($criteria['lastName'])) {
-          
+
              //remove % just in case if user inputs it
             $criteria['lastName'] = str_replace('%', '',  $criteria['lastName']);
             $criteria['lastName'] = "%" . $criteria['lastName'] . "%";
 
             $queryBuilder
-                 ->andWhere('LOWER(patient.lastName) LIKE :lastName')
+                ->andWhere('LOWER(patient.lastName) LIKE :lastName')
                 ->setParameter('lastName', strtolower($criteria['lastName']));
 
             unset($criteria['lastName']);
         }
+
+        // Date of birth handling
 
         if (!empty($criteria['phase'])) {
             $queryBuilder
@@ -113,14 +117,28 @@ class PatientRepository extends EntityRepository implements PatientRepositoryInt
             ;
         }
 
+        if (!empty($criteria['fromDate'])) {
+            $fromDate = DateTime::createFromFormat('Y-m-d', $criteria['fromDate']);
+            if ($fromDate) {
+                $queryBuilder->filterByStatement('patient.dateOfBirth >= :fromDate', array('fromDate' => $fromDate));
+            }
+        }
+
+        if (!empty($criteria['toDate'])) {
+            $toDate = Datetime::createFromFormat('Y-m-d', $criteria['toDate']);
+            if ($toDate) {
+                $queryBuilder->filterByStatement('patient.dateOfBirth <= :toDate', array('toDate' => $toDate));
+            }
+        }
+
         if (!empty($criteria['deceased'])) {
             $queryBuilder->filterByStatement('patient.dateOfDeath IS NOT NULL');
         }
 
-
-        unset($criteria['phase'], $criteria['deceased']);
+        unset($criteria['phase'], $criteria['deceased'], $criteria['fromDate'], $criteria['toDate']);
         $this->applyCriteria($queryBuilder, $criteria);
         $this->applySorting($queryBuilder, $sorting);
+
         return $this->getPaginator($queryBuilder);
     }
 

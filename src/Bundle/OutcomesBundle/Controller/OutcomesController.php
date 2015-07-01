@@ -150,6 +150,18 @@ class OutcomesController extends Controller implements ExpressionAwareController
     }
 
     /**
+     * Get the Accard State object.
+     *
+     * @return JsonResponse
+     */
+    public function stateAction(Request $request)
+    {
+        $theState = $this->get('accard.state')->getState();
+
+        return new JsonResponse($theState);
+    }
+
+    /**
      * Custom serializer context.
      *
      * This is required in order to set options for the serializer. We require

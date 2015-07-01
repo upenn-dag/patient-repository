@@ -11,7 +11,7 @@ accard_backend_option_index:
     defaults:
         _controller: accard.controller.option:indexAction
         _accard:
-            template: Theme:Backend/Option:index.html.twig
+            template: AccardWebBundle:Backend/Option:index.html.twig
 
 accard_backend_option_create:
     pattern: /new
@@ -19,7 +19,7 @@ accard_backend_option_create:
     defaults:
         _controller: accard.controller.option:createAction
         _accard:
-            template: Theme:Backend/Option:create.html.twig
+            template: AccardWebBundle:Backend/Option:create.html.twig
             redirect: accard_backend_option_index
 
 accard_backend_option_update:
@@ -29,7 +29,7 @@ accard_backend_option_update:
     defaults:
         _controller: accard.controller.option:updateAction
         _accard:
-            template: Theme:Backend/Option:update.html.twig
+            template: AccardWebBundle:Backend/Option:update.html.twig
             redirect: accard_backend_option_index
 
 accard_backend_option_update_redirect:

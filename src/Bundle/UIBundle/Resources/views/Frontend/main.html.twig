@@ -1,0 +1,54 @@
+{%- set general = accard_settings('general') -%}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title general.title|default('accard.interface.frontend.title'|trans) %}</title>
+  <link rel="stylesheet" type="text/css" href="{{ asset('bundles/accardui/css/accard.css') }}">
+</head>
+<body class="outer-content">
+
+  <nav id="accard-navbar" class="navbar navbar-light navbar-docked navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div id="accard-brand"></div>
+      </div>
+
+      <!-- Removed from UI, code remains as it will be developed at a later date
+      <div id="accard-search" class="navbar-form navbar-right navbar-search"></div>
+      -->
+    </div>
+  </nav>
+
+  <div id="accard-drawers"></div>
+
+  <div id="accard-content-area" class="accard-content-area drawer-content">
+    <div class="accard-content-wrapper container-fluid">
+      <div id="accard-content" class="accard-content row-fluid"></div>
+    </div>
+  </div>
+
+  <div id="accard-tray-area"></div>
+  <div id="accard-modal"></div>
+
+  <script type="text/javascript">
+    window.accardConfig = {
+      urls: {
+        routes: '{{ asset('js/fos_js_routes.js') }}',
+        state: '{{ path('accard_outcomes_state') }}'
+      },
+      drawers: {
+        right: { initialize: false }
+      },
+      inspector: { initialize: true },
+      grid: { initialize: true },
+      debug: false
+    };
+  </script>
+  <script type="text/javascript" src="{{ asset('bundles/accardui/js/accard.js') }}"></script>
+
+</body>
+
+</html>

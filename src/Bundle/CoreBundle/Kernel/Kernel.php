@@ -42,7 +42,7 @@ abstract class Kernel extends BaseKernel
             new \Accard\Bundle\RegimenBundle\AccardRegimenBundle(),
             new \Accard\Bundle\ActivityBundle\AccardActivityBundle(),
             new \Accard\Bundle\TemplateBundle\AccardTemplateBundle(),
-            new \Accard\Bundle\WebBundle\AccardWebBundle(),
+            //new \Accard\Bundle\WebBundle\AccardWebBundle(),
             new \Accard\Bundle\OutcomesBundle\AccardOutcomesBundle(),
             new \Accard\Bundle\ApiBundle\AccardApiBundle(),
 
@@ -50,8 +50,6 @@ abstract class Kernel extends BaseKernel
             new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new \Symfony\Bundle\TwigBundle\TwigBundle(),
             new \Symfony\Bundle\MonologBundle\MonologBundle(),
-            //new \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new \Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new \Lexik\Bundle\TranslationBundle\LexikTranslationBundle(),
@@ -60,8 +58,6 @@ abstract class Kernel extends BaseKernel
             new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
-            new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new \FOS\ElasticaBundle\FOSElasticaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

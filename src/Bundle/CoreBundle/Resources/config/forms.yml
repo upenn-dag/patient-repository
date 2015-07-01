@@ -7,6 +7,7 @@
 
 parameters:
 
+    accard.form.type_extension.date_defaults.class: Accard\Bundle\WebBundle\Form\Extension\DateDefaultsExtension
     accard.form.type.accard_patient_phase.class: Accard\Bundle\CoreBundle\Form\Type\PatientPhaseType
     accard.form.type.accard_patient_phase_choice.class: Accard\Bundle\CoreBundle\Form\Type\PatientPhaseChoiceType
     accard.form.type.accard_patient_phase_instance.class: Accard\Bundle\CoreBundle\Form\Type\PatientPhaseInstanceType
@@ -22,10 +23,25 @@ parameters:
     accard.form.extension.accard_regimen.class: Accard\Bundle\CoreBundle\Form\Extension\RegimenTypeExtension
 
     accard.form.type.patient_diagnoses.class: Accard\Bundle\CoreBundle\Form\Type\PatientDiagnosesType
-
     accard.form.type.patient_filter.class: Accard\Bundle\CoreBundle\Form\Type\Filter\PatientFilterType
 
 services:
+
+    accard.form.type_extension.date:
+        class: %accard.form.type_extension.date_defaults.class%
+        arguments: ['date']
+        tags: [{ name: form.type_extension, alias: date }]
+
+    accard.form.type_extension.datetime:
+        class: %accard.form.type_extension.date_defaults.class%
+        arguments: ['datetime']
+        tags: [{ name: form.type_extension, alias: datetime }]
+
+    accard.form.type_extension.birthday:
+        class: %accard.form.type_extension.date_defaults.class%
+        arguments: ['birthday']
+        tags: [{ name: form.type_extension, alias: birthday }]
+
 
     accard.form.type.accard_patient_phase:
         class: %accard.form.type.accard_patient_phase.class%

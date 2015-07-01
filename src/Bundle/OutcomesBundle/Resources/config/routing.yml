@@ -49,6 +49,4 @@ accard_outcomes_download:
 accard_outcomes_state:
     path: /state.json
     defaults:
-        _controller: AccardWebBundle:Frontend:state
-
-
+        _controller: AccardOutcomesBundle:Outcomes:state

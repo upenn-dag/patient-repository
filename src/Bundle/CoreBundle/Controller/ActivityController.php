@@ -14,6 +14,7 @@ use Accard\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Pagerfanta\Pagerfanta;
+use Accard\Component\Patient\Exception\PatientNotFoundException;
 
 /**
  * Activity controller.

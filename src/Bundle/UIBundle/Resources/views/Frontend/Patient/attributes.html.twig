@@ -1,0 +1,50 @@
+{% from 'AccardUIBundle:Macros:misc.html.twig' import prototype_dropdown %}
+{% from 'AccardUIBundle:Macros:button.html.twig' import delete_with_confirmation, edit_in_modal %}
+
+{% set prototypes = accard_prototypes('attribute') %}
+{% set selector = prototype_dropdown('attribute', prototypes, patient) %}
+
+{% if attributes|length > 0 %}
+  <table id="attributes" class="attribute-table table table-accard table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="prototype">{{ 'accard.attribute.form.prototype'|trans }}</th>
+        <th class="description">{{ 'accard.attribute.form.description'|trans }}</th>
+        <th class="actions">{{ selector }}</th>
+      </tr>
+    </thead>
+    <tbody data-accard="prototypes" style="display: none">
+      <tr>
+        <th class="text-center" colspan="4">
+          <div class="btn-group" data-toggle="buttons">
+          {% for prototype in prototypes %}
+            <label class="btn btn-primary">
+              <input type="radio" name="prototypes" id="prototype-{{ prototype.name }}" data-accard="{{ prototype.name }}" autocomplete="off"> {{ prototype.presentation }}
+            </label>
+          {% endfor %}
+          </div>
+        </th>
+      </tr>
+    </tbody>
+    <tbody>
+    {% for attribute in attributes %}
+      <tr id="attribute-{{ attribute.id }}">
+        <td class="prototype">{{ attribute.prototype.presentation }}</td>
+        <td class="description">{{ attribute.description }}</td>
+        <td class="actions">
+          <div class="pull-right">
+            {{ edit_in_modal(path('accard_frontend_attribute_update', { patient: attribute.patient.id, id: attribute.id }), null, 'xs') }}
+            {{ delete_with_confirmation(path('accard_frontend_attribute_delete', { patient: attribute.patient.id, id: attribute.id }), null, 'xs') }}
+          </div>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <div class="alert alert-info">
+    {{ selector }}
+    <h4 class="alert-heading">{{ 'accard.alert.info'|trans }}</h4>
+    <p>{{ 'accard.attribute.not_found'|trans }}</p>
+  </div>
+{% endif %}

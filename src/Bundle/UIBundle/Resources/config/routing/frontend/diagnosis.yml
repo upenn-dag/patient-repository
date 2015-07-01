@@ -1,0 +1,48 @@
+accard_frontend_diagnosis_show:
+    pattern: /{id}
+    methods: [GET]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.diagnosis:showAction
+        _accard:
+            template: Theme:Frontend/Diagnosis:show.html.twig
+    options:
+        expose: true
+
+accard_frontend_diagnosis_create:
+    pattern: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: accard.controller.diagnosis:createAction
+        _accard:
+            template: Theme:Frontend/Diagnosis:create.html.twig
+            redirect:
+                route: accard_frontend_diagnosis_update
+                parameters: { patient: $patient, id: resource.id }
+    options:
+        expose: true
+
+accard_frontend_diagnosis_update:
+    pattern: /{id}/edit
+    methods: [GET, PUT, POST]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.diagnosis:updateAction
+        _accard:
+            template: Theme:Frontend/Diagnosis:update.html.twig
+            redirect:
+                route: accard_frontend_diagnosis_update
+                parameters: { patient: $patient, id: $id }
+    options:
+        expose: true
+
+accard_frontend_diagnosis_delete:
+    pattern: /{id}
+    methods: [DELETE]
+    requirements: { id: \d+ }
+    defaults:
+        _controller: accard.controller.diagnosis:deleteAction
+        _accard:
+            redirect:
+                route: accard_frontend_deleted
+                parameters: { type: 'diagnosis', id: $id }

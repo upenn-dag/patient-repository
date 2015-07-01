@@ -69,15 +69,12 @@ class ActivityTypeExtension extends AbstractTypeExtension
 
         // Attempt to grab existing data...
         $activity = isset($options['data']) ? $options['data'] : null;
-        $disableFields = false;
-
-        if ($activity && ($activity->getDiagnosis() || $activity->getPatient())) {
-            $disableFields = true;
-        }
+        $disablePt = $activity && $activity->getPatient();
+        $disableDx = $activity && $activity->getDiagnosis();
 
         if ($options['use_patient']) {
             $builder->add('patient', 'accard_patient_choice', array(
-                'disabled' => $disableFields,
+                'disabled' => $disableDt,
             ));
         }
 
@@ -85,7 +82,7 @@ class ActivityTypeExtension extends AbstractTypeExtension
             $builder
                 ->add('diagnosis', 'accard_diagnosis_choice', array(
                     'required' => false,
-                    'disabled' => $disableFields,
+                    'disabled' => false,// $disableDx,
 
                 ))
                 ->addEventSubscriber(new PatientDiagnosesListener($this->diagnosisRepository))
@@ -100,7 +97,7 @@ class ActivityTypeExtension extends AbstractTypeExtension
     {
         $resolver
             ->setDefaults(array(
-                'use_patient' => true,
+                'use_patient' => false,
                 'use_diagnosis' => true,
             ))
         ;

@@ -1,0 +1,26 @@
+{% extends 'AccardUIBundle:Frontend/Regimen:create.html.twig' %}
+{% from 'AccardUIBundle:Macros:action.html.twig' import update %}
+
+{% set prototype = regimen.prototype is defined ? regimen.prototype.name : 'default' %}
+
+{% block regimen_header %}
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>
+        {{- 'accard.updating'|trans({ '%updated%': regimen.description }) -}}
+      </h2>
+    </div>
+  </div>
+{% endblock regimen_header %}
+
+{% block regimen_form %}
+  <form action="{{ path('accard_frontend_regimen_update', { patient: (regimen.patient ? regimen.patient.id : null), diagnosis: (regimen.diagnosis ? regimen.diagnosis.id : null), id: regimen.id }) }}" method="post" {{ form_enctype(form) }}>
+    <input type="hidden" name="_method" value="PUT">
+    {{ form_widget(form._token) }}
+    {% include ["Theme:Frontend/Regimen:#{prototype}-form.html.twig", "Theme:Frontend/Regimen:form.html.twig"] with { regimen: regimen } %}
+    <div class="row">
+        <div class="col-md-12">{{ update() }}</div>
+    </div>
+    </div>
+  </form>
+{% endblock regimen_form %}

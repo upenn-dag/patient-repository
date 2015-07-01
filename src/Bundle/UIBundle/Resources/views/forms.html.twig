@@ -1,0 +1,35 @@
+{# This file is part of the Accard package. #}
+
+{# (c) University of Pennsylvania #}
+
+{# For the full copyright and license information, please view the LICENSE #}
+{# file that was distributed with this source code. #}
+
+{% extends 'bootstrap_3_layout.html.twig' %}
+
+{% block typeahead_widget %}
+    {% set attr = attr|merge({
+        'data-typeahead': typeahead|json_encode
+    }) %}
+    {{ block('form_widget') }}
+{% endblock typeahead_widget %}
+
+{#
+{% block choice_widget %}
+    {% if form.vars.is_addable|default(false) %}
+        <div class="input-group">
+            {{ parent() }}
+            <span class="input-group-btn">
+                <a href="{{ path('accard_frontend_option_quickadd', {'option': form.vars.option.id}) }}"
+                   data-toggle="modal"
+                   data-target="#quick-add-modal"
+                   data-option-target="#{{ form.vars.id }}"
+                   class="btn btn-success quick-add">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </a>
+            </span>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock choice_widget %}
+#}

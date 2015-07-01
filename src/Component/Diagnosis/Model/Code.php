@@ -140,4 +140,12 @@ class Code implements CodeInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return sprintf('DiagnosisCode#%d', $this->id);
+    }
 }

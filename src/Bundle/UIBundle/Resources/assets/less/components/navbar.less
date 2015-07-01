@@ -1,0 +1,188 @@
+.navbar-search .form-control {
+  background: rgba(0, 0, 0, 0.3);
+  border: 0;
+  color: rgba(255, 255, 255, 0.6);
+  border-radius: 0;
+  margin-right: 1px;
+  width: 130px;
+  transition: all 0.2s ease;
+}
+
+.navbar-search .form-control:focus {
+  width: 260px;
+}
+
+.navbar-search .form-control::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+.navbar-search .form-control::input-placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+.navbar-search .form-control::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+.navbar-search .form-control:-moz-placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+.navbar-search .form-control:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.navbar-search .fa {
+  margin-left: -28px;
+  color: rgba(255, 255, 255, 0.3);
+  cursor: text;
+}
+
+@media (min-width: 992px) {
+  .navbar-search .form-control {
+    width: 220px;
+  }
+
+  .navbar-search .form-control:focus {
+    width: 360px;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar .form-control {
+    display: inline-block;
+    width: 100%;
+    margin-right: -28px;
+  }
+
+  .navbar-search .fa {
+    margin-left: 0;
+  }
+
+  .navbar-search .form-control:focus {
+    width: 100%;
+  }
+}
+
+
+/* Handling for docking menu */
+.navbar-light.navbar-undocked {
+  background-color: rgba(0, 0, 0, 0.9); 
+}
+.navbar-light .navbar-collapse.collapse.in,
+.navbar-light .navbar-collapse.collapsing {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.navbar-brand span.fa {
+  font-size: 120%;
+  margin-right: 5px;
+}
+
+.navbar-light .navbar-nav > li > a {
+  font-size: 120%; 
+}
+
+.navbar-brand:hover span.fa {
+  color: red;
+}
+
+.navbar-light {
+  background-color: transparent;
+  border-color: transparent;
+  transition: all 0.4s ease;
+}
+.navbar-light .navbar-brand {
+  color: #9d9d9d;
+}
+.navbar-light .navbar-brand:hover,
+.navbar-light .navbar-brand:focus {
+  color: #ffffff;
+  background-color: transparent;
+}
+.navbar-light .navbar-text {
+  color: #9d9d9d;
+}
+.navbar-light .navbar-nav > li > a {
+  color: #9d9d9d;
+}
+.navbar-light .navbar-nav > li > a:hover,
+.navbar-light .navbar-nav > li > a:focus {
+  color: #ffffff;
+  background-color: transparent;
+}
+.navbar-light .navbar-nav > .active > a,
+.navbar-light .navbar-nav > .active > a:hover,
+.navbar-light .navbar-nav > .active > a:focus {
+  color: #ffffff;
+  background-color: transparent;
+}
+.navbar-light .navbar-nav > .disabled > a,
+.navbar-light .navbar-nav > .disabled > a:hover,
+.navbar-light .navbar-nav > .disabled > a:focus {
+  color: #444444;
+  background-color: transparent;
+}
+.navbar-light .navbar-toggle {
+  border-color: rgb(51, 51, 51);
+}
+.navbar-light .navbar-toggle:hover,
+.navbar-light .navbar-toggle:focus {
+  background-color: rgb(51, 51, 51);
+}
+.navbar-light .navbar-toggle .icon-bar {
+  background-color: #ffffff;
+}
+.navbar-light .navbar-collapse,
+.navbar-light .navbar-form {
+  border-color: #101010;
+}
+.navbar-light .navbar-nav > .open > a,
+.navbar-light .navbar-nav > .open > a:hover,
+.navbar-light .navbar-nav > .open > a:focus {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+}
+@media (max-width: 767px) {
+  .navbar-light .navbar-nav .open .dropdown-menu > .dropdown-header {
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+  .navbar-light .navbar-nav .open .dropdown-menu .divider {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  .navbar-light .navbar-nav .open .dropdown-menu > li > a {
+    color: #9d9d9d;
+  }
+  .navbar-light .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-light .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ffffff;
+    background-color: transparent;
+  }
+  .navbar-light .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-light .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-light .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  .navbar-light .navbar-nav .open .dropdown-menu > .disabled > a,
+  .navbar-light .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .navbar-light .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #444444;
+    background-color: transparent;
+  }
+}
+.navbar-light .navbar-link {
+  color: #9d9d9d;
+}
+.navbar-light .navbar-link:hover {
+  color: #ffffff;
+}
+.navbar-light .btn-link {
+  color: #9d9d9d;
+}
+.navbar-light .btn-link:hover,
+.navbar-light .btn-link:focus {
+  color: #ffffff;
+}
+.navbar-light .btn-link[disabled]:hover,
+fieldset[disabled] .navbar-light .btn-link:hover,
+.navbar-light .btn-link[disabled]:focus,
+fieldset[disabled] .navbar-light .btn-link:focus {
+  color: #444444;
+}

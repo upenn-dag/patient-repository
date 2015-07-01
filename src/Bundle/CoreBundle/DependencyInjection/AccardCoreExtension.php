@@ -10,6 +10,7 @@
  */
 namespace Accard\Bundle\CoreBundle\DependencyInjection;
 
+use Accard\Component\Core\Version;
 use Accard\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -54,6 +55,16 @@ class AccardCoreExtension extends AbstractResourceExtension implements PrependEx
     public function load(array $config, ContainerBuilder $container)
     {
         list($config, $loader) = $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
+
+        $container->setParameter('accard.core_version.simple', Version::SIMPLE);
+        $container->setParameter('accard.core_version.major', Version::MAJOR);
+        $container->setParameter('accard.core_version.minor', Version::MINOR);
+        $container->setParameter('accard.core_version.release', Version::RELEASE);
+        $container->setParameter('accard.core_version.id', Version::ID);
+        $container->setParameter('accard.core_version.preview', Version::PREVIEW);
+        $container->setParameter('accard.core_version.preview_type', Version::PREVIEW_TYPE);
+        $container->setParameter('accard.core_version.preview_number', Version::PREVIEW_NUMBER);
+        $container->setParameter('accard.core_version.full', Version::FULL);
     }
 
     /**

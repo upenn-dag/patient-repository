@@ -191,4 +191,12 @@ class Regimen implements RegimenInterface
     {
         return sprintf("Regimen #%s", $this->id);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isAfterStartDate()
+    {
+        return null === $this->endDate || ($this->startDate < $this->endDate);
+    }
 }

@@ -1,0 +1,3 @@
+accard:
+    flashes:
+        no_delete: "%resource% may not be deleted if it has associated data. Please delete all %resource_lower% %entities%."

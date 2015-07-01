@@ -387,6 +387,6 @@ class Diagnosis implements DiagnosisInterface
      */
     public function __toString()
     {
-        return $this->getCanonical();
+        return sprintf('Diagnosis #%d', $this->id);
     }
 }

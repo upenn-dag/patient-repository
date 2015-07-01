@@ -14,6 +14,7 @@ use Accard\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Pagerfanta\Pagerfanta;
+use Accard\Component\Patient\Exception\PatientNotFoundException;
 
 /**
  * Attribute controller.
@@ -106,6 +107,32 @@ class AttributeController extends ResourceController
         }
 
         return parent::getForm($resource);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createNew()
+    {
+        $resource = parent::createNew();
+
+        if (!$request = $this->config->getRequest()) {
+            return $resource;
+        }
+
+        $patient = $request->get('patient');
+
+        if ($patient) {
+            try {
+                $patientProvier = $this->get('accard.provider.patient');
+                $patient = $patientProvier->getPatient($patient);
+                $resource->setPatient($patient);
+            } catch (PatientNotFoundException $e) {
+                throw $this->createNotFoundException('Patient could not be found.', $e);
+            }
+        }
+
+        return $resource;
     }
 
     /**

@@ -1,0 +1,32 @@
+{% extends 'AccardUIBundle:Frontend:layout.html.twig' %}
+{% from 'AccardUIBundle:Macros:action.html.twig' import create %}
+
+{% set prototype = sample.prototype is defined ? sample.prototype.name : 'default' %}
+
+{% block content %}
+
+  {% block sample_header %}
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>
+          {{- 'accard.creating'|trans({ '%created%': prototype }) -}}
+        </h2>
+      </div>
+    </div>
+  {% endblock sample_header %}
+
+  {% block sample_errors %}
+    {{ form_errors(form) }}    
+  {% endblock %}
+
+  {% block sample_form %}
+    <form action="{{ path('accard_frontend_sample_create', { patient: sample.patient.id, prototype: prototype }) }}" method="post" {{ form_enctype(form) }}>
+      {{ form_widget(form._token) }}
+      {% include ["Theme:Frontend/Sample:#{prototype}-form.html.twig", "Theme:Frontend/Sample:form.html.twig"] with { sample: sample } %}
+      <div class="row">
+        <div class="col-md-12">{{ create() }}</div>
+    </div>
+    </form>
+  {% endblock %}
+
+{% endblock %}

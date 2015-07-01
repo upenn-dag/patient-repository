@@ -9,6 +9,7 @@ accard:
     regimen:
         entity_name: Regimen
         regimens: Regimens
+        not_found: No regimens found.
         form:
             id: Id
             description: Description
