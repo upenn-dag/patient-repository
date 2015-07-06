@@ -1,6 +1,0 @@
-# Codeception Integration Suite Configuration
-
-# suite for integration tests.
-class_name: IntegrationTester
-modules:
-    enabled: [Mockery, Asserts, \AccardTest\Bundle\ResourceBundle\Helper\Integration]

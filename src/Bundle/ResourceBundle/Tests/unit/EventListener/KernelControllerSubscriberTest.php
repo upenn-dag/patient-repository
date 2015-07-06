@@ -3,18 +3,20 @@ namespace AccardTest\Bundle\ResourceBundle\EventListener;
 
 /**
  * Kernel Controler Subscriber Test
- * 
+ *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
 use Accard\Bundle\ResourceBundle\EventListener\KernelControllerSubscriber;
 use Mockery;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class KernelControllerSubscriberTest extends \Codeception\TestCase\Test
 {
     protected function _before()
     {
-        $this->securityContext = new Security;
+        //$this->securityContext = new Security;
+        $this->securityContext = Mockery::mock('Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface');
         $this->exprLanguage = Mockery::mock('Accard\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage');
 
         $this->kernelControllerSubscriber = new KernelControllerSubscriber($this->securityContext, $this->exprLanguage);
@@ -86,7 +88,7 @@ class KernelControllerSubscriberTest extends \Codeception\TestCase\Test
             ->andReturn('NOT_AN_ARRAY')
             ->getMock()
         ;
-        
+
         $this->assertEmpty($this->kernelControllerSubscriber->onKernelController($event));
     }
 }
