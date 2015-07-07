@@ -51,8 +51,10 @@ accard_outcomes:
     resource: @AccardOutcomesBundle/Resources/config/routing.yml
     prefix: /outcomes
 
-accard_credits:
+accard_frontend_credits:
     pattern: /credits
     methods: [GET]
     defaults:
         _controller: AccardUIBundle:UI:credits
+    options:
+        expose: true

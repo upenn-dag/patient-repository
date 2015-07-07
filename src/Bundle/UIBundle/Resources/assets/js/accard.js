@@ -145,6 +145,11 @@ AccardApplication.prototype = {
         React.render(<NewPatientSubapp accard={this} />, this.contentElement);
       break;
 
+      case 'credits':
+        var CreditsSubapp = require('./components/subapp/credits-subapp');
+        React.render(<CreditsSubapp accard={this} />, this.contentElement);
+      break;
+
       default:
         throw 'Subapplication not found.';
     }

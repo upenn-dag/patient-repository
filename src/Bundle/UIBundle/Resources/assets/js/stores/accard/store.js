@@ -11,7 +11,8 @@ var CHANGE_EVENT = 'accard-change';
 var appList = {
   patient: 'patient',
   patients: 'patients',
-  newPatient: 'new-patient'
+  newPatient: 'new-patient',
+  credits: 'credits',
 };
 var appState = Immutable.Map({
   subApplication: 'patients'
