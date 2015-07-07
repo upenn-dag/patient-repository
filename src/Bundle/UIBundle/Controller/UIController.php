@@ -26,6 +26,11 @@ class UIController extends Controller
         return $this->render('AccardUIBundle:Frontend:main.html.twig');
     }
 
+    public function creditsAction(Request $request)
+    {
+        return $this->render('AccardUIBundle:Frontend:credits.html.twig');
+    }
+
     public function deletedAction(Request $request, $type, $id)
     {
         return $this->render('AccardUIBundle:Frontend:deleted.html.twig', array(
