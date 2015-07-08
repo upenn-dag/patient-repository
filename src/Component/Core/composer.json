@@ -7,7 +7,14 @@
     "license": "MIT",
     "require": {
         "php": ">=5.4.0",
-        "accard/resource": "~1.0"
+        "accard/activity": "~1.0",
+        "accard/attribute": "~1.0",
+        "accard/behavior": "~1.0",
+        "accard/diagnosis": "~1.0",
+        "accard/patient": "~1.0",
+        "accard/phase": "~1.0",
+        "accard/regimen": "~1.0",
+        "accard/sample": "~1.0"
     },
     "autoload": {
         "psr-4": { "Accard\\Component\\Core\\": "" }
@@ -17,6 +24,13 @@
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         }
+    },
+    "require-dev": {
+       "codeception/codeception": "dev-master",
+       "codeception/mockery-module": "dev-master"
+    },
+    "config": {
+        "bin-dir": "bin"
     },
     "repositories": [
         { "type": "composer", "url": "http://accard-dev.med.upenn.edu/satis" }
