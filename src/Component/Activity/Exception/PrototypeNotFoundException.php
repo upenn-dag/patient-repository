@@ -17,7 +17,7 @@ use InvalidArgumentException;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class PrototypeNotFoundException extends InvalidArgumentException
+class PrototypeNotFoundException extends InvalidArgumentException implements ActivityException
 {
     /**
      * Exception constructor.

@@ -17,7 +17,7 @@ use InvalidArgumentException;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class ActivityNotFoundException extends InvalidArgumentException
+class ActivityNotFoundException extends InvalidArgumentException implements ActivityException
 {
     /**
      * Exception constructor.
