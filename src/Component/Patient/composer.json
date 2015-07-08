@@ -22,11 +22,11 @@
     "require-dev": {
        "codeception/codeception": "dev-master",
        "codeception/mockery-module": "dev-master"
-   },
-   "config": {
-       "bin-dir": "bin"
-   },
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
     "repositories": [
-        { "type": "composer", "url": "http://accard-dev.med.upenn.edu/satis" }
+         { "type": "composer", "url": "http://accard-dev.med.upenn.edu/satis" }
     ]
 }

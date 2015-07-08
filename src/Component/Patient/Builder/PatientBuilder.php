@@ -63,11 +63,21 @@ class PatientBuilder extends AbstractBuilder implements PatientBuilderInterface
         $this->fieldValueRepository = $fieldValueRepository;
     }
 
+    /**
+     * Get field repository.
+     *
+     * @return RepositoryInterface
+     */
     public function getFieldRepository()
     {
         return $this->fieldRepository;
     }
 
+    /**
+     * Get field value repository.
+     *
+     * @return RepositoryInterface
+     */
     public function getFieldValueRepository()
     {
         return $this->fieldValueRepository;
@@ -102,13 +112,7 @@ class PatientBuilder extends AbstractBuilder implements PatientBuilderInterface
         $fieldValue = $this->fieldValueRepository->createNew();
         $fieldValue->setField($field);
 
-        if (null !== $value) {
-            if (FieldTypes::MULTICHOICE === $field->getType()) {
-                $fieldValue->setValues($value);
-            } else {
-                $fieldValue->setValue($value);
-            }
-        }
+        // TODO: Value is not currently supported.
 
         $this->resource->addField($fieldValue);
 
