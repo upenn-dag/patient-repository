@@ -21,9 +21,9 @@ coverage:
         - Model/*
         - Provider/*
         - Repository/*
-        - Test/*
     exclude:
         - bin/*
         - Resources/*
+        - Test/*
         - Tests/*
         - vendor/*
