@@ -328,7 +328,7 @@ class Patient implements PatientInterface
     public function addField(BaseFieldValueInterface $field)
     {
         if (!$this->hasField($field)) {
-            $field->setPatient($this);
+            $field->setSubject($this);
             $this->fields->add($field);
         }
 
@@ -342,7 +342,7 @@ class Patient implements PatientInterface
     {
         if ($this->hasField($field)) {
             $this->fields->removeElement($field);
-            $field->setPatient(null);
+            $field->setSubject(null);
         }
 
         return $this;
