@@ -19,6 +19,6 @@ use RuntimeException;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class ImportFailedException extends RuntimeException
+class ImportFailedException extends RuntimeException implements ResourceException
 {
 }

@@ -19,7 +19,7 @@ use Accard\Component\Resource\Model\ImportSubjectInterface;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class ImportTargetAlreadySetException extends RuntimeException
+class ImportTargetAlreadySetException extends RuntimeException implements ResourceException
 {
     /**
      * Constructor.

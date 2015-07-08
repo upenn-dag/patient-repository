@@ -19,7 +19,7 @@ use InvalidArgumentException;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class InvalidResourceException extends InvalidArgumentException
+class InvalidResourceException extends InvalidArgumentException implements ResourceException
 {
     const MESSAGE_TEMPLATE = 'Expecting resource to be an instance of "%s", got %s.';
 
