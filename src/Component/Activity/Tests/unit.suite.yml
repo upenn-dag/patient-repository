@@ -3,5 +3,5 @@
 # suite for unit (internal) tests.
 class_name: UnitTester
 modules:
-    enabled: [Mockery, Asserts, \AccardTest\Component\Activity\Helper\Unit]
+    enabled: [Mockery, Asserts]
 
