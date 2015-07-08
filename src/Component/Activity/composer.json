@@ -8,6 +8,7 @@
     "require": {
         "php": ">=5.4.0",
         "accard/resource": "~1.0",
+        "accard/drug": "~1.0",
         "accard/prototype": "~1.0"
     },
     "require-dev": {
