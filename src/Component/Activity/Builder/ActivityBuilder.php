@@ -100,7 +100,8 @@ class ActivityBuilder extends AbstractBuilder implements ActivityBuilderInterfac
 
         $fieldValue = $this->fieldValueRepository->createNew();
         $fieldValue->setField($field);
-        $fieldValue->setValue($value);
+
+        // TODO: Value is not currently supported.
 
         $this->resource->addField($fieldValue);
 
