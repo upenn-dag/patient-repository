@@ -42,6 +42,13 @@ interface ActivityInterface extends BaseActivityInterface,
     public function setPatient(PatientInterface $patient = null);
 
     /**
+     * Test for presence of a patient.
+     *
+     * @return boolean
+     */
+    public function hasPatient();
+
+    /**
      * Get diagnosis.
      *
      * @return DiagnosisInterface

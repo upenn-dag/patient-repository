@@ -78,6 +78,14 @@ class Activity extends BaseActivity implements ActivityInterface
     /**
      * {@inheritdoc}
      */
+    public function hasPatient()
+    {
+        return $this->patient instanceof PatientInterface;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getDiagnosis()
     {
         return $this->diagnosis;
