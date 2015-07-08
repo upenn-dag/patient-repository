@@ -38,8 +38,9 @@ class Attribute extends BaseAttribute implements AttributeInterface
      */
     public function __construct()
     {
-        parent::__construct();
         $this->createdAt = new DateTime();
+
+        parent::__construct();
     }
 
     /**

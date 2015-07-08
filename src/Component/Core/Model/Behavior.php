@@ -37,8 +37,9 @@ class Behavior extends BaseBehavior implements BehaviorInterface
      */
     public function __construct()
     {
-        parent::__construct();
         $this->createdAt = new DateTime();
+
+        parent::__construct();
     }
 
     /**
