@@ -1,6 +1,7 @@
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var SERVER_EVENT = 'message-server-event';
+var alert = window.alert;
 
 var Server = function(providedWindow) {
   this.targetWindow = providedWindow || window;
@@ -11,7 +12,8 @@ var Server = function(providedWindow) {
 
   this.targetWindow.addEventListener('message', function(e) {
     // Only allow local communication, no cross-site or cross window.
-    if (e.srcElement !== targetWindow || e.origin != targetOrigin) {
+    if (e.origin != targetOrigin) {
+      alert('A cross-site scripting error has occurred and has been logged.');
       throw "Cross site or cross window detected";
     }
 

@@ -1814,12 +1814,13 @@ start(initConfig)
 ;
 
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_22642b93.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_3d4e8364.js","/")
 },{"+7ZJp0":98,"./accard":1,"./api":2,"bluebird":38,"buffer":94}],25:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var SERVER_EVENT = 'message-server-event';
+var alert = window.alert;
 
 var Server = function(providedWindow) {
   this.targetWindow = providedWindow || window;
@@ -1830,7 +1831,8 @@ var Server = function(providedWindow) {
 
   this.targetWindow.addEventListener('message', function(e) {
     // Only allow local communication, no cross-site or cross window.
-    if (e.srcElement !== targetWindow || e.origin != targetOrigin) {
+    if (e.origin != targetOrigin) {
+      alert('A cross-site scripting error has occurred and has been logged.');
       throw "Cross site or cross window detected";
     }
 
