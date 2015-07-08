@@ -72,6 +72,12 @@ class PatientBuilderTest extends Test
         $this->builder->addField('NAME', 'VALUE', 'PRESENTATION');
     }
 
+    public function testPatientBuilderAddFieldIsFluent()
+    {
+        $this->setupFieldAdditionScenario(true, true);
+
+        $this->assertSame($this->builder, $this->builder->addField('NAME', 'VALUE', null));
+    }
 
     // Privates
 
