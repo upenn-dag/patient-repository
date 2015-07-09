@@ -25,21 +25,21 @@ git subsplit update
 for component in "${components[@]}"
 do
     echo "Splitting ${component} component"
-    git subsplit publish "src/Component/${component}:git@gitlab.med.upenn.edu:prototype/${component}.git" --heads="master"
+    git subsplit publish "src/Component/${component}:git@gitlab.med.upenn.edu:prototype/${component}.git" --heads="master develop"
     sleep 1 # Added for coherence of output
 done
 
 for bundle in "${bundles[@]}"
 do
     echo "Splitting ${bundle} bundle"
-    git subsplit publish "src/Bundle/${bundle}:git@gitlab.med.upenn.edu:prototype/${bundle}.git" --heads="master"
+    git subsplit publish "src/Bundle/${bundle}:git@gitlab.med.upenn.edu:prototype/${bundle}.git" --heads="master develop"
     sleep 1 # Added for coherence of output
 done
 
 for bridge in "${bridges[@]}"
 do
     echo "Splitting ${bridge}"
-    git subsplit publish "src/Bridge/${bridge}:git@gitlab.med.upenn.edu:prototype/${bridge}.git" --heads="master"
+    git subsplit publish "src/Bridge/${bridge}:git@gitlab.med.upenn.edu:prototype/${bridge}.git" --heads="master develop"
     sleep 1 # Added for coherence of output
 done
 
