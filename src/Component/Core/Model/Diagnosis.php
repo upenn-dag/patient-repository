@@ -88,6 +88,14 @@ class Diagnosis extends BaseDiagnosis implements DiagnosisInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function hasPatient()
+    {
+        return $this->patient instanceof PatientInterface;
+    }
+
+    /**
      * Temporary get patient full name.
      *
      * @return string
@@ -137,6 +145,8 @@ class Diagnosis extends BaseDiagnosis implements DiagnosisInterface
             $this->activities->removeElement($activity);
             $activity->setTarget(null);
         }
+
+        return $this;
     }
 
     /**
@@ -177,6 +187,8 @@ class Diagnosis extends BaseDiagnosis implements DiagnosisInterface
             $this->phases->removeElement($phase);
             $phase->setTarget(null);
         }
+
+        return $this;
     }
 
     /**

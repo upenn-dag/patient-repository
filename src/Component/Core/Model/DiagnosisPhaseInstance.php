@@ -51,13 +51,13 @@ class DiagnosisPhaseInstance implements DiagnosisPhaseInstanceInterface
 
     /**
      * Id.
-     * 
+     *
      * @var integer
      */
     protected $id;
 
 
-    /** 
+    /**
      * {@inheritdoc}
      */
     public function getId()
@@ -72,7 +72,7 @@ class DiagnosisPhaseInstance implements DiagnosisPhaseInstanceInterface
     {
         $this->id = $id;
 
-        return $id;
+        return $this;
     }
 
     /**

@@ -49,9 +49,9 @@ class PatientPhaseInstance implements PatientPhaseInstanceInterface
      */
     protected $endDate;
 
-    /** 
+    /**
      * Id.
-     * 
+     *
      * @var int
      */
     protected $id;
@@ -71,7 +71,7 @@ class PatientPhaseInstance implements PatientPhaseInstanceInterface
     {
         $this->id = $id;
 
-        return $id;
+        return $this;
     }
 
 

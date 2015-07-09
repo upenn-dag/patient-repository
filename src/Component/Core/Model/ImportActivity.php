@@ -11,7 +11,6 @@
 namespace Accard\Component\Core\Model;
 
 use Accard\Component\Activity\Model\Activity as BaseActivity;
-use Accard\Component\Core\Model\ActivityTrait;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use DateTime;
@@ -57,6 +56,14 @@ class ImportActivity extends BaseActivity implements ImportActivityInterface
         $this->patient = $patient;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPatient()
+    {
+        return $this->patient instanceof PatientInterface;
     }
 
     /**

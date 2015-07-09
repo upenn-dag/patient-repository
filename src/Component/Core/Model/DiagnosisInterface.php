@@ -44,6 +44,13 @@ interface DiagnosisInterface extends BaseDiagnosisInterface,
 	public function setPatient(PatientInterface $patient = null);
 
     /**
+     * Test for presence of a patient.
+     *
+     * @return boolean
+     */
+    public function hasPatient();
+
+    /**
      * Get activities.
      *
      * @return Collection|ActivityInterface[]
@@ -76,21 +83,21 @@ interface DiagnosisInterface extends BaseDiagnosisInterface,
 
     /**
      * Get regimens.
-     * 
+     *
      * @return Collection|RegimenInterface[]
      */
     public function getRegimens();
 
     /**
      * Test for presence of a regimen.
-     * 
+     *
      * @return boolean
      */
     public function hasRegimen(RegimenInterface $regimen);
 
     /**
      * Add regimen.
-     * 
+     *
      * @param RegimenInterface $regimen
      * @return DiagnosisInterface
      */
@@ -98,7 +105,7 @@ interface DiagnosisInterface extends BaseDiagnosisInterface,
 
     /**
      *  Remove regimen.
-     * 
+     *
      * @param RegimenInterface $regimen
      * @return DiagnosisInterface
      */

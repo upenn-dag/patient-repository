@@ -11,7 +11,6 @@
 namespace Accard\Component\Core\Model;
 
 use Accard\Component\Sample\Model\Sample as BaseSample;
-use Accard\Component\Core\Model\SampleTrait;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use DateTime;
@@ -49,5 +48,13 @@ class ImportSample extends BaseSample implements ImportSampleInterface
         $this->patient = $patient;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPatient()
+    {
+        return $this->patient instanceof PatientInterface;
     }
 }

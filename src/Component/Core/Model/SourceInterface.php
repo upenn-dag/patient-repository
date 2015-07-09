@@ -11,13 +11,33 @@
 namespace Accard\Component\Core\Model;
 
 use Accard\Component\Sample\Model\SourceInterface as BaseSourceInterface;
-use Accard\Component\Patient\Model\PatientCollectingInterface;
 
 /**
  * Accard sample source interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface SourceInterface extends BaseSourceInterface, PatientCollectingInterface
+interface SourceInterface extends BaseSourceInterface
 {
+    /**
+     * Get patient.
+     *
+     * @return PatientInterface
+     */
+    public function getPatient();
+
+    /**
+     * Set patient.
+     *
+     * @param PatientInterface|null $patient
+     * @return ActivityInterface
+     */
+    public function setPatient(PatientInterface $patient = null);
+
+    /**
+     * Test for presence of a patient.
+     *
+     * @return boolean
+     */
+    public function hasPatient();
 }

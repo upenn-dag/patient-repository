@@ -11,13 +11,33 @@
 namespace Accard\Component\Core\Model;
 
 use Accard\Component\Sample\Model\SampleInterface as BaseSampleInterface;
-use Accard\Component\Patient\Model\PatientCollectingInterface;
 
 /**
  * Accard sample interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface SampleInterface extends BaseSampleInterface, PatientCollectingInterface
+interface SampleInterface extends BaseSampleInterface
 {
+    /**
+     * Get patient.
+     *
+     * @return PatientInterface
+     */
+    public function getPatient();
+
+    /**
+     * Set patient.
+     *
+     * @param PatientInterface|null $patient
+     * @return ActivityInterface
+     */
+    public function setPatient(PatientInterface $patient = null);
+
+    /**
+     * Test for presence of a patient.
+     *
+     * @return boolean
+     */
+    public function hasPatient();
 }

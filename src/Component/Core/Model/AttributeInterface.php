@@ -40,4 +40,11 @@ interface AttributeInterface extends BaseAttributeInterface,
      * @return AttributeInterface
      */
     public function setPatient(PatientInterface $patient = null);
+
+    /**
+     * Test for presence of patient.
+     *
+     * @return boolean
+     */
+    public function hasPatient();
 }

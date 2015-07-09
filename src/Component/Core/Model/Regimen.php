@@ -73,6 +73,14 @@ class Regimen extends BaseRegimen implements RegimenInterface
     /**
      * {@inheritdoc}
      */
+    public function hasPatient()
+    {
+        return $this->patient instanceof PatientInterface;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getDiagnosis()
     {
         return $this->diagnosis;
@@ -86,5 +94,13 @@ class Regimen extends BaseRegimen implements RegimenInterface
         $this->diagnosis = $diagnosis;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasDiagnosis()
+    {
+        return $this->diagnosis instanceof DiagnosisInterface;
     }
 }

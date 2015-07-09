@@ -42,6 +42,13 @@ interface RegimenInterface extends BaseRegimenInterface,
     public function setPatient(PatientInterface $patient = null);
 
     /**
+     * Test for presence of a patient.
+     *
+     * @return boolean
+     */
+    public function hasPatient();
+
+    /**
      * Get diagnosis.
      *
      * @return DiagnosisInterface
@@ -55,4 +62,11 @@ interface RegimenInterface extends BaseRegimenInterface,
      * @return RegimenInterface
      */
     public function setDiagnosis(DiagnosisInterface $diagnosis = null);
+
+    /**
+     * Test for presence of a diagnosis.
+     *
+     * @return boolean
+     */
+    public function hasDiagnosis();
 }

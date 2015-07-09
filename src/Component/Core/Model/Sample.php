@@ -19,5 +19,37 @@ use Accard\Component\Sample\Model\Sample as BaseSample;
  */
 class Sample extends BaseSample implements SampleInterface
 {
-    use \Accard\Component\Patient\Model\PatientCollectingTrait;
+    /**
+     * Patient.
+     *
+     * @var PatientInterface
+     */
+    protected $patient;
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPatient()
+    {
+        return $this->patient;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPatient(PatientInterface $patient = null)
+    {
+        $this->patient = $patient;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPatient()
+    {
+        return $this->patient instanceof PatientInterface;
+    }
 }

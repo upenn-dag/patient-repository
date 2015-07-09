@@ -59,4 +59,12 @@ class Behavior extends BaseBehavior implements BehaviorInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPatient()
+    {
+        return $this->patient instanceof PatientInterface;
+    }
 }

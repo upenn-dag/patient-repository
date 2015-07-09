@@ -60,4 +60,12 @@ class Attribute extends BaseAttribute implements AttributeInterface
 
         return $this;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPatient()
+    {
+        return $this->patient instanceof PatientInterface;
+    }
 }
