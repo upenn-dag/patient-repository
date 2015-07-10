@@ -75,16 +75,16 @@ class ResourceExtension extends ContainerAwareExtension
             $this->createArrayFunctionArray('join', 'implode'),
             $this->createArrayFunctionArray('split', 'explode'),
 
-            // Date functions
+            // Date functions, always work on clone to avoid reference changing date.
             array(
                 'date',
                 function(DateTime $date = null, $format = 'm/d/Y') {
-                    $date = $date ?: new DateTime();
+                    $date = $date ? clone $date : new DateTime();
 
                     return sprintf('(is_integer(%1$d)) ? date(%1%d) : %1$d', $date->getTimestamp());
                 },
                 function(array $variables, DateTime $date = null, $format = 'm/d/Y') {
-                    $date = $date ?: new DateTime();
+                    $date = $date ? clone $date: new DateTime();
 
                     return $date->format($format);
                 }
