@@ -55,8 +55,8 @@ var Drawers = React.createClass({
     return (
       <div className="drawers">
         { handles }
-        { this.props.left ? (<Drawer side={Drawer.LEFT} ref={Drawer.LEFT} />) : null }
-        { this.props.right ? (<Drawer side={Drawer.RIGHT} ref={Drawer.RIGHT} />) : null }
+        { this.props.left ? (<Drawer onHide={this.close} side={Drawer.LEFT} ref={Drawer.LEFT} />) : null }
+        { this.props.right ? (<Drawer onHide={this.close} side={Drawer.RIGHT} ref={Drawer.RIGHT} />) : null }
       </div>
     );
   },

@@ -587,8 +587,8 @@ var Drawers = React.createClass({displayName: "Drawers",
     return (
       React.createElement("div", {className: "drawers"}, 
          handles, 
-         this.props.left ? (React.createElement(Drawer, {side: Drawer.LEFT, ref: Drawer.LEFT})) : null, 
-         this.props.right ? (React.createElement(Drawer, {side: Drawer.RIGHT, ref: Drawer.RIGHT})) : null
+         this.props.left ? (React.createElement(Drawer, {onHide: this.close, side: Drawer.LEFT, ref: Drawer.LEFT})) : null, 
+         this.props.right ? (React.createElement(Drawer, {onHide: this.close, side: Drawer.RIGHT, ref: Drawer.RIGHT})) : null
       )
     );
   },
@@ -649,6 +649,7 @@ module.exports = Drawers;
 'use strict';
 
 var React = require('react');
+var Component = require('./component');
 var LeftDrawer = require('./left');
 var RightDrawer = require('./right');
 
@@ -657,6 +658,7 @@ var RIGHT = 'right';
 
 var Drawer = React.createClass({displayName: "Drawer",
   propTypes: {
+    onHide: React.PropTypes.func.isRequired,
     side: React.PropTypes.oneOf([LEFT, RIGHT]).isRequired,
     children: React.PropTypes.element
   },
@@ -678,7 +680,7 @@ var Drawer = React.createClass({displayName: "Drawer",
 
     return (
       React.createElement("div", {className: classString}, 
-         this.isLeft() ? (React.createElement(LeftDrawer, null)) : (React.createElement(RightDrawer, null)) 
+         this.isLeft() ? (React.createElement(LeftDrawer, {onHide: this.props.onHide})) : (React.createElement(RightDrawer, {onHide: this.props.onHide})) 
       )
     );
   }
@@ -687,17 +689,11 @@ var Drawer = React.createClass({displayName: "Drawer",
 Drawer.LEFT = LEFT;
 Drawer.RIGHT = RIGHT;
 
-/* EXAMPLE DRAWER UTILITY!
-
-Drawer.doSomething = function() { return 'hey!'; };
-
-*/
-
 module.exports = Drawer;
 
 
 }).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/components/drawer/drawer.js","/components/drawer")
-},{"+7ZJp0":97,"./left":6,"./right":10,"buffer":93,"react":354}],6:[function(require,module,exports){
+},{"+7ZJp0":97,"./component":4,"./left":6,"./right":10,"buffer":93,"react":354}],6:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
@@ -711,6 +707,10 @@ var AccardActions = require('./../../stores/accard/actions');
 var LeftDrawer = React.createClass({displayName: "LeftDrawer",
 
 //  mixins: [React.addons.PureRenderMixin],
+
+  propTypes: {
+    onHide: React.PropTypes.func
+  },
 
   render:function() {
     var outcomesTooltip = (React.createElement(Bootstrap.Tooltip, null, "Experimental developer preview"));
@@ -735,6 +735,12 @@ var LeftDrawer = React.createClass({displayName: "LeftDrawer",
     );
   },
 
+  hide:function() {
+    if (this.props.onHide) {
+      this.props.onHide();
+    }
+  },
+
   comingSoon:function(e) {
     if (e.preventDefault) e.preventDefault();
     alert('Coming soon! This feature has been planned for the near future, and will become available upon completion.');
@@ -743,21 +749,25 @@ var LeftDrawer = React.createClass({displayName: "LeftDrawer",
   _handleCreditsClick:function(e) {
     if (e.preventDefault) e.preventDefault();
     AccardActions.switchSubapplication('credits');
+    this.hide();
   },
 
   _handleOutcomesClick:function(e) {
     if (e.preventDefault) e.preventDefault();
     AccardActions.switchSubapplication('outcomes');
+    this.hide();
   },
 
   _handlePatientClick:function(e) {
     if (e.preventDefault) e.preventDefault();
     AccardActions.switchSubapplication('patients');
+    this.hide();
   },
 
   _handleNewPatientClick:function(e) {
     if (e.preventDefault) e.preventDefault();
     AccardActions.switchSubapplication('newPatient');
+    this.hide();
   }
 });
 
@@ -1745,7 +1755,7 @@ start(initConfig)
 ;
 
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_ad626881.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_bf598780.js","/")
 },{"+7ZJp0":97,"./accard":1,"./api":2,"bluebird":37,"buffer":93}],24:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var EventEmitter = require('events').EventEmitter;

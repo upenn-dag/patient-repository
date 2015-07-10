@@ -11,6 +11,10 @@ var LeftDrawer = React.createClass({
 
 //  mixins: [React.addons.PureRenderMixin],
 
+  propTypes: {
+    onHide: React.PropTypes.func
+  },
+
   render() {
     var outcomesTooltip = (<Bootstrap.Tooltip>Experimental developer preview</Bootstrap.Tooltip>);
 
@@ -34,6 +38,12 @@ var LeftDrawer = React.createClass({
     );
   },
 
+  hide() {
+    if (this.props.onHide) {
+      this.props.onHide();
+    }
+  },
+
   comingSoon(e) {
     if (e.preventDefault) e.preventDefault();
     alert('Coming soon! This feature has been planned for the near future, and will become available upon completion.');
@@ -42,21 +52,25 @@ var LeftDrawer = React.createClass({
   _handleCreditsClick(e) {
     if (e.preventDefault) e.preventDefault();
     AccardActions.switchSubapplication('credits');
+    this.hide();
   },
 
   _handleOutcomesClick(e) {
     if (e.preventDefault) e.preventDefault();
     AccardActions.switchSubapplication('outcomes');
+    this.hide();
   },
 
   _handlePatientClick(e) {
     if (e.preventDefault) e.preventDefault();
     AccardActions.switchSubapplication('patients');
+    this.hide();
   },
 
   _handleNewPatientClick(e) {
     if (e.preventDefault) e.preventDefault();
     AccardActions.switchSubapplication('newPatient');
+    this.hide();
   }
 });
 

@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var Component = require('./component');
 var LeftDrawer = require('./left');
 var RightDrawer = require('./right');
 
@@ -9,6 +10,7 @@ var RIGHT = 'right';
 
 var Drawer = React.createClass({
   propTypes: {
+    onHide: React.PropTypes.func.isRequired,
     side: React.PropTypes.oneOf([LEFT, RIGHT]).isRequired,
     children: React.PropTypes.element
   },
@@ -30,7 +32,7 @@ var Drawer = React.createClass({
 
     return (
       <div className={classString}>
-        { this.isLeft() ? (<LeftDrawer />) : (<RightDrawer />) }
+        { this.isLeft() ? (<LeftDrawer onHide={this.props.onHide} />) : (<RightDrawer onHide={this.props.onHide} />) }
       </div>
     );
   }
@@ -38,11 +40,5 @@ var Drawer = React.createClass({
 
 Drawer.LEFT = LEFT;
 Drawer.RIGHT = RIGHT;
-
-/* EXAMPLE DRAWER UTILITY!
-
-Drawer.doSomething = function() { return 'hey!'; };
-
-*/
 
 module.exports = Drawer;
