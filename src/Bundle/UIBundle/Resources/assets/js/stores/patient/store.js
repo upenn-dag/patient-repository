@@ -170,7 +170,7 @@ Store.dispatchToken = Dispatcher.register(function(action) {
         page = pages;
       } else {
         page++;
-        limit = LIMIT + DEFAULT_LIMIT;
+        limit = limit + DEFAULT_LIMIT;
         loadPatients(true);
       }
     break;
