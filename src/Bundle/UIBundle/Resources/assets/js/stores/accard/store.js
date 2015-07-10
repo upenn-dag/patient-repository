@@ -13,6 +13,7 @@ var appList = {
   patients: 'patients',
   newPatient: 'new-patient',
   credits: 'credits',
+  outcomes: 'outcomes'
 };
 var appState = Immutable.Map({
   subApplication: 'patients'
