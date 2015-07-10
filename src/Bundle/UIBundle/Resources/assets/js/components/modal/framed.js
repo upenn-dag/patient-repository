@@ -7,20 +7,21 @@ var FramedModal = React.createClass({
 
   propTypes: {
     source: React.PropTypes.string.isRequired,
-    onRequestHide: React.PropTypes.func
+    onHide: React.PropTypes.func
   },
 
-  getDefaultProps() {
-    return {
-      title: false
-    };
+  getInitialState() {
+    return { show: true };
   },
 
   render() {
     return (
       <div className="accard-input-modal" ref="top">
         <Bootstrap.Modal
-          {...this.props}>
+          {...this.props}
+          show={this.state.show}
+          onHide={this.hide}
+          container={this}>
           <div className='iframe-buttons'>
             <button type='button' className='refresher' onClick={this.refresh}>
               <span className='fa fa-refresh'></span>
@@ -29,16 +30,16 @@ var FramedModal = React.createClass({
               <span className='fa fa-close'></span>
             </button>
           </div>
-          <div className='modal-body'>
+          <Bootstrap.Modal.Body>
             <iframe src={this.props.source} ref='iframe' style={{ border: 'none' }} />
-          </div>
+          </Bootstrap.Modal.Body>
         </Bootstrap.Modal>
       </div>
     );
   },
 
   hide() {
-    if (this.props.onRequestHide) this.props.onRequestHide();
+    this.setState({ show: false });
   },
 
   refresh() {

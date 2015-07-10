@@ -32,6 +32,9 @@ var CriteriaModel = Immutable.Record({
 var page, limit, pages, total, xhr, currentPatientId;
 var CHANGE_EVENT = 'patient-change';
 var CURRENT_EVENT = 'current-patient-change';
+var DEFAULT_LIMIT = 25;
+var cache = Immutable.Map();
+var requestCache = {};
 var patients = Immutable.List();
 var criteria = new CriteriaModel();
 var sortKey = 'id';
@@ -91,6 +94,10 @@ var Store = assign({}, EventEmitter.prototype, {
 
   hasCurrentPatient() {
     return currentPatientId ? this.has(currentPatientId) : false;
+  },
+
+  hasMorePatientsToLoad() {
+    return pages > page;
   },
 
   getSortKey() {
@@ -153,12 +160,26 @@ Store.dispatchToken = Dispatcher.register(function(action) {
   switch (action.type) {
 
     case Constants.LOAD:
-      loadPatients();
+      page = 1;
+      limit = DEFAULT_LIMIT;
+      loadPatients(false);
+    break;
+
+    case Constants.LOAD_MORE:
+      if (page >= pages) {
+        page = pages;
+      } else {
+        page++;
+        limit = LIMIT + DEFAULT_LIMIT;
+        loadPatients(true);
+      }
     break;
 
     case Constants.RESET_CRITERIA:
+      page = 1;
+      limit = DEFAULT_LIMIT;
       criteria = new CriteriaModel();
-      loadPatients();
+      loadPatients(false);
     break;
 
     case Constants.SELECT:
@@ -175,17 +196,22 @@ Store.dispatchToken = Dispatcher.register(function(action) {
     break;
 
     case Constants.SET_SORT_KEY:
+      page = 1;
       sortKey = action.key;
       sortDirection = action.direction;
       loadPatients();
     break;
 
     case Constants.SET_CRITERIA:
+      page = 1;
+      limit = DEFAULT_LIMIT;
       criteria = new CriteriaModel(action.criteria);
       loadPatients();
     break;
 
     case Constants.SET_CRITERIA_BY_KEY:
+      page = 1;
+      limit = DEFAULT_LIMIT;
       criteria = criteria.set(action.key, action.value);
       loadPatients();
     break;
@@ -203,17 +229,50 @@ function _dir(reverse) {
   return reverse ? ('desc' == sortDirection ? 1 : -1) : ('desc' == sortDirection ? -1 : 1);
 }
 
-function loadPatients() {
-  API.cancel().getJSON(createIndexURL()).then(function(response) {
-    // Clear patients list prior to loading new patients.
-    patients = patients.clear();
+function loadPatients(merge) {
+  merge = !!merge || false;
 
-    // Inject all patients into list.
-    response._embedded.items.forEach(function(patient) {
-      patients = patients.push(new PatientModel(patient));
+  var url = createIndexURL();
+  var requestedPatients = [];
+
+  // Cached? Load that instead.
+  if (requestCache[url]) {
+
+    page = requestCache[url].page;
+    pages = requestCache[url].pages;
+    total = requestCache[url].total;
+    requestCache[url].ids.forEach(function(patientId) {
+      requestedPatients.push(cache.get(patientId));
     });
 
-    // Unset current patient if it's no longer in the list.
+    patients = merge ? patients.concat(requestedPatients) : Immutable.List(requestedPatients);
+    Store.emitChange();
+
+    return;
+  }
+
+  API.cancel().getJSON(url).then(function(response) {
+    var requestData = {ids: []};
+
+    // Inject all patients into the cache if they don't exist.
+    response._embedded.items.forEach(function(patient) {
+// Commented this out, not sure if we want to reload patients as they come?
+//      if (!cache.has(patient.id)) {
+        cache = cache.set(patient.id, new PatientModel(patient));
+//      }
+
+      requestedPatients.push(cache.get(patient.id));        
+      requestData.ids.push(patient.id);
+    });
+
+    page = requestData.page = response.page;
+    pages = requestData.pages = response.pages;
+    total =  requestData.total = response.total;
+    patients = merge ? patients.concat(requestedPatients) : Immutable.List(requestedPatients);
+
+    // Cache the patient ids from the response.
+    requestCache[url] = requestData;
+
     if (!has(currentPatientId)) {
       currentPatientId = null;
       Store.emitCurrentPatientChange();
@@ -236,7 +295,7 @@ function createIndexURL() {
     criteria: {},
     sorting: {},
     page: page || 1,
-    limit: limit || 25
+    limit: limit || DEFAULT_LIMIT
   };
 
   if (criteria.mrn) {
@@ -295,10 +354,5 @@ function deselectById(patientId) {
   if (!patient) return;
   patients = patients.set(index, patient.set('selected', false));
 }
-
-/**
- * We need to preload some data, not sure if we should do this here...
- */
-require('./actions').load();
 
 module.exports = Store;

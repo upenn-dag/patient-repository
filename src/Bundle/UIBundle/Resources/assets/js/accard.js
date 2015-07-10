@@ -316,8 +316,8 @@ AccardApplication.prototype = {
 
   openModal: function(source) {
     if (this.modal) this.closeModal();
-    var FramedModal = require('./components/modal/framed-auto');
-    this.modal = React.render(<FramedModal frameSource={source} />, this.modalElement);
+    var FramedModal = require('./components/modal/framed');
+    this.modal = React.render(<FramedModal source={source} />, this.modalElement);
   },
 
   closeModal: function() {

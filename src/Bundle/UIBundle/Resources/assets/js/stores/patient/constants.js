@@ -3,6 +3,7 @@
 module.exports = {
   ADD: 'add-patient',
   LOAD: 'load-patients',
+  LOAD_MORE: 'load-more-patients',
   REFRESH: 'refresh-patients',
   REMOVE: 'remove-patient',
   REMOVE_ALL: 'remove-all-patients',

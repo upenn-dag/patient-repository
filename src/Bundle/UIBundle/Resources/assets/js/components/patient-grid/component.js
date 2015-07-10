@@ -4,6 +4,7 @@
 Object.assign = Object.assign || require('object-assign');
 
 var React = require('react/addons');
+var Bootstrap = require('react-bootstrap');
 var FixedDataTable = require('fixed-data-table');
 var Table = FixedDataTable.Table;
 var Column = FixedDataTable.Column;
@@ -50,6 +51,7 @@ var PatientGrid = React.createClass({
   },
 
   render: function() {
+    var btn;
     var rows = this.state.patients;
     var current = this.state.currentPatientId;
     var rowsCount = rows.size;
@@ -73,22 +75,29 @@ var PatientGrid = React.createClass({
       return classes.join(' ');
     };
 
+    if (Store.hasMorePatientsToLoad()) {
+      btn = (<Bootstrap.Button onClick={Actions.loadMore} bsStyle='primary' block>Load More Patients</Bootstrap.Button>);
+    }
+
     return (
-      <Table rowHeight={rowHeight}
-             rowGetter={rowGetter}
-             rowsCount={rowsCount}
-             rowClassNameGetter={classGetter.bind(this)}
-             width={this.state.width}
-             maxHeight={this.state.height}
-             headerHeight={headerHeight}
-             onRowClick={this._handleRowClickWithDoubleClick}>
-        <Column label={this._createSortableCellLabel('mrn', 'MRN')} fixed={true} cellClassName='accardFixedDataTableCell' width={colWidth} flexGrow={1} dataKey='mrn' headerRenderer={this._createHeaderRenderer} />
-        <Column label={this._createSortableCellLabel('firstName', 'First Name')} cellClassName='accardFixedDataTableCell' width={colWidth} flexGrow={2} dataKey='firstName' headerRenderer={this._createHeaderRenderer} />
-        <Column label={this._createSortableCellLabel('lastName', 'Last Name')} cellClassName='accardFixedDataTableCell' width={colWidth} flexGrow={2} dataKey='lastName' headerRenderer={this._createHeaderRenderer} />
-        <Column label={this._createSortableCellLabel('dateOfBirth', 'Date of Birth')} cellClassName='accardFixedDataTableCell' width={colWidth} flexGrow={1} dataKey='dateOfBirth' headerRenderer={this._createHeaderRenderer} cellRenderer={this._createDateRenderer} />
-        <Column label={this._createSortableCellLabel('gender', 'Gender')} cellClassName='accardFixedDataTableCell' width={colWidth} flexGrow={1} dataKey='gender' headerRenderer={this._createHeaderRenderer} cellRenderer={this._createGenderRenderer} />
-        <Column label={this._createSortableCellLabel('race', 'Race')} cellClassName='accardFixedDataTableCell' width={colWidth-1} flexGrow={1} dataKey='race' headerRenderer={this._createHeaderRenderer} cellRenderer={this._createRaceRenderer} />
-      </Table>
+      <div>
+        <Table rowHeight={rowHeight}
+               rowGetter={rowGetter}
+               rowsCount={rowsCount}
+               rowClassNameGetter={classGetter.bind(this)}
+               width={this.state.width}
+               maxHeight={this.state.height}
+               headerHeight={headerHeight}
+               onRowClick={this._handleRowClickWithDoubleClick}>
+          <Column label={this._createSortableCellLabel('mrn', 'MRN')} fixed={true} cellClassName='accardFixedDataTableCell' width={colWidth} flexGrow={1} dataKey='mrn' headerRenderer={this._createHeaderRenderer} />
+          <Column label={this._createSortableCellLabel('firstName', 'First Name')} cellClassName='accardFixedDataTableCell' width={colWidth} flexGrow={2} dataKey='firstName' headerRenderer={this._createHeaderRenderer} />
+          <Column label={this._createSortableCellLabel('lastName', 'Last Name')} cellClassName='accardFixedDataTableCell' width={colWidth} flexGrow={2} dataKey='lastName' headerRenderer={this._createHeaderRenderer} />
+          <Column label={this._createSortableCellLabel('dateOfBirth', 'Date of Birth')} cellClassName='accardFixedDataTableCell' width={colWidth} flexGrow={1} dataKey='dateOfBirth' headerRenderer={this._createHeaderRenderer} cellRenderer={this._createDateRenderer} />
+          <Column label={this._createSortableCellLabel('gender', 'Gender')} cellClassName='accardFixedDataTableCell' width={colWidth} flexGrow={1} dataKey='gender' headerRenderer={this._createHeaderRenderer} cellRenderer={this._createGenderRenderer} />
+          <Column label={this._createSortableCellLabel('race', 'Race')} cellClassName='accardFixedDataTableCell' width={colWidth-1} flexGrow={1} dataKey='race' headerRenderer={this._createHeaderRenderer} cellRenderer={this._createRaceRenderer} />
+        </Table>
+        {btn}
+      </div>
     );
   },
 
@@ -137,6 +146,8 @@ var PatientGrid = React.createClass({
   componentDidMount: function() {
     Store.addChangeListener(this._onChange);
     Store.addCurrentPatientListener(this._onChange);
+
+    Actions.load();
   },
 
   componentWillUnmount: function() {

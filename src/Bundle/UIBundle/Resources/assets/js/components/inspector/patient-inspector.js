@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react/addons');
-var FramedModalButton = require('../modal/framed-button');
 var PatientStore = require('./../../stores/patient/store');
 
 var PatientInspector = React.createClass({

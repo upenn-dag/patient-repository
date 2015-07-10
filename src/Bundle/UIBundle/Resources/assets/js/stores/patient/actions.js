@@ -10,6 +10,12 @@ module.exports = {
     });
   },
 
+  loadMore() {
+    Dispatcher.dispatch({
+      type: Constants.LOAD_MORE
+    });
+  },
+
   refresh() {
     Dispatcher.dispatch({
       type: Constants.REFRESH
