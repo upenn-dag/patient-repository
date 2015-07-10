@@ -14,6 +14,8 @@ accard_outcomes_main:
     path: /
     defaults:
         _controller: AccardOutcomesBundle:Outcomes:main
+    options:
+        expose: true
 
 accard_outcomes_filters:
     path: /filters.{_format}
@@ -50,3 +52,5 @@ accard_outcomes_state:
     path: /state.json
     defaults:
         _controller: AccardOutcomesBundle:Outcomes:state
+    options:
+        expose: true
