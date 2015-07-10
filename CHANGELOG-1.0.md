@@ -8,5 +8,19 @@ To get the diff for a specific change, go to https://gitlab.med.upenn.edu/protot
 * 1.0.0-beta1 (Initial release 07/01/2015)
     - No changes recorded, initial release.
 * 1.0.0-beta2
-    - bug #? [UIBundle] Non HTML5 browsers now support common date picker in UI. (frankbardon)
-    - bug #? [UIBundle] Dates now properly render on grid in Safari. (frankbardon)
+    - [OutcomesBundle]
+        - Minor adjustments made to support loading outcomes inside UIBundle.
+    - [ResourceBundle]
+        - Expression language dates are now cloned prior to use, this avoids overwriting dates.
+    - [UIBundle]
+        - Non HTML5 browsers now support common date picker in UI.
+        - Dates now properly render on grid in Safari.
+        - Integrated new credits page.
+        - All npm dependencies updated, and all deprecations resolved.
+        - Patient grid now infinitely scrollable.
+        - Outcomes incorporated into UI, experimentally.
+        - Left drawer auto-hides when a valid menu item is selected.
+    - [Activity] Now fully unit tested, minor code inconsistencies found and fixed.
+    - [Core] Now fully unit tested, minor code inconsistencies found and fixed.
+    - [Patient] Now fully unit tested, minor code inconsistencies found and fixed.
+    - [Resource] Now fuly unit tested, minor code inconsistencies found and fixed.
