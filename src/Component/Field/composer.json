@@ -7,8 +7,8 @@
     "license": "MIT",
     "require": {
         "php": ">=5.4.0",
-        "accard/resource": "~1.0",
-        "accard/option": "~1.0"
+        "accard/resource": "dev-develop",
+        "accard/option": "dev-develop"
     },
     "require-dev": {
         "codeception/codeception": "dev-master",
