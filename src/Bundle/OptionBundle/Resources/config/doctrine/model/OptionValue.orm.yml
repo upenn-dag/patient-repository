@@ -21,6 +21,11 @@ Accard\Component\Option\Model\OptionValue:
             nullable: false
         locked:
             type: boolean
+        order:
+            type: integer
+            column: ordering
+            options:
+                default: 0
 
     manyToOne:
         option:
