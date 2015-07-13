@@ -12,6 +12,7 @@ namespace Accard\Component\Field\Model;
 
 use BadMethodCallException;
 use Accard\Component\Option\Model\OptionInterface;
+use Accard\Component\Option\Model\OptionOrder;
 
 /**
  * Accard field model.
@@ -72,11 +73,19 @@ class Field implements FieldInterface
     protected $addable = false;
 
     /**
+     * Field ordering type.
+     *
+     * @var string
+     */
+    protected $order = OptionOrder::DEFAULT_ORDER;
+
+    /**
      * Field configuration.
      *
      * @var array
      */
     protected $configuration = array();
+
 
     /**
      * {@inheritdoc}
@@ -195,6 +204,24 @@ class Field implements FieldInterface
     public function setAddable($addable)
     {
         $this->addable = (boolean) $addable;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
 
         return $this;
     }

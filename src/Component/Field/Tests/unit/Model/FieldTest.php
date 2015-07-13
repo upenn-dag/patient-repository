@@ -13,6 +13,7 @@ namespace Model;
 use Mockery;
 use Accard\Component\Field\Model\FieldTypes;
 use Accard\Component\Field\Model\Field;
+use Accard\Component\Option\Model\OptionOrder;
 
 /**
  * Field model tests.
@@ -132,6 +133,20 @@ class FieldTest extends \Codeception\TestCase\Test
         $this->field->setConfiguration(array('test'));
         $this->assertAttributeSame(array('test'), 'configuration', $this->field);
         $this->assertSame(array('test'), $this->field->getConfiguration());
+    }
+
+    public function testFieldOrderingIsOrderingDefaultOnCreation()
+    {
+        $expected = OptionOrder::DEFAULT_ORDER;
+        $this->assertAttributeSame($expected, 'order', $this->field);
+        $this->assertSame($expected, $this->field->getOrder());
+    }
+
+    public function testFieldOrderingIsMutable()
+    {
+        $expected = OptionOrder::BY_ID_ASC;
+        $this->field->setOrder($expected);
+        $this->assertSame($expected, $this->field->getOrder());
     }
 
     public function testFieldConfigurationIsEmptyArrayByDefault()

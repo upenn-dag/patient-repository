@@ -111,6 +111,21 @@ interface FieldInterface extends ResourceInterface
     public function setAddable($addable);
 
     /**
+     * Get order.
+     *
+     * @return string
+     */
+    public function getOrder();
+
+    /**
+     * Set order.
+     *
+     * @param string $order
+     * @return FieldInterface
+     */
+    public function setOrder($order);
+
+    /**
      * Get field configuration.
      *
      * @return array
