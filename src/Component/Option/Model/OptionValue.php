@@ -12,6 +12,7 @@ namespace Accard\Component\Option\Model;
 
 use BadMethodCallException;
 use Accard\Component\Resource\Model\LockableTrait;
+use Accard\Component\Resource\Model\OrderableTrait;
 
 /**
  * Option value model.
@@ -21,6 +22,7 @@ use Accard\Component\Resource\Model\LockableTrait;
 class OptionValue implements OptionValueInterface
 {
     use LockableTrait;
+    use OrderableTrait;
 
     /**
      * Option value id.

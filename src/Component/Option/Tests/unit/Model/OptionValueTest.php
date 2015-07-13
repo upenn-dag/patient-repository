@@ -54,6 +54,14 @@ class OptionValueTest extends \Codeception\TestCase\Test
         );
     }
 
+    public function testOptionValueIsResourceOrderable()
+    {
+        $this->assertInstanceOf(
+            'Accard\Component\Resource\Model\OrderableInterface',
+            $this->optionValue
+        );
+    }
+
     public function testOptionValueIdIsUnsetOnCreation()
     {
         $this->assertNull($this->optionValue->getId());
