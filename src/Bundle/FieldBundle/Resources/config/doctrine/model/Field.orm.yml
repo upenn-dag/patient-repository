@@ -37,6 +37,13 @@ Accard\Component\Field\Model\Field:
             nullable: false
             options:
                 default: false
+        order:
+            type: string
+            length: 60
+            nullable: false
+            column: ordering
+            options:
+                default: "numeric"
         configuration:
             type: array
 
