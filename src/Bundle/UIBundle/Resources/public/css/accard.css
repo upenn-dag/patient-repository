@@ -11245,6 +11245,10 @@ form[data-accard="formmodal"] {
   border: 0;
   opacity: 0.4;
 }
+.control-label.required:after {
+  content: "*";
+  color: rgba(249, 56, 34, 0.8);
+}
 .inner-content .alert-accard-main {
   width: 90%;
 }
