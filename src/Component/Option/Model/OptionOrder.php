@@ -10,6 +10,9 @@
  */
 namespace Accard\Component\Option\Model;
 
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
+
 /**
  * Option order types.
  *
@@ -58,5 +61,38 @@ class OptionOrder
     public static function getDefault()
     {
         return self::DEFAULT_ORDER;
+    }
+
+    /**
+     * Sort existing value collection utility.
+     *
+     * @param Collection $values
+     * @param string $sortKey
+     * @return Collection
+     */
+    public static function sort(Collection $values, $sortKey)
+    {
+        $criteria = new Criteria();
+
+        switch ($sortKey) {
+            case self::BY_ALPHA_ASC:
+                $criteria->orderBy(array('presentation' => Criteria::ASC));
+            break;
+            case self::BY_ALPHA_DESC:
+                $criteria->orderBy(array('presentation' => Criteria::DESC));
+            break;
+            case self::BY_ID_ASC:
+                $criteria->orderBy(array('id' => Criteria::ASC));
+            break;
+            case self::BY_ID_DESC:
+                $criteria->orderBy(array('id' => Criteria::DESC));
+            break;
+            case self::BY_NUMBER:
+            default:
+                $criteria->orderBy(array('order' => Criteria::ASC));
+            break;
+        }
+
+        return $values->matching($criteria);
     }
 }
