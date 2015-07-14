@@ -11230,8 +11230,8 @@ form[data-accard="formmodal"] {
 .iframe-buttons {
   float: right;
   position: absolute;
-  top: 12px;
-  right: 24px;
+  top: 17px;
+  right: 17px;
   z-index: 1060;
   margin: 3px 6px;
 }
@@ -11244,6 +11244,9 @@ form[data-accard="formmodal"] {
   margin-left: 6px;
   border: 0;
   opacity: 0.4;
+}
+.inner-content .alert-accard-main {
+  width: 90%;
 }
 .btn-inverse {
   color: #ffffff;
