@@ -12,6 +12,7 @@ namespace Accard\Bundle\OptionBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
 use Accard\Component\Option\Model\OptionInterface;
+use Accard\Component\Option\Model\OptionOrder;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
@@ -50,12 +51,10 @@ class OptionValueChoiceType extends AbstractType
     {
         parent::finishView($view, $form, $options);
 
-        $view->vars['option']     = $this->option;
-        $view->vars['is_addable'] = 
-            array_key_exists('data-field-addable', $options['attr'])
-                ? (bool)$options['attr']['data-field-addable']
-                : false;
-
+        $view->vars['option'] = $this->option;
+        $view->vars['is_addable'] = array_key_exists('data-field-addable', $options['attr'])
+            ? (bool) $options['attr']['data-field-addable']
+            : false;
     }
 
     /**
@@ -75,6 +74,8 @@ class OptionValueChoiceType extends AbstractType
         }
 
         $class = get_class($choices->first());
+
+        // Remove locked values from choice list.
         $choices = $choices->filter(function($choice) {
             return !$choice->isLocked();
         });
