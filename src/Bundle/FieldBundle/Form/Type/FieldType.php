@@ -86,6 +86,9 @@ class FieldType extends AbstractType
                 'label' => 'accard.field.form.addable',
                 'required' => false,
             ))
+            ->add('order', 'accard_option_order_choice', array(
+                'required' => true,
+            ))
         ;
     }
 

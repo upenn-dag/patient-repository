@@ -76,13 +76,15 @@ class BuildFieldValueFormListener implements EventSubscriberInterface
         $name = 'value';
         if (FieldTypes::CHOICE === $fieldValue->getType()) {
             $option = $fieldValue->getField()->getOption();
-            $type = new OptionValueChoiceType($option);
+            $sortBy = $fieldValue->getField()->getOrder();
+            $type = new OptionValueChoiceType($option, $sortBy);
+
             if ($fieldValue->getAllowMultiple()) {
                 $name = 'values';
                 $options['multiple'] = true;
                 $options['expanded'] = true;
             }
-            $options['attr']['data-field-addable'] = $fieldValue->isAddable() ? '1' : '0';
+            $options['attr']['data-field-addable'] = $fieldValue->isAddable();
         } else {
             $type = $fieldValue->getType();
         }

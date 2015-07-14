@@ -13,6 +13,8 @@ accard:
             presentation: Presentation
             type: Type
             option: Option
+            order: Order
+            order_default: Default
             allow_multiple: Allow multiple options
             addable: Addable
         action:
