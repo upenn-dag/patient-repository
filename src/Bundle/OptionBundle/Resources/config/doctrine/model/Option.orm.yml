@@ -31,3 +31,4 @@ Accard\Component\Option\Model\Option:
             mappedBy: option
             orphanRemoval: true
             cascade: ["persist", "remove"]
+            orderBy: { "order": "ASC" }
