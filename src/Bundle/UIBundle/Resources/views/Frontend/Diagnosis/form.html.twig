@@ -22,8 +22,13 @@
     <div class="col-md-3">
       {{ form_widget(phase.endDate) }}
     </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-delete btn-danger" data-accard="delete-prototype">
+        {{- 'accard.delete'|trans -}}
+      </button>
+    </div>
+    <hr>
   </div>
-  <hr>
 {% endspaceless %}
 {% endmacro %}
 
