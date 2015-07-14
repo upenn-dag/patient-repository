@@ -34,13 +34,21 @@ class OptionValueChoiceType extends AbstractType
     private $option;
 
     /**
+     * Sort order key.
+     *
+     * @var string
+     */
+    private $sortBy;
+
+    /**
      * Constructor.
      *
      * @param OptionInterface $option
      */
-    public function __construct(OptionInterface $option)
+    public function __construct(OptionInterface $option, $sortBy = OptionOrder::DEFAULT_ORDER)
     {
         $this->option = $option;
+        $this->sortBy = $sortBy;
     }
 
 
@@ -79,6 +87,9 @@ class OptionValueChoiceType extends AbstractType
         $choices = $choices->filter(function($choice) {
             return !$choice->isLocked();
         });
+
+        // Sort choice list.
+        $choices = OptionOrder::sort($choices, $this->sortBy);
 
         $resolver
             ->setDefaults(array(
