@@ -57,6 +57,11 @@ class OptionValueType extends AbstractType
                 'required' => true,
                 'label' => 'accard.form.option_value.value',
             ))
+            ->add('order', 'number', array(
+                'required' => true,
+                'label' => 'accard.form.option_value.order',
+                'empty_data' => 0,
+            ))
             ->add('locked', 'checkbox', array(
                 'required' => false,
                 'label' => 'accard.form.option_value.locked',
