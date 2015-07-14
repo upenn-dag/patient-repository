@@ -6,6 +6,11 @@
 # file that was distributed with this source code.
 
 accard:
+    invalid_number: This must be a valid number.
+    invalid_integer: This must be a valid integer.
+    invalid_date: This must be a valid date YYYY-MM-DD.
+    invalid_datetime: This must be a valid date and time.
+    invalid_percent: This must be a valid number to be considered a percentage.
     patient:
         diagnoses:
             type: Diagnoses must all be valid diagnoses.

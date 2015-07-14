@@ -21,11 +21,21 @@ parameters:
     accard.form.extension.accard_sample.class: Accard\Bundle\CoreBundle\Form\Extension\SampleTypeExtension
     accard.form.extension.accard_sample_source.class: Accard\Bundle\CoreBundle\Form\Extension\SampleSourceTypeExtension
     accard.form.extension.accard_regimen.class: Accard\Bundle\CoreBundle\Form\Extension\RegimenTypeExtension
-
+    accard.form.extension.invalid_message.class: Accard\Bundle\CoreBundle\Form\Extension\InvalidMessageExtension
     accard.form.type.patient_diagnoses.class: Accard\Bundle\CoreBundle\Form\Type\PatientDiagnosesType
     accard.form.type.patient_filter.class: Accard\Bundle\CoreBundle\Form\Type\Filter\PatientFilterType
 
 services:
+
+    accard.form.type_extension.number:
+        class: %accard.form.extension.invalid_message.class%
+        arguments: ['number', 'accard.invalid_number']
+        tags: [{ name: form.type_extension, alias: number }]
+
+    accard.form.type_extension.integer:
+        class: %accard.form.extension.invalid_message.class%
+        arguments: ['integer', 'accard.invalid_integer']
+        tags: [{ name: form.type_extension, alias: integer }]
 
     accard.form.type_extension.date:
         class: %accard.form.type_extension.date_defaults.class%

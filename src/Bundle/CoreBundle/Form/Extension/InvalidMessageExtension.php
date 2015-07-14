@@ -14,11 +14,11 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Sets default values for form fields.
+ * Allows us to easily override default messages for Symfony form types.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class DateDefaultsExtension extends AbstractTypeExtension
+class InvalidMessageExtension extends AbstractTypeExtension
 {
     /**
      * Form type of which to extend.
@@ -27,15 +27,23 @@ class DateDefaultsExtension extends AbstractTypeExtension
      */
     private $baseType;
 
+    /**
+     * New invalid_message option.
+     * 
+     * @var string
+     */
+    private $newMessage;
+
 
     /**
      * Constructor.
      *
      * @param string $baseType
      */
-    public function __construct($baseType)
+    public function __construct($baseType, $newMessage)
     {
         $this->baseType = $baseType;
+        $this->newMessage = $newMessage;
     }
 
     /**
@@ -44,8 +52,7 @@ class DateDefaultsExtension extends AbstractTypeExtension
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'widget' => 'single_text',
-            'invalid_message' => 'accard.invalid_date'
+            'invalid_message' => $this->newMessage
         ));
     }
 
