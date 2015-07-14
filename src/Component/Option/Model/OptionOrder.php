@@ -36,6 +36,7 @@ class OptionOrder
     public static function getChoices()
     {
         return array(
+            self::DEFAULT_ORDER => 'Default',
             self::BY_ALPHA_ASC => 'A-Z',
             self::BY_ALPHA_DESC => 'Z-A',
             self::BY_ID_DESC => 'Newest First',
@@ -76,10 +77,10 @@ class OptionOrder
 
         switch ($sortKey) {
             case self::BY_ALPHA_ASC:
-                $criteria->orderBy(array('presentation' => Criteria::ASC));
+                $criteria->orderBy(array('value' => Criteria::ASC));
             break;
             case self::BY_ALPHA_DESC:
-                $criteria->orderBy(array('presentation' => Criteria::DESC));
+                $criteria->orderBy(array('value' => Criteria::DESC));
             break;
             case self::BY_ID_ASC:
                 $criteria->orderBy(array('id' => Criteria::ASC));
