@@ -137,8 +137,16 @@ var Store = assign({}, EventEmitter.prototype, {
   },
 
   translateRace(race) {
-    // Translate me
-    return race;
+    race += '';
+
+    var truncTo = 22;
+    var f = race.charAt(0).toUpperCase();
+
+    if ((race.length + 1) > truncTo) {
+      return (f + race.substr(1)).substr(0, truncTo) + '...';
+    } 
+
+    return f + race.substr(1);
   },
 
   translateGender(gender) {

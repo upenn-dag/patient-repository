@@ -1273,12 +1273,12 @@ var PatientGrid = React.createClass({displayName: "PatientGrid",
                maxHeight: this.state.height, 
                headerHeight: headerHeight, 
                onRowClick: this._handleRowClickWithDoubleClick}, 
-          React.createElement(Column, {label: this._createSortableCellLabel('mrn', 'MRN'), fixed: true, cellClassName: "accardFixedDataTableCell", width: colWidth, flexGrow: 1, dataKey: "mrn", headerRenderer: this._createHeaderRenderer}), 
-          React.createElement(Column, {label: this._createSortableCellLabel('firstName', 'First Name'), cellClassName: "accardFixedDataTableCell", width: colWidth, flexGrow: 2, dataKey: "firstName", headerRenderer: this._createHeaderRenderer}), 
-          React.createElement(Column, {label: this._createSortableCellLabel('lastName', 'Last Name'), cellClassName: "accardFixedDataTableCell", width: colWidth, flexGrow: 2, dataKey: "lastName", headerRenderer: this._createHeaderRenderer}), 
-          React.createElement(Column, {label: this._createSortableCellLabel('dateOfBirth', 'Date of Birth'), cellClassName: "accardFixedDataTableCell", width: colWidth, flexGrow: 1, dataKey: "dateOfBirth", headerRenderer: this._createHeaderRenderer, cellRenderer: this._createDateRenderer}), 
-          React.createElement(Column, {label: this._createSortableCellLabel('gender', 'Gender'), cellClassName: "accardFixedDataTableCell", width: colWidth, flexGrow: 1, dataKey: "gender", headerRenderer: this._createHeaderRenderer, cellRenderer: this._createGenderRenderer}), 
-          React.createElement(Column, {label: this._createSortableCellLabel('race', 'Race'), cellClassName: "accardFixedDataTableCell", width: colWidth-1, flexGrow: 1, dataKey: "race", headerRenderer: this._createHeaderRenderer, cellRenderer: this._createRaceRenderer})
+          React.createElement(Column, {label: this._createSortableCellLabel('mrn', 'MRN'), fixed: true, cellClassName: "accardFixedDataTableCell", width: colWidth*0.6, flexGrow: 1, dataKey: "mrn", headerRenderer: this._createHeaderRenderer}), 
+          React.createElement(Column, {label: this._createSortableCellLabel('firstName', 'First Name'), cellClassName: "accardFixedDataTableCell", width: colWidth*0.7, flexGrow: 2, dataKey: "firstName", headerRenderer: this._createHeaderRenderer}), 
+          React.createElement(Column, {label: this._createSortableCellLabel('lastName', 'Last Name'), cellClassName: "accardFixedDataTableCell", width: colWidth*0.7, flexGrow: 2, dataKey: "lastName", headerRenderer: this._createHeaderRenderer}), 
+          React.createElement(Column, {label: this._createSortableCellLabel('dateOfBirth', 'Date of Birth'), cellClassName: "accardFixedDataTableCell", width: colWidth*0.7, flexGrow: 1, dataKey: "dateOfBirth", headerRenderer: this._createHeaderRenderer, cellRenderer: this._createDateRenderer}), 
+          React.createElement(Column, {label: this._createSortableCellLabel('gender', 'Gender'), cellClassName: "accardFixedDataTableCell", width: colWidth*0.4, flexGrow: 1, dataKey: "gender", headerRenderer: this._createHeaderRenderer, cellRenderer: this._createGenderRenderer}), 
+          React.createElement(Column, {label: this._createSortableCellLabel('race', 'Race'), cellClassName: "accardFixedDataTableCell", width: colWidth-1, flexGrow: 3, dataKey: "race", headerRenderer: this._createHeaderRenderer, cellRenderer: this._createRaceRenderer})
         ), 
         btn
       )
@@ -1755,7 +1755,7 @@ start(initConfig)
 ;
 
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_bf598780.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_95eb3f42.js","/")
 },{"+7ZJp0":97,"./accard":1,"./api":2,"bluebird":37,"buffer":93}],24:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var EventEmitter = require('events').EventEmitter;
@@ -2204,8 +2204,16 @@ var Store = assign({}, EventEmitter.prototype, {
   },
 
   translateRace:function(race) {
-    // Translate me
-    return race;
+    race += '';
+
+    var truncTo = 22;
+    var f = race.charAt(0).toUpperCase();
+
+    if ((race.length + 1) > truncTo) {
+      return (f + race.substr(1)).substr(0, truncTo) + '...';
+    } 
+
+    return f + race.substr(1);
   },
 
   translateGender:function(gender) {
