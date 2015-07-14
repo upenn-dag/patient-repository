@@ -1,19 +1,21 @@
 {% macro prototype_dropdown(type, prototypes, patient) %}
   {% from 'AccardUIBundle:Macros:button.html.twig' import link_in_modal %}
-  {% set transString = "accard.#{type}.action.create" %}
+  {% set transString = "accard.create" %}
 
-  <div class="btn-group pull-right">
+  <div class="pull-right">
     <button type="button" class="btn btn-primary btn-xs" data-accard="prototype-activator">
-      <span class="caret"></span>
+      <span class="fa fa-filter"></span>
     </button>
-    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-      {{ transString|trans }} <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-    {% for prototype in prototypes %}
-      <li>{{ link_in_modal(path("accard_frontend_#{type}_create", { patient: patient.id, prototype: prototype.name }), prototype.presentation) }}</li>
-    {% endfor %}
-    </ul>
+    <div class="btn-group">
+      <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        {{ transString|trans }} <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-left" style="right: 0; left: auto;">
+      {% for prototype in prototypes %}
+        <li>{{ link_in_modal(path("accard_frontend_#{type}_create", { patient: patient.id, prototype: prototype.name }), prototype.presentation) }}</li>
+      {% endfor %}
+      </ul>
+    </div>
   </div>
 {% endmacro %}
 
