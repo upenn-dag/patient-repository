@@ -32,9 +32,6 @@ var PatientSubapp = React.createClass({
     return (
       <div className='accard-main-wrapper col-sm-12'>
         <div className='iframe-buttons'>
-          <button type='button' className='refresher' onClick={this.refresh}>
-            <span className='fa fa-refresh'></span>
-          </button>
           <button type='button' className='closer' onClick={this.hide}>
             <span className='fa fa-close'></span>
           </button>

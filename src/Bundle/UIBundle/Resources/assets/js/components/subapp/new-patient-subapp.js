@@ -26,6 +26,10 @@ var PatientSubapp = React.createClass({
     );
   },
 
+  refresh() {
+    React.findDOMNode(this.refs.iframe).contentWindow.location.reload();
+  },
+
   _handleIframeLoad(e) {
     if (!e.target || !e.target.contentWindow) {
       throw "Unable to locate iframe content window.";

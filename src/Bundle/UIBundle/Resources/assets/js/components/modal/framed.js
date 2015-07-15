@@ -23,9 +23,6 @@ var FramedModal = React.createClass({
           onHide={this.hide}
           container={this}>
           <div className='iframe-buttons'>
-            <button type='button' className='refresher' onClick={this.refresh}>
-              <span className='fa fa-refresh'></span>
-            </button>
             <button type='button' className='closer' onClick={this.hide}>
               <span className='fa fa-close'></span>
             </button>
@@ -39,6 +36,7 @@ var FramedModal = React.createClass({
   },
 
   hide() {
+    if (this.props.onHide) this.props.onHide();
     this.setState({ show: false });
   },
 

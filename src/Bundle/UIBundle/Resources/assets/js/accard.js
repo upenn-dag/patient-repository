@@ -115,6 +115,16 @@ AccardApplication.prototype = {
     return this._debug('Initialized subapplications');
   },
 
+  refreshSubapplication: function() {
+    if (this.subapp && this.subapp.refresh) {
+      this.subapp.refresh();
+    } else {
+      this._navigate(AccardStore.getSubapplication());
+    }
+
+    return this._debug('Refreshed current subapplication.');
+  },
+
   _onSwitchSubapplication: function() {
     this._navigate(AccardStore.getSubapplication());
   },
@@ -126,33 +136,34 @@ AccardApplication.prototype = {
     if (this.inspectorElement) React.unmountComponentAtNode(this.inspectorElement);
     if (this.gridElement) React.unmountComponentAtNode(this.gridElement);
     React.unmountComponentAtNode(this.contentElement);
+    this.subapp = null;
 
     switch (subApplication) {
       case 'patients':
         var PatientsSubapp = require('./components/subapp/patients-subapp');
-        React.render(<PatientsSubapp accard={this} />, this.contentElement);
+        this.subapp = React.render(<PatientsSubapp accard={this} />, this.contentElement);
         this.initializeGrid();
         this.initializeInspector();
       break;
 
       case 'patient':
         var PatientSubapp = require('./components/subapp/patient-subapp');
-        React.render(<PatientSubapp accard={this} />, this.contentElement);
+        this.subapp = React.render(<PatientSubapp accard={this} />, this.contentElement);
       break;
 
       case 'newPatient':
         var NewPatientSubapp = require('./components/subapp/new-patient-subapp');
-        React.render(<NewPatientSubapp accard={this} />, this.contentElement);
+        this.subapp = React.render(<NewPatientSubapp accard={this} />, this.contentElement);
       break;
 
       case 'credits':
         var CreditsSubapp = require('./components/subapp/credits-subapp');
-        React.render(<CreditsSubapp accard={this} />, this.contentElement);
+        this.subapp = React.render(<CreditsSubapp accard={this} />, this.contentElement);
       break;
 
       case 'outcomes':
         var OutcomesSubapp = require('./components/subapp/outcomes');
-        React.render(<OutcomesSubapp accard={this} />, this.contentElement);
+        this.subapp = React.render(<OutcomesSubapp accard={this} />, this.contentElement);
       break;
 
       default:
@@ -322,7 +333,7 @@ AccardApplication.prototype = {
   openModal: function(source) {
     if (this.modal) this.closeModal();
     var FramedModal = require('./components/modal/framed');
-    this.modal = React.render(<FramedModal source={source} />, this.modalElement);
+    this.modal = React.render(<FramedModal source={source} onHide={this.refreshSubapplication.bind(this)} />, this.modalElement);
   },
 
   closeModal: function() {

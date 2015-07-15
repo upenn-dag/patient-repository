@@ -117,6 +117,16 @@ AccardApplication.prototype = {
     return this._debug('Initialized subapplications');
   },
 
+  refreshSubapplication: function() {
+    if (this.subapp && this.subapp.refresh) {
+      this.subapp.refresh();
+    } else {
+      this._navigate(AccardStore.getSubapplication());
+    }
+
+    return this._debug('Refreshed current subapplication.');
+  },
+
   _onSwitchSubapplication: function() {
     this._navigate(AccardStore.getSubapplication());
   },
@@ -128,33 +138,34 @@ AccardApplication.prototype = {
     if (this.inspectorElement) React.unmountComponentAtNode(this.inspectorElement);
     if (this.gridElement) React.unmountComponentAtNode(this.gridElement);
     React.unmountComponentAtNode(this.contentElement);
+    this.subapp = null;
 
     switch (subApplication) {
       case 'patients':
         var PatientsSubapp = require('./components/subapp/patients-subapp');
-        React.render(React.createElement(PatientsSubapp, {accard: this}), this.contentElement);
+        this.subapp = React.render(React.createElement(PatientsSubapp, {accard: this}), this.contentElement);
         this.initializeGrid();
         this.initializeInspector();
       break;
 
       case 'patient':
         var PatientSubapp = require('./components/subapp/patient-subapp');
-        React.render(React.createElement(PatientSubapp, {accard: this}), this.contentElement);
+        this.subapp = React.render(React.createElement(PatientSubapp, {accard: this}), this.contentElement);
       break;
 
       case 'newPatient':
         var NewPatientSubapp = require('./components/subapp/new-patient-subapp');
-        React.render(React.createElement(NewPatientSubapp, {accard: this}), this.contentElement);
+        this.subapp = React.render(React.createElement(NewPatientSubapp, {accard: this}), this.contentElement);
       break;
 
       case 'credits':
         var CreditsSubapp = require('./components/subapp/credits-subapp');
-        React.render(React.createElement(CreditsSubapp, {accard: this}), this.contentElement);
+        this.subapp = React.render(React.createElement(CreditsSubapp, {accard: this}), this.contentElement);
       break;
 
       case 'outcomes':
         var OutcomesSubapp = require('./components/subapp/outcomes');
-        React.render(React.createElement(OutcomesSubapp, {accard: this}), this.contentElement);
+        this.subapp = React.render(React.createElement(OutcomesSubapp, {accard: this}), this.contentElement);
       break;
 
       default:
@@ -324,7 +335,7 @@ AccardApplication.prototype = {
   openModal: function(source) {
     if (this.modal) this.closeModal();
     var FramedModal = require('./components/modal/framed');
-    this.modal = React.render(React.createElement(FramedModal, {source: source}), this.modalElement);
+    this.modal = React.render(React.createElement(FramedModal, {source: source, onHide: this.refreshSubapplication.bind(this)}), this.modalElement);
   },
 
   closeModal: function() {
@@ -1314,9 +1325,6 @@ var FramedModal = React.createClass({displayName: "FramedModal",
           onHide: this.hide, 
           container: this}), 
           React.createElement("div", {className: "iframe-buttons"}, 
-            React.createElement("button", {type: "button", className: "refresher", onClick: this.refresh}, 
-              React.createElement("span", {className: "fa fa-refresh"})
-            ), 
             React.createElement("button", {type: "button", className: "closer", onClick: this.hide}, 
               React.createElement("span", {className: "fa fa-close"})
             )
@@ -1330,6 +1338,7 @@ var FramedModal = React.createClass({displayName: "FramedModal",
   },
 
   hide:function() {
+    if (this.props.onHide) this.props.onHide();
     this.setState({ show: false });
   },
 
@@ -1583,6 +1592,10 @@ var PatientSubapp = React.createClass({displayName: "PatientSubapp",
     );
   },
 
+  refresh:function() {
+    React.findDOMNode(this.refs.iframe).contentWindow.location.reload();
+  },
+
   _handleIframeLoad:function(e) {
     if (!e.target || !e.target.contentWindow) {
       throw "Unable to locate iframe content window.";
@@ -1681,9 +1694,6 @@ var PatientSubapp = React.createClass({displayName: "PatientSubapp",
     return (
       React.createElement("div", {className: "accard-main-wrapper col-sm-12"}, 
         React.createElement("div", {className: "iframe-buttons"}, 
-          React.createElement("button", {type: "button", className: "refresher", onClick: this.refresh}, 
-            React.createElement("span", {className: "fa fa-refresh"})
-          ), 
           React.createElement("button", {type: "button", className: "closer", onClick: this.hide}, 
             React.createElement("span", {className: "fa fa-close"})
           )
@@ -1922,7 +1932,7 @@ start(initConfig)
 ;
 
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_ce5eecb6.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_4bf19be2.js","/")
 },{"+7ZJp0":100,"./accard":1,"./api":2,"./state":28,"bluebird":40,"buffer":96}],26:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var EventEmitter = require('events').EventEmitter;
