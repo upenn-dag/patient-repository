@@ -44,32 +44,26 @@ var PatientFilter = React.createClass({
       <form onSubmit={function(e) { e.preventDefault() }}>
         <div className='row-fluid'>
           <div className='col-sm-12 col'>
-            <Overlay placement='left' trigger='focus' overlay={<Tooltip>Medical record number</Tooltip>}>
               <Input type='text' bsSize='small' ref='mrn' placeholder='MRN' onChange={this._inputHandler('mrn')} value={this.state.mrn} />
-            </Overlay>
           </div>
         </div>
         <div className='row-fluid'>
           <div className='col-sm-6 col'>
-            <Overlay placement='left' trigger='focus' overlay={<Tooltip>First name</Tooltip>}>
-              <Input type='text' bsSize='small' ref='firstName' placeholder='First name' onChange={this._inputHandler('firstName')} value={this.state.firstName} />
-            </Overlay>
+            <Input type='text' bsSize='small' ref='firstName' placeholder='First name' onChange={this._inputHandler('firstName')} value={this.state.firstName} />
           </div>
           <div className='col-sm-6 col'>
-            <Overlay placement='left' trigger='focus' overlay={<Tooltip>Last name</Tooltip>}>
-              <Input type='text' bsSize='small' ref='lastName' placeholder='Last name' onChange={this._inputHandler('lastName')} value={this.state.lastName} />
-            </Overlay>
+            <Input type='text' bsSize='small' ref='lastName' placeholder='Last name' onChange={this._inputHandler('lastName')} value={this.state.lastName} />
           </div>
         </div>
         <div className='row-fluid'>
           <div className='col-sm-6 col'>
-            <Overlay placement='left' trigger='focus' overlay={<Tooltip>Date of birth from</Tooltip>}>
-              <Input type='date' bsSize='small' ref='fromDate' onChange={this._inputHandler('fromDate')} value={this.state.fromDate} />
+            <Overlay placement='top' trigger='focus' overlay={<Tooltip>Date of birth from</Tooltip>}>
+              <Input type='date' bsSize='small' ref='fromDate' placeholder='DOB: From' onChange={this._inputHandler('fromDate')} value={this.state.fromDate} />
             </Overlay>
           </div>
           <div className='col-sm-6 col'>
-            <Overlay placement='left' trigger='focus' overlay={<Tooltip>Date of birth to</Tooltip>}>
-              <Input type='date' bsSize='small' ref='toDate' onChange={this._inputHandler('toDate')} value={this.state.toDate} />
+            <Overlay placement='top' trigger='focus' overlay={<Tooltip>Date of birth to</Tooltip>}>
+              <Input type='date' bsSize='small' ref='toDate' placeholder='DOB: To' onChange={this._inputHandler('toDate')} value={this.state.toDate} />
             </Overlay>
           </div>
         </div>
