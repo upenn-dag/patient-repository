@@ -5,7 +5,6 @@ var singleton = false;
 
 var State = function(state) {
   if (!state) throw 'No state provided.';
-  console.log(state);
   this.data = Immutable.fromJS(state);
 };
 
