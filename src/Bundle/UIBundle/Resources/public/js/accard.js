@@ -1274,7 +1274,8 @@ var PatientGrid = React.createClass({displayName: "PatientGrid",
           React.createElement(Column, {label: this._createSortableCellLabel('gender', 'Gender'), cellClassName: "accardFixedDataTableCell", width: colWidth*0.4, flexGrow: 1, dataKey: "gender", headerRenderer: this._createHeaderRenderer, cellRenderer: this._createGenderRenderer}), 
           React.createElement(Column, {label: this._createSortableCellLabel('race', 'Race'), cellClassName: "accardFixedDataTableCell", width: colWidth-1, flexGrow: 3, dataKey: "race", headerRenderer: this._createHeaderRenderer, cellRenderer: this._createRaceRenderer})
         ), 
-        btn
+        btn, 
+        React.createElement("p", {className: "text-muted text-center"}, "Double clicking on a patient record will open the patient details page.")
       )
     );
   },
@@ -1749,7 +1750,7 @@ start(initConfig)
 ;
 
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_74ec638d.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_4b667e41.js","/")
 },{"+7ZJp0":97,"./accard":1,"./api":2,"bluebird":37,"buffer":93}],24:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var EventEmitter = require('events').EventEmitter;

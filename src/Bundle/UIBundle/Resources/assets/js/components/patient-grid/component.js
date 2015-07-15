@@ -97,6 +97,7 @@ var PatientGrid = React.createClass({
           <Column label={this._createSortableCellLabel('race', 'Race')} cellClassName='accardFixedDataTableCell' width={colWidth-1} flexGrow={3} dataKey='race' headerRenderer={this._createHeaderRenderer} cellRenderer={this._createRaceRenderer} />
         </Table>
         {btn}
+        <p className='text-muted text-center'>Double clicking on a patient record will open the patient details page.</p>
       </div>
     );
   },
