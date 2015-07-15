@@ -26,7 +26,7 @@ final class Version
      *
      * @var    string
      */
-    const SIMPLE = '1.0.0 Beta 1';
+    const SIMPLE = '1.0.0 Beta 2';
 
     /**
      * Major version number
@@ -87,7 +87,7 @@ final class Version
      *
      * @var    integer
      */
-    const PREVIEW_NUMBER = 1;
+    const PREVIEW_NUMBER = 2;
 
     /**
      * Core version string, this is the full version string, which includes the
@@ -100,5 +100,5 @@ final class Version
      *
      * @var    string
      */
-    const FULL = '1.0.0 Beta 1 (Experimental)';
+    const FULL = '1.0.0 Beta 2 (Experimental)';
 }
