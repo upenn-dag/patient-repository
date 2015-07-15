@@ -2,6 +2,7 @@
 
 var Promise = require('bluebird');
 var API = require('./api');
+var State = require('./state');
 var initConfig = window.accardConfig || {};
 
 function start(config) {
@@ -23,7 +24,7 @@ start(initConfig)
     responses.forEach(function(response) {
       switch (response.key) {
         case initConfig.urls.state:
-          initConfig.state = JSON.parse(response.response);
+          initConfig.state = State.init(JSON.parse(response.response));
         break;
         case initConfig.urls.routes:
           initConfig.routes = JSON.parse(response.response);
@@ -45,11 +46,8 @@ start(initConfig)
   })
 
   .then(function(accard) {
-    window.accard = accard;
     accard.initialize(initConfig);
     accard.initMessaging();
-
-    // TEST TEST TEST BELOW!!!
 
     var server = accard.getMessagingServer();
 
@@ -66,5 +64,7 @@ start(initConfig)
         break;
       }
     });
+
+    window.accard = accard;
   })
 ;

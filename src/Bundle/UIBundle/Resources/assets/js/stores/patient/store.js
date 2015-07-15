@@ -161,6 +161,11 @@ var Store = assign({}, EventEmitter.prototype, {
 });
 
 /**
+ * Allow more listeners without incident.
+ */
+Store.setMaxListeners(20);
+
+/**
  * Interface action hooks.
  */
 Store.dispatchToken = Dispatcher.register(function(action) {
