@@ -1265,7 +1265,7 @@ var PatientInspector = React.createClass({displayName: "PatientInspector",
     } else {
       str = (
         React.createElement("div", {className: "text-center"}, 
-          React.createElement(Bootstrap.SplitButton, {title: "Create for active patient"}, 
+          React.createElement(Bootstrap.DropdownButton, {title: "Create for active patient"}, 
             links
           )
         )
@@ -1932,7 +1932,7 @@ start(initConfig)
 ;
 
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_4bf19be2.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_1ea3c4f4.js","/")
 },{"+7ZJp0":100,"./accard":1,"./api":2,"./state":28,"bluebird":40,"buffer":96}],26:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var EventEmitter = require('events').EventEmitter;

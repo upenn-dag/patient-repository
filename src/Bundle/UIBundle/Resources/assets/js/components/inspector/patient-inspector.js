@@ -58,9 +58,9 @@ var PatientInspector = React.createClass({
     } else {
       str = (
         <div className='text-center'>
-          <Bootstrap.SplitButton title='Create for active patient'>
+          <Bootstrap.DropdownButton title='Create for active patient'>
             {links}
-          </Bootstrap.SplitButton>
+          </Bootstrap.DropdownButton>
         </div>
       );
     }
