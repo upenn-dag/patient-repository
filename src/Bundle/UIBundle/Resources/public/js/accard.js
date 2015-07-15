@@ -874,19 +874,7 @@ module.exports = RightDrawer;
 var React = require('react');
 var PatientFilter = require('./patient-filter');
 var PatientInspector = require('./patient-inspector');
-
-/*
-var PatientActions = require('./patient-actions');
-
-        <div className='inspector panel'>
-          <div className='inspector-header'>
-            <div className='inspector-title'>Patients</div>
-          </div>
-          <div className='inspector-body' ref='body'>
-            <PatientActions />
-          </div>
-        </div>
-*/
+var AccardActions = require('./../../stores/accard/actions');
 
 var InspectorComponent = React.createClass({displayName: "InspectorComponent",
 
@@ -904,7 +892,12 @@ var InspectorComponent = React.createClass({displayName: "InspectorComponent",
 
         React.createElement("div", {className: "inspector panel"}, 
           React.createElement("div", {className: "inspector-header"}, 
-            React.createElement("div", {className: "inspector-title"}, "Selected Patient")
+            React.createElement("div", {className: "pull-right"}, 
+              React.createElement("a", {href: "#", onClick: this.create}, 
+                "create"
+              )
+            ), 
+            React.createElement("div", {className: "inspector-title"}, "Patient")
           ), 
           React.createElement("div", {className: "inspector-body", ref: "body"}, 
             React.createElement(PatientInspector, null)
@@ -914,14 +907,17 @@ var InspectorComponent = React.createClass({displayName: "InspectorComponent",
     );
   },
 
-  add:function() {}
+  create:function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    AccardActions.switchSubapplication('newPatient');
+  }
 });
 
 module.exports = InspectorComponent;
 
 
 }).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/components/inspector/component.js","/components/inspector")
-},{"+7ZJp0":97,"./patient-filter":12,"./patient-inspector":13,"buffer":93,"react":354}],12:[function(require,module,exports){
+},{"+7ZJp0":97,"./../../stores/accard/actions":26,"./patient-filter":12,"./patient-inspector":13,"buffer":93,"react":354}],12:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
@@ -1750,7 +1746,7 @@ start(initConfig)
 ;
 
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_97035549.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_218551e5.js","/")
 },{"+7ZJp0":97,"./accard":1,"./api":2,"bluebird":37,"buffer":93}],24:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var EventEmitter = require('events').EventEmitter;

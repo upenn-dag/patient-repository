@@ -3,19 +3,7 @@
 var React = require('react');
 var PatientFilter = require('./patient-filter');
 var PatientInspector = require('./patient-inspector');
-
-/*
-var PatientActions = require('./patient-actions');
-
-        <div className='inspector panel'>
-          <div className='inspector-header'>
-            <div className='inspector-title'>Patients</div>
-          </div>
-          <div className='inspector-body' ref='body'>
-            <PatientActions />
-          </div>
-        </div>
-*/
+var AccardActions = require('./../../stores/accard/actions');
 
 var InspectorComponent = React.createClass({
 
@@ -33,7 +21,12 @@ var InspectorComponent = React.createClass({
 
         <div className='inspector panel'>
           <div className='inspector-header'>
-            <div className='inspector-title'>Selected Patient</div>
+            <div className='pull-right'>
+              <a href='#' onClick={this.create}>
+                create
+              </a>
+            </div>
+            <div className='inspector-title'>Patient</div>
           </div>
           <div className='inspector-body' ref='body'>
             <PatientInspector />
@@ -43,7 +36,10 @@ var InspectorComponent = React.createClass({
     );
   },
 
-  add() {}
+  create(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    AccardActions.switchSubapplication('newPatient');
+  }
 });
 
 module.exports = InspectorComponent;
