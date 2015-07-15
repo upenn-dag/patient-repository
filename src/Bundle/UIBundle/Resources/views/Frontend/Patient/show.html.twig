@@ -51,7 +51,7 @@
           <h3>Custom details</h3>
           <ul class="list-unstyled">
           {% for field in patient.fields %}
-            <li><strong>{{ field.name|humanize }}</strong> {{ field_value(field) }}</li>
+            <li><strong>{{ field.presentation|humanize }}</strong> {{ field_value(field) }}</li>
           {% else %}
             <li>No custom fields collected</li>
           {% endfor %}

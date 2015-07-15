@@ -1,12 +1,26 @@
 {% from 'AccardUIBundle:Macros:button.html.twig' import edit_in_modal, delete_with_confirmation %}
+{% from 'AccardUIBundle:Macros:misc.html.twig' import field_value %}
+
+{% set diagnosisDescription = diagnosis.code ? diagnosis.code.description : 'No code provided' %}
+{% set diagnosisCode = diagnosis.code ? diagnosis.code.code : 'None' %}
 
 <div class="diagnosis">
   <div class="row">
     <div class="col-md-12">
       <h4>
-        {{- diagnosis.code ? diagnosis.code.description : 'No code provided' -}}
+        {{- diagnosisDescription -}}
       </h4>
-      <p>This is a diagnosis with code {{ diagnosis.code.description }}</p>
+      <p>
+        Diagnosis of {{ diagnosisDescription }} ({{ diagnosisCode }}) on {{ diagnosis.startDate|localizeddate('medium', 'none') }} –
+        {{ diagnosis.endDate ? diagnosis.endDate|localizeddate('medium', 'none') : 'ongoing' }}.
+      </p>
+      <ul class="list-unstyled">
+      {% for field in diagnosis.fields %}
+        <li><span class="text-primary">{{ field.presentation|humanize }}</span> {{ field_value(field) }}</li>
+      {% else %}
+        <li>No custom fields collected</li>
+      {% endfor %}
+      </ul>
     </div>
   </div>
   <div class="row">
