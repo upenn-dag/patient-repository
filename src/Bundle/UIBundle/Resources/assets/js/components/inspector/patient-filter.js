@@ -58,12 +58,12 @@ var PatientFilter = React.createClass({
         <div className='row-fluid'>
           <div className='col-sm-6 col'>
             <Overlay placement='top' trigger='focus' overlay={<Tooltip>Date of birth from</Tooltip>}>
-              <Input type='date' bsSize='small' ref='fromDate' placeholder='DOB: From' onChange={this._inputHandler('fromDate')} value={this.state.fromDate} />
+              <Input type='date' bsSize='small' ref='fromDate' placeholder='mm/dd/yyyy' onChange={this._inputHandler('fromDate')} value={this.state.fromDate} />
             </Overlay>
           </div>
           <div className='col-sm-6 col'>
             <Overlay placement='top' trigger='focus' overlay={<Tooltip>Date of birth to</Tooltip>}>
-              <Input type='date' bsSize='small' ref='toDate' placeholder='DOB: To' onChange={this._inputHandler('toDate')} value={this.state.toDate} />
+              <Input type='date' bsSize='small' ref='toDate' placeholder='mm/dd/yyyy' onChange={this._inputHandler('toDate')} value={this.state.toDate} />
             </Overlay>
           </div>
         </div>

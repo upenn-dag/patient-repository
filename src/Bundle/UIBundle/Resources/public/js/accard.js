@@ -983,12 +983,12 @@ var PatientFilter = React.createClass({displayName: "PatientFilter",
         React.createElement("div", {className: "row-fluid"}, 
           React.createElement("div", {className: "col-sm-6 col"}, 
             React.createElement(Overlay, {placement: "top", trigger: "focus", overlay: React.createElement(Tooltip, null, "Date of birth from")}, 
-              React.createElement(Input, {type: "date", bsSize: "small", ref: "fromDate", placeholder: "DOB: From", onChange: this._inputHandler('fromDate'), value: this.state.fromDate})
+              React.createElement(Input, {type: "date", bsSize: "small", ref: "fromDate", placeholder: "mm/dd/yyyy", onChange: this._inputHandler('fromDate'), value: this.state.fromDate})
             )
           ), 
           React.createElement("div", {className: "col-sm-6 col"}, 
             React.createElement(Overlay, {placement: "top", trigger: "focus", overlay: React.createElement(Tooltip, null, "Date of birth to")}, 
-              React.createElement(Input, {type: "date", bsSize: "small", ref: "toDate", placeholder: "DOB: To", onChange: this._inputHandler('toDate'), value: this.state.toDate})
+              React.createElement(Input, {type: "date", bsSize: "small", ref: "toDate", placeholder: "mm/dd/yyyy", onChange: this._inputHandler('toDate'), value: this.state.toDate})
             )
           )
         ), 
@@ -1750,7 +1750,7 @@ start(initConfig)
 ;
 
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_4b667e41.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_97035549.js","/")
 },{"+7ZJp0":97,"./accard":1,"./api":2,"bluebird":37,"buffer":93}],24:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var EventEmitter = require('events').EventEmitter;
