@@ -13,22 +13,5 @@ class AttributeTest extends \Codeception\TestCase\Test
 {
     protected function _before()
     {
-        $this->attribute = new Attribute();
-    }
-
-    public function testAttributeFollowsCorrectInterfaces()
-    {
-        $this->assertInstanceOf('Accard\Component\Attribute\Model\AttributeInterface', $this->attribute);
-
-    }
-
-    public function testAttributeIdIsNullOnCreation()
-    {
-        $this->assertSame(null, $this->attribute->getId());
-    }
-
-    public function testAttributeFieldsAreArrayCollectionOnCreation()
-    {
-        $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $this->attribute->getFields());
     }
 }

@@ -12,7 +12,7 @@ namespace AccardTest\Component\Patient\Model;
 
 use Mockery;
 use Codeception\TestCase\Test;
-use Accard\Component\Patient\Test\PatientCollectingSubject;
+use Accard\Component\Patient\Test\Stub\PatientCollectingSubject;
 
 class PatientCollectingTraitTest extends Test
 {

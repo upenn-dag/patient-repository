@@ -3,7 +3,7 @@ namespace Accard\Component\Sample\tests\unit\Model;
 
 /**
  * Sample model tests
- * 
+ *
  * @author Karl Zipser <kzipser@mail.med.upenn.edu>
  */
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,7 +14,7 @@ class SampleTest extends \Codeception\TestCase\Test
 {
     use \Accard\Component\Prototype\Model\PrototypeSubjectTrait;
     use \Accard\Component\Field\Model\FieldSubjectTrait;
-        
+
     protected $sample;
 
     protected function _before()
@@ -30,9 +30,9 @@ class SampleTest extends \Codeception\TestCase\Test
     /**
      * All methods from interface are implemented
      */
-    public function testClassInterfaceIsFollowed()
+    //public function testClassInterfaceIsFollowed()
 
-    
+
     public function testSampleImplementsInterface()
     {
         $this->assertInstanceOf(
@@ -40,7 +40,7 @@ class SampleTest extends \Codeception\TestCase\Test
             $this->sample
         );
     }
-    
+
 
     public function testSampleDerivativesAreEmptyCollectionOnClassConstruct()
     {
@@ -48,7 +48,7 @@ class SampleTest extends \Codeception\TestCase\Test
             'Doctrine\Common\Collections\ArrayCollection',
             $this->sample->getDerivatives()
         );
- 
+
         $this->assertEquals(0, $this->sample->getDerivatives()->count());
     }
 
@@ -56,14 +56,14 @@ class SampleTest extends \Codeception\TestCase\Test
     {
 		$this->assertNull($this->sample->getId());
     }
-    
+
     public function testGetSourceReturnsValue()
     {
         $sourceinterface = Mockery::mock('Accard\Component\Sample\Model\SourceInterface');
         $this->sample->setSource($sourceinterface);
-        $this->assertSame($this->sample->getSource(), $sourceinterface);    
+        $this->assertSame($this->sample->getSource(), $sourceinterface);
     }
-    
+
     public function testSetSourceSetsValue()
     {
         $sourceinterface = Mockery::mock('Accard\Component\Sample\Model\SourceInterface');
@@ -72,27 +72,27 @@ class SampleTest extends \Codeception\TestCase\Test
             'Accard\Component\Sample\Model\SourceInterface',
             $this->sample->getSource()
         );
-    }    
-        
+    }
+
     public function testGetAmountAndSetAmount()
     {
     	$this->sample->setAmount(1);
     	$this->assertNotEmpty($this->sample->getAmount());
     }
-    
+
     public function testAddDerivativesAlsoHasDerivatives()
     {
         $sourceinterface = Mockery::mock('Accard\Component\Sample\Model\SourceInterface');
         $this->sample->addDerivative($sourceinterface);
-        $this->assertTrue($this->sample->hasDerivatives());    	 
+        $this->assertTrue($this->sample->hasDerivatives());
     }
 
     public function testRemoveDerivativeRemovesDerivative()
     {
         $sourceinterface = Mockery::mock('Accard\Component\Sample\Model\SourceInterface');
         $this->sample->addDerivative($sourceinterface);
-        $this->sample->removeDerivative($sourceinterface); 
-        $this->assertFalse($this->sample->hasDerivatives());  
-    }    
-    
+        $this->sample->removeDerivative($sourceinterface);
+        $this->assertFalse($this->sample->hasDerivatives());
+    }
+
 }

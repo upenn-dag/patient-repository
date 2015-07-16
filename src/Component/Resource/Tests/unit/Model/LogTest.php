@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the
  * LICENSE file that was distributed with this source code.
  */
-namespace Accard\Component\Resource\tests\unit\Model;
+namespace AccardTest\Component\Option\Model;
 
 use DateTime;
 use Mockery;

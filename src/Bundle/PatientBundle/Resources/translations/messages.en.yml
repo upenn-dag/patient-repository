@@ -42,6 +42,7 @@ accard:
             black_or_african_american: Black or African American
             native_hawaiian_or_other_pacific_islander: Native Hawaiian or Other Pacific Islander
             white: White
+            unknown: Unknown
     patient_field:
         entity_name: Patient Field
         form:

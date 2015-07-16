@@ -22,8 +22,6 @@ coverage:
         - Provider/*
         - Repository/*
     exclude:
-        - bin/*
         - Resources/*
         - Test/*
         - Tests/*
-        - vendor/*

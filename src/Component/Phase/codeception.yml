@@ -18,4 +18,5 @@ coverage:
         - Provider/*
         - Repository/*
     exclude:
-        - tests/*
+        - Resources/*
+        - Tests/*

@@ -19,7 +19,5 @@ coverage:
         - Model/*
         - Builder/*
     exclude:
-        - bin/*
         - Resources/*
-        - tests/*
-        - vendor/*
+        - Tests/*

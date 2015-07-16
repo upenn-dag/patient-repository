@@ -1,5 +1,6 @@
 <?php
 
+namespace AccardTest\Component\Patient;
 
 /**
  * Inherited Methods

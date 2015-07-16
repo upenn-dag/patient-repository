@@ -18,7 +18,5 @@ coverage:
     include:
         - Model/*
     exclude:
-        - bin/*
         - Resources/*
         - Tests/*
-        - vendor/*
