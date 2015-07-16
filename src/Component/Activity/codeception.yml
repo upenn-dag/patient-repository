@@ -1,3 +1,4 @@
+namespace: AccardTest\Component\Activity
 actor: Tester
 paths:
     tests: Tests

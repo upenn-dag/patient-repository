@@ -10,10 +10,16 @@ settings:
     bootstrap: _bootstrap.php
     colors: true
     memory_limit: 1024M
+extensions:
+    enabled:
+        - Codeception\Extension\RunFailed
 coverage:
     enabled: true
     include:
         - Model/*
         - Builder/*
     exclude:
+        - bin/*
+        - Resources/*
         - tests/*
+        - vendor/*

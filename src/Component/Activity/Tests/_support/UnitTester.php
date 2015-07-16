@@ -1,5 +1,6 @@
 <?php
 
+namespace AccardTest\Component\Activity;
 
 /**
  * Inherited Methods
