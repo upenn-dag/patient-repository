@@ -1,33 +1,46 @@
 <?php
-namespace AccardTest\Component\Behavior\Model;
 
 /**
- * Behavior test
- * 
- * @author Dylan Pierce <dylan@booksmart.it>
+ * This file is part of the Accard package.
+ *
+ * (c) University of Pennsylvania
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
  */
-use Accard\Component\Behavior\Model\Behavior;
-use DateTime;
-use DateInterval;
-use Doctrine\Common\Collections\ArrayCollection;
+namespace AccardTest\Component\Behavior\Model;
 
-class BehaviorTest extends \Codeception\TestCase\Test
+use DateTime;
+use Mockery;
+use Codeception\TestCase\Test;
+use Accard\Component\Behavior\Model\Behavior;
+use Accard\Component\Field\Test\FieldSubjectTest;
+
+/**
+ * Behavior model tests.
+ *
+ * @author Frank Bardon Jr. <bardonf@upenn.edu>
+ */
+class BehaviorTest extends Test
 {
+    use FieldSubjectTest;
+
     protected function _before()
     {
+        $this->behaviorStartDate = new DateTime('1970-01-01 00:00:00');
+        $this->behaviorEndDate = new DateTime('1980-01-01 00:00:00');
         $this->behavior = new Behavior();
+
+        // Required by field subject test trait above.
+        $this->fieldSubject = $this->behavior;
     }
 
-    protected function _after()
-    {
-    }
-
-    /**
-     * Interface Tests
-     */
     public function testBehaviorInterfaceIsFollowed()
     {
-        $this->assertInstanceOf('Accard\Component\Behavior\Model\BehaviorInterface', $this->behavior);
+        $this->assertInstanceOf(
+            'Accard\Component\Behavior\Model\BehaviorInterface',
+            $this->behavior
+        );
     }
 
     public function testBehaviorIsAccardResource()
@@ -38,69 +51,62 @@ class BehaviorTest extends \Codeception\TestCase\Test
         );
     }
 
-    /**
-     * Behavior->id
-     */
-    public function testBehaviorIdIsUnsetOnCreation()
+    public function testBehaviorIdIsNullOnCreation()
     {
+        $this->assertAttributeSame(null, 'id', $this->behavior);
         $this->assertNull($this->behavior->getId());
     }
 
-    /**
-     * Behavior->fields
-     */
-    public function testBehaviorFieldsIsArrayCollectionOnCreation()
+    public function testBehaviorStartDateIsNullOnCreation()
     {
-        $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $this->behavior->getFields());
+        $this->assertAttributeSame(null, 'startDate', $this->behavior);
+        $this->assertNull($this->behavior->getStartDate());
     }
-    /**
-     * Behavior->startDate
-     */
+
     public function testBehaviorStartDateIsMutable()
     {
-        $startDate = new DateTime();
-        $this->behavior->setStartDate($startDate);
-
-        $this->assertAttributeEquals($startDate, 'startDate', $this->behavior);
-        $this->assertEquals($startDate, $this->behavior->getStartDate());
+        $expected = $this->behaviorStartDate;
+        $this->behavior->setStartDate($expected);
+        $this->assertSame($expected, $this->behavior->getStartDate());
     }
 
-    /**
-     * Behavior->endDate
-     */
+    public function testBehaviorEndDateIsNullOnCreation()
+    {
+        $this->assertAttributeSame(null, 'endDate', $this->behavior);
+        $this->assertNull($this->behavior->getEndDate());
+    }
+
     public function testBehaviorEndDateIsMutable()
     {
-        $endDate = new DateTime();
-        $this->behavior->setEndDate($endDate);
-
-        $this->assertAttributeEquals($endDate, 'endDate', $this->behavior);
-        $this->assertEquals($endDate, $this->behavior->getEndDate());
+        $expected = $this->behaviorEndDate;
+        $this->behavior->setEndDate($expected);
+        $this->assertSame($expected, $this->behavior->getEndDate());
     }
 
-    /**
-     * Behavior validators
-     */
-    public function testBehaviorIsStartDateReturnsTrueWhenStartDateIsBeforeEndDate()
+    public function testBehaviorEndDateIsNullable()
     {
-        $startDate = new DateTime();
-        $endDate = new DateTime();
-        $endDate->add(new DateInterval('P1D'));
-
-        $this->behavior->setStartDate($startDate);
-        $this->behavior->setEndDate($endDate);
-
-        $this->assertEquals(True, $this->behavior->isAfterStartDate());
+        $this->behavior->setEndDate(null);
+        $this->assertNull($this->behavior->getEndDate());
     }
 
-    public function testBehaviorIsStartDateReturnsFalseWhenStartDateIsAfterEndDate()
+    public function testBehaviorDateTestIsTrueWithNoEndDate()
     {
-        $startDate = new DateTime();
-        $endDate = new DateTime();
-        $startDate->add(new DateInterval('P1D'));
+        $this->assertTrue($this->behavior->isAfterStartDate());
+    }
 
-        $this->behavior->setStartDate($startDate);
-        $this->behavior->setEndDate($endDate);
+    public function testBehaviorDateTestIsTrueWithEndDateAfterStartDate()
+    {
+        $this->behavior->setStartDate($this->behaviorStartDate);
+        $this->behavior->setEndDAte($this->behaviorEndDate);
 
-        $this->assertEquals(False, $this->behavior->isAfterStartDate());
+        $this->assertTrue($this->behavior->isAfterStartDate());
+    }
+
+    public function testBehaviorDateTestIsFalseWithEndDateBeforeStartDate()
+    {
+        $this->behavior->setStartDate($this->behaviorEndDate);
+        $this->behavior->setEndDate($this->behaviorStartDate);
+
+        $this->assertFalse($this->behavior->isAfterStartDate());
     }
 }

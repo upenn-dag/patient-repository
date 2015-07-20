@@ -107,7 +107,7 @@ class Behavior implements BehaviorInterface
             return true;
         }
 
-        return null === $this->endDate || ($this->startDate < $this->endDate);
+        return $this->startDate < $this->endDate;
 
     }
 }
