@@ -17,14 +17,14 @@ use Accard\Component\Attribute\Model\FieldValueInterface;
 
 /**
  * Field value tests.
- * 
+ *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
 class FieldValueTest extends Test
 {
     protected function _before()
     {
-        $this->sample = Mockery::mock('Accard\Component\Attribute\Model\Attribute');
+        $this->attribute = Mockery::mock('Accard\Component\Attribute\Model\Attribute');
         $this->fieldValue = new FieldValue();
     }
 
@@ -51,13 +51,13 @@ class FieldValueTest extends Test
 
     public function testFieldValueHasAttributeAliasForSettingSubject()
     {
-        $this->fieldValue->setAttribute($this->sample);
-        $this->assertAttributeSame($this->sample, 'subject', $this->fieldValue);
+        $this->fieldValue->setAttribute($this->attribute);
+        $this->assertAttributeSame($this->attribute, 'subject', $this->fieldValue);
     }
 
     public function testFieldValueHasAttributeAliasForGettingSubject()
     {
-        $this->fieldValue->setAttribute($this->sample);
-        $this->assertSame($this->sample, $this->fieldValue->getAttribute());
+        $this->fieldValue->setAttribute($this->attribute);
+        $this->assertSame($this->attribute, $this->fieldValue->getAttribute());
     }
 }
