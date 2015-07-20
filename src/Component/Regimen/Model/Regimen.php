@@ -189,7 +189,7 @@ class Regimen implements RegimenInterface
      */
     public function __toString()
     {
-        return sprintf("Regimen #%s", $this->id);
+        return sprintf("Regimen #%d", $this->id);
     }
 
     /**
@@ -197,6 +197,10 @@ class Regimen implements RegimenInterface
      */
     public function isAfterStartDate()
     {
-        return null === $this->endDate || ($this->startDate < $this->endDate);
+        if (null === $this->endDate) {
+            return true;
+        }
+
+        return $this->startDate < $this->endDate;
     }
 }

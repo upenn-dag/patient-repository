@@ -1,25 +1,43 @@
 <?php
-namespace AccardTest\Component\Regimen\Model;
 
 /**
- * Regimen Model Test
- * 
- * @author Dylan Pierce <piercedy@upenn.edu>
+ * This file is part of the Accard package.
+ *
+ * (c) University of Pennsylvania
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
  */
-use Accard\Component\Regimen\Model\Regimen;
-use Accard\Component\Activity\Model\Activity;
+namespace AccardTest\Component\Regimen\Model;
+
 use DateTime;
 use Mockery;
+use Codeception\TestCase\Test;
+use Accard\Component\Regimen\Model\Regimen;
+use Accard\Component\Activity\Model\Activity;
+use Accard\Component\Field\Test\FieldSubjectTest;
 
-class RegimenTest extends \Codeception\TestCase\Test
+/**
+ * Regimen model tests.
+ *
+ * @author Frank Bardon Jr. <bardonf@upenn.edu>
+ */
+class RegimenTest extends Test
 {
+    use FieldSubjectTest;
+
     protected function _before()
     {
         $this->regimen = new Regimen();
-    }
+        $this->startDate = new DateTime('1970-01-01 00:00:00');
+        $this->endDate = new DateTime('1980-01-01 00:00:00');
+        $this->drug = Mockery::mock('Accard\\Component\\Drug\\Model\\DrugInterface');
+        $this->activity = Mockery::mock('Accard\\Component\\Activity\\Model\\ActivityInterface')
+            ->shouldReceive('setRegimen')->zeroOrMoreTimes()->andReturn(Mockery::self())
+            ->getMock();
 
-    protected function _after()
-    {
+        // Required for field subject test trait.
+        $this->fieldSubject = $this->regimen;
     }
 
     public function testRegimenFollowsRegimenInterface()
@@ -29,125 +47,164 @@ class RegimenTest extends \Codeception\TestCase\Test
 
     public function testRegimenIdIsNullOnCreation()
     {
-        $this->assertSame(null, $this->regimen->getId());
+        $this->assertAttributeSame(null, 'id', $this->regimen);
+        $this->assertNull($this->regimen->getId());
+    }
+
+    public function testRegimenStartDateIsNullOnCreation()
+    {
+        $this->assertAttributeSame(null, 'startDate', $this->regimen);
+        $this->assertNull($this->regimen->getStartDate());
     }
 
     public function testRegimenStartDateIsMutable()
     {
-        $startDate = new DateTime();
+        $expected = $this->startDate;
+        $this->regimen->setStartDate($expected);
+        $this->assertSame($expected, $this->regimen->getStartDate());
+    }
 
-        $this->regimen->setStartDate($startDate);
-        $this->assertSame($this->regimen->getStartDate(), $startDate);
+    public function testRegimenStartDateSettingIsFluent()
+    {
+        $this->assertSame($this->regimen, $this->regimen->setStartDate($this->startDate));
+    }
+
+    public function testRegimenEndDateIsUnsetOnCreation()
+    {
+        $this->assertAttributeSame(null, 'endDate', $this->regimen);
+        $this->assertNull($this->regimen->getEndDate());
     }
 
     public function testRegimenEndDateIsMutable()
     {
-        $endDate = new DateTime();
+        $expected = $this->endDate;
+        $this->regimen->setEndDate($expected);
+        $this->assertSame($expected, $this->regimen->getEndDate());
+    }
 
-        $this->regimen->setEndDate($endDate);
-        $this->assertSame($this->regimen->getEndDate(), $endDate);
+    public function testRegimenEndDateIsNullable()
+    {
+        $this->regimen->setEndDate(null);
+        $this->assertNull($this->regimen->getEndDate());
+    }
+
+    public function testRegimenEndDateSettingIsFluent()
+    {
+        $this->assertSame($this->regimen, $this->regimen->setEndDate($this->endDate));
+    }
+
+    public function testRegimenDrugIsUnsetOnCreation()
+    {
+        $this->assertAttributeSame(null, 'drug', $this->regimen);
+        $this->assertNull($this->regimen->getDrug());
     }
 
     public function testRegimenDrugIsMutable()
     {
-        $drug = Mockery::Mock('Accard\Component\Drug\Model\DrugInterface');
-
-        $this->regimen->setDrug($drug);
-
-        $this->assertSame($drug, $this->regimen->getDrug());
+        $expected = $this->drug;
+        $this->regimen->setDrug($expected);
+        $this->assertSame($expected, $this->regimen->getDrug());
     }
 
-    public function testRegimenIsDruggableReturnsFalseIfNoPrototypeAssigned()
+    public function testRegienIsNotDrugabbleWithoutPrototype()
     {
-        $this->assertSame(false, $this->regimen->isDruggable());
+        $this->assertFalse($this->regimen->isDruggable());
     }
 
-    public function testRegimenCallsPrototypesGetAllowDrugIfPrototypePresent()
+    public function testRegimenIsDruggableWhenPrototypeSaySo()
     {
-        $prototype = Mockery::mock('Accard\Component\Prototype\Model\PrototypeInterface');
+        $prototype = Mockery::mock('Accard\\Component\\Regimen\\Model\\PrototypeInterface')
+            ->shouldReceive('getAllowDrug')->once()->andReturn(true)
+            ->getMock();
 
         $this->regimen->setPrototype($prototype);
-
-        $prototype->shouldReceive('getAllowDrug');
+        $this->assertTrue($this->regimen->isDruggable());
     }
 
-    public function testRegimenActivitiesIsArrayCollectionOnCreation()
+    public function testRegimenIsNotDruggableWhenPrototypeSayNo()
     {
-        $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $this->regimen->getActivities());
+        $prototype = Mockery::mock('Accard\\Component\\Regimen\\Model\\PrototypeInterface')
+            ->shouldReceive('getAllowDrug')->once()->andReturn(false)
+            ->getMock();
+
+        $this->regimen->setPrototype($prototype);
+        $this->assertFalse($this->regimen->isDruggable());
     }
 
-    public function testRegimenActivitiesCanAddAnActivity()
+    public function testRegimenActivitiesAreAnEmptyCollectionOnCreation()
     {
-        $activity = Mockery::mock('Accard\Component\Activity\Model\ActivityInterface');
-        $activity->shouldReceive('setRegimen');
-        $this->regimen->addActivity($activity);
-
-        $this->assertSame($this->regimen->getActivities()->first(), $activity);
-
+        $this->assertAttributeInstanceOf('Doctrine\\Common\\Collections\\Collection', 'activities', $this->regimen);
+        $this->assertAttributeEmpty('activities', $this->regimen);
+        $this->assertInstanceOf('Doctrine\\Common\\Collections\\Collection', $this->regimen->getActivities());
+        $this->assertEmpty($this->regimen->getActivities());
     }
 
-    public function testRegimenActivitiesDoesNotAddTheSameActivityTwice()
+    public function testRegimenActivityAdd()
     {
-        $activity = Mockery::mock('Accard\Component\Activity\Model\ActivityInterface');
-        $activity->shouldReceive('setRegimen')->once();
-
-        $this->regimen->addActivity($activity);
-        $this->regimen->addActivity($activity);
-
-        $this->assertSame($this->regimen->getActivities()->count(), 1);
+        $this->regimen->addActivity($this->activity);
+        $this->assertCount(1, $this->regimen->getActivities());
     }
 
-    public function testRegimenActivitiesDoesNotContainActivityOnCreation()
+    public function testRegimenActivitesAreNotAddedTwice()
     {
-        $activity = Mockery::mock('Accard\Component\Activity\Model\ActivityInterface');
-
-        $this->assertSame(false, $this->regimen->hasActivity($activity));
+        $this->regimen->addActivity($this->activity);
+        $this->regimen->addActivity($this->activity);
+        $this->assertCount(1, $this->regimen->getActivities());
     }
 
-    public function testRegimenActivitiesFindsActivityWhenPresent()
+    public function testRegimenActivityAddIsFluent()
     {
-        $activity = Mockery::mock('Accard\Component\Activity\Model\ActivityInterface');
-        $activity->shouldReceive('setRegimen')->once();
-
-        $this->regimen->addActivity($activity);
-
-        $this->assertSame(true, $this->regimen->hasActivity($activity));
+        $this->assertSame($this->regimen, $this->regimen->addActivity($this->activity));
     }
 
-    public function testRegimenCanAddMultipleActivities()
+    public function testRegimenActivityCanBeDetectedWhenPresent()
     {
-        $activity0 = Mockery::mock('Accard\Component\Activity\Model\ActivityInterface');
-        $activity0->shouldReceive('setRegimen')->once();
-        $activity1 = Mockery::mock('Accard\Component\Activity\Model\ActivityInterface');
-        $activity1->shouldReceive('setRegimen')->once();
-
-        $this->regimen->addActivity($activity1);
-        $this->regimen->addActivity($activity0);
-
-        $this->assertEquals(2, $this->regimen->getActivities()->count());
-        $this->assertEquals(true, $this->regimen->hasActivity($activity0));
-        $this->assertEquals(true, $this->regimen->hasActivity($activity1));
+        $this->regimen->addActivity($this->activity);
+        $this->assertTrue($this->regimen->hasActivity($this->activity));
     }
 
-    public function testRegimenCanRemoveActivities()
+    public function testRegimenActivityCanNotBeDetectedWhenNotPresent()
     {
-        $activity = Mockery::mock('Accard\Component\Activity\Model\ActivityInterface');
-        $activity->shouldReceive('setRegimen')->twice();
-
-        $this->regimen->addActivity($activity);
-        $this->regimen->removeActivity($activity);
-
-        $this->assertEquals(0, $this->regimen->getActivities()->count());
-        $this->assertEquals(false, $this->regimen->hasActivity($activity));
+        $this->assertFalse($this->regimen->hasActivity($this->activity));
     }
 
-    public function testRegimenFieldsIsArrayCollectionOnCreation()
+    public function testRegimenActivityRemove()
     {
-        $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $this->regimen->getFields());
+        $this->regimen->addActivity($this->activity);
+        $this->regimen->removeActivity($this->activity);
+        $this->assertCount(0, $this->regimen->getActivities());
     }
 
-    public function testRegimenToStringFormatsCorrectly()
+    public function testRegimenActivityDoesNotRemoveNonRequestedActivities()
     {
-        $this->assertEquals("Regimen #", (string) $this->regimen);
+        $regimen = Mockery::mock('Accard\\Component\\Activity\\Model\\ActivityInterface');
+        $this->regimen->addActivity($this->activity);
+        $this->regimen->removeActivity($regimen);
+        $this->assertCount(1, $this->regimen->getActivities());
+    }
+
+    public function testRegimenToString()
+    {
+        $expected = 'Regimen #0';
+        $this->assertSame($expected, (string) $this->regimen);
+    }
+
+    public function testRegimenDateCheckerReturnsTrueWhenNoEndDate()
+    {
+        $this->assertTrue($this->regimen->isAfterStartDate());
+    }
+
+    public function testRegimenDateCheckerReturnsTrueWhenEndDateGreaterThanStartDate()
+    {
+        $this->regimen->setStartDate($this->startDate);
+        $this->regimen->setEndDate($this->endDate);
+        $this->assertTrue($this->regimen->isAfterStartDate());
+    }
+
+    public function testRegimenDateCheckerReturnsFalseWhenEndDateBeforeStartDate()
+    {
+        $this->regimen->setStartDate($this->endDate);
+        $this->regimen->setEndDate($this->startDate);
+        $this->assertFalse($this->regimen->isAfterStartDate());
     }
 }

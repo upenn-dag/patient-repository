@@ -1,23 +1,29 @@
 <?php
-namespace AccardTest\Component\Regimen\Model;
 
 /**
- * Regimen Prototype Model Test
- * 
- * @author Dylan Pierce <piercedy@upenn.edu>
+ * This file is part of the Accard package.
+ *
+ * (c) University of Pennsylvania
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
  */
-use Accard\Component\Regimen\Model\Prototype;
-use Mockery;
+namespace AccardTest\Component\Regimen\Model;
 
-class PrototypeTest extends \Codeception\TestCase\Test
+use Mockery;
+use Codeception\TestCase\Test;
+use Accard\Component\Regimen\Model\Prototype;
+
+/**
+ * Regimen prototype tests.
+ *
+ * @author Frank Bardon Jr. <bardonf@upenn.edu>
+ */
+class PrototypeTest extends Test
 {
     protected function _before()
     {
         $this->prototype = new Prototype();
-    }
-
-    protected function _after()
-    {
     }
 
     public function testPrototypeAdheresToPrototypeInterface()

@@ -100,7 +100,8 @@ class RegimenBuilder extends AbstractBuilder implements RegimenBuilderInterface
 
         $fieldValue = $this->fieldValueRepository->createNew();
         $fieldValue->setField($field);
-        $fieldValue->setValue($value);
+
+        //$fieldValue->setValue($value);
 
         $this->resource->addField($fieldValue);
 
