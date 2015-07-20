@@ -63,6 +63,11 @@ class BehaviorTest extends Test
         $this->assertNull($this->behavior->getStartDate());
     }
 
+    public function testBehaviorStartDateSettingIsFluent()
+    {
+        $this->assertSame($this->behavior, $this->behavior->setStartDate($this->behaviorStartDate));
+    }
+
     public function testBehaviorStartDateIsMutable()
     {
         $expected = $this->behaviorStartDate;
@@ -87,6 +92,11 @@ class BehaviorTest extends Test
     {
         $this->behavior->setEndDate(null);
         $this->assertNull($this->behavior->getEndDate());
+    }
+
+    public function testBehaviorEndDateSettingIsFluent()
+    {
+        $this->assertSame($this->behavior, $this->behavior->setEndDate($this->behaviorEndDate));
     }
 
     public function testBehaviorDateTestIsTrueWithNoEndDate()
