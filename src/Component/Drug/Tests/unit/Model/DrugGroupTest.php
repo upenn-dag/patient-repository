@@ -1,24 +1,33 @@
 <?php
-namespace AccardTest\Component\Drug\Model;
 
 /**
- * Drug Group Test
- * 
- * @author Dylan Pierce <piercedy@upenn.edu>
+ * This file is part of the Accard package.
+ *
+ * (c) University of Pennsylvania
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
  */
-use Accard\Component\Drug\Model\DrugGroup;
-use Accard\Component\Drug\Model\Drug;
+namespace AccardTest\Component\Drug\Model;
 
-class DrugGroupTest extends \Codeception\TestCase\Test
+use Mockery;
+use Codeception\TestCase\Test;
+use Accard\Component\Drug\Model\DrugGroup;
+
+/**
+ * Drug group tests.
+ *
+ * @author Frank Bardon Jr. <bardonf@upenn.edu>
+ */
+class DrugGroupTest extends Test
 {
     protected function _before()
     {
         $this->group = new DrugGroup();
-        $this->drug = new Drug();
-    }
-
-    protected function _after()
-    {
+        $this->drug = Mockery::mock('Accard\\Component\\Drug\\Model\\DrugInterface')
+            ->shouldReceive('addGroup')->zeroOrMoretimes()->andReturn(Mockery::self())
+            ->shouldReceive('removeGroup')->zeroOrMoretimes()->andReturn(Mockery::self())
+            ->getMock();
     }
 
     /**
@@ -32,7 +41,7 @@ class DrugGroupTest extends \Codeception\TestCase\Test
         );
     }
 
-    public function testDrugIsAccardResource()
+    public function testDrugGroupIsAccardResource()
     {
         $this->assertInstanceOf(
             'Accard\Component\Resource\Model\ResourceInterface',
@@ -40,44 +49,44 @@ class DrugGroupTest extends \Codeception\TestCase\Test
         );
     }
 
-    /**
-     * DrugGroup->id
-     */
-    public function testGroupIdIsUnsetOnCreation()
+    public function testDrugGroupIdIsUnsetOnCreation()
     {
+        $this->assertAttributeSame(null, 'id', $this->group);
         $this->assertNull($this->group->getId());
     }
 
-    /**
-     * DrugGroup->name
-     */
-
     public function testDrugGroupNameIsMutable()
     {
-        $this->group->setName('NAME');
-        $this->assertAttributeSame('NAME', 'name', $this->group);
-        $this->assertSame('NAME', $this->group->getName());
+        $expected = 'NAME';
+        $this->group->setName($expected);
+        $this->assertAttributeSame($expected, 'name', $this->group);
+        $this->assertSame($expected, $this->group->getName());
     }
 
-    /**
-     * DrugGroup->presentation
-     */
+    public function testDrugGroupPresentationIsUnsetOnCreation()
+    {
+        $this->assertAttributeSame(null, 'presentation', $this->group);
+        $this->assertNull($this->group->getPresentation());
+    }
+
     public function testDrugGroupPresentationIsMutable()
     {
-        $this->group->setPresentation('PRESENTATION');
-        $this->assertAttributeSame('PRESENTATION', 'presentation', $this->group);
-        $this->assertSame('PRESENTATION', $this->group->getPresentation());
+        $expected = 'PRESENTATION';
+        $this->group->setPresentation($expected);
+        $this->assertAttributeSame($expected, 'presentation', $this->group);
+        $this->assertSame($expected, $this->group->getPresentation());
     }
 
-    /**
-     * DrugGroup->drugs
-     */
-    public function testDrugGroupDrugsIsInstanceOfArrayCollectionByDefault()
+
+    public function testDrugGroupDrugsIsEmptyCollectionOnCreation()
     {
-        $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $this->group->getDrugs());
+        $this->assertAttributeInstanceOf('Doctrine\\Common\\Collections\\Collection', 'drugs', $this->group);
+        $this->assertAttributeEmpty('drugs', $this->group);
+        $this->assertInstanceOf('Doctrine\\Common\\Collections\\Collection', $this->group->getDrugs());
+        $this->assertEmpty($this->group->getDrugs());
     }
 
-    public function testDrugGroupDrugsCanAddDrugInterface()
+    public function testDrugGroupDrugsCanAddDrug()
     {
         $this->group->addDrug($this->drug);
         $this->assertCount(1, $this->group->getDrugs());
@@ -90,12 +99,17 @@ class DrugGroupTest extends \Codeception\TestCase\Test
         $this->assertCount(1, $this->group->getDrugs());
     }
 
-    public function testDrugGroupDoesNotFindDrugWhenNotPresent()
+    public function testDrugGroupAddIsFluent()
+    {
+        $this->assertSame($this->group, $this->group->addDrug($this->drug));
+    }
+
+    public function testDrugGroupCanNotDetectDrugWhenNotPresent()
     {
         $this->assertFalse($this->group->hasDrug($this->drug));
     }
 
-    public function testDrugGroupFindsDrugWhenPresent()
+    public function testDrugGroupCanDetectDrugWhenPresent()
     {
         $this->group->addDrug($this->drug);
         $this->assertTrue($this->group->hasDrug($this->drug));
@@ -108,4 +122,11 @@ class DrugGroupTest extends \Codeception\TestCase\Test
         $this->assertCount(0, $this->group->getDrugs());
     }
 
+    public function testDrugGroupDoesNotRemoveNonRequestedDrug()
+    {
+        $drug = Mockery::mock('Accard\\Component\\Drug\\Model\\DrugInterface');
+        $this->group->addDrug($this->drug);
+        $this->group->removeDrug($drug);
+        $this->assertCount(1, $this->group->getDrugs());
+    }
 }

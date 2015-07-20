@@ -1,23 +1,30 @@
 <?php
-namespace AccardTest\Component\Drug\Model;
 
 /**
- * Drugable Prototype Trait Test
- * 
- * @author Dylan Pierce <piercedy@upenn.edu>
+ * This file is part of the Accard package.
+ *
+ * (c) University of Pennsylvania
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
  */
-require __DIR__.'/../Stub/DrugablePrototype.php';
+namespace AccardTest\Component\Drug\Model;
 
-use Stub\DrugablePrototype;
-use Accard\Component\Drug\Model\DrugGroup;
 use Mockery;
+use Codeception\TestCase\Test;
+use Accard\Component\Drug\Test\Stub\DrugablePrototype;
 
-
-class DrugablePrototypeTraitTest extends \Codeception\TestCase\Test
+/**
+ * Drugable prototype trait tests.
+ *
+ * @author Frank Bardon Jr. <bardonf@upenn.edu>
+ */
+class DrugablePrototypeTraitTest extends Test
 {
     protected function _before()
     {
         $this->prototype = new DrugablePrototype();
+        $this->drugGroup = Mockery::mock('Accard\Component\Drug\Model\DrugGroupInterface');
     }
     /**
      * Interface tests
@@ -30,36 +37,43 @@ class DrugablePrototypeTraitTest extends \Codeception\TestCase\Test
         );
     }
 
-    /**
-     * DrugablePrototype->allowDrug
-     */
     public function testDrugablePrototypeDoesNotAllowDrugByDefault()
     {
-        $this->assertSame(False, $this->prototype->getAllowDrug());
+        $this->assertAttributeSame(false, 'allowDrug', $this->prototype);
+        $this->assertFalse($this->prototype->getAllowDrug());
     }
 
     public function testDrugablePrototypeAllowDrugIsMutable()
     {
-        $this->prototype->setAllowDrug(True);
-        $this->assertSame(True, $this->prototype->getAllowDrug());
+        $this->prototype->setAllowDrug(true);
+        $this->assertTrue($this->prototype->getAllowDrug());
     }
 
-    /**
-     * DrugablePrototype->drugGroup
-     */
-    public function testDrugablePrototypeDrugGroupAcceptsDrugableInterface()
+    public function testDrugablePrototypeAllowDrugSettingIsFluent()
     {
-        $this->group = Mockery::mock('Accard\Component\Drug\Model\DrugGroupInterface');
-
-        $this->prototype->setDrugGroup($this->group);
-        $this->assertSame($this->prototype->getDrugGroup(), $this->group);
+        $this->assertSame($this->prototype, $this->prototype->setAllowDrug(false));
     }
 
-    public function testDrugablePrototypeDrugGroupAcceptsNull()
+    public function testDrugablePrototypeDrugGroupIsUnsetOnCreation()
     {
-        $this->group = null;
+        $this->assertAttributeSame(null, 'drugGroup', $this->prototype);
+        $this->assertNull($this->prototype->getDrugGroup());
+    }
 
-        $this->prototype->setDrugGroup($this->group);
-        $this->assertSame($this->prototype->getDrugGroup(), $this->group);
+    public function testDrugablePrototypeDrugGroupIsMutable()
+    {
+        $this->prototype->setDrugGroup($this->drugGroup);
+        $this->assertSame($this->prototype->getDrugGroup(), $this->drugGroup);
+    }
+
+    public function testDrugablePrototypeDrugGroupIsNullable()
+    {
+        $this->prototype->setDrugGroup(null);
+        $this->assertNull($this->prototype->getDrugGroup());
+    }
+
+    public function testDrugablePrototypeDrugGroupSettingIsFluent()
+    {
+        $this->assertSame($this->prototype, $this->prototype->setDrugGroup($this->drugGroup));
     }
 }

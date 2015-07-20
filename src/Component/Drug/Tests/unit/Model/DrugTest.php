@@ -1,33 +1,36 @@
 <?php
-namespace AccardTest\Component\Drug\Model;
 
 /**
- * Drug model tests
- * 
- * @author Dylan Pierce <piercedy@upenn.edu>
+ * This file is part of the Accard package.
+ *
+ * (c) University of Pennsylvania
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
  */
+namespace AccardTest\Component\Drug\Model;
+
+use Mockery;
+use Codeception\TestCase\Test;
 use Accard\Component\Drug\Model\Drug;
 use Accard\Component\Drug\Model\DrugGroup;
 use Doctrine\Common\Collections\ArrayCollection;
 
-class DrugTest extends \Codeception\TestCase\Test
+/**
+ * Drug tests.
+ *
+ * @author Frank Bardon Jr. <bardonf@upenn.edu>
+ */
+class DrugTest extends Test
 {
-    /**
-     * @var \AccardTest\Component\Drug\\UnitTester
-     */
-    protected $tester;
-
-
     protected function _before()
     {
         $this->drug = new Drug();
-        $this->brand = new Drug();
-        $this->generic = new Drug();
-        $this->group = new DrugGroup();
-    }
-
-    protected function _after()
-    {
+        $this->brand = Mockery::mock('Accard\\Component\\Drug\\Model\\DrugInterface')
+            ->shouldReceive('setGeneric')->zeroOrMoreTimes()->andReturn(Mockery::self())
+            ->getMock();
+        $this->generic = Mockery::mock('Accard\\Component\\Drug\\Model\\DrugInterface');
+        $this->group = Mockery::mock('Accard\\Component\\Drug\\Model\\DrugGroupInterface');
     }
 
     public function testDrugInterfaceIsFollowed()
@@ -46,64 +49,84 @@ class DrugTest extends \Codeception\TestCase\Test
         );
     }
 
-    /**
-     * Drug->id
-     */
     public function testDrugIdIsUnsetOnCreation()
     {
+        $this->assertAttributeSame(null, 'id', $this->drug);
         $this->assertNull($this->drug->getId());
     }
 
-    /**
-     * Drug->name
-     */
-    public function testDrugNameIsMutable()
+    public function testDrugNameIsUnsetOnCreation()
     {
-        $this->drug->setName('NAME');
-        $this->assertAttributeSame('NAME', 'name', $this->drug);
-        $this->assertSame('NAME', $this->drug->getName());
+        $this->assertAttributeSame(null, 'name', $this->drug);
+        $this->assertNull($this->drug->getName());
     }
 
-    /**
-     * Drug->group
-     */
+    public function testDrugNameIsMutable()
+    {
+        $expected = 'NAME';
+        $this->drug->setName($expected);
+        $this->assertAttributeSame($expected, 'name', $this->drug);
+        $this->assertSame($expected, $this->drug->getName());
+    }
+
+    public function testDrugNameSettingIsFluent()
+    {
+        $this->assertSame($this->drug, $this->drug->setName('NAME'));
+    }
+
+    public function testDrugPresentationIsUnsetOnCreation()
+    {
+        $this->assertAttributeSame(null, 'presentation', $this->drug);
+        $this->assertNull($this->drug->getPresentation());
+    }
+
     public function testDrugPresentationIsMutable()
     {
-        $this->drug->setPresentation('PRESENTATION');
-        $this->assertAttributeSame('PRESENTATION', 'presentation', $this->drug);
-        $this->assertSame('PRESENTATION', $this->drug->getPresentation());
+        $expected = 'PRESENTATION';
+        $this->drug->setPresentation($expected);
+        $this->assertAttributeSame($expected, 'presentation', $this->drug);
+        $this->assertSame($expected, $this->drug->getPresentation());
     }
-    
-    /**
-     * Drug->generic
-     */
-    public function testDrugGenericAcceptsDrugInterface()
+
+    public function testDrugPresentationSettingIsFluent()
     {
-        $this->drug->setGeneric($this->generic);
-        $this->assertAttributeSame($this->generic, 'generic', $this->drug);
-        $this->assertSame($this->generic, $this->drug->getGeneric());
+        $this->assertSame($this->drug, $this->drug->setPresentation('PRESENTATION'));
+    }
+
+    public function testDrugGenericIsUnsetOnCreation()
+    {
+        $this->assertAttributeSame(null, 'generic', $this->drug);
+        $this->assertNull($this->drug->getGeneric());
+    }
+
+    public function testDrugGenericIsMutable()
+    {
+        $expected = $this->generic;
+        $this->drug->setGeneric($expected);
+        $this->assertAttributeSame($expected, 'generic', $this->drug);
+        $this->assertSame($expected, $this->drug->getGeneric());
     }
 
     public function testDrugIsGenericReturnsFalseWhenGenericPresent()
     {
         $this->drug->setGeneric($this->generic);
-        $this->assertSame(False, $this->drug->isGeneric());
+        $this->assertFalse($this->drug->isGeneric());
     }
 
     public function testDrugIsGenericReturnsTrueWhenGenericIsNotPresent()
     {
-        $this->assertSame(True, $this->drug->isGeneric());
+        $this->assertTrue($this->drug->isGeneric());
     }
 
-    /**
-     * Drug->groups
-     */
-    public function testDrugGroupsIsInstanceOfArrayCollectionByDefault()
+    public function testDrugGroupsIsAnEmptyCollectionOnCreation()
     {
-        $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $this->drug->getGroups());
+        $this->assertAttributeInstanceOf('Doctrine\\Common\\Collections\\Collection', 'groups', $this->drug);
+        $this->assertAttributeEmpty('groups', $this->drug);
+        $this->assertInstanceOf('Doctrine\\Common\\Collections\\Collection', $this->drug->getGroups());
+        $this->assertEmpty($this->drug->getGroups());
     }
 
-    public function testDrugGroupsCanAddDrugGroupInterface()
+    public function testDrugGroupsCanAddDrugGroup()
     {
         $this->drug->addGroup($this->group);
         $this->assertCount(1, $this->drug->getGroups());
@@ -114,6 +137,11 @@ class DrugTest extends \Codeception\TestCase\Test
         $this->drug->addGroup($this->group);
         $this->drug->addGroup($this->group);
         $this->assertCount(1, $this->drug->getGroups());
+    }
+
+    public function testDrugGroupAddIsFluent()
+    {
+        $this->assertSame($this->drug, $this->drug->addGroup($this->group));
     }
 
     public function testDrugDoesNotFindGroupWhenNotPresent()
@@ -134,33 +162,44 @@ class DrugTest extends \Codeception\TestCase\Test
         $this->assertCount(0, $this->drug->getGroups());
     }
 
-    /**
-     * Drug->brand
-     */
-    public function testDrugBrandsIsInstanceOfArrayCollectionByDefault()
+    public function testDrugGroupRemoveIsFluent()
     {
-        $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $this->drug->getBrands());
+        $this->assertSame($this->drug, $this->drug->removeGroup($this->group));
     }
 
-    public function testDrugBrandCanAddDrugInterface()
+
+    public function testDrugBrandsIsEmptyCollectionOnCreation()
+    {
+        $this->assertAttributeInstanceOf('Doctrine\\Common\\Collections\\Collection', 'brands', $this->drug);
+        $this->assertAttributeEmpty('brands', $this->drug);
+        $this->assertInstanceOf('Doctrine\\Common\\Collections\\Collection', $this->drug->getBrands());
+        $this->assertEmpty($this->drug->getBrands());
+    }
+
+    public function testDrugBrandCanAddBrandDrug()
     {
         $this->drug->addBrand($this->brand);
         $this->assertCount(1, $this->drug->getBrands());
     }
 
-    public function testDrugBrandDoesNotAddBrandTwice()
+    public function testDrugBrandDoesNotAddBrandDrugTwice()
     {
         $this->drug->addBrand($this->brand);
         $this->drug->addBrand($this->brand);
         $this->assertCount(1, $this->drug->getBrands());
     }
 
-    public function testDrugDoesNotFindBrandWhenNotPresent()
+    public function testDrugBrandAddIsFluent()
+    {
+        $this->assertSame($this->drug, $this->drug->addBrand($this->brand));
+    }
+
+    public function testDrugDoesNotFindBrandDrugWhenNotPresent()
     {
         $this->assertFalse($this->drug->hasBrand($this->brand));
     }
 
-    public function testDrugFindsBrandWhenPresent()
+    public function testDrugFindsBrandDrugWhenPresent()
     {
         $this->drug->addBrand($this->brand);
         $this->assertTrue($this->drug->hasBrand($this->brand));
@@ -173,19 +212,23 @@ class DrugTest extends \Codeception\TestCase\Test
         $this->assertCount(0, $this->drug->getBrands());
     }
 
-    public function testDrugConvertsToExpectedFormatWhenOnlyNameIsPresent()
+    public function testDrugBrandRemoveIsFluent()
     {
-        $this->drug->setName('NAME');
-        $this->assertSame('Drug #NAME (generic)', (string)$this->drug);
+        $this->assertSame($this->drug, $this->drug->removeBrand($this->brand));
     }
 
-    public function testDrugConvertsToExpectedFormatWhenNameAndGenericIsPresent()
+    public function testDrugToStringGeneric()
     {
+        $expected = 'Drug #NAME (generic)';
+        $this->drug->setName('NAME');
+        $this->assertSame($expected, (string) $this->drug);
+    }
+
+    public function testDrugToStringBrand()
+    {
+        $expected = 'Drug #NAME (brand)';
         $this->drug->setName('NAME');
         $this->drug->setGeneric($this->generic);
-
-        $this->assertSame('Drug #NAME (brand)', (string)$this->drug);
+        $this->assertSame($expected, (string) $this->drug);
     }
-
-
 }

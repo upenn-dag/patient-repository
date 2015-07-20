@@ -195,10 +195,6 @@ class Drug implements DrugInterface
      */
     public function hasBrand(DrugInterface $brand = null)
     {
-        if (null === $brand) {
-            return (boolean) $this->brands->count();
-        }
-
         return $this->brands->contains($brand);
     }
 
