@@ -100,7 +100,8 @@ class AttributeBuilder extends AbstractBuilder implements AttributeBuilderInterf
 
         $fieldValue = $this->fieldValueRepository->createNew();
         $fieldValue->setField($field);
-        $fieldValue->setValue($value);
+
+        //$fieldValue->setValue($value);
 
         $this->resource->addField($fieldValue);
 
