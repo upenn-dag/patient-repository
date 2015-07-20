@@ -120,7 +120,8 @@ class DiagnosisBuilder extends AbstractBuilder implements DiagnosisBuilderInterf
 
         $fieldValue = $this->fieldValueRepository->createNew();
         $fieldValue->setField($field);
-        $fieldValue->setValue($value);
+
+        //$fieldValue->setValue($value);
 
         $this->resource->addField($fieldValue);
 

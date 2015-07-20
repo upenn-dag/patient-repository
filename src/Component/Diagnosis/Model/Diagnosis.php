@@ -315,7 +315,7 @@ class Diagnosis implements DiagnosisInterface
     public function addField(BaseFieldValueInterface $field)
     {
         if (!$this->hasField($field)) {
-            $field->setDiagnosis($this);
+            $field->setSubject($this);
             $this->fields->add($field);
         }
 
@@ -329,7 +329,7 @@ class Diagnosis implements DiagnosisInterface
     {
         if ($this->hasField($field)) {
             $this->fields->removeElement($field);
-            $field->setDiagnosis(null);
+            $field->setSubject(null);
         }
 
         return $this;

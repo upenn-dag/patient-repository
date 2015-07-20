@@ -136,7 +136,7 @@ class CodeGroup implements CodeGroupInterface
     public function removeCode(CodeInterface $code)
     {
         if ($this->hasCode($code)) {
-            $this->codes->removeElement($this);
+            $this->codes->removeElement($code);
             $code->removeGroup($this);
         }
 

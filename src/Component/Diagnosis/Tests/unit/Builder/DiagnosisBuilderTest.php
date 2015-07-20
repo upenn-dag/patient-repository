@@ -11,6 +11,7 @@
 namespace AccardTest\Component\Diagnosis\Builder;
 
 use Mockery;
+use Codeception\TestCase\Test;
 use Accard\Component\Diagnosis\Builder\DiagnosisBuilder;
 
 /**
@@ -18,11 +19,18 @@ use Accard\Component\Diagnosis\Builder\DiagnosisBuilder;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class DiagnosisBuilderTest extends \Codeception\TestCase\Test
+class DiagnosisBuilderTest extends Test
 {
     protected function _before()
     {
-        $this->objectManager = Mockery::mock('Doctrine\Common\Persistence\ObjectManager');
+        $this->diagnosis = Mockery::mock('Accard\Component\Diagnosis\Model\DiagnosisInterface');
+        $this->field = Mockery::mock('Accard\Component\Diagnosis\Model\FieldInterface');
+        $this->fieldValue = Mockery::mock('Accard\Component\Diagnosis\Model\FieldValueInterface');
+
+        $this->objectManager = Mockery::mock('Doctrine\Common\Persistence\ObjectManager')
+            ->shouldReceive('persist')->zeroOrMoreTimes()
+            ->shouldReceive('flush')->zeroOrMoreTimes()
+            ->getMock();
         $this->diagnosisRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
         $this->fieldRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
         $this->fieldValueRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
@@ -30,62 +38,87 @@ class DiagnosisBuilderTest extends \Codeception\TestCase\Test
         $this->builder = new DiagnosisBuilder($this->objectManager, $this->diagnosisRepository, $this->fieldRepository, $this->fieldValueRepository);
     }
 
-    public function testDiagnosisBuilderGetFieldRepositoryReceivesCreateNew()
+    public function testDiagnosisBuilderCanReturnDiagnosisRepository()
     {
-        $this->diagnosisRepository->shouldReceive('createNew');
-        $this->assertSame($this->builder, $this->builder->create());
+        $this->assertSame($this->diagnosisRepository, $this->builder->getRepository());
     }
 
-    public function testDiagnosisBuilderReturnsFieldRepository()
+    public function testDiagnosisBuilderCanReturnFieldRepository()
     {
         $this->assertSame($this->fieldRepository, $this->builder->getFieldRepository());
     }
 
-    public function testDiagnosisBuilderReturnsFieldValueRepository()
+    public function testDiagnosisBuilderCanReturnFieldValueRepository()
     {
         $this->assertSame($this->fieldValueRepository, $this->builder->getFieldValueRepository());
     }
 
-    public function testDiagnosisBuilderAddsFieldAndFieldValue()
+    public function testDiagnosisBuilderCanCreateNewDiagnosisResource()
     {
-        $field = Mockery::mock('Accard\Component\Field\Model\FieldInterface');
-
-        $fieldValue = Mockery::mock('Accard\Component\Field\Model\FieldValueInterface');
-        $fieldValue->shouldReceive('setField');
-        $fieldValue->shouldReceive('setValue');
-
-        $resource = Mockery::mock();
-        $resource->shouldReceive('addField');
-        $this->builder->set($resource);
-
-        $this->fieldRepository->shouldReceive('findOneBy')->andReturn($field);
-        $this->fieldValueRepository->shouldReceive('createNew')->andReturn($fieldValue);
-
-        $this->assertSame($this->builder, $this->builder->addField('NAME', 'VALUE'));
+        $this->enableDiagnosisCreate();
+        $this->builder->create();
+        $this->assertAttributeSame($this->diagnosis, 'resource', $this->builder);
     }
 
-    public function testDiagnosisBuilderAddFieldCreatesNewFieldWhenFieldRepositoryReturnsNull()
+    public function testDiagnosisBuilderCreateIsFluent()
     {
-        $resource = Mockery::mock();
-        $resource->shouldReceive('addField');
-        $this->builder->set($resource);
+        $this->enableDiagnosisCreate();
+        $this->assertSame($this->builder->create(), $this->builder);
+    }
 
-        $this->fieldRepository->shouldReceive('findOneBy')->andReturn(null);
+    public function testDiagnosisBuilderCanAddFieldWithoutPresentationWithoutDatabaseRecord()
+    {
+        $this->setupFieldAdditionScenario(false, true);
+        $this->builder->addField('NAME', 'VALUE', null);
+    }
 
-        $field = Mockery::mock('Accard\Component\Field\Model\FieldInterface');
+    public function testDiagnosisBuilderCanAddFieldWithoutPresentationWithDatabaseRecord()
+    {
+        $this->setupFieldAdditionScenario(true, true);
+        $this->builder->addField('NAME', 'VALUE', null);
+    }
 
-        $this->fieldRepository->shouldReceive('createNew')->andReturn($field);
-        $field->shouldReceive('setName')->with('NAME');
-        $field->shouldReceive('setPresentation')->with('PRESENTATION');
+    public function testDiagnosisBuilderCanAddFieldWithPresentationWithoutDatabaseRecord()
+    {
+        $this->setupFieldAdditionScenario(false, false);
+        $this->builder->addField('NAME', 'VALUE', 'PRESENTATION');
+    }
 
-        $this->objectManager->shouldReceive('persist')->with($field);
-        $this->objectManager->shouldReceive('flush')->with($field);
+    public function testDiagnosisBuilderAddFieldIsFluent()
+    {
+        $this->setupFieldAdditionScenario(true, true);
+        $this->assertSame($this->builder, $this->builder->addField('NAME', 'VALUE', null));
+    }
 
-        $fieldValue = Mockery::mock('Accard\Component\Field\Model\FieldValueInterface');
-        $fieldValue->shouldReceive('setField');
-        $fieldValue->shouldReceive('setValue');
-        $this->fieldValueRepository->shouldReceive('createNew')->andReturn($fieldValue);
 
-        $this->assertSame($this->builder, $this->builder->addField('NAME', 'VALUE', 'PRESENTATION'));
+    // Privates
+
+    private function enableDiagnosisCreate()
+    {
+        $this->diagnosisRepository->shouldReceive('createNew')->once()->andReturn($this->diagnosis);
+    }
+
+    private function setupFieldAdditionScenario($findInDb, $presentationIsNull)
+    {
+        $this->enableDiagnosisCreate();
+        $this->builder->create();
+
+        $this->diagnosis->shouldReceive('addField')->zeroOrMoreTimes()->andReturn(Mockery::self());
+        $this->fieldValueRepository->shouldReceive('createNew')->once()->andReturn($this->fieldValue);
+        $this->fieldValue->shouldReceive('setField')->once()->with($this->field)->andReturn(Mockery::self());
+
+        if ($findInDb) {
+            $this->fieldRepository->shouldReceive('findOneBy')->once()->andReturn($this->field);
+        } else {
+            $this->fieldRepository->shouldReceive('findOneBy')->once()->andReturn(null);
+            $this->fieldRepository->shouldReceive('createNew')->once()->andReturn($this->field);
+            $this->field->shouldReceive('setName')->once()->with('NAME')->andReturn(Mockery::self());
+            if ($presentationIsNull) {
+                $this->field->shouldReceive('setPresentation')->once()->with('NAME')->andReturn(Mockery::self());
+            } else {
+                $this->field->shouldReceive('setPresentation')->once()->with('PRESENTATION')->andReturn(Mockery::self());
+            }
+
+        }
     }
 }
