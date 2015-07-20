@@ -1,40 +1,38 @@
 <?php
-namespace AccardTest\Component\Phase\Exception;
 
 /**
- * Phase not found exception test
- * 
- * @author Dylan Pierce <piercedy@upenn.edu>
+ * This file is part of the Accard package.
+ *
+ * (c) University of Pennsylvania
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
  */
-use Accard\Component\Phase\Exception\PhaseNotFoundException;
-use Mockery;
+namespace AccardTest\Component\Phase\Exception;
 
-class PhaseNotFoundExceptionTest extends \Codeception\TestCase\Test
+use Mockery;
+use Codeception\TestCase\Test;
+use Accard\Component\Phase\Exception\PhaseNotFoundException;
+
+/**
+ * Phase not found exception tests.
+ *
+ * @author Frank Bardon Jr. <bardonf@upenn.edu>
+ */
+class PhaseNotFoundExceptionTest extends Test
 {
     protected function _before()
     {
-        $this->mock = Mockery::mock('Accard\Component\Phase\Exception\PhaseNotFoundException');
+        $this->exception = new PhaseNotFoundException('LABEL');
     }
 
-    protected function _after()
-    {
-    }
-
-    /**
-     * Interface Tests
-     */
     public function testPhaseNotFoundExceptionInstanceOfRunTimeException()
     {
-        $this->assertInstanceOf('RuntimeException', $this->mock);
+        $this->assertInstanceOf('RuntimeException', $this->exception);
     }
 
-    /**
-     * PhaseNotFoundException->message
-     */
     public function testPhaseNotFoundExceptionMessageFormatsCorrectly()
     {
-        $this->exception = new PhaseNotFoundException('NAME');
-
-        $this->assertAttributeEquals('Phase with label "NAME" not found.', 'message', $this->exception);
+        $this->assertAttributeContains('LABEL', 'message', $this->exception);
     }
 }

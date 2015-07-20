@@ -1,27 +1,25 @@
 <?php
-namespace AccardTest\Component\Phase\Model;
 
 /**
- * Phase test
- * 
- * @author Dylan Pierce <piecedy@upenn.edu>
+ * This file is part of the Accard package.
+ *
+ * (c) University of Pennsylvania
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
  */
+namespace AccardTest\Component\Phase\Model;
+
+use Codeception\TestCase\Test;
 use Accard\Component\Phase\Model\Phase;
 
-class PhaseTest extends \Codeception\TestCase\Test
+class PhaseTest extends Test
 {
     protected function _before()
     {
         $this->phase = new Phase();
     }
 
-    protected function _after()
-    {
-    }
-
-    /**
-     * Interface tests
-     */
     public function testPhaseInterfaceIsFollowed()
     {
         $this->assertInstanceOf(
@@ -38,37 +36,44 @@ class PhaseTest extends \Codeception\TestCase\Test
         );
     }
 
-    /**
-     * Phase->id
-     */
     public function testPhaseIdIsUnsetOnCreation()
     {
+        $this->assertAttributeSame(null, 'id', $this->phase);
         $this->assertNull($this->phase->getId());
     }
 
-    /**
-     * Phase->label
-     */
     public function testPhaseLabelIsMutable()
     {
-        $this->phase->setLabel('NAME');
-        $this->assertAttributeSame('NAME', 'label', $this->phase);
-        $this->assertSame('NAME', $this->phase->getLabel());
+        $expected = 'NAME';
+        $this->phase->setLabel($expected);
+        $this->assertAttributeSame($expected, 'label', $this->phase);
+        $this->assertSame($expected, $this->phase->getLabel());
     }
 
-    /**
-     * Phase->presentation
-     */
+    public function testPhaseLabelSettingIsFluent()
+    {
+        $this->assertSame($this->phase, $this->phase->setLabel('LABEL'));
+    }
+
+    public function testPhasePresentationIsUnsetOnCreation()
+    {
+        $this->assertAttributeSame(null, 'presentation', $this->phase);
+        $this->assertNull($this->phase->getPresentation());
+    }
+
     public function testPhasePresentationIsMutable()
     {
-        $this->phase->setPresentation('NAME');
-        $this->assertAttributeSame('NAME', 'presentation', $this->phase);
-        $this->assertSame('NAME', $this->phase->getPresentation());
+        $expected = 'PRESENTATION';
+        $this->phase->setPresentation($expected);
+        $this->assertAttributeSame($expected, 'presentation', $this->phase);
+        $this->assertSame($expected, $this->phase->getPresentation());
     }
 
-    /**
-     * Phase->order
-     */
+    public function testPhasePresentationSettingIsMutable()
+    {
+        $this->assertSame($this->phase, $this->phase->setPresentation('PRESENTATION'));
+    }
+
     public function testPhaseOrderIs99OnCreation()
     {
         $this->assertSame(99, $this->phase->getOrder());
@@ -76,9 +81,14 @@ class PhaseTest extends \Codeception\TestCase\Test
 
     public function testPhaseOrderIsMutable()
     {
-        $this->phase->setOrder(1);
-        $this->assertAttributeSame(1, 'order', $this->phase);
-        $this->assertSame(1, $this->phase->getOrder());
+        $expected = 1;
+        $this->phase->setOrder($expected);
+        $this->assertAttributeSame($expected, 'order', $this->phase);
+        $this->assertSame($expected, $this->phase->getOrder());
     }
 
+    public function testPhaseOrderSettingIsFluent()
+    {
+        $this->assertSame($this->phase, $this->phase->setOrder(1));
+    }
 }
