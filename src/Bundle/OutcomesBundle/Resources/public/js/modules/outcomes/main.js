@@ -1,7 +1,6 @@
 // main.js
 require.config({
     waitSeconds: 2,
-    baseUrl: "/bundles/accardoutcomes/js",
     shim: {
         "jquery": { exports: "$" },
         "jquery.serialize": { deps: ["jquery"] },

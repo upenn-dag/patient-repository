@@ -181,18 +181,21 @@
             }
 
         </style>
+
+        <script type="text/javascript">
+            var accardRootUrl = "{{ path('accard_frontend') }}";
+            var require = {
+                baseUrl: accardRootUrl + "bundles/accardoutcomes/js"
+            };
+        </script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.16/require.min.js"></script>
         <script type="text/javascript">
-
-            requirejs.config({
-                baseUrl: "/bundles/accardoutcomes/js"
-            });
-
             require(["modules/outcomes/main"], function(main) {
-                var rootUrl = "{{ path("accard_frontend") }}";
+                var rootUrl = "{{ path('accard_frontend') }}";
+
                 var options = {
                     rootUrl: rootUrl,
-                    stateUrl: rootUrl + "outcomes/state.json",
+                    stateUrl: rootUrl +  "outcomes/state.json",
                     filterUrl: rootUrl + "outcomes/filters.json",
                     filteredUrl: rootUrl + "outcomes/filtered.json",
                     translatedUrl: rootUrl + "outcomes/translated.json",
