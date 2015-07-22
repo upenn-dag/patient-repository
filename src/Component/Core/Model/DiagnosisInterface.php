@@ -12,9 +12,9 @@ namespace Accard\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use Accard\Component\Diagnosis\Model\DiagnosisInterface as BaseDiagnosisInterface;
-use Accard\Component\Resource\Model\BlameableInterface;
-use Accard\Component\Resource\Model\VersionableInterface;
-use Accard\Component\Resource\Model\TimestampableInterface;
+use DAG\Component\Resource\Model\BlameableInterface;
+use DAG\Component\Resource\Model\VersionableInterface;
+use DAG\Component\Resource\Model\TimestampableInterface;
 use Accard\Component\Phase\Model\PhaseTargetInterface;
 
 /**

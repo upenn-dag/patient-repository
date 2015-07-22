@@ -10,7 +10,7 @@
  */
 namespace Accard\Bundle\CoreBundle\EventListener;
 
-use Accard\Bundle\ResourceBundle\Event\ResourceEvent;
+use DAG\Bundle\ResourceBundle\Event\ResourceEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**

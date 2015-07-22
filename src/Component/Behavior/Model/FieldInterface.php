@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Behavior\Model;
 
-use Accard\Component\Field\Model\FieldInterface as BaseFieldInterface;
+use DAG\Component\Field\Model\FieldInterface as BaseFieldInterface;
 
 /**
  * Behavior prototype field model interface.

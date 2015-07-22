@@ -10,8 +10,8 @@
  */
 namespace Accard\Bundle\CoreBundle\Settings;
 
-use Accard\Bundle\SettingsBundle\Schema\ContainerAwareSchema;
-use Accard\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
+use DAG\Bundle\SettingsBundle\Schema\ContainerAwareSchema;
+use DAG\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

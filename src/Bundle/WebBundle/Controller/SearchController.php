@@ -13,7 +13,7 @@ namespace Accard\Bundle\WebBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Accard\Bundle\ResourceBundle\Search\SearchCollection;
+use DAG\Bundle\ResourceBundle\Search\SearchCollection;
 use Elastica\Query\QueryString;
 use Elastica\Exception\Connection\HttpException;
 

@@ -11,7 +11,7 @@
 namespace Accard\Bundle\ActivityBundle\Doctrine\ORM;
 
 use Accard\Component\Activity\Repository\ActivityRepositoryInterface;
-use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use DAG\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * Basic activity repository.

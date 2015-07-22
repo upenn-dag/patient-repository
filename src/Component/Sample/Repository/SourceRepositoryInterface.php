@@ -12,7 +12,7 @@ namespace Accard\Component\Sample\Repository;
 
 use PagerFanta\PagerfantaInterface;
 use Doctrine\ORM\QueryBuilder;
-use Accard\Component\Resource\Repository\RepositoryInterface;
+use DAG\Component\Resource\Repository\RepositoryInterface;
 use Accard\Component\Sample\Model\SourceInterface;
 
 /**

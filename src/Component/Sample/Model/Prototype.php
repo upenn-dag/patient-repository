@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Sample\Model;
 
-use Accard\Component\Prototype\Model\Prototype as BasePrototype;
+use DAG\Component\Prototype\Model\Prototype as BasePrototype;
 
 /**
  * Sample prototype model.

@@ -3,12 +3,12 @@ namespace Accard\Bundle\CPDBundle\Import;
 
 /**
  * Local Source Adapter
- * 
+ *
  * @desc Responsible for knowing how to get local records
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-use Accard\Bundle\ResourceBundle\Import\SourceAdapterInterface;
-use Accard\Component\Prototype\Provider\PrototypeProviderInterface;
+use DAG\Bundle\ResourceBundle\Import\SourceAdapterInterface;
+use DAG\Component\Prototype\Provider\PrototypeProviderInterface;
 use Accard\Component\Sample\Model\PrototypeInterface;
 use Doctrine\DBAL\Connection;
 
@@ -44,7 +44,7 @@ class LocalSource implements SourceAdapterInterface
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
 		$localRecords = $this->prepareResults($stmt->fetchAll(), $prototype);
-        $stmt->closeCursor(); 
+        $stmt->closeCursor();
 
         return $localRecords;
 	}
@@ -53,7 +53,7 @@ class LocalSource implements SourceAdapterInterface
 	 * Query
 	 */
 	private function buildQuery($prototype)
-	{		
+	{
 		$fieldIds = array();
         foreach ($prototype->getFields() as $field) {
             $fieldIds[] = $field->getId();

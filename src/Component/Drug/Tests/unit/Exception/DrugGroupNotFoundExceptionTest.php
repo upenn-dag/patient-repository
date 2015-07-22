@@ -3,11 +3,11 @@ namespace AccardTest\Component\Drug\Exception;
 
 /**
  * Drug Group Not Found Exception Test
- * 
+ *
  * @author Dylan Pierce <piecedy@upenn.edu>
  */
 use Accard\Component\Drug\Exception\DrugGroupNotFoundException;
-use Accard\Component\Field\Model\Field;
+use DAG\Component\Field\Model\Field;
 use Mockery;
 
 class DrugGroupNotFoundExceptionTest extends \Codeception\TestCase\Test
@@ -41,13 +41,13 @@ class DrugGroupNotFoundExceptionTest extends \Codeception\TestCase\Test
     {
         $this->field = 1;
         $this->exception = new DrugGroupNotFoundException($this->field);
-        
+
         $this->assertSame('Drug group with id "1" cound not be found.', $this->exception->getMessage());
     }
 
     public function testDrugGroupNotFoundExceptionMessageIsCorrectWithNullField()
     {
-        $this->field = Mockery::mock('Accard\Component\Field\Model\FieldInterface')
+        $this->field = Mockery::mock('DAG\Component\Field\Model\FieldInterface')
             ->shouldReceive('__toString()')->zeroOrMoreTimes()->andReturn('NAME');
         $this->field = 'NAME';
 
@@ -57,7 +57,7 @@ class DrugGroupNotFoundExceptionTest extends \Codeception\TestCase\Test
 
     public function testDrugNotFoundExceptionMessageIsCorrectWhenFieldIsNotNumericAndFieldIsPresent()
     {
-        $this->field = Mockery::mock('Accard\Component\Field\Model\FieldInterface')
+        $this->field = Mockery::mock('DAG\Component\Field\Model\FieldInterface')
             ->shouldReceive('__toString()')->zeroOrMoreTimes()->andReturn('NAME');
         $this->field = 'FIELDNAME';
 

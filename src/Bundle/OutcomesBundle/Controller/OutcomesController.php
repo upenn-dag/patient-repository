@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Accard\Bundle\ResourceBundle\Controller\ExpressionAwareController;
+use DAG\Bundle\ResourceBundle\Controller\ExpressionAwareController;
 use Accard\Bundle\OutcomesBundle\Exception\OutcomesException;
 use JMS\Serializer\SerializationContext;
 

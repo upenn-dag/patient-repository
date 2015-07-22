@@ -80,7 +80,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->defaultValue('Accard\Component\Regimen\Model\Regimen')->end()
-                                ->scalarNode('controller')->defaultValue('Accard\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('controller')->defaultValue('DAG\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->defaultValue('Accard\Bundle\RegimenBundle\Doctrine\ORM\RegimenRepository')->end()
                                 ->scalarNode('form')->defaultValue('Accard\Bundle\RegimenBundle\Form\Type\RegimenType')->end()
                             ->end()

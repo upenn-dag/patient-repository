@@ -10,7 +10,7 @@
  */
 namespace Accard\Bundle\ActivityBundle\DependencyInjection;
 
-use Accard\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use DAG\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -58,7 +58,7 @@ class AccardActivityExtension extends AbstractResourceExtension implements Prepe
                     'subject'   => $config['classes']['activity']['model'],
                     'prototype' => array(
                         'model' => 'Accard\Component\Activity\Model\Prototype',
-                        'repository' => 'Accard\Bundle\PrototypeBundle\Doctrine\ORM\PrototypeRepository',
+                        'repository' => 'DAG\Bundle\PrototypeBundle\Doctrine\ORM\PrototypeRepository',
                         'form' => 'Accard\Bundle\ActivityBundle\Form\Type\ActivityPrototypeType',
                     ),
                     'field' => array(

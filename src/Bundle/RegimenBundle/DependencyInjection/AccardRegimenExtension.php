@@ -10,7 +10,7 @@
  */
 namespace Accard\Bundle\RegimenBundle\DependencyInjection;
 
-use Accard\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use DAG\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -47,7 +47,7 @@ class AccardRegimenExtension extends AbstractResourceExtension implements Prepen
                     'subject'   => $config['classes']['regimen']['model'],
                     'prototype' => array(
                         'model' => 'Accard\Component\Regimen\Model\Prototype',
-                        'repository' => 'Accard\Bundle\PrototypeBundle\Doctrine\ORM\PrototypeRepository',
+                        'repository' => 'DAG\Bundle\PrototypeBundle\Doctrine\ORM\PrototypeRepository',
                         'form' => 'Accard\Bundle\RegimenBundle\Form\Type\RegimenPrototypeType',
                     ),
                     'field' => array(

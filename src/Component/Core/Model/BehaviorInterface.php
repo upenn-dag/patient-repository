@@ -10,9 +10,9 @@
 namespace Accard\Component\Core\Model;
 
 use Accard\Component\Behavior\Model\BehaviorInterface as BaseBehaviorInterface;
-use Accard\Component\Resource\Model\BlameableInterface;
-use Accard\Component\Resource\Model\VersionableInterface;
-use Accard\Component\Resource\Model\TimestampableInterface;
+use DAG\Component\Resource\Model\BlameableInterface;
+use DAG\Component\Resource\Model\VersionableInterface;
+use DAG\Component\Resource\Model\TimestampableInterface;
 
 /**
  * Accard activity interface.

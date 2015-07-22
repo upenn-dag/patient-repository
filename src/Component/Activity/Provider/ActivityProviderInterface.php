@@ -10,11 +10,11 @@
  */
 namespace Accard\Component\Activity\Provider;
 
-use Accard\Component\Resource\Provider\ProviderInterface;
+use DAG\Component\Resource\Provider\ProviderInterface;
 use Accard\Component\Activity\Model\ActivityInterface;
 use Accard\Component\Activity\Model\PrototypeInterface;
 use Accard\Component\Activity\Exception\ActivityNotFoundException;
-use Accard\Component\Prototype\Provider\PrototypeProviderInterface;
+use DAG\Component\Prototype\Provider\PrototypeProviderInterface;
 
 /**
  * Activity provider interface.

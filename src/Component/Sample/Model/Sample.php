@@ -19,8 +19,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Sample implements SampleInterface
 {
-    use \Accard\Component\Prototype\Model\PrototypeSubjectTrait;
-    use \Accard\Component\Field\Model\FieldSubjectTrait;
+    use \DAG\Component\Prototype\Model\PrototypeSubjectTrait;
+    use \DAG\Component\Field\Model\FieldSubjectTrait;
 
     /**
      * Sample id.

@@ -6,7 +6,7 @@ namespace Accard\Bundle\PDSBundle\Import\Common;
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-use Accard\Bundle\ResourceBundle\Import\SourceAdapterInterface;
+use DAG\Bundle\ResourceBundle\Import\SourceAdapterInterface;
 
 abstract class PDSSource implements SourceAdapterInterface
 {

@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Accard\Bundle\WebBundle\Event\MenuBuilderEvent;
-use Accard\Bundle\SettingsBundle\Manager\SettingsManager;
+use DAG\Bundle\SettingsBundle\Manager\SettingsManager;
 
 /**
  * Abstract menu builder.

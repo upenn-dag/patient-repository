@@ -13,7 +13,7 @@ namespace Accard\Bundle\SampleBundle\Import;
 use DateTime;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Accard\Bundle\ResourceBundle\Import\ImporterInterface;
+use DAG\Bundle\ResourceBundle\Import\ImporterInterface;
 
 /**
  * Abstract sample importer.
@@ -37,7 +37,7 @@ abstract class SampleImporter implements ImporterInterface
             if(is_null($value)) {
                 return null;
             }
-            
+
             return $resource->getByMRN($value);
         };
 

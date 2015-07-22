@@ -44,7 +44,7 @@ class DrugGroupTest extends Test
     public function testDrugGroupIsAccardResource()
     {
         $this->assertInstanceOf(
-            'Accard\Component\Resource\Model\ResourceInterface',
+            'DAG\Component\Resource\Model\ResourceInterface',
             $this->group
         );
     }

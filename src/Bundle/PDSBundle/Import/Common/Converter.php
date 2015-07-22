@@ -6,9 +6,9 @@ namespace Accard\Bundle\PDSBundle\Import\Common;
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-use Accard\Bundle\ResourceBundle\Import\ConverterInterface;
-use Accard\Bundle\ResourceBundle\Event\ImportEvent;
-use Accard\Bundle\ResourceBundle\Import\Resource;
+use DAG\Bundle\ResourceBundle\Import\ConverterInterface;
+use DAG\Bundle\ResourceBundle\Event\ImportEvent;
+use DAG\Bundle\ResourceBundle\Import\Resource;
 use DateTime;
 
 class Converter implements ConverterInterface

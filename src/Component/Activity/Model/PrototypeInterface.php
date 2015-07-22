@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Activity\Model;
 
-use Accard\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterface;
+use DAG\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterface;
 use Accard\Component\Drug\Model\DrugablePrototypeInterface;
 
 /**

@@ -42,7 +42,7 @@ class CodeGroupTest extends Test
     public function testCodeGroupIsAccardResource()
     {
         $this->assertInstanceOf(
-            'Accard\Component\Resource\Model\ResourceInterface',
+            'DAG\Component\Resource\Model\ResourceInterface',
             $this->codeGroup
         );
     }

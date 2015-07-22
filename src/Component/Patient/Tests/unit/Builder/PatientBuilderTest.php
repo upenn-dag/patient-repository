@@ -4,7 +4,7 @@ namespace AccardTest\Component\Patient\Builder;
 
 use Codeception\TestCase\Test;
 use Accard\Component\Patient\Builder\PatientBuilder;
-use Accard\Component\Field\Model\FieldTypes;
+use DAG\Component\Field\Model\FieldTypes;
 use Mockery;
 
 class PatientBuilderTest extends Test
@@ -19,9 +19,9 @@ class PatientBuilderTest extends Test
             ->shouldReceive('persist')->zeroOrMoreTimes()
             ->shouldReceive('flush')->zeroOrMoreTimes()
             ->getMock();
-        $this->patientRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
-        $this->fieldRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
-        $this->fieldValueRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
+        $this->patientRepository = Mockery::mock('DAG\Component\Resource\Repository\RepositoryInterface');
+        $this->fieldRepository = Mockery::mock('DAG\Component\Resource\Repository\RepositoryInterface');
+        $this->fieldValueRepository = Mockery::mock('DAG\Component\Resource\Repository\RepositoryInterface');
 
         $this->builder = new PatientBuilder($this->objectManager, $this->patientRepository, $this->fieldRepository, $this->fieldValueRepository);
     }

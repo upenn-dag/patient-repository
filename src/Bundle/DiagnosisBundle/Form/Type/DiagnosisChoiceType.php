@@ -17,8 +17,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Accard\Component\Diagnosis\Repository\DiagnosisRepositoryInterface;
-use Accard\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer;
-use Accard\Bundle\ResourceBundle\Form\DataTransformer\IdentifierToObjectTransformer;
+use DAG\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer;
+use DAG\Bundle\ResourceBundle\Form\DataTransformer\IdentifierToObjectTransformer;
 
 /**
  * Diagnosis choice form type.

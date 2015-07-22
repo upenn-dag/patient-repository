@@ -11,7 +11,7 @@
 namespace Accard\Component\Phase\Model;
 
 use DateTime;
-use Accard\Component\Resource\Model\ResourceInterface;
+use DAG\Component\Resource\Model\ResourceInterface;
 
 /**
  * Basic phase interface.

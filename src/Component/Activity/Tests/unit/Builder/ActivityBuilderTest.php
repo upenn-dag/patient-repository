@@ -31,9 +31,9 @@ class ActivityBuilderTest extends Test
             ->shouldReceive('persist')->zeroOrMoreTimes()
             ->shouldReceive('flush')->zeroOrMoreTimes()
             ->getMock();
-        $this->activityRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
-        $this->fieldRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
-        $this->fieldValueRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
+        $this->activityRepository = Mockery::mock('DAG\Component\Resource\Repository\RepositoryInterface');
+        $this->fieldRepository = Mockery::mock('DAG\Component\Resource\Repository\RepositoryInterface');
+        $this->fieldValueRepository = Mockery::mock('DAG\Component\Resource\Repository\RepositoryInterface');
 
         $this->builder = new ActivityBuilder($this->objectManager, $this->activityRepository, $this->fieldRepository, $this->fieldValueRepository);
     }

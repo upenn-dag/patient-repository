@@ -23,9 +23,9 @@ use DateTime;
 class Diagnosis extends BaseDiagnosis implements DiagnosisInterface
 {
     // Traits
-    use \Accard\Component\Resource\Model\BlameableTrait;
-    use \Accard\Component\Resource\Model\TimestampableTrait;
-    use \Accard\Component\Resource\Model\VersionableTrait;
+    use \DAG\Component\Resource\Model\BlameableTrait;
+    use \DAG\Component\Resource\Model\TimestampableTrait;
+    use \DAG\Component\Resource\Model\VersionableTrait;
 
     /**
      * Patient.

@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Attribute\Model;
 
-use Accard\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterface;
+use DAG\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterface;
 
 /**
  * Attribute prototype interface

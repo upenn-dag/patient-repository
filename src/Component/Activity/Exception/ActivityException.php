@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Activity\Exception;
 
-use Accard\Component\Resource\Exception\ResourceException;
+use DAG\Component\Resource\Exception\ResourceException;
 
 /**
  * Activity exception interface.

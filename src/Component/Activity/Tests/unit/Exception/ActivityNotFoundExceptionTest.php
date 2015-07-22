@@ -12,7 +12,7 @@ namespace AccardTest\Component\Activity\Exception;
 
 use Codeception\TestCase\Test;
 use Accard\Component\Activity\Exception\ActivityNotFoundException;
-use Accard\Component\Field\Model\FieldTypes;
+use DAG\Component\Field\Model\FieldTypes;
 use Mockery;
 
 class ActivityNotFoundExceptionTest extends Test

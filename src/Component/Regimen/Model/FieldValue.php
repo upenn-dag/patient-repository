@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Regimen\Model;
 
-use Accard\Component\Field\Model\FieldValue as BaseFieldValue;
+use DAG\Component\Field\Model\FieldValue as BaseFieldValue;
 
 /**
  * Accard sample field value model.

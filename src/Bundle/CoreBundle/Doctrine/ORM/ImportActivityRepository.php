@@ -10,8 +10,8 @@
  */
 namespace Accard\Bundle\CoreBundle\Doctrine\ORM;
 
-use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Accard\Component\Resource\Model\ImportTargetInterface;
+use DAG\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use DAG\Component\Resource\Model\ImportTargetInterface;
 
 /**
  * Accard import activity repository.

@@ -21,5 +21,5 @@ use DateTime;
 class ImportPatient extends BasePatient implements ImportPatientInterface
 {
     // Traits
-    use \Accard\Component\Resource\Model\ImportTargetTrait;
+    use \DAG\Component\Resource\Model\ImportTargetTrait;
 }

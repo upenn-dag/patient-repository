@@ -6,9 +6,9 @@ namespace Accard\Bundle\PDSBundle\Import\Test;
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-use Accard\Bundle\ResourceBundle\Import\SourceAdapterInterface;
+use DAG\Bundle\ResourceBundle\Import\SourceAdapterInterface;
 use Accard\Bundle\PDSBundle\Import\Common\PDSSource;
-use Accard\Component\Prototype\Provider\PrototypeProviderInterface;
+use DAG\Component\Prototype\Provider\PrototypeProviderInterface;
 use Doctrine\DBAL\Connection;
 
 class PDSTestSource extends PDSSource implements SourceAdapterInterface
@@ -39,7 +39,7 @@ class PDSTestSource extends PDSSource implements SourceAdapterInterface
 
 	/**
 	 * Build query
-	 * 
+	 *
 	 * @return string
 	 */
     protected function buildQuery()

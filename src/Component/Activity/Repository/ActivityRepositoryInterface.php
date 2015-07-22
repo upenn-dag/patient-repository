@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Activity\Repository;
 
-use Accard\Component\Resource\Repository\RepositoryInterface;
+use DAG\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Activity repository interface.

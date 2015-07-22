@@ -3,7 +3,7 @@ namespace AccardTest\Bundle\ActivityBundle\Doctrine\ORM;
 
 /**
  * Activity Repository
- * 
+ *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
 use Accard\Bundle\ActivityBundle\Doctrine\ORM\ActivityRepository;
@@ -14,7 +14,7 @@ class ActivityRepositoryTest extends \Codeception\TestCase\Test
     protected function _before()
     {
         $this->class = Mockery::mock('Doctrine\ORM\Mapping\ClassMetadata');
-        $this->class->name = "Accard\Bundle\ResourceBundle\Test\Stub\Stub";
+        $this->class->name = "DAG\Bundle\ResourceBundle\Test\Stub\Stub";
 
         $this->query = Mockery::Mock('Doctrine\ORM\AbstractQuery')
             ->shouldReceive('setParameters')->andReturn(Mockery::self())

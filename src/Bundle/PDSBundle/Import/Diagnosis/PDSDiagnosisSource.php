@@ -6,8 +6,8 @@ namespace Accard\Bundle\PDSBundle\Import\Diagnosis;
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-use Accard\Bundle\ResourceBundle\Import\SourceAdapterInterface;
-use Accard\Component\Prototype\Provider\PrototypeProviderInterface;
+use DAG\Bundle\ResourceBundle\Import\SourceAdapterInterface;
+use DAG\Component\Prototype\Provider\PrototypeProviderInterface;
 use Doctrine\DBAL\Connection;
 
 class PDSDiagnosisSource implements SourceAdapterInterface

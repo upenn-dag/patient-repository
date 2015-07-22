@@ -11,7 +11,7 @@
 namespace Accard\Bundle\SampleBundle\Doctrine\ORM;
 
 use Accard\Component\Sample\Repository\SampleRepositoryInterface;
-use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use DAG\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * Basic sample repository.

@@ -4,7 +4,7 @@ namespace AccardTest\Component\Patient\Exception;
 
 use Codeception\TestCase\Test;
 use Accard\Component\Patient\Exception\MultiplePatientsFoundException;
-use Accard\Component\Field\Model\FieldTypes;
+use DAG\Component\Field\Model\FieldTypes;
 use Mockery;
 
 class MultiplePatientsFoundExceptionTest extends Test

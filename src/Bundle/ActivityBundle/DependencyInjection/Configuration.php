@@ -80,7 +80,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->defaultValue('Accard\Component\Activity\Model\Activity')->end()
-                                ->scalarNode('controller')->defaultValue('Accard\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('controller')->defaultValue('DAG\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->defaultValue('Accard\Bundle\ActivityBundle\Doctrine\ORM\ActivityRepository')->end()
                                 ->scalarNode('form')->defaultValue('Accard\Bundle\ActivityBundle\Form\Type\ActivityType')->end()
                             ->end()

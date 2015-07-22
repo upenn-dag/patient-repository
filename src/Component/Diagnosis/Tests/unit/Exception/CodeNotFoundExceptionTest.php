@@ -13,7 +13,7 @@ namespace AccardTest\Component\Diagnosis\Exception;
 use Mockery;
 use Codeception\TestCase\Test;
 use Accard\Component\Diagnosis\Exception\CodeNotFoundException;
-use Accard\Component\Field\Model\FieldTypes;
+use DAG\Component\Field\Model\FieldTypes;
 
 /**
  * Code not found exception tests.

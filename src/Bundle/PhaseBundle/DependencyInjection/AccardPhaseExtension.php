@@ -10,7 +10,7 @@
  */
 namespace Accard\Bundle\PhaseBundle\DependencyInjection;
 
-use Accard\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use DAG\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**

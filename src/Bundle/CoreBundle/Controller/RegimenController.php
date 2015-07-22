@@ -10,7 +10,7 @@
  */
 namespace Accard\Bundle\CoreBundle\Controller;
 
-use Accard\Bundle\ResourceBundle\Controller\ResourceController;
+use DAG\Bundle\ResourceBundle\Controller\ResourceController;
 use Accard\Bundle\RegimenBundle\Model\RegimenActivitiesChoice;
 use Accard\Bundle\RegimenBundle\Form\Type\RegimenActivitiesChoiceType;
 use Symfony\Component\HttpFoundation\Request;

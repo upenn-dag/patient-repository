@@ -38,7 +38,7 @@ class CodeTest extends Test
     public function testCodeIsAccardResource()
     {
         $this->assertInstanceOf(
-            'Accard\Component\Resource\Model\ResourceInterface',
+            'DAG\Component\Resource\Model\ResourceInterface',
             $this->code
         );
     }

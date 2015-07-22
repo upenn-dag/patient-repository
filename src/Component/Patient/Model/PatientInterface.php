@@ -12,8 +12,8 @@ namespace Accard\Component\Patient\Model;
 
 use DateTime;
 use DateInterval;
-use Accard\Component\Field\Model\FieldSubjectInterface;
-use Accard\Component\Resource\Model\ResourceInterface;
+use DAG\Component\Field\Model\FieldSubjectInterface;
+use DAG\Component\Resource\Model\ResourceInterface;
 
 /**
  * Basic patient interface.

@@ -11,7 +11,7 @@
 namespace Accard\Component\Phase\Model;
 
 use DateTime;
-use Accard\Component\Resource\Model\ResourceInterface;
+use DAG\Component\Resource\Model\ResourceInterface;
 
 /**
  * Basic phase instance interface.
@@ -20,16 +20,16 @@ use Accard\Component\Resource\Model\ResourceInterface;
  */
 interface PhaseInstanceInterface extends ResourceInterface
 {
-    /** 
+    /**
      * Get id.
-     * 
+     *
      * @return integer
      */
     public function getId();
 
     /**
      * Set id.
-     * 
+     *
      * @param integer | id
      * @return PhaseInstanceInterface
      */

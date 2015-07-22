@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Drug\Exception;
 
-use Accard\Component\Resource\Exception\ResourceException;
+use DAG\Component\Resource\Exception\ResourceException;
 
 /**
  * Drug exception interface.

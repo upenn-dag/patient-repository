@@ -13,7 +13,7 @@ namespace Accard\Bundle\ActivityBundle\Import;
 use DateTime;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Accard\Bundle\ResourceBundle\Import\ImporterInterface;
+use DAG\Bundle\ResourceBundle\Import\ImporterInterface;
 
 /**
  * Abstract activity importer.
@@ -44,7 +44,7 @@ abstract class ActivityImporter implements ImporterInterface
             if (!$resource) {
                 $resource = $options['diagnosis_resource']->getRepository();
             }
-            
+
             if ($patient = $options['patient']) {
                 foreach ($patient->getDiagnoses() as $diagnosis) {
                     if (in_array($diagnosis->getCode()->getCode(), $codes)) {

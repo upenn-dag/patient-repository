@@ -80,7 +80,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->defaultValue('Accard\Component\Patient\Model\Patient')->end()
-                                ->scalarNode('controller')->defaultValue('Accard\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('controller')->defaultValue('DAG\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->defaultValue('Accard\Bundle\PatientBundle\Doctrine\ORM\PatientRepository')->end()
                                 ->scalarNode('form')->defaultValue('Accard\Bundle\PatientBundle\Form\Type\PatientType')->end()
                             ->end()

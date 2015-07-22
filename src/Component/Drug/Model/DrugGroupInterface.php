@@ -11,7 +11,7 @@
 namespace Accard\Component\Drug\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Accard\Component\Resource\Model\ResourceInterface;
+use DAG\Component\Resource\Model\ResourceInterface;
 
 /**
  * Drug group model interface.
@@ -22,7 +22,7 @@ interface DrugGroupInterface extends ResourceInterface
 {
     /**
      * Get drug group id.
-     * 
+     *
      * @var integer
      */
     public function getId();

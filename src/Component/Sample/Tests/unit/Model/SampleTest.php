@@ -14,7 +14,7 @@ use DateTime;
 use Mockery;
 use Codeception\TestCase\Test;
 use Accard\Component\Sample\Model\Sample;
-use Accard\Component\Field\Test\FieldSubjectTest;
+use DAG\Component\Field\Test\FieldSubjectTest;
 
 /**
  * Sample model tests.
@@ -48,7 +48,7 @@ class SampleTest extends Test
     public function testSampleIsAccardResource()
     {
         $this->assertInstanceOf(
-            'Accard\Component\Resource\Model\ResourceInterface',
+            'DAG\Component\Resource\Model\ResourceInterface',
             $this->sample
         );
     }

@@ -10,7 +10,7 @@
  */
 namespace Accard\Bundle\CoreBundle\Settings;
 
-use Accard\Bundle\SettingsBundle\Schema\Schema;
+use DAG\Bundle\SettingsBundle\Schema\Schema;
 
 /**
  * Abstract settings schema.

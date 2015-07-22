@@ -15,10 +15,10 @@ use DateTime;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Accard\Bundle\SampleBundle\Import\SampleImporter;
-use Accard\Bundle\ResourceBundle\Import\ImporterInterface;
+use DAG\Bundle\ResourceBundle\Import\ImporterInterface;
 use Accard\Bundle\CoreBundle\Provider\ImportPatientProvider;
-use Accard\Bundle\ResourceBundle\Import\SourceAdapterInterface;
-use Accard\Bundle\ResourceBundle\Import\CriteriaInterface;
+use DAG\Bundle\ResourceBundle\Import\SourceAdapterInterface;
+use DAG\Bundle\ResourceBundle\Import\CriteriaInterface;
 
 /**
  *  HMTB Specimens importer.
@@ -43,14 +43,14 @@ class SpecimensCollectionImporter extends SampleImporter
 
     /**
      * HMTB results source.
-     * 
+     *
      * @var SourceAdapterInterface
      */
     private $hmtbSource;
 
-    /** 
+    /**
      * HMTB criteria.
-     * 
+     *
      * @var Criteria Interface
      */
     private $criteria;
@@ -128,15 +128,15 @@ class SpecimensCollectionImporter extends SampleImporter
                                      '0',
                                      '1',
                                      '2',
-                                     'subtype', 
+                                     'subtype',
                                      'restricted',
-                                     'total_sum_vials_remaining', 
-                                     'blasts', 
+                                     'total_sum_vials_remaining',
+                                     'blasts',
                                      'ct_cycle',
-                                     'ct_study_day', 
-                                     'ct_peak_through', 
-                                     'ct_time_post_drug', 
-                                     'ct_time_post_drug_unit', 
+                                     'ct_study_day',
+                                     'ct_peak_through',
+                                     'ct_time_post_drug',
+                                     'ct_time_post_drug_unit',
                                      'ct_treatment_relation_time',
                                      'when_modified'));
 

@@ -3,10 +3,10 @@ namespace AccardTest\Bundle\CoreBundle\Controller;
 
 /**
  * Activity Controller
- * 
+ *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-use Accard\Bundle\ResourceBundle\Controller\ActivityController;
+use DAG\Bundle\ResourceBundle\Controller\ActivityController;
 
 class ActivityControllerTest extends \Codeception\TestCase\Test
 {

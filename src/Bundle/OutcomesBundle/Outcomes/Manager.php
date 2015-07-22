@@ -17,7 +17,7 @@ use Accard\Bundle\OutcomesBundle\Exception\ManagerNotInitializedException;
 use Accard\Bundle\OutcomesBundle\Exception\TargetNotFoundException;
 use Accard\Bundle\OutcomesBundle\Exception\TargetPrototypeNotFoundException;
 use Accard\Bundle\CoreBundle\State\StateInstance;
-use Accard\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage;
+use DAG\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage;
 
 
 /**

@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Behavior\Builder;
 
-use Accard\Component\Resource\Builder\BuilderInterface;
+use DAG\Component\Resource\Builder\BuilderInterface;
 
 /**
  * Behavior Builder.

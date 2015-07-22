@@ -23,7 +23,7 @@ use DateTime;
 class ImportSample extends BaseSample implements ImportSampleInterface
 {
     // Traits
-    use \Accard\Component\Resource\Model\ImportTargetTrait;
+    use \DAG\Component\Resource\Model\ImportTargetTrait;
 
     /**
      * Patient.

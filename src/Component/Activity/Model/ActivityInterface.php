@@ -11,9 +11,9 @@
 namespace Accard\Component\Activity\Model;
 
 use DateTime;
-use Accard\Component\Prototype\Model\PrototypeSubjectInterface;
-use Accard\Component\Field\Model\FieldSubjectInterface;
-use Accard\Component\Resource\Model\ResourceInterface;
+use DAG\Component\Prototype\Model\PrototypeSubjectInterface;
+use DAG\Component\Field\Model\FieldSubjectInterface;
+use DAG\Component\Resource\Model\ResourceInterface;
 use Accard\Component\Drug\Model\DrugInterface;
 
 /**

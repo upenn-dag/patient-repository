@@ -14,7 +14,7 @@ use DateTime;
 use Mockery;
 use Codeception\TestCase\Test;
 use Accard\Component\Activity\Model\Activity;
-use Accard\Component\Field\Test\FieldSubjectTest;
+use DAG\Component\Field\Test\FieldSubjectTest;
 
 /**
  * Activity model tests.
@@ -47,7 +47,7 @@ class ActivityTest extends Test
     public function testActivityIsAccardResource()
     {
         $this->assertInstanceOf(
-            'Accard\Component\Resource\Model\ResourceInterface',
+            'DAG\Component\Resource\Model\ResourceInterface',
             $this->activity
         );
     }

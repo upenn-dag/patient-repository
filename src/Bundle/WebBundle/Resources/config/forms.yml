@@ -8,7 +8,7 @@
 parameters:
 
     accard.form.type_extension.date_defaults.class: Accard\Bundle\WebBundle\Form\Extension\DateDefaultsExtension
-    accard.form.type.typeahead.class: Accard\Bundle\ResourceBundle\Form\Type\TypeaheadType
+    accard.form.type.typeahead.class: DAG\Bundle\ResourceBundle\Form\Type\TypeaheadType
 
 services:
 

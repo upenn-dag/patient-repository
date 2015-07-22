@@ -14,7 +14,7 @@ use DateTime;
 use DateInterval;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Accard\Component\Field\Model\FieldValueInterface as BaseFieldValueInterface;
+use DAG\Component\Field\Model\FieldValueInterface as BaseFieldValueInterface;
 
 /**
  * Accard patient model.

@@ -11,7 +11,7 @@
 namespace Accard\Component\Drug\Provider;
 
 use Doctrine\Common\Collections\Collection;
-use Accard\Component\Resource\Provider\ProviderInterface;
+use DAG\Component\Resource\Provider\ProviderInterface;
 use Accard\Component\Diagnosis\Exception\DrugNotFoundException;
 use Accard\Component\Diagnosis\Model\DrugInterface;
 

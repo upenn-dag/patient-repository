@@ -26,12 +26,12 @@ abstract class Kernel extends BaseKernel
     public function registerBundles()
     {
         $bundles = array(
-            new \Accard\Bundle\ResourceBundle\AccardResourceBundle(),
-            new \Accard\Bundle\SettingsBundle\AccardSettingsBundle(),
+            new \DAG\Bundle\ResourceBundle\AccardResourceBundle(),
+            new \DAG\Bundle\SettingsBundle\AccardSettingsBundle(),
             new \Accard\Bundle\CoreBundle\AccardCoreBundle(),
-            new \Accard\Bundle\OptionBundle\AccardOptionBundle(),
-            new \Accard\Bundle\PrototypeBundle\AccardPrototypeBundle(),
-            new \Accard\Bundle\FieldBundle\AccardFieldBundle(),
+            new \DAG\Bundle\OptionBundle\AccardOptionBundle(),
+            new \DAG\Bundle\PrototypeBundle\AccardPrototypeBundle(),
+            new \DAG\Bundle\FieldBundle\AccardFieldBundle(),
             new \Accard\Bundle\DrugBundle\AccardDrugBundle(),
             new \Accard\Bundle\PatientBundle\AccardPatientBundle(),
             new \Accard\Bundle\DiagnosisBundle\AccardDiagnosisBundle(),

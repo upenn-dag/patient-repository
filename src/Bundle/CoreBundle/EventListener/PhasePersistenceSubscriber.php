@@ -11,7 +11,7 @@
 namespace Accard\Bundle\CoreBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Accard\Bundle\ResourceBundle\Event\ResourceEvent;
+use DAG\Bundle\ResourceBundle\Event\ResourceEvent;
 
 /**
  * Phase persistence event subscriber.

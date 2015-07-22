@@ -6,10 +6,10 @@ namespace Accard\Bundle\PDSBundle\Import\Drug;
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-use Accard\Bundle\ResourceBundle\Import\ManagerInterface;
-use Accard\Bundle\ResourceBundle\Import\Manager as ImportManager;
+use DAG\Bundle\ResourceBundle\Import\ManagerInterface;
+use DAG\Bundle\ResourceBundle\Import\Manager as ImportManager;
 
 class Manager extends ImportManager implements ManagerInterface
 {
-	
+
 }

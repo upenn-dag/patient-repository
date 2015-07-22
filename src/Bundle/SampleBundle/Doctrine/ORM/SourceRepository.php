@@ -12,7 +12,7 @@ namespace Accard\Bundle\SampleBundle\Doctrine\ORM;
 
 use PagerFanta\Pagerfanta;
 use Accard\Component\Sample\Repository\SourceRepositoryInterface;
-use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use DAG\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * Basic sample repository.

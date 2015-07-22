@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Behavior\Model;
 
-use Accard\Component\Field\Model\FieldValue as BaseFieldValue;
+use DAG\Component\Field\Model\FieldValue as BaseFieldValue;
 
 /**
  * Accard behavior field value model.

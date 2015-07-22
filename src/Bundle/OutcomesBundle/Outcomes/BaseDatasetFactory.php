@@ -12,8 +12,8 @@ namespace Accard\Bundle\OutcomesBundle\Outcomes;
 
 use Accard\Bundle\OutcomesBundle\Exception\TargetNotFoundException;
 use Accard\Bundle\OutcomesBundle\Exception\TargetPrototypeNotFoundException;
-use Accard\Component\Resource\Repository\RepositoryInterface;
-use Accard\Component\Prototype\Repository\PrototypeRepositoryInterface;
+use DAG\Component\Resource\Repository\RepositoryInterface;
+use DAG\Component\Prototype\Repository\PrototypeRepositoryInterface;
 
 /**
  * Base dataset factory.

@@ -43,7 +43,7 @@ class SourceTest extends Test
     public function testSourceIsAccardResource()
     {
         $this->assertInstanceOf(
-            'Accard\Component\Resource\Model\ResourceInterface',
+            'DAG\Component\Resource\Model\ResourceInterface',
             $this->source
         );
     }

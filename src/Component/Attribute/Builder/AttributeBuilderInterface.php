@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Attribute\Builder;
 
-use Accard\Component\Resource\Builder\BuilderInterface;
+use DAG\Component\Resource\Builder\BuilderInterface;
 
 /**
  * Attribute Builder.

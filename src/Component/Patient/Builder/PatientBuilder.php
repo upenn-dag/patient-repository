@@ -10,9 +10,9 @@
  */
 namespace Accard\Component\Patient\Builder;
 
-use Accard\Component\Field\Model\FieldTypes;
-use Accard\Component\Resource\Builder\AbstractBuilder;
-use Accard\Component\Resource\Repository\RepositoryInterface;
+use DAG\Component\Field\Model\FieldTypes;
+use DAG\Component\Resource\Builder\AbstractBuilder;
+use DAG\Component\Resource\Repository\RepositoryInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**

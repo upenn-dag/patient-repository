@@ -12,7 +12,7 @@ namespace Accard\Component\Sample\Model;
 
 use DateTime;
 use Doctrine\Common\Collections\Collection as DoctrineCollection;
-use Accard\Component\Resource\Model\ResourceInterface;
+use DAG\Component\Resource\Model\ResourceInterface;
 
 /**
  * Sample source model interface.

@@ -10,8 +10,8 @@
  */
 namespace Accard\Bundle\CoreBundle\Controller;
 
-use Accard\Bundle\ResourceBundle\Controller\ResourceController;
-use Accard\Bundle\SettingsBundle\Model\Settings;
+use DAG\Bundle\ResourceBundle\Controller\ResourceController;
+use DAG\Bundle\SettingsBundle\Model\Settings;
 use Symfony\Component\HttpFoundation\Request;
 use Pagerfanta\Pagerfanta;
 

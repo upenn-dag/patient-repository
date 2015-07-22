@@ -32,7 +32,7 @@ Accard\Component\Diagnosis\Model\Diagnosis:
         fields:
             - Valid: ~
             - All:
-                - Type: { type: Accard\Component\Field\Model\FieldValueInterface, message: accard.diagnosis.fields.type, groups: ['accard'] }
+                - Type: { type: DAG\Component\Field\Model\FieldValueInterface, message: accard.diagnosis.fields.type, groups: ['accard'] }
 
 Accard\Component\Diagnosis\Model\Field: ~
 Accard\Component\Diagnosis\Model\FieldValue: ~

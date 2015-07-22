@@ -44,7 +44,7 @@ class DrugTest extends Test
     public function testDrugIsAccardResource()
     {
         $this->assertInstanceOf(
-            'Accard\Component\Resource\Model\ResourceInterface',
+            'DAG\Component\Resource\Model\ResourceInterface',
             $this->drug
         );
     }

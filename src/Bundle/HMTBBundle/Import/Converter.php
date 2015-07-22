@@ -7,12 +7,12 @@ namespace Accard\Bundle\HMTBBundle\Import;
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
 
-use Accard\Bundle\ResourceBundle\Import\ConverterInterface;
-use Accard\Bundle\ResourceBundle\Import\Events;
-use Accard\Bundle\ResourceBundle\Event\ImportEvent;
+use DAG\Bundle\ResourceBundle\Import\ConverterInterface;
+use DAG\Bundle\ResourceBundle\Import\Events;
+use DAG\Bundle\ResourceBundle\Event\ImportEvent;
 use Accard\Component\Core\Model\Sample;
 use Accard\Component\Core\Model\Source;
-use Accard\Component\Prototype\Provider\PrototypeProviderInterface;
+use DAG\Component\Prototype\Provider\PrototypeProviderInterface;
 use Accard\Component\Sample\Model\FieldValue;
 
 class Converter implements ConverterInterface
@@ -70,7 +70,7 @@ class Converter implements ConverterInterface
             $source->addSample($sample);
 
             foreach($fields as $key => $field) {
-                if(method_exists($field, 'getName')) {             
+                if(method_exists($field, 'getName')) {
                     $fieldValue = new FieldValue;
                     $fieldValue->setField($field);
                     $fieldValue->setSample($sample);

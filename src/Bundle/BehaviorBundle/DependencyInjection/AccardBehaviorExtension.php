@@ -10,7 +10,7 @@
  */
 namespace Accard\Bundle\BehaviorBundle\DependencyInjection;
 
-use Accard\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use DAG\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -48,7 +48,7 @@ class AccardBehaviorExtension extends AbstractResourceExtension implements Prepe
                     'subject'   => $config['classes']['behavior']['model'],
                     'prototype' => array(
                         'model' => 'Accard\Component\Behavior\Model\Prototype',
-                        'repository' => 'Accard\Bundle\PrototypeBundle\Doctrine\ORM\PrototypeRepository',
+                        'repository' => 'DAG\Bundle\PrototypeBundle\Doctrine\ORM\PrototypeRepository',
                     ),
                     'field' => array(
                         'model' => 'Accard\Component\Behavior\Model\Field',

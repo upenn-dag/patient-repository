@@ -46,11 +46,11 @@ abstract class TestCase extends Test
         $class = $this->createResource();
 
         $this->assertAttributeInstanceOf('DateTime', 'createdAt', $this->resource, sprintf('%s constructor does not set createdAt time.', $class));
-        $this->assertInstanceOf('Accard\Component\Resource\Model\TimestampableInterface', $this->resource);
+        $this->assertInstanceOf('DAG\Component\Resource\Model\TimestampableInterface', $this->resource);
 
         if ($enforceTrait) {
             $traits = class_uses($class);
-            $this->assertContains('Accard\Component\Resource\Model\TimestampableTrait', $traits, sprintf('%s does not implement TimestampableTrait.', $class));
+            $this->assertContains('DAG\Component\Resource\Model\TimestampableTrait', $traits, sprintf('%s does not implement TimestampableTrait.', $class));
         }
     }
 
@@ -64,11 +64,11 @@ abstract class TestCase extends Test
         $class = $this->createResource();
 
         $this->assertAttributeSame(null, 'createdBy', $this->resource, sprintf('%s::$createBy is not null on creation.', $class));
-        $this->assertInstanceOf('Accard\Component\Resource\Model\BlameableInterface', $this->resource);
+        $this->assertInstanceOf('DAG\Component\Resource\Model\BlameableInterface', $this->resource);
 
         if ($enforceTrait) {
             $traits = class_uses($class);
-            $this->assertContains('Accard\Component\Resource\Model\BlameableTrait', $traits, sprintf('%s does not implementBlameableTrait.', $class));
+            $this->assertContains('DAG\Component\Resource\Model\BlameableTrait', $traits, sprintf('%s does not implementBlameableTrait.', $class));
         }
     }
 
@@ -82,11 +82,11 @@ abstract class TestCase extends Test
         $class = $this->createResource();
 
         $this->assertAttributeSame(0, 'currentVersion', $this->resource, sprintf('%s::$currentVersion is not null on creation.', $class));
-        $this->assertInstanceOf('Accard\Component\Resource\Model\VersionableInterface', $this->resource);
+        $this->assertInstanceOf('DAG\Component\Resource\Model\VersionableInterface', $this->resource);
 
         if ($enforceTrait) {
             $traits = class_uses($class);
-            $this->assertContains('Accard\Component\Resource\Model\VersionableTrait', $traits, sprintf('%s does not implement VersionableTrait.', $class));
+            $this->assertContains('DAG\Component\Resource\Model\VersionableTrait', $traits, sprintf('%s does not implement VersionableTrait.', $class));
         }
     }
 

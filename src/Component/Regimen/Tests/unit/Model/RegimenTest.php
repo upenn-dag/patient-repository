@@ -15,7 +15,7 @@ use Mockery;
 use Codeception\TestCase\Test;
 use Accard\Component\Regimen\Model\Regimen;
 use Accard\Component\Activity\Model\Activity;
-use Accard\Component\Field\Test\FieldSubjectTest;
+use DAG\Component\Field\Test\FieldSubjectTest;
 
 /**
  * Regimen model tests.

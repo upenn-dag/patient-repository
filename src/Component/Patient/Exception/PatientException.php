@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Patient\Exception;
 
-use Accard\Component\Resource\Exception\ResourceException;
+use DAG\Component\Resource\Exception\ResourceException;
 
 /**
  * Patient exception interface.

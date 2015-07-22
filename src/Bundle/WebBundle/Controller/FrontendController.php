@@ -14,10 +14,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Accard\Component\Option\Model\OptionInterface;
+use DAG\Component\Option\Model\OptionInterface;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
-use Accard\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage;
+use DAG\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage;
 
 /**
  * Base frontend controller.
@@ -38,7 +38,7 @@ class FrontendController extends Controller
 
 
         $genderCount = array();
-        
+
         foreach($patients as $patient) {
             if(is_object($patient->getGender())) {
                 if(! array_key_exists($patient->getGender()->getValue(), $genderCount) ) {

@@ -31,9 +31,9 @@ class SampleBuilderTest extends Test
             ->shouldReceive('persist')->zeroOrMoreTimes()
             ->shouldReceive('flush')->zeroOrMoreTimes()
             ->getMock();
-        $this->sampleRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
-        $this->fieldRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
-        $this->fieldValueRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
+        $this->sampleRepository = Mockery::mock('DAG\Component\Resource\Repository\RepositoryInterface');
+        $this->fieldRepository = Mockery::mock('DAG\Component\Resource\Repository\RepositoryInterface');
+        $this->fieldValueRepository = Mockery::mock('DAG\Component\Resource\Repository\RepositoryInterface');
 
         $this->builder = new SampleBuilder($this->objectManager, $this->sampleRepository, $this->fieldRepository, $this->fieldValueRepository);
     }

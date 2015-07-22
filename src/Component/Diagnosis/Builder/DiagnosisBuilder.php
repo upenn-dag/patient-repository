@@ -10,8 +10,8 @@
  */
 namespace Accard\Component\Diagnosis\Builder;
 
-use Accard\Component\Resource\Builder\AbstractBuilder;
-use Accard\Component\Resource\Repository\RepositoryInterface;
+use DAG\Component\Resource\Builder\AbstractBuilder;
+use DAG\Component\Resource\Repository\RepositoryInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**

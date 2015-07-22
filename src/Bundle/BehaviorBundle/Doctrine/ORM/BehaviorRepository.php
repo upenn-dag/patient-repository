@@ -9,7 +9,7 @@
  */
 namespace Accard\Bundle\BehaviorBundle\Doctrine\ORM;
 
-use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use DAG\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * Basic behavior repository.

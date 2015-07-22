@@ -10,7 +10,7 @@
 namespace Accard\Bundle\DrugBundle\Doctrine\ORM;
 
 use Accard\Component\Drug\Repository\DrugGroupRepositoryInterface;
-use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use DAG\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * Basic drug group repository.

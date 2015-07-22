@@ -10,7 +10,7 @@
  */
 namespace Accard\Bundle\SampleBundle\DependencyInjection;
 
-use Accard\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
+use DAG\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -47,7 +47,7 @@ class AccardSampleExtension extends AbstractResourceExtension implements Prepend
                     'subject'   => $config['classes']['sample']['model'],
                     'prototype' => array(
                         'model' => 'Accard\Component\Sample\Model\Prototype',
-                        'repository' => 'Accard\Bundle\PrototypeBundle\Doctrine\ORM\PrototypeRepository',
+                        'repository' => 'DAG\Bundle\PrototypeBundle\Doctrine\ORM\PrototypeRepository',
                     ),
                     'field' => array(
                         'model' => 'Accard\Component\Sample\Model\Field',

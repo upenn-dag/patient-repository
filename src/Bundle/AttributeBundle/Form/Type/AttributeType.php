@@ -14,8 +14,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Accard\Bundle\OptionBundle\Form\Type\OptionValueChoiceType;
-use Accard\Component\Option\Provider\OptionProviderInterface;
+use DAG\Bundle\OptionBundle\Form\Type\OptionValueChoiceType;
+use DAG\Component\Option\Provider\OptionProviderInterface;
 use Accard\Component\Attribute\Builder\AttributeBuilderInterface;
 use Accard\Bundle\AttributeBundle\Form\EventListener\DefaultAttributeFieldListener;
 

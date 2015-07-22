@@ -10,7 +10,7 @@
  */
 namespace Accard\Bundle\OutcomesBundle\Outcomes;
 
-use Accard\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage;
+use DAG\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage;
 
 /**
  * Outcomes dataset translator.

@@ -3,12 +3,12 @@ namespace Accard\Bundle\RIDICBundle\Import;
 
 /**
  * Local Source Adapter
- * 
+ *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-use Accard\Bundle\ResourceBundle\Import\SourceAdapterInterface;
+use DAG\Bundle\ResourceBundle\Import\SourceAdapterInterface;
 use Accard\Component\Activity\Repository\ActivityRepositoryInterface;
-use Accard\Component\Prototype\Provider\PrototypeProviderInterface;
+use DAG\Component\Prototype\Provider\PrototypeProviderInterface;
 use Doctrine\DBAL\Connection;
 
 class LocalSource implements SourceAdapterInterface

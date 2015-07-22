@@ -12,8 +12,8 @@ namespace Accard\Component\Diagnosis\Model;
 
 use DateTime;
 use Doctrine\Common\Collections\Collection;
-use Accard\Component\Field\Model\FieldSubjectInterface;
-use Accard\Component\Resource\Model\ResourceInterface;
+use DAG\Component\Field\Model\FieldSubjectInterface;
+use DAG\Component\Resource\Model\ResourceInterface;
 
 /**
  * Basic diagnosis interface.

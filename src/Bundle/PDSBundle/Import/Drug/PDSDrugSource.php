@@ -6,7 +6,7 @@ namespace Accard\Bundle\PDSBundle\Import\Drug;
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-use Accard\Bundle\ResourceBundle\Import\SourceAdapterInterface;
+use DAG\Bundle\ResourceBundle\Import\SourceAdapterInterface;
 use Accard\Bundle\PDSBundle\Import\Common\PDSSource;
 use Doctrine\DBAL\Connection;
 

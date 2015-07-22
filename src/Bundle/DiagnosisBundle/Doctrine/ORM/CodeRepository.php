@@ -10,7 +10,7 @@
 namespace Accard\Bundle\DiagnosisBundle\Doctrine\ORM;
 
 use Accard\Component\Diagnosis\Repository\CodeRepositoryInterface;
-use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use DAG\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * Basic diagnosis code repository.

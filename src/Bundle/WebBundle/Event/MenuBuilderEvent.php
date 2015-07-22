@@ -16,7 +16,7 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
-use Accard\Bundle\SettingsBundle\Manager\SettingsManager;
+use DAG\Bundle\SettingsBundle\Manager\SettingsManager;
 
 /**
  * Menu builder event.

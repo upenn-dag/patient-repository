@@ -6,9 +6,9 @@ namespace Accard\Bundle\PDSBundle\Import\Common;
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-use Accard\Bundle\ResourceBundle\Event\ImportEvent;
-use Accard\Bundle\ResourceBundle\Import\CriteriaInterface;
-use Accard\Bundle\ResourceBundle\Import\InitializerInterface;
+use DAG\Bundle\ResourceBundle\Event\ImportEvent;
+use DAG\Bundle\ResourceBundle\Import\CriteriaInterface;
+use DAG\Bundle\ResourceBundle\Import\InitializerInterface;
 
 class Initializer implements InitializerInterface
 {
@@ -46,7 +46,7 @@ class Initializer implements InitializerInterface
         if (empty($criteria)) {
             $criteria = $this->criteria->setParams($this->criteria->calculate($history));
         }
-        
+
         $import->setImporter($importer->getName());
         $import->setCriteria($criteria->retrieve());
     }

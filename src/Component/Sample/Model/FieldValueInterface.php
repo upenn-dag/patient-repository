@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Sample\Model;
 
-use Accard\Component\Field\Model\FieldValueInterface as BaseFieldValueInterface;
+use DAG\Component\Field\Model\FieldValueInterface as BaseFieldValueInterface;
 
 /**
  * Sample sample field value model interface.

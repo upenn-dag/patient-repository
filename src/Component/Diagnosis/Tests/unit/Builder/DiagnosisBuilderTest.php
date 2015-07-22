@@ -31,9 +31,9 @@ class DiagnosisBuilderTest extends Test
             ->shouldReceive('persist')->zeroOrMoreTimes()
             ->shouldReceive('flush')->zeroOrMoreTimes()
             ->getMock();
-        $this->diagnosisRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
-        $this->fieldRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
-        $this->fieldValueRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
+        $this->diagnosisRepository = Mockery::mock('DAG\Component\Resource\Repository\RepositoryInterface');
+        $this->fieldRepository = Mockery::mock('DAG\Component\Resource\Repository\RepositoryInterface');
+        $this->fieldValueRepository = Mockery::mock('DAG\Component\Resource\Repository\RepositoryInterface');
 
         $this->builder = new DiagnosisBuilder($this->objectManager, $this->diagnosisRepository, $this->fieldRepository, $this->fieldValueRepository);
     }

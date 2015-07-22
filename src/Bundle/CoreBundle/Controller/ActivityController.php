@@ -10,7 +10,7 @@
  */
 namespace Accard\Bundle\CoreBundle\Controller;
 
-use Accard\Bundle\ResourceBundle\Controller\ResourceController;
+use DAG\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Pagerfanta\Pagerfanta;

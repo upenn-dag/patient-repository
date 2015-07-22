@@ -28,7 +28,7 @@ class PrototypeTest extends Test
 
     public function testPrototypeAdheresToPrototypeInterface()
     {
-        $this->assertInstanceOf('Accard\Component\Prototype\Model\Prototype', $this->prototype);
+        $this->assertInstanceOf('DAG\Component\Prototype\Model\Prototype', $this->prototype);
     }
 
     public function testPrototypeActivityPrototypesAreArrayCollectionOnCreation()

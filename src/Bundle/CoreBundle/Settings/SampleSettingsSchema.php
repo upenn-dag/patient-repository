@@ -10,8 +10,8 @@
  */
 namespace Accard\Bundle\CoreBundle\Settings;
 
-use Accard\Bundle\SettingsBundle\Schema\Schema;
-use Accard\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
+use DAG\Bundle\SettingsBundle\Schema\Schema;
+use DAG\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

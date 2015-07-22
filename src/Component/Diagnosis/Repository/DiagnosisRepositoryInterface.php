@@ -13,7 +13,7 @@ namespace Accard\Component\Diagnosis\Repository;
 use Doctrine\Common\Collections\Collection;
 use Accard\Component\Diagnosis\Model\DiagnosisInterface;
 use Accard\Component\Diagnosis\Model\CodeInterface;
-use Accard\Component\Resource\Repository\RepositoryInterface;
+use DAG\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Diagnosis repository interface.

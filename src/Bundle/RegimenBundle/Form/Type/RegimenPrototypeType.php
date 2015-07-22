@@ -13,7 +13,7 @@ namespace Accard\Bundle\RegimenBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Accard\Bundle\PrototypeBundle\Form\Type\PrototypeType;
+use DAG\Bundle\PrototypeBundle\Form\Type\PrototypeType;
 
 /**
  * Accard regimen prototype type.

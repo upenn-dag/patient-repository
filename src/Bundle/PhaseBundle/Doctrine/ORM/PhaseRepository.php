@@ -11,7 +11,7 @@
 namespace Accard\Bundle\PhaseBundle\Doctrine\ORM;
 
 use Accard\Component\Phase\Repository\PhaseRepositoryInterface;
-use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use DAG\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * Basic phase repository.

@@ -12,7 +12,7 @@ namespace AccardTest\Component\Activity\Exception;
 
 use Codeception\TestCase\Test;
 use Accard\Component\Activity\Exception\PrototypeNotFoundException;
-use Accard\Component\Field\Model\FieldTypes;
+use DAG\Component\Field\Model\FieldTypes;
 use Mockery;
 
 class PrototypeNotFoundExceptionTest extends Test

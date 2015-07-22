@@ -14,7 +14,7 @@ use DateTime;
 use Mockery;
 use Codeception\TestCase\Test;
 use Accard\Component\Behavior\Model\Behavior;
-use Accard\Component\Field\Test\FieldSubjectTest;
+use DAG\Component\Field\Test\FieldSubjectTest;
 
 /**
  * Behavior model tests.
@@ -46,7 +46,7 @@ class BehaviorTest extends Test
     public function testBehaviorIsAccardResource()
     {
         $this->assertInstanceOf(
-            'Accard\Component\Resource\Model\ResourceInterface',
+            'DAG\Component\Resource\Model\ResourceInterface',
             $this->behavior
         );
     }

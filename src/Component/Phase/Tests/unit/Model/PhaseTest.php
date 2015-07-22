@@ -31,7 +31,7 @@ class PhaseTest extends Test
     public function testPhaseIsAccardResource()
     {
         $this->assertInstanceOf(
-            'Accard\Component\Resource\Model\ResourceInterface',
+            'DAG\Component\Resource\Model\ResourceInterface',
             $this->phase
         );
     }

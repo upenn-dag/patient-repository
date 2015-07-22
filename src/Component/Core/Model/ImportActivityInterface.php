@@ -11,7 +11,7 @@
 namespace Accard\Component\Core\Model;
 
 use Accard\Component\Activity\Model\ActivityInterface as BaseActivityInterface;
-use Accard\Component\Resource\Model\ImportTargetInterface;
+use DAG\Component\Resource\Model\ImportTargetInterface;
 use DateTime;
 
 /**

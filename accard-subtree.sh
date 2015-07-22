@@ -9,8 +9,8 @@ if [ ! type "git subsplit" > /dev/null ]; then
 
 fi
 
-components=("Activity" "Attribute" "Behavior" "Core" "Diagnosis" "Drug" "Field" "Option" "Patient" "Phase" "Prototype" "Regimen" "Resource" "Sample")
-bundles=("ActivityBundle" "AttributeBundle" "BehaviorBundle" "CoreBundle" "CPDBundle" "DiagnosisBundle" "DrugBundle" "FieldBundle" "HMTBBundle" "OptionBundle" "OutcomesBundle" "PDSBundle" "PatientBundle" "PhaseBundle" "PrototypeBundle" "RegimenBundle" "ResourceBundle" "SampleBundle" "SettingsBundle" "TemplateBundle" "WebBundle")
+components=("Activity" "Attribute" "Behavior" "Core" "Diagnosis" "Drug" "Patient" "Phase" "Regimen" "Sample")
+bundles=("ActivityBundle" "AttributeBundle" "BehaviorBundle" "CoreBundle" "CPDBundle" "DiagnosisBundle" "DrugBundle" "HMTBBundle" "OutcomesBundle" "PDSBundle" "PatientBundle" "PhaseBundle" "RegimenBundle" "SampleBundle" "TemplateBundle" "WebBundle")
 bridges=("Twig")
 
 # These are here so we can easily, and selectively split certain pieces without running the whole thing.

@@ -11,7 +11,7 @@
 namespace Accard\Component\Core\Model;
 
 use Accard\Component\Patient\Model\PatientInterface as BasePatientInterface;
-use Accard\Component\Resource\Model\ImportTargetInterface;
+use DAG\Component\Resource\Model\ImportTargetInterface;
 use DateTime;
 
 /**

@@ -14,7 +14,7 @@ use DateTime;
 use Mockery;
 use Codeception\TestCase\Test;
 use Accard\Component\Diagnosis\Model\Diagnosis;
-use Accard\Component\Field\Test\FieldSubjectTest;
+use DAG\Component\Field\Test\FieldSubjectTest;
 
 /**
  * Diagnosis model tests.
@@ -56,7 +56,7 @@ class DiagnosisTest extends Test
     public function testDiagnosisIsAccardResource()
     {
         $this->assertInstanceOf(
-            'Accard\Component\Resource\Model\ResourceInterface',
+            'DAG\Component\Resource\Model\ResourceInterface',
             $this->diagnosis
         );
     }

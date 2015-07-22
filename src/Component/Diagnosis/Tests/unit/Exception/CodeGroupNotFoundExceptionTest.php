@@ -13,11 +13,11 @@ namespace AccardTest\Component\Diagnosis\Exception;
 use Mockery;
 use Codeception\TestCase\Test;
 use Accard\Component\Diagnosis\Exception\CodeGroupNotFoundException;
-use Accard\Component\Field\Model\FieldTypes;
+use DAG\Component\Field\Model\FieldTypes;
 
 /**
  * Code group not found exception tests.
- * 
+ *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
 class CodeGroupNotFoundExceptionTest extends Test

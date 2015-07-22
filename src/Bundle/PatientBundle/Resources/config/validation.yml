@@ -31,7 +31,7 @@ Accard\Component\Patient\Model\Patient:
         fields:
             - Valid: ~
             - All:
-                - Type: { type: Accard\Component\Field\Model\FieldValueInterface, message: accard.patient.fields.type, groups: ['accard'] }
+                - Type: { type: DAG\Component\Field\Model\FieldValueInterface, message: accard.patient.fields.type, groups: ['accard'] }
     getters:
         dateOfDeathValid:
             - "True": { message: accard.behavior.error.end_date_before_start_date, groups: ['accard'] }

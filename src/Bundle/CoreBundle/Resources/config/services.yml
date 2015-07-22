@@ -16,7 +16,7 @@ parameters:
     accard.fixture.manager.class: Accard\Bundle\CoreBundle\DataFixtures\FixtureManager
     accard.fixture.option_builder.class: Accard\Bundle\CoreBundle\DataFixtures\OptionBuilder
     accard.fixture.option_value_builder.class: Accard\Bundle\CoreBundle\DataFixtures\OptionValueBuilder
-    doctrine.oracle.session_listener.class: Accard\Bundle\ResourceBundle\EventListener\OracleSessionInit
+    doctrine.oracle.session_listener.class: DAG\Bundle\ResourceBundle\EventListener\OracleSessionInit
     doctrine.extension.listener.class: Accard\Bundle\CoreBundle\EventListener\DoctrineExtensionListener
 
 services:

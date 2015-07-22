@@ -81,7 +81,7 @@ class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('model')->defaultValue('Accard\Component\Attribute\Model\Attribute')->end()
-                                ->scalarNode('controller')->defaultValue('Accard\Bundle\ResourceBundle\Controller\ResourceController')->end()
+                                ->scalarNode('controller')->defaultValue('DAG\Bundle\ResourceBundle\Controller\ResourceController')->end()
                                 ->scalarNode('repository')->defaultValue('Accard\Bundle\AttributeBundle\Doctrine\ORM\AttributeRepository')->end()
                                 ->scalarNode('form')->defaultValue('Accard\Bundle\AttributeBundle\Form\Type\AttributeType')->end()
                             ->end()

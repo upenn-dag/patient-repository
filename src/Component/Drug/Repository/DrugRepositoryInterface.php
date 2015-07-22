@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Drug\Repository;
 
-use Accard\Component\Resource\Repository\RepositoryInterface;
+use DAG\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Drug repository interface.

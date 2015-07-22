@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Attribute\Model;
 
-use Accard\Component\Field\Model\Field as BaseField;
+use DAG\Component\Field\Model\Field as BaseField;
 
 /**
  * Accard prototype field.

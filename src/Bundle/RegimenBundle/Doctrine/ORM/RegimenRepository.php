@@ -11,7 +11,7 @@
 namespace Accard\Bundle\RegimenBundle\Doctrine\ORM;
 
 use Accard\Component\Regimen\Repository\RegimenRepositoryInterface;
-use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use DAG\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
  * Basic regimen repository.

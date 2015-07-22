@@ -12,7 +12,7 @@ namespace Accard\Component\Regimen\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Accard\Component\Drug\Model\DrugablePrototypeTrait;
-use Accard\Component\Prototype\Model\Prototype as BasePrototype;
+use DAG\Component\Prototype\Model\Prototype as BasePrototype;
 use Accard\Component\Activity\Model\PrototypeInterface as ActivityPrototypeInterface;
 
 /**

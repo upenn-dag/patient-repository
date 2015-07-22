@@ -11,7 +11,7 @@
 namespace Accard\Component\Diagnosis\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Accard\Component\Resource\Model\ResourceInterface;
+use DAG\Component\Resource\Model\ResourceInterface;
 
 /**
  * Code interface.

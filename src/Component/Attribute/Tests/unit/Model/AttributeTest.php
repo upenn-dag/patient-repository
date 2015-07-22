@@ -14,7 +14,7 @@ use DateTime;
 use Mockery;
 use Codeception\TestCase\Test;
 use Accard\Component\Attribute\Model\Attribute;
-use Accard\Component\Field\Test\FieldSubjectTest;
+use DAG\Component\Field\Test\FieldSubjectTest;
 
 /**
  * Attribute model tests.
@@ -44,7 +44,7 @@ class AttributeTest extends Test
     public function testAttributeIsAccardResource()
     {
         $this->assertInstanceOf(
-            'Accard\Component\Resource\Model\ResourceInterface',
+            'DAG\Component\Resource\Model\ResourceInterface',
             $this->attribute
         );
     }

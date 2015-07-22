@@ -13,8 +13,8 @@ namespace Accard\Component\Core\Model;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Accard\Component\Patient\Model\Patient as BasePatient;
-use Accard\Component\Option\Model\OptionValueInterface;
-use Accard\Component\Resource\Model\ImportSubjectInterface;
+use DAG\Component\Option\Model\OptionValueInterface;
+use DAG\Component\Resource\Model\ImportSubjectInterface;
 use DateTime;
 
 /**
@@ -25,10 +25,10 @@ use DateTime;
 class Patient extends BasePatient implements PatientInterface, ImportSubjectInterface
 {
     // Traits
-    use \Accard\Component\Resource\Model\BlameableTrait;
-    use \Accard\Component\Resource\Model\TimestampableTrait;
-    use \Accard\Component\Resource\Model\VersionableTrait;
-    use \Accard\Component\Resource\Model\ImportSubjectTrait;
+    use \DAG\Component\Resource\Model\BlameableTrait;
+    use \DAG\Component\Resource\Model\TimestampableTrait;
+    use \DAG\Component\Resource\Model\VersionableTrait;
+    use \DAG\Component\Resource\Model\ImportSubjectTrait;
 
     /**
      * Diagnoses.

@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Patient\Builder;
 
-use Accard\Component\Resource\Builder\BuilderInterface;
+use DAG\Component\Resource\Builder\BuilderInterface;
 
 /**
  * Patient builder interface.

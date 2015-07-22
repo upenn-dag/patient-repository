@@ -6,8 +6,8 @@ namespace Accard\Bundle\HMTBBundle\Import;
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-use Accard\Bundle\ResourceBundle\Import\CriteriaInterface;
-use Accard\Bundle\ResourceBundle\Doctrine\ORM\ImportRepository;
+use DAG\Bundle\ResourceBundle\Import\CriteriaInterface;
+use DAG\Bundle\ResourceBundle\Doctrine\ORM\ImportRepository;
 use Doctrine\DBAL\Connection;
 use PDO;
 
@@ -35,7 +35,7 @@ class Criteria implements CriteriaInterface
 
     /**
      * Get local last id
-     * 
+     *
      * @return string $id
      */
     public function getLastLocalId()
@@ -53,7 +53,7 @@ class Criteria implements CriteriaInterface
 
     /**
      * Get HMTB last id
-     * 
+     *
      * @return string $id
      */
     public function getLastHMTBId()
@@ -73,7 +73,7 @@ class Criteria implements CriteriaInterface
 	 * Retrieve criteria
 	 */
 	public function retrieve(array $history = null)
-	{  
+	{
         $lastHMTBId = $this->getLastHMTBId();
         $lastLocalId = $this->getLastLocalId();
 
@@ -85,7 +85,7 @@ class Criteria implements CriteriaInterface
 
     /**
      * Does the criteria pass?
-     * 
+     *
      * @desc if the criteria fails, then the importer needs to run
      * @return boolean
      */
@@ -102,7 +102,7 @@ class Criteria implements CriteriaInterface
 
     /**
      * Find the biggest collection id SQL.
-     * 
+     *
      * @return string
      */
     private function getMaxCollectionId()

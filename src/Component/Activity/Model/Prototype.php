@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Activity\Model;
 
-use Accard\Component\Prototype\Model\Prototype as BasePrototype;
+use DAG\Component\Prototype\Model\Prototype as BasePrototype;
 use Accard\Component\Drug\Model\DrugablePrototypeTrait;
 
 /**

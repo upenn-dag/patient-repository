@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Diagnosis\Exception;
 
-use Accard\Component\Resource\Exception\ResourceException;
+use DAG\Component\Resource\Exception\ResourceException;
 
 /**
  * Diagnosis exception interface.

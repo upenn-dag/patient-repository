@@ -11,7 +11,7 @@
 namespace Accard\Component\Core\Model;
 
 use Accard\Component\Sample\Model\SampleInterface as BaseSampleInterface;
-use Accard\Component\Resource\Model\ImportTargetInterface;
+use DAG\Component\Resource\Model\ImportTargetInterface;
 use DateTime;
 
 /**

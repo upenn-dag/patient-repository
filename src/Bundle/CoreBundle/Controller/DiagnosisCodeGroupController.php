@@ -10,7 +10,7 @@
  */
 namespace Accard\Bundle\CoreBundle\Controller;
 
-use Accard\Bundle\ResourceBundle\Controller\ResourceController;
+use DAG\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Pagerfanta\Pagerfanta;
@@ -25,7 +25,7 @@ class DiagnosisCodeGroupController extends ResourceController
 {
     /**
      * Add code to group action.
-     * 
+     *
      * @param Request $request
      */
     public function addCodeAction(Request $request)
@@ -59,7 +59,7 @@ class DiagnosisCodeGroupController extends ResourceController
 
     /**
      * Remove code from group action.
-     * 
+     *
      * @param Request $request
      */
     public function removeCodeAction(Request $request)
@@ -93,7 +93,7 @@ class DiagnosisCodeGroupController extends ResourceController
 
     /**
      * Find a code.
-     * 
+     *
      * @param integer $codeId
      * @return Code
      */
@@ -104,7 +104,7 @@ class DiagnosisCodeGroupController extends ResourceController
 
     /**
      * Find a code group.
-     * 
+     *
      * @param integer $groupId
      * @return CodeGroup
      */

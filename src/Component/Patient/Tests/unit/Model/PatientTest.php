@@ -13,7 +13,7 @@ namespace AccardTest\Component\Patient\Model;
 use DateTime;
 use Codeception\TestCase\Test;
 use Accard\Component\Patient\Model\Patient;
-use Accard\Component\Field\Test\FieldSubjectTest;
+use DAG\Component\Field\Test\FieldSubjectTest;
 
 class PatientTest extends Test
 {
@@ -40,7 +40,7 @@ class PatientTest extends Test
     public function testPatientIsAccardResource()
     {
         $this->assertInstanceOf(
-            'Accard\Component\Resource\Model\ResourceInterface',
+            'DAG\Component\Resource\Model\ResourceInterface',
             $this->patient
         );
     }

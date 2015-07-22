@@ -23,7 +23,7 @@ use DateTime;
 class ImportActivity extends BaseActivity implements ImportActivityInterface
 {
     // Traits
-    use \Accard\Component\Resource\Model\ImportTargetTrait;
+    use \DAG\Component\Resource\Model\ImportTargetTrait;
 
     /**
      * Patient.

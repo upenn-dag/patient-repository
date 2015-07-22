@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Patient\Model;
 
-use Accard\Component\Field\Model\FieldInterface as BaseFieldInterface;
+use DAG\Component\Field\Model\FieldInterface as BaseFieldInterface;
 
 /**
  * Patient field interface.

@@ -6,8 +6,8 @@ namespace Accard\Bundle\PDSBundle\Import\Common;
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
-use Accard\Bundle\ResourceBundle\Import\CriteriaInterface;
-use Accard\Bundle\ResourceBundle\Doctrine\ORM\ImportRepository;
+use DAG\Bundle\ResourceBundle\Import\CriteriaInterface;
+use DAG\Bundle\ResourceBundle\Doctrine\ORM\ImportRepository;
 use Doctrine\DBAL\Connection;
 use PDO;
 use DateTime;
@@ -23,7 +23,7 @@ class Criteria implements CriteriaInterface
 
     /**
      * History.
-     * 
+     *
      * @var history.
      */
     private $history;
@@ -38,7 +38,7 @@ class Criteria implements CriteriaInterface
 
     /**
      * Calculate criteria.
-     * 
+     *
      * @param array $history.
      */
     public function calculate(array $history = null)
@@ -58,12 +58,12 @@ class Criteria implements CriteriaInterface
 	/**
 	 * Retrieve criteria.
      *
-     *  @return array $params 
+     *  @return array $params
 	 */
 	public function retrieve()
-	{  
+	{
         return $this->params;
-	} 
+	}
 
     /**
      * Retrieve default criteria.
@@ -78,7 +78,7 @@ class Criteria implements CriteriaInterface
 
     /**
      * Set criteria parameters.
-     * 
+     *
      * @param array $criteria
      */
     public function setParams(array $params)
@@ -89,7 +89,7 @@ class Criteria implements CriteriaInterface
 
     /**
      * Get criteria parameters.
-     * 
+     *
      * @return array $params.
      */
     public function getParams()

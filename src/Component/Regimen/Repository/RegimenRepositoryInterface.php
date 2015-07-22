@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Regimen\Repository;
 
-use Accard\Component\Resource\Repository\RepositoryInterface;
+use DAG\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * Regimen repository interface.

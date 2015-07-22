@@ -11,7 +11,7 @@
 namespace Accard\Component\Regimen\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Accard\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterface;
+use DAG\Component\Prototype\Model\PrototypeInterface as BasePrototypeInterface;
 use Accard\Component\Drug\Model\DrugablePrototypeInterface;
 use Accard\Component\Activity\Model\PrototypeInterface as ActivityPrototypeInterface;
 

@@ -13,7 +13,7 @@ namespace Accard\Bundle\PatientBundle\Import;
 use DateTime;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Accard\Bundle\ResourceBundle\Import\ImporterInterface;
+use DAG\Bundle\ResourceBundle\Import\ImporterInterface;
 use Accard\Component\Patient\Model\PatientInterface;
 
 /**

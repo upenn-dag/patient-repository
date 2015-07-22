@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Activity\Model;
 
-use Accard\Component\Field\Model\FieldValueInterface as BaseFieldValueInterface;
+use DAG\Component\Field\Model\FieldValueInterface as BaseFieldValueInterface;
 
 /**
  * Activity activity field value model interface.

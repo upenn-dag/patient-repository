@@ -10,19 +10,19 @@
  */
 namespace Accard\Bundle\CPDBundle\Import;
 
-use Accard\Bundle\ResourceBundle\Import\ConverterInterface;
-use Accard\Bundle\ResourceBundle\Import\Events;
-use Accard\Bundle\ResourceBundle\Event\ImportEvent;
+use DAG\Bundle\ResourceBundle\Import\ConverterInterface;
+use DAG\Bundle\ResourceBundle\Import\Events;
+use DAG\Bundle\ResourceBundle\Event\ImportEvent;
 use Accard\Component\Core\Model\Sample;
 use Accard\Component\Core\Model\Source;
-use Accard\Component\Prototype\Provider\PrototypeProviderInterface;
+use DAG\Component\Prototype\Provider\PrototypeProviderInterface;
 use Accard\Component\Sample\Model\FieldValue;
 
 /**
  * CPD Records Converter
  *
  * @author Dylan Pierce <piercedy@upenn.edu>
- * 
+ *
  */
 class Converter implements ConverterInterface
 {

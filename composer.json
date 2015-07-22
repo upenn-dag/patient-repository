@@ -22,26 +22,10 @@
     },
     "require": {
         "php":                                   ">=5.4.0",
-        "symfony/symfony":                       "~2.7.0",
-        "symfony/assetic-bundle":                "~2.6",
-        "symfony/monolog-bundle":                "~2.7",
-        "sensio/distribution-bundle":            "~3.0",
-        "sensio/framework-extra-bundle":         "~3.0",
-        "doctrine/orm":                          "~2.4.0",
-        "doctrine/doctrine-bundle":              "~1.4",
-        "doctrine/doctrine-cache-bundle":        "~1.0",
-        "doctrine/doctrine-migrations-bundle":   "2.1.*@dev",
-        "twig/extensions":                       "~1.2",
+        "dag/framework":                         "~1.0@dev",
         "incenteev/composer-parameter-handler":  "~2.0",
-        "friendsofsymfony/rest-bundle":          "~1.5",
-        "jms/serializer-bundle":                 "0.13.*",
-        "white-october/pagerfanta-bundle":       "~1.0",
-        "lexik/translation-bundle":              "~2.1",
-        "gedmo/doctrine-extensions":             "~2.4",
-        "willdurand/hateoas-bundle":             "~0.5",
         "friendsofsymfony/jsrouting-bundle":     "~2.0@dev",
-        "knplabs/knp-menu-bundle":               "~2.0",
-        "symfony/assetic-bundle":                "~2.3"
+        "knplabs/knp-menu-bundle":               "~2.0"
     },
     "require-dev": {
         "codeception/codeception": "dev-master",
@@ -54,13 +38,9 @@
         "accard/core": "self.version",
         "accard/diagnosis": "self.version",
         "accard/drug": "self.version",
-        "accard/field": "self.version",
-        "accard/option": "self.version",
         "accard/patient": "self.version",
         "accard/phase": "self.version",
-        "accard/prototype": "self.version",
         "accard/regimen": "self.version",
-        "accard/resource": "self.version",
         "accard/sample": "self.version"
     },
     "minimum-stability": "dev",
@@ -71,5 +51,8 @@
     },
     "config": {
         "bin-dir": "bin"
-    }
+    },
+    "repositories": [
+        { "type": "composer", "url": "http://accard-dev.med.upenn.edu/satis" }
+    ]
 }

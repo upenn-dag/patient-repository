@@ -14,7 +14,7 @@ use DateTime;
 use Accard\Component\Patient\Utils;
 use PagerFanta\PagerfantaInterface;
 use Accard\Component\Patient\Model\PatientInterface;
-use Accard\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use DAG\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Accard\Component\Patient\Repository\PatientRepositoryInterface;
 
 /**

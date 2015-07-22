@@ -21,8 +21,8 @@ use Accard\Component\Drug\Model\DrugInterface;
  */
 class Activity implements ActivityInterface
 {
-    use \Accard\Component\Prototype\Model\PrototypeSubjectTrait;
-    use \Accard\Component\Field\Model\FieldSubjectTrait;
+    use \DAG\Component\Prototype\Model\PrototypeSubjectTrait;
+    use \DAG\Component\Field\Model\FieldSubjectTrait;
 
     /**
      * Activity id.

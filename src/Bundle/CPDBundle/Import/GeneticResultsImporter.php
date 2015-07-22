@@ -13,10 +13,10 @@ namespace Accard\Bundle\CPDBundle\Import;
 use DateTime;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Accard\Bundle\ResourceBundle\Import\ImporterInterface;
+use DAG\Bundle\ResourceBundle\Import\ImporterInterface;
 use Accard\Bundle\CoreBundle\Provider\ImportPatientProvider;
-use Accard\Component\Prototype\Provider\PrototypeProviderInterface;
-use Accard\Bundle\ResourceBundle\Import\SourceAdapterInterface;
+use DAG\Component\Prototype\Provider\PrototypeProviderInterface;
+use DAG\Bundle\ResourceBundle\Import\SourceAdapterInterface;
 use Accard\Bundle\SampleBundle\Import\SampleImporter;
 
 /**
@@ -35,14 +35,14 @@ class GeneticResultsImporter extends SampleImporter
 
     /**
      * Local CPD source.
-     * 
+     *
      * @var SourceInterface
      */
     private $cpdSource;
 
     /**
      * CPD source.
-     * 
+     *
      * @var SourceInterface
      */
     private $sourceInterface;
@@ -126,8 +126,8 @@ class GeneticResultsImporter extends SampleImporter
 
         $resolver->setOptional(array(
             'protein_change',
-            'variant_categorization', 
-            'variant_alias', 
+            'variant_categorization',
+            'variant_alias',
             'genetic_test_version_id',
             'transcript_id',
             'position',

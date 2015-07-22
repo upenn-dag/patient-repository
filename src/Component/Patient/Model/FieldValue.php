@@ -10,7 +10,7 @@
  */
 namespace Accard\Component\Patient\Model;
 
-use Accard\Component\Field\Model\FieldValue as BaseFieldValue;
+use DAG\Component\Field\Model\FieldValue as BaseFieldValue;
 
 /**
  * Patient to field value relation.

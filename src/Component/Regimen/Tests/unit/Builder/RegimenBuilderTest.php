@@ -31,9 +31,9 @@ class RegimenBuilderTest extends Test
             ->shouldReceive('persist')->zeroOrMoreTimes()
             ->shouldReceive('flush')->zeroOrMoreTimes()
             ->getMock();
-        $this->regimenRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
-        $this->fieldRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
-        $this->fieldValueRepository = Mockery::mock('Accard\Component\Resource\Repository\RepositoryInterface');
+        $this->regimenRepository = Mockery::mock('DAG\Component\Resource\Repository\RepositoryInterface');
+        $this->fieldRepository = Mockery::mock('DAG\Component\Resource\Repository\RepositoryInterface');
+        $this->fieldValueRepository = Mockery::mock('DAG\Component\Resource\Repository\RepositoryInterface');
 
         $this->builder = new RegimenBuilder($this->objectManager, $this->regimenRepository, $this->fieldRepository, $this->fieldValueRepository);
     }

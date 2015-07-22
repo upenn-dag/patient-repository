@@ -15,10 +15,10 @@ use DateTime;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Accard\Bundle\ActivityBundle\Import\ActivityImporter;
-use Accard\Bundle\ResourceBundle\Import\ImporterInterface;
+use DAG\Bundle\ResourceBundle\Import\ImporterInterface;
 use Accard\Bundle\CoreBundle\Provider\ImportPatientProvider;
-use Accard\Bundle\ResourceBundle\Import\SourceAdapterInterface;
-use Accard\Bundle\ResourceBundle\Import\CriteriaInterface;
+use DAG\Bundle\ResourceBundle\Import\SourceAdapterInterface;
+use DAG\Bundle\ResourceBundle\Import\CriteriaInterface;
 
 /**
  *  RIDIC \ Import \ RIDIC Importer

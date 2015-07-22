@@ -11,7 +11,7 @@
 namespace Accard\Bundle\PatientBundle\ExpressionLanguage;
 
 use Accard\Component\Patient\Model\PatientInterface;
-use Accard\Bundle\ResourceBundle\ExpressionLanguage\ContainerAwareExtension;
+use DAG\Bundle\ResourceBundle\ExpressionLanguage\ContainerAwareExtension;
 
 /**
  * Patient expression language extension.
