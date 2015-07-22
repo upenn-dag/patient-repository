@@ -23,7 +23,6 @@
     "require": {
         "php":                                   ">=5.4.0",
         "dag/framework":                         "~1.0@dev",
-        "incenteev/composer-parameter-handler":  "~2.0",
         "friendsofsymfony/jsrouting-bundle":     "~2.0@dev",
         "knplabs/knp-menu-bundle":               "~2.0"
     },
