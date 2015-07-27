@@ -53,3 +53,16 @@ This changelog references the relevant changes (bugs and security fixes) done in
     - [Resource]
         + Now fuly unit tested, minor code inconsistencies found and fixed.
         + Orderable trait and interface now available for common use.
+* 1.0.0-rc1 (07/27/2015)
+    - [Framework]
+        + Framework code has been separated into its own repository.
+    - [PatientBundle]
+        + Race and gender are now required fields everywhere, not only in the validator component.
+    - [UIBundle]
+        + Inspector title header links are now white.
+        + Grid filtering now has clear buttons everywhere.
+        + Patient details subapplication has close button like other subapplications have.
+        + All dates have been converted to yyyy-mm-dd format for consistency.
+    - [Components]
+        + All components are unit tested to 100%!!!
+

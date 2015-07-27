@@ -26,7 +26,7 @@ final class Version
      *
      * @var    string
      */
-    const SIMPLE = '1.0.0 Beta 2';
+    const SIMPLE = '1.0.0 Release Candidate 1';
 
     /**
      * Major version number
@@ -79,7 +79,7 @@ final class Version
      *
      * @var    string
      */
-    const PREVIEW_TYPE = 'Beta';
+    const PREVIEW_TYPE = 'Release Candidate';
 
     /**
      * Development preview number, this is set to the preview number for the
@@ -87,7 +87,7 @@ final class Version
      *
      * @var    integer
      */
-    const PREVIEW_NUMBER = 2;
+    const PREVIEW_NUMBER = 1;
 
     /**
      * Core version string, this is the full version string, which includes the
@@ -100,5 +100,5 @@ final class Version
      *
      * @var    string
      */
-    const FULL = '1.0.0 Beta 2 (Experimental)';
+    const FULL = '1.0.0 Release Candidate 1 (Experimental)';
 }
