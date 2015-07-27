@@ -1569,6 +1569,7 @@ module.exports = CreditsSubapp;
 var React = require('react/addons');
 var PatientStore = require('./../../stores/patient/store');
 var PatientActions = require('./../../stores/patient/actions');
+var AccardActions = require('./../../stores/accard/actions');
 
 var PatientSubapp = React.createClass({displayName: "PatientSubapp",
 
@@ -1587,9 +1588,18 @@ var PatientSubapp = React.createClass({displayName: "PatientSubapp",
 
     return (
       React.createElement("div", {className: "accard-main-wrapper col-sm-12"}, 
+        React.createElement("div", {className: "iframe-buttons"}, 
+          React.createElement("button", {type: "button", className: "closer", onClick: this.hide}, 
+            React.createElement("span", {className: "fa fa-close"})
+          )
+        ), 
         React.createElement("iframe", {src: iframeSource, ref: "iframe", onLoad: this._handleIframeLoad})
       )
     );
+  },
+
+  hide:function() {
+    AccardActions.switchSubapplication('patients');
   },
 
   refresh:function() {
@@ -1627,7 +1637,7 @@ module.exports = PatientSubapp;
 
 
 }).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/components/subapp/new-patient-subapp.js","/components/subapp")
-},{"+7ZJp0":100,"./../../stores/patient/actions":33,"./../../stores/patient/store":36,"buffer":96,"react/addons":185}],20:[function(require,module,exports){
+},{"+7ZJp0":100,"./../../stores/accard/actions":29,"./../../stores/patient/actions":33,"./../../stores/patient/store":36,"buffer":96,"react/addons":185}],20:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict';
 
@@ -1932,7 +1942,7 @@ start(initConfig)
 ;
 
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_1ea3c4f4.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_5626c6a5.js","/")
 },{"+7ZJp0":100,"./accard":1,"./api":2,"./state":28,"bluebird":40,"buffer":96}],26:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var EventEmitter = require('events').EventEmitter;

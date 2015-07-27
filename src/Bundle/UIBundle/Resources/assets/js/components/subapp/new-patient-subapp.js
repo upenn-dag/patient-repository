@@ -3,6 +3,7 @@
 var React = require('react/addons');
 var PatientStore = require('./../../stores/patient/store');
 var PatientActions = require('./../../stores/patient/actions');
+var AccardActions = require('./../../stores/accard/actions');
 
 var PatientSubapp = React.createClass({
 
@@ -21,9 +22,18 @@ var PatientSubapp = React.createClass({
 
     return (
       <div className='accard-main-wrapper col-sm-12'>
+        <div className='iframe-buttons'>
+          <button type='button' className='closer' onClick={this.hide}>
+            <span className='fa fa-close'></span>
+          </button>
+        </div>
         <iframe src={iframeSource} ref='iframe' onLoad={this._handleIframeLoad}></iframe>
       </div>
     );
+  },
+
+  hide() {
+    AccardActions.switchSubapplication('patients');
   },
 
   refresh() {
