@@ -11437,6 +11437,13 @@ fieldset[disabled] .btn-inverse.active {
   outline: 0;
   font-size: 14px;
 }
+#accard-inspector .inspector .inspector-header a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+}
+#accard-inspector .inspector .inspector-header a:hover {
+  color: #ffffff;
+}
 #accard-inspector .inspector .inspector-body .col {
   padding-left: 5px;
   padding-right: 5px;
