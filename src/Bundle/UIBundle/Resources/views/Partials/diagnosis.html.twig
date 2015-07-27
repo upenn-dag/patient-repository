@@ -11,8 +11,8 @@
         {{- diagnosisDescription -}}
       </h4>
       <p>
-        Diagnosis of {{ diagnosisDescription }} ({{ diagnosisCode }}) on {{ diagnosis.startDate|localizeddate('medium', 'none') }} –
-        {{ diagnosis.endDate ? diagnosis.endDate|localizeddate('medium', 'none') : 'ongoing' }}.
+        Diagnosis of {{ diagnosisDescription }} ({{ diagnosisCode }}) on {{ diagnosis.startDate|date('Y-m-d') }} –
+        {{ diagnosis.endDate ? diagnosis.endDate|date('Y-m-d') : 'ongoing' }}.
       </p>
       <ul class="list-unstyled">
       {% for field in diagnosis.fields %}

@@ -33,7 +33,7 @@
     <tbody>
     {% for activity in activities %}
       <tr id="activity-{{ activity.id }}" data-accard-activity="{{ activity.prototype.name }}">
-        <td class="activity-date">{{ activity.activityDate|localizeddate('medium', 'none') }}</td>
+        <td class="activity-date">{{ activity.activityDate|date('Y-m-d') }}</td>
         <td class="prototype">{{ activity.prototype.presentation }}</td>
         <td class="description">{{ activity.description }}</td>
         <td class="actions">

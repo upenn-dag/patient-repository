@@ -34,8 +34,8 @@
     <tbody>
     {% for behavior in behaviors %}
       <tr id="behavior-{{ behavior.id }}">
-        <td class="start-date">{{ behavior.startDate|localizeddate('medium', 'none') }}</td>
-        <td class="end-date">{{ behavior.endDate ? behavior.endDate|localizeddate('medium', 'none') : 'accard.ongoing'|trans }}</td>
+        <td class="start-date">{{ behavior.startDate|date('Y-m-d') }}</td>
+        <td class="end-date">{{ behavior.endDate ? behavior.endDate|date('Y-m-d') : 'accard.ongoing'|trans }}</td>
         <td class="prototype">{{ behavior.prototype.presentation }}</td>
         <td class="description">{{ behavior.description }}</td>
         <td class="actions">

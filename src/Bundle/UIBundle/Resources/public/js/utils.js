@@ -141,7 +141,8 @@
       .datepicker({
         autoclose: true,
         clearBtn: true,
-        format: 'yyyy-mm-dd'
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
       });
   }
 

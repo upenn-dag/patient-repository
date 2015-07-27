@@ -35,8 +35,8 @@
     <tbody>
     {% for regimen in regimens %}
       <tr id="regimen-{{ regimen.id }}" data-accard-activity="{{ regimen.prototype.name }}">
-        <td class="regimen-start-date">{{ regimen.startDate|localizeddate('medium', 'none') }}</td>
-        <td class="regimen-end-date">{{ regimen.endDate ? regimen.endDate|localizeddate('medium', 'none') : 'accard.ongoing'|trans }}</td>
+        <td class="regimen-start-date">{{ regimen.startDate|date('Y-m-d') }}</td>
+        <td class="regimen-end-date">{{ regimen.endDate ? regimen.endDate|date('Y-m-d') : 'accard.ongoing'|trans }}</td>
         <td class="prototype">{{ regimen.prototype.presentation }}</td>
         <td class="description">{{ regimen.description }}</td>
         <td class="activities">{{ regimen.activities|length }}</td>

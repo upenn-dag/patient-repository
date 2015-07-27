@@ -34,8 +34,8 @@
             <li><span title="Medical Record Number">{{ patient.mrn|default('No MRN provided') }}</span></li>
             <li>
               {{ patient.race ? displayRace(patient.race) : '' }}{{ patient.gender ? (", " ~ displayGender(patient.gender)) : '' }}</li>
-            <li>Born {{ patient.dateOfBirth ? patient.dateOfBirth|localizeddate('medium', 'none') : 'none' }}</li>
-            {% if patient.dateOfDeath %}<li>Died {{ patient.dateOfDeath|localizeddate('medium', 'none') }}</li>{% endif %}
+            <li>Born {{ patient.dateOfBirth ? patient.dateOfBirth|date('Y-m-d') : 'none' }}</li>
+            {% if patient.dateOfDeath %}<li>Died {{ patient.dateOfDeath|date('Y-m-d') }}</li>{% endif %}
             <li>&nbsp;</li>
             <li>
               {{ update(path('accard_frontend_patient_update', { id: patient.id }), null, 'xs') }}

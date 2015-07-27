@@ -29,9 +29,9 @@
   {% elseif type == constant('DAG\\Component\\Field\\Model\\FieldTypes::CHOICE') %}
     {{ fv.allowMultiple ? fv.values|join(', ') : fv.value }}
   {% elseif type == constant('DAG\\Component\\Field\\Model\\FieldTypes::DATE') %}
-    {{ fv.value ? fv.value|localizeddate('medium', 'none') : '' }}
+    {{ fv.value ? fv.value|date('Y-m-d') : '' }}
   {% elseif type == constant('DAG\\Component\\Field\\Model\\FieldTypes::DATETIME') %}
-    {{ fv.value ? fv.value|localizeddate('medium', 'short') : '' }}
+    {{ fv.value ? fv.value|date('Y-m-d h:i:s') : '' }}
   {% elseif type == constant('DAG\\Component\\Field\\Model\\FieldTypes::NUMBER') %}
     {{ fv.value }}
   {% elseif type == constant('DAG\\Component\\Field\\Model\\FieldTypes::PERCENTAGE') %}
