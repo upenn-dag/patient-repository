@@ -18,6 +18,8 @@ accard:
             race: Race
         action:
             create: Create Patient
+            choose_gender: Choose a gender
+            choose_race: Choose a race
             manage: Manage Patients
             design: Design Patient
             update: Update Patient
