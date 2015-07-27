@@ -111,6 +111,16 @@
     $this.blur();
   });
 
+  $('body').on('click', 'tbody[data-accard=prototypes] button[data-accard=clear-prototypes]', function(e) {
+    var $this = $(this);
+    var $table = $this.closest('table');
+
+    if (!$table) return;
+
+    $table.find('tbody[data-accard=prototypes] input[type=radio]').prop('checked', false).parent('label').removeClass('active');
+    $table.find('tr[data-accard-activity]').show();
+  });
+
   $('tbody[data-accard=prototypes]').on('change', 'input[type=radio]', function(e) {
     var $this = $(this);
     var $table = $this.closest('table');
