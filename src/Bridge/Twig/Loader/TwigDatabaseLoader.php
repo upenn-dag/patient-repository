@@ -30,14 +30,14 @@ class TwigDatabaseLoader implements Twig_LoaderInterface
 
     /**
      * Template repository.
-     * 
+     *
      * @var TemplateRepository
      */
     private $repository;
 
     /**
      * Constructor.
-     * 
+     *
      * @param TemplateRepository
      */
     public function __construct($repository)

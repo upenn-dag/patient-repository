@@ -12,10 +12,11 @@ class TwigAccardFilesystemLoader extends FilesystemLoader
 {
     private $defaultLoadBundle;
 
-    public function __construct($defaultLoadBundle,
-                                FileLocatorInterface $locator,
-                                TemplateNameParserInterface $parser)
-    {
+    public function __construct(
+        $defaultLoadBundle,
+        FileLocatorInterface $locator,
+        TemplateNameParserInterface $parser
+    ) {
         $this->defaultLoadBundle = $defaultLoadBundle;
         parent::__construct($locator, $parser);
     }
@@ -29,7 +30,7 @@ class TwigAccardFilesystemLoader extends FilesystemLoader
             return parent::findTemplate($name);
         }
 
-        throw new Twig_Error_Loader(sprintf('Template for "%s" does not exist and is not prefixed.', $name));        
+        throw new Twig_Error_Loader(sprintf('Template for "%s" does not exist and is not prefixed.', $name));
     }
 
     protected function getTemplate($base)
