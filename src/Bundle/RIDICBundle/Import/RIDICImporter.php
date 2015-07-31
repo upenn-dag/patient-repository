@@ -54,10 +54,11 @@ class RIDICImporter extends ActivityImporter
      * @var ImportPatientProvider
      * @var SourceAdapterInterface
      */
-    public function __construct(ImportPatientProvider $provider,
-    							SourceAdapterInterface $ridicSource,
-                                SourceAdapterInterface $localSource)
-    {
+    public function __construct(
+        ImportPatientProvider $provider,
+        SourceAdapterInterface $ridicSource,
+        SourceAdapterInterface $localSource
+    ) {
         $this->provider = $provider;
         $this->ridicSource = $ridicSource;
         $this->localSource = $localSource;
@@ -73,7 +74,7 @@ class RIDICImporter extends ActivityImporter
         $localRecords = $this->localSource->execute();
         $results = $this->ridicSource->execute();
 
-        foreach($results as $key => $result) {
+        foreach ($results as $key => $result) {
             $result = array_change_key_case($result, CASE_LOWER);
 
             $mrn = $result['hup_mrn'];
@@ -93,7 +94,7 @@ class RIDICImporter extends ActivityImporter
 
             $record = $resolver->resolve($result);
 
-            if($record['patient'] && !in_array($record['course_ser'], $localRecords)) {
+            if ($record['patient'] && !in_array($record['course_ser'], $localRecords)) {
                 $records[] = $record;
             }
 

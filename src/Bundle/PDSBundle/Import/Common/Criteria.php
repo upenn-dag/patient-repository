@@ -55,15 +55,15 @@ class Criteria implements CriteriaInterface
         );
     }
 
-	/**
-	 * Retrieve criteria.
+    /**
+     * Retrieve criteria.
      *
      *  @return array $params
-	 */
-	public function retrieve()
-	{
+     */
+    public function retrieve()
+    {
         return $this->params;
-	}
+    }
 
     /**
      * Retrieve default criteria.
@@ -112,5 +112,4 @@ class Criteria implements CriteriaInterface
     {
         return $this->history;
     }
-
 }

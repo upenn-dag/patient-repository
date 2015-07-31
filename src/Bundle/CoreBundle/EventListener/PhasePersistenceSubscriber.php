@@ -51,7 +51,7 @@ class PhasePersistenceSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $om->transactional(function($om) use ($subject) {
+        $om->transactional(function ($om) use ($subject) {
             $phases = $subject->getPhases()->toArray();
 
             // Remove all phases BEFORE persisting subject.

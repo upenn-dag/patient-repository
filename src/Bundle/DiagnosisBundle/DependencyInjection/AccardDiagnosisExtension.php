@@ -14,7 +14,6 @@ use DAG\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-
 /**
  * Accard Diagnosis bundle extension.
  *
@@ -68,7 +67,6 @@ class AccardDiagnosisExtension extends AbstractResourceExtension implements Prep
                         'model' => 'Accard\Component\Diagnosis\Model\FieldValue'
                     ),
                 )
-            ))
-        );
+            )));
     }
 }

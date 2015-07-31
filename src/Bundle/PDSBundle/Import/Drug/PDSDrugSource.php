@@ -29,18 +29,19 @@ class PDSDrugSource extends PDSSource implements SourceAdapterInterface
     /**
      * Constructor.
      */
-    public function __construct(Connection $connection,
-    							array $drugs)
-    {
-    	$this->connection = $connection;
-    	$this->drugs = $drugs;
+    public function __construct(
+        Connection $connection,
+        array $drugs
+    ) {
+        $this->connection = $connection;
+        $this->drugs = $drugs;
     }
 
-	/**
-	 * Build query.
-	 *
-	 * @return string
-	 */
+    /**
+     * Build query.
+     *
+     * @return string
+     */
     protected function buildQuery()
     {
         $drugs = implode(', ', $this->drugs);

@@ -55,10 +55,11 @@ class PatientType extends AbstractType
      * @param array $validationGroups
      * @param PatientBuilderInterface $builder
      */
-    public function __construct($dataClass,
-                                array $validationGroups,
-                                PatientBuilderInterface $patientBuilder)
-    {
+    public function __construct(
+        $dataClass,
+        array $validationGroups,
+        PatientBuilderInterface $patientBuilder
+    ) {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
         $this->patientBuilder = $patientBuilder;
@@ -74,7 +75,7 @@ class PatientType extends AbstractType
     private function prepareChoices(array $choices, $translationKey)
     {
         $labels = $choices;
-        array_walk($labels, function(&$value) use ($translationKey) {
+        array_walk($labels, function (&$value) use ($translationKey) {
             $value = sprintf("accard.patient.%s.%s", $translationKey, str_replace(' ', '_', $value));
         });
 

@@ -77,13 +77,14 @@ class MenuBuilderEvent extends Event
      * @param FactoryInterface $factory
      * @param ItemInterface $menu
      */
-    public function __construct(FactoryInterface $factory,
-                                ItemInterface $menu,
-                                Request $request,
-                                TranslatorInterface $translator,
-                                SecurityContextInterface $securityContext,
-                                SettingsManager $settingsManager)
-    {
+    public function __construct(
+        FactoryInterface $factory,
+        ItemInterface $menu,
+        Request $request,
+        TranslatorInterface $translator,
+        SecurityContextInterface $securityContext,
+        SettingsManager $settingsManager
+    ) {
         $this->factory = $factory;
         $this->menu = $menu;
         $this->request = $request;

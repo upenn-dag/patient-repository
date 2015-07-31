@@ -53,10 +53,11 @@ class SampleType extends AbstractType
      * @param array $validationGroups
      * @param SampleBuilderInterface $sampleBuilder
      */
-    public function __construct($dataClass,
-                                array $validationGroups,
-                                SampleBuilderInterface $sampleBuilder)
-    {
+    public function __construct(
+        $dataClass,
+        array $validationGroups,
+        SampleBuilderInterface $sampleBuilder
+    ) {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
         $this->sampleBuilder = $sampleBuilder;

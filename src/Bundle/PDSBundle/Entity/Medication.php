@@ -131,77 +131,88 @@ class Medication implements \JsonSerializable
     /**
      * @return Route[]
      */
-    public function getRoutes() {
+    public function getRoutes()
+    {
         return $this->routes;
     }
 
     /**
      * @return string
      */
-    public function getFullName() {
+    public function getFullName()
+    {
         return $this->fullName;
     }
 
     /**
      * @return string
      */
-    public function getSimpleGenericName() {
+    public function getSimpleGenericName()
+    {
         return $this->simpleGenericName;
     }
 
     /**
      * @return string
      */
-    public function getGenericName() {
+    public function getGenericName()
+    {
         return $this->genericName;
     }
 
     /**
      * @return string
      */
-    public function getTherapeuticClass() {
+    public function getTherapeuticClass()
+    {
         return $this->therapeuticClass;
     }
 
     /**
      * @return string
      */
-    public function getPharmacyClass() {
+    public function getPharmacyClass()
+    {
         return $this->pharmacyClass;
     }
 
     /**
      * @return string
      */
-    public function getPharmacySubclass() {
+    public function getPharmacySubclass()
+    {
         return $this->pharmacySubclass;
     }
 
     /**
      * @return string
      */
-    public function getDeaClass() {
+    public function getDeaClass()
+    {
         return $this->deaClass;
     }
 
     /**
      * @return string
      */
-    public function getAmount() {
+    public function getAmount()
+    {
         return $this->amount;
     }
 
     /**
      * @return string
      */
-    public function getForm() {
+    public function getForm()
+    {
         return $this->form;
     }
 
     /**
      * @return bool
      */
-    public function isControlledMedication() {
+    public function isControlledMedication()
+    {
         if ($this->controlledMedicationYN === null) {
             return false;
         }

@@ -50,5 +50,4 @@ class AccardBehaviorBundle extends Bundle
             )
         );
     }
-
 }

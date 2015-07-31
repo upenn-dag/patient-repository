@@ -32,7 +32,7 @@ class Converter implements ConverterInterface
     public function convert(ImportEvent $event)
     {
         $importer = $event->getImporter();
-        if(!('sample' === $importer->getSubject() && 'hmtb_specimens_collection' === $importer->getName())){
+        if (!('sample' === $importer->getSubject() && 'hmtb_specimens_collection' === $importer->getName())) {
             return;
         }
 
@@ -69,8 +69,8 @@ class Converter implements ConverterInterface
 
             $source->addSample($sample);
 
-            foreach($fields as $key => $field) {
-                if(method_exists($field, 'getName')) {
+            foreach ($fields as $key => $field) {
+                if (method_exists($field, 'getName')) {
                     $fieldValue = new FieldValue;
                     $fieldValue->setField($field);
                     $fieldValue->setSample($sample);

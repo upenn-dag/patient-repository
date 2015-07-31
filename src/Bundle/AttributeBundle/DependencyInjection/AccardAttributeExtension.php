@@ -62,11 +62,10 @@ class AccardAttributeExtension extends AbstractResourceExtension implements Prep
                         'model' => 'Accard\Component\Attribute\Model\FieldValue',
                     ),
                 )
-            ))
-        );
+            )));
 
         // Prepend attribute prototype field.
-        $container->prependExtensionConfig('dag_field', array(
+            $container->prependExtensionConfig('dag_field', array(
             'classes' => array(
                 $this->applicationName.':'.'attribute_prototype' => array(
                     'subject'   => $config['classes']['attribute']['model'],
@@ -77,7 +76,6 @@ class AccardAttributeExtension extends AbstractResourceExtension implements Prep
                         'model' => 'Accard\Component\Attribute\Model\FieldValue'
                     ),
                 )
-            ))
-        );
+            )));
     }
 }

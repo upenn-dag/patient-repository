@@ -23,62 +23,67 @@ use Accard\Component\Patient\Model\PatientInterface;
  */
 abstract class PatientImporter implements ImporterInterface
 {
-	/**
-	 * {@inheritdoc}
-	 */
+    /**
+     * {@inheritdoc}
+     */
     public function configureResolver(OptionsResolverInterface $resolver)
     {
-        $genderNormalizer = function(Options $options, $value) {
+        $genderNormalizer = function (Options $options, $value) {
             $value = substr(trim(strtolower($value)), 0, 1);
 
             switch ($value) {
-                switch 'm': return PatientInterface::GENDER_MASCULINE; break;
-                switch 'f': return PatientInterface::GENDER_FEMININE; break;
-                default:    return PatientInterface::GENDER_UNKNOWN;
+                switch 'm':
+                    return PatientInterface::GENDER_MASCULINE;
+                    break;
+                    switch 'f':
+                        return PatientInterface::GENDER_FEMININE;
+                        break;
+                        default:
+                            return PatientInterface::GENDER_UNKNOWN;
+                    }
+                };
+
+                $dateNormalizer = function (Options $options, $value) {
+                    return empty($value) ? null : new DateTime($value);
+                };
+
+                $nameNormalizer = function (Options $options, $value) {
+                    $value = preg_replace("#[[:punct:]]#", "", $value);
+
+                    return ucwords(strtolower(trim($value)));
+                };
+
+
+                $resolver->setRequired(array('mrn', 'first_name', 'last_name', 'date_of_birth'));
+                $resolver->setOptional(array('date_of_death', 'gender', 'race'));
+
+                $resolver->setDefaults(array(
+                'gender' => 'unknown',
+                ));
+
+                $resolver->setAllowedTypes(array(
+                'first_name' => 'string',
+                'last_name' => 'string',
+                'date_of_birth' => array('DateTime', 'string'),
+                'date_of_death' => array('DateTime', 'null', 'string'),
+                'gender' => array('string'),
+                'race' => array('string', 'null'),
+                ));
+
+                $resolver->setNormalizers(array(
+                'first_name' => $nameNormalizer,
+                'last_name' => $nameNormalizer,
+                'gender' => $genderNormalizer,
+                'date_of_birth' => $dateNormalizer,
+                'date_of_death' => $dateNormalizer,
+                ));
             }
-        };
-
-        $dateNormalizer = function (Options $options, $value) {
-            return empty($value) ? null : new DateTime($value);
-        };
-
-        $nameNormalizer = function (Options $options, $value) {
-            $value = preg_replace("#[[:punct:]]#", "", $value);
-
-            return ucwords(strtolower(trim($value)));
-        };
-
-
-        $resolver->setRequired(array('mrn', 'first_name', 'last_name', 'date_of_birth'));
-        $resolver->setOptional(array('date_of_death', 'gender', 'race'));
-
-        $resolver->setDefaults(array(
-            'gender' => 'unknown',
-        ));
-
-        $resolver->setAllowedTypes(array(
-            'first_name' => 'string',
-            'last_name' => 'string',
-            'date_of_birth' => array('DateTime', 'string'),
-            'date_of_death' => array('DateTime', 'null', 'string'),
-            'gender' => array('string'),
-            'race' => array('string', 'null'),
-        ));
-
-        $resolver->setNormalizers(array(
-            'first_name' => $nameNormalizer,
-            'last_name' => $nameNormalizer,
-            'gender' => $genderNormalizer,
-            'date_of_birth' => $dateNormalizer,
-            'date_of_death' => $dateNormalizer,
-        ));
-    }
 
     /**
      * {@inheritdoc}
      */
-    public function getSubject()
-    {
-        return 'patient';
-    }
-}
+            public function getSubject()
+            {
+                return 'patient';
+            }
+        }

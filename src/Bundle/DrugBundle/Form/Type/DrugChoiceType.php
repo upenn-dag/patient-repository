@@ -47,7 +47,7 @@ class DrugChoiceType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $choiceNormalizer = function(Options $options) {
+        $choiceNormalizer = function (Options $options) {
             if ($options["group"]) {
                 return $options['group']->getDrugs();
             }

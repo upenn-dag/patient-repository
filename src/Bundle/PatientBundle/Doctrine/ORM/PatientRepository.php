@@ -81,9 +81,8 @@ class PatientRepository extends EntityRepository implements PatientRepositoryInt
         // Name handling
 
         if (!empty($criteria['firstName'])) {
-
             //remove % just in case if user inputs it
-            $criteria['firstName'] = str_replace('%', '',  $criteria['firstName']);
+            $criteria['firstName'] = str_replace('%', '', $criteria['firstName']);
             $criteria['firstName'] = "%" . $criteria['firstName'] . "%";
 
              $queryBuilder
@@ -94,9 +93,8 @@ class PatientRepository extends EntityRepository implements PatientRepositoryInt
         }
 
         if (!empty($criteria['lastName'])) {
-
              //remove % just in case if user inputs it
-            $criteria['lastName'] = str_replace('%', '',  $criteria['lastName']);
+            $criteria['lastName'] = str_replace('%', '', $criteria['lastName']);
             $criteria['lastName'] = "%" . $criteria['lastName'] . "%";
 
             $queryBuilder

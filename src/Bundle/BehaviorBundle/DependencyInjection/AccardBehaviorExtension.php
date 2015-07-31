@@ -61,11 +61,10 @@ class AccardBehaviorExtension extends AbstractResourceExtension implements Prepe
                         'model' => 'Accard\Component\Behavior\Model\FieldValue',
                     ),
                 )
-            ))
-        );
+            )));
 
         // Prepend behavior prototype field.
-        $container->prependExtensionConfig('dag_field', array(
+            $container->prependExtensionConfig('dag_field', array(
             'classes' => array(
                 $this->applicationName.':'.'behavior_prototype' => array(
                     'subject'   => $config['classes']['behavior']['model'],
@@ -76,7 +75,6 @@ class AccardBehaviorExtension extends AbstractResourceExtension implements Prepe
                         'model' => 'Accard\Component\Behavior\Model\FieldValue'
                     ),
                 )
-            ))
-        );
+            )));
     }
 }

@@ -93,35 +93,40 @@ class DiagnosisCode implements \JsonSerializable
     /**
      * @return string
      */
-    public function getCodeStandardName() {
+    public function getCodeStandardName()
+    {
         return $this->codeStandardName;
     }
 
     /**
      * @return string
      */
-    public function getCode() {
+    public function getCode()
+    {
         return $this->code;
     }
 
     /**
      * @return string
      */
-    public function getSubCategory() {
+    public function getSubCategory()
+    {
         return $this->subCategory;
     }
 
     /**
      * @return string
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
     /**
      * @return DateTime
      */
-    public function getCreateDate() {
+    public function getCreateDate()
+    {
         return $this->createDate;
     }
 

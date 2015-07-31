@@ -13,25 +13,26 @@ use PDO;
 
 class Criteria implements CriteriaInterface
 {
-	/**
-	 * PDS connection.
-	 */
-	protected $connection;
+    /**
+     * PDS connection.
+     */
+    protected $connection;
 
     /**
      * Import repository.
      */
     protected $repository;
 
-	/**
-	 * Constructor.
-	 */
-	public function __construct(Connection $connection,
-                                ImportRepository $repository)
-	{
-		$this->connection = $connection;
+    /**
+     * Constructor.
+     */
+    public function __construct(
+        Connection $connection,
+        ImportRepository $repository
+    ) {
+        $this->connection = $connection;
         $this->repository = $repository;
-	}
+    }
 
     /**
      * Get local last id
@@ -42,7 +43,7 @@ class Criteria implements CriteriaInterface
     {
         $latestImport = $this->repository->getLatestFor('hmtb_specimens_collection');
 
-        if(is_null($latestImport)) {
+        if (is_null($latestImport)) {
             return 0;
         }
 
@@ -69,11 +70,11 @@ class Criteria implements CriteriaInterface
 
 
 
-	/**
-	 * Retrieve criteria
-	 */
-	public function retrieve(array $history = null)
-	{
+    /**
+     * Retrieve criteria
+     */
+    public function retrieve(array $history = null)
+    {
         $lastHMTBId = $this->getLastHMTBId();
         $lastLocalId = $this->getLastLocalId();
 
@@ -81,7 +82,7 @@ class Criteria implements CriteriaInterface
             'first_id' => $lastLocalId,
             'last_id' => $lastHMTBId,
         );
-	}
+    }
 
     /**
      * Does the criteria pass?

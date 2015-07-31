@@ -30,18 +30,19 @@ class PDSTestSource extends PDSSource implements SourceAdapterInterface
     /**
      * Constructor.
      */
-    public function __construct(Connection $connection,
-    							array $tests)
-    {
-    	$this->connection = $connection;
-    	$this->tests = $tests;
+    public function __construct(
+        Connection $connection,
+        array $tests
+    ) {
+        $this->connection = $connection;
+        $this->tests = $tests;
     }
 
-	/**
-	 * Build query
-	 *
-	 * @return string
-	 */
+    /**
+     * Build query
+     *
+     * @return string
+     */
     protected function buildQuery()
     {
         $tests = implode(', ', $this->tests);

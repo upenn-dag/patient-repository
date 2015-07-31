@@ -17,7 +17,6 @@ use Accard\Bundle\OutcomesBundle\Exception\FieldNotFoundException;
 use Accard\Bundle\OutcomesBundle\Exception\TargetNotFoundException;
 use Accard\Bundle\OutcomesBundle\Exception\TargetPrototypeNotFoundException;
 
-
 /**
  * Outcomes configuration.
  *
@@ -54,10 +53,11 @@ class ActiveConfiguration implements ActiveConfigurationInterface
      * @param StateInstance $state
      * @param FilterRegistry $filterRegistry
      */
-    public function __construct(Configuration $configuration,
-                                StateInstance $state,
-                                FilterRegistry $filterRegistry)
-    {
+    public function __construct(
+        Configuration $configuration,
+        StateInstance $state,
+        FilterRegistry $filterRegistry
+    ) {
         $this->configuration = $configuration;
         $this->state = $state;
         $this->filterRegistry = $filterRegistry;

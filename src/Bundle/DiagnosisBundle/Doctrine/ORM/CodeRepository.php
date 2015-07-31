@@ -36,5 +36,4 @@ class CodeRepository extends EntityRepository implements CodeRepositoryInterface
     {
         return $this->getQueryBuilder()->select('COUNT(diagnosis_code.id)')->getQuery()->getSingleScalarResult();
     }
-
 }

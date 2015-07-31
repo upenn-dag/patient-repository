@@ -31,7 +31,7 @@ class NotEmptyFilter extends AbstractFilter
         $criteria->andWhere(
             $criteria->expr()->andX(
                 $criteria->expr()->neq($field->name, ""),
-                $criteria->expr()->neq($field->name, NULL)
+                $criteria->expr()->neq($field->name, null)
             )
         );
     }

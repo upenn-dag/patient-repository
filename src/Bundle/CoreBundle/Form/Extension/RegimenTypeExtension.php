@@ -21,7 +21,6 @@ use Accard\Component\Activity\Repository\ActivityRepositoryInterface;
 use Accard\Bundle\CoreBundle\Form\EventListener\PatientDiagnosesListener;
 use Accard\Bundle\CoreBundle\Form\EventListener\DiagnosisActivitiesListener;
 
-
 /**
  * Regimen form type extension.
  *
@@ -79,10 +78,11 @@ class RegimenTypeExtension extends AbstractTypeExtension
      * @param DiagnosisRepositoryInterface $diagnosisRepository
      * @param ActivityRepositoryInterface $activityRepository
      */
-    public function __construct(PatientRepositoryInterface $patientRepository,
-                                DiagnosisRepositoryInterface $diagnosisRepository,
-                                ActivityRepositoryInterface $activityRepository)
-    {
+    public function __construct(
+        PatientRepositoryInterface $patientRepository,
+        DiagnosisRepositoryInterface $diagnosisRepository,
+        ActivityRepositoryInterface $activityRepository
+    ) {
         $this->patientClass = $patientRepository->getClassName();
         $this->patientRepository = $patientRepository;
         $this->diagnosisClass = $diagnosisRepository->getClassName();
@@ -135,8 +135,7 @@ class RegimenTypeExtension extends AbstractTypeExtension
         $activitiesAllowed = ($regimen && (($patient && $diagnosis) || $diagnosis));
 
         if ($activitiesAllowed && $options['use_activities']) {
-
-            $queryBuilder = function(EntityRepository $er) use ($regimen) {
+            $queryBuilder = function (EntityRepository $er) use ($regimen) {
                 $qb = $er->getQueryBuilder();
 
                 if ($regimen->getDiagnosis()) {

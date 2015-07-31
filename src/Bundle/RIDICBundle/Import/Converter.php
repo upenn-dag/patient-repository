@@ -94,14 +94,14 @@ class Converter implements ConverterInterface
         $fields['patient-ser'] = $prototype->getFieldByName('patient-ser');
 
         $activities = array();
-        foreach( $records as $key => $record ) {
+        foreach ($records as $key => $record) {
             $activity = new Activity;
             $activity->setPatient($record['patient']);
             $activity->setActivityDate($record['activity_date']);
             $activity->setPrototype($prototype);
 
-            foreach($fields as $key => $field) {
-                if(method_exists($field, 'getName')) {
+            foreach ($fields as $key => $field) {
+                if (method_exists($field, 'getName')) {
                     $fieldValue = new FieldValue;
                     $fieldValue->setField($field);
                     $fieldValue->setActivity($activity);

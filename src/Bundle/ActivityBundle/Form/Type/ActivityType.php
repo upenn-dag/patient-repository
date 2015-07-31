@@ -53,10 +53,11 @@ class ActivityType extends AbstractType
      * @param array $validationGroups
      * @param ActivityBuilderInterface $activityBuilder
      */
-    public function __construct($dataClass,
-                                array $validationGroups,
-                                ActivityBuilderInterface $activityBuilder)
-    {
+    public function __construct(
+        $dataClass,
+        array $validationGroups,
+        ActivityBuilderInterface $activityBuilder
+    ) {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
         $this->activityBuilder = $activityBuilder;

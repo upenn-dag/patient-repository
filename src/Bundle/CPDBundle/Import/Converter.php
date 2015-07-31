@@ -42,7 +42,7 @@ class Converter implements ConverterInterface
     {
         $importer = $event->getImporter();
 
-        if(!('sample' == $importer->getSubject() && 'cpd_genetic_results' == $importer->getName())) {
+        if (!('sample' == $importer->getSubject() && 'cpd_genetic_results' == $importer->getName())) {
             return;
         }
 
@@ -87,7 +87,7 @@ class Converter implements ConverterInterface
                 $sample->setDiagnosis($record['diagnosis']);
             }
 
-            foreach($fields as $key => $field) {
+            foreach ($fields as $key => $field) {
                 $fieldValue = new FieldValue;
                 $fieldValue->setField($field);
                 $fieldValue->setValue($record[str_replace('genetic_results_', '', str_replace('-', '_', $field->getName()))]);
@@ -100,5 +100,5 @@ class Converter implements ConverterInterface
         }
 
         $event->setRecords($sources);
-   }
+    }
 }

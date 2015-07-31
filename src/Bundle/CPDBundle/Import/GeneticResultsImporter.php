@@ -52,10 +52,11 @@ class GeneticResultsImporter extends SampleImporter
      *
      * @param ImportPatientProvider $provider
      */
-    public function __construct(ImportPatientProvider $provider,
-                                SourceAdapterInterface $localSource,
-                                SourceAdapterInterface $cpdSource)
-    {
+    public function __construct(
+        ImportPatientProvider $provider,
+        SourceAdapterInterface $localSource,
+        SourceAdapterInterface $cpdSource
+    ) {
         $this->provider = $provider;
         $this->localSource = $localSource;
         $this->cpdSource = $cpdSource;
@@ -71,7 +72,7 @@ class GeneticResultsImporter extends SampleImporter
         $results = $this->cpdSource->execute();
         $cachedMrns = array();
 
-        foreach($results as $key => $result) {
+        foreach ($results as $key => $result) {
             $result = array_change_key_case($result, CASE_LOWER);
             $mrn = $result['patient'];
 
@@ -92,7 +93,7 @@ class GeneticResultsImporter extends SampleImporter
 
             $record = $resolver->resolve($result);
 
-            if($record['patient'] && $record['genetic_test_version_id'] == '2' && !in_array($record['pk_id'], $localRecords)) {
+            if ($record['patient'] && $record['genetic_test_version_id'] == '2' && !in_array($record['pk_id'], $localRecords)) {
                 $records[] = $record;
             }
 

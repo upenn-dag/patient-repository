@@ -85,8 +85,8 @@ class UIExtension extends Twig_Extension implements ContainerAwareInterface
      */
     public function filterByPrototypeName(Collection $resources, $name)
     {
-        return $resources->filter(function($resource) use ($name)
-        {
+        return $resources->filter(function ($resource) use ($name) {
+        
             return $resource->getPrototype()->getName() == $name;
         });
     }
@@ -102,8 +102,7 @@ class UIExtension extends Twig_Extension implements ContainerAwareInterface
     {
         $fieldValues = [];
 
-        foreach($resources as $resource) {
-
+        foreach ($resources as $resource) {
             $fieldValue = $resource->getFieldByName($name)->getValue();
 
             $fieldValues[$fieldValue][$resource->getId()] = $resource;

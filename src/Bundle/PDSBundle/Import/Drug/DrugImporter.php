@@ -53,10 +53,11 @@ class DrugImporter extends PatientImporter
      * @param ImportPatientProvider $provider
      * @param SourceAdapterInterface $pdsSource
      */
-    public function __construct(ImportPatientProvider $provider,
-                                SourceAdapterInterface $pdsSource,
-                                CriteriaInterface $criteria)
-    {
+    public function __construct(
+        ImportPatientProvider $provider,
+        SourceAdapterInterface $pdsSource,
+        CriteriaInterface $criteria
+    ) {
         $this->provider = $provider;
         $this->pdsSource = $pdsSource;
         $this->criteria = $criteria;
@@ -77,7 +78,8 @@ class DrugImporter extends PatientImporter
                 if ($record = $this->provider->getPatientByMRN($result['mrn'])) {
                     $result['previous_record'] = $record;
                 }
-            } catch (PatientNotFoundException $e) {}
+            } catch (PatientNotFoundException $e) {
+            }
 
             $result['identifier'] = $result['mrn'];
             $result['import_description'] = sprintf('%s ordered on %s.', $result['medication'], $result['medication_date']);
@@ -113,5 +115,4 @@ class DrugImporter extends PatientImporter
     {
         return 'pds_drug';
     }
-
 }

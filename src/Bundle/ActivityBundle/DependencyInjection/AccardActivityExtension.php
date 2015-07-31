@@ -73,11 +73,10 @@ class AccardActivityExtension extends AbstractResourceExtension implements Prepe
                         'model' => 'Accard\Component\Activity\Model\FieldValue',
                     ),
                 )
-            ))
-        );
+            )));
 
         // Prepend activity prototype field.
-        $container->prependExtensionConfig('dag_field', array(
+            $container->prependExtensionConfig('dag_field', array(
             'classes' => array(
                 $this->applicationName.':'.'activity_prototype' => array(
                     'subject'   => $config['classes']['activity']['model'],
@@ -88,7 +87,6 @@ class AccardActivityExtension extends AbstractResourceExtension implements Prepe
                         'model' => 'Accard\Component\Activity\Model\FieldValue'
                     ),
                 )
-            ))
-        );
+            )));
     }
 }

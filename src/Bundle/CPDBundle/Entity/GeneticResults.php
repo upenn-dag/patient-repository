@@ -11,125 +11,125 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class GeneticResults implements \JsonSerializable
 {
-	/**
-	 * CPD result id
-	 */
-	protected $id;
+    /**
+     * CPD result id
+     */
+    protected $id;
 
-	/**
-	 * Patient MRN
-	 */
-	protected $patientMRN;
+    /**
+     * Patient MRN
+     */
+    protected $patientMRN;
 
-	/**
-	 * Date tested
-	 */
-	protected $dateTested;
+    /**
+     * Date tested
+     */
+    protected $dateTested;
 
-	/**
-	 * Variant Detected
-	 */
-	protected $variantDetected;
+    /**
+     * Variant Detected
+     */
+    protected $variantDetected;
 
-	/**
-	 * Variant Categorization
-	 */
-	protected $variantCategorization;
+    /**
+     * Variant Categorization
+     */
+    protected $variantCategorization;
 
-	/**
-	 * CDNA Change
-	 */
-	protected $cdnaChange;
+    /**
+     * CDNA Change
+     */
+    protected $cdnaChange;
 
-	/**
-	 * Protein change
-	 */
-	protected $proteinChange;
+    /**
+     * Protein change
+     */
+    protected $proteinChange;
 
-	/**
-	 * Mutation type cdna
-	 */
-	protected $mutationTypeCdna;
+    /**
+     * Mutation type cdna
+     */
+    protected $mutationTypeCdna;
 
-	/**
-	 * Mutation type protein
-	 */
-	protected $mutationTypeProtein;
+    /**
+     * Mutation type protein
+     */
+    protected $mutationTypeProtein;
 
-	/**
-	 * Variant alias
-	 */
-	protected $variantAlias;
+    /**
+     * Variant alias
+     */
+    protected $variantAlias;
 
-	/**
-	 * get Id
-	 */
-	public function getId()
-	{
-		return $this->id;
-	}
+    /**
+     * get Id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-	/**
-	 * Get patient mrn
-	 */
-	public function getPatientMRN()
-	{
-		return $this->patientMRN;
-	}
+    /**
+     * Get patient mrn
+     */
+    public function getPatientMRN()
+    {
+        return $this->patientMRN;
+    }
 
-	/**
-	 * Get date tested
-	 */
-	public function getDateTested()
-	{
-		return $this->dateTested;
-	}
+    /**
+     * Get date tested
+     */
+    public function getDateTested()
+    {
+        return $this->dateTested;
+    }
 
-	/**
-	 * Get variant detected
-	 */
-	public function getVariantDetected()
-	{
-		return $this->variantDetected;
-	}
+    /**
+     * Get variant detected
+     */
+    public function getVariantDetected()
+    {
+        return $this->variantDetected;
+    }
 
-	/**
-	 * Get variant Categorization
-	 */
-	public function getVariantCategorization()
-	{
-		return $this->variantCategorization;
-	}
+    /**
+     * Get variant Categorization
+     */
+    public function getVariantCategorization()
+    {
+        return $this->variantCategorization;
+    }
 
-	/**
-	 * Get cdna change
-	 */
-	public function getCdnaChange()
-	{
-		return $this->cdnaChange;
-	}
+    /**
+     * Get cdna change
+     */
+    public function getCdnaChange()
+    {
+        return $this->cdnaChange;
+    }
 
-	/**
-	 * Get protein change
-	 */
-	public function getProteinChange()
-	{
-		return $this->proteinChange;
-	}
+    /**
+     * Get protein change
+     */
+    public function getProteinChange()
+    {
+        return $this->proteinChange;
+    }
 
-	/**
-	 * Get mutation type cdna
-	 */
-	public function getMutationTypeCdna()
-	{
-		return $this->mutationTypeCdna;
-	}
+    /**
+     * Get mutation type cdna
+     */
+    public function getMutationTypeCdna()
+    {
+        return $this->mutationTypeCdna;
+    }
 
-	/**
-	 * Get variant alias
-	 */
-	public function getVariantAlias()
-	{
-		return $this->variantAlias;
-	}
+    /**
+     * Get variant alias
+     */
+    public function getVariantAlias()
+    {
+        return $this->variantAlias;
+    }
 }

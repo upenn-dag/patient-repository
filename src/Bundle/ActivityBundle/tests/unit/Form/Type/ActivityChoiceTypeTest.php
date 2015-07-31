@@ -3,7 +3,7 @@ namespace AccardTest\Bundle\ActivityBundle\Form\Type;
 
 /**
  * Activity Choice Type Test
- * 
+ *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
 use Accard\Bundle\ActivityBundle\Form\Type\ActivityChoiceType;

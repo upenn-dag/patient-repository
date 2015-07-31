@@ -56,10 +56,11 @@ class BehaviorType extends AbstractType
      * @param array $validationGroups
      * @param OptionProviderInterface $optionProvider
      */
-    public function __construct($dataClass,
-                                array $validationGroups,
-                                BehaviorBuilderInterface $behaviorBuilder)
-    {
+    public function __construct(
+        $dataClass,
+        array $validationGroups,
+        BehaviorBuilderInterface $behaviorBuilder
+    ) {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
         $this->behaviorBuilder = $behaviorBuilder;

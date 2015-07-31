@@ -48,9 +48,15 @@ class PDSController extends Controller
         foreach ($genders as $gender) {
             $begin = strtolower(substr($gender->getValue(), 0, 1));
             switch ($begin) {
-                case 'm': $male = $gender->getId(); break;
-                case 'f': $female = $gender->getId(); break;
-                case 'u': $unknown = $gender->getId(); break;
+                case 'm':
+                    $male = $gender->getId();
+                    break;
+                case 'f':
+                    $female = $gender->getId();
+                    break;
+                case 'u':
+                    $unknown = $gender->getId();
+                    break;
             }
         }
 
@@ -58,15 +64,29 @@ class PDSController extends Controller
             $begin = strtolower(substr($race->getValue(), 0, 3));
             switch ($begin) {
                 case 'ame':
-                case 'ind': $americanIndian = $race->getId(); break;
+                case 'ind':
+                    $americanIndian = $race->getId();
+                    break;
                 case 'whi':
-                case 'cau': $white = $race->getId(); break;
+                case 'cau':
+                    $white = $race->getId();
+                    break;
                 case 'afr':
-                case 'bla': $black = $race->getId(); break;
-                case 'asi': $asian = $race->getId(); break;
-                case 'nat': $nativeHawaiian = $race->getId(); break;
-                case 'unk': $unknown = $race->getId(); break;
-                case 'oth': $other = $race->getId(); break;
+                case 'bla':
+                    $black = $race->getId();
+                    break;
+                case 'asi':
+                    $asian = $race->getId();
+                    break;
+                case 'nat':
+                    $nativeHawaiian = $race->getId();
+                    break;
+                case 'unk':
+                    $unknown = $race->getId();
+                    break;
+                case 'oth':
+                    $other = $race->getId();
+                    break;
             }
         }
 

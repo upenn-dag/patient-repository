@@ -63,11 +63,12 @@ class SpecimensCollectionImporter extends SampleImporter
      * @param SourceAdapterInterface Interface $hmtbSource
      * @param CriteraInterface $criteria
      */
-    public function __construct(ImportPatientProvider $provider,
-                                SourceAdapterInterface $localSource,
-                                SourceAdapterInterface $hmtbSource,
-                                CriteriaInterface $criteria)
-    {
+    public function __construct(
+        ImportPatientProvider $provider,
+        SourceAdapterInterface $localSource,
+        SourceAdapterInterface $hmtbSource,
+        CriteriaInterface $criteria
+    ) {
         $this->provider = $provider;
         $this->localSource = $localSource;
         $this->hmtbSource = $hmtbSource;
@@ -88,12 +89,13 @@ class SpecimensCollectionImporter extends SampleImporter
         $results = $this->hmtbSource->execute($this->criteria->retrieve());
         $localRecords = $this->localSource->execute();
 
-        foreach($results as $key => $result) {
+        foreach ($results as $key => $result) {
             $result = array_change_key_case($result, CASE_LOWER);
 
             try {
                 $result['previous_record'] = $this->provider->getPatientByMRN($result['patient']);
-            } catch (PatientNotFoundException $e) {}
+            } catch (PatientNotFoundException $e) {
+            }
 
             $record['identifier'] = $result['hmtb_id'];
             $result['import_description'] = sprintf('%s specimen on the %s.', $result['hmtb_id'], $result['patient']);
@@ -176,5 +178,4 @@ class SpecimensCollectionImporter extends SampleImporter
     {
         return 'hmtb_specimens_collection';
     }
-
 }

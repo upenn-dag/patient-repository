@@ -11,13 +11,13 @@ use DAG\Bundle\ResourceBundle\Import\SourceAdapterInterface;
 abstract class PDSSource implements SourceAdapterInterface
 {
 
-	/**
-	 * Execute
-	 *
-	 * @param array || null $criteria
-	 */
-	public function execute(array $criteria = null)
-	{
+    /**
+     * Execute
+     *
+     * @param array || null $criteria
+     */
+    public function execute(array $criteria = null)
+    {
         $stmt = $this->connection->prepare($this->buildQuery());
         $stmt->execute(array(
             'mds' => $criteria['start_date']->format('m/d/Y'),
@@ -27,6 +27,5 @@ abstract class PDSSource implements SourceAdapterInterface
         $stmt->closeCursor();
 
         return $results;
-	}
-
+    }
 }

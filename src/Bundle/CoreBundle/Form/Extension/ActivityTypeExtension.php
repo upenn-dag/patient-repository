@@ -53,9 +53,10 @@ class ActivityTypeExtension extends AbstractTypeExtension
      * @param string $patientClass
      * @param DiagnosisRepositoryInterface $diagnosisRepository
      */
-    public function __construct($patientClass,
-                                DiagnosisRepositoryInterface $diagnosisRepository)
-    {
+    public function __construct(
+        $patientClass,
+        DiagnosisRepositoryInterface $diagnosisRepository
+    ) {
         $this->patientClass = $patientClass;
         $this->diagnosisClass = $diagnosisRepository->getClassName();
         $this->diagnosisRepository = $diagnosisRepository;

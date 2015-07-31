@@ -12,20 +12,20 @@ use DAG\Bundle\ResourceBundle\Import\InitializerInterface;
 
 class Initializer implements InitializerInterface
 {
-	/**
-	 * Criteria
-	 */
-	protected $criteria;
+    /**
+     * Criteria
+     */
+    protected $criteria;
 
-	/**
-	 * Constructor.
-	 */
-	public function __construct(CriteriaInterface $criteria)
-	{
-		$this->criteria = $criteria;
-	}
+    /**
+     * Constructor.
+     */
+    public function __construct(CriteriaInterface $criteria)
+    {
+        $this->criteria = $criteria;
+    }
 
-	/**
+    /**
      * Initialize the import object.
      *
      * Figure out criteria to use...

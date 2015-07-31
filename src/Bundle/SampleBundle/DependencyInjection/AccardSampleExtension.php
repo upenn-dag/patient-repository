@@ -61,11 +61,10 @@ class AccardSampleExtension extends AbstractResourceExtension implements Prepend
                         'model' => 'Accard\Component\Sample\Model\FieldValue',
                     ),
                 )
-            ))
-        );
+            )));
 
         // Prepend sample prototype field.
-        $container->prependExtensionConfig('dag_field', array(
+            $container->prependExtensionConfig('dag_field', array(
             'classes' => array(
                 $this->applicationName.':'.'sample_prototype' => array(
                     'subject'   => $config['classes']['sample']['model'],
@@ -76,7 +75,6 @@ class AccardSampleExtension extends AbstractResourceExtension implements Prepend
                         'model' => 'Accard\Component\Sample\Model\FieldValue'
                     ),
                 )
-            ))
-        );
+            )));
     }
 }

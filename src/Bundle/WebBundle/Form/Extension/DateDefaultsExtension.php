@@ -22,7 +22,7 @@ class DateDefaultsExtension extends AbstractTypeExtension
 {
     /**
      * Form type of which to extend.
-     * 
+     *
      * @var string
      */
     private $baseType;
@@ -30,7 +30,7 @@ class DateDefaultsExtension extends AbstractTypeExtension
 
     /**
      * Constructor.
-     * 
+     *
      * @param string $baseType
      */
     public function __construct($baseType)

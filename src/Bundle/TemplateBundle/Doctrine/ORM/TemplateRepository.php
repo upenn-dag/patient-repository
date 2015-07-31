@@ -16,8 +16,7 @@ class TemplateRepository extends EntityRepository
     {
         $template = $this->findOneBy($criteria);
 
-        if (null === $template)
-        {
+        if (null === $template) {
             $template = new Template();
         }
 

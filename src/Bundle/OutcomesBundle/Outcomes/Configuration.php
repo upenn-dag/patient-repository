@@ -16,7 +16,6 @@ use Accard\Bundle\CoreBundle\Exception\StateException;
 use Accard\Bundle\OutcomesBundle\Exception\FieldNotFoundException;
 use Accard\Bundle\OutcomesBundle\Exception\DuplicateFieldException;
 
-
 /**
  * Outcomes configuration.
  *

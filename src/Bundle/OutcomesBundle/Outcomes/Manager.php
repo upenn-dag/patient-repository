@@ -19,7 +19,6 @@ use Accard\Bundle\OutcomesBundle\Exception\TargetPrototypeNotFoundException;
 use Accard\Bundle\CoreBundle\State\StateInstance;
 use DAG\Bundle\ResourceBundle\ExpressionLanguage\AccardLanguage;
 
-
 /**
  * Outcomes manager.
  *

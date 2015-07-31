@@ -27,7 +27,7 @@ abstract class ActivityImporter implements ImporterInterface
      */
     public function configureResolver(OptionsResolverInterface $resolver)
     {
-        $patientNormalizer = function(Options $options, $value) {
+        $patientNormalizer = function (Options $options, $value) {
             static $resource;
 
             if (!$resource) {
@@ -38,7 +38,7 @@ abstract class ActivityImporter implements ImporterInterface
         };
 
         $codes = $this->getCodes();
-        $diagnosisNormalizer = function(Options $options, $value) use ($codes) {
+        $diagnosisNormalizer = function (Options $options, $value) use ($codes) {
             static $resource;
 
             if (!$resource) {

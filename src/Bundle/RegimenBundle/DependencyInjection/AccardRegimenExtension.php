@@ -62,11 +62,10 @@ class AccardRegimenExtension extends AbstractResourceExtension implements Prepen
                         'model' => 'Accard\Component\Regimen\Model\FieldValue',
                     ),
                 )
-            ))
-        );
+            )));
 
         // Prepend regimen prototype field.
-        $container->prependExtensionConfig('dag_field', array(
+            $container->prependExtensionConfig('dag_field', array(
             'classes' => array(
                 $this->applicationName.':'.'regimen_prototype' => array(
                     'subject'   => $config['classes']['regimen']['model'],
@@ -77,7 +76,6 @@ class AccardRegimenExtension extends AbstractResourceExtension implements Prepen
                         'model' => 'Accard\Component\Regimen\Model\FieldValue'
                     ),
                 )
-            ))
-        );
+            )));
     }
 }

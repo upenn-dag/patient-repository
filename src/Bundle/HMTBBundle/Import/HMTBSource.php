@@ -29,11 +29,12 @@ class HMTBSource implements SourceAdapterInterface
     /**
      * Constructor.
      */
-    public function __construct(Connection $connection,
-    							array $codes)
-    {
-    	$this->connection = $connection;
-    	$this->codes = $codes;
+    public function __construct(
+        Connection $connection,
+        array $codes
+    ) {
+        $this->connection = $connection;
+        $this->codes = $codes;
     }
 
     /**

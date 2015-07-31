@@ -17,7 +17,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Accard\Component\Regimen\Model\RegimenInterface;
 
-
 /**
  * Regimen activities choice form type.
  *
@@ -48,7 +47,7 @@ class RegimenActivitiesChoiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $regimen = $this->regimen;
-        $queryBuilder = function(EntityRepository $er) use ($regimen) {
+        $queryBuilder = function (EntityRepository $er) use ($regimen) {
             $qb = $er->getQueryBuilder();
 
             if ($regimen->getDiagnosis()) {

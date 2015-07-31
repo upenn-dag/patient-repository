@@ -47,9 +47,10 @@ class DiagnosisChoiceType extends AbstractType
      *
      * @param string $dataClass
      */
-    public function __construct($dataClass,
-                                DiagnosisRepositoryInterface $diagnosisRepository)
-    {
+    public function __construct(
+        $dataClass,
+        DiagnosisRepositoryInterface $diagnosisRepository
+    ) {
         $this->dataClass = $dataClass;
         $this->diagnosisRepository = $diagnosisRepository;
     }

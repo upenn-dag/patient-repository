@@ -27,7 +27,7 @@ class BehaviorSettingsSchema extends AbstractSettingsSchema
      */
     public function buildSettings(SettingsBuilderInterface $builder)
     {
-        $integerNormalizer = function(Options $options, $value) {
+        $integerNormalizer = function (Options $options, $value) {
             if (null !== $value && is_numeric($value)) {
                 return intval($value);
             }

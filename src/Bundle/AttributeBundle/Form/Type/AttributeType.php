@@ -56,10 +56,11 @@ class AttributeType extends AbstractType
      * @param array $validationGroups
      * @param AttributeBuilderInterface $builder
      */
-    public function __construct($dataClass,
-                                array $validationGroups,
-                                AttributeBuilderInterface $attributeBuilder)
-    {
+    public function __construct(
+        $dataClass,
+        array $validationGroups,
+        AttributeBuilderInterface $attributeBuilder
+    ) {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
         $this->attributeBuilder = $attributeBuilder;

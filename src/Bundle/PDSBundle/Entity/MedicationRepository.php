@@ -41,7 +41,7 @@ DQL;
         return $q->getResult();
     }
 
-   public function getAzacytidineTestResults()
+    public function getAzacytidineTestResults()
     {
         $query = <<<DQL
 SELECT M,MO,O,R 
@@ -57,7 +57,7 @@ DQL;
         return $q->getResult();
     }
 
-   public function getDecitabineTestResults()
+    public function getDecitabineTestResults()
     {
         $query = <<<DQL
 SELECT M,MO,O,R 
@@ -73,7 +73,7 @@ DQL;
         return $q->getResult();
     }
 
-   public function getIdarubicinTestResults()
+    public function getIdarubicinTestResults()
     {
         $query = <<<DQL
 SELECT M,MO,O,R 
@@ -89,7 +89,7 @@ DQL;
         return $q->getResult();
     }
 
-   public function getHydroxyureaTestResults()
+    public function getHydroxyureaTestResults()
     {
         $query = <<<DQL
 SELECT M,MO,O,R 

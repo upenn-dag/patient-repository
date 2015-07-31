@@ -3,7 +3,7 @@ namespace AccardTest\Bundle\ActivityBundle\Form\EventListener;
 
 /**
  * Default Activity Field Listener Test
- * 
+ *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
 use Accard\Bundle\ActivityBundle\Form\EventListener\DefaultActivityFieldListener;

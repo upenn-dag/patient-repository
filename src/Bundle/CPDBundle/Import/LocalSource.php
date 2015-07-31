@@ -14,47 +14,48 @@ use Doctrine\DBAL\Connection;
 
 class LocalSource implements SourceAdapterInterface
 {
-	/**
-	 * Connection
-	 */
-	protected $connection;
+    /**
+     * Connection
+     */
+    protected $connection;
 
-	/**
-	 * Prototype Provider
-	 */
-	protected $provider;
+    /**
+     * Prototype Provider
+     */
+    protected $provider;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct(Connection $connection,
-								PrototypeProviderInterface $prototypeProvider)
-	{
-		$this->connection = $connection;
-		$this->prototypeProvider = $prototypeProvider;
-	}
+    /**
+     * Constructor
+     */
+    public function __construct(
+        Connection $connection,
+        PrototypeProviderInterface $prototypeProvider
+    ) {
+        $this->connection = $connection;
+        $this->prototypeProvider = $prototypeProvider;
+    }
 
-	/**
-	 * Execute Command
-	 */
-	public function execute(array $criteria = null)
-	{
-		$prototype = $this->prototypeProvider->getPrototypeByName('genetic-results');
+    /**
+     * Execute Command
+     */
+    public function execute(array $criteria = null)
+    {
+        $prototype = $this->prototypeProvider->getPrototypeByName('genetic-results');
         $sql = $this->buildQuery($prototype);
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
-		$localRecords = $this->prepareResults($stmt->fetchAll(), $prototype);
+        $localRecords = $this->prepareResults($stmt->fetchAll(), $prototype);
         $stmt->closeCursor();
 
         return $localRecords;
-	}
+    }
 
-	/**
-	 * Query
-	 */
-	private function buildQuery($prototype)
-	{
-		$fieldIds = array();
+    /**
+     * Query
+     */
+    private function buildQuery($prototype)
+    {
+        $fieldIds = array();
         foreach ($prototype->getFields() as $field) {
             $fieldIds[] = $field->getId();
         }
@@ -65,11 +66,11 @@ class LocalSource implements SourceAdapterInterface
             WHERE v.fieldId IN (%s)";
 
         return sprintf($sql, implode(', ', $fieldIds));
-	}
+    }
 
-	/**
-	 * Prepare Local Results
-	 */
+    /**
+     * Prepare Local Results
+     */
     private function prepareResults(array $results, PrototypeInterface $prototype)
     {
         $localResults = array();
@@ -113,11 +114,10 @@ class LocalSource implements SourceAdapterInterface
     {
         $concatenatedLocalRecords = array();
 
-        foreach($localResults as $localResult) {
+        foreach ($localResults as $localResult) {
             $concatenatedId = '';
-            foreach($fields as $field) {
-                if(isset($localResult[$field->getId()]))
-                {
+            foreach ($fields as $field) {
+                if (isset($localResult[$field->getId()])) {
                     $concatenatedId .= $localResult[$field->getId()];
                 }
             }
@@ -129,5 +129,4 @@ class LocalSource implements SourceAdapterInterface
 
         return $concatenatedLocalRecords;
     }
-
 }

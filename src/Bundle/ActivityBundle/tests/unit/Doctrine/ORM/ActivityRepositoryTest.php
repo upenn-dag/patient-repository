@@ -43,5 +43,4 @@ class ActivityRepositoryTest extends \Codeception\TestCase\Test
     {
         $this->assertEquals('activity', $this->repository->getAlias());
     }
-
 }

@@ -86,7 +86,8 @@ class Diagnosis implements \JsonSerializable
     /**
      * @return DateTime
      */
-    public function getCodingDate() {
+    public function getCodingDate()
+    {
         return $this->codingDate;
     }
 

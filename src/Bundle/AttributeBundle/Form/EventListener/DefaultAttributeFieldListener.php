@@ -67,7 +67,7 @@ class DefaultAttributeFieldListener implements EventSubscriberInterface
 
     /**
      * Remove prototype field if prototype is present.
-     * 
+     *
      * @param FormEvent $event
      */
     public function hidePrototype(FormEvent $event)
@@ -105,7 +105,7 @@ class DefaultAttributeFieldListener implements EventSubscriberInterface
 
     /**
      * Test if prototype exists within form data.
-     * 
+     *
      * @return boolean
      */
     private function testForPrototype(FormEvent $event)

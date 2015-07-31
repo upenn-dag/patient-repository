@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * This file is part of the Accard package.
+ *
+ * (c) University of Pennsylvania
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
 namespace Accard\Bundle\TemplateBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -9,6 +17,11 @@ use Accard\Bundle\TemplateBundle\Form\Type\TemplateType;
 use Symfony\Component\HttpFoundation\Request;
 use Accard\Bridge\Twig\Loader\TwigDatabaseLoader;
 
+/**
+ * Template controller.
+ *
+ * @author Frank Bardon Jr. <bardonf@upenn.edu>
+ */
 class TemplateController extends Controller
 {
     /**
@@ -19,7 +32,7 @@ class TemplateController extends Controller
     /**
      * Constructor.
      */
-    function __construct(TemplateRepository $repository)
+    public function __construct(TemplateRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -46,7 +59,7 @@ class TemplateController extends Controller
 
         $template = $this->repository->findOneOrCreate(array('name' => $name));
 
-        if(!is_null($version)) {
+        if (!is_null($version)) {
             $logRepo->revert($template, $version);
         }
 
@@ -76,13 +89,13 @@ class TemplateController extends Controller
 
     /**
      * Create form.
-     * 
+     *
      */
     private function createTemplateForm($template = null)
     {
         $bundles = array();
 
-        foreach($this->container->getParameter('kernel.bundles') as $bundle => $class) {
+        foreach ($this->container->getParameter('kernel.bundles') as $bundle => $class) {
             if (TwigDatabaseLoader::MAGIC_PREFIX === substr($bundle, 0, strlen(TwigDatabaseLoader::MAGIC_PREFIX))) {
                 $bundles[$bundle] = $bundle;
             }
@@ -121,7 +134,7 @@ class TemplateController extends Controller
             'form' => $form->createView(),
         ));
     }
-    
+
     /**
      * View the history of a file
      */

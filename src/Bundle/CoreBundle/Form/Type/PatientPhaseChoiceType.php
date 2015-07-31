@@ -23,7 +23,7 @@ class PatientPhaseChoiceType extends AbstractType
 {
     /**
      * Phase data class.
-     * 
+     *
      * @var string
      */
     private $phaseClass;
@@ -31,7 +31,7 @@ class PatientPhaseChoiceType extends AbstractType
 
     /**
      * Constructor.
-     * 
+     *
      * @param string $phaseClass
      */
     public function __construct($phaseClass)

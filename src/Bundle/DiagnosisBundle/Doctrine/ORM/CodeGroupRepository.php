@@ -36,5 +36,4 @@ class CodeGroupRepository extends EntityRepository implements CodeGroupRepositor
     {
         return $this->getQueryBuilder()->select('COUNT(diagnosis_code_group.id)')->getQuery()->getSingleScalarResult();
     }
-
 }

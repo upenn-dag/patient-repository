@@ -53,10 +53,11 @@ class RegimenType extends AbstractType
      * @param array $validationGroups
      * @param RegimenBuilderInterface $regimenBuilder
      */
-    public function __construct($dataClass,
-                                array $validationGroups,
-                                RegimenBuilderInterface $regimenBuilder)
-    {
+    public function __construct(
+        $dataClass,
+        array $validationGroups,
+        RegimenBuilderInterface $regimenBuilder
+    ) {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
         $this->regimenBuilder = $regimenBuilder;

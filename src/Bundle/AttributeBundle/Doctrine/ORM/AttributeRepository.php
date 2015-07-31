@@ -35,5 +35,4 @@ class AttributeRepository extends EntityRepository
     {
         return $this->getQueryBuilder()->select('COUNT(attribute.id)')->getQuery()->getSingleScalarResult();
     }
-
 }

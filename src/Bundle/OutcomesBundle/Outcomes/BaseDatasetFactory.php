@@ -43,9 +43,10 @@ class BaseDatasetFactory
      * @param RepositoryInterface $repository
      * @param PrototypeRepositoryInterface $prototypeRepository
      */
-    public function __construct(RepositoryInterface $repository,
-                                PrototypeRepositoryInterface $prototypeRepository = null)
-    {
+    public function __construct(
+        RepositoryInterface $repository,
+        PrototypeRepositoryInterface $prototypeRepository = null
+    ) {
         $this->repository = $repository;
         $this->prototypeRepository = $prototypeRepository;
     }

@@ -36,5 +36,4 @@ class BehaviorRepository extends EntityRepository
     {
         return $this->getQueryBuilder()->select('COUNT(behavior.id)')->getQuery()->getSingleScalarResult();
     }
-
 }

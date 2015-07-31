@@ -27,14 +27,14 @@ abstract class SampleImporter implements ImporterInterface
      */
     public function configureResolver(OptionsResolverInterface $resolver)
     {
-        $patientNormalizer = function(Options $options, $value) {
+        $patientNormalizer = function (Options $options, $value) {
             static $resource;
 
             if (!$resource) {
                 $resource = $options['patient_resource']->getRepository();
             }
 
-            if(is_null($value)) {
+            if (is_null($value)) {
                 return null;
             }
 

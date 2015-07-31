@@ -9,129 +9,128 @@ namespace Accard\Bundle\TemplateBundle\Entity;
 
 class Template
 {
-	/** 
-	 * Id.
-	 * 
-	 * @var integer
-	 */
-	protected $id;
+    /**
+     * Id.
+     *
+     * @var integer
+     */
+    protected $id;
 
-	/** 
-	 * Parent.
-	 * 
-	 * @var string
-	 */
-	protected $parent;
+    /**
+     * Parent.
+     *
+     * @var string
+     */
+    protected $parent;
 
-	/**
-	 * Location.
-	 * 
-	 * @var string
-	 */
-	protected $location;
+    /**
+     * Location.
+     *
+     * @var string
+     */
+    protected $location;
 
-	/**
-	 * Name.
-	 * 
-	 * @var string
-	 */
-	protected $name;
+    /**
+     * Name.
+     *
+     * @var string
+     */
+    protected $name;
 
-	/**
-	 * Content.
-	 * 
-	 * @var text
-	 */
-	protected $content;
+    /**
+     * Content.
+     *
+     * @var text
+     */
+    protected $content;
 
     /**
      * {@inheritdoc}
      */
-	public function getId()
-	{
-		return $this->id;
-	}
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * {@inheritdoc}
      */
-	public function setId($id)
-	{
-		$this->id = $id;
+    public function setId($id)
+    {
+        $this->id = $id;
 
-		return $this;
-	}
-
-    /**
-     * {@inheritdoc}
-     */
-	public function getParent()
-	{
-		return $this->parent;
-	}
+        return $this;
+    }
 
     /**
      * {@inheritdoc}
      */
-	public function setParent($parent = null)
-	{
-		$this->parent = $parent;
-
-		return $this;
-	}
+    public function getParent()
+    {
+        return $this->parent;
+    }
 
     /**
      * {@inheritdoc}
      */
-	public function getName()
-	{
-		return $this->name;
-	}
+    public function setParent($parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
 
     /**
      * {@inheritdoc}
      */
-	public function setName($name)
-	{
-		$this->name = $name;
-
-		return $this;
-	}
+    public function getName()
+    {
+        return $this->name;
+    }
 
     /**
      * {@inheritdoc}
      */
-	public function getLocation()
-	{
-		return $this->location;
-	}
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
 
     /**
      * {@inheritdoc}
      */
-	public function setLocation($location)
-	{
-		$this->location = $location;
-
-		return $this;
-	}
+    public function getLocation()
+    {
+        return $this->location;
+    }
 
     /**
      * {@inheritdoc}
      */
-	public function getContent()
-	{
-		return $this->content;
-	}
+    public function setLocation($location)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
 
     /**
      * {@inheritdoc}
      */
-	public function setContent($content)
-	{
-		$this->content = $content;
+    public function getContent()
+    {
+        return $this->content;
+    }
 
-		return $this;
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
 
+        return $this;
+    }
 }

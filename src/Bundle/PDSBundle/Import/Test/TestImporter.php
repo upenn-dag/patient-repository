@@ -53,10 +53,11 @@ class TestImporter extends PatientImporter
      * @param ImportPatientProvider $provider
      * @param SourceAdapterInterface $pdsSource
      */
-    public function __construct(ImportPatientProvider $provider,
-                                SourceAdapterInterface $pdsSource,
-                                CriteriaInterface $criteria)
-    {
+    public function __construct(
+        ImportPatientProvider $provider,
+        SourceAdapterInterface $pdsSource,
+        CriteriaInterface $criteria
+    ) {
         $this->provider = $provider;
         $this->pdsSource = $pdsSource;
         $this->criteria = $criteria;
@@ -78,7 +79,8 @@ class TestImporter extends PatientImporter
                 if ($record = $this->provider->getPatientByMRN($result['mrn'])) {
                     $result['previous_record'] = $record;
                 }
-            } catch (PatientNotFoundException $e) {}
+            } catch (PatientNotFoundException $e) {
+            }
 
             $result['identifier'] = $result['mrn'];
             $result['import_description'] = sprintf('%s test on %s.', $result['result'], $result['result_date']);
@@ -114,5 +116,4 @@ class TestImporter extends PatientImporter
     {
         return 'pds_test';
     }
-
 }

@@ -17,7 +17,7 @@ use Accard\Bundle\DiagnosisBundle\Form\Type\DiagnosisType;
 
 /**
  * Diagnosis collection form type.
- * 
+ *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
 class DiagnosisCollectionType extends AbstractType
@@ -43,7 +43,7 @@ class DiagnosisCollectionType extends AbstractType
      * @param array $validationGroups
      * @param OptionProviderInterface $optionProvider
      */
-    public function __construct( $dataClass, $diagnosisFormType )
+    public function __construct($dataClass, $diagnosisFormType)
     {
         $this->dataClass = $dataClass;
         $this->diagnosisFormType = $diagnosisFormType;

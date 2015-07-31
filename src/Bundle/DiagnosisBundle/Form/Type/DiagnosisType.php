@@ -65,11 +65,12 @@ class DiagnosisType extends AbstractType
      * @param array $validationGroups
      * @param OptionProviderInterface $optionProvider
      */
-    public function __construct($dataClass,
-                                array $validationGroups,
-                                DiagnosisBuilderInterface $builder,
-                                CodeGroupProvider $codeGroupProvider)
-    {
+    public function __construct(
+        $dataClass,
+        array $validationGroups,
+        DiagnosisBuilderInterface $builder,
+        CodeGroupProvider $codeGroupProvider
+    ) {
         $this->dataClass = $dataClass;
         $this->validationGroups = $validationGroups;
         $this->builder = $builder;

@@ -29,7 +29,7 @@ class InvalidMessageExtension extends AbstractTypeExtension
 
     /**
      * New invalid_message option.
-     * 
+     *
      * @var string
      */
     private $newMessage;

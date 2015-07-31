@@ -49,5 +49,4 @@ class AccardAttributeBundle extends Bundle
             )
         );
     }
-
 }

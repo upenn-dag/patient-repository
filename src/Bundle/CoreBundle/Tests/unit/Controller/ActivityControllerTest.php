@@ -24,5 +24,4 @@ class ActivityControllerTest extends \Codeception\TestCase\Test
     {
 
     }
-
 }

@@ -41,7 +41,7 @@ class DateBetweenFilter extends AbstractFilter
      */
     protected function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $dateNormalizer = function(Options $options, $value) {
+        $dateNormalizer = function (Options $options, $value) {
             if (is_string($value)) {
                 return new DateTime($value);
             } elseif (is_numeric($value)) {
@@ -52,7 +52,7 @@ class DateBetweenFilter extends AbstractFilter
         };
 
         $resolver
-            ->setDefault("end", function(Options $options) {
+            ->setDefault("end", function (Options $options) {
                 return new Datetime();
             })
             ->setRequired(array("start", "end"))

@@ -14,7 +14,6 @@ use Accard\Bundle\OutcomesBundle\Outcomes\Filter\FilterInterface;
 use Accard\Bundle\OutcomesBundle\Exception\FilterNotFoundException;
 use Accard\Bundle\OutcomesBundle\Exception\DuplicateFilterException;
 
-
 /**
  * Filter registry.
  *
