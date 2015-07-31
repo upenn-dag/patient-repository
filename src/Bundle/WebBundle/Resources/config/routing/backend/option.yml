@@ -9,16 +9,16 @@ accard_backend_option_index:
     pattern: /
     methods: [GET]
     defaults:
-        _controller: accard.controller.option:indexAction
-        _accard:
+        _controller: dag.controller.option:indexAction
+        _dag:
             template: AccardWebBundle:Backend/Option:index.html.twig
 
 accard_backend_option_create:
     pattern: /new
     methods: [GET, POST]
     defaults:
-        _controller: accard.controller.option:createAction
-        _accard:
+        _controller: dag.controller.option:createAction
+        _dag:
             template: AccardWebBundle:Backend/Option:create.html.twig
             redirect: accard_backend_option_index
 
@@ -27,8 +27,8 @@ accard_backend_option_update:
     methods: [GET, PUT, POST]
     requirements: { id: \d+ }
     defaults:
-        _controller: accard.controller.option:updateAction
-        _accard:
+        _controller: dag.controller.option:updateAction
+        _dag:
             template: AccardWebBundle:Backend/Option:update.html.twig
             redirect: accard_backend_option_index
 
@@ -37,7 +37,7 @@ accard_backend_option_update_redirect:
     methods: [GET]
     requirements: { id: '[a-z_-]{3,36}' }
     defaults:
-        _controller: accard.controller.option:redirectNameAction
-        _accard:
+        _controller: dag.controller.option:redirectNameAction
+        _dag:
             redirect: accard_backend_option_update
 

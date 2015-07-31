@@ -10,7 +10,7 @@ accard_backend_activity_design:
     methods: [GET]
     defaults:
         _controller: accard.controller.activity:designAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/Activity:design.html.twig
 
 accard_backend_activity_settings_update:
@@ -18,8 +18,8 @@ accard_backend_activity_settings_update:
     methods: [PUT, POST]
     defaults:
         namespace: activity
-        _controller: accard.controller.settings:updateAction
-        _accard:
+        _controller: dag.controller.settings:updateAction
+        _dag:
             redirect:
                 route: accard_backend_activity_design
                 parameters: { type: settings, action: update }
@@ -29,7 +29,7 @@ accard_backend_activity_prototype_create:
     methods: [GET, POST]
     defaults:
         _controller: accard.controller.activity_prototype:createAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/Activity:prototypeCreate.html.twig
             redirect:
                 route: accard_backend_activity_design
@@ -40,7 +40,7 @@ accard_backend_activity_prototype_update:
     methods: [GET, PUT, POST]
     defaults:
         _controller: accard.controller.activity_prototype:updateAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/Activity:prototypeUpdate.html.twig
             redirect:
                 route: accard_backend_activity_design
@@ -52,7 +52,7 @@ accard_backend_activity_prototype_delete:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.activity_prototype:deleteAction
-        _accard:
+        _dag:
             redirect:
                 route: accard_backend_activity_design
                 parameters: { type: prototype, action: delete }
@@ -62,7 +62,7 @@ accard_backend_activity_field_create:
     methods: [GET, POST]
     defaults:
         _controller: accard.controller.activity_prototype_field:createAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/Activity:fieldCreate.html.twig
             redirect:
                 route: accard_backend_activity_design
@@ -73,7 +73,7 @@ accard_backend_activity_field_update:
     methods: [GET, PUT, POST]
     defaults:
         _controller: accard.controller.activity_prototype_field:updateAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/Activity:fieldUpdate.html.twig
             redirect:
                 route: accard_backend_activity_design
@@ -85,7 +85,7 @@ accard_backend_activity_field_delete:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.activity_prototype_field:deleteAction
-        _accard:
+        _dag:
             redirect:
                 route: accard_backend_activity_design
                 parameters: { type: field, action: delete }

@@ -22,19 +22,20 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class AccardCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
+    protected $applicationName = 'accard';
+
     /**
      * @var array
      */
     protected $bundles = array(
-        'accard_resource',
-        'accard_settings',
-        'accard_field',
-        'accard_prototype',
-        'accard_option',
+        'dag_resource',
+        'dag_settings',
+        'dag_field',
+        'dag_prototype',
+        'dag_option',
         'accard_patient',
         'accard_diagnosis',
         'accard_phase',
-        'accard_import',
         'accard_behavior',
         'accard_attribute',
         'accard_sample',

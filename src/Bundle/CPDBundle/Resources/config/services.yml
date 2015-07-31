@@ -8,11 +8,6 @@
 parameters:
 
     accard_cpd.controller.class: Accard\Bundle\CPDBundle\Controller\CPDController
-    accard.import.importer.cpd_genetic_results.class: Accard\Bundle\CPDBundle\Import\GeneticResultsImporter
-    accard.import.manager.cpd.class: Accard\Bundle\CPDBundle\Import\Manager
-    accard.import.converter.cpd.class: Accard\Bundle\CPDBundle\Import\Converter
-    accard.import.source.cpd.class: Accard\Bundle\CPDBundle\Import\CPDSource
-    accard.import.source.cpd_local.class: Accard\Bundle\CPDBundle\Import\LocalSource
 
 services:
 
@@ -22,36 +17,3 @@ services:
     accard_cpd.controller:
         class: "%accard_cpd.controller.class%"
         arguments: ["@doctrine.orm.accard_entity_manager"]
-
-    accard.import.importer.cpd_genetic_results:
-        class: %accard.import.importer.cpd_genetic_results.class%
-        arguments:
-            - @accard.provider.import_patient
-            - @accard.import.source.cpd_local
-            - @accard.import.source.cpd
-        tags: [{ name: accard.importer, importer: cpd_genetic_results }]
-
-    accard.import.converter.cpd:
-        class: "%accard.import.converter.cpd.class%"
-        arguments:
-            - @accard.provider.sample_prototype
-
-    accard.import.manager.cpd:
-        class: "%accard.import.manager.cpd.class%"
-        arguments:
-            - @accard.import.initializer.default
-            - @accard.import.converter.cpd
-            - @accard.import.persister.default
-        tags: [{ name: accard.manager, manager: cpd_genetic_results }]
-
-    accard.import.source.cpd:
-        class: "%accard.import.source.cpd.class%"
-        arguments:
-            - @accard.connection.pds
-            - ['205', '205.0', '205.00', '205.01', '205.02']
-
-    accard.import.source.cpd_local:
-        class: "%accard.import.source.cpd_local.class%"
-        arguments:
-            - @doctrine.dbal.default_connection
-            - @accard.provider.sample_prototype

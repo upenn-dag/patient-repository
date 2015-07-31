@@ -10,7 +10,7 @@ accard_backend_drug_group_index:
     methods: [GET]
     defaults:
         _controller: accard.controller.drug_group:drugGroupAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/Drug:groupIndex.html.twig
 
 accard_backend_drug_group_add:
@@ -30,7 +30,7 @@ accard_backend_drug_group_create:
     methods: [GET, POST]
     defaults:
         _controller: accard.controller.drug_group:createAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/Drug:groupCreate.html.twig
             redirect: accard_backend_drug_group_index
 
@@ -39,7 +39,7 @@ accard_backend_drug_group_update:
     methods: [GET, PUT, POST]
     defaults:
         _controller: accard.controller.drug_group:updateAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/Drug:groupUpdate.html.twig
             redirect: accard_backend_drug_group_index
 
@@ -48,7 +48,7 @@ accard_backend_drug_group_delete:
     methods: [DELETE]
     defaults:
         _controller: accard.controller.drug_group:deleteAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/Misc:delete.html.twig
             redirect: accard_backend_drug_group_index
 
@@ -57,7 +57,7 @@ accard_backend_drug_create:
     methods: [GET, POST]
     defaults:
         _controller: accard.controller.drug:createAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/Drug:drugCreate.html.twig
             redirect: accard_backend_drug_group_index
 
@@ -66,7 +66,7 @@ accard_backend_drug_update:
     methods: [GET, PUT, POST]
     defaults:
         _controller: accard.controller.drug:updateAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/Drug:drugUpdate.html.twig
             redirect: accard_backend_drug_group_index
 
@@ -75,6 +75,6 @@ accard_backend_drug_delete:
     methods: [DELETE]
     defaults:
         _controller: accard.controller.drug:deleteAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/Misc:delete.html.twig
             redirect: accard_backend_drug_group_index

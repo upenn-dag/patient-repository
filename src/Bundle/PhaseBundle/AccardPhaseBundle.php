@@ -11,7 +11,6 @@
 namespace Accard\Bundle\PhaseBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
-use DAG\Bundle\ResourceBundle\AccardResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

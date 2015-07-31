@@ -10,14 +10,14 @@ accard_backend_patient_design:
     methods: [GET]
     defaults:
         _controller: accard.controller.patient:designAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/Patient:design.html.twig
 
 accard_backend_patient_settings_update:
     pattern: /settings/update
     methods: [PUT, POST]
     defaults:
-        _controller: accard.controller.settings:updateAction
+        _controller: dag.controller.settings:updateAction
         namespace: patient
         redirect: accard_backend_patient_design
 
@@ -26,7 +26,7 @@ accard_backend_patient_field_create:
     methods: [GET, POST]
     defaults:
         _controller: accard.controller.patient_field:createAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/Patient:fieldCreate.html.twig
             redirect: accard_backend_patient_design
 
@@ -35,7 +35,7 @@ accard_backend_patient_field_update:
     methods: [GET, PUT, POST]
     defaults:
         _controller: accard.controller.patient_field:updateAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/Patient:fieldUpdate.html.twig
             redirect: accard_backend_patient_design
 
@@ -44,7 +44,7 @@ accard_backend_patient_field_delete:
     methods: [DELETE]
     defaults:
         _controller: accard.controller.patient_field:deleteAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/Misc:delete.html.twig
             redirect: accard_backend_patient_design
 
@@ -53,7 +53,7 @@ accard_backend_patient_phase_index:
     methods: [GET]
     defaults:
         _controller: accard.controller.patient_phase:indexAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/PatientPhase:index.html.twig
             sortable: true
             paginate: 12
@@ -65,7 +65,7 @@ accard_backend_patient_phase_create:
     methods: [GET, POST]
     defaults:
         _controller: accard.controller.patient_phase:createAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/PatientPhase:create.html.twig
             redirect: accard_backend_patient_phase_index
 
@@ -75,7 +75,7 @@ accard_backend_patient_phase_update:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.patient_phase:updateAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/PatientPhase:update.html.twig
             redirect: accard_backend_patient_phase_index
 
@@ -85,6 +85,6 @@ accard_backend_patient_phase_delete:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.patient_phase:deleteAction
-        _accard:
+        _dag:
             template: AccardWebBundle:Backend/PatientPhase:delete.html.twig
             redirect: accard_backend_patient_phase_index

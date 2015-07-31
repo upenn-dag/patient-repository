@@ -29,8 +29,8 @@ class PatientController extends ResourceController
      */
     public function designAction(Request $request)
     {
-        $manager = $this->get('accard.settings.manager');
-        $settingsForm = $this->get('accard.settings.form_factory')->create('patient');
+        $manager = $this->get('dag.settings.manager');
+        $settingsForm = $this->get('dag.settings.form_factory')->create('patient');
         $settingsForm->setData($manager->load('patient'));
 
         $view = $this
@@ -63,51 +63,13 @@ class PatientController extends ResourceController
     }
 
     /**
-     * Import patient index.
-     *
-     * @param Request $request
-     */
-    public function importAction(Request $request)
-    {
-        $enabled = $this->getPatientSettings()->get('import_enabled');
-
-        if (!$enabled) {
-            throw $this->createAccessDeniedException(
-                $this->get('translator')->trans('accard.form.patient.import_disabled')
-            );
-        }
-
-        $criteria = $this->config->getCriteria();
-        $sorting = $this->config->getSorting();
-
-        $repository = $this->get('accard.repository.import_patient');
-
-        $resources = $this->resourceResolver->getResource(
-            $repository,
-            'createActivePaginator',
-            array($criteria, $sorting)
-        );
-        $resources->setCurrentPage($request->get('page', 1), true, true);
-        $resources->setMaxPerPage($this->config->getPaginationMaxPerPage());
-
-        $view = $this
-            ->view()
-            ->setTemplate($this->config->getTemplate('import.html'))
-            ->setTemplateVar($this->config->getPluralResourceName())
-            ->setData($resources)
-        ;
-
-        return $this->handleView($view);
-    }
-
-    /**
      * Get patient settings.
      *
      * @return Settings
      */
     private function getPatientSettings()
     {
-        return $this->get('accard.settings.manager')->load('patient');
+        return $this->get('dag.settings.manager')->load('patient');
     }
 
     /**

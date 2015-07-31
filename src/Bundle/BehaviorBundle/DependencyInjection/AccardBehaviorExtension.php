@@ -14,7 +14,6 @@ use DAG\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-
 /**
  * Accard behavior bundle extension.
  *
@@ -22,6 +21,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class AccardBehaviorExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    protected $applicationName = 'accard';
+
     /**
      * {@inheritdoc}
      */
@@ -37,14 +41,14 @@ class AccardBehaviorExtension extends AbstractResourceExtension implements Prepe
     {
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
-        if (!$container->hasExtension('accard_prototype') || !$container->hasExtension('accard_field')) {
+        if (!$container->hasExtension('dag_prototype') || !$container->hasExtension('dag_field')) {
             return;
         }
 
         // Prepend behavior prototype.
-        $container->prependExtensionConfig('accard_prototype', array(
+        $container->prependExtensionConfig('dag_prototype', array(
             'classes' => array(
-                'behavior' => array(
+                $this->applicationName.':'.'behavior' => array(
                     'subject'   => $config['classes']['behavior']['model'],
                     'prototype' => array(
                         'model' => 'Accard\Component\Behavior\Model\Prototype',
@@ -61,9 +65,9 @@ class AccardBehaviorExtension extends AbstractResourceExtension implements Prepe
         );
 
         // Prepend behavior prototype field.
-        $container->prependExtensionConfig('accard_field', array(
+        $container->prependExtensionConfig('dag_field', array(
             'classes' => array(
-                'behavior_prototype' => array(
+                $this->applicationName.':'.'behavior_prototype' => array(
                     'subject'   => $config['classes']['behavior']['model'],
                     'field' => array(
                         'model' => 'Accard\Component\Behavior\Model\Field'

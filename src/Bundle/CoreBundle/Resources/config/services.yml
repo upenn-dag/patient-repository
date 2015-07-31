@@ -10,12 +10,6 @@ parameters:
     accard.state.class: Accard\Bundle\CoreBundle\AccardState
     accard.state.registry.class: Accard\Bundle\CoreBundle\State\DecoratorRegistry
     accard.form.extension.accard_attribute.class: Accard\Bundle\CoreBundle\Form\Extension\AttributeTypeExtension
-    accard.provider.import_patient.class: Accard\Bundle\CoreBundle\Provider\ImportPatientProvider
-    accard.provider.import_activity.class: Accard\Bundle\CoreBundle\Provider\ImportActivityProvider
-    accard.provider.import_sample.class: Accard\Bundle\CoreBundle\Provider\ImportSampleProvider
-    accard.fixture.manager.class: Accard\Bundle\CoreBundle\DataFixtures\FixtureManager
-    accard.fixture.option_builder.class: Accard\Bundle\CoreBundle\DataFixtures\OptionBuilder
-    accard.fixture.option_value_builder.class: Accard\Bundle\CoreBundle\DataFixtures\OptionValueBuilder
     doctrine.oracle.session_listener.class: DAG\Bundle\ResourceBundle\EventListener\OracleSessionInit
     doctrine.extension.listener.class: Accard\Bundle\CoreBundle\EventListener\DoctrineExtensionListener
 
@@ -29,34 +23,6 @@ services:
 
     accard.state.registry:
         class: %accard.state.registry.class%
-
-    accard.provider.import_patient:
-        class: %accard.provider.import_patient.class%
-        arguments:
-            - @accard.repository.import_patient
-
-    accard.provider.import_activity:
-        class: %accard.provider.import_activity.class%
-        argument:
-            - @accard.repository.import_activity
-
-    accard.provider.import_sample:
-        class: %accard.provider.import_sample.class%
-        argument:
-            - @accard.repository.import_sample
-
-    accard.fixture.manager:
-        class: %accard.fixture.manager.class%
-
-    accard.fixture.option_builder:
-        class: %accard.fixture.option_builder.class%
-        calls:
-            - [setOptionClass, ["%accard.model.option.class%"]]
-
-    accard.fixture.option_value_builder:
-        class: %accard.fixture.option_value_builder.class%
-        calls:
-            - [setOptionValueClass, ["%accard.model.optionvalue.class"]]
 
     doctrine.oracle.default_session_listener:
         class: %doctrine.oracle.session_listener.class%

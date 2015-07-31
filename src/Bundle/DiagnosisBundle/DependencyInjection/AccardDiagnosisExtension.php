@@ -26,6 +26,11 @@ class AccardDiagnosisExtension extends AbstractResourceExtension implements Prep
     /**
      * {@inheritdoc}
      */
+    protected $applicationName = 'accard';
+
+    /**
+     * {@inheritdoc}
+     */
     protected $configFiles = array('services', 'builders', 'forms', 'providers');
 
     /**
@@ -48,13 +53,13 @@ class AccardDiagnosisExtension extends AbstractResourceExtension implements Prep
 
     private function prependField(ContainerBuilder $container, array $config)
     {
-        if (!$container->hasExtension('accard_field')) {
+        if (!$container->hasExtension('dag_field')) {
             return;
         }
 
-        $container->prependExtensionConfig('accard_field', array(
+        $container->prependExtensionConfig('dag_field', array(
             'classes' => array(
-                'diagnosis' => array(
+                $this->applicationName.':'.'diagnosis' => array(
                     'subject'   => $config['classes']['diagnosis']['model'],
                     'field' => array(
                         'model' => 'Accard\Component\Diagnosis\Model\Field'

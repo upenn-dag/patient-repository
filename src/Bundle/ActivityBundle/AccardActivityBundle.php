@@ -12,8 +12,8 @@ namespace Accard\Bundle\ActivityBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use DAG\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
-use DAG\Bundle\ResourceBundle\AccardResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -35,7 +35,7 @@ class AccardActivityBundle extends Bundle
             'Accard\Component\Activity\Model\PrototypeInterface' => 'accard.model.activity_prototype.class',
         );
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('accard_activity', $interfaces));
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('accard_activity', $interfaces), PassConfig::TYPE_BEFORE_REMOVING);
 
         $mappings = array(
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Accard\Component\Activity\Model',

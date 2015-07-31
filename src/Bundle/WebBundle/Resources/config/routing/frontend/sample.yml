@@ -10,7 +10,7 @@ accard_frontend_sample_index:
     methods: [GET]
     defaults:
         _controller: accard.controller.sample:indexAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:index.html.twig
             sortable: true
             paginate: 25
@@ -20,7 +20,7 @@ accard_frontend_sample_source_collection_index:
     methods: [GET]
     defaults:
         _controller: accard.controller.sample_source:indexAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:sourceIndex.html.twig
             sortable: true
             method: createCollectionPaginator
@@ -31,7 +31,7 @@ accard_frontend_sample_source_derivation_index:
     methods: [GET]
     defaults:
         _controller: accard.controller.sample_source:indexAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:sourceIndex.html.twig
             sortable: true
             method: createDerivationPaginator
@@ -42,7 +42,7 @@ accard_frontend_sample_index_by_prototype:
     methods: [GET]
     defaults:
         _controller: accard.controller.sample:indexByPrototypeAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:indexByPrototype.html.twig
             sortable: true
             criteria:
@@ -55,7 +55,7 @@ accard_frontend_sample_source_collection_show:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.sample_source:showAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:showSource.html.twig
 
 accard_frontend_sample_source_derivation_show:
@@ -64,7 +64,7 @@ accard_frontend_sample_source_derivation_show:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.sample_source:showAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:showSource.html.twig
 
 accard_frontend_sample_show:
@@ -73,7 +73,7 @@ accard_frontend_sample_show:
     requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
     defaults:
         _controller: accard.controller.sample:showAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:show.html.twig
 
 accard_frontend_sample_source_collection_create:
@@ -81,7 +81,7 @@ accard_frontend_sample_source_collection_create:
     methods: [GET, POST]
     defaults:
         _controller: accard.controller.sample_source:createAction
-        _accard:
+        _dag:
             form: accard_sample_source_collection
             template: Theme:Frontend/Sample:sourceCreate.html.twig
             redirect: accard_frontend_sample_source_collection_index
@@ -91,7 +91,7 @@ accard_frontend_sample_source_derivation_create:
     methods: [GET, POST]
     defaults:
         _controller: accard.controller.sample_source:createAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:sourceCreate.html.twig
             redirect: accard_frontend_sample_source_derivation_index
             form: accard_sample_source_derivation
@@ -102,7 +102,7 @@ accard_frontend_sample_create:
     requirements: { prototype: "[a-zA-Z1-9\-_\/]+" }
     defaults:
         _controller: accard.controller.sample:createAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:create.html.twig
             redirect:
                 route: accard_frontend_sample_index_by_prototype
@@ -114,7 +114,7 @@ accard_frontend_sample_source_collection_update:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.sample_source:updateAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:sourceUpdate.html.twig
             redirect: accard_frontend_sample_source_collection_index
             form: accard_sample_source_collection
@@ -125,7 +125,7 @@ accard_frontend_sample_source_derivation_update:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.sample_source:updateActiion
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:sourceUpdate.html.twig
             redirect: accard_frontend_sample_source_derivation_index
             form: accard_sample_source_derivation
@@ -136,7 +136,7 @@ accard_frontend_sample_update:
     requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
     defaults:
         _controller: accard.controller.sample:updateAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:update.html.twig
             redirect:
                 route: accard_frontend_sample_index_by_prototype
@@ -148,7 +148,7 @@ accard_frontend_sample_source_collection_delete:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.sample_source:deleteAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:delete.html.twig
             redirect:
                 route: accard_frontend_sample_source_collection_index
@@ -160,7 +160,7 @@ accard_frontend_sample_source_derivation_delete:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.sample_source:deleteAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:delete.html.twig
             redirect:
                 route: accard_frontend_sample_source_derivation_index
@@ -172,7 +172,7 @@ accard_frontend_sample_delete:
     requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
     defaults:
         _controller: accard.controller.sample:deleteAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:delete.html.twig
             redirect:
                 route: accard_frontend_sample_index

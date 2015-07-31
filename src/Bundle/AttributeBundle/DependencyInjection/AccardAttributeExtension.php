@@ -14,14 +14,19 @@ use DAG\Bundle\ResourceBundle\DependencyInjection\AbstractResourceExtension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-
 /**
  * Accard attribute bundle extension.
  *
+ * @author Frank Bardon Jr. <bardonf@upenn.edu>
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
 class AccardAttributeExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    protected $applicationName = 'accard';
+
     /**
      * {@inheritdoc}
      */
@@ -37,14 +42,14 @@ class AccardAttributeExtension extends AbstractResourceExtension implements Prep
     {
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
-        if (!$container->hasExtension('accard_prototype') || !$container->hasExtension('accard_field')) {
+        if (!$container->hasExtension('dag_prototype') || !$container->hasExtension('dag_field')) {
             return;
         }
 
         // Prepend attribute prototype.
-        $container->prependExtensionConfig('accard_prototype', array(
+        $container->prependExtensionConfig('dag_prototype', array(
             'classes' => array(
-                'attribute' => array(
+                $this->applicationName.':'.'attribute' => array(
                     'subject'   => $config['classes']['attribute']['model'],
                     'prototype' => array(
                         'model' => 'Accard\Component\Attribute\Model\Prototype',
@@ -61,9 +66,9 @@ class AccardAttributeExtension extends AbstractResourceExtension implements Prep
         );
 
         // Prepend attribute prototype field.
-        $container->prependExtensionConfig('accard_field', array(
+        $container->prependExtensionConfig('dag_field', array(
             'classes' => array(
-                'attribute_prototype' => array(
+                $this->applicationName.':'.'attribute_prototype' => array(
                     'subject'   => $config['classes']['attribute']['model'],
                     'field' => array(
                         'model' => 'Accard\Component\Attribute\Model\Field'

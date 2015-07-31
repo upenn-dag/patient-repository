@@ -10,13 +10,6 @@ Accard\Component\Core\Model\Patient:
     table: accard_patient
     repositoryClass: Accard\Bundle\PatientBundle\Doctrine\ORM\PatientRepository
 
-    oneToOne:
-        target:
-            targetEntity: Accard\Component\Core\Model\ImportPatientInterface
-            fetch: EXTRA_LAZY
-            joinColumn:
-                name: targetId
-
     oneToMany:
         diagnoses:
             targetEntity: Accard\Component\Diagnosis\Model\DiagnosisInterface

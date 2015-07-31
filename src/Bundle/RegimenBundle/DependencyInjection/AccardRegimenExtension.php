@@ -24,6 +24,11 @@ class AccardRegimenExtension extends AbstractResourceExtension implements Prepen
     /**
      * {@inheritdoc}
      */
+    protected $applicationName = 'accard';
+
+    /**
+     * {@inheritdoc}
+     */
     public function load(array $config, ContainerBuilder $container)
     {
         $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
@@ -36,14 +41,14 @@ class AccardRegimenExtension extends AbstractResourceExtension implements Prepen
     {
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
-        if (!$container->hasExtension('accard_prototype') || !$container->hasExtension('accard_field')) {
+        if (!$container->hasExtension('dag_prototype') || !$container->hasExtension('dag_field')) {
             return;
         }
 
         // Prepend regimen prototype.
-        $container->prependExtensionConfig('accard_prototype', array(
+        $container->prependExtensionConfig('dag_prototype', array(
             'classes' => array(
-                'regimen' => array(
+                $this->applicationName.':'.'regimen' => array(
                     'subject'   => $config['classes']['regimen']['model'],
                     'prototype' => array(
                         'model' => 'Accard\Component\Regimen\Model\Prototype',
@@ -61,9 +66,9 @@ class AccardRegimenExtension extends AbstractResourceExtension implements Prepen
         );
 
         // Prepend regimen prototype field.
-        $container->prependExtensionConfig('accard_field', array(
+        $container->prependExtensionConfig('dag_field', array(
             'classes' => array(
-                'regimen_prototype' => array(
+                $this->applicationName.':'.'regimen_prototype' => array(
                     'subject'   => $config['classes']['regimen']['model'],
                     'field' => array(
                         'model' => 'Accard\Component\Regimen\Model\Field'

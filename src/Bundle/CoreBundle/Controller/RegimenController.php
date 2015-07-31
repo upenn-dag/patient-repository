@@ -31,7 +31,7 @@ class RegimenController extends ResourceController
      */
     public function initialize(Request $request, AuthorizationCheckerInterface $authChecker)
     {
-        $settings = $this->get('accard.settings.manager')->load('regimen');
+        $settings = $this->get('dag.settings.manager')->load('regimen');
 
         if ($authChecker->isGranted('ROLE_ADMIN')) {
             return;
@@ -81,8 +81,8 @@ class RegimenController extends ResourceController
      */
     public function designAction(Request $request)
     {
-        $manager = $this->get('accard.settings.manager');
-        $settingsForm = $this->get('accard.settings.form_factory')->create('regimen');
+        $manager = $this->get('dag.settings.manager');
+        $settingsForm = $this->get('dag.settings.form_factory')->create('regimen');
         $settingsForm->setData($manager->load('regimen'));
 
         $criteria = $this->config->getCriteria();

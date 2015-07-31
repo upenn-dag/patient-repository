@@ -10,7 +10,7 @@ accard_frontend_activity_index:
     methods: [GET]
     defaults:
         _controller: accard.controller.activity:indexAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Activity:index.html.twig
             sortable: true
             paginate: 25
@@ -20,7 +20,7 @@ accard_frontend_activity_index_by_prototype:
     methods: [GET]
     defaults:
         _controller: accard.controller.activity:indexByPrototypeAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Activity:indexByPrototype.html.twig
             sortable: true
             criteria:
@@ -33,7 +33,7 @@ accard_frontend_activity_show:
     requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
     defaults:
         _controller: accard.controller.activity:showAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Activity:show.html.twig
 
 accard_frontend_activity_create:
@@ -42,7 +42,7 @@ accard_frontend_activity_create:
     requirements: { prototype: "[a-zA-Z1-9\-_\/]+" }
     defaults:
         _controller: accard.controller.activity:createAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Activity:create.html.twig
             redirect:
                 route: accard_frontend_activity_index_by_prototype
@@ -54,7 +54,7 @@ accard_frontend_activity_update:
     requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
     defaults:
         _controller: accard.controller.activity:updateAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Activity:update.html.twig
             redirect:
                 route: accard_frontend_activity_index_by_prototype
@@ -66,7 +66,7 @@ accard_frontend_activity_delete:
     requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
     defaults:
         _controller: accard.controller.activity:deleteAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Activity:delete.html.twig
             redirect:
                 route: accard_frontend_activity_index_by_prototype

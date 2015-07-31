@@ -10,7 +10,7 @@ accard_frontend_regimen_index:
     methods: [GET]
     defaults:
         _controller: accard.controller.regimen:indexAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Regimen:index.html.twig
             sortable: true
             paginate: 25
@@ -20,7 +20,7 @@ accard_frontend_regimen_index_by_prototype:
     methods: [GET]
     defaults:
         _controller: accard.controller.regimen:indexByPrototypeAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Regimen:indexByPrototype.html.twig
             sortable: true
             criteria:
@@ -33,7 +33,7 @@ accard_frontend_regimen_activities:
     requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
     defaults:
         _controller: accard.controller.regimen:activitiesAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Regimen:activities.html.twig
             redirect:
                 route: accard_frontend_regimen_index_by_prototype
@@ -45,7 +45,7 @@ accard_frontend_regimen_show:
     requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
     defaults:
         _controller: accard.controller.regimen:showAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Regimen:show.html.twig
 
 accard_frontend_regimen_create:
@@ -54,7 +54,7 @@ accard_frontend_regimen_create:
     requirements: { prototype: "[a-zA-Z1-9\-_\/]+" }
     defaults:
         _controller: accard.controller.regimen:createAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Regimen:create.html.twig
             redirect:
                 route: accard_frontend_regimen_index_by_prototype
@@ -66,7 +66,7 @@ accard_frontend_regimen_update:
     requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
     defaults:
         _controller: accard.controller.regimen:updateAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Regimen:update.html.twig
             redirect:
                 route: accard_frontend_regimen_index_by_prototype
@@ -78,7 +78,7 @@ accard_frontend_regimen_delete:
     requirements: { prototype: "[a-zA-Z1-9\-_\/]+", id: \d+ }
     defaults:
         _controller: accard.controller.regimen:deleteAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Regimen:delete.html.twig
             redirect:
                 route: accard_frontend_regimen_index_by_prototype

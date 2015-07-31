@@ -4,7 +4,7 @@ accard_frontend_activity_show:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.activity:showAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Activity:show.html.twig
     options:
         expose: true
@@ -14,7 +14,7 @@ accard_frontend_activity_create:
     methods: [GET, POST]
     defaults:
         _controller: accard.controller.activity:createAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Activity:create.html.twig
             redirect:
                 route: accard_frontend_activity_update
@@ -28,7 +28,7 @@ accard_frontend_activity_update:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.activity:updateAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Activity:update.html.twig
             redirect:
                 route: accard_frontend_activity_update
@@ -42,7 +42,7 @@ accard_frontend_activity_delete:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.activity:deleteAction
-        _accard:
+        _dag:
             redirect:
                 route: accard_frontend_deleted
                 parameters: { type: 'activity', id: $id }

@@ -86,6 +86,7 @@ accard:
                 manage_options: Manage Options
                 create_option: Creating Option
                 update_option: Updating Option, %option%
+                update_patient_phase: Updating Patient Phase
         frontend:
             titles:
                 login: Accard Login

@@ -17,14 +17,14 @@ use Doctrine\ORM\EntityManager;
 
 /**
  * HMTB controller.
- * 
+ *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
 class HMTBController extends Controller
 {
     /**
      * Patient action.
-     * 
+     *
      * @param string $mrn
      * @return JsonResponse
      */
@@ -39,14 +39,8 @@ class HMTBController extends Controller
         return $response;
     }
 
-    private function getOptionProvider()
-    {
-        return $this->get('accard.provider.option');
-    }
-
     private function getPatients()
     {
         return $this->getDoctrine()->getManager('accard')->getRepository("AccardCPDBundle:Patient");
     }
-
 }

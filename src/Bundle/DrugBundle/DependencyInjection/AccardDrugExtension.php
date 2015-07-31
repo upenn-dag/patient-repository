@@ -23,6 +23,11 @@ class AccardDrugExtension extends AbstractResourceExtension
     /**
      * {@inheritdoc}
      */
+    protected $applicationName = 'accard';
+
+    /**
+     * {@inheritdoc}
+     */
     protected $configFiles = array('services', 'forms');
 
     /**

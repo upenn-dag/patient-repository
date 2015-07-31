@@ -12,8 +12,8 @@ namespace Accard\Bundle\PatientBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use DAG\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
-use DAG\Bundle\ResourceBundle\AccardResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -34,7 +34,7 @@ class AccardPatientBundle extends Bundle
             'Accard\Component\Patient\Model\FieldValueInterface' => 'accard.model.patient_field_value.class',
         );
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('accard_patient', $interfaces));
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('accard_patient', $interfaces), PassConfig::TYPE_BEFORE_REMOVING);
 
         $mappings = array(
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Accard\Component\Patient\Model',

@@ -12,8 +12,8 @@ namespace Accard\Bundle\RegimenBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use DAG\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
-use DAG\Bundle\ResourceBundle\AccardResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -35,7 +35,7 @@ class AccardRegimenBundle extends Bundle
             'Accard\Component\Regimen\Model\PrototypeInterface' => 'accard.model.regimen_prototype.class',
         );
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('accard_regimen', $interfaces));
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('accard_regimen', $interfaces), PassConfig::TYPE_BEFORE_REMOVING);
 
         $mappings = array(
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Accard\Component\Regimen\Model',

@@ -12,8 +12,8 @@ namespace Accard\Bundle\BehaviorBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use DAG\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
-use DAG\Bundle\ResourceBundle\AccardResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -36,7 +36,7 @@ class AccardBehaviorBundle extends Bundle
             'Accard\Component\Behavior\Model\PrototypeInterface' => 'accard.model.behavior_prototype.class',
         );
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('accard_behavior', $interfaces));
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('accard_behavior', $interfaces), PassConfig::TYPE_BEFORE_REMOVING);
 
         $mappings = array(
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Accard\Component\Behavior\Model',

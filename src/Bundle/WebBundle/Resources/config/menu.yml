@@ -19,7 +19,7 @@ services:
             - "@security.context"
             - "@translator"
             - "@event_dispatcher"
-            - "@accard.settings.manager"
+            - "@dag.settings.manager"
 
     accard.menu.backend.main:
         class: Knp\Menu\MenuItem

@@ -28,7 +28,7 @@ class SampleController extends ResourceController
      */
     public function initialize(Request $request, AuthorizationCheckerInterface $authChecker)
     {
-        $settings = $this->get('accard.settings.manager')->load('sample');
+        $settings = $this->get('dag.settings.manager')->load('sample');
 
         if ($authChecker->isGranted('ROLE_ADMIN')) {
             return;
@@ -46,8 +46,8 @@ class SampleController extends ResourceController
      */
     public function designAction(Request $request)
     {
-        $manager = $this->get('accard.settings.manager');
-        $settingsForm = $this->get('accard.settings.form_factory')->create('sample');
+        $manager = $this->get('dag.settings.manager');
+        $settingsForm = $this->get('dag.settings.form_factory')->create('sample');
         $settingsForm->setData($manager->load('sample'));
 
         $view = $this

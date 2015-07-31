@@ -28,7 +28,7 @@ class BehaviorController extends ResourceController
      */
     public function initialize(Request $request, AuthorizationCheckerInterface $authChecker)
     {
-        $settings = $this->get('accard.settings.manager')->load('behavior');
+        $settings = $this->get('dag.settings.manager')->load('behavior');
 
         if ($authChecker->isGranted('ROLE_ADMIN')) {
             return;
@@ -46,8 +46,8 @@ class BehaviorController extends ResourceController
      */
     public function designAction(Request $request)
     {
-        $manager = $this->get('accard.settings.manager');
-        $settingsForm = $this->get('accard.settings.form_factory')->create('behavior');
+        $manager = $this->get('dag.settings.manager');
+        $settingsForm = $this->get('dag.settings.form_factory')->create('behavior');
         $settingsForm->setData($manager->load('behavior'));
 
         $view = $this

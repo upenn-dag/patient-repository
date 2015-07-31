@@ -10,7 +10,7 @@ accard_frontend_patient_index:
     methods: [GET]
     defaults:
         _controller: accard.controller.patient:indexAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Patient:index.html.twig
             sortable: true
             filterable: true
@@ -23,7 +23,7 @@ accard_frontend_patient_import:
     methods: [GET]
     defaults:
         _controller: accard.controller.patient:importAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Patient:import.html.twig
             sortable: true
             paginate: 25
@@ -34,7 +34,7 @@ accard_frontend_patient_show:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.patient:showAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Patient:show.html.twig
 
 accard_frontend_patient_create:
@@ -42,7 +42,7 @@ accard_frontend_patient_create:
     methods: [GET, POST]
     defaults:
         _controller: accard.controller.patient:createAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Patient:create.html.twig
             redirect: accard_frontend_patient_show
 
@@ -52,7 +52,7 @@ accard_frontend_patient_update:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.patient:updateAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Patient:update.html.twig
             redirect: accard_frontend_patient_show
 
@@ -62,6 +62,6 @@ accard_frontend_patient_delete:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.patient:deleteAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Patient:delete.html.twig
             redirect: accard_frontend_patient_index

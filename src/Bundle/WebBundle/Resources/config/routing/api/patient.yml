@@ -11,7 +11,7 @@ accard_api_patient_diagnoses:
     requirements: { patient: \d+ }
     defaults:
         _controller: accard.controller.diagnosis:indexAction
-        _accard:
+        _dag:
             sortable: true
             paginate: false
             criteria:
@@ -23,7 +23,7 @@ accard_api_patient_activities:
     requirements: { patient: \d+ }
     defaults:
         _controller: accard.controller.activity:indexAction
-        _accard:
+        _dag:
             sortable: true
             paginate: false
             criteria:

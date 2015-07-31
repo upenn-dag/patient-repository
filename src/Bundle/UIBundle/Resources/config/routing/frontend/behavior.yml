@@ -4,7 +4,7 @@ accard_frontend_behavior_show:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.behavior:showAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Behavior:show.html.twig
     options:
         expose: true
@@ -14,7 +14,7 @@ accard_frontend_behavior_create:
     methods: [GET, POST]
     defaults:
         _controller: accard.controller.behavior:createAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Behavior:create.html.twig
             redirect:
                 route: accard_frontend_behavior_update
@@ -28,7 +28,7 @@ accard_frontend_behavior_update:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.behavior:updateAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Behavior:update.html.twig
             redirect:
                 route: accard_frontend_behavior_update
@@ -42,7 +42,7 @@ accard_frontend_behavior_delete:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.behavior:deleteAction
-        _accard:
+        _dag:
             redirect:
                 route: accard_frontend_deleted
                 parameters: { type: 'behavior', id: $id }

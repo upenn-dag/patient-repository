@@ -4,7 +4,7 @@ accard_frontend_sample_show:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.sample:showAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:show.html.twig
     options:
         expose: true
@@ -14,7 +14,7 @@ accard_frontend_sample_create:
     methods: [GET, POST]
     defaults:
         _controller: accard.controller.sample:createAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:create.html.twig
             redirect:
                 route: accard_frontend_sample_update
@@ -28,7 +28,7 @@ accard_frontend_sample_update:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.sample:updateAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Sample:update.html.twig
             redirect:
                 route: accard_frontend_sample_update
@@ -42,7 +42,7 @@ accard_frontend_sample_delete:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.sample:deleteAction
-        _accard:
+        _dag:
             redirect:
                 route: accard_frontend_deleted
                 parameters: { type: 'sample', id: $id }

@@ -2,6 +2,7 @@ parameters:
 
     twig.extension.text.class: Twig_Extensions_Extension_Text
     twig.extension.intl.class: Twig_Extensions_Extension_Intl
+    accard.twig.extension.ui.class: Accard\Bundle\UIBundle\Twig\UIExtension
 
 services:
 
@@ -13,4 +14,10 @@ services:
     accard.twig.extension.intl:
         class: %twig.extension.intl.class%
         public: false
+        tags: [{ name: twig.extension }]
+
+    accard.twig.extension.ui:
+        class: %accard.twig.extension.ui.class%
+        calls:
+            - ["setContainer", ["@service_container"]]
         tags: [{ name: twig.extension }]

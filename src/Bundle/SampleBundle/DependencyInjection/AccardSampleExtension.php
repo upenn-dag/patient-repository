@@ -24,6 +24,11 @@ class AccardSampleExtension extends AbstractResourceExtension implements Prepend
     /**
      * {@inheritdoc}
      */
+    protected $applicationName = 'accard';
+
+    /**
+     * {@inheritdoc}
+     */
     public function load(array $config, ContainerBuilder $container)
     {
         $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
@@ -36,14 +41,14 @@ class AccardSampleExtension extends AbstractResourceExtension implements Prepend
     {
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
-        if (!$container->hasExtension('accard_prototype') || !$container->hasExtension('accard_field')) {
+        if (!$container->hasExtension('dag_prototype') || !$container->hasExtension('dag_field')) {
             return;
         }
 
         // Prepend sample prototype.
-        $container->prependExtensionConfig('accard_prototype', array(
+        $container->prependExtensionConfig('dag_prototype', array(
             'classes' => array(
-                'sample' => array(
+                $this->applicationName.':'.'sample' => array(
                     'subject'   => $config['classes']['sample']['model'],
                     'prototype' => array(
                         'model' => 'Accard\Component\Sample\Model\Prototype',
@@ -60,9 +65,9 @@ class AccardSampleExtension extends AbstractResourceExtension implements Prepend
         );
 
         // Prepend sample prototype field.
-        $container->prependExtensionConfig('accard_field', array(
+        $container->prependExtensionConfig('dag_field', array(
             'classes' => array(
-                'sample_prototype' => array(
+                $this->applicationName.':'.'sample_prototype' => array(
                     'subject'   => $config['classes']['sample']['model'],
                     'field' => array(
                         'model' => 'Accard\Component\Sample\Model\Field'

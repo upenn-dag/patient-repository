@@ -24,6 +24,11 @@ class AccardActivityExtension extends AbstractResourceExtension implements Prepe
     /**
      * {@inheritdoc}
      */
+    protected $applicationName = 'accard';
+
+    /**
+     * {@inheritdoc}
+     */
     public function load(array $config, ContainerBuilder $container)
     {
         $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
@@ -47,14 +52,14 @@ class AccardActivityExtension extends AbstractResourceExtension implements Prepe
      */
     private function prependPrototype(ContainerBuilder $container, array $config)
     {
-        if (!$container->hasExtension('accard_prototype') || !$container->hasExtension('accard_field')) {
+        if (!$container->hasExtension('dag_prototype') || !$container->hasExtension('dag_field')) {
             return;
         }
 
         // Prepend activity prototype.
-        $container->prependExtensionConfig('accard_prototype', array(
+        $container->prependExtensionConfig('dag_prototype', array(
             'classes' => array(
-                'activity' => array(
+                $this->applicationName.':'.'activity' => array(
                     'subject'   => $config['classes']['activity']['model'],
                     'prototype' => array(
                         'model' => 'Accard\Component\Activity\Model\Prototype',
@@ -72,9 +77,9 @@ class AccardActivityExtension extends AbstractResourceExtension implements Prepe
         );
 
         // Prepend activity prototype field.
-        $container->prependExtensionConfig('accard_field', array(
+        $container->prependExtensionConfig('dag_field', array(
             'classes' => array(
-                'activity_prototype' => array(
+                $this->applicationName.':'.'activity_prototype' => array(
                     'subject'   => $config['classes']['activity']['model'],
                     'field' => array(
                         'model' => 'Accard\Component\Activity\Model\Field'

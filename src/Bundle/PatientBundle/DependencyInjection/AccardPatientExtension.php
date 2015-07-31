@@ -26,6 +26,11 @@ class AccardPatientExtension extends AbstractResourceExtension implements Prepen
     /**
      * {@inheritdoc}
      */
+    protected $applicationName = 'accard';
+
+    /**
+     * {@inheritdoc}
+     */
     public function load(array $config, ContainerBuilder $container)
     {
         $this->configure($config, new Configuration(), $container, self::CONFIGURE_LOADER | self::CONFIGURE_DATABASE | self::CONFIGURE_PARAMETERS | self::CONFIGURE_VALIDATORS);
@@ -43,13 +48,13 @@ class AccardPatientExtension extends AbstractResourceExtension implements Prepen
 
     private function prependField(ContainerBuilder $container, array $config)
     {
-        if (!$container->hasExtension('accard_field')) {
+        if (!$container->hasExtension('dag_field')) {
             return;
         }
 
-        $container->prependExtensionConfig('accard_field', array(
+        $container->prependExtensionConfig('dag_field', array(
             'classes' => array(
-                'patient' => array(
+                $this->applicationName.':'.'patient' => array(
                     'subject'   => $config['classes']['patient']['model'],
                     'field' => array(
                         'model' => 'Accard\Component\Patient\Model\Field'

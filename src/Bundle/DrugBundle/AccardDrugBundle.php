@@ -13,6 +13,7 @@ namespace Accard\Bundle\DrugBundle;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use DAG\Bundle\ResourceBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -32,7 +33,7 @@ class AccardDrugBundle extends Bundle
             'Accard\Component\Drug\Model\DrugGroupInterface' => 'accard.model.drug_group.class',
         );
 
-        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('accard_drug', $interfaces));
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('accard_drug', $interfaces), PassConfig::TYPE_BEFORE_REMOVING);
 
         $mappings = array(
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'Accard\Component\Drug\Model',

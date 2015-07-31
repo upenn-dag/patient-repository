@@ -6,7 +6,7 @@
 # file that was distributed with this source code.
 
 imports:
-    - { resource: accard.yml }
+    - { resource: dag.yml }
 
 lexik_translation:
     fallback_locale: en
@@ -14,9 +14,9 @@ lexik_translation:
 
 doctrine_cache:
     providers:
-        accard_settings:
+        dag_settings:
             type: apc
-            namespace: accard_%accard_app_name%_settings
+            namespace: dag_%dag_app_name%_settings
 
 #mopa_bootstrap:
 #    form:

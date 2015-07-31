@@ -67,7 +67,7 @@
       </div>
     </div>
   </div>
-  {% if accard_setting('diagnosis.collect_phases') %}
+  {% if dag_setting('diagnosis.collect_phases') %}
   <div class="tab-pane fade" id="diagnosis-phases">
     <div class="row">
       <div id="phases" class="col-md-12" data-prototype="{{ _self.phase_form(form.phases.vars.prototype)|e }}">

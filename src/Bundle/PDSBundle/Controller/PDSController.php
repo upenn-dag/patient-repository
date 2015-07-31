@@ -17,14 +17,14 @@ use Doctrine\ORM\EntityManager;
 
 /**
  * Penn Data Store controller.
- * 
+ *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
 class PDSController extends Controller
 {
     /**
      * Patient action.
-     * 
+     *
      * @param string $mrn
      * @return JsonResponse
      */
@@ -89,7 +89,7 @@ class PDSController extends Controller
 
     private function getOptionProvider()
     {
-        return $this->get('accard.provider.option');
+        return $this->get('dag.provider.option');
     }
 
     private function getPatients()

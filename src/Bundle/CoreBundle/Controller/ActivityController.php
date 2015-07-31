@@ -28,7 +28,7 @@ class ActivityController extends ResourceController
      */
     public function initialize(Request $request, AuthorizationCheckerInterface $authChecker)
     {
-        $settings = $this->get('accard.settings.manager')->load('activity');
+        $settings = $this->get('dag.settings.manager')->load('activity');
 
         if ($authChecker->isGranted('ROLE_ADMIN')) {
             return;
@@ -46,8 +46,8 @@ class ActivityController extends ResourceController
      */
     public function designAction(Request $request)
     {
-        $manager = $this->get('accard.settings.manager');
-        $settingsForm = $this->get('accard.settings.form_factory')->create('activity');
+        $manager = $this->get('dag.settings.manager');
+        $settingsForm = $this->get('dag.settings.form_factory')->create('activity');
         $settingsForm->setData($manager->load('activity'));
 
         $view = $this

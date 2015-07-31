@@ -21,36 +21,36 @@ services:
 
     accard.settings_schema.general:
         class: %accard.settings_schema.general.class%
-        tags: [{ name: accard.settings_schema, namespace: general }]
+        tags: [{ name: dag.settings_schema, namespace: general }]
 
     accard.settings_schema.theme:
         class: %accard.settings_schema.theme.class%
-        tags: [{ name: accard.settings_schema, namespace: theme }]
+        tags: [{ name: dag.settings_schema, namespace: theme }]
 
     accard.settings_schema.patient:
         class: %accard.settings_schema.patient.class%
-        tags: [{ name: accard.settings_schema, namespace: patient }]
+        tags: [{ name: dag.settings_schema, namespace: patient }]
 
     accard.settings_schema.diagnosis:
         class: %accard.settings_schema.diagnosis.class%
-        tags: [{ name: accard.settings_schema, namespace: diagnosis }]
+        tags: [{ name: dag.settings_schema, namespace: diagnosis }]
 
     accard.settings_schema.activity:
         class: %accard.settings_schema.activity.class%
-        tags: [{ name: accard.settings_schema, namespace: activity }]
+        tags: [{ name: dag.settings_schema, namespace: activity }]
 
     accard.settings_schema.sample:
         class: %accard.settings_schema.sample.class%
-        tags: [{ name: accard.settings_schema, namespace: sample }]
+        tags: [{ name: dag.settings_schema, namespace: sample }]
 
     accard.settings_schema.regimen:
         class: %accard.settings_schema.regimen.class%
-        tags: [{ name: accard.settings_schema, namespace: regimen }]
+        tags: [{ name: dag.settings_schema, namespace: regimen }]
 
     accard.settings_schema.behavior:
         class: %accard.settings_schema.behavior.class%
-        tags: [{ name: accard.settings_schema, namespace: behavior }]
+        tags: [{ name: dag.settings_schema, namespace: behavior }]
 
     accard.settings_schema.attribute:
         class: %accard.settings_schema.attribute.class%
-        tags: [{ name: accard.settings_schema, namespace: attribute }]
+        tags: [{ name: dag.settings_schema, namespace: attribute }]

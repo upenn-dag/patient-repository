@@ -17,14 +17,14 @@ use Doctrine\ORM\EntityManager;
 
 /**
  * CPD controller.
- * 
+ *
  * @author Dylan Pierce <piercedy@upenn.edu>
  */
 class CPDController extends Controller
 {
     /**
      * Patient action.
-     * 
+     *
      * @param string $mrn
      * @return JsonResponse
      */
@@ -39,14 +39,8 @@ class CPDController extends Controller
         return $response;
     }
 
-    private function getOptionProvider()
-    {
-        return $this->get('accard.provider.option');
-    }
-
     private function getPatients()
     {
         return $this->getDoctrine()->getManager('accard')->getRepository("AccardCPDBundle:Patient");
     }
-
 }

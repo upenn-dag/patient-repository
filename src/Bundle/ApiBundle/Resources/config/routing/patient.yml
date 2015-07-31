@@ -3,7 +3,7 @@ accard_api_patient_index:
     methods: [GET]
     defaults:
         _controller: accard.controller.patient:indexAction
-        _accard:
+        _dag:
             method: createFilterPaginator
             arguments: [$criteria, $sorting]
             paginate: $limit
@@ -17,5 +17,5 @@ accard_api_patient_show:
     methods: [GET]
     defaults:
         _controller: accard.controller.patient:showAction
-        _accard:
+        _dag:
             serialization_groups: [api]

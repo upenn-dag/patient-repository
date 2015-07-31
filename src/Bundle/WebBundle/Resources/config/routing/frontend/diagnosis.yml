@@ -10,7 +10,7 @@ accard_frontend_diagnosis_index:
     methods: [GET]
     defaults:
         _controller: accard.controller.diagnosis:indexAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Diagnosis:index.html.twig
             sortable: true
             paginate: 25
@@ -21,7 +21,7 @@ accard_frontend_diagnosis_show:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.diagnosis:showAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Diagnosis:show.html.twig
 
 accard_frontend_diagnosis_create:
@@ -29,7 +29,7 @@ accard_frontend_diagnosis_create:
     methods: [GET, POST]
     defaults:
         _controller: accard.controller.diagnosis:createAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Diagnosis:create.html.twig
             redirect: accard_frontend_diagnosis_show
 
@@ -39,7 +39,7 @@ accard_frontend_diagnosis_update:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.diagnosis:updateAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Diagnosis:update.html.twig
             redirect: accard_frontend_diagnosis_show
 
@@ -49,6 +49,6 @@ accard_frontend_diagnosis_delete:
     requirements: { id: \d+ }
     defaults:
         _controller: accard.controller.diagnosis:deleteAction
-        _accard:
+        _dag:
             template: Theme:Frontend/Diagnosis:delete.html.twig
             redirect: accard_frontend_diagnosis_index
