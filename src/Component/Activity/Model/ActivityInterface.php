@@ -21,9 +21,10 @@ use Accard\Component\Drug\Model\DrugInterface;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface ActivityInterface extends PrototypeSubjectInterface,
-                                    FieldSubjectInterface,
-                                    ResourceInterface
+interface ActivityInterface extends
+    PrototypeSubjectInterface,
+    FieldSubjectInterface,
+    ResourceInterface
 {
     /**
      * Get activity id.

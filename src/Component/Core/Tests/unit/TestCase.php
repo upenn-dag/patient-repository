@@ -253,5 +253,4 @@ abstract class TestCase extends Test
 
         return get_class($this->resource);
     }
-
 }

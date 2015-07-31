@@ -23,12 +23,12 @@ class CodeGroupTest extends Test
 {
     protected function _before()
     {
-      $this->code = Mockery::mock('Accard\\Component\\Diagnosis\\Model\\CodeInterface')
+        $this->code = Mockery::mock('Accard\\Component\\Diagnosis\\Model\\CodeInterface')
         ->shouldReceive('addGroup')->zeroOrMoreTimes()->andReturn(Mockery::self())
         ->shouldReceive('removeGroup')->zeroOrMoreTimes()->andReturn(Mockery::self())
         ->getMock();
 
-      $this->codeGroup = new CodeGroup();
+        $this->codeGroup = new CodeGroup();
     }
 
     public function testCodeGroupInterfaceIsFollowed()

@@ -51,11 +51,12 @@ class AttributeBuilder extends AbstractBuilder implements AttributeBuilderInterf
      * @param ObjectManager $manager
      * @param RepositoryInterface $attributeRepository
      */
-    public function __construct(ObjectManager $manager,
-                                RepositoryInterface $attributeRepository,
-                                RepositoryInterface $fieldRepository,
-                                RepositoryInterface $fieldValueRepository)
-    {
+    public function __construct(
+        ObjectManager $manager,
+        RepositoryInterface $attributeRepository,
+        RepositoryInterface $fieldRepository,
+        RepositoryInterface $fieldValueRepository
+    ) {
         $this->manager = $manager;
         $this->attributeRepository = $attributeRepository;
         $this->fieldRepository = $fieldRepository;

@@ -20,9 +20,10 @@ use DAG\Component\Resource\Model\ResourceInterface;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface SampleInterface extends PrototypeSubjectInterface,
-                                  FieldSubjectInterface,
-                                  ResourceInterface
+interface SampleInterface extends
+    PrototypeSubjectInterface,
+    FieldSubjectInterface,
+    ResourceInterface
 {
     /**
      * Get sample id.

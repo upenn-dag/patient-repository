@@ -23,8 +23,8 @@ class CodeTest extends Test
 {
     protected function _before()
     {
-      $this->code = new Code;
-      $this->codeGroup = Mockery::mock('Accard\\Component\\Diagnosis\\Model\\CodeGroupInterface');
+        $this->code = new Code;
+        $this->codeGroup = Mockery::mock('Accard\\Component\\Diagnosis\\Model\\CodeGroupInterface');
     }
 
     public function testCodeInterfaceIsFollowed()

@@ -19,10 +19,11 @@ use DAG\Component\Resource\Model\TimestampableInterface;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface BehaviorInterface extends BaseBehaviorInterface,
-                                    TimestampableInterface,
-                                    BlameableInterface,
-                                    VersionableInterface
+interface BehaviorInterface extends
+    BaseBehaviorInterface,
+    TimestampableInterface,
+    BlameableInterface,
+    VersionableInterface
 {
     /**
      * Get patient.

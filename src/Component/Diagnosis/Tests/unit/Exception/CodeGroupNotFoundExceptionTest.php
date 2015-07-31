@@ -45,24 +45,24 @@ class CodeGroupNotFoundExceptionTest extends Test
 
     public function testExceptionContainsIdWhenGivenNumericInput()
     {
-    	$expected = 1;
-    	$exception = new CodeGroupNotFoundException($expected);
-    	$this->assertAttributeContains((string) $expected, 'message', $exception);
+        $expected = 1;
+        $exception = new CodeGroupNotFoundException($expected);
+        $this->assertAttributeContains((string) $expected, 'message', $exception);
     }
 
     public function testExceptionContainsFieldWhenStringInputWithoutValue()
     {
-    	$expected = 'FIELD';
-    	$exception = new CodeGroupNotFoundException($expected);
-    	$this->assertAttributeContains($expected, 'message', $exception);
+        $expected = 'FIELD';
+        $exception = new CodeGroupNotFoundException($expected);
+        $this->assertAttributeContains($expected, 'message', $exception);
     }
 
     public function testExceptionContainsFieldAndValueWhenGivenBothArgumentsAsStrings()
     {
-    	$expected1 = 'FIELD';
-    	$expected2 = 'VALUE';
-    	$exception = new CodeGroupNotFoundException($expected1, $expected2);
-    	$this->assertAttributeContains($expected1, 'message', $exception);
-    	$this->assertAttributeContains($expected2, 'message', $exception);
+        $expected1 = 'FIELD';
+        $expected2 = 'VALUE';
+        $exception = new CodeGroupNotFoundException($expected1, $expected2);
+        $this->assertAttributeContains($expected1, 'message', $exception);
+        $this->assertAttributeContains($expected2, 'message', $exception);
     }
 }

@@ -20,9 +20,10 @@ use DAG\Component\Resource\Model\ResourceInterface;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface AttributeInterface extends PrototypeSubjectInterface,
-                                     FieldSubjectInterface,
-                                     ResourceInterface
+interface AttributeInterface extends
+    PrototypeSubjectInterface,
+    FieldSubjectInterface,
+    ResourceInterface
 {
     /**
      * Get attribute id.

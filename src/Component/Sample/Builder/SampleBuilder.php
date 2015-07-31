@@ -51,11 +51,12 @@ class SampleBuilder extends AbstractBuilder implements SampleBuilderInterface
      * @param ObjectManager $manager
      * @param RepositoryInterface $sampleRepository
      */
-    public function __construct(ObjectManager $manager,
-                                RepositoryInterface $sampleRepository,
-                                RepositoryInterface $fieldRepository,
-                                RepositoryInterface $fieldValueRepository)
-    {
+    public function __construct(
+        ObjectManager $manager,
+        RepositoryInterface $sampleRepository,
+        RepositoryInterface $fieldRepository,
+        RepositoryInterface $fieldValueRepository
+    ) {
         $this->manager = $manager;
         $this->sampleRepository = $sampleRepository;
         $this->fieldRepository = $fieldRepository;

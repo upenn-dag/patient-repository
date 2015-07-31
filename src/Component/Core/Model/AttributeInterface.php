@@ -21,10 +21,11 @@ use DAG\Component\Resource\Model\TimestampableInterface;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface AttributeInterface extends BaseAttributeInterface,
-                                     TimestampableInterface,
-                                     BlameableInterface,
-                                     VersionableInterface
+interface AttributeInterface extends
+    BaseAttributeInterface,
+    TimestampableInterface,
+    BlameableInterface,
+    VersionableInterface
 {
     /**
      * Get patient.

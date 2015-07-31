@@ -17,7 +17,7 @@ use Accard\Component\Sample\Model\FieldValueInterface;
 
 /**
  * Field value tests.
- * 
+ *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
 class FieldValueTest extends Test

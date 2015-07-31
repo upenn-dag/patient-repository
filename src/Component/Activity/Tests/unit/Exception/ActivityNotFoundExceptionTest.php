@@ -40,7 +40,7 @@ class ActivityNotFoundExceptionTest extends Test
 
     public function testExceptionIndicatesId()
     {
-    	$exception = new ActivityNotFoundException(1);
-    	$this->assertAttributeContains('1', 'message', $exception);
+        $exception = new ActivityNotFoundException(1);
+        $this->assertAttributeContains('1', 'message', $exception);
     }
 }

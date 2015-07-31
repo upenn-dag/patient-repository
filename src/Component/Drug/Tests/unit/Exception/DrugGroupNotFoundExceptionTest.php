@@ -65,5 +65,4 @@ class DrugGroupNotFoundExceptionTest extends \Codeception\TestCase\Test
         $this->exception = new DrugGroupNotFoundException($this->field, $this->value);
         $this->assertSame('Drug group could not be found using FIELDNAME with value VALUENAME', $this->exception->getMessage());
     }
-
 }

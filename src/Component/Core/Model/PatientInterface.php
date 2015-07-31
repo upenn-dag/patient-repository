@@ -23,11 +23,12 @@ use Accard\Component\Phase\Model\PhaseTargetInterface;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface PatientInterface extends BasePatientInterface,
-                                   TimestampableInterface,
-                                   BlameableInterface,
-                                   VersionableInterface,
-                                   PhaseTargetInterface
+interface PatientInterface extends
+    BasePatientInterface,
+    TimestampableInterface,
+    BlameableInterface,
+    VersionableInterface,
+    PhaseTargetInterface
 {
     /**
      * Get diagnoses.

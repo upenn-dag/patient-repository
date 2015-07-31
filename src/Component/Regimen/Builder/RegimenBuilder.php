@@ -51,11 +51,12 @@ class RegimenBuilder extends AbstractBuilder implements RegimenBuilderInterface
      * @param ObjectManager $manager
      * @param RepositoryInterface $regimenRepository
      */
-    public function __construct(ObjectManager $manager,
-                                RepositoryInterface $regimenRepository,
-                                RepositoryInterface $fieldRepository,
-                                RepositoryInterface $fieldValueRepository)
-    {
+    public function __construct(
+        ObjectManager $manager,
+        RepositoryInterface $regimenRepository,
+        RepositoryInterface $fieldRepository,
+        RepositoryInterface $fieldValueRepository
+    ) {
         $this->manager = $manager;
         $this->regimenRepository = $regimenRepository;
         $this->fieldRepository = $fieldRepository;

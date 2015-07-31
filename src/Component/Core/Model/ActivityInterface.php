@@ -21,10 +21,11 @@ use DAG\Component\Resource\Model\TimestampableInterface;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface ActivityInterface extends BaseActivityInterface,
-                                    TimestampableInterface,
-                                    BlameableInterface,
-                                    VersionableInterface
+interface ActivityInterface extends
+    BaseActivityInterface,
+    TimestampableInterface,
+    BlameableInterface,
+    VersionableInterface
 {
     /**
      * Get patient.

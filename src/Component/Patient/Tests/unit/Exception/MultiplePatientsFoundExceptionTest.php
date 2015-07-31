@@ -9,14 +9,14 @@ use Mockery;
 
 class MultiplePatientsFoundExceptionTest extends Test
 {
-	protected function _before()
+    protected function _before()
     {
-    	$this->exception = new MultiplePatientsFoundException();
+        $this->exception = new MultiplePatientsFoundException();
     }
 
     public function testExceptionIsPatientExceptionInterface()
     {
-    	$this->assertInstanceOf(
+        $this->assertInstanceOf(
             'Accard\Component\Patient\Exception\PatientException',
             $this->exception
         );
@@ -24,7 +24,7 @@ class MultiplePatientsFoundExceptionTest extends Test
 
     public function testExceptionIsRuntimeException()
     {
-    	$this->assertInstanceOf(
+        $this->assertInstanceOf(
             'RuntimeException',
             $this->exception
         );

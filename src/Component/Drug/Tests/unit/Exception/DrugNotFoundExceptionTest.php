@@ -65,5 +65,4 @@ class DrugNotFoundExceptionTest extends \Codeception\TestCase\Test
         $this->exception = new DrugNotFoundException($this->field, $this->value);
         $this->assertSame('Drug could not be found using FIELDNAME with value VALUENAME', $this->exception->getMessage());
     }
-
 }

@@ -22,28 +22,28 @@ class DrugGroup implements DrugGroupInterface
 {
     /**
      * Drug group id.
-     * 
+     *
      * @var integer
      */
     protected $id;
 
     /**
      * Drug group name.
-     * 
+     *
      * @var string
      */
     protected $name;
 
     /**
      * Presentation.
-     * 
+     *
      * @var string
      */
     protected $presentation;
 
     /**
      * Drugs.
-     * 
+     *
      * @var Collection|DrugInterface[]
      */
     protected $drugs;

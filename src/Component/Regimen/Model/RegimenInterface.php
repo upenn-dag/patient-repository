@@ -23,9 +23,10 @@ use Accard\Component\Activity\Model\ActivityInterface;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface RegimenInterface extends PrototypeSubjectInterface,
-                                   FieldSubjectInterface,
-                                   ResourceInterface
+interface RegimenInterface extends
+    PrototypeSubjectInterface,
+    FieldSubjectInterface,
+    ResourceInterface
 {
     /**
      * Get regimen id.

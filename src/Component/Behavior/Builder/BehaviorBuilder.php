@@ -51,11 +51,12 @@ class BehaviorBuilder extends AbstractBuilder implements BehaviorBuilderInterfac
      * @param ObjectManager $manager
      * @param RepositoryInterface $behaviorRepository
      */
-    public function __construct(ObjectManager $manager,
-                                RepositoryInterface $behaviorRepository,
-                                RepositoryInterface $fieldRepository,
-                                RepositoryInterface $fieldValueRepository)
-    {
+    public function __construct(
+        ObjectManager $manager,
+        RepositoryInterface $behaviorRepository,
+        RepositoryInterface $fieldRepository,
+        RepositoryInterface $fieldValueRepository
+    ) {
         $this->manager = $manager;
         $this->behaviorRepository = $behaviorRepository;
         $this->fieldRepository = $fieldRepository;

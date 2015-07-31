@@ -21,10 +21,11 @@ use DAG\Component\Resource\Model\TimestampableInterface;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface RegimenInterface extends BaseRegimenInterface,
-                                   TimestampableInterface,
-                                   BlameableInterface,
-                                   VersionableInterface
+interface RegimenInterface extends
+    BaseRegimenInterface,
+    TimestampableInterface,
+    BlameableInterface,
+    VersionableInterface
 {
     /**
      * Get patient.

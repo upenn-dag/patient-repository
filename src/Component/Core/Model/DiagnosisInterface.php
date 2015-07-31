@@ -22,26 +22,27 @@ use Accard\Component\Phase\Model\PhaseTargetInterface;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface DiagnosisInterface extends BaseDiagnosisInterface,
-                                     TimestampableInterface,
-                                     BlameableInterface,
-                                     VersionableInterface,
-                                     PhaseTargetInterface
+interface DiagnosisInterface extends
+    BaseDiagnosisInterface,
+    TimestampableInterface,
+    BlameableInterface,
+    VersionableInterface,
+    PhaseTargetInterface
 {
-	/**
-	 * Get patient.
-	 *
-	 * @return PatientInterface
-	 */
-	public function getPatient();
+    /**
+     * Get patient.
+     *
+     * @return PatientInterface
+     */
+    public function getPatient();
 
-	/**
-	 * Set patient.
-	 *
-	 * @param PatientInterface|null $patient
-	 * @return DiagnosisInterface
-	 */
-	public function setPatient(PatientInterface $patient = null);
+    /**
+     * Set patient.
+     *
+     * @param PatientInterface|null $patient
+     * @return DiagnosisInterface
+     */
+    public function setPatient(PatientInterface $patient = null);
 
     /**
      * Test for presence of a patient.

@@ -21,9 +21,10 @@ use DAG\Component\Resource\Model\ResourceInterface;
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface BehaviorInterface extends PrototypeSubjectInterface,
-                                    FieldSubjectInterface,
-                                    ResourceInterface
+interface BehaviorInterface extends
+    PrototypeSubjectInterface,
+    FieldSubjectInterface,
+    ResourceInterface
 {
     /**
      * Get behavior id.

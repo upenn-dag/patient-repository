@@ -52,11 +52,12 @@ class PatientBuilder extends AbstractBuilder implements PatientBuilderInterface
      * @param ObjectManager $manager
      * @param RepositoryInterface $patientRepository
      */
-    public function __construct(ObjectManager $manager,
-                                RepositoryInterface $patientRepository,
-                                RepositoryInterface $fieldRepository,
-                                RepositoryInterface $fieldValueRepository)
-    {
+    public function __construct(
+        ObjectManager $manager,
+        RepositoryInterface $patientRepository,
+        RepositoryInterface $fieldRepository,
+        RepositoryInterface $fieldValueRepository
+    ) {
         $this->manager = $manager;
         $this->patientRepository = $patientRepository;
         $this->fieldRepository = $fieldRepository;

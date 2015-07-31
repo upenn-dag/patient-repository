@@ -40,8 +40,8 @@ class PrototypeNotFoundExceptionTest extends Test
 
     public function testExceptionIndicatesIdWhenIntegerProvided()
     {
-    	$exception = new PrototypeNotFoundException(1);
-    	$this->assertAttributeContains('1', 'message', $exception);
+        $exception = new PrototypeNotFoundException(1);
+        $this->assertAttributeContains('1', 'message', $exception);
     }
 
     public function testExceptionIndicatesNameWhenStringProvided()

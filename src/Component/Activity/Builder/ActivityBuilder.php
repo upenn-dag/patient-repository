@@ -51,11 +51,12 @@ class ActivityBuilder extends AbstractBuilder implements ActivityBuilderInterfac
      * @param ObjectManager $manager
      * @param RepositoryInterface $activityRepository
      */
-    public function __construct(ObjectManager $manager,
-                                RepositoryInterface $activityRepository,
-                                RepositoryInterface $fieldRepository,
-                                RepositoryInterface $fieldValueRepository)
-    {
+    public function __construct(
+        ObjectManager $manager,
+        RepositoryInterface $activityRepository,
+        RepositoryInterface $fieldRepository,
+        RepositoryInterface $fieldValueRepository
+    ) {
         $this->manager = $manager;
         $this->activityRepository = $activityRepository;
         $this->fieldRepository = $fieldRepository;

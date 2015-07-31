@@ -51,15 +51,17 @@ class DiagnosisBuilder extends AbstractBuilder implements DiagnosisBuilderInterf
      * @param ObjectManager $manager
      * @param RepositoryInterface $diagnosisRepository
      */
-    public function __construct(ObjectManager $manager,
-                                RepositoryInterface $diagnosisRepository,
-                                RepositoryInterface $fieldRepository,
-                                RepositoryInterface $fieldValueRepository)
-    {
+    public function __construct(
+        ObjectManager $manager,
+        RepositoryInterface $diagnosisRepository,
+        RepositoryInterface $fieldRepository,
+        RepositoryInterface $fieldValueRepository
+    ) {
         $this->manager = $manager;
         $this->repository = $diagnosisRepository;
         $this->fieldRepository = $fieldRepository;
-        $this->fieldValueRepository = $fieldValueRepository;;
+        $this->fieldValueRepository = $fieldValueRepository;
+        ;
     }
 
     /**
