@@ -39,10 +39,6 @@ esac
 shift
 done
 
-echo $COMPONENTS
-echo $BUNDLES
-echo $BRIDGES
-
 components=("Activity" "Attribute" "Behavior" "Core" "Diagnosis" "Drug" "Patient" "Phase" "Regimen" "Sample")
 bundles=("ActivityBundle" "AttributeBundle" "BehaviorBundle" "CoreBundle" "CPDBundle" "DiagnosisBundle" "DrugBundle" "HMTBBundle" "OutcomesBundle" "PDSBundle" "PatientBundle" "PhaseBundle" "RegimenBundle" "SampleBundle" "TemplateBundle" "WebBundle")
 bridges=("Twig")
