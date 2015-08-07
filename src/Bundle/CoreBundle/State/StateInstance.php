@@ -14,6 +14,8 @@ use JsonSerializable;
 use Accard\Bundle\CoreBundle\AccardState;
 use Accard\Bundle\CoreBundle\Exception\DuplicateObjectException;
 use Accard\Bundle\CoreBundle\Exception\ObjectNotFoundException;
+use Accard\Bundle\CoreBundle\Exception\DuplicateOptionException;
+use Accard\Bundle\CoreBundle\Exception\OptionNotFoundException;
 
 /**
  * State instance.
@@ -27,14 +29,14 @@ class StateInstance implements JsonSerializable
      *
      * @var ObjectStateInterface[]
      */
-    private $objects;
+    private $objects = array();
 
     /**
-     * Resource objects array.
+     * Option state objects array.
      *
-     * @var ObjectResourceInterface[]
+     * @var OptionStateInterface[]
      */
-    private $resources;
+    private $options = array();
 
     /**
      * State object hash.
@@ -48,16 +50,16 @@ class StateInstance implements JsonSerializable
      * Constructor.
      *
      * @param ObjectStateInterface[] $objects
-     * @param ObjectResourceInterface[] $resources
+     * @param OptionStateInterface[] $resources
      */
-    public function __construct(array $objects = array(), array $resources = array())
+    public function __construct(array $objects = array(), array $options = array())
     {
         foreach ($objects as $object) {
             $this->addObject($object);
         }
 
-        foreach ($resources as $resource) {
-            $this->addResource($resource);
+        foreach ($options as $option) {
+            $this->addOption($option);
         }
     }
 
@@ -128,25 +130,61 @@ class StateInstance implements JsonSerializable
     }
 
     /**
-     * Remove a state object by name or instance.
+     * Get options.
      *
-     * @param string|ObjectStateInterface $name
-     * @return self
+     * @return OptionStateInterface[]
      */
-    public function removeObject($name)
+    public function getOptions()
     {
-        if ($name instanceof ObjectStateInterface) {
-            if ($name = array_search($name, $this->objects)) {
-                unset($this->objects[$name]);
+        return $this->options;
+    }
 
-                return $this;
-            }
+    /**
+     * Get option by name.
+     *
+     * @param string $name
+     * @return OptionStateInterface[]
+     */
+    public function getOption($name)
+    {
+        $this->assertOptionExists($name);
 
-            throw new \InvalidArgumentException('State object could not be located.');
+        return $this->options[$name];
+    }
+
+    /**
+     * Test for presence of an option by name.
+     *
+     * @param string $name
+     * @return boolean
+     */
+    public function hasOption($name)
+    {
+        return isset($this->options[$name]);
+    }
+
+    /**
+     * Add option with optional name.
+     *
+     * @param string|OptionStateInterface $name
+     * @param OptionStateInterface|null
+     */
+    public function addOption($name, OptionStateInterface $option = null)
+    {
+        if ($name instanceof OptionStateInterface) {
+            $option = $name;
+            $name = $option->name;
         }
 
-        $this->assertObjectExists($name);
-        unset($this->objects[$name]);
+        if (!$name) {
+            throw new \InvalidArgumentException('State option must have a name set.');
+        }
+
+        if ($this->hasOption($name)) {
+            throw new DuplicateOptionException($name);
+        }
+
+        $this->options[$name] = $option;
 
         return $this;
     }
@@ -168,7 +206,7 @@ class StateInstance implements JsonSerializable
      */
     public function __sleep()
     {
-        return array('objects');
+        return array('objects', 'options');
     }
 
     /**
@@ -181,19 +219,33 @@ class StateInstance implements JsonSerializable
         return array(
             'hash' => $this->hash,
             'objects' => $this->objects,
+            'options' => $this->options,
         );
     }
 
     /**
      * Assert object exists.
      *
-     * @throws InvalidArgumentException If object can not be found locally.
+     * @throws ObjectNotFoundException If object can not be found locally.
      * @param string $name
      */
     private function assertObjectExists($name)
     {
         if (!$this->hasObject($name)) {
             throw new ObjectNotFoundException($name);
+        }
+    }
+
+    /**
+     * Assert option exists.
+     *
+     * @throws OptionNotFoundException If option can not be found locally.
+     * @param string $name
+     */
+    private function assertOptionExists($name)
+    {
+        if (!$this->hasOption($name)) {
+            throw new OptionNotFoundException($name);
         }
     }
 }

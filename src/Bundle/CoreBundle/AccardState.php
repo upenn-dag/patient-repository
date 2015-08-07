@@ -51,6 +51,32 @@ class AccardState extends ContainerAware
             foreach ($objects as $object) {
                 $this->createObjectState($object);
             }
+
+            // Let's get all the options.
+            $options = $this->get('dag.repository.option')->findAll();
+            foreach ($options as $option) {
+                $optState = $this->createOptionState();
+                $optState
+                    ->setName($option->getName())
+                    ->setPresentation($option->getPresentation())
+                ;
+
+                foreach ($option->getValues() as $optionValue) {
+                    $optValueState = $this->createOptionValueState($optState);
+                    $optValueState
+                        ->setValue($optionValue->getValue())
+                        ->setOrder($optionValue->getOrder())
+                        ->setLocked($optionValue->isLocked())
+                    ;
+                    $optState->addValue($optValueState);
+                }
+
+                $this->cachedState->addOption($optState);
+            }
+
+            unset($options, $option, $optionValue);
+
+            $this->completed = true;
         }
 
         return $this->cachedState;
@@ -185,6 +211,26 @@ class AccardState extends ContainerAware
     public function createObjectStaticFieldState(State\ObjectStateInterface $object)
     {
         return new State\ObjectStaticFieldState($object);
+    }
+
+    /**
+     * Create option state.
+     *
+     * @return State\OptionState
+     */
+    public function createOptionState()
+    {
+        return new State\OptionState();
+    }
+
+    /**
+     * Create option value state.
+     *
+     * @return State\OptionValueState
+     */
+    public function createOptionValueState(State\OptionStateInterface $option)
+    {
+        return new State\OptionValueState($option);
     }
 
     /**

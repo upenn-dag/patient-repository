@@ -13,10 +13,10 @@ namespace Accard\Bundle\CoreBundle\State;
 use JsonSerializable;
 
 /**
- * Object prototype state interface.
+ * Option state interface.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-interface ObjectPrototypeStateInterface extends JsonSerializable
+interface OptionStateInterface extends JsonSerializable
 {
 }

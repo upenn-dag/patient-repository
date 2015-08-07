@@ -10,14 +10,12 @@
  */
 namespace Accard\Bundle\CoreBundle\State;
 
-use JsonSerializable;
-
 /**
  * Accard prototype state representation.
  *
  * @author Frank Bardon Jr. <bardonf@upenn.edu>
  */
-class ObjectPrototypeState implements JsonSerializable
+class ObjectPrototypeState implements ObjectPrototypeStateInterface
 {
     private $parent;
 
