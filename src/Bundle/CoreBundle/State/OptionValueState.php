@@ -19,6 +19,7 @@ class OptionValueState implements OptionValueStateInterface
 {
     private $parent;
 
+    public $id;
     public $value;
     public $order;
     public $locked;
@@ -26,6 +27,13 @@ class OptionValueState implements OptionValueStateInterface
     public function __construct(OptionStateInterface $parent)
     {
         $this->parent = $parent;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function setValue($value)
@@ -72,6 +80,6 @@ class OptionValueState implements OptionValueStateInterface
 
     public function __sleep()
     {
-        return array('value', 'order', 'locked');
+        return array('id', 'value', 'order', 'locked');
     }
 }

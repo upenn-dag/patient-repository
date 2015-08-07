@@ -153,6 +153,24 @@ class StateInstance implements JsonSerializable
     }
 
     /**
+     * Get option by id.
+     *
+     * @throws OptionNotFoundException If option can not be found locally.
+     * @param integer $id
+     * @return OptionStateInterface
+     */
+    public function getOptionById($id)
+    {
+        foreach ($this->options as $option) {
+            if ($id === $option->id) {
+                return $option;
+            }
+        }
+
+        throw new OptionNotFoundException($id);
+    }
+
+    /**
      * Test for presence of an option by name.
      *
      * @param string $name
@@ -161,6 +179,23 @@ class StateInstance implements JsonSerializable
     public function hasOption($name)
     {
         return isset($this->options[$name]);
+    }
+
+    /**
+     * Test for presence of an option by id.
+     *
+     * @param integer $id
+     * @return boolean
+     */
+    public function hasOptionById($id)
+    {
+        foreach ($this->options as $option) {
+            if ($id === $option->id) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -248,4 +283,5 @@ class StateInstance implements JsonSerializable
             throw new OptionNotFoundException($name);
         }
     }
+
 }

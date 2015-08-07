@@ -57,6 +57,7 @@ class AccardState extends ContainerAware
             foreach ($options as $option) {
                 $optState = $this->createOptionState();
                 $optState
+                    ->setId($option->getId())
                     ->setName($option->getName())
                     ->setPresentation($option->getPresentation())
                 ;
@@ -64,6 +65,7 @@ class AccardState extends ContainerAware
                 foreach ($option->getValues() as $optionValue) {
                     $optValueState = $this->createOptionValueState($optState);
                     $optValueState
+                        ->setId($optionValue->getId())
                         ->setValue($optionValue->getValue())
                         ->setOrder($optionValue->getOrder())
                         ->setLocked($optionValue->isLocked())

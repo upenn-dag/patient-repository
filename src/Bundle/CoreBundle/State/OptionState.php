@@ -17,9 +17,17 @@ namespace Accard\Bundle\CoreBundle\State;
  */
 class OptionState implements OptionStateInterface
 {
+    public $id;
     public $name;
     public $presentation;
     public $values = array();
+
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     public function setName($name)
     {
@@ -72,6 +80,6 @@ class OptionState implements OptionStateInterface
 
     public function __sleep()
     {
-        return array('name', 'presentation', 'values');
+        return array('id', 'name', 'presentation', 'values');
     }
 }
