@@ -1,0 +1,144 @@
+{% macro field_accordion(state, object) %}
+  {% set fields = object.getFields() %}
+  <div class="panel-group" id="{{ object.getName() }}" role="tablist" aria-multiselectable="true">
+  {% for field in fields %}
+    {% set option = field.dynamic and field.option and state.hasOptionById(field.option) ? state.getOptionById(field.option) : null %}
+    <div class="panel panel-{{ field.dynamic ? 'info' : 'default' }}">
+      <div class="panel-heading" role="tab">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#{{ object.getName() }}" href="#{{ object.getName() }}-{{ field.name }}" aria-expanded="false" aria-controls="{{ object.getName() }}-{{ field.name }}">
+            {% if field.dynamic %}
+            <span class="pull-right">
+              <span class="glyphicon glyphicon-cloud" title="This field is dynamic"></span>
+            </span>
+            {% endif %}
+            {{ field.presentation|humanize }}
+          </a>
+        </h4>
+      </div>
+      <div id="{{ object.getName() }}-{{ field.name }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{ object.getName() }}-{{ field.name }}">
+        <div class="panel-body">
+        {% if field.dynamic %}
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Option</th>
+                <th>Multiple?</th>
+                <th>Addable?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ field.name }}</td>
+                <td>{{ field.type }}</td>
+                <td>{{ option ? option.presentation : '' }}</td>
+                <td>{% if field.allowMultiple %}<span class="glyphicon glyphicon-ok text-success"></span>{% else %}<span class="glyphicon glyphicon-remove text-danger"></span>{% endif %}</td>
+                <td>{% if field.addable %}<span class="glyphicon glyphicon-ok text-success"></span>{% else %}<span class="glyphicon glyphicon-remove text-danger"></span>{% endif %}</td>
+              </tr>
+              {% if option %}
+              <tr>
+                <td colspan="5">
+                  <strong>Options: </strong>
+                {% for value in option.values %}
+                  {{ value.value ~ (loop.last ? '' : ', ') }}
+                {% endfor %}
+                </td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        {% else %}
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Primary</th>
+                <th>Unique</th>
+                <th>Nullable</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ field.name }}</td>
+                <td>{{ field.type }}</td>
+                <td>{% if field.extras.primary %}<span class="glyphicon glyphicon-ok text-success"></span>{% else %}<span class="glyphicon glyphicon-remove text-danger"></span>{% endif %}</td>
+                <td>{% if field.extras.unique %}<span class="glyphicon glyphicon-ok text-success"></span>{% else %}<span class="glyphicon glyphicon-remove text-danger"></span>{% endif %}</td>
+                <td>{% if field.extras.nullable %}<span class="glyphicon glyphicon-ok text-success"></span>{% else %}<span class="glyphicon glyphicon-remove text-danger"></span>{% endif %}</td>
+              </tr>
+            </tbody>
+          </table>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+{% endmacro %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ 'accard.info.state.title'|trans }}</title>
+  <meta charset="UTF-8">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  <style type="text/css">
+    body { padding: 5%; }
+
+    .state-section-container {
+    }
+
+    .state-section {
+      margin-bottom: 48px;
+      padding: 24px;
+      border: 1px solid rgb(210, 210, 210);
+      background: rgb(240, 240, 240);
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9" role="main">
+        <div class="state-section-container">
+          <div class="state-section">
+            <h1>
+              <a name="#patient"></a>
+              {{ 'accard.patient.entity_name'|trans }}
+            </h1>
+            <p>
+              The patient object facilitates the collection of patients and patient data. It is not
+              prototyped, but supports dynamic fields.
+            </p>
+            {{ _self.field_accordion(state, state.getObject('patient')) }}
+          </div>
+          <div class="state-section">
+            <h1>
+              <a name="#diagnosis"></a>
+              {{ 'accard.diagnosis.entity_name'|trans }}
+            </h1>
+            {{ _self.field_accordion(state, state.getObject('diagnosis')) }}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3" role="complementary">
+        <nav class="state-sidebar hidden-print hidden-xs hidden-sm affix" data-spy="affix" data-offset-top="120">
+          <ul class="nav state-nav">
+            <li><a href="#patient">{{ 'accard.patient.entity_name'|trans }}</a></li>
+            <li><a href="#diagnosis">{{ 'accard.diagnosis.entity_name'|trans }}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.2.1/anchor.min.js"></script>
+  <script>
+    anchors.add('.state-section > h1');
+  </script>
+</body>
+</html>

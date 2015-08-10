@@ -1,0 +1,6 @@
+accard_info_state:
+    pattern: /state
+    methods: [GET]
+    defaults:
+        _controller: AccardCoreBundle:Info:state
+
