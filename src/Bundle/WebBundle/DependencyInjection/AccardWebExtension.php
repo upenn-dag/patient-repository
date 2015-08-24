@@ -13,7 +13,7 @@ namespace Accard\Bundle\WebBundle\DependencyInjection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
  * Accard web bundle extension.
@@ -27,9 +27,9 @@ class AccardWebExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         foreach (array('menu') as $config) {
-            $loader->load("$config.yml");
+            $loader->load("$config.xml");
         }
     }
 }
