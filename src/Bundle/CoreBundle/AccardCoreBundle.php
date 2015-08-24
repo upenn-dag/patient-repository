@@ -42,7 +42,7 @@ class AccardCoreBundle extends Bundle
         );
 
         $container->addCompilerPass(
-            DoctrineOrmMappingsPass::createYamlMappingDriver(
+            DoctrineOrmMappingsPass::createXmlMappingDriver(
                 $mappings,
                 array('doctrine.orm.entity_manager'),
                 'accard_core.driver.doctrine/orm'

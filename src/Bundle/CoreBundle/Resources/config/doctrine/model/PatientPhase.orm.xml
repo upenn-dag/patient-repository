@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="Accard\Bundle\PhaseBundle\Doctrine\ORM\PhaseRepository" name="Accard\Component\Core\Model\PatientPhase" table="accard_patient_phase"/>
+</doctrine-mapping>

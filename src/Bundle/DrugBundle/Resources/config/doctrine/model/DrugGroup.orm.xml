@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="Accard\Bundle\DrugBundle\Doctrine\ORM\DrugGroupRepository" name="Accard\Component\Drug\Model\DrugGroup" table="accard_drug_group">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" column="name" unique="true" nullable="false"/>
+    <field name="presentation" type="string" column="presentation" nullable="false"/>
+    <many-to-many field="drugs" target-entity="Accard\Component\Drug\Model\Drug" inversed-by="groups">
+      <join-table name="accard_drugs_groups">
+        <join-columns>
+          <join-column name="groupId" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="drugId" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

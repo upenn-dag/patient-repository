@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="Accard\Bundle\DiagnosisBundle\Doctrine\ORM\DiagnosisRepository" name="Accard\Component\Core\Model\Diagnosis" table="accard_diagnosis">
+    <one-to-many field="comorbidities" target-entity="Accard\Component\Core\Model\Diagnosis" mapped-by="parent"/>
+    <one-to-many field="recurrences" target-entity="Accard\Component\Core\Model\Diagnosis" mapped-by="primary"/>
+    <one-to-many field="activities" target-entity="Accard\Component\Core\Model\Activity" mapped-by="diagnosis" orphan-removal="true">
+      <cascade>
+        <cascade-remove/>
+        <cascade-persist/>
+      </cascade>
+    </one-to-many>
+    <one-to-many field="regimens" target-entity="Accard\Component\Core\Model\Regimen" mapped-by="diagnosis" orphan-removal="true">
+      <cascade>
+        <cascade-remove/>
+        <cascade-persist/>
+      </cascade>
+    </one-to-many>
+    <one-to-many field="phases" target-entity="Accard\Component\Core\Model\DiagnosisPhaseInstance" mapped-by="target" orphan-removal="true">
+      <cascade>
+        <cascade-remove/>
+        <cascade-persist/>
+      </cascade>
+    </one-to-many>
+    <one-to-many field="fields" target-entity="Accard\Component\Diagnosis\Model\FieldValue" mapped-by="subject" orphan-removal="true">
+      <cascade>
+        <cascade-remove/>
+        <cascade-persist/>
+      </cascade>
+    </one-to-many>
+    <many-to-one field="patient" target-entity="Accard\Component\Core\Model\Patient" inversed-by="diagnoses">
+      <join-columns>
+        <join-column name="patientId" referenced-column-name="id" nullable=""/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

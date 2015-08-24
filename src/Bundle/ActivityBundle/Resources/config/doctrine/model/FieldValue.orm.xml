@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Accard\Component\Activity\Model\FieldValue" table="accard_activity_proto_fldval">
+    <many-to-many field="optionValues" target-entity="DAG\Component\Option\Model\OptionValue">
+      <join-table name="accard_activity_proto_fld_opt_">
+        <join-columns>
+          <join-column name="optionValueId" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="fieldValueId" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

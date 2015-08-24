@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="Accard\Bundle\DiagnosisBundle\Doctrine\ORM\CodeRepository" name="Accard\Component\Diagnosis\Model\Code" table="accard_diagnosis_code">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="code" type="string" column="code" unique="true" nullable="false"/>
+    <field name="description" type="string" column="description" nullable="false"/>
+    <many-to-many field="groups" target-entity="Accard\Component\Diagnosis\Model\CodeGroup" inversed-by="codes">
+      <join-table name="accard_diagnosis_codes_groups">
+        <join-columns>
+          <join-column name="codeId" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="groupId" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

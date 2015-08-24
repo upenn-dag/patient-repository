@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="DAG\Bundle\PrototypeBundle\Doctrine\ORM\PrototypeRepository" name="Accard\Component\Regimen\Model\Prototype" table="accard_regimen_prototype">
+    <field name="allowDrug" type="boolean" column="allowDrug" nullable="true"/>
+    <many-to-one field="drugGroup" target-entity="Accard\Component\Drug\Model\DrugGroup">
+      <join-columns>
+        <join-column name="drugGroupId" referenced-column-name="id" nullable="1"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="activityPrototypes" target-entity="Accard\Component\Activity\Model\Prototype">
+      <join-table name="accard_regimen_activity_map">
+        <join-columns>
+          <join-column name="activityPrototypeId" referenced-column-name="id"/>
+        </join-columns>
+        <inverse-join-columns>
+          <join-column name="regimenPrototypeId" referenced-column-name="id"/>
+        </inverse-join-columns>
+      </join-table>
+    </many-to-many>
+  </entity>
+</doctrine-mapping>

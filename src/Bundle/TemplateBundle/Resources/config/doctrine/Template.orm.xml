@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="Accard\Bundle\TemplateBundle\Doctrine\ORM\TemplateRepository" name="Accard\Bundle\TemplateBundle\Entity\Template" table="accard_template">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="parent" type="string" column="parent" length="180" nullable="true"/>
+    <field name="name" type="string" column="name" length="200" unique="true"/>
+    <field name="location" type="string" column="location" length="200"/>
+    <field name="content" type="text" column="content"/>
+  </entity>
+</doctrine-mapping>

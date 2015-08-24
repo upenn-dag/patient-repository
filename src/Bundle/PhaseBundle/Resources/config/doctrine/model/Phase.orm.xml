@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <mapped-superclass name="Accard\Component\Phase\Model\Phase" table="Phase">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="label" type="string" column="label" nullable="false"/>
+    <field name="presentation" type="string" column="presentation" nullable="false"/>
+    <field name="order" type="integer" column="orderNumber" nullable="false"/>
+  </mapped-superclass>
+</doctrine-mapping>
