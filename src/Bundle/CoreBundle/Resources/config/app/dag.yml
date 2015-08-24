@@ -1,0 +1,62 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+accard_core:
+    driver: doctrine/orm
+
+accard_patient:
+    classes:
+        patient:
+            model: Accard\Component\Core\Model\Patient
+            controller: Accard\Bundle\CoreBundle\Controller\PatientController
+
+accard_diagnosis:
+    classes:
+        diagnosis:
+            model: Accard\Component\Core\Model\Diagnosis
+            controller: Accard\Bundle\CoreBundle\Controller\DiagnosisController
+        diagnosis_code_group:
+            controller: Accard\Bundle\CoreBundle\Controller\DiagnosisCodeGroupController
+
+accard_activity:
+    classes:
+        activity:
+            model: Accard\Component\Core\Model\Activity
+            controller: Accard\Bundle\CoreBundle\Controller\ActivityController
+
+accard_sample:
+    classes:
+        sample:
+            model: Accard\Component\Core\Model\Sample
+            controller: Accard\Bundle\CoreBundle\Controller\SampleController
+        sample_source:
+            model: Accard\Component\Core\Model\Source
+
+accard_regimen:
+    classes:
+        regimen:
+            model: Accard\Component\Core\Model\Regimen
+            controller: Accard\Bundle\CoreBundle\Controller\RegimenController
+
+accard_behavior:
+    classes:
+        behavior:
+            model: Accard\Component\Core\Model\Behavior
+            controller: Accard\Bundle\CoreBundle\Controller\BehaviorController
+
+accard_attribute:
+    classes:
+        attribute:
+            model: Accard\Component\Core\Model\Attribute
+            controller: Accard\Bundle\CoreBundle\Controller\AttributeController
+
+accard_drug:
+    classes:
+        drug:
+            controller: Accard\Bundle\CoreBundle\Controller\DrugController
+        drug_group:
+            controller: Accard\Bundle\CoreBundle\Controller\DrugGroupController

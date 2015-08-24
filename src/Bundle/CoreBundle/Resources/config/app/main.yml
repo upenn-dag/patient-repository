@@ -1,0 +1,103 @@
+# This file is part of the Accard package.
+#
+# (c) University of Pennsylvania
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+imports:
+    - { resource: dag.yml }
+
+lexik_translation:
+    fallback_locale: en
+    managed_locales: [en]
+
+doctrine_cache:
+    providers:
+        dag_settings:
+            type: apc
+            namespace: dag_%dag_app_name%_settings
+
+#mopa_bootstrap:
+#    form:
+#        templating: AccardWebBundle::forms.html.twig
+#        horizontal: false
+#        render_optional_text: false
+
+sensio_framework_extra:
+    view:
+        annotations: false
+
+fos_rest:
+    view:
+        formats:
+            json: true
+            xml: true
+        empty_content: 204
+    format_listener:
+        rules:
+            - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
+            - { path: '^/', stop: true }
+    serializer:
+        serialize_null: true
+
+#fos_elastica:
+#    clients:
+#        default: { host: %elasticsearch_host%, port: %elasticsearch_port% }
+#    serializer: ~
+#    indexes:
+#        accard:
+#            client: default
+#            finder: ~
+#            index_name: %accard_app_name%
+#            types:
+#                patient:
+#                    mappings:
+#                        firstName: { boost: 5 }
+#                        lastName: { boost: 5 }
+#                    serializer:
+#                        groups: [search]
+#                    persistence:
+#                        driver: orm
+#                        model: Accard\Component\Core\Model\Patient
+#                        finder: ~
+#                        provider: ~
+#                        listener:
+#                            insert: %elasticsearch_enabled%
+#                            update: %elasticsearch_enabled%
+#                            delete: %elasticsearch_enabled%
+#                            flush: %elasticsearch_enabled%
+#                diagnosis:
+#                    serializer:
+#                        groups: [search]
+#                    persistence:
+#                        driver: orm
+#                        model: Accard\Component\Core\Model\Diagnosis
+#                        finder: ~
+#                        provider: ~
+#                        listener:
+#                            insert: %elasticsearch_enabled%
+#                            update: %elasticsearch_enabled%
+#                            delete: %elasticsearch_enabled%
+#                            flush: %elasticsearch_enabled%
+#                diagnosis_code:
+#                    serializer:
+#                        groups: [search]
+#                    persistence:
+#                        driver: orm
+#                        model: Accard\Component\Diagnosis\Model\Code
+#                        finder: ~
+#                        provider: ~
+#                        listener:
+#                            insert: %elasticsearch_enabled%
+#                            update: %elasticsearch_enabled%
+#                            delete: %elasticsearch_enabled%
+#                            flush: %elasticsearch_enabled%
+
+jms_serializer:
+    metadata:
+        auto_detection: false
+        directories:
+            core:
+                namespace_prefix: Accard\Component
+                path: @AccardCoreBundle/Resources/serializer
