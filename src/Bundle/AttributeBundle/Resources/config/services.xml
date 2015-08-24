@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <parameter key="accard.form.type.attribute.class">Accard\Bundle\AttributeBundle\Form\Type\AttributeType</parameter>
+    <parameter key="accard.builder.attribute.class">Accard\Component\Attribute\Builder\AttributeBuilder</parameter>
+  </parameters>
+  <services>
+    <service id="accard.form.type.attribute" class="%accard.form.type.attribute.class%">
+      <tag name="form.type" alias="accard_attribute"/>
+      <argument>%accard.model.attribute.class%</argument>
+      <argument>%accard.validation_group.attribute%</argument>
+      <argument type="service" id="accard.builder.attribute"/>
+    </service>
+    <service id="accard.builder.attribute" class="%accard.builder.attribute.class%">
+      <argument type="service" id="accard.manager.attribute"/>
+      <argument type="service" id="accard.repository.attribute"/>
+      <argument type="service" id="accard.repository.attribute_field"/>
+      <argument type="service" id="accard.repository.attribute_field_value"/>
+    </service>
+  </services>
+</container>

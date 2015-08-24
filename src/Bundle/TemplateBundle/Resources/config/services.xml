@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <parameter key="accard.repository.template.class">Accard\Bundle\TemplateBundle\Doctrine\ORM\TemplateRepository</parameter>
+    <parameter key="accard.controller.template.class">Accard\Bundle\TemplateBundle\Controller\TemplateController</parameter>
+    <parameter key="accard.form.template.class">Accard\Bundle\TemplateBundle\Form\Type\TemplateType</parameter>
+    <parameter key="accard.model.template.class">Accard\Bundle\TemplateBundle\Entity\Template</parameter>
+  </parameters>
+  <services>
+    <service id="accard.repository.template" class="%accard.repository.template.class%" factory-method="getRepository" factory-service="doctrine">
+      <argument>Accard\Bundle\TemplateBundle\Entity\Template</argument>
+    </service>
+    <service id="accard.twig_database_loader" class="Accard\Bridge\Twig\Loader\TwigDatabaseLoader">
+      <argument type="service" id="accard.repository.template"/>
+    </service>
+    <service id="accard.twig_filesystem_loader" class="Accard\Bridge\Twig\Loader\TwigAccardFilesystemLoader">
+      <argument>AccardUIBundle</argument>
+      <argument type="service" id="templating.locator"/>
+      <argument type="service" id="templating.name_parser"/>
+    </service>
+    <service id="accard.twig_chain_loader" class="Twig_Loader_Chain">
+      <call method="addLoader">
+        <argument type="service" id="accard.twig_database_loader"/>
+      </call>
+      <call method="addLoader">
+        <argument type="service" id="accard.twig_filesystem_loader"/>
+      </call>
+      <call method="addLoader">
+        <argument type="service" id="twig.loader"/>
+      </call>
+    </service>
+    <service id="accard.controller.template" class="%accard.controller.template.class%">
+      <argument type="service" id="accard.repository.template"/>
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="accard.form.type.accard_template" class="%accard.form.template.class%">
+      <tag name="form.type" alias="accard_template"/>
+      <call method="setBundles">
+        <argument>%kernel.bundles%</argument>
+      </call>
+    </service>
+  </services>
+</container>

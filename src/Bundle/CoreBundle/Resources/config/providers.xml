@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <parameter key="accard.provider.patient_phase.class">Accard\Bundle\PhaseBundle\Provider\PhaseProvider</parameter>
+    <parameter key="accard.provider.diagnosis_phase.class">Accard\Bundle\PhaseBundle\Provider\PhaseProvider</parameter>
+  </parameters>
+  <services>
+    <service id="accard.provider.patient_phase" class="%accard.provider.patient_phase.class%">
+      <argument type="service" id="accard.repository.patient_phase"/>
+      <argument type="service" id="accard.repository.patient_phase_instance"/>
+    </service>
+    <service id="accard.provider.diagnosis_phase" class="%accard.provider.diagnosis_phase.class%">
+      <argument type="service" id="accard.repository.diagnosis_phase"/>
+      <argument type="service" id="accard.repository.diagnosis_phase_instance"/>
+    </service>
+  </services>
+</container>

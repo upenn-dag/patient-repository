@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <parameter key="accard.form.type.diagnosis.class">Accard\Bundle\DiagnosisBundle\Form\Type\DiagnosisType</parameter>
+    <parameter key="accard.form.type.diagnosis_choice.class">Accard\Bundle\DiagnosisBundle\Form\Type\DiagnosisChoiceType</parameter>
+    <parameter key="accard.form.type.diagnosis_code.class">Accard\Bundle\DiagnosisBundle\Form\Type\CodeType</parameter>
+    <parameter key="accard.form.type.diagnosis_code_group.class">Accard\Bundle\DiagnosisBundle\Form\Type\CodeGroupType</parameter>
+  </parameters>
+  <services>
+    <service id="accard.form.type.diagnosis" class="%accard.form.type.diagnosis.class%">
+      <tag name="form.type" alias="accard_diagnosis"/>
+      <argument>%accard.model.diagnosis.class%</argument>
+      <argument>%accard.validation_group.diagnosis%</argument>
+      <argument type="service" id="accard.builder.diagnosis"/>
+      <argument type="service" id="accard.provider.diagnosis_code_group"/>
+    </service>
+    <service id="accard.form.type.diagnosis_choice" class="%accard.form.type.diagnosis_choice.class%">
+      <tag name="form.type" alias="accard_diagnosis_choice"/>
+      <argument>%accard.model.diagnosis.class%</argument>
+      <argument type="service" id="accard.repository.diagnosis"/>
+    </service>
+    <service id="accard.form.type.diagnosis_code" class="%accard.form.type.diagnosis_code.class%">
+      <tag name="form.type" alias="accard_diagnosis_code"/>
+      <argument>%accard.model.diagnosis_code.class%</argument>
+      <argument>%accard.model.diagnosis_code_group.class%</argument>
+      <argument>%accard.validation_group.diagnosis_code%</argument>
+    </service>
+    <service id="accard.form.type.diagnosis_code_group" class="%accard.form.type.diagnosis_code_group.class%">
+      <tag name="form.type" alias="accard_diagnosis_code_group"/>
+      <argument>%accard.model.diagnosis_code_group.class%</argument>
+      <argument>%accard.model.diagnosis_code.class%</argument>
+      <argument>%accard.validation_group.diagnosis_code_group%</argument>
+    </service>
+  </services>
+</container>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <parameter key="accard_hmtb.controller.class">Accard\Bundle\HMTBBundle\Controller\HMTBController</parameter>
+  </parameters>
+  <services>
+    <service id="accard_hmtb.controller" class="%accard_hmtb.controller.class%">
+      <argument type="service" id="doctrine.orm.accard_entity_manager"/>
+    </service>
+    <service id="accard.connection.hmtb" alias="doctrine.dbal.accard_connection"/>
+  </services>
+</container>

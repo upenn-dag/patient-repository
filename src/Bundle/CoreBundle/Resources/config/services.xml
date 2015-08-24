@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <parameter key="accard.state.class">Accard\Bundle\CoreBundle\AccardState</parameter>
+    <parameter key="accard.state.registry.class">Accard\Bundle\CoreBundle\State\DecoratorRegistry</parameter>
+    <parameter key="accard.form.extension.accard_attribute.class">Accard\Bundle\CoreBundle\Form\Extension\AttributeTypeExtension</parameter>
+    <parameter key="doctrine.oracle.session_listener.class">DAG\Bundle\ResourceBundle\EventListener\OracleSessionInit</parameter>
+    <parameter key="doctrine.extension.listener.class">Accard\Bundle\CoreBundle\EventListener\DoctrineExtensionListener</parameter>
+  </parameters>
+  <services>
+    <service id="accard.state" class="%accard.state.class%">
+      <argument type="service" id="accard.state.registry"/>
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="accard.state.registry" class="%accard.state.registry.class%"/>
+    <service id="doctrine.oracle.default_session_listener" class="%doctrine.oracle.session_listener.class%">
+      <tag name="doctrine.event_listener" event="postConnect"/>
+    </service>
+    <service id="doctrine.oracle.accard_session_listener" class="%doctrine.oracle.session_listener.class%">
+      <tag name="doctrine.event_listener" event="postConnect" connection="accard"/>
+    </service>
+    <service id="doctrine.extension.listener" class="%doctrine.extension.listener.class%">
+      <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="gedmo.listener.loggable" class="Gedmo\Loggable\LoggableListener">
+      <tag name="doctrine.event_subscriber" connection="default"/>
+      <call method="setAnnotationReader">
+        <argument type="service" id="annotation_reader"/>
+      </call>
+    </service>
+  </services>
+</container>

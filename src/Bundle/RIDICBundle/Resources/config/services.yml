@@ -1,8 +1,0 @@
-parameters:
-
-    accard.import.manager.ridic.class: Accard\Bundle\RIDICBundle\Import\Manager
-
-services:
-
-    accard.connection.ridic:
-        alias: doctrine.dbal.accard_connection

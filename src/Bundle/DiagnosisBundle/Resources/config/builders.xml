@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <parameter key="accard.builder.diagnosis.class">Accard\Component\Diagnosis\Builder\DiagnosisBuilder</parameter>
+  </parameters>
+  <services>
+    <service id="accard.builder.diagnosis" class="%accard.builder.diagnosis.class%">
+      <argument type="service" id="accard.manager.diagnosis"/>
+      <argument type="service" id="accard.repository.diagnosis"/>
+      <argument type="service" id="accard.repository.diagnosis_field"/>
+      <argument type="service" id="accard.repository.diagnosis_field_value"/>
+    </service>
+  </services>
+</container>

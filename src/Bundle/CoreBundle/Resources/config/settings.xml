@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <parameter key="accard.settings_schema.general.class">Accard\Bundle\CoreBundle\Settings\GeneralSettingsSchema</parameter>
+    <parameter key="accard.settings_schema.theme.class">Accard\Bundle\CoreBundle\Settings\ThemeSettingsSchema</parameter>
+    <parameter key="accard.settings_schema.patient.class">Accard\Bundle\CoreBundle\Settings\PatientSettingsSchema</parameter>
+    <parameter key="accard.settings_schema.diagnosis.class">Accard\Bundle\CoreBundle\Settings\DiagnosisSettingsSchema</parameter>
+    <parameter key="accard.settings_schema.activity.class">Accard\Bundle\CoreBundle\Settings\ActivitySettingsSchema</parameter>
+    <parameter key="accard.settings_schema.sample.class">Accard\Bundle\CoreBundle\Settings\SampleSettingsSchema</parameter>
+    <parameter key="accard.settings_schema.regimen.class">Accard\Bundle\CoreBundle\Settings\RegimenSettingsSchema</parameter>
+    <parameter key="accard.settings_schema.behavior.class">Accard\Bundle\CoreBundle\Settings\BehaviorSettingsSchema</parameter>
+    <parameter key="accard.settings_schema.attribute.class">Accard\Bundle\CoreBundle\Settings\AttributeSettingsSchema</parameter>
+  </parameters>
+  <services>
+    <service id="accard.settings_schema.general" class="%accard.settings_schema.general.class%">
+      <tag name="dag.settings_schema" namespace="general"/>
+    </service>
+    <service id="accard.settings_schema.theme" class="%accard.settings_schema.theme.class%">
+      <tag name="dag.settings_schema" namespace="theme"/>
+    </service>
+    <service id="accard.settings_schema.patient" class="%accard.settings_schema.patient.class%">
+      <tag name="dag.settings_schema" namespace="patient"/>
+    </service>
+    <service id="accard.settings_schema.diagnosis" class="%accard.settings_schema.diagnosis.class%">
+      <tag name="dag.settings_schema" namespace="diagnosis"/>
+    </service>
+    <service id="accard.settings_schema.activity" class="%accard.settings_schema.activity.class%">
+      <tag name="dag.settings_schema" namespace="activity"/>
+    </service>
+    <service id="accard.settings_schema.sample" class="%accard.settings_schema.sample.class%">
+      <tag name="dag.settings_schema" namespace="sample"/>
+    </service>
+    <service id="accard.settings_schema.regimen" class="%accard.settings_schema.regimen.class%">
+      <tag name="dag.settings_schema" namespace="regimen"/>
+    </service>
+    <service id="accard.settings_schema.behavior" class="%accard.settings_schema.behavior.class%">
+      <tag name="dag.settings_schema" namespace="behavior"/>
+    </service>
+    <service id="accard.settings_schema.attribute" class="%accard.settings_schema.attribute.class%">
+      <tag name="dag.settings_schema" namespace="attribute"/>
+    </service>
+  </services>
+</container>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <parameter key="accard.form.type.drug_group.class">Accard\Bundle\DrugBundle\Form\Type\DrugGroupType</parameter>
+    <parameter key="accard.form.type.drug.class">Accard\Bundle\DrugBundle\Form\Type\DrugType</parameter>
+    <parameter key="accard.form.type.drug_group_choice.class">Accard\Bundle\DrugBundle\Form\Type\DrugGroupChoiceType</parameter>
+    <parameter key="accard.form.type.drug_choice.class">Accard\Bundle\DrugBundle\Form\Type\DrugChoiceType</parameter>
+  </parameters>
+  <services>
+    <service id="accard.form.type.drug_group" class="%accard.form.type.drug_group.class%">
+      <tag name="form.type" alias="accard_drug_group"/>
+      <argument>%accard.model.drug_group.class%</argument>
+      <argument>%accard.model.drug.class%</argument>
+      <argument>%accard.validation_group.drug_group%</argument>
+    </service>
+    <service id="accard.form.type.drug" class="%accard.form.type.drug.class%">
+      <tag name="form.type" alias="accard_drug"/>
+      <argument>%accard.model.drug.class%</argument>
+      <argument>%accard.model.drug_group.class%</argument>
+      <argument>%accard.validation_group.drug%</argument>
+    </service>
+    <service id="accard.form.type.drug_group_choice" class="%accard.form.type.drug_group_choice.class%">
+      <tag name="form.type" alias="accard_drug_group_choice"/>
+      <argument>%accard.model.drug_group.class%</argument>
+    </service>
+    <service id="accard.form.type.drug_choice" class="%accard.form.type.drug_choice.class%">
+      <tag name="form.type" alias="accard_drug_choice"/>
+      <argument>%accard.model.drug.class%</argument>
+    </service>
+  </services>
+</container>

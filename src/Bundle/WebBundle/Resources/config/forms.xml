@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <parameter key="accard.form.type_extension.date_defaults.class">Accard\Bundle\WebBundle\Form\Extension\DateDefaultsExtension</parameter>
+    <parameter key="accard.form.type.typeahead.class">DAG\Bundle\ResourceBundle\Form\Type\TypeaheadType</parameter>
+  </parameters>
+  <services>
+    <service id="accard.form.type_extension.date" class="%accard.form.type_extension.date_defaults.class%">
+      <tag name="form.type_extension" alias="date"/>
+      <argument>date</argument>
+    </service>
+    <service id="accard.form.type_extension.datetime" class="%accard.form.type_extension.date_defaults.class%">
+      <tag name="form.type_extension" alias="datetime"/>
+      <argument>datetime</argument>
+    </service>
+    <service id="accard.form.type_extension.birthday" class="%accard.form.type_extension.date_defaults.class%">
+      <tag name="form.type_extension" alias="birthday"/>
+      <argument>birthday</argument>
+    </service>
+    <service id="accard.form.type.typeahead" class="%accard.form.type.typeahead.class%">
+      <tag name="form.type" alias="accard_typeahead"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+  </services>
+</container>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <parameter key="accard.builder.patient.class">Accard\Component\Patient\Builder\PatientBuilder</parameter>
+    <parameter key="accard.provider.patient.class">Accard\Bundle\PatientBundle\Provider\PatientProvider</parameter>
+    <parameter key="accard.form.type.patient_choice.class">Accard\Bundle\PatientBundle\Form\Type\PatientChoiceType</parameter>
+    <parameter key="accard.expression_language.extension.patient.class">Accard\Bundle\PatientBundle\ExpressionLanguage\PatientExtension</parameter>
+  </parameters>
+  <services>
+    <service id="accard.expression_language.extension.patient" class="%accard.expression_language.extension.patient.class%">
+      <tag name="accard.expression_language_extension"/>
+      <argument type="service" id="accard.provider.patient"/>
+    </service>
+    <service id="accard.form.type.patient" class="%accard.form.type.patient.class%">
+      <tag name="form.type" alias="accard_patient"/>
+      <argument>%accard.model.patient.class%</argument>
+      <argument>%accard.validation_group.patient%</argument>
+      <argument type="service" id="accard.builder.patient"/>
+      <argument type="service" id="dag.provider.option"/>
+    </service>
+    <service id="accard.form.type.patient_choice" class="%accard.form.type.patient_choice.class%">
+      <tag name="form.type" alias="accard_patient_choice"/>
+      <argument>%accard.model.patient.class%</argument>
+    </service>
+    <service id="accard.builder.patient" class="%accard.builder.patient.class%">
+      <argument type="service" id="accard.manager.patient"/>
+      <argument type="service" id="accard.repository.patient"/>
+      <argument type="service" id="accard.repository.patient_field"/>
+      <argument type="service" id="accard.repository.patient_field_value"/>
+    </service>
+    <service id="accard.provider.patient" class="%accard.provider.patient.class%">
+      <argument type="service" id="accard.repository.patient"/>
+    </service>
+  </services>
+</container>

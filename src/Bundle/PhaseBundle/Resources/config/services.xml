@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <parameter key="accard.form.type.accard_phase.class">Accard\Bundle\PhaseBundle\Form\Type\PhaseType</parameter>
+    <parameter key="accard.form.type.accard_phase_choice.class">Accard\Bundle\PhaseBundle\Form\Type\PhaseChoiceType</parameter>
+    <parameter key="accard.form.type.accard_phase_instance.class">Accard\Bundle\PhaseBundle\Form\Type\PhaseInstanceType</parameter>
+  </parameters>
+  <services>
+    <service id="accard.form.type.accard_phase" class="%accard.form.type.accard_phase.class%">
+      <tag name="form.type" alias="accard_phase"/>
+    </service>
+    <service id="accard.form.type.accard_phase_choice" class="%accard.form.type.accard_phase_choice.class%">
+      <tag name="form.type" alias="accard_phase_choice"/>
+    </service>
+    <service id="accard.form.type.accard_phase_instance" class="%accard.form.type.accard_phase_instance.class%">
+      <tag name="form.type" alias="accard_phase_instance"/>
+    </service>
+  </services>
+</container>

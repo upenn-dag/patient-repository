@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <parameter key="accard.form.type_extension.date_defaults.class">Accard\Bundle\WebBundle\Form\Extension\DateDefaultsExtension</parameter>
+    <parameter key="accard.form.type.accard_patient_phase.class">Accard\Bundle\CoreBundle\Form\Type\PatientPhaseType</parameter>
+    <parameter key="accard.form.type.accard_patient_phase_choice.class">Accard\Bundle\CoreBundle\Form\Type\PatientPhaseChoiceType</parameter>
+    <parameter key="accard.form.type.accard_patient_phase_instance.class">Accard\Bundle\CoreBundle\Form\Type\PatientPhaseInstanceType</parameter>
+    <parameter key="accard.form.type.accard_diagnosis_phase.class">Accard\Bundle\CoreBundle\Form\Type\DiagnosisPhaseType</parameter>
+    <parameter key="accard.form.type.accard_diagnosis_phase_choice.class">Accard\Bundle\CoreBundle\Form\Type\DiagnosisPhaseChoiceType</parameter>
+    <parameter key="accard.form.type.accard_diagnosis_phase_instance.class">Accard\Bundle\CoreBundle\Form\Type\DiagnosisPhaseInstanceType</parameter>
+    <parameter key="accard.form.extension.accard_attribute.class">Accard\Bundle\CoreBundle\Form\Extension\AttributeTypeExtension</parameter>
+    <parameter key="accard.form.extension.accard_diagnosis.class">Accard\Bundle\CoreBundle\Form\Extension\DiagnosisTypeExtension</parameter>
+    <parameter key="accard.form.extension.accard_behavior.class">Accard\Bundle\CoreBundle\Form\Extension\BehaviorTypeExtension</parameter>
+    <parameter key="accard.form.extension.accard_activity.class">Accard\Bundle\CoreBundle\Form\Extension\ActivityTypeExtension</parameter>
+    <parameter key="accard.form.extension.accard_sample.class">Accard\Bundle\CoreBundle\Form\Extension\SampleTypeExtension</parameter>
+    <parameter key="accard.form.extension.accard_sample_source.class">Accard\Bundle\CoreBundle\Form\Extension\SampleSourceTypeExtension</parameter>
+    <parameter key="accard.form.extension.accard_regimen.class">Accard\Bundle\CoreBundle\Form\Extension\RegimenTypeExtension</parameter>
+    <parameter key="accard.form.extension.invalid_message.class">Accard\Bundle\CoreBundle\Form\Extension\InvalidMessageExtension</parameter>
+    <parameter key="accard.form.type.patient_diagnoses.class">Accard\Bundle\CoreBundle\Form\Type\PatientDiagnosesType</parameter>
+    <parameter key="accard.form.type.patient_filter.class">Accard\Bundle\CoreBundle\Form\Type\Filter\PatientFilterType</parameter>
+  </parameters>
+  <services>
+    <service id="accard.form.type_extension.number" class="%accard.form.extension.invalid_message.class%">
+      <tag name="form.type_extension" alias="number"/>
+      <argument>number</argument>
+      <argument>accard.invalid_number</argument>
+    </service>
+    <service id="accard.form.type_extension.integer" class="%accard.form.extension.invalid_message.class%">
+      <tag name="form.type_extension" alias="integer"/>
+      <argument>integer</argument>
+      <argument>accard.invalid_integer</argument>
+    </service>
+    <service id="accard.form.type_extension.date" class="%accard.form.type_extension.date_defaults.class%">
+      <tag name="form.type_extension" alias="date"/>
+      <argument>date</argument>
+    </service>
+    <service id="accard.form.type_extension.datetime" class="%accard.form.type_extension.date_defaults.class%">
+      <tag name="form.type_extension" alias="datetime"/>
+      <argument>datetime</argument>
+    </service>
+    <service id="accard.form.type_extension.birthday" class="%accard.form.type_extension.date_defaults.class%">
+      <tag name="form.type_extension" alias="birthday"/>
+      <argument>birthday</argument>
+    </service>
+    <service id="accard.form.type.accard_patient_phase" class="%accard.form.type.accard_patient_phase.class%">
+      <tag name="form.type" alias="accard_patient_phase"/>
+      <argument>%accard.model.patient_phase.class%</argument>
+      <argument>%accard.validation_group.patient_phase%</argument>
+    </service>
+    <service id="accard.form.type.accard_patient_phase_choice" class="%accard.form.type.accard_patient_phase_choice.class%">
+      <tag name="form.type" alias="accard_patient_phase_choice"/>
+      <argument>%accard.model.patient_phase.class%</argument>
+    </service>
+    <service id="accard.form.type.accard_patient_phase_instance" class="%accard.form.type.accard_patient_phase_instance.class%">
+      <tag name="form.type" alias="accard_patient_phase_instance"/>
+      <argument>%accard.model.patient_phase_instance.class%</argument>
+      <argument>%accard.model.patient_phase.class%</argument>
+      <argument>%accard.model.patient.class%</argument>
+      <argument>%accard.validation_group.patient_phase_instance%</argument>
+    </service>
+    <service id="accard.form.type.accard_diagnosis_phase" class="%accard.form.type.accard_diagnosis_phase.class%">
+      <tag name="form.type" alias="accard_diagnosis_phase"/>
+      <argument>%accard.model.diagnosis_phase.class%</argument>
+      <argument>%accard.validation_group.diagnosis_phase%</argument>
+    </service>
+    <service id="accard.form.type.accard_diagnosis_phase_choice" class="%accard.form.type.accard_diagnosis_phase_choice.class%">
+      <tag name="form.type" alias="accard_diagnosis_phase_choice"/>
+      <argument>%accard.model.diagnosis_phase.class%</argument>
+    </service>
+    <service id="accard.form.type.accard_diagnosis_phase_instance" class="%accard.form.type.accard_diagnosis_phase_instance.class%">
+      <tag name="form.type" alias="accard_diagnosis_phase_instance"/>
+      <argument>%accard.model.diagnosis_phase_instance.class%</argument>
+      <argument>%accard.model.diagnosis_phase.class%</argument>
+      <argument>%accard.model.diagnosis.class%</argument>
+      <argument>%accard.validation_group.diagnosis_phase_instance%</argument>
+    </service>
+    <service id="accard.form.extension.accard_attribute" class="%accard.form.extension.accard_attribute.class%">
+      <tag name="form.type_extension" alias="accard_attribute"/>
+      <argument>%accard.model.patient.class%</argument>
+    </service>
+    <service id="accard.form.extension.accard_behavior" class="%accard.form.extension.accard_behavior.class%">
+      <tag name="form.type_extension" alias="accard_behavior"/>
+      <argument>%accard.model.patient.class%</argument>
+    </service>
+    <service id="accard.form.extension.accard_diagnosis" class="%accard.form.extension.accard_diagnosis.class%">
+      <tag name="form.type_extension" alias="accard_diagnosis"/>
+    </service>
+    <service id="accard.form.extension.accard_activity" class="%accard.form.extension.accard_activity.class%">
+      <tag name="form.type_extension" alias="accard_activity"/>
+      <argument>%accard.model.patient.class%</argument>
+      <argument type="service" id="accard.repository.diagnosis"/>
+    </service>
+    <service id="accard.form.extension.accard_sample" class="%accard.form.extension.accard_sample.class%">
+      <tag name="form.type_extension" alias="accard_sample"/>
+      <argument>%accard.model.patient.class%</argument>
+    </service>
+    <service id="accard.form.extension.accard_sample_source" class="%accard.form.extension.accard_sample_source.class%">
+      <tag name="form.type_extension" alias="accard_sample_source"/>
+      <argument>%accard.model.patient.class%</argument>
+    </service>
+    <service id="accard.form.extension.accard_regimen" class="%accard.form.extension.accard_regimen.class%">
+      <tag name="form.type_extension" alias="accard_regimen"/>
+      <argument type="service" id="accard.repository.patient"/>
+      <argument type="service" id="accard.repository.diagnosis"/>
+      <argument type="service" id="accard.repository.activity"/>
+    </service>
+    <service id="accard.form.type.patient_diagnoses" class="%accard.form.type.patient_diagnoses.class%">
+      <tag name="form.type" alias="accard_patient_diagnoses"/>
+      <argument>%accard.model.patient.class%</argument>
+      <argument type="service" id="accard.form.type.diagnosis"/>
+    </service>
+    <service id="accard.form.type.patient_filter" class="%accard.form.type.patient_filter.class%">
+      <tag name="form.type" alias="accard_patient_filter"/>
+    </service>
+  </services>
+</container>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <parameter key="accard.builder.sample.class">Accard\Component\Sample\Builder\SampleBuilder</parameter>
+    <parameter key="accard.form.type.sample_source_collection.class">Accard\Bundle\SampleBundle\Form\Type\CollectionSourceType</parameter>
+    <parameter key="accard.form.type.sample_source_derivation.class">Accard\Bundle\SampleBundle\Form\Type\DerivationSourceType</parameter>
+  </parameters>
+  <services>
+    <service id="accard.form.type.sample" class="%accard.form.type.sample.class%">
+      <tag name="form.type" alias="accard_sample"/>
+      <argument>%accard.model.sample.class%</argument>
+      <argument>%accard.validation_group.sample%</argument>
+      <argument type="service" id="accard.builder.sample"/>
+    </service>
+    <service id="accard.form.type.sample_source" class="%accard.form.type.sample_source.class%">
+      <tag name="form.type" alias="accard_sample_source"/>
+      <argument>%accard.model.sample_source.class%</argument>
+      <argument>%accard.validation_group.sample_source%</argument>
+    </service>
+    <service id="accard.form.type.sample_source_collection" class="%accard.form.type.sample_source_collection.class%">
+      <tag name="form.type" alias="accard_sample_source_collection"/>
+    </service>
+    <service id="accard.form.type.sample_source_derivation" class="%accard.form.type.sample_source_derivation.class%">
+      <tag name="form.type" alias="accard_sample_source_derivation"/>
+    </service>
+    <service id="accard.builder.sample" class="%accard.builder.sample.class%">
+      <argument type="service" id="accard.manager.sample"/>
+      <argument type="service" id="accard.repository.sample"/>
+      <argument type="service" id="accard.repository.sample_field"/>
+      <argument type="service" id="accard.repository.sample_field_value"/>
+    </service>
+  </services>
+</container>

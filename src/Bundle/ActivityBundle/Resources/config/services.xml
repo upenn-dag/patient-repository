@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+  <parameters>
+    <parameter key="accard.form.type.activity_choice.class">Accard\Bundle\ActivityBundle\Form\Type\ActivityChoiceType</parameter>
+    <parameter key="accard.builder.activity.class">Accard\Component\Activity\Builder\ActivityBuilder</parameter>
+    <parameter key="accard.provider.activity.class">Accard\Component\Activity\Provider\ActivityProvider</parameter>
+  </parameters>
+  <services>
+    <service id="accard.form.type.activity" class="%accard.form.type.activity.class%">
+      <tag name="form.type" alias="accard_activity"/>
+      <argument>%accard.model.activity.class%</argument>
+      <argument>%accard.validation_group.activity%</argument>
+      <argument type="service" id="accard.builder.activity"/>
+    </service>
+    <service id="accard.form.type.activity_choice" class="%accard.form.type.activity_choice.class%">
+      <tag name="form.type" alias="accard_activity_choice"/>
+      <argument type="service" id="accard.repository.activity"/>
+    </service>
+    <service id="accard.builder.activity" class="%accard.builder.activity.class%">
+      <argument type="service" id="accard.manager.activity"/>
+      <argument type="service" id="accard.repository.activity"/>
+      <argument type="service" id="accard.repository.activity_field"/>
+      <argument type="service" id="accard.repository.activity_field_value"/>
+    </service>
+    <service id="accard.provider.activity" class="%accard.provider.activity.class%">
+      <argument type="service" id="accard.repository.activity"/>
+      <argument type="service" id="accard.provider.activity_prototype"/>
+    </service>
+  </services>
+</container>
