@@ -46,7 +46,7 @@ interface ActivityInterface extends
      * @param DateTime $activityDate
      * @return ActivityInterface
      */
-    public function setActivityDate(DateTime $activityDate);
+    public function setActivityDate(DateTime $activityDate = null);
 
     /**
      * Get drug.

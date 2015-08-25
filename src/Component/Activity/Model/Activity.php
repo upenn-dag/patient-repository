@@ -73,7 +73,7 @@ class Activity implements ActivityInterface
     /**
      * {@inheritdoc}
      */
-    public function setActivityDate(DateTime $activityDate)
+    public function setActivityDate(DateTime $activityDate = null)
     {
         $this->activityDate = $activityDate;
 
