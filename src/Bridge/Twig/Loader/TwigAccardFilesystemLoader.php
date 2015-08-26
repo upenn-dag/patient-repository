@@ -21,13 +21,13 @@ class TwigAccardFilesystemLoader extends FilesystemLoader
         parent::__construct($locator, $parser);
     }
 
-    protected function findTemplate($name)
+    protected function findTemplate($name, $throw = true)
     {
         // If it's prefixed with "Theme" we need to change the name before we pass it along...
         if (TwigDatabaseLoader::MAGIC_TEMPLATE === substr($name, 0, strlen(TwigDatabaseLoader::MAGIC_TEMPLATE))) {
             $name = $this->defaultLoadBundle.substr($name, strlen(TwigDatabaseLoader::MAGIC_TEMPLATE));
 
-            return parent::findTemplate($name);
+            return parent::findTemplate($name, $throw);
         }
 
         throw new Twig_Error_Loader(sprintf('Template for "%s" does not exist and is not prefixed.', $name));
