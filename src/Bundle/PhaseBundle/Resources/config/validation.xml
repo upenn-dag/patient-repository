@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+  <!-- Phase Model -->
+
+  <class name="Accard\Component\Phase\Model\Phase">
+    <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+      <option name="message">accard.phase.label.unique</option>
+      <option name="fields">
+        <value>label</value>
+      </option>
+      <option name="groups">
+        <value>accard</value>
+      </option>
+    </constraint>
+
+    <property name="label">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Regex">
+        <option name="pattern">/^[a-z0-9-]+$/</option>
+        <option name="message">accard.phase.label.slug</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Length">
+        <option name="min">3</option>
+        <option name="max">120</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="presentation">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Length">
+        <option name="min">3</option>
+        <option name="max">120</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="order">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Type">
+        <option name="type">int</option>
+        <option name="message">accard.phase.order.type</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+  </class>
+
+</constraint-mapping>

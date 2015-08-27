@@ -6,7 +6,9 @@
 # file that was distributed with this source code.
 
 accard:
-    regimen: ~
-    regimen_prototype: ~
-    regimen_field: ~
-    regimen_source: ~
+    phase:
+        label:
+            unique: Value is already in use by another phase.
+            slug: "Value may only contain letters, numbers and hyphens."
+        order:
+            type: Value must be numeric.
