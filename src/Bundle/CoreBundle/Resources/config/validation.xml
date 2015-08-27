@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+  <!-- Core Patient Model -->
+
+  <class name="Accard\Component\Core\Model\Patient">
+    <property name="gender">
+      <constraint name="Choice">
+        <option name="callback">getAvailableGenders</option>
+        <option name="strict">true</option>
+        <option name="message">accard.patient.gender.choice</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="race">
+      <constraint name="Choice">
+        <option name="callback">getAvailableRaces</option>
+        <option name="strict">true</option>
+        <option name="message">accard.patient.race.choice</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="phases">
+      <constraint name="Valid">
+        <option name="traverse">true</option>
+      </constraint>
+    </property>
+  </class>
+
+  <!-- Core Diagnosis Model -->
+
+  <class name="Accard\Component\Core\Model\Diagnosis">
+    <property name="patient">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Type">
+        <option name="type">Accard\Component\Core\Model\PatientInterface</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="phases">
+      <constraint name="Valid">
+        <option name="traverse">true</option>
+      </constraint>
+    </property>
+  </class>
+
+  <!-- Core Activity Model -->
+
+  <class name="Accard\Component\Core\Model\Activity">
+    <property name="patient">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Type">
+        <option name="type">Accard\Component\Core\Model\PatientInterface</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="diagnosis">
+      <constraint name="Type">
+        <option name="type">Accard\Component\Core\Model\DiagnosisInterface</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+  </class>
+
+  <!-- Core Attribute Model -->
+
+  <class name="Accard\Component\Core\Model\Attribute">
+    <property name="patient">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Type">
+        <option name="type">Accard\Component\Core\Model\PatientInterface</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+  </class>
+
+  <!-- Core Behavior Model -->
+
+  <class name="Accard\Component\Core\Model\Behavior">
+    <property name="patient">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Type">
+        <option name="type">Accard\Component\Core\Model\PatientInterface</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+  </class>
+
+  <!-- Core Regimen Model -->
+
+  <class name="Accard\Component\Core\Model\Regimen">
+    <property name="patient">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Type">
+        <option name="type">Accard\Component\Core\Model\PatientInterface</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="diagnosis">
+      <constraint name="Type">
+        <option name="type">Accard\Component\Core\Model\DiagnosisInterface</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+  </class>
+
+  <!-- Core Sample Model -->
+
+  <class name="Accard\Component\Core\Model\Sample">
+    <property name="patient">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Type">
+        <option name="type">Accard\Component\Core\Model\PatientInterface</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+  </class>
+
+</constraint-mapping>
