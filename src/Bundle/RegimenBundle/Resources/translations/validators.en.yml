@@ -7,11 +7,5 @@
 
 accard:
     regimen:
-        start_date:
-            not_blank: Start date may not be left blank.
-            datetime: Start date must be a valid date.
         end_date:
-            datetime: Start date must be a valid date.
-        end_date_before_start_date:  Start date must be after end date
-    regimen_prototype:
-    regimen_field: ~
+            after_start: "End date must be blank or be later than the regimen start date."
