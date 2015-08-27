@@ -1,6 +1,11 @@
 accard:
     drug:
         name:
-            slug: "The field name may only contain letters, numbers and hyphens."
+            unique: Name is already in use.
+            slug: "The drug name may only contain letters, numbers and hyphens."
         generic:
             type: Generic must be a valid drug.
+    drug_group:
+        name:
+            unique: Name is already in use.
+            slug: "The drug group name may only contain letters, numbers and hyphens."
