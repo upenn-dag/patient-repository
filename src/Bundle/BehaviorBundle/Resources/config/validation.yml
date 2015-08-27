@@ -1,9 +1,0 @@
-Accard\Component\Behavior\Model\Behavior:
-    properties:
-        startDate:
-            - Date: ~
-        endDate:
-            - Date: ~ 
-    getters:
-        afterStartDate:
-            - "True" : { message: 'accard.behavior.end_date_before_start_date', groups: ['accard']}
