@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+  <!-- Diagnosis Model -->
+
+  <class name="Accard\Component\Diagnosis\Model\Diagnosis">
+    <property name="parent">
+      <constraint name="Type">
+        <option name="type">Accard\Component\Diagnosis\Model\DiagnosisInterface</option>
+        <option name="message">accard.diagnosis.parent.type</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="primary">
+      <constraint name="Type">
+        <option name="type">Accard\Component\Diagnosis\Model\DiagnosisInterface</option>
+        <option name="message">accard.diagnosis.primary.type</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="code">
+      <constraint name="Type">
+        <option name="type">Accard\Component\Diagnosis\Model\CodeInterface</option>
+        <option name="message">accard.diagnosis.code.type</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="startDate">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Date">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Expression">
+        <option name="expression">
+          <![CDATA[ !this.getEndDate() or this.getEndDate() >= this.getStartDate() ]]>
+        </option>
+        <option name="message">accard.diagnosis.start_date.before_end_date</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Expression">
+        <option name="expression">
+          <![CDATA[ this.getPatient() and this.getPatient().getDateOfBirth() <= this.getStartDate() ]]>
+        </option>
+        <option name="message">accard.diagnosis.start_date.before_birth</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="endDate">
+      <constraint name="Date">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Expression">
+        <option name="expression">
+          <![CDATA[ !this.getEndDate() or (this.getPatient() and this.getPatient().getDateOfDeath() >= this.getEndDate()) ]]>
+        </option>
+        <option name="message">accard.diagnosis.end_date.after_death</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+  </class>
+
+  <!-- Diagnosis Code Model -->
+
+  <class name="Accard\Component\Diagnosis\Model\Code">
+    <property name="code">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Length">
+        <option name="min">1</option>
+        <option name="max">36</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="description">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Length">
+        <option name="min">1</option>
+        <option name="max">255</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+  </class>
+
+  <!-- Diagnosis Code Group Model -->
+
+  <class name="Accard\Component\Diagnosis\Model\CodeGroup">
+    <property name="name">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Regex">
+        <option name="pattern">/^[a-z0-9-]+$/</option>
+        <option name="message">accard.diagnosis_code.slug</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Length">
+        <option name="min">3</option>
+        <option name="max">36</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="presentation">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Length">
+        <option name="min">3</option>
+        <option name="max">255</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+  </class>
+
+</constraint-mapping>

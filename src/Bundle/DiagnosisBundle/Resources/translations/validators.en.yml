@@ -1,10 +1,3 @@
-# This file is part of the Accard package.
-#
-# (c) University of Pennsylvania
-#
-# For the full copyright and license information, please view the LICENSE
-# file that was distributed with this source code.
-
 accard:
     diagnosis:
         parent:
@@ -14,38 +7,10 @@ accard:
         code:
             type: Code must be a valid diagnosis code.
         start_date:
-            not_blank: Start date may not be left blank.
-            datetime: Start date must contain a valid date.
+            before_end_date: Start date must come before end date.
             before_birth: Start date may not be prior to patient birth.
         end_date:
-            datetime: End date must contain a valid date.
             after_death: End date may not occur after patient death.
-        recurrences:
-            type: Recurrences must all be valid diagnoses.
-        comorbidities:
-            type: Comorbidities must all be valid diagnoses.
-        fields:
-            type: Fields must all be valid diagnosis field values.
     diagnosis_code:
         code:
-            not_blank: Code may not be left blank.
-        description:
-            length:
-                min: "Description must contain more than {{ limit }} characters."
-                max: "Description must not contain more than {{ limit }} characters."
-        groups:
-            type: Groups must all be valid diagnosis code groups.
-    diagnosis_code_group:
-        name:
-            not_blank: Name may not be left blank.
-            slug: "The code name may only contain letters, numbers and hyphens."
-            length:
-                min: "Name must contain more than {{ limit }} characters."
-                max: "Name must not contain more than {{ limit }} characters."
-        presentation:
-            not_blank: Presentation may not be left blank.
-            length:
-                min: "Presentation must contain more than {{ limit }} characters."
-                max: "Presentation must not contain more than {{ limit }} characters."
-        codes:
-            type: Codes must all be valid diagnosis codes.
+            slug: 'Code may only contain A-Z, a-z, 0-9, "_", and "-".'
