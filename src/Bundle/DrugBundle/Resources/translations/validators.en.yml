@@ -1,0 +1,6 @@
+accard:
+    drug:
+        name:
+            slug: "The field name may only contain letters, numbers and hyphens."
+        generic:
+            type: Generic must be a valid drug.
