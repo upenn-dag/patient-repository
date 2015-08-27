@@ -9,28 +9,6 @@ accard:
     patient:
         mrn:
             unique: The MRN has already been registered.
-            regex: MRN must contain nine digits.
-        first_name:
-            not_blank: First name may not be left blank.
-            length:
-                min: "First name must contain more than {{ limit }} characters."
-                max: "First name must not contain more than {{ limit }} characters."
-        last_name:
-            not_blank: Last name may not be left blank.
-            length:
-                min: "Last name must contain more than {{ limit }} characters."
-                max: "Last name must not contain more than {{ limit }} characters."
-        date_of_birth:
-            not_blank: Date of birth may not be left blank.
-            date: Date of birth must contain a valid date.
+            regex: MRN must contain nine numeric digits.
         date_of_death:
-            date: Date of death must contain a valid date.
-            valid: Date of death must be empty or greater than date of birth.
-        gender:
-            not_blank: Gender may not be left blank.
-            choice: Gender selected is invalid.
-        race:
-            not_blank: Race may not be left blank.
-            choice: Race selected is invalid.
-        fields:
-            type: Fields must all be valid patient field values.
+            valid: Date of death must be empty or after date of birth.

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+  <!-- Patient Model -->
+
+  <class name="Accard\Component\Patient\Model\Patient">
+    <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+      <option name="message">accard.patient.mrn.unique</option>
+      <option name="fields">
+        <value>mrn</value>
+      </option>
+      <option name="groups">
+        <value>accard</value>
+      </option>
+    </constraint>
+
+    <property name="mrn">
+      <constraint name="Regex">
+        <option name="pattern">/^[0-9]{9}$/</option>
+        <option name="message">accard.patient.mrn.regex</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="firstName">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Length">
+        <option name="min">2</option>
+        <option name="max">36</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="lastName">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Length">
+        <option name="min">2</option>
+        <option name="max">36</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="dateOfBirth">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Date">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="dateOfDeath">
+      <constraint name="Date">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Expression">
+        <option name="expression">
+          <![CDATA[ !this.getDateOfDeath() or this.getDateOfDeath() >= this.getDateOfBirth() ]]>
+        </option>
+        <option name="message">accard.patient.date_of_death.valid</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="gender">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="race">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+  </class>
+</constraint-mapping>
