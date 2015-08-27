@@ -1,0 +1,9 @@
+accard:
+    activity:
+        prototype:
+            type: This value should be a valid activity prototype.
+    activity_prototype:
+        name:
+            not_derivation: '"Derivation" is a reserved word, please choose another.'
+            not_collection: '"Collection" is a reserved word, please choose another.'
+            regex: 'This value may only contain A-Z, a-z, 0-9, "-", and "_".'

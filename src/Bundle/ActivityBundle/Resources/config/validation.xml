@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+  <!-- Activity Model -->
+
+  <class name="Accard\Component\Activity\Model\Activity">
+    <property name="prototype">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="Type">
+        <option name="type">Accard\Component\Activity\Model\PrototypeInterface</option>
+        <option name="message">accard.activity.prototype.type</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+    <property name="activityDate">
+      <constraint name="NotBlank">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="DateTime">
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+  </class>
+
+  <!-- Activity prototype, extension -->
+
+  <class name="Accard\Component\Activity\Model\Prototype">
+    <property name="name">
+      <constraint name="NotEqualTo">
+        <option name="value">derivation</option>
+        <option name="message">accard.activity_prototype.name.not_derivation</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+      <constraint name="NotEqualTo">
+        <option name="value">collection</option>
+        <option name="message">accard.activity_prototype.name.not_collection</option>
+        <option name="groups">
+          <value>accard</value>
+        </option>
+      </constraint>
+    </property>
+  </class>
+
+</constraint-mapping>
