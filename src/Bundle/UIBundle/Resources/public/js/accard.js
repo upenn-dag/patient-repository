@@ -210,7 +210,7 @@ AccardApplication.prototype = {
     this.gridElement = document.getElementById('accard-grid');
     if (this.gridElement) {
       var PatientGrid = require('./components/patient-grid/component');
-      this.grid = React.render(React.createElement(PatientGrid, {height: this.gridElement.clientHeight, width: this.gridElement.clientWidth, onRowClick: this._handleGridRowClick.bind(this), onRowDoubleClick: this._handleGridRowDoubleClick.bind(this)}), this.gridElement);
+      this.grid = React.render(React.createElement(PatientGrid, {height: this.gridElement.clientHeight - 22, width: this.gridElement.clientWidth, onRowClick: this._handleGridRowClick.bind(this), onRowDoubleClick: this._handleGridRowDoubleClick.bind(this)}), this.gridElement);
       this._debug('Initialized grid', this.grid);
     } else {
       this._debug('No grid element found');
@@ -1942,7 +1942,7 @@ start(initConfig)
 ;
 
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_4a44cdb1.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_65ddea82.js","/")
 },{"+7ZJp0":100,"./accard":1,"./api":2,"./state":28,"bluebird":40,"buffer":96}],26:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var EventEmitter = require('events').EventEmitter;
@@ -2332,7 +2332,7 @@ var CriteriaModel = Immutable.Record({
 var page, limit, pages, total, xhr, currentPatientId;
 var CHANGE_EVENT = 'patient-change';
 var CURRENT_EVENT = 'current-patient-change';
-var DEFAULT_LIMIT = 25;
+var DEFAULT_LIMIT = 12;
 var cache = Immutable.Map();
 var requestCache = {};
 var patients = Immutable.List();
@@ -2397,7 +2397,7 @@ var Store = assign({}, EventEmitter.prototype, {
   },
 
   hasMorePatientsToLoad:function() {
-    return pages > page;
+    return pages >= page;
   },
 
   getSortKey:function() {
@@ -2698,10 +2698,11 @@ module.exports = {
  * Github:  http://github.com/jakiestfu/snap.js/
  * Version: 1.9.3
  */
+/* jshint ignore:start */
 /*jslint browser: true*/
 /*global define, module, ender*/
 (function(win, doc) {
-    //'use strict';
+    'use strict';
     var Drawer = Drawer || function(userOpts) {
         var settings = {
             element: null,
@@ -2856,14 +2857,14 @@ module.exports = {
                         if( !utils.canTransform() ){
                             return parseInt(settings.element.style.left, 10);
                         } else {
-                            var innerMatrix = win.getComputedStyle(settings.element)[cache.vendor+'Transform'].match(/\((.*)\)/),
+                            var matrix = win.getComputedStyle(settings.element)[cache.vendor+'Transform'].match(/\((.*)\)/),
                                 ieOffset = 8;
-                            if (innerMatrix) {
-                                innerMatrix = innerMatrix[1].split(',');
-                                if(innerMatrix.length===16){
+                            if (matrix) {
+                                matrix = matrix[1].split(',');
+                                if(matrix.length===16){
                                     index+=ieOffset;
                                 }
-                                return parseInt(innerMatrix[index], 10);
+                                return parseInt(matrix[index], 10);
                             }
                             return 0;
                         }
@@ -3256,18 +3257,19 @@ module.exports = {
         });
     }
 }).call(this, window, document);
+/* jshint ignore:end */
 
 
 }).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/vendor/drawer.js","/vendor")
 },{"+7ZJp0":100,"buffer":96}],39:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-/* jshint ignore:start */
 /**
  * Portions of this code are from the Google Closure Library,
  * received from the Closure Authors under the Apache 2.0 license.
  *
  * All other code is (C) FriendsOfSymfony and subject to the MIT license.
  */
+/* jshint ignore:start */
 (function() {var f=!1,i,k=this;function l(a,c){var b=a.split("."),d=k;!(b[0]in d)&&d.execScript&&d.execScript("var "+b[0]);for(var e;b.length&&(e=b.shift());)!b.length&&void 0!==c?d[e]=c:d=d[e]?d[e]:d[e]={}};var m=Array.prototype,n=m.forEach?function(a,c,b){m.forEach.call(a,c,b)}:function(a,c,b){for(var d=a.length,e="string"==typeof a?a.split(""):a,g=0;g<d;g++)g in e&&c.call(b,e[g],g,a)};function q(a,c){this.c={};this.a=[];var b=arguments.length;if(1<b){if(b%2)throw Error("Uneven number of arguments");for(var d=0;d<b;d+=2)this.set(arguments[d],arguments[d+1])}else if(a){var e;if(a instanceof q){r(a);d=a.a.concat();r(a);e=[];for(b=0;b<a.a.length;b++)e.push(a.c[a.a[b]])}else{var b=[],g=0;for(d in a)b[g++]=d;d=b;b=[];g=0;for(e in a)b[g++]=a[e];e=b}for(b=0;b<d.length;b++)this.set(d[b],e[b])}}q.prototype.f=0;q.prototype.p=0;
 function r(a){if(a.f!=a.a.length){for(var c=0,b=0;c<a.a.length;){var d=a.a[c];t(a.c,d)&&(a.a[b++]=d);c++}a.a.length=b}if(a.f!=a.a.length){for(var e={},b=c=0;c<a.a.length;)d=a.a[c],t(e,d)||(a.a[b++]=d,e[d]=1),c++;a.a.length=b}}q.prototype.get=function(a,c){return t(this.c,a)?this.c[a]:c};q.prototype.set=function(a,c){t(this.c,a)||(this.f++,this.a.push(a),this.p++);this.c[a]=c};function t(a,c){return Object.prototype.hasOwnProperty.call(a,c)};var u,v,w,x;function y(){return k.navigator?k.navigator.userAgent:null}x=w=v=u=f;var C;if(C=y()){var D=k.navigator;u=0==C.indexOf("Opera");v=!u&&-1!=C.indexOf("MSIE");w=!u&&-1!=C.indexOf("WebKit");x=!u&&!w&&"Gecko"==D.product}var E=v,F=x,G=w;var I;if(u&&k.opera){var J=k.opera.version;"function"==typeof J&&J()}else F?I=/rv\:([^\);]+)(\)|;)/:E?I=/MSIE\s+([^\);]+)(\)|;)/:G&&(I=/WebKit\/(\S+)/),I&&I.exec(y());function K(a,c){this.b=a||{e:"",prefix:"",host:"",scheme:""};this.h(c||{})}K.g=function(){return K.j?K.j:K.j=new K};i=K.prototype;i.h=function(a){this.d=new q(a)};i.o=function(){return this.d};i.k=function(a){this.b.e=a};i.n=function(){return this.b.e};i.l=function(a){this.b.prefix=a};
 function L(a,c,b,d){var e,g=RegExp(/\[\]$/);if(b instanceof Array)n(b,function(b,e){g.test(c)?d(c,b):L(a,c+"["+("object"===typeof b?e:"")+"]",b,d)});else if("object"===typeof b)for(e in b)L(a,c+"["+e+"]",b[e],d);else d(c,b)}i.i=function(a){var c=this.b.prefix+a;if(t(this.d.c,c))a=c;else if(!t(this.d.c,a))throw Error('The route "'+a+'" does not exist.');return this.d.get(a)};
@@ -8390,7 +8392,7 @@ function isUndefined(arg) {
  * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
  * @license   Licensed under MIT license
  *            See https://raw.githubusercontent.com/jakearchibald/es6-promise/master/LICENSE
- * @version   2.2.0
+ * @version   3.0.2
  */
 
 (function() {
@@ -8422,7 +8424,7 @@ function isUndefined(arg) {
     var lib$es6$promise$asap$$vertxNext;
     var lib$es6$promise$asap$$customSchedulerFn;
 
-    function lib$es6$promise$asap$$asap(callback, arg) {
+    var lib$es6$promise$asap$$asap = function asap(callback, arg) {
       lib$es6$promise$asap$$queue[lib$es6$promise$asap$$len] = callback;
       lib$es6$promise$asap$$queue[lib$es6$promise$asap$$len + 1] = arg;
       lib$es6$promise$asap$$len += 2;
@@ -8438,9 +8440,12 @@ function isUndefined(arg) {
       }
     }
 
-    var lib$es6$promise$asap$$default = lib$es6$promise$asap$$asap;
     function lib$es6$promise$asap$$setScheduler(scheduleFn) {
       lib$es6$promise$asap$$customSchedulerFn = scheduleFn;
+    }
+
+    function lib$es6$promise$asap$$setAsap(asapFn) {
+      lib$es6$promise$asap$$asap = asapFn;
     }
 
     var lib$es6$promise$asap$$browserWindow = (typeof window !== 'undefined') ? window : undefined;
@@ -8455,15 +8460,10 @@ function isUndefined(arg) {
 
     // node
     function lib$es6$promise$asap$$useNextTick() {
-      var nextTick = process.nextTick;
       // node version 0.10.x displays a deprecation warning when nextTick is used recursively
-      // setImmediate should be used instead instead
-      var version = process.versions.node.match(/^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)$/);
-      if (Array.isArray(version) && version[1] === '0' && version[2] === '10') {
-        nextTick = setImmediate;
-      }
+      // see https://github.com/cujojs/when/issues/410 for details
       return function() {
-        nextTick(lib$es6$promise$asap$$flush);
+        process.nextTick(lib$es6$promise$asap$$flush);
       };
     }
 
@@ -8515,7 +8515,7 @@ function isUndefined(arg) {
       lib$es6$promise$asap$$len = 0;
     }
 
-    function lib$es6$promise$asap$$attemptVertex() {
+    function lib$es6$promise$asap$$attemptVertx() {
       try {
         var r = require;
         var vertx = r('vertx');
@@ -8535,7 +8535,7 @@ function isUndefined(arg) {
     } else if (lib$es6$promise$asap$$isWorker) {
       lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useMessageChannel();
     } else if (lib$es6$promise$asap$$browserWindow === undefined && typeof require === 'function') {
-      lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$attemptVertex();
+      lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$attemptVertx();
     } else {
       lib$es6$promise$asap$$scheduleFlush = lib$es6$promise$asap$$useSetTimeout();
     }
@@ -8548,7 +8548,7 @@ function isUndefined(arg) {
 
     var lib$es6$promise$$internal$$GET_THEN_ERROR = new lib$es6$promise$$internal$$ErrorObject();
 
-    function lib$es6$promise$$internal$$selfFullfillment() {
+    function lib$es6$promise$$internal$$selfFulfillment() {
       return new TypeError("You cannot resolve a promise with itself");
     }
 
@@ -8574,7 +8574,7 @@ function isUndefined(arg) {
     }
 
     function lib$es6$promise$$internal$$handleForeignThenable(promise, thenable, then) {
-       lib$es6$promise$asap$$default(function(promise) {
+       lib$es6$promise$asap$$asap(function(promise) {
         var sealed = false;
         var error = lib$es6$promise$$internal$$tryThen(then, thenable, function(value) {
           if (sealed) { return; }
@@ -8632,7 +8632,7 @@ function isUndefined(arg) {
 
     function lib$es6$promise$$internal$$resolve(promise, value) {
       if (promise === value) {
-        lib$es6$promise$$internal$$reject(promise, lib$es6$promise$$internal$$selfFullfillment());
+        lib$es6$promise$$internal$$reject(promise, lib$es6$promise$$internal$$selfFulfillment());
       } else if (lib$es6$promise$utils$$objectOrFunction(value)) {
         lib$es6$promise$$internal$$handleMaybeThenable(promise, value);
       } else {
@@ -8655,7 +8655,7 @@ function isUndefined(arg) {
       promise._state = lib$es6$promise$$internal$$FULFILLED;
 
       if (promise._subscribers.length !== 0) {
-        lib$es6$promise$asap$$default(lib$es6$promise$$internal$$publish, promise);
+        lib$es6$promise$asap$$asap(lib$es6$promise$$internal$$publish, promise);
       }
     }
 
@@ -8664,7 +8664,7 @@ function isUndefined(arg) {
       promise._state = lib$es6$promise$$internal$$REJECTED;
       promise._result = reason;
 
-      lib$es6$promise$asap$$default(lib$es6$promise$$internal$$publishRejection, promise);
+      lib$es6$promise$asap$$asap(lib$es6$promise$$internal$$publishRejection, promise);
     }
 
     function lib$es6$promise$$internal$$subscribe(parent, child, onFulfillment, onRejection) {
@@ -8678,7 +8678,7 @@ function isUndefined(arg) {
       subscribers[length + lib$es6$promise$$internal$$REJECTED]  = onRejection;
 
       if (length === 0 && parent._state) {
-        lib$es6$promise$asap$$default(lib$es6$promise$$internal$$publish, parent);
+        lib$es6$promise$asap$$asap(lib$es6$promise$$internal$$publish, parent);
       }
     }
 
@@ -9059,7 +9059,8 @@ function isUndefined(arg) {
     lib$es6$promise$promise$$Promise.resolve = lib$es6$promise$promise$resolve$$default;
     lib$es6$promise$promise$$Promise.reject = lib$es6$promise$promise$reject$$default;
     lib$es6$promise$promise$$Promise._setScheduler = lib$es6$promise$asap$$setScheduler;
-    lib$es6$promise$promise$$Promise._asap = lib$es6$promise$asap$$default;
+    lib$es6$promise$promise$$Promise._setAsap = lib$es6$promise$asap$$setAsap;
+    lib$es6$promise$promise$$Promise._asap = lib$es6$promise$asap$$asap;
 
     lib$es6$promise$promise$$Promise.prototype = {
       constructor: lib$es6$promise$promise$$Promise,
@@ -9270,7 +9271,7 @@ function isUndefined(arg) {
 
         if (state) {
           var callback = arguments[state - 1];
-          lib$es6$promise$asap$$default(function(){
+          lib$es6$promise$asap$$asap(function(){
             lib$es6$promise$$internal$$invokeCallback(state, child, callback, result);
           });
         } else {

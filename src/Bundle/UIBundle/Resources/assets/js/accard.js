@@ -208,7 +208,7 @@ AccardApplication.prototype = {
     this.gridElement = document.getElementById('accard-grid');
     if (this.gridElement) {
       var PatientGrid = require('./components/patient-grid/component');
-      this.grid = React.render(<PatientGrid height={this.gridElement.clientHeight} width={this.gridElement.clientWidth} onRowClick={this._handleGridRowClick.bind(this)} onRowDoubleClick={this._handleGridRowDoubleClick.bind(this)} />, this.gridElement);
+      this.grid = React.render(<PatientGrid height={this.gridElement.clientHeight - 22} width={this.gridElement.clientWidth} onRowClick={this._handleGridRowClick.bind(this)} onRowDoubleClick={this._handleGridRowDoubleClick.bind(this)} />, this.gridElement);
       this._debug('Initialized grid', this.grid);
     } else {
       this._debug('No grid element found');

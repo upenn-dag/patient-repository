@@ -8,6 +8,7 @@
   "dependencies": {
     "bluebird": "2.9.27",
     "bootstrap": "3.3.5",
+    "es6-promise": "^3.0.2",
     "fixed-data-table": "0.4.1",
     "flux": "2.0.3",
     "font-awesome": "4.3.0",

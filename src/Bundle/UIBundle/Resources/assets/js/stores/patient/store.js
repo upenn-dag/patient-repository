@@ -32,7 +32,7 @@ var CriteriaModel = Immutable.Record({
 var page, limit, pages, total, xhr, currentPatientId;
 var CHANGE_EVENT = 'patient-change';
 var CURRENT_EVENT = 'current-patient-change';
-var DEFAULT_LIMIT = 25;
+var DEFAULT_LIMIT = 12;
 var cache = Immutable.Map();
 var requestCache = {};
 var patients = Immutable.List();
@@ -97,7 +97,7 @@ var Store = assign({}, EventEmitter.prototype, {
   },
 
   hasMorePatientsToLoad() {
-    return pages > page;
+    return pages >= page;
   },
 
   getSortKey() {
