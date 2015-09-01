@@ -1942,7 +1942,7 @@ start(initConfig)
 ;
 
 
-}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_65ddea82.js","/")
+}).call(this,require("+7ZJp0"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_99a33d18.js","/")
 },{"+7ZJp0":100,"./accard":1,"./api":2,"./state":28,"bluebird":40,"buffer":96}],26:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var EventEmitter = require('events').EventEmitter;
@@ -2332,7 +2332,7 @@ var CriteriaModel = Immutable.Record({
 var page, limit, pages, total, xhr, currentPatientId;
 var CHANGE_EVENT = 'patient-change';
 var CURRENT_EVENT = 'current-patient-change';
-var DEFAULT_LIMIT = 12;
+var DEFAULT_LIMIT = 25;
 var cache = Immutable.Map();
 var requestCache = {};
 var patients = Immutable.List();
