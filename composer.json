@@ -3,6 +3,8 @@
     "license": "MIT",
     "type": "library",
     "description": "Accard Patient Repository",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "authors": [
         {
             "name": "Frank Bardon Jr.",
@@ -21,25 +23,39 @@
         }
     },
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "dag/framework": "~1.0"
     },
     "require-dev": {
         "codeception/codeception": "dev-master",
         "codeception/mockery-module": "dev-master"
     },
+    "suggest": {
+        "friendsofsymfony/jsrouting-bundle": "Required when using UIBundle and OutcomesBundle.",
+        "knplabs/knp-menu-bundle": "Required when using WebBundle administration."
+    },
     "replace": {
         "accard/activity": "self.version",
+        "accard/activity-bundle": "self.version",
         "accard/attribute": "self.version",
+        "accard/attribute-bundle": "self.version",
         "accard/behavior": "self.version",
+        "accard/behavior-bundle": "self.version",
         "accard/core": "self.version",
+        "accard/core-bundle": "self.version",
         "accard/diagnosis": "self.version",
+        "accard/diagnosis-bundle": "self.version",
         "accard/drug": "self.version",
+        "accard/drug-bundle": "self.version",
         "accard/patient": "self.version",
+        "accard/patient-bundle": "self.version",
         "accard/phase": "self.version",
+        "accard/phase-bundle": "self.version",
         "accard/regimen": "self.version",
-        "accard/sample": "self.version"
+        "accard/regimen-bundle": "self.version",
+        "accard/sample": "self.version",
+        "accard/sample-bundle": "self.version"
     },
-    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
             "dev-master": "1.1.x-dev",
