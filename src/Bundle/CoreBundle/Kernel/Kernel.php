@@ -61,14 +61,31 @@ abstract class Kernel extends BaseKernel
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+            if ($this->bundleExists('\Sensio\Bundle\DistributionBundle\SensioDistributionBundle')) {
+                $bundles[] = new \Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
+            }
+
+            if ($this->bundleExists('\Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle')) {
+                $bundles[] = new \Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+            }
+
             $bundles[] = new \Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new \Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
-            $bundles[] = new \Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
             $bundles[] = new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle();
         }
 
         return $bundles;
+    }
+
+    /**
+     * Tests given bundle's existence before inclusion.
+     *
+     * @param string $className
+     * @return boolean
+     */
+    private function bundleExists($className)
+    {
+        return class_exists($className);
     }
 
     /**
