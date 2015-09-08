@@ -27,8 +27,27 @@
         "dag/framework": "~1.0"
     },
     "require-dev": {
-        "codeception/codeception": "dev-master",
-        "codeception/mockery-module": "dev-master"
+        "codeception/codeception":               "dev-master",
+        "codeception/mockery-module":            "dev-master",
+        "friendsofsymfony/jsrouting-bundle":     "~2.0@dev",
+        "knplabs/knp-menu-bundle":               "~2.0",
+        "symfony/symfony":                       "~2.7",
+        "symfony/assetic-bundle":                "~2.6",
+        "symfony/monolog-bundle":                "~2.7",
+        "sensio/distribution-bundle":            "~3.0",
+        "sensio/framework-extra-bundle":         "~3.0",
+        "doctrine/dbal":                         "~2.5",
+        "doctrine/orm":                          "~2.4",
+        "doctrine/doctrine-bundle":              "~1.4",
+        "doctrine/doctrine-cache-bundle":        "~1.0",
+        "doctrine/doctrine-migrations-bundle":   "~1.0",
+        "twig/extensions":                       "~1.2",
+        "friendsofsymfony/rest-bundle":          "~1.5",
+        "jms/serializer-bundle":                 "0.13.*",
+        "white-october/pagerfanta-bundle":       "~1.0",
+        "lexik/translation-bundle":              "~2.1",
+        "gedmo/doctrine-extensions":             "~2.4",
+        "willdurand/hateoas-bundle":             "~0.5"
     },
     "suggest": {
         "friendsofsymfony/jsrouting-bundle": "Required when using UIBundle and OutcomesBundle.",
