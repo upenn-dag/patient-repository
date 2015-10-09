@@ -19,7 +19,7 @@
     "require": {
         "php": ">=5.3.3",
         "accard/core":              "~1.0",
-        "accard/resource-bundle":   "~1.0",
+        "dag/resource-bundle":   "~1.0",
         "accard/activity-bundle":   "~1.0",
         "accard/behavior-bundle":   "~1.0",
         "accard/diagnosis-bundle":  "~1.0",

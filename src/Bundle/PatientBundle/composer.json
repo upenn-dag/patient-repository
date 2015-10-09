@@ -22,7 +22,7 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "accard/resource-bundle":   "~1.0",
+        "dag/resource-bundle":   "~1.0",
         "accard/patient":           "~1.0"
     },
     "require-dev": {
