@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity repository-class="Accard\Bundle\DrugBundle\Doctrine\ORM\DrugRepository" name="Accard\Component\Drug\Model\Drug" table="accard_drug">
+  <mapped-superclass repository-class="Accard\Bundle\DrugBundle\Doctrine\ORM\DrugRepository" name="Accard\Component\Drug\Model\Drug" table="accard_drug">
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
@@ -13,5 +13,5 @@
       </join-columns>
     </many-to-one>
     <many-to-many field="groups" target-entity="Accard\Component\Drug\Model\DrugGroup" mapped-by="drugs"/>
-  </entity>
+  </mapped-superclass>
 </doctrine-mapping>
