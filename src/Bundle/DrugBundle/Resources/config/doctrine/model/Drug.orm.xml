@@ -6,12 +6,12 @@
     </id>
     <field name="name" type="string" column="name" unique="true" nullable="false"/>
     <field name="presentation" type="string" column="presentation" nullable="false"/>
-    <one-to-many field="brands" target-entity="Accard\Component\Drug\Model\Drug" mapped-by="generic"/>
-    <many-to-one field="generic" target-entity="Accard\Component\Drug\Model\Drug" inversed-by="brands">
+    <one-to-many field="brands" target-entity="Accard\Component\Drug\Model\DrugInterface" mapped-by="generic"/>
+    <many-to-one field="generic" target-entity="Accard\Component\Drug\Model\DrugInterface" inversed-by="brands">
       <join-columns>
         <join-column name="genericId" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-many field="groups" target-entity="Accard\Component\Drug\Model\DrugGroup" mapped-by="drugs"/>
+    <many-to-many field="groups" target-entity="Accard\Component\Drug\Model\DrugGroupInterface" mapped-by="drugs"/>
   </mapped-superclass>
 </doctrine-mapping>

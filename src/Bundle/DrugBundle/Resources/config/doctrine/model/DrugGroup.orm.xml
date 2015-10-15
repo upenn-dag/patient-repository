@@ -6,7 +6,7 @@
     </id>
     <field name="name" type="string" column="name" unique="true" nullable="false"/>
     <field name="presentation" type="string" column="presentation" nullable="false"/>
-    <many-to-many field="drugs" target-entity="Accard\Component\Drug\Model\Drug" inversed-by="groups">
+    <many-to-many field="drugs" target-entity="Accard\Component\Drug\Model\DrugInterface" inversed-by="groups">
       <join-table name="accard_drugs_groups">
         <join-columns>
           <join-column name="groupId" referenced-column-name="id"/>
